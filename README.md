@@ -22,6 +22,7 @@ cal.addEvent({
 	end: new Date(new Date().getTime() + 3600000),
 	summary: 'Example Event',
 	description: 'It works ;)',
+	location: 'my room',
 	url: 'http://sebbo.net/'
 });
 
@@ -74,6 +75,9 @@ Appointment summary
 #### options.description (String)
 Appointment description
 
+#### options.location (String)
+Appointment location
+
 #### options.organizer (Plain Object)
 Appointment organizer
 
@@ -83,6 +87,7 @@ cal.addEvent({
 	end: new Date(new Date().getTime() + 3600000),
 	summary: 'Example Event',
 	description: 'Appointment with Organizer',
+	location: 'Room 123',
 	organizer: {
 		name: 'Organizer\'s Name',
 		email: 'organizer@example.com'
