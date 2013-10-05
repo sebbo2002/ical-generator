@@ -234,9 +234,9 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30 GMT+0200 (CEST)"),
-				end: new Date("Fr Oct 04 2013 23:15:00 GMT+0200 (CEST)"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 GMT+0200 (CEST)"),
+				start: new Date("Fr Oct 04 2013 22:39:30<th "),
+				end: new Date("Fr Oct 04 2013 23:15:00<th "),
+				stamp: new Date("Fr Oct 04 2013 23:34:53<th "),
 				summary: 'Simple Event'
 			});
 
@@ -258,9 +258,9 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30 GMT+0200 (CEST)"),
-				end: new Date("Fr Oct 04 2013 23:15:00 GMT+0200 (CEST)"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 GMT+0200 (CEST)"),
+				start: new Date("Fr Oct 04 2013 22:39:30<th "),
+				end: new Date("Fr Oct 04 2013 23:15:00<th "),
+				stamp: new Date("Fr Oct 04 2013 23:34:53<th "),
 				summary: 'Sample Event',
 				location: 'localhost',
 				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
@@ -284,9 +284,9 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30 GMT+0200 (CEST)"),
-				end: new Date("Fr Oct 04 2013 23:15:00 GMT+0200 (CEST)"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 GMT+0200 (CEST)"),
+				start: new Date("Fr Oct 04 2013 22:39:30"),
+				end: new Date("Fr Oct 04 2013 23:15:00"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53"),
 				summary: 'Sample Event',
 				organizer: {
 					name: 'Sebastian Pekarek',
