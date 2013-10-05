@@ -1,3 +1,4 @@
-/.DS_Store
+.DS_Store
 /ical-generator.sublime-workspace
 /ical-generator.sublime-project
+/node_modules/
