@@ -8,6 +8,16 @@
 		"email": "bugs@sebbo.net"
 	},
 
+	"dependencies": {
+
+	},
+	"devDependencies": {
+		"mocha": "~1.13"
+	},
+	"scripts": {
+		"test": "mocha -R spec"
+	},
+
 	"preferGlobal": false,
 	"main": "./lib/ical-generator.js",
 
