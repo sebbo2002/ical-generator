@@ -234,14 +234,12 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30<th "),
-				end: new Date("Fr Oct 04 2013 23:15:00<th "),
-				stamp: new Date("Fr Oct 04 2013 23:34:53<th "),
+				start: new Date("Fr Oct 04 2013 22:39:30"),
+				end: new Date("Fr Oct 04 2013 23:15:00"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53"),
 				summary: 'Simple Event'
 			});
 
-			console.log('Result: %s', cal.toString());
-			console.log('Expected: %s', fs.readFileSync(__dirname + '/results/generate_01.ical'));
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_01.ical'));
 		});
 
@@ -258,16 +256,14 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30<th "),
-				end: new Date("Fr Oct 04 2013 23:15:00<th "),
-				stamp: new Date("Fr Oct 04 2013 23:34:53<th "),
+				start: new Date("Fr Oct 04 2013 22:39:30"),
+				end: new Date("Fr Oct 04 2013 23:15:00"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53"),
 				summary: 'Sample Event',
 				location: 'localhost',
 				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
 			});
 
-			console.log('Result: %s', cal.toString());
-			console.log('Expected: %s', fs.readFileSync(__dirname + '/results/generate_02.ical'));
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ical'));
 		});
 
@@ -295,8 +291,6 @@ describe('ical-generator', function() {
 				url: 'http://sebbo.net/'
 			});
 
-			console.log('Result: %s', cal.toString());
-			console.log('Expected: %s', fs.readFileSync(__dirname + '/results/generate_03.ical'));
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ical'));
 		});
 	});
