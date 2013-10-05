@@ -1,5 +1,8 @@
 # ical-generator
 
+[![Build Status](https://travis-ci.org/sebbo2002/ical-generator.png?branch=master)](https://travis-ci.org/sebbo2002/ical-generator)
+[![Coverage Status](https://coveralls.io/repos/sebbo2002/ical-generator/badge.png)](https://coveralls.io/r/sebbo2002/ical-generator)
+
 ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable calendar feeds.
 
 
