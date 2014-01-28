@@ -240,7 +240,7 @@ describe('ical-generator', function() {
 				summary: 'Simple Event'
 			});
 
-			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_01.ical'));
+			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_01.ical', 'utf8'));
 		});
 
 		it('case #2', function() {
@@ -264,7 +264,7 @@ describe('ical-generator', function() {
 				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
 			});
 
-			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ical'));
+			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ical', 'utf8'));
 		});
 
 		it('case #3', function() {
@@ -291,7 +291,7 @@ describe('ical-generator', function() {
 				url: 'http://sebbo.net/'
 			});
 
-			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ical'));
+			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ical', 'utf8'));
 		});
 	});
 });
