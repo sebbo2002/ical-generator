@@ -8,6 +8,6 @@ DTSTART:20131004T223930
 DTEND:20131004T231500
 SUMMARY:Sample Event
 LOCATION:localhost
-DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat\, sed diam voluptua.
+DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat\, sed diam voluptua.\nbeep boop
 END:VEVENT
 END:VCALENDAR

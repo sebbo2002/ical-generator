@@ -261,7 +261,7 @@ describe('ical-generator', function() {
 				stamp: new Date("Fr Oct 04 2013 23:34:53"),
 				summary: 'Sample Event',
 				location: 'localhost',
-				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop'
 			});
 
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ical', 'utf8'));
