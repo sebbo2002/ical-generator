@@ -25,6 +25,30 @@ describe('ical-generator', function() {
 	});
 
 
+	describe('setName()', function() {
+		it('should return all public methods', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.deepEqual(cal, cal.setName('test'));
+		});
+
+		it('should change something', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			cal.setName('testfile');
+			cal.addEvent({
+				start: new Date(),
+				end: new Date(new Date().getTime() + 3600000),
+				summary: 'Example Event'
+			});
+
+			assert(cal.toString().indexOf('testfile') > -1);
+		});
+	});
+
+
 	describe('setProdID()', function() {
 		it('should return all public methods', function() {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
