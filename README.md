@@ -17,7 +17,7 @@ var ical = require('ical-generator'),
 	http = require('http'),
 	cal = ical();
 
-cal.setDomain('sebbo.net');
+cal.setDomain('sebbo.net').setName('my first iCal');
 
 cal.addEvent({
 	start: new Date(),
@@ -41,6 +41,11 @@ console.log('Server running at http://127.0.0.1:3000/');
 ### setDomain(domain)
 
 Use this method to set your server's hostname. It will be used to generate the feed's UID. Default hostname is localhost.
+
+
+### setName(name)
+
+Use this method to set your feed's name.
 
 
 ### setProdID(prodID)
