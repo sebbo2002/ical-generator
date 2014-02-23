@@ -120,3 +120,6 @@ Send Calendar to the User when using HTTP. See example above.
 
 ### toString()
 Return Calendar as a String.
+
+### clear()
+Empty the Calender.
