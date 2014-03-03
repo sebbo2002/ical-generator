@@ -115,7 +115,47 @@ describe('ical-generator', function() {
 		});
 	});
 
-	
+	describe('setTTL()', function() {
+		it('should return all public methods', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.deepEqual(cal, cal.setTTL(100,'minutes'));
+		});
+
+		it('should throw error when sending invalid duration', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.setTTL('120a', 'minutes');
+			}, /duration has to be a number/);
+		});
+
+		it('should throw error when sending invalid unit', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.setTTL(120, 'test');
+			}, /unit "test" is invalid or not supported/);
+		});
+
+		it('should add the x-published-ttl header to ical', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			cal.setTTL(120, 'minutes');
+			cal.addEvent({
+				start: new Date(),
+				end: new Date(new Date().getTime() + 3600000),
+				summary: 'Example Event'
+			});
+
+			assert(cal.toString().indexOf('X-PUBLISHED-TTL:PT120M') > -1);
+		});
+	});
+
 	describe('addEvent()', function() {
 		it('should return all public methods', function() {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
