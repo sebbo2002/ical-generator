@@ -73,6 +73,9 @@ Appointment date of beginning
 #### options.end (Date Object, required)
 Appointment date of end
 
+#### options.allDay (Bool)
+Appointment is for the whole day
+
 #### options.stamp (Date Object)
 Appointment date of creation
 
