@@ -133,10 +133,10 @@ Empty the Calender.
 
 ## Tests
 
-´´´javascript
+```javascript
 // simple unit tests
 mocha -R spec
 
 // coverage test
 istanbul cover _mocha -- -R spec
-´´´
+```
