@@ -129,3 +129,14 @@ Returns the ammount of events in the calendar.
 
 ### clear()
 Empty the Calender.
+
+
+## Tests
+
+´´´javascript
+// simple unit tests
+mocha -R spec
+
+// coverage test
+istanbul cover _mocha -- -R spec
+´´´
