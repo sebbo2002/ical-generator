@@ -318,4 +318,71 @@ describe('ical-generator', function() {
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ical', 'utf8'));
 		});
 	});
+
+
+	describe('save()', function() {
+		it('should return all public methods and save it', function(done) {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				path = require('path'),
+				fs = require('fs'),
+				file = path.join(__dirname, 'save.ical'),
+				cal = generator();
+
+			assert.deepEqual(cal, cal.save(file, function() {
+				assert.ok(fs.existsSync(file));
+				fs.unlink(file);
+				done();
+			}));
+		});
+	});
+
+
+	describe('saveSync()', function() {
+		it('should save it', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				path = require('path'),
+				fs = require('fs'),
+				file = path.join(__dirname, 'save_sync.ical'),
+				cal = generator();
+
+			cal.saveSync(file);
+			assert.ok(fs.existsSync(file));
+			fs.unlinkSync(file);
+		});
+	});
+
+
+	describe('length()', function() {
+		it('should work', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.equal(cal.length(), 0);
+
+			cal.addEvent({
+				start: new Date(),
+				end: new Date(new Date().getTime() + 3600000),
+				summary: 'Example Event'
+			})
+			assert.equal(cal.length(), 1);
+		});
+	});
+
+
+	describe('clear()', function() {
+		it('should work', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			cal.addEvent({
+				start: new Date(),
+				end: new Date(new Date().getTime() + 3600000),
+				summary: 'Example Event'
+			})
+			assert.equal(cal.length(), 1);
+
+			assert.deepEqual(cal, cal.clear());
+			assert.equal(cal.length(), 0);
+		});
+	});
 });
