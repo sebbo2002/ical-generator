@@ -121,5 +121,8 @@ Send Calendar to the User when using HTTP. See example above.
 ### toString()
 Return Calendar as a String.
 
+### length()
+Returns the ammount of events in the calendar.
+
 ### clear()
 Empty the Calender.
