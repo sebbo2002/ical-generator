@@ -2,3 +2,6 @@
 /ical-generator.sublime-workspace
 /ical-generator.sublime-project
 /node_modules/
+/coverage/
+
+/.idea/
