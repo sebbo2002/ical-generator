@@ -10,10 +10,11 @@
   "dependencies": {
   },
   "devDependencies": {
-    "mocha": "~1.13"
+    "mocha": "~1.20.1",
+    "istanbul": "~0.2.11"
   },
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "istanbul cover _mocha -- -R spec"
   },
   "preferGlobal": false,
   "main": "./lib/ical-generator.js",
