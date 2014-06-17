@@ -14,7 +14,7 @@
     "istanbul": "~0.2.11"
   },
   "scripts": {
-    "test": "mochan-R spec"
+    "test": "mocha -R spec"
   },
   "preferGlobal": false,
   "main": "./lib/ical-generator.js",
