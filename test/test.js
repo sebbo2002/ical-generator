@@ -115,7 +115,7 @@ describe('ical-generator', function() {
 		});
 	});
 
-	
+
 	describe('addEvent()', function() {
 		it('should return all public methods', function() {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
@@ -258,9 +258,9 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30"),
-				end: new Date("Fr Oct 04 2013 23:15:00"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53"),
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 04 2013 23:15:00 UTC"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
 				summary: 'Simple Event'
 			});
 
@@ -280,9 +280,9 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30"),
-				end: new Date("Fr Oct 04 2013 23:15:00"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53"),
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 04 2013 23:15:00 UTC"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
 				summary: 'Sample Event',
 				location: 'localhost',
 				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop'
@@ -304,10 +304,10 @@ describe('ical-generator', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30"),
-				end: new Date("Fr Oct 06 2013 23:15:00"),
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
 				allDay: true,
-				stamp: new Date("Fr Oct 04 2013 23:34:53"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
 				summary: 'Sample Event',
 				organizer: {
 					name: 'Sebastian Pekarek',
