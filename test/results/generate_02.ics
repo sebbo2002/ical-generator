@@ -3,9 +3,9 @@ VERSION:2.0
 PRODID:-//sebbo.net//ical-generator.tests//EN
 BEGIN:VEVENT
 UID:20131004T223930Z-123@sebbo.net
-DTSTAMP:20131004T233453
-DTSTART:20131004T223930
-DTEND:20131004T231500
+DTSTAMP:20131004T233453Z
+DTSTART:20131004T223930Z
+DTEND:20131004T231500Z
 SUMMARY:Sample Event
 LOCATION:localhost
 DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat\, sed diam voluptua.\nbeep boop
