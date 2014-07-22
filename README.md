@@ -142,3 +142,8 @@ mocha -R spec
 // coverage test
 istanbul cover _mocha -- -R spec
 ```
+
+
+## Copyright and license
+
+Copyright (c) Sebastian Pekarek under the [MIT license](LICENSE).
