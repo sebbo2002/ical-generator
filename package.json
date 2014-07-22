@@ -7,11 +7,10 @@
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "~1.20.1",
-    "istanbul": "~0.2.11"
+    "istanbul": "^0.2.16"
   },
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec"
