@@ -10,7 +10,8 @@
   "dependencies": {},
   "devDependencies": {
     "mocha": "^1.20.1",
-    "istanbul": "^0.3.0"
+    "istanbul": "^0.3.0",
+    "portfinder": "^0.2.1"
   },
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec"

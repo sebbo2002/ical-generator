@@ -1,6 +1,8 @@
 var assert = require("assert");
 
 describe('ical-generator', function() {
+	'use strict';
+
 	describe('setDomain()', function() {
 		it('should return all public methods', function() {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
@@ -75,7 +77,7 @@ describe('ical-generator', function() {
 
 			assert.throws(function() {
 				cal.setProdID({});
-			}, /prodid.company is a mandatory item/);
+			}, /prodid\.company is a mandatory item/);
 		});
 
 		it('should throw error when no product given', function() {
@@ -86,7 +88,7 @@ describe('ical-generator', function() {
 				cal.setProdID({
 					company: 'sebbo.net'
 				});
-			}, /prodid.product is a mandatory item/);
+			}, /prodid\.product is a mandatory item/);
 		});
 
 		it('should change something #1', function() {
@@ -143,7 +145,7 @@ describe('ical-generator', function() {
 
 			assert.throws(function() {
 				cal.addEvent({});
-			}, /event.start is a mandatory item/);
+			}, /event\.start is a mandatory item/);
 		});
 
 		it('should throw error when start time is not a date', function() {
@@ -154,7 +156,7 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: 'hello'
 				});
-			}, /event.start must be a Date Object/);
+			}, /event\.start must be a Date Object/);
 		});
 
 		it('should throw error when no end time given', function() {
@@ -165,7 +167,7 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date()
 				});
-			}, /event.end is a mandatory item/);
+			}, /event\.end is a mandatory item/);
 		});
 
 		it('should throw error when end time is not a date', function() {
@@ -177,7 +179,7 @@ describe('ical-generator', function() {
 					start: new Date(),
 					end: 'hello'
 				});
-			}, /event.end must be a Date Object/);
+			}, /event\.end must be a Date Object/);
 		});
 
 		it('should throw error when time stamp is not a date', function() {
@@ -190,7 +192,7 @@ describe('ical-generator', function() {
 					end: new Date(),
 					stamp: 'hello'
 				});
-			}, /event.stamp must be a Date Object/);
+			}, /event\.stamp must be a Date Object/);
 		});
 
 		it('should throw error when summary is empty', function() {
@@ -202,7 +204,7 @@ describe('ical-generator', function() {
 					start: new Date(),
 					end: new Date()
 				});
-			}, /event.summary is a mandatory item/);
+			}, /event\.summary is a mandatory item/);
 		});
 
 		it('should throw error when event.organizer.name is empty', function() {
@@ -216,7 +218,7 @@ describe('ical-generator', function() {
 					summary: 'hello',
 					organizer: {}
 				});
-			}, /event.organizer.name is empty/);
+			}, /event\.organizer\.name is empty/);
 		});
 
 		it('should throw error when event.organizer.email is empty', function() {
@@ -232,7 +234,7 @@ describe('ical-generator', function() {
 						name: 'Otto'
 					}
 				});
-			}, /event.organizer.email is empty/);
+			}, /event\.organizer\.email is empty/);
 		});
 	});
 
@@ -353,6 +355,62 @@ describe('ical-generator', function() {
 	});
 
 
+	describe('serve()', function() {
+		it('should work', function(cb) {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				portfinder = require('portfinder'),
+				http = require('http'),
+				cal = generator();
+
+			cal.addEvent({
+				start: new Date(),
+				end: new Date(new Date().getTime() + (1000 * 60 * 60)),
+				summary: 'HTTP Calendar Event'
+			});
+
+			portfinder.getPort(function(err, port) {
+				if(err) {
+					assert.error(err);
+					cb();
+				}
+
+				// create server
+				var server = http.createServer(function(req, res) {
+					cal.serve(res);
+				}).listen(port, function() {
+
+					// make request
+					var req = http.request({
+						port: port
+					}, function(res) {
+						var file = '';
+
+						assert.equal(res.headers['content-type'], 'text/calendar', 'Header: text/calendar');
+						assert.equal(res.headers['content-disposition'], 'attachment; filename="calendar.ics"', 'Content-Disposition');
+
+						res.setEncoding('utf8');
+						res.on('data', function(chunk) {
+							file += chunk;
+						});
+						res.on('end', function() {
+							assert.equal(file, cal.toString());
+
+							server.close(function() {
+								cb();
+							});
+						});
+					});
+
+					req.on('error', function(err) {
+						assert.error(err);
+					});
+					req.end();
+				});
+			});
+		});
+	});
+
+
 	describe('length()', function() {
 		it('should work', function() {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
@@ -364,7 +422,7 @@ describe('ical-generator', function() {
 				start: new Date(),
 				end: new Date(new Date().getTime() + 3600000),
 				summary: 'Example Event'
-			})
+			});
 			assert.equal(cal.length(), 1);
 		});
 	});
@@ -379,7 +437,7 @@ describe('ical-generator', function() {
 				start: new Date(),
 				end: new Date(new Date().getTime() + 3600000),
 				summary: 'Example Event'
-			})
+			});
 			assert.equal(cal.length(), 1);
 
 			assert.deepEqual(cal, cal.clear());
