@@ -110,6 +110,12 @@ cal.addEvent({
 #### options.url (String)
 Appointment Website
 
+#### options.method (String)
+Appointment method. May be any of the following: publish, request, reply, add, cancel, refresh, counter, declinecounter.
+
+#### options.status (String)
+Appointment status. May be any of the following: confirmed, tenative, cancelled.
+
 
 ### save(file[, cb])
 Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback)
