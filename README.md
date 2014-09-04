@@ -50,6 +50,11 @@ Use this method to set your server's hostname. It will be used to generate the f
 Use this method to set your feed's name.
 
 
+### setTZ(timezone)
+
+Use this method to set your feed's timezone.
+
+
 ### setProdID(prodID)
 
 This method is used to overwrite the default ProdID:
