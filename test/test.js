@@ -236,6 +236,34 @@ describe('ical-generator', function() {
 				});
 			}, /event\.organizer\.email is empty/);
 		});
+
+		it('should throw an error if method is not allowed', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					summary: 'hello',
+					method:'hello world'
+				});
+			}, /event\.method must be one of the following/);
+		});
+
+		it('should throw an error if status is not allowed', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					summary: 'hello',
+					status:'hello world'
+				});
+			}, /event\.status must be one of the following/);
+		});
 	});
 
 
@@ -315,6 +343,8 @@ describe('ical-generator', function() {
 					name: 'Sebastian Pekarek',
 					email: 'mail@sebbo.net'
 				},
+				method: 'add',
+				status: 'confirmed',
 				url: 'http://sebbo.net/'
 			});
 

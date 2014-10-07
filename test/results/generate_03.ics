@@ -9,5 +9,7 @@ DTEND;VALUE=DATE:20131006Z
 SUMMARY:Sample Event
 ORGANIZER;CN="Sebastian Pekarek":mailto:mail@sebbo.net
 URL;VALUE=URI:http://sebbo.net/
+METHOD:ADD
+STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR
