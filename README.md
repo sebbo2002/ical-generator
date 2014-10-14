@@ -80,6 +80,21 @@ Appointment date of beginning
 #### options.end (Date Object, required)
 Appointment date of end
 
+#### options.repeating (Plain Object)
+Appointment is a repeating event
+
+```javascript
+cal.addEvent({
+	/* Other options */
+	repeating: {
+		freq: 'MONTHLY', // required
+		count: 5,
+		interval: 2,
+		until: new Date("Jan 01 2014 00:00:00 UTC")
+	}
+});
+```
+
 #### options.allDay (Bool)
 Appointment is for the whole day
 
