@@ -219,6 +219,82 @@ describe('ical-generator', function() {
 			}, /event\.stamp must be a Date Object/);
 		});
 
+		it('should throw error when repeating without freq', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					repeating: {}
+				});
+			}, /event\.repeating\.freq is a mandatory item, and must be one of the following/);
+		});
+
+		it('should throw error when repeating when freq is not allowed', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					repeating: {
+						freq: 'hello'
+					}
+				});
+			}, /event\.repeating\.freq is a mandatory item, and must be one of the following/);
+		});
+
+		it('should throw error when repeating.count is not a number', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					repeating: {
+					freq: 'DAILY',
+					count: Infinity
+					}
+				});
+			}, /event\.repeating\.count must be a Number/);
+		});
+
+		it('should throw error when repeating.interval is not a number', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					repeating: {
+						freq: 'DAILY',
+						interval: 'string'
+					}
+				});
+			}, /event\.repeating\.interval must be a Number/);
+		});
+
+		it('should throw error when repeating.until is not a date', function() {
+			var generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			assert.throws(function() {
+				cal.addEvent({
+					start: new Date(),
+					end: new Date(),
+					repeating: {
+						freq: 'DAILY',
+						until: 1413277003
+					}
+				});
+			}, /event\.repeating\.until must be a Date Object/);
+		});
+
 		it('should throw error when summary is empty', function() {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
 				cal = generator();
@@ -373,6 +449,56 @@ describe('ical-generator', function() {
 			});
 
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'));
+		});
+
+		it('case #4 (repeating)', function() {
+			var fs = require('fs'),
+				generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			cal.setDomain('sebbo.net');
+			cal.setProdID({
+				company: 'sebbo.net',
+				product: 'ical-generator.tests'
+			});
+
+			cal.addEvent({
+				uid: '1',
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				summary: 'repeating by month',
+				repeating: {
+					freq: 'MONTHLY'
+				}
+			});
+
+			cal.addEvent({
+				uid: '2',
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				summary: 'repeating by day, twice',
+				repeating: {
+					freq: 'DAILY',
+					count: 2
+				}
+			});
+
+			cal.addEvent({
+				uid: '3',
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				summary: 'repeating by 3 weeks, until 2014',
+				repeating: {
+					freq: 'WEEKLY',
+					interval: 3,
+					until: new Date("We Jan 01 2014 00:00:00 UTC")
+				}
+			});
+
+			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
 		});
 	});
 
