@@ -521,7 +521,6 @@ describe('ical-generator', function() {
 				floating: true
 			});
 
-			fs.writeFileSync(__dirname + '/results/mike.ics', cal.toString());
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
 		});
 	});
