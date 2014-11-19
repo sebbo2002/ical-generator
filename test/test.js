@@ -500,6 +500,30 @@ describe('ical-generator', function() {
 
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
 		});
+
+		it('case #5 (floating)', function() {
+			var fs = require('fs'),
+				generator = require(__dirname + '/../lib/ical-generator.js'),
+				cal = generator();
+
+			cal.setDomain('sebbo.net');
+			cal.setProdID({
+				company: 'sebbo.net',
+				product: 'ical-generator.tests'
+			});
+
+			cal.addEvent({
+				uid: '1',
+				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
+				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
+				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				summary: 'floating',
+				floating: true
+			});
+
+			fs.writeFileSync(__dirname + '/results/mike.ics', cal.toString());
+			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
+		});
 	});
 
 
