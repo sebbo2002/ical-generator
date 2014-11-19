@@ -98,6 +98,17 @@ cal.addEvent({
 #### options.allDay (Bool)
 Appointment is for the whole day
 
+#### options.floating (Bool)
+Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.12):
+
+> Time values of this type are said to be "floating" and are not
+> bound to any time zone in particular.  They are used to represent
+> the same hour, minute, and second value regardless of which time
+> zone is currently being observed.  For example, an event can be
+> defined that indicates that an individual will be busy from 11:00
+> AM to 1:00 PM every day, no matter which time zone the person is
+> in.  In these cases, a local time can be specified.
+
 #### options.stamp (Date Object)
 Appointment date of creation
 
