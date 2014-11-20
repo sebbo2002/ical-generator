@@ -394,6 +394,7 @@ describe('ical-generator', function() {
 				summary: 'Simple Event'
 			});
 
+			/*jslint stupid: true */
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_01.ics', 'utf8'));
 		});
 
@@ -418,6 +419,7 @@ describe('ical-generator', function() {
 				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop'
 			});
 
+			/*jslint stupid: true */
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ics', 'utf8'));
 		});
 
@@ -448,6 +450,7 @@ describe('ical-generator', function() {
 				url: 'http://sebbo.net/'
 			});
 
+			/*jslint stupid: true */
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'));
 		});
 
@@ -498,6 +501,7 @@ describe('ical-generator', function() {
 				}
 			});
 
+			/*jslint stupid: true */
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
 		});
 
@@ -521,6 +525,7 @@ describe('ical-generator', function() {
 				floating: true
 			});
 
+			/*jslint stupid: true */
 			assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
 		});
 	});
@@ -535,9 +540,15 @@ describe('ical-generator', function() {
 				cal = generator();
 
 			assert.deepEqual(cal, cal.save(file, function() {
+				/*jslint stupid: true */
 				assert.ok(fs.existsSync(file));
 				fs.unlink(file);
-				done();
+
+				assert.deepEqual(cal, cal.save(file, function() {
+					assert.ok(fs.existsSync(file));
+					fs.unlink(file);
+					done();
+				}));
 			}));
 		});
 	});
@@ -551,6 +562,11 @@ describe('ical-generator', function() {
 				file = path.join(__dirname, 'save_sync.ical'),
 				cal = generator();
 
+			/*jslint stupid: true */
+			cal.saveSync(file);
+			assert.ok(fs.existsSync(file));
+			fs.unlinkSync(file);
+
 			cal.saveSync(file);
 			assert.ok(fs.existsSync(file));
 			fs.unlinkSync(file);
@@ -559,7 +575,7 @@ describe('ical-generator', function() {
 
 
 	describe('serve()', function() {
-		it('should work', function(cb) {
+		it('should work', function(done) {
 			var generator = require(__dirname + '/../lib/ical-generator.js'),
 				portfinder = require('portfinder'),
 				http = require('http'),
@@ -574,40 +590,46 @@ describe('ical-generator', function() {
 			portfinder.getPort(function(err, port) {
 				if(err) {
 					assert.error(err);
-					cb();
+					done();
 				}
 
 				// create server
 				var server = http.createServer(function(req, res) {
 					cal.serve(res);
 				}).listen(port, function() {
+					function request(cb) {
+						// make request
+						var req = http.request({
+							port: port
+						}, function(res) {
+							var file = '';
 
-					// make request
-					var req = http.request({
-						port: port
-					}, function(res) {
-						var file = '';
+							assert.equal(res.headers['content-type'], 'text/calendar', 'Header: text/calendar');
+							assert.equal(res.headers['content-disposition'], 'attachment; filename="calendar.ics"', 'Content-Disposition');
 
-						assert.equal(res.headers['content-type'], 'text/calendar', 'Header: text/calendar');
-						assert.equal(res.headers['content-disposition'], 'attachment; filename="calendar.ics"', 'Content-Disposition');
-
-						res.setEncoding('utf8');
-						res.on('data', function(chunk) {
-							file += chunk;
-						});
-						res.on('end', function() {
-							assert.equal(file, cal.toString());
-
-							server.close(function() {
+							res.setEncoding('utf8');
+							res.on('data', function(chunk) {
+								file += chunk;
+							});
+							res.on('end', function() {
+								assert.equal(file, cal.toString());
 								cb();
 							});
 						});
-					});
 
-					req.on('error', function(err) {
-						assert.error(err);
+						req.on('error', function(err) {
+							assert.error(err);
+						});
+						req.end();
+					}
+
+					request(function() {
+						request(function() {
+							server.close(function() {
+								done();
+							});
+						});
 					});
-					req.end();
 				});
 			});
 		});
