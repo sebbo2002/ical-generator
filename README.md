@@ -177,7 +177,7 @@ Empty the Calender.
 mocha -R spec
 
 // coverage test
-istanbul cover _mocha -- -R spec
+npm test
 ```
 
 
