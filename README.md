@@ -1,6 +1,6 @@
 # ical-generator
 
-[![License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![CI Status](https://sebbo.helium.uberspace.de/teamcity-badges/iCalGenerator_Develop/status)](https://ci.sebbo.net/viewType.html?buildTypeId=iCalGenerator_Develop&guest=1)
 [![Code Coverage](https://sebbo.helium.uberspace.de/teamcity-badges/iCalGenerator_Develop/coverage-istanbul)](https://ci.sebbo.net/viewType.html?buildTypeId=iCalGenerator_Develop&guest=1)
 
