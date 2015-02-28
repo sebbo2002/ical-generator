@@ -178,7 +178,9 @@ describe('ical-generator', function() {
 
 			assert.throws(function() {
 				cal.addEvent({
-					start: 'hello'
+					start: 'hello',
+					end: new Date(),
+					summary: 'test'
 				});
 			}, /event\.start must be a Date Object/);
 		});
@@ -201,7 +203,8 @@ describe('ical-generator', function() {
 			assert.throws(function() {
 				cal.addEvent({
 					start: new Date(),
-					end: 'hello'
+					end: 'hello',
+					summary: 'test'
 				});
 			}, /event\.end must be a Date Object/);
 		});
@@ -214,7 +217,8 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date(),
 					end: new Date(),
-					stamp: 'hello'
+					stamp: 'hello',
+					'summary': 'test'
 				});
 			}, /event\.stamp must be a Date Object/);
 		});
@@ -227,7 +231,8 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date(),
 					end: new Date(),
-					repeating: {}
+					repeating: {},
+					summary: 'test'
 				});
 			}, /event\.repeating\.freq is a mandatory item, and must be one of the following/);
 		});
@@ -240,6 +245,7 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date(),
 					end: new Date(),
+					summary: 'test',
 					repeating: {
 						freq: 'hello'
 					}
@@ -255,9 +261,10 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date(),
 					end: new Date(),
+					summary: 'test',
 					repeating: {
-					freq: 'DAILY',
-					count: Infinity
+						freq: 'DAILY',
+						count: Infinity
 					}
 				});
 			}, /event\.repeating\.count must be a Number/);
@@ -271,6 +278,7 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date(),
 					end: new Date(),
+					summary: 'test',
 					repeating: {
 						freq: 'DAILY',
 						interval: 'string'
@@ -287,6 +295,7 @@ describe('ical-generator', function() {
 				cal.addEvent({
 					start: new Date(),
 					end: new Date(),
+					summary: 'test',
 					repeating: {
 						freq: 'DAILY',
 						until: 1413277003
