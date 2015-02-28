@@ -197,8 +197,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 			});
 
 			it('should throw error when event invalid', function() {
-				var file = path.join(__dirname, 'save.ical'),
-					cal = ical(),
+				var cal = ical(),
 					e = cal.createEvent();
 
 				assert.throws(function() {
@@ -228,8 +227,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 			});
 
 			it('should throw error when event invalid', function() {
-				var file = path.join(__dirname, 'save.ical'),
-					cal = ical(),
+				var cal = ical(),
 					e = cal.createEvent();
 
 				assert.throws(function() {
@@ -845,7 +843,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 					summary: 'Example Event'
 				});
 				assert.throws(function() {
-					e.generate()
+					e.generate();
 				}, /`calendar`/);
 			});
 

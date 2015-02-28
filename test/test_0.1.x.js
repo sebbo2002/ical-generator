@@ -397,9 +397,9 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 04 2013 23:15:00 UTC"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'Simple Event'
 			});
 
@@ -420,9 +420,9 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 04 2013 23:15:00 UTC"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'Sample Event',
 				location: 'localhost',
 				description: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop'
@@ -445,10 +445,10 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '123',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
 				allDay: true,
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'Sample Event',
 				organizer: {
 					name: 'Sebastian Pekarek',
@@ -476,9 +476,9 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '1',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'repeating by month',
 				repeating: {
 					freq: 'MONTHLY'
@@ -487,9 +487,9 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '2',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'repeating by day, twice',
 				repeating: {
 					freq: 'DAILY',
@@ -499,14 +499,14 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '3',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'repeating by 3 weeks, until 2014',
 				repeating: {
 					freq: 'WEEKLY',
 					interval: 3,
-					until: new Date("We Jan 01 2014 00:00:00 UTC")
+					until: new Date('We Jan 01 2014 00:00:00 UTC')
 				}
 			});
 
@@ -527,9 +527,9 @@ describe('ical-generator 0.1.x', function() {
 
 			cal.addEvent({
 				uid: '1',
-				start: new Date("Fr Oct 04 2013 22:39:30 UTC"),
-				end: new Date("Fr Oct 06 2013 23:15:00 UTC"),
-				stamp: new Date("Fr Oct 04 2013 23:34:53 UTC"),
+				start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+				end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+				stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 				summary: 'floating',
 				floating: true
 			});
