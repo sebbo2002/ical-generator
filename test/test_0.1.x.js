@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-describe('ical-generator', function() {
+describe('ical-generator 0.1.x', function() {
 	'use strict';
 
 	describe('setDomain()', function() {
