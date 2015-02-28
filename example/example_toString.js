@@ -1,4 +1,4 @@
-var ical = require('../lib/ical-generator.js'),
+var ical = require('../lib/index.js'),
 	cal = ical();
 
 cal.setDomain('example.com');

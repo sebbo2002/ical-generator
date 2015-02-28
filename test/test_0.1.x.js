@@ -1,18 +1,18 @@
-var assert = require("assert");
+var assert = require('assert');
 
 describe('ical-generator', function() {
 	'use strict';
 
 	describe('setDomain()', function() {
 		it('should return all public methods', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.deepEqual(cal, cal.setDomain('localhost'));
 		});
 
 		it('should change something', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setDomain('loremipsum.de');
@@ -29,14 +29,14 @@ describe('ical-generator', function() {
 
 	describe('setName()', function() {
 		it('should return all public methods', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.deepEqual(cal, cal.setName('test'));
 		});
 
 		it('should change something', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setName('testfile');
@@ -53,14 +53,14 @@ describe('ical-generator', function() {
 
 	describe('setTZ()', function() {
 		it('should return all public methods', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.deepEqual(cal, cal.setName('test'));
 		});
 
 		it('should change something', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setTZ('UTC+8');
@@ -77,7 +77,7 @@ describe('ical-generator', function() {
 
 	describe('setProdID()', function() {
 		it('should return all public methods', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.deepEqual(cal, cal.setProdID({
@@ -87,7 +87,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when not an object', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -96,7 +96,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when no company given', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -105,7 +105,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when no product given', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -116,7 +116,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should change something #1', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setProdID({
@@ -128,7 +128,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should change something #2', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setProdID({
@@ -144,7 +144,7 @@ describe('ical-generator', function() {
 
 	describe('addEvent()', function() {
 		it('should return all public methods', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.deepEqual(cal, cal.addEvent({
@@ -155,7 +155,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when not an object', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -164,7 +164,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when no start time given', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -173,7 +173,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when start time is not a date', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -184,7 +184,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when no end time given', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -195,7 +195,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when end time is not a date', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -207,7 +207,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when time stamp is not a date', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -220,7 +220,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when repeating without freq', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -233,7 +233,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when repeating when freq is not allowed', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -248,7 +248,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when repeating.count is not a number', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -264,7 +264,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when repeating.interval is not a number', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -280,7 +280,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when repeating.until is not a date', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -296,7 +296,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when summary is empty', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -308,7 +308,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when event.organizer.name is empty', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -322,7 +322,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw error when event.organizer.email is empty', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -338,7 +338,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw an error if method is not allowed', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -352,7 +352,7 @@ describe('ical-generator', function() {
 		});
 
 		it('should throw an error if status is not allowed', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.throws(function() {
@@ -369,7 +369,7 @@ describe('ical-generator', function() {
 
 	describe('generate()', function() {
 		it('should return all public methods', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.deepEqual(cal, cal.generate());
@@ -377,7 +377,7 @@ describe('ical-generator', function() {
 
 		it('case #1', function() {
 			var fs = require('fs'),
-				generator = require(__dirname + '/../lib/ical-generator.js'),
+				generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setDomain('sebbo.net');
@@ -400,7 +400,7 @@ describe('ical-generator', function() {
 
 		it('case #2', function() {
 			var fs = require('fs'),
-				generator = require(__dirname + '/../lib/ical-generator.js'),
+				generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setDomain('sebbo.net');
@@ -425,7 +425,7 @@ describe('ical-generator', function() {
 
 		it('case #3', function() {
 			var fs = require('fs'),
-				generator = require(__dirname + '/../lib/ical-generator.js'),
+				generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setDomain('sebbo.net');
@@ -456,7 +456,7 @@ describe('ical-generator', function() {
 
 		it('case #4 (repeating)', function() {
 			var fs = require('fs'),
-				generator = require(__dirname + '/../lib/ical-generator.js'),
+				generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setDomain('sebbo.net');
@@ -507,7 +507,7 @@ describe('ical-generator', function() {
 
 		it('case #5 (floating)', function() {
 			var fs = require('fs'),
-				generator = require(__dirname + '/../lib/ical-generator.js'),
+				generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.setDomain('sebbo.net');
@@ -533,7 +533,7 @@ describe('ical-generator', function() {
 
 	describe('save()', function() {
 		it('should return all public methods and save it', function(done) {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				path = require('path'),
 				fs = require('fs'),
 				file = path.join(__dirname, 'save.ical'),
@@ -556,7 +556,7 @@ describe('ical-generator', function() {
 
 	describe('saveSync()', function() {
 		it('should save it', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				path = require('path'),
 				fs = require('fs'),
 				file = path.join(__dirname, 'save_sync.ical'),
@@ -576,7 +576,7 @@ describe('ical-generator', function() {
 
 	describe('serve()', function() {
 		it('should work', function(done) {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				portfinder = require('portfinder'),
 				http = require('http'),
 				cal = generator();
@@ -638,7 +638,7 @@ describe('ical-generator', function() {
 
 	describe('length()', function() {
 		it('should work', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			assert.equal(cal.length(), 0);
@@ -655,7 +655,7 @@ describe('ical-generator', function() {
 
 	describe('clear()', function() {
 		it('should work', function() {
-			var generator = require(__dirname + '/../lib/ical-generator.js'),
+			var generator = require(__dirname + '/../lib/index.js'),
 				cal = generator();
 
 			cal.addEvent({
