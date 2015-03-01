@@ -1,18 +1,20 @@
-var ical = require('../lib/ical-generator.js'),
-	cal = ical();
+var ical = require('../lib/'),
+	cal = ical({domain: 'localhost'}),
+	event;
 
-cal.setDomain('example.com');
+// overwrite domain
+cal.domain('example.com');
 
-cal.addEvent({
+event = cal.createEvent({
 	start: new Date(new Date().getTime() + 3600000),
 	end: new Date(new Date().getTime() + 7200000),
 	summary: 'Example Event',
 	description: 'It works ;)',
-	organizer: {
-		name: 'Organizer\'s Name',
-		email: 'organizer@example.com'
-	},
+	organizer: 'Organizer\'s Name <organizer@example.com>',
 	url: 'http://sebbo.net/'
 });
+
+// update event's description
+event.description('It still works ;)');
 
 console.log(cal.toString());
