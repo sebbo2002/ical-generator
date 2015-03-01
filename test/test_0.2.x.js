@@ -142,7 +142,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				var cal = ical(),
 					ICalEvent = require('../lib/event.js');
 
-				assert.ok(cal, cal.createEvent() instanceof ICalEvent);
+				assert.ok(cal.createEvent() instanceof ICalEvent);
 			});
 
 			it('should pass data to instance', function() {
@@ -163,18 +163,13 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.deepEqual(cal.events()[0], event);
 			});
 
-			it('setter should add events and return reference to new instances', function() {
-				var cal = ical(), events;
+			it('setter should add events and return this', function() {
+				var cal = ical(), events, cal2;
 				assert.equal(cal.length(), 0);
 
-				events = cal.events([{summary: 'Event A'}, {summary: 'Event B'}]);
+				cal2 = cal.events([{summary: 'Event A'}, {summary: 'Event B'}]);
 				assert.equal(cal.length(), 2);
-
-				assert.deepEqual(events[0], cal.events()[0]);
-				assert.equal(events[0].summary(), 'Event A');
-
-				assert.deepEqual(events[1], cal.events()[1]);
-				assert.equal(events[1].summary(), 'Event B');
+				assert.deepEqual(cal2, cal);
 			});
 		});
 
@@ -746,6 +741,59 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 			});
 		});
 
+		describe('createAttendee()', function() {
+			it('should return a ICalAttendee instance', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					ICalAttendee = require('../lib/attendee.js');
+
+				assert.ok(event.createAttendee() instanceof ICalAttendee);
+			});
+
+			it('should pass data to instance', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					attendee = event.createAttendee({name: 'Zac'});
+
+				assert.equal(attendee.name(), 'Zac');
+			});
+
+			it('getter should return value', function() {
+				var a = ical().createEvent().createAttendee('Sebastian Pekarek <mail@example.com>');
+				assert.equal('Sebastian Pekarek', a.name());
+				assert.equal('mail@example.com', a.email());
+			});
+
+			it('should throw error when string misformated', function() {
+				var e = ical().createEvent();
+				assert.throws(function() {
+					e.createAttendee('foo bar');
+				}, /`attendee`/);
+			});
+		});
+
+		describe('attendees()', function() {
+			it('getter should return an array of attendees…', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					attendee;
+				assert.equal(event.attendees().length, 0);
+
+				attendee = event.createAttendee();
+				assert.equal(event.attendees().length, 1);
+				assert.deepEqual(event.attendees()[0], attendee);
+			});
+
+			it('setter should add events and return this', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					foo = event.attendees([{name: 'Person A'}, {name: 'Person B'}]);
+
+				assert.equal(event.attendees().length, 2);
+				assert.deepEqual(foo, event);
+			});
+		});
+
 		describe('method()', function() {
 			it('setter should return this', function() {
 				var e = ical().createEvent();
@@ -962,6 +1010,263 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
 				/*jslint stupid: true */
 				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
+			});
+
+			it('case #6 (attendee with simple delegation)', function() {
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+				cal.createEvent({
+					id: '123',
+					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+					end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+					allDay: true,
+					stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+					summary: 'Sample Event',
+					organizer: 'Sebastian Pekarek <mail@sebbo.net>',
+					attendees: [
+						{
+							name: 'Matt',
+							email: 'matt@example.com',
+							delegatesTo: {
+								name: 'John',
+								email: 'john@example.com',
+								status: 'accepted'
+							}
+						}
+					],
+					method: 'add',
+					status: 'confirmed',
+					url: 'http://sebbo.net/'
+				});
+
+				/*jslint stupid: true */
+				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_06.ics', 'utf8'));
+			});
+		});
+	});
+
+	describe('ICalAttendee', function() {
+		it('shouldn\'t work without event reference', function() {
+			var ICalAttendee = require('../lib/attendee.js');
+			assert.throws(function() {
+				new ICalAttendee({email: 'foo@bar.com'});
+			}, /`event`/);
+		});
+
+		describe('name()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.name('Sebastian'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAttendee().name('Sebastian');
+				assert.equal(e.name(), 'Sebastian');
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mail@example.com', name: 'hufflepuff'});
+				assert.ok(cal.toString().indexOf('hufflepuff') > -1);
+			});
+		});
+
+		describe('email()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.email('foo@example.com'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAttendee().email('foo@example.com');
+				assert.equal(e.email(), 'foo@example.com');
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mail@example.com'});
+				assert.ok(cal.toString().indexOf('mail@example.com') > -1);
+			});
+		});
+
+		describe('role()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.role('req-participant'));
+			});
+
+			it('getter should return value', function() {
+				var a = ical().createEvent().createAttendee().role('req-participant');
+				assert.equal(a.role(), 'REQ-PARTICIPANT');
+			});
+
+			it('should throw error when method not allowed', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.throws(function() {
+					a.role('COOKING');
+				}, /`role`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mail@example.com', role: 'non-participant'});
+				assert.ok(cal.toString().indexOf('NON-PARTICIPANT') > -1);
+			});
+		});
+
+		describe('status()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.status('accepted'));
+			});
+
+			it('getter should return value', function() {
+				var a = ical().createEvent().createAttendee().status('accepted');
+				assert.equal(a.status(), 'ACCEPTED');
+			});
+
+			it('should throw error when method not allowed', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.throws(function() {
+					a.status('DRINKING');
+				}, /`status`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mail@example.com', status: 'declined'});
+				assert.ok(cal.toString().indexOf('DECLINED') > -1);
+			});
+		});
+
+		describe('delegatedTo()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.delegatedTo('foo@example.com'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAttendee().delegatedTo('foo@example.com');
+				assert.equal(e.delegatedTo(), 'foo@example.com');
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mail@example.com', delegatedTo: 'foo@example.com'});
+				assert.ok(cal.toString().indexOf('foo@example.com') > -1);
+			});
+		});
+
+		describe('delegatedFrom()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.delegatedFrom('foo@example.com'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAttendee().delegatedFrom('foo@example.com');
+				assert.equal(e.delegatedFrom(), 'foo@example.com');
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mail@example.com', delegatedFrom: 'foo@example.com'});
+				assert.ok(cal.toString().indexOf('foo@example.com') > -1);
+			});
+		});
+
+		describe('delegatesTo()', function() {
+			it('should return a new ICalAttendee instance by default', function() {
+				var event = ical().createEvent(),
+					ICalAttendee = require('../lib/attendee.js');
+
+				assert.ok(event.createAttendee().delegatesTo() instanceof ICalAttendee);
+			});
+
+			it('should reuse the same ICalAttendee instance if passed', function() {
+				var event = ical().createEvent(),
+					attendee = event.createAttendee({name: 'Muh'});
+
+				assert.deepEqual(event.createAttendee().delegatesTo(attendee), attendee);
+			});
+
+			it('should pass data to instance', function() {
+				var event = ical().createEvent(),
+					attendee = event.createAttendee({name: 'Zac'}).delegatesTo({name: 'Cody'});
+
+				assert.equal(attendee.name(), 'Cody');
+			});
+		});
+
+		describe('delegatesFrom()', function() {
+			it('should return a new ICalAttendee instance by default', function() {
+				var event = ical().createEvent(),
+					ICalAttendee = require('../lib/attendee.js');
+
+				assert.ok(event.createAttendee().delegatesFrom() instanceof ICalAttendee);
+			});
+
+			it('should reuse the same ICalAttendee instance if passed', function() {
+				var event = ical().createEvent(),
+					attendee = event.createAttendee({name: 'Muh'});
+
+				assert.deepEqual(event.createAttendee().delegatesFrom(attendee), attendee);
+			});
+
+			it('should pass data to instance', function() {
+				var event = ical().createEvent(),
+					attendee = event.createAttendee({name: 'Zac'}).delegatesFrom({name: 'Cody'});
+
+				assert.equal(attendee.name(), 'Cody');
+			});
+		});
+
+		describe('generate()', function() {
+			it('shoult throw an error without email', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAttendee({name: 'Testuser'});
+
+				assert.throws(function() {
+					a.generate();
+				}, /`email`/);
 			});
 		});
 	});

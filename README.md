@@ -300,9 +300,12 @@ Appointment description
 
 
 #### location([String location])
+
 Appointment location
 
+
 #### organizer([String|Object organizer])
+
 Appointment organizer
 
 ```javascript
@@ -314,6 +317,40 @@ cal.organizer({
 // OR
 
 cal.organizer('Organizer\'s Name <organizer@example.com>');
+```
+
+
+#### createAttendee([Object options])
+
+Creates a new [Attendee](#attendee) ([`ICalAttendee`](#attendee)) and returns it. Use options to prefill the attendee's attributes.
+Calling this method without options will create an empty attendee.
+
+```javascript
+var ical = require('ical-generator'),
+    cal = ical(),
+    event = cal.createEvent(),
+    attendee = event.createAttendee({email: 'hui@example.com', 'name': 'Hui'});
+
+// overwrite attendee's email address
+attendee.email('hui@example.net');
+
+// add another attendee
+event.createAttendee('Buh <buh@example.net>');
+```
+
+
+#### attendees([Object attendees])
+
+Add Attendees to the event or return all attached attendees.
+
+```javascript
+var event = ical().createEvent();
+cal.attendees([
+    {email: 'a@example.com', name: 'Person A'},
+    {email: 'b@example.com', name: 'Person B'}
+]);
+
+cal.attendees(); // --> [ICalAttendee, ICalAttendee]
 ```
 
 
@@ -330,6 +367,55 @@ Appointment method. May be any of the following: publish, request, reply, add, c
 #### status([String status])
 
 Appointment status. May be any of the following: confirmed, tenative, cancelled.
+
+
+
+### Attendee
+
+#### name([String name])
+
+Use this method to set the attendee's name.
+
+
+#### email([String email])
+
+The attendee's email address. An email address is required for every attendee!
+
+
+#### role([String role])
+
+Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: req-participant, non-participant
+
+
+#### status([String status])
+
+Set the attendee's status. May be one of the following: accepted, tentative, declined
+
+
+#### delegatesTo(ICalAttendee|Object attendee)
+
+Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+    attendee = cal.createAttendee();
+
+attendee.delegatesTo({email: 'foo@bar.com', name: 'Foo'});
+```
+
+
+#### delegatesFrom(ICalAttendee|Object attendee)
+
+Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+    attendee = cal.createAttendee();
+
+attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
+```
 
 
 
