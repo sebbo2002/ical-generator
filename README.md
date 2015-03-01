@@ -106,7 +106,7 @@ cal = ical({
 
 ### ical-generator
 
-#### ical([Object options])
+#### ical([_Object_ options])
 
 Creates a new [Calendar](#calendar) ([`ICalCalendar`](#calendar)).
 
@@ -134,13 +134,13 @@ cal.domain('sebbo.net');
 
 ### Calendar
 
-#### domain([String domain])
+#### domain([_String_ domain])
 
 Use this method to set your server's hostname. It will be used to generate the feed's UID. Default hostname is your
 server's one (`require('os').hostname()`).
 
 
-#### prodId([String|Object prodId])
+#### prodId([_String_|_Object_ prodId])
 
 Use this method to overwrite the default Product Identifier (`//sebbo.net//ical-generator//EN`). `prodId` can be ether
 a valid Product Identifier or an object:
@@ -158,12 +158,12 @@ cal.prodId('//My Company//My Product//EN');
 ```
 
 
-#### name([String name])
+#### name([_String_ name])
 
 Use this method to set your feed's name. Is used to fill `X-WR-CALNAME` in your iCal file.
 
 
-#### timezone([String timezone])
+#### timezone([_String_ timezone])
 
 Use this method to set your feed's timezone. Is used to fill `X-WR-TIMEZONE` in your iCal.
 
@@ -172,7 +172,7 @@ var cal = ical().timezone('Europe/Berlin');
 ```
 
 
-#### createEvent([Object options])
+#### createEvent([_Object_ options])
 
 Creates a new [Event](#event) ([`ICalEvent`](#event)) and returns it. Use options to prefill the event's attributes.
 Calling this method without options will create an empty event.
@@ -187,7 +187,7 @@ event.summary('Your Event');
 ```
 
 
-#### events([Object events])
+#### events([_Object_ events])
 
 Add Events to calendar or return all attached events.
 
@@ -207,17 +207,17 @@ cal.events(); // --> [ICalEvent]
 ```
 
 
-#### save(String file[, Function cb])
+#### save(**_String_ file**[, _Function_ cb])
 
 Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback).
 
 
-#### saveSync(String file)
+#### saveSync(**_String_ file**)
 
 Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options).
 
 
-#### serve(http.ServerResponse response)
+#### serve(**_http.ServerResponse_ response**)
 
 Send Calendar to the User when using HTTP. See Quick Start above.
 
@@ -240,32 +240,32 @@ Empty the Calender.
 
 ### Event
 
-#### uid([String|Number uid]) or id([String|Number id])
+#### uid([_String_|_Number_ uid]) or id([_String_|_Number_ id])
 
 Use this method to set the event's ID. If not set, an UID will be generated randomly.
 
 
-#### start([Date start])
+#### start([_Date_ start])
 
 Appointment date of beginning as Date object. This is required for all events!
 
 
-#### end([Date end])
+#### end([_Date_ end])
 
 Appointment date of end as Date object. This is also required for all events!
 
 
-#### timestamp([Date stamp]) or stamp([Date stamp])
+#### timestamp([_Date_ stamp]) or stamp([_Date_ stamp])
 
 Appointment date of creation as Date object. Default to `new Date()`.
 
 
-#### allDay([Boolean allDay])
+#### allDay([_Boolean_ allDay])
 
 When allDay == true -> appointment is for the whole day
 
 
-#### floating([Boolean floating])
+#### floating([_Boolean_ floating])
 Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.12):
 
 > Time values of this type are said to be "floating" and are not
@@ -277,7 +277,7 @@ Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools
 > in.  In these cases, a local time can be specified.
 
 
-#### repeating([Object repeating])
+#### repeating([_Object_ repeating])
 Appointment is a repeating event
 
 ```javascript
@@ -290,22 +290,22 @@ cal.repeating({
 ```
 
 
-#### summary([String summary])
+#### summary([_String_ summary])
 
 Appointment summary, default to empty string.
 
 
-#### description([String description])
+#### description([_String_ description])
 
 Appointment description
 
 
-#### location([String location])
+#### location([_String_ location])
 
 Appointment location
 
 
-#### organizer([String|Object organizer])
+#### organizer([_String_|Object organizer])
 
 Appointment organizer
 
@@ -321,7 +321,7 @@ cal.organizer('Organizer\'s Name <organizer@example.com>');
 ```
 
 
-#### createAttendee([Object options])
+#### createAttendee([_Object_ options])
 
 Creates a new [Attendee](#attendee) ([`ICalAttendee`](#attendee)) and returns it. Use options to prefill the attendee's attributes.
 Calling this method without options will create an empty attendee.
@@ -340,7 +340,7 @@ event.createAttendee('Buh <buh@example.net>');
 ```
 
 
-#### attendees([Object attendees])
+#### attendees([_Object_ attendees])
 
 Add Attendees to the event or return all attached attendees.
 
@@ -355,17 +355,17 @@ cal.attendees(); // --> [ICalAttendee, ICalAttendee]
 ```
 
 
-#### url([String url])
+#### url([_String_ url])
 
 Appointment URL
 
 
-#### method([String method])
+#### method([_String_ method])
 
 Appointment method. May be any of the following: publish, request, reply, add, cancel, refresh, counter, declinecounter.
 
 
-#### status([String status])
+#### status([_String_ status])
 
 Appointment status. May be any of the following: confirmed, tenative, cancelled.
 
@@ -373,22 +373,22 @@ Appointment status. May be any of the following: confirmed, tenative, cancelled.
 
 ### Attendee
 
-#### name([String name])
+#### name([_String_ name])
 
 Use this method to set the attendee's name.
 
 
-#### email([String email])
+#### email([_String_ email])
 
 The attendee's email address. An email address is required for every attendee!
 
 
-#### role([String role])
+#### role([_String_ role])
 
 Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: req-participant, non-participant
 
 
-#### status([String status])
+#### status([_String_ status])
 
 Set the attendee's status. May be one of the following: accepted, tentative, declined
 
