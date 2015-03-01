@@ -393,7 +393,7 @@ Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the follow
 Set the attendee's status. May be one of the following: accepted, tentative, declined
 
 
-#### delegatesTo(ICalAttendee|Object attendee)
+#### delegatesTo(**_ICalAttendee_|_Object_ attendee**)
 
 Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
 
@@ -406,7 +406,7 @@ attendee.delegatesTo({email: 'foo@bar.com', name: 'Foo'});
 ```
 
 
-#### delegatesFrom(ICalAttendee|Object attendee)
+#### delegatesFrom(**_ICalAttendee_|_Object_ attendee**)
 
 Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
 
