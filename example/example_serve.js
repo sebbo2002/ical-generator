@@ -2,15 +2,19 @@
 
 var ical = require('../lib/'),
 	http = require('http'),
-	cal = ical();
-
-cal.createEvent({
-	start: new Date(),
-	end: new Date(new Date().getTime() + 3600000),
-	summary: 'Example Event',
-	description: 'It works ;)',
-	url: 'http://sebbo.net/'
-});
+	cal = ical({
+		domain: 'sebbo.net',
+		prodId: '//superman-industries.com//ical-generator//EN',
+		events: [
+			{
+				start: new Date(),
+				end: new Date(new Date().getTime() + 3600000),
+				summary: 'Example Event',
+				description: 'It works ;)',
+				url: 'http://sebbo.net/'
+			}
+		]
+	});
 
 http.createServer(function(req, res) {
 	cal.serve(res);
