@@ -784,7 +784,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.deepEqual(event.attendees()[0], attendee);
 			});
 
-			it('setter should add events and return this', function() {
+			it('setter should add attendees and return this', function() {
 				var cal = ical(),
 					event = cal.createEvent(),
 					foo = event.attendees([{name: 'Person A'}, {name: 'Person B'}]);
