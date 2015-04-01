@@ -1441,5 +1441,79 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.ok(cal.toString().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
 			});
 		});
+
+		describe('repeat()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.repeat(4));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().repeat(100);
+				assert.equal(e.repeat(), 100);
+			});
+
+			it('should throw error if repeat not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.repeat(Infinity);
+				}, /`repeat`/);
+				assert.throws(function() {
+					a.repeat('hi');
+				}, /`repeat`/);
+				assert.throws(function() {
+					a.repeat(true);
+				}, /`repeat`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300, repeat: 42, interval: 60});
+				assert.ok(cal.toString().indexOf('REPEAT:42') > -1);
+			});
+		});
+
+		describe('interval()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.interval(60));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().interval(30);
+				assert.equal(e.interval(), 30);
+			});
+
+			it('should throw error if repeat not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.interval(Infinity);
+				}, /`interval`/);
+				assert.throws(function() {
+					a.interval('hi');
+				}, /`interval`/);
+				assert.throws(function() {
+					a.interval(true);
+				}, /`interval`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300, repeat: 42, interval: 90});
+				assert.ok(cal.toString().indexOf('DURATION:PT1M30S') > -1);
+			});
+		});
 	});
 });
