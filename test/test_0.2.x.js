@@ -1349,5 +1349,97 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.ok(cal.toString().indexOf('ACTION:DISPLAY') > -1);
 			});
 		});
+
+		describe('trigger()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.trigger(60 * 10));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().trigger(300),
+					now = new Date();
+
+				assert.equal(e.trigger(), 300);
+				assert.equal(e.triggerAfter(), -300);
+
+				// Date
+				e.trigger(now);
+				assert.deepEqual(e.trigger(), now);
+			});
+
+			it('should throw error when trigger not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.trigger(Infinity);
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.trigger('hi');
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.trigger(true);
+				}, /`trigger`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					}),
+					trigger = new Date('2015-02-01T13:38:45Z'),
+					alarm;
+
+				alarm = event.createAlarm({type: 'display', trigger: 60 * 10});
+				assert.ok(cal.toString().indexOf('TRIGGER:-PT10M') > -1);
+
+				alarm.trigger(trigger);
+				assert.ok(cal.toString().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
+			});
+		});
+
+		describe('triggerAfter()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.triggerAfter(60 * 10));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().triggerAfter(300);
+				assert.equal(e.triggerAfter(), 300);
+				assert.equal(e.trigger(), -300);
+			});
+
+			it('should throw error when trigger not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.triggerAfter(Infinity);
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.triggerAfter('hi');
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.triggerAfter(true);
+				}, /`trigger`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					}),
+					trigger = new Date('2015-02-01T13:38:45Z'),
+					alarm;
+
+				alarm = event.createAlarm({type: 'display', triggerAfter: 60 * 10});
+				assert.ok(cal.toString().indexOf('TRIGGER;RELATED=END:PT10M') > -1);
+
+				alarm.triggerAfter(trigger);
+				assert.ok(cal.toString().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
+			});
+		});
 	});
 });
