@@ -794,6 +794,46 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 			});
 		});
 
+		describe('createAlarm()', function() {
+			it('should return a ICalAlarm instance', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					ICalAlarm = require('../lib/alarm.js');
+
+				assert.ok(event.createAlarm() instanceof ICalAlarm);
+			});
+
+			it('should pass data to instance', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					attendee = event.createAlarm({type: 'audio'});
+
+				assert.equal(attendee.type(), 'audio');
+			});
+		});
+
+		describe('alarms()', function() {
+			it('getter should return an array of alarms…', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					alarm;
+				assert.equal(event.alarms().length, 0);
+
+				alarm = event.createAlarm();
+				assert.equal(event.alarms().length, 1);
+				assert.deepEqual(event.alarms()[0], alarm);
+			});
+
+			it('setter should add alarms and return this', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					foo = event.alarms([{type: 'audio'}, {type: 'display'}]);
+
+				assert.equal(event.alarms().length, 2);
+				assert.deepEqual(foo, event);
+			});
+		});
+
 		describe('method()', function() {
 			it('setter should return this', function() {
 				var e = ical().createEvent();
@@ -1267,6 +1307,46 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.throws(function() {
 					a.generate();
 				}, /`email`/);
+			});
+		});
+	});
+
+	describe('ICalAlarm', function() {
+		it('shouldn\'t work without event reference', function() {
+			var ICalAlarm = require('../lib/alarm.js');
+			assert.throws(function() {
+				new ICalAlarm({type: 'display'});
+			}, /`event`/);
+		});
+
+		describe('type()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.type('display'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().type('display');
+				assert.equal(e.type(), 'display');
+			});
+
+			it('should throw error when type not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.type('BANANA');
+				}, /`type`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 60 * 10});
+				assert.ok(cal.toString().indexOf('ACTION:DISPLAY') > -1);
 			});
 		});
 	});
