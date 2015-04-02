@@ -1594,16 +1594,16 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 						trigger: 300
 					});
 
-				assert.ok(cal.toString().indexOf('\nATTACH;VALUE=URI:Basso') > -1);
+				assert.ok(cal.toString().indexOf('\r\nATTACH;VALUE=URI:Basso') > -1);
 
 				a.attach('https://example.com/beep.aud');
-				assert.ok(cal.toString().indexOf('\nATTACH;VALUE=URI:https://example.com/beep.aud') > -1);
+				assert.ok(cal.toString().indexOf('\r\nATTACH;VALUE=URI:https://example.com/beep.aud') > -1);
 
 				a.attach({
 					uri: 'https://example.com/beep.aud',
 					mime: 'audio/basic'
 				});
-				assert.ok(cal.toString().indexOf('\nATTACH;FMTTYPE=audio/basic:https://example.com/beep.aud') > -1);
+				assert.ok(cal.toString().indexOf('\r\nATTACH;FMTTYPE=audio/basic:https://example.com/beep.aud') > -1);
 			});
 		});
 
@@ -1627,7 +1627,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 					});
 
 				event.createAlarm({type: 'display', trigger: 300, description: 'Huibuh!'});
-				assert.ok(cal.toString().indexOf('\nDESCRIPTION:Huibuh') > -1);
+				assert.ok(cal.toString().indexOf('\r\nDESCRIPTION:Huibuh') > -1);
 			});
 
 			it('should fallback to event summary', function() {
@@ -1639,7 +1639,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 					});
 
 				event.createAlarm({type: 'display', trigger: 300});
-				assert.ok(cal.toString().indexOf('\nDESCRIPTION:Example Event') > -1);
+				assert.ok(cal.toString().indexOf('\r\nDESCRIPTION:Example Event') > -1);
 			});
 		});
 
