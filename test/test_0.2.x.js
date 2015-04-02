@@ -6,6 +6,19 @@ var assert = require('assert'),
 describe('ical-generator 0.2.x / ICalCalendar', function() {
 	'use strict';
 
+	describe('ICalTools', function() {
+		describe('duration()', function() {
+			it('case #1', function() {
+				var tools = require(__dirname + '/../lib/_tools.js');
+				assert.equal(tools.duration(5425), 'PT1H30M25S');
+			});
+			it('case #2', function() {
+				var tools = require(__dirname + '/../lib/_tools.js');
+				assert.equal(tools.duration(0), 'PT0S');
+			});
+		});
+	});
+
 	describe('ICalCalendar', function() {
 		describe('domain()', function() {
 			it('setter should return this', function() {
