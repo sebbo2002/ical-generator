@@ -1052,7 +1052,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
 			});
 
-			it('case #6 (attendee with simple delegation)', function() {
+			it('case #6 (attendee with simple delegation and alarm)', function() {
 				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
 				cal.createEvent({
 					id: '123',
@@ -1071,6 +1071,18 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 								email: 'john@example.com',
 								status: 'accepted'
 							}
+						}
+					],
+					alarms: [
+						{
+							type: 'display',
+							trigger: 60 * 10,
+							repeat: 2,
+							interval: 60
+						},
+						{
+							type: 'display',
+							trigger: 60 * 60
 						}
 					],
 					method: 'add',
@@ -1513,6 +1525,56 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
 				event.createAlarm({type: 'display', trigger: 300, repeat: 42, interval: 90});
 				assert.ok(cal.toString().indexOf('DURATION:PT1M30S') > -1);
+			});
+		});
+
+		describe('generate()', function() {
+			it('shoult throw an error without type', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({trigger: 300});
+
+				assert.throws(function() {
+					a.generate();
+				}, /`type`/);
+			});
+
+			it('shoult throw an error without trigger', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({type: 'display'});
+
+				assert.throws(function() {
+					a.generate();
+				}, /`trigger`/);
+			});
+
+			it('shoult throw an error if repeat is set but interval isn\'t', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({type: 'display', trigger: 300, repeat: 4});
+
+				assert.throws(function() {
+					a.generate();
+				}, /for `interval`/);
+			});
+
+			it('shoult throw an error if interval is set but repeat isn\'t', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({type: 'display', trigger: 300, interval: 60});
+
+				assert.throws(function() {
+					a.generate();
+				}, /for `repeat`/);
 			});
 		});
 	});
