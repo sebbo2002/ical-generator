@@ -355,6 +355,40 @@ cal.attendees(); // --> [ICalAttendee, ICalAttendee]
 ```
 
 
+#### createAlarm([_Object_ options])
+
+Creates a new [Alarm](#alarm) ([`ICalAlarm`](#alarm)) and returns it. Use options to prefill the alarm's attributes.
+Calling this method without options will create an empty alarm.
+
+```javascript
+var ical = require('ical-generator'),
+    cal = ical(),
+    event = cal.createEvent(),
+    alarm = event.createAlarm({type: 'display', trigger: 300});
+
+// add another alarm
+event.createAlarm({
+    type: 'audio',
+    trigger: 300, // 5min before event
+});
+```
+
+
+#### alarms([_Object_ alarms])
+
+Add alarms to the event or return all attached alarms.
+
+```javascript
+var event = ical().createEvent();
+cal.alarms([
+    {type: 'display', trigger: 600},
+    {type: 'audio', trigger: 300}
+]);
+
+cal.attendees(); // --> [ICalAlarm, ICalAlarm]
+```
+
+
 #### url([_String_ url])
 
 Appointment URL
@@ -417,6 +451,104 @@ var cal = ical(),
 
 attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 ```
+
+
+
+### Alarm
+
+#### type([_String_ type])
+
+Use this method to set the alarm type. Right now, `audio` and `display` is supported.
+
+
+#### trigger([_String_|_Date_ trigger]) / triggerBefore([_String_|_Date_ trigger])
+
+Use this method to set the alarm time.
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+    alarm = cal.createAlarm();
+
+alarm.trigger(600); // -> 10 minutes before event starts
+alarm.trigger(new Date()); // -> now
+```
+
+
+#### triggerAfter([_String_|_Date_ trigger])
+
+Use this method to set the alarm time.
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+    alarm = cal.createAlarm();
+
+alarm.trigger(600); // -> 10 minutes after the event finishes
+alarm.trigger(new Date()); // -> now
+```
+
+
+#### repeat([_Number_ repeat])
+
+Use this method to repeat the alarm.
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+
+// repeat the alarm 4 times every 5 minutes…
+cal.createAlarm({
+    repeat: 4,
+    interval: 300
+});
+```
+
+
+#### interval([_Number_ interval])
+
+Use this method to set the alarm's interval.
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+
+// repeat the alarm 4 times every 5 minutes…
+cal.createAlarm({
+    repeat: 4,
+    interval: 300
+});
+```
+
+
+#### attach([_String_|_Object_ attach])
+
+Alarm attachment; used to set the alarm sound if type = audio. Defaults to "Basso".
+
+```javascript
+var cal = ical(),
+    event = cal.createEvent(),
+
+// by url
+event.createAlarm({
+    attach: 'https://example.com/notification.aud'
+});
+
+// OR
+
+event.createAlarm({
+    attach: {
+        uri: 'https://example.com/notification.aud',
+        mime: 'audio/basic'
+    }
+});
+```
+
+
+#### description([_String_| description])
+
+Alarm description; used to set the alarm message if type = display. Defaults to the event's summary.
+
 
 
 
