@@ -6,6 +6,19 @@ var assert = require('assert'),
 describe('ical-generator 0.2.x / ICalCalendar', function() {
 	'use strict';
 
+	describe('ICalTools', function() {
+		describe('duration()', function() {
+			it('case #1', function() {
+				var tools = require(__dirname + '/../lib/_tools.js');
+				assert.equal(tools.duration(5425), 'PT1H30M25S');
+			});
+			it('case #2', function() {
+				var tools = require(__dirname + '/../lib/_tools.js');
+				assert.equal(tools.duration(0), 'PT0S');
+			});
+		});
+	});
+
 	describe('ICalCalendar', function() {
 		describe('domain()', function() {
 			it('setter should return this', function() {
@@ -784,12 +797,52 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.deepEqual(event.attendees()[0], attendee);
 			});
 
-			it('setter should add events and return this', function() {
+			it('setter should add attendees and return this', function() {
 				var cal = ical(),
 					event = cal.createEvent(),
 					foo = event.attendees([{name: 'Person A'}, {name: 'Person B'}]);
 
 				assert.equal(event.attendees().length, 2);
+				assert.deepEqual(foo, event);
+			});
+		});
+
+		describe('createAlarm()', function() {
+			it('should return a ICalAlarm instance', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					ICalAlarm = require('../lib/alarm.js');
+
+				assert.ok(event.createAlarm() instanceof ICalAlarm);
+			});
+
+			it('should pass data to instance', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					attendee = event.createAlarm({type: 'audio'});
+
+				assert.equal(attendee.type(), 'audio');
+			});
+		});
+
+		describe('alarms()', function() {
+			it('getter should return an array of alarms…', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					alarm;
+				assert.equal(event.alarms().length, 0);
+
+				alarm = event.createAlarm();
+				assert.equal(event.alarms().length, 1);
+				assert.deepEqual(event.alarms()[0], alarm);
+			});
+
+			it('setter should add alarms and return this', function() {
+				var cal = ical(),
+					event = cal.createEvent(),
+					foo = event.alarms([{type: 'audio'}, {type: 'display'}]);
+
+				assert.equal(event.alarms().length, 2);
 				assert.deepEqual(foo, event);
 			});
 		});
@@ -1012,7 +1065,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
 			});
 
-			it('case #6 (attendee with simple delegation)', function() {
+			it('case #6 (attendee with simple delegation and alarm)', function() {
 				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
 				cal.createEvent({
 					id: '123',
@@ -1031,6 +1084,19 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 								email: 'john@example.com',
 								status: 'accepted'
 							}
+						}
+					],
+					alarms: [
+						{
+							type: 'display',
+							trigger: 60 * 10,
+							repeat: 2,
+							interval: 60
+						},
+						{
+							type: 'display',
+							trigger: 60 * 60,
+							description: 'I\'m a reminder :)'
 						}
 					],
 					method: 'add',
@@ -1267,6 +1333,363 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.throws(function() {
 					a.generate();
 				}, /`email`/);
+			});
+		});
+	});
+
+	describe('ICalAlarm', function() {
+		it('shouldn\'t work without event reference', function() {
+			var ICalAlarm = require('../lib/alarm.js');
+			assert.throws(function() {
+				new ICalAlarm({type: 'display'});
+			}, /`event`/);
+		});
+
+		describe('type()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.type('display'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().type('display');
+				assert.equal(e.type(), 'display');
+			});
+
+			it('should throw error when type not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.type('BANANA');
+				}, /`type`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 60 * 10});
+				assert.ok(cal.toString().indexOf('ACTION:DISPLAY') > -1);
+			});
+		});
+
+		describe('trigger()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.trigger(60 * 10));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().trigger(300),
+					now = new Date();
+
+				assert.equal(e.trigger(), 300);
+				assert.equal(e.triggerAfter(), -300);
+
+				// Date
+				e.trigger(now);
+				assert.deepEqual(e.trigger(), now);
+			});
+
+			it('should throw error when trigger not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.trigger(Infinity);
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.trigger('hi');
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.trigger(true);
+				}, /`trigger`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					}),
+					trigger = new Date('2015-02-01T13:38:45Z'),
+					alarm;
+
+				alarm = event.createAlarm({type: 'display', trigger: 60 * 10});
+				assert.ok(cal.toString().indexOf('TRIGGER:-PT10M') > -1);
+
+				alarm.trigger(trigger);
+				assert.ok(cal.toString().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
+			});
+		});
+
+		describe('triggerAfter()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.triggerAfter(60 * 10));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().triggerAfter(300);
+				assert.equal(e.triggerAfter(), 300);
+				assert.equal(e.trigger(), -300);
+			});
+
+			it('should throw error when trigger not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.triggerAfter(Infinity);
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.triggerAfter('hi');
+				}, /`trigger`/);
+				assert.throws(function() {
+					a.triggerAfter(true);
+				}, /`trigger`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					}),
+					trigger = new Date('2015-02-01T13:38:45Z'),
+					alarm;
+
+				alarm = event.createAlarm({type: 'display', triggerAfter: 60 * 10});
+				assert.ok(cal.toString().indexOf('TRIGGER;RELATED=END:PT10M') > -1);
+
+				alarm.triggerAfter(trigger);
+				assert.ok(cal.toString().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
+			});
+		});
+
+		describe('repeat()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.repeat(4));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().repeat(100);
+				assert.equal(e.repeat(), 100);
+			});
+
+			it('should throw error if repeat not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.repeat(Infinity);
+				}, /`repeat`/);
+				assert.throws(function() {
+					a.repeat('hi');
+				}, /`repeat`/);
+				assert.throws(function() {
+					a.repeat(true);
+				}, /`repeat`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300, repeat: 42, interval: 60});
+				assert.ok(cal.toString().indexOf('REPEAT:42') > -1);
+			});
+		});
+
+		describe('interval()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.interval(60));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().interval(30);
+				assert.equal(e.interval(), 30);
+			});
+
+			it('should throw error if repeat not allowed', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.interval(Infinity);
+				}, /`interval`/);
+				assert.throws(function() {
+					a.interval('hi');
+				}, /`interval`/);
+				assert.throws(function() {
+					a.interval(true);
+				}, /`interval`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300, repeat: 42, interval: 90});
+				assert.ok(cal.toString().indexOf('DURATION:PT1M30S') > -1);
+			});
+		});
+
+		describe('attach()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.attach('https://sebbo.net/beep.aud'));
+			});
+
+			it('getter should return value', function() {
+				var t = {uri: 'https://example.com/alarm.aud', mime: 'audio/basic'},
+					e = ical().createEvent().createAlarm().attach(t);
+				assert.deepEqual(e.attach(), t);
+
+				e.attach('https://www.example.com/beep.aud');
+				assert.deepEqual(e.attach(), {
+					uri: 'https://www.example.com/beep.aud',
+					mime: null
+				});
+
+				e.attach({
+					uri: 'https://www.example.com/beep.aud'
+				});
+				assert.deepEqual(e.attach(), {
+					uri: 'https://www.example.com/beep.aud',
+					mime: null
+				});
+			});
+
+			it('should throw error withour uri', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.attach({mime: 'audio/basic'});
+				}, /`attach.uri`/);
+			});
+
+			it('should throw error when unknown format', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.attach(Infinity);
+				}, /`attach`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					e = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					}),
+					a = e.createAlarm({
+						type: 'audio',
+						trigger: 300
+					});
+
+				assert.ok(cal.toString().indexOf('\r\nATTACH;VALUE=URI:Basso') > -1);
+
+				a.attach('https://example.com/beep.aud');
+				assert.ok(cal.toString().indexOf('\r\nATTACH;VALUE=URI:https://example.com/beep.aud') > -1);
+
+				a.attach({
+					uri: 'https://example.com/beep.aud',
+					mime: 'audio/basic'
+				});
+				assert.ok(cal.toString().indexOf('\r\nATTACH;FMTTYPE=audio/basic:https://example.com/beep.aud') > -1);
+			});
+		});
+
+		describe('description()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.description('Hey Ho!'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().description('blablabla');
+				assert.deepEqual(e.description(), 'blablabla');
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300, description: 'Huibuh!'});
+				assert.ok(cal.toString().indexOf('\r\nDESCRIPTION:Huibuh') > -1);
+			});
+
+			it('should fallback to event summary', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300});
+				assert.ok(cal.toString().indexOf('\r\nDESCRIPTION:Example Event') > -1);
+			});
+		});
+
+		describe('generate()', function() {
+			it('shoult throw an error without type', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({trigger: 300});
+
+				assert.throws(function() {
+					a.generate();
+				}, /`type`/);
+			});
+
+			it('shoult throw an error without trigger', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({type: 'display'});
+
+				assert.throws(function() {
+					a.generate();
+				}, /`trigger`/);
+			});
+
+			it('shoult throw an error if repeat is set but interval isn\'t', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({type: 'display', trigger: 300, repeat: 4});
+
+				assert.throws(function() {
+					a.generate();
+				}, /for `interval`/);
+			});
+
+			it('shoult throw an error if interval is set but repeat isn\'t', function() {
+				var a = ical().createEvent({
+					start: new Date(),
+					end: new Date(new Date().getTime() + 3600000),
+					summary: 'Example Event'
+				}).createAlarm({type: 'display', trigger: 300, interval: 60});
+
+				assert.throws(function() {
+					a.generate();
+				}, /for `repeat`/);
 			});
 		});
 	});
