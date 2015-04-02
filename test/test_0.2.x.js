@@ -1095,7 +1095,8 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 						},
 						{
 							type: 'display',
-							trigger: 60 * 60
+							trigger: 60 * 60,
+							description: 'I\'m a reminder :)'
 						}
 					],
 					method: 'add',
@@ -1538,6 +1539,107 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
 				event.createAlarm({type: 'display', trigger: 300, repeat: 42, interval: 90});
 				assert.ok(cal.toString().indexOf('DURATION:PT1M30S') > -1);
+			});
+		});
+
+		describe('attach()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.attach('https://sebbo.net/beep.aud'));
+			});
+
+			it('getter should return value', function() {
+				var t = {uri: 'https://example.com/alarm.aud', mime: 'audio/basic'},
+					e = ical().createEvent().createAlarm().attach(t);
+				assert.deepEqual(e.attach(), t);
+
+				e.attach('https://www.example.com/beep.aud');
+				assert.deepEqual(e.attach(), {
+					uri: 'https://www.example.com/beep.aud',
+					mime: null
+				});
+
+				e.attach({
+					uri: 'https://www.example.com/beep.aud'
+				});
+				assert.deepEqual(e.attach(), {
+					uri: 'https://www.example.com/beep.aud',
+					mime: null
+				});
+			});
+
+			it('should throw error withour uri', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.attach({mime: 'audio/basic'});
+				}, /`attach.uri`/);
+			});
+
+			it('should throw error when unknown format', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.throws(function() {
+					a.attach(Infinity);
+				}, /`attach`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					e = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					}),
+					a = e.createAlarm({
+						type: 'audio',
+						trigger: 300
+					});
+
+				assert.ok(cal.toString().indexOf('\nATTACH;VALUE=URI:Basso') > -1);
+
+				a.attach('https://example.com/beep.aud');
+				assert.ok(cal.toString().indexOf('\nATTACH;VALUE=URI:https://example.com/beep.aud') > -1);
+
+				a.attach({
+					uri: 'https://example.com/beep.aud',
+					mime: 'audio/basic'
+				});
+				assert.ok(cal.toString().indexOf('\nATTACH;FMTTYPE=audio/basic:https://example.com/beep.aud') > -1);
+			});
+		});
+
+		describe('description()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAlarm();
+				assert.deepEqual(a, a.description('Hey Ho!'));
+			});
+
+			it('getter should return value', function() {
+				var e = ical().createEvent().createAlarm().description('blablabla');
+				assert.deepEqual(e.description(), 'blablabla');
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300, description: 'Huibuh!'});
+				assert.ok(cal.toString().indexOf('\nDESCRIPTION:Huibuh') > -1);
+			});
+
+			it('should fallback to event summary', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAlarm({type: 'display', trigger: 300});
+				assert.ok(cal.toString().indexOf('\nDESCRIPTION:Example Event') > -1);
 			});
 		});
 
