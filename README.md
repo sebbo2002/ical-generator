@@ -529,7 +529,6 @@ Alarm attachment; used to set the alarm sound if type = audio. Defaults to "Bass
 var cal = ical(),
     event = cal.createEvent(),
 
-// by url
 event.createAlarm({
     attach: 'https://example.com/notification.aud'
 });
