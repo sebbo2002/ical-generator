@@ -18,7 +18,7 @@
     "portfinder": "^0.2.1"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec --no-colours && grunt"
+    "test": "istanbul cover _mocha -- -R spec --no-colors && grunt"
   },
   "preferGlobal": false,
   "main": "./lib/index.js",
