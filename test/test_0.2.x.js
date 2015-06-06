@@ -280,7 +280,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 							}, function(res) {
 								var file = '';
 
-								assert.equal(res.headers['content-type'], 'text/calendar', 'Header: text/calendar');
+								assert.equal(res.headers['content-type'], 'text/calendar; charset=utf-8', 'Header: text/calendar; charset=utf-8');
 								assert.equal(res.headers['content-disposition'], 'attachment; filename="calendar.ics"', 'Content-Disposition');
 
 								res.setEncoding('utf8');
