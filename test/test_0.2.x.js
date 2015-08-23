@@ -1177,11 +1177,18 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.equal(a.role(), 'REQ-PARTICIPANT');
 			});
 
+			it('should throw error when method empty', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.throws(function() {
+					a.role('');
+				}, /`role` must be a non-empty string/);
+			});
+
 			it('should throw error when method not allowed', function() {
 				var a = ical().createEvent().createAttendee();
 				assert.throws(function() {
 					a.role('COOKING');
-				}, /`role`/);
+				}, /`role` must be one of the following/);
 			});
 
 			it('should change something', function() {
@@ -1208,11 +1215,18 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.equal(a.status(), 'ACCEPTED');
 			});
 
+            it('should throw error when method empty', function() {
+                var a = ical().createEvent().createAttendee();
+                assert.throws(function() {
+                    a.status('');
+                }, /`status` must be a non-empty string/);
+            });
+
 			it('should throw error when method not allowed', function() {
 				var a = ical().createEvent().createAttendee();
 				assert.throws(function() {
 					a.status('DRINKING');
-				}, /`status`/);
+				}, /`status` must be one of the following/);
 			});
 
 			it('should change something', function() {
@@ -1239,11 +1253,18 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.equal(a.type(), 'ROOM');
 			});
 
+            it('should throw error when method empty', function() {
+                var a = ical().createEvent().createAttendee();
+                assert.throws(function() {
+                    a.type('');
+                }, /`type` must be a non-empty string/);
+            });
+
 			it('should throw error when method not allowed', function() {
 				var a = ical().createEvent().createAttendee();
 				assert.throws(function() {
 					a.type('DRINKING');
-				}, /`type`/);
+				}, /`type` must be one of the following/);
 			});
 
 			it('should change something', function() {
