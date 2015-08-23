@@ -427,6 +427,12 @@ Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the follow
 Set the attendee's status. May be one of the following: accepted, tentative, declined
 
 
+#### type([_String_ type])
+
+Set the attendee's type. May be one of the following: `INDIVIDUAL`, `GROUP`, `RESOURCE`, `ROOM`, `UNKNOWN` (See [Section 4.2.3](https://tools.ietf.org/html/rfc2445#section-4.2.3))
+
+
+
 #### delegatesTo(**_ICalAttendee_|_Object_ attendee**)
 
 Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
