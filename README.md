@@ -429,7 +429,7 @@ Set the attendee's status. May be one of the following: accepted, tentative, dec
 
 #### type([_String_ type])
 
-Set the attendee's type. May be one of the following: INDIVIDUAL', 'GROUP', 'RESOURCE', 'ROOM', 'UNKNOWN'], // // ref: https://tools.ietf.org/html/rfc2445#section-4.2.3
+Set the attendee's type. May be one of the following: `INDIVIDUAL`, `GROUP`, `RESOURCE`, `ROOM`, `UNKNOWN` (See [Section 4.2.3](https://tools.ietf.org/html/rfc2445#section-4.2.3))
 
 
 
