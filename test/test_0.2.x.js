@@ -1228,6 +1228,37 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 			});
 		});
 
+		describe('type()', function() {
+			it('setter should return this', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.deepEqual(a, a.type('individual'));
+			});
+
+			it('getter should return value', function() {
+				var a = ical().createEvent().createAttendee().type('room');
+				assert.equal(a.type(), 'ROOM');
+			});
+
+			it('should throw error when method not allowed', function() {
+				var a = ical().createEvent().createAttendee();
+				assert.throws(function() {
+					a.type('DRINKING');
+				}, /`type`/);
+			});
+
+			it('should change something', function() {
+				var cal = ical(),
+					event = cal.createEvent({
+						start: new Date(),
+						end: new Date(new Date().getTime() + 3600000),
+						summary: 'Example Event'
+					});
+
+				event.createAttendee({email: 'mailing-list@example.com', type: 'group'});
+				assert.ok(cal.toString().indexOf('GROUP') > -1);
+			});
+		});
+
 		describe('delegatedTo()', function() {
 			it('setter should return this', function() {
 				var a = ical().createEvent().createAttendee();
