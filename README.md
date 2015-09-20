@@ -227,6 +227,14 @@ Send Calendar to the User when using HTTP. See Quick Start above.
 Return Calendar as a String.
 
 
+#### toJSON()
+
+Return a shallow copy of the calendar's options for JSON stringification. Can be used for persistance.
+```javascript
+var cal = ical(),
+    json = JSON.stringify(cal);
+```
+
 #### length()
 
 Returns the ammount of events in the calendar.

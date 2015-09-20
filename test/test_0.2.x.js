@@ -1047,7 +1047,8 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 			});
 
 			it('case #1', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
 				cal.createEvent({
 					id: '123',
 					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -1057,11 +1058,16 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				});
 
 				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_01.ics', 'utf8'));
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_01.ics', 'utf8'));
+
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
 			});
 
 			it('case #2', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
 				cal.createEvent({
 					id: '123',
 					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -1073,11 +1079,16 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				});
 
 				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ics', 'utf8'));
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_02.ics', 'utf8'));
+
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
 			});
 
 			it('case #3', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
 				cal.createEvent({
 					id: '123',
 					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -1092,11 +1103,131 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				});
 
 				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'));
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'));
+
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
+			});
+
+			it('case #4 (repeating)', function() {
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
+				cal.events([
+					{
+						id: '1',
+						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+						summary: 'repeating by month',
+						repeating: {
+							freq: 'monthly'
+						}
+					},
+					{
+						id: '2',
+						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+						summary: 'repeating by day, twice',
+						repeating: {
+							freq: 'DAILY',
+							count: 2
+						}
+					},
+					{
+						id: '3',
+						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+						summary: 'repeating by 3 weeks, until 2014',
+						repeating: {
+							freq: 'WEEKLY',
+							interval: 3,
+							until: new Date('We Jan 01 2014 00:00:00 UTC')
+						}
+					}
+				]);
+
+				/*jslint stupid: true */
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
+
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
+			});
+
+			it('case #5 (floating)', function() {
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
+				cal.createEvent({
+					id: '1',
+					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+					end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+					stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+					summary: 'floating',
+					floating: true
+				});
+
+				/*jslint stupid: true */
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
+
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
+			});
+
+			it('case #6 (attendee with simple delegation and alarm)', function() {
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
+				cal.createEvent({
+					id: '123',
+					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+					end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+					allDay: true,
+					stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+					summary: 'Sample Event',
+					organizer: 'Sebastian Pekarek <mail@sebbo.net>',
+					attendees: [
+						{
+							name: 'Matt',
+							email: 'matt@example.com',
+							delegatesTo: {
+								name: 'John',
+								email: 'john@example.com',
+								status: 'accepted'
+							}
+						}
+					],
+					alarms: [
+						{
+							type: 'display',
+							trigger: 60 * 10,
+							repeat: 2,
+							interval: 60
+						},
+						{
+							type: 'display',
+							trigger: 60 * 60,
+							description: 'I\'m a reminder :)'
+						}
+					],
+					method: 'add',
+					status: 'confirmed',
+					url: 'http://sebbo.net/'
+				});
+
+				/*jslint stupid: true */
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_06.ics', 'utf8'));
+
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
 			});
 
 			it('case #7 (repeating: byDay, byMonth, byMonthDay)', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+					string, json;
 				cal.events([
 					{
 						id: '1',
@@ -1136,107 +1267,11 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				]);
 
 				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_07.ics', 'utf8'));
-			});
+				string = cal.toString();
+				assert.equal(string, fs.readFileSync(__dirname + '/results/generate_07.ics', 'utf8'));
 
-			it('case #5 (floating)', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
-				cal.createEvent({
-					id: '1',
-					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-					end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-					stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-					summary: 'floating',
-					floating: true
-				});
-
-				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
-			});
-
-			it('case #6 (attendee with simple delegation and alarm)', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
-				cal.createEvent({
-					id: '123',
-					start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-					end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-					allDay: true,
-					stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-					summary: 'Sample Event',
-					organizer: 'Sebastian Pekarek <mail@sebbo.net>',
-					attendees: [
-						{
-							name: 'Matt',
-							email: 'matt@example.com',
-							delegatesTo: {
-								name: 'John',
-								email: 'john@example.com',
-								status: 'accepted'
-							}
-						}
-					],
-					alarms: [
-						{
-							type: 'display',
-							trigger: 60 * 10,
-							repeat: 2,
-							interval: 60
-						},
-						{
-							type: 'display',
-							trigger: 60 * 60,
-							description: 'I\'m a reminder :)'
-						}
-					],
-					method: 'add',
-					status: 'confirmed',
-					url: 'http://sebbo.net/'
-				});
-
-				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_06.ics', 'utf8'));
-			});
-
-			it('case #4 (repeating)', function() {
-				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
-				cal.events([
-					{
-						id: '1',
-						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-						summary: 'repeating by month',
-						repeating: {
-							freq: 'monthly'
-						}
-					},
-					{
-						id: '2',
-						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-						summary: 'repeating by day, twice',
-						repeating: {
-							freq: 'DAILY',
-							count: 2
-						}
-					},
-					{
-						id: '3',
-						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-						summary: 'repeating by 3 weeks, until 2014',
-						repeating: {
-							freq: 'WEEKLY',
-							interval: 3,
-							until: new Date('We Jan 01 2014 00:00:00 UTC')
-						}
-					}
-				]);
-
-				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
+				json = JSON.stringify(cal.toJSON());
+				assert.equal(ical(json).toString(), string);
 			});
 		});
 	});
