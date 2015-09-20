@@ -285,7 +285,10 @@ event.repeating({
     freq: 'MONTHLY', // required
     count: 5,
     interval: 2,
-    until: new Date('Jan 01 2014 00:00:00 UTC')
+    until: new Date('Jan 01 2014 00:00:00 UTC'),
+    byDay: ['su', 'mo'], // repeat only sunday and monday
+    byMonth: [1, 2], // repeat only in january und february,
+    byMonthDay: [1, 15] // repeat only on the 1st and 15th
 });
 ```
 
