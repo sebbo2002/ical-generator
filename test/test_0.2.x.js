@@ -625,6 +625,93 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 					});
 				}, /`repeating\.until` must be a Date Object/);
 			});
+
+			it('should throw error when repeating.byDay is not valid', function() {
+				var cal = ical();
+				assert.throws(function() {
+					cal.createEvent({
+						start: new Date(),
+						end: new Date(),
+						summary: 'test',
+						repeating: {
+							freq: 'DAILY',
+							interval: 2,
+							byDay: 'FOO'
+						}
+					});
+				}, /`repeating\.byDay` contains invalid value `FOO`/);
+
+				assert.throws(function() {
+					cal.createEvent({
+						start: new Date(),
+						end: new Date(),
+						summary: 'test',
+						repeating: {
+							freq: 'DAILY',
+							interval: 2,
+							byDay: ['SU', 'BAR', 'th']
+						}
+					});
+				}, /`repeating\.byDay` contains invalid value `BAR`/);
+			});
+
+			it('should throw error when repeating.byMonth is not valid', function() {
+				var cal = ical();
+				assert.throws(function() {
+					cal.createEvent({
+						start: new Date(),
+						end: new Date(),
+						summary: 'test',
+						repeating: {
+							freq: 'DAILY',
+							interval: 2,
+							byMonth: 'FOO'
+						}
+					});
+				}, /`repeating\.byMonth` contains invalid value `FOO`/);
+
+				assert.throws(function() {
+					cal.createEvent({
+						start: new Date(),
+						end: new Date(),
+						summary: 'test',
+						repeating: {
+							freq: 'DAILY',
+							interval: 2,
+							byMonth: [1, 14, 7]
+						}
+					});
+				}, /`repeating\.byMonth` contains invalid value `14`/);
+			});
+
+			it('should throw error when repeating.byMonthDay is not valid', function() {
+				var cal = ical();
+				assert.throws(function() {
+					cal.createEvent({
+						start: new Date(),
+						end: new Date(),
+						summary: 'test',
+						repeating: {
+							freq: 'DAILY',
+							interval: 2,
+							byMonthDay: 'FOO'
+						}
+					});
+				}, /`repeating\.byMonthDay` contains invalid value `FOO`/);
+
+				assert.throws(function() {
+					cal.createEvent({
+						start: new Date(),
+						end: new Date(),
+						summary: 'test',
+						repeating: {
+							freq: 'DAILY',
+							interval: 2,
+							byMonthDay: [1, 32, 15]
+						}
+					});
+				}, /`repeating\.byMonthDay` contains invalid value `32`/);
+			});
 		});
 
 		describe('summary()', function() {
@@ -1008,7 +1095,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'));
 			});
 
-			it('case #4 (repeating)', function() {
+			it('case #7 (repeating: byDay, byMonth, byMonthDay)', function() {
 				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
 				cal.events([
 					{
@@ -1018,7 +1105,8 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
 						summary: 'repeating by month',
 						repeating: {
-							freq: 'monthly'
+							freq: 'monthly',
+							byMonth: [1, 4, 7, 10]
 						}
 					},
 					{
@@ -1026,10 +1114,11 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
 						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
 						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-						summary: 'repeating by day, twice',
+						summary: 'repeating on Mo/We/Fr, twice',
 						repeating: {
 							freq: 'DAILY',
-							count: 2
+							count: 2,
+							byDay: ['mo', 'we', 'fr']
 						}
 					},
 					{
@@ -1037,17 +1126,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
 						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
 						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-						summary: 'repeating by 3 weeks, until 2014',
+						summary: 'repeating on 1st and 15th',
 						repeating: {
-							freq: 'WEEKLY',
-							interval: 3,
-							until: new Date('We Jan 01 2014 00:00:00 UTC')
+							freq: 'DAILY',
+							interval: 1,
+							byMonthDay: [1, 15]
 						}
 					}
 				]);
 
 				/*jslint stupid: true */
-				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
+				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_07.ics', 'utf8'));
 			});
 
 			it('case #5 (floating)', function() {
@@ -1106,6 +1195,48 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
 				/*jslint stupid: true */
 				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_06.ics', 'utf8'));
+			});
+
+			it('case #4 (repeating)', function() {
+				var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+				cal.events([
+					{
+						id: '1',
+						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+						summary: 'repeating by month',
+						repeating: {
+							freq: 'monthly'
+						}
+					},
+					{
+						id: '2',
+						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+						summary: 'repeating by day, twice',
+						repeating: {
+							freq: 'DAILY',
+							count: 2
+						}
+					},
+					{
+						id: '3',
+						start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+						end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+						stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+						summary: 'repeating by 3 weeks, until 2014',
+						repeating: {
+							freq: 'WEEKLY',
+							interval: 3,
+							until: new Date('We Jan 01 2014 00:00:00 UTC')
+						}
+					}
+				]);
+
+				/*jslint stupid: true */
+				assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
 			});
 		});
 	});
