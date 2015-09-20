@@ -2,7 +2,7 @@
   "name": "ical-generator",
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <mail@sebbo.net>",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "bugs": {
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"
@@ -18,7 +18,7 @@
     "portfinder": "^0.2.1"
   },
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec --no-colors && grunt"
+    "test": "grunt && istanbul cover _mocha -- -R spec --no-colors"
   },
   "preferGlobal": false,
   "main": "./lib/index.js",

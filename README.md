@@ -1,8 +1,8 @@
 # ical-generator
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![CI Status](https://sebbo.helium.uberspace.de/teamcity-badges/ICalGenerator_Develop/status)](https://ci.sebbo.net/viewType.html?buildTypeId=ICalGenerator_Develop&guest=1)
-[![Test Coverage](https://sebbo.helium.uberspace.de/teamcity-badges/ICalGenerator_Develop/coverage-istanbul)](https://ci.sebbo.net/viewType.html?buildTypeId=ICalGenerator_Develop&guest=1)
+[![CI Status](https://img.shields.io/travis/sebbo2002/ical-generator.svg?style=flat-square)](https://travis-ci.org/sebbo2002/ical-generator)
+[![Test Coverage](https://sebbo.helium.uberspace.de/teamcity-badges/ICalGenerator_UnitTests/coverage-istanbul)](https://ci.sebbo.net/project.html?projectId=ICalGenerator&tab=preport_project1_Test_Coverage&guest=1)
 
 ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable
 calendar feeds.
@@ -227,6 +227,14 @@ Send Calendar to the User when using HTTP. See Quick Start above.
 Return Calendar as a String.
 
 
+#### toJSON()
+
+Return a shallow copy of the calendar's options for JSON stringification. Can be used for persistance.
+```javascript
+var cal = ical(),
+    json = JSON.stringify(cal);
+```
+
 #### length()
 
 Returns the ammount of events in the calendar.
@@ -281,18 +289,21 @@ Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools
 Appointment is a repeating event
 
 ```javascript
-cal.repeating({
+event.repeating({
     freq: 'MONTHLY', // required
     count: 5,
     interval: 2,
-    until: new Date('Jan 01 2014 00:00:00 UTC')
+    until: new Date('Jan 01 2014 00:00:00 UTC'),
+    byDay: ['su', 'mo'], // repeat only sunday and monday
+    byMonth: [1, 2], // repeat only in january und february,
+    byMonthDay: [1, 15] // repeat only on the 1st and 15th
 });
 ```
 
 
 #### summary([_String_ summary])
 
-Appointment summary, default to empty string.
+Appointment summary, defaults to empty string.
 
 
 #### description([_String_ description])
@@ -396,12 +407,12 @@ Appointment URL
 
 #### method([_String_ method])
 
-Appointment method. May be any of the following: publish, request, reply, add, cancel, refresh, counter, declinecounter.
+Appointment method. May be any of the following: `publish`, `request`, `reply`, `add`, `cancel`, `refresh`, `counter`, `declinecounter`.
 
 
 #### status([_String_ status])
 
-Appointment status. May be any of the following: confirmed, tenative, cancelled.
+Appointment status. May be any of the following: `confirmed`, `tenative`, `cancelled`.
 
 
 
@@ -419,17 +430,17 @@ The attendee's email address. An email address is required for every attendee!
 
 #### role([_String_ role])
 
-Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: req-participant, non-participant
+Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: `req-participant`, `non-participant`
 
 
 #### status([_String_ status])
 
-Set the attendee's status. May be one of the following: accepted, tentative, declined
+Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`
 
 
 #### type([_String_ type])
 
-Set the attendee's type. May be one of the following: `INDIVIDUAL`, `GROUP`, `RESOURCE`, `ROOM`, `UNKNOWN` (See [Section 4.2.3](https://tools.ietf.org/html/rfc2445#section-4.2.3))
+Set the attendee's type. May be one of the following: `individual`, `group`, `resource`, `room`, `unknown` (See [Section 4.2.3](https://tools.ietf.org/html/rfc2445#section-4.2.3))
 
 
 
@@ -467,7 +478,7 @@ attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 Use this method to set the alarm type. Right now, `audio` and `display` is supported.
 
 
-#### trigger([_String_|_Date_ trigger]) / triggerBefore([_String_|_Date_ trigger])
+#### trigger([_Number_|_Date_ trigger]) / triggerBefore([_Number_|_Date_ trigger])
 
 Use this method to set the alarm time.
 
@@ -481,7 +492,7 @@ alarm.trigger(new Date()); // -> now
 ```
 
 
-#### triggerAfter([_String_|_Date_ trigger])
+#### triggerAfter([_Number_|_Date_ trigger])
 
 Use this method to set the alarm time.
 
