@@ -180,6 +180,28 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('url()', function() {
+            it('setter should return this', function() {
+                var cal = ical();
+                assert.deepEqual(cal, cal.url('https://example.com/calendar.ical'));
+            });
+
+            it('getter should return value', function() {
+                var cal = ical().url('https://example.com/calendar.ical');
+                assert.equal(cal.url(), 'https://example.com/calendar.ical');
+            });
+
+            it('should change something', function() {
+                var cal = ical().url('https://example.com/calendar.ical');
+                cal.createEvent({
+                    start: new Date(),
+                    end: new Date(new Date().getTime() + 3600000),
+                    summary: 'Example Event'
+                });
+                assert.ok(cal.toString().indexOf('https://example.com/calendar.ical') > -1);
+            });
+        });
+
         describe('createEvent()', function() {
             it('should return a ICalEvent instance', function() {
                 var cal = ical(),

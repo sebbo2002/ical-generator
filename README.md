@@ -163,6 +163,15 @@ cal.prodId('//My Company//My Product//EN');
 Use this method to set your feed's name. Is used to fill `X-WR-CALNAME` in your iCal file.
 
 
+#### url([_String_ url])
+
+Use this method to set your feed's URL.
+
+```javascript
+var cal = ical().url('https://example.com/calendar.ical');
+```
+
+
 #### timezone([_String_ timezone])
 
 Use this method to set your feed's timezone. Is used to fill `X-WR-TIMEZONE` in your iCal.
