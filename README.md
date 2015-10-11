@@ -251,6 +251,9 @@ Return a shallow copy of the calendar's options for JSON stringification. Can be
 ```javascript
 var cal = ical(),
     json = JSON.stringify(cal);
+    
+// later
+cal = ical(json);
 ```
 
 #### length()
