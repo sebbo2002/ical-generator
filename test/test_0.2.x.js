@@ -16,6 +16,14 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                 var tools = require(__dirname + '/../lib/_tools.js');
                 assert.equal(tools.duration(0), 'PT0S');
             });
+            it('case #3', function() {
+                var tools = require(__dirname + '/../lib/_tools.js');
+                assert.equal(tools.duration(178225), 'P2DT1H30M25S');
+            });
+            it('case #4', function() {
+                var tools = require(__dirname + '/../lib/_tools.js');
+                assert.equal(tools.duration(259200), 'P3D');
+            });
         });
     });
 
@@ -147,6 +155,28 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     summary: 'Example Event'
                 });
                 assert.ok(cal.toString().indexOf('Europe/London') > -1);
+            });
+        });
+
+        describe('ttl()', function() {
+            it('setter should return this', function() {
+                var cal = ical();
+                assert.deepEqual(cal, cal.ttl(60 * 60 * 24));
+            });
+
+            it('getter should return value', function() {
+                var cal = ical().ttl(86400);
+                assert.equal(cal.ttl(), 86400);
+            });
+
+            it('should change something', function() {
+                var cal = ical().ttl(86400);
+                cal.createEvent({
+                    start: new Date(),
+                    end: new Date(new Date().getTime() + 3600000),
+                    summary: 'Example Event'
+                });
+                assert.ok(cal.toString().indexOf('P1D') > -1);
             });
         });
 
