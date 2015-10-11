@@ -172,6 +172,15 @@ var cal = ical().timezone('Europe/Berlin');
 ```
 
 
+#### ttl([_Number_ ttl])
+
+Use this method to set your feed's time to live. Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
+
+```javascript
+var cal = ical().ttl(60 * 60 * 24);
+```
+
+
 #### createEvent([_Object_ options])
 
 Creates a new [Event](#event) ([`ICalEvent`](#event)) and returns it. Use options to prefill the event's attributes.
