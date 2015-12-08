@@ -1,14 +1,10 @@
 module.exports = function(grunt) {
     'use strict';
 
-    grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.initConfig({
-        clean: {
-            coverage: ['coverage/**']
-        },
         jshint: {
             options: {
                 jshintrc: true
