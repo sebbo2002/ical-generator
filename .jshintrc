@@ -1,8 +1,6 @@
 {
-	"maxerr": 50,
-	"smarttabs": true,
-	"nonbsp": false,
-	"quotmark": "single",
-	"node": true,
-	"mocha": true
+  "maxerr": 50,
+  "quotmark": "single",
+  "node": true,
+  "mocha": true
 }
