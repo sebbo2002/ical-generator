@@ -2,7 +2,7 @@
   "name": "ical-generator",
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <mail@sebbo.net>",
-  "version": "0.2.4",
+  "version": "0.2.5-dev",
   "bugs": {
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"

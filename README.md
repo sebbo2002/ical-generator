@@ -160,15 +160,33 @@ cal.prodId('//My Company//My Product//EN');
 
 #### name([_String_ name])
 
-Use this method to set your feed's name. Is used to fill `X-WR-CALNAME` in your iCal file.
+Use this method to set your feed's name. Is used to fill `NAME` and `X-WR-CALNAME` in your iCal file.
+
+
+#### url([_String_ url])
+
+Use this method to set your feed's URL.
+
+```javascript
+var cal = ical().url('https://example.com/calendar.ical');
+```
 
 
 #### timezone([_String_ timezone])
 
-Use this method to set your feed's timezone. Is used to fill `X-WR-TIMEZONE` in your iCal.
+Use this method to set your feed's timezone. Is used to fill `TIMEZONE-ID` and `X-WR-TIMEZONE` in your iCal.
 
 ```javascript
 var cal = ical().timezone('Europe/Berlin');
+```
+
+
+#### ttl([_Number_ ttl])
+
+Use this method to set your feed's time to live. Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
+
+```javascript
+var cal = ical().ttl(60 * 60 * 24);
 ```
 
 
@@ -233,6 +251,9 @@ Return a shallow copy of the calendar's options for JSON stringification. Can be
 ```javascript
 var cal = ical(),
     json = JSON.stringify(cal);
+    
+// later
+cal = ical(json);
 ```
 
 #### length()
