@@ -230,6 +230,15 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
                 assert.equal(event.summary(), 'Patch-Day');
             });
+
+            it('should not require optional parameters', function() {
+                assert.doesNotThrow(function () {
+                    ical().addEvent({
+                        start: new Date(),
+                        summary: 'Patch-Day'
+                    });
+                }, Error);
+            });
         });
 
         describe('events()', function() {
