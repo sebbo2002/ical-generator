@@ -274,6 +274,12 @@ Empty the Calender.
 Use this method to set the event's ID. If not set, an UID will be generated randomly.
 
 
+#### sequence([_Integer_ sequence])
+
+Use this method to set the event's revision sequence number of the
+calendar component within a sequence of revisions.
+
+
 #### start([_Date_ start])
 
 Appointment date of beginning as Date object. This is required for all events!
