@@ -264,11 +264,6 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                 assert.throws(function() {
                     cal.save(file);
                 }, /`start`/);
-
-                e.start(new Date());
-                assert.throws(function() {
-                    cal.save(file);
-                }, /`end`/);
             });
         });
 
@@ -296,12 +291,6 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     /*jslint stupid: true */
                     cal.saveSync(file);
                 }, /`start`/);
-
-                e.start(new Date());
-                assert.throws(function() {
-                    /*jslint stupid: true */
-                    cal.saveSync(file);
-                }, /`end`/);
             });
         });
 
