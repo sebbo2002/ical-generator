@@ -257,17 +257,13 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('should throw error when event invalid', function() {
-                var cal = ical(),
+                var file = path.join(__dirname, 'save.ical'),
+                    cal = ical(),
                     e = cal.createEvent();
 
                 assert.throws(function() {
-                    cal.save();
+                    cal.save(file);
                 }, /`start`/);
-
-                e.start(new Date());
-                assert.throws(function() {
-                    cal.save();
-                }, /`end`/);
             });
         });
 
@@ -287,19 +283,14 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('should throw error when event invalid', function() {
-                var cal = ical(),
+                var file = path.join(__dirname, 'save_sync.ical'),
+                    cal = ical(),
                     e = cal.createEvent();
 
                 assert.throws(function() {
                     /*jslint stupid: true */
-                    cal.saveSync();
+                    cal.saveSync(file);
                 }, /`start`/);
-
-                e.start(new Date());
-                assert.throws(function() {
-                    /*jslint stupid: true */
-                    cal.saveSync();
-                }, /`end`/);
             });
         });
 

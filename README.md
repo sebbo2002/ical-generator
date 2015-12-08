@@ -281,7 +281,7 @@ Appointment date of beginning as Date object. This is required for all events!
 
 #### end([_Date_ end])
 
-Appointment date of end as Date object. This is also required for all events!
+Appointment date of end as Date object.
 
 
 #### timestamp([_Date_ stamp]) or stamp([_Date_ stamp])
