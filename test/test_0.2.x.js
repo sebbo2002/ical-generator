@@ -467,6 +467,19 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+
+        describe('timezone()', function() {
+            it('setter should return this', function() {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.timezone('Europe/Berlin'));
+            });
+
+            it('getter should return value', function() {
+                var e = ical().createEvent().timezone('Europe/Berlin');
+                assert.equal(e.timezone(), 'Europe/Berlin');
+            });
+        });
+
         describe('stamp()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
