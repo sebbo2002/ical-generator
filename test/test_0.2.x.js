@@ -789,6 +789,18 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                 event.summary('Example Event II');
                 assert.ok(str !== cal.toString());
             });
+
+            it('should escape CR/CRLF line breaks', function() {
+                var cal = ical(),
+                    event = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example with a\rlinebreak'
+                    }),
+                    str = cal.toString();
+
+                assert.equal(str.indexOf('\rlinebreak'), -1);
+            });
         });
 
         describe('location()', function() {
