@@ -434,6 +434,44 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('sequence()', function() {
+            it('setter should return this', function() {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.sequence(1));
+            });
+
+            it('getter should return value', function() {
+                var e = ical().createEvent().sequence(1048);
+                assert.equal(e.sequence(), 1048);
+            });
+
+            it('should change something', function() {
+                var cal = ical();
+                cal.createEvent({
+                    sequenze: 512,
+                    start: new Date(),
+                    end: new Date(new Date().getTime() + 3600000),
+                    summary: 'Example Event'
+                });
+                assert.ok(cal.toString().indexOf('512') > -1);
+            });
+
+            it('setter should throw error when sequence is not valid', function() {
+                var e = ical().createEvent();
+                assert.throws(function() {
+                    e.sequence('hello');
+                }, /`sequence`/);
+            });
+
+            it('setter should work with 0', function() {
+                var e = ical().createEvent().sequence(12);
+                assert.equal(e.sequence(), 12);
+
+                e.sequence(0);
+                assert.equal(e.sequence(), 0);
+            });
+        });
+
         describe('start()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
