@@ -271,7 +271,13 @@ Empty the Calender.
 
 #### uid([_String_|_Number_ uid]) or id([_String_|_Number_ id])
 
-Use this method to set the event's ID. If not set, an UID will be generated randomly.
+Use this method to set the event's ID. If not set, an UID will be generated randomly.  When output, the ID will be suffixed with '@' + your calendar's domain.
+
+
+#### sequence([_Number_ sequence])
+
+Use this method to set the event's revision sequence number of the
+calendar component within a sequence of revisions.
 
 
 #### start([_Date_ start])
@@ -282,6 +288,13 @@ Appointment date of beginning as Date object. This is required for all events!
 #### end([_Date_ end])
 
 Appointment date of end as Date object.
+
+
+#### timezone([_String_ timezone])
+
+Use this method to set your event's timezone using the TZID property parameter on start and end dates, as per [date-time form #3 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5).
+
+This and the 'floating' flag (see below) are mutually exclusive, and setting a timezone will unset the 'floating' flag.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format (see [date-time form #2 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5)).
 
 
 #### timestamp([_Date_ stamp]) or stamp([_Date_ stamp])
@@ -295,6 +308,7 @@ When allDay == true -> appointment is for the whole day
 
 
 #### floating([_Boolean_ floating])
+
 Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.12):
 
 > Time values of this type are said to be "floating" and are not
@@ -305,8 +319,11 @@ Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools
 > AM to 1:00 PM every day, no matter which time zone the person is
 > in.  In these cases, a local time can be specified.
 
+This and the 'timezone' setting (see above) are mutually exclusive, and setting the floating flag will unset the 'timezone'.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format (see [date-time form #2 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5)).
+
 
 #### repeating([_Object_ repeating])
+
 Appointment is a repeating event
 
 ```javascript

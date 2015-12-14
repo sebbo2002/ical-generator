@@ -147,7 +147,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                 assert.equal(cal.timezone(), 'Europe/Berlin');
             });
 
-            it('should change something', function() {
+            it('should make a difference to iCal output', function() {
                 var cal = ical().timezone('Europe/London');
                 cal.createEvent({
                     start: new Date(),
@@ -155,6 +155,20 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     summary: 'Example Event'
                 });
                 assert.ok(cal.toString().indexOf('Europe/London') > -1);
+            });
+
+            it('should mark event as not floating', function() {
+                var cal = ical().timezone('Europe/London'),
+                    evt = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example Event',
+                        floating: true
+                    });
+
+                evt.timezone('Europe/Berlin');
+
+                assert.equal(evt.floating(), false);
             });
         });
 
@@ -215,6 +229,15 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     event = cal.createEvent({summary: 'Patch-Day'});
 
                 assert.equal(event.summary(), 'Patch-Day');
+            });
+
+            it('should not require optional parameters', function() {
+                assert.doesNotThrow(function() {
+                    ical().addEvent({
+                        start: new Date(),
+                        summary: 'Patch-Day'
+                    });
+                }, Error);
             });
         });
 
@@ -411,6 +434,44 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('sequence()', function() {
+            it('setter should return this', function() {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.sequence(1));
+            });
+
+            it('getter should return value', function() {
+                var e = ical().createEvent().sequence(1048);
+                assert.equal(e.sequence(), 1048);
+            });
+
+            it('should change something', function() {
+                var cal = ical();
+                cal.createEvent({
+                    sequenze: 512,
+                    start: new Date(),
+                    end: new Date(new Date().getTime() + 3600000),
+                    summary: 'Example Event'
+                });
+                assert.ok(cal.toString().indexOf('512') > -1);
+            });
+
+            it('setter should throw error when sequence is not valid', function() {
+                var e = ical().createEvent();
+                assert.throws(function() {
+                    e.sequence('hello');
+                }, /`sequence`/);
+            });
+
+            it('setter should work with 0', function() {
+                var e = ical().createEvent().sequence(12);
+                assert.equal(e.sequence(), 12);
+
+                e.sequence(0);
+                assert.equal(e.sequence(), 0);
+            });
+        });
+
         describe('start()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
@@ -464,6 +525,30 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     e = ical().createEvent({start: b, end: a});
                 assert.deepEqual(e.start(), a);
                 assert.deepEqual(e.end(), b);
+            });
+        });
+
+        describe('timezone()', function() {
+            it('setter should return this', function() {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.timezone('Europe/Berlin'));
+            });
+
+            it('getter should return value', function() {
+                var e = ical().createEvent().timezone('Europe/Berlin');
+                assert.equal(e.timezone(), 'Europe/Berlin');
+            });
+
+            it('should change something', function() {
+                var cal = ical(),
+                    e = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example Event'
+                    });
+
+                e.timezone('Europe/London');
+                assert.ok(cal.toString().indexOf('Europe/London') > -1);
             });
         });
 
@@ -554,6 +639,20 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
                 event.floating(true);
                 assert.ok(str !== cal.toString());
+            });
+
+            it('should mark event as having no time zone', function() {
+                var cal = ical().timezone('Europe/London'),
+                    evt = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example Event',
+                        timezone: 'Europe/Berlin'
+                    });
+
+                evt.floating(true);
+
+                assert.equal(evt.timezone(), null);
             });
         });
 

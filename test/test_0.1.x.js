@@ -185,17 +185,6 @@ describe('ical-generator 0.1.x', function() {
             }, /event\.start must be a Date Object/);
         });
 
-        it('should throw error when no end time given', function() {
-            var generator = require(__dirname + '/../lib/index.js'),
-                cal = generator();
-
-            assert.throws(function() {
-                cal.addEvent({
-                    start: new Date()
-                });
-            }, /event\.end is a mandatory item/);
-        });
-
         it('should throw error when end time is not a date', function() {
             var generator = require(__dirname + '/../lib/index.js'),
                 cal = generator();
