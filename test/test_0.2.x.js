@@ -232,7 +232,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('should not require optional parameters', function() {
-                assert.doesNotThrow(function () {
+                assert.doesNotThrow(function() {
                     ical().addEvent({
                         start: new Date(),
                         summary: 'Patch-Day'
