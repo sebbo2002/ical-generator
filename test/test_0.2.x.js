@@ -28,6 +28,11 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
     });
 
     describe('ICalCalendar', function() {
+        it('should ignore unknown data attributes', function() {
+            var cal = ical({unknown: true, name: 'test'});
+            assert.equal(cal.name(), 'test');
+        });
+
         describe('domain()', function() {
             it('setter should return this', function() {
                 var cal = ical();
@@ -117,12 +122,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('name()', function() {
             it('setter should return this', function() {
                 var cal = ical();
+                assert.deepEqual(cal, cal.name(null));
                 assert.deepEqual(cal, cal.name('Testevents'));
             });
 
             it('getter should return value', function() {
-                var cal = ical().name('Testevents');
+                var cal = ical();
+                assert.equal(cal.name(), null);
+                cal.name('Testevents');
                 assert.equal(cal.name(), 'Testevents');
+                cal.name(null);
+                assert.equal(cal.name(), null);
             });
 
             it('should change something', function() {
@@ -133,6 +143,33 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     summary: 'Example Event'
                 });
                 assert.ok(cal.toString().indexOf('Testevents') > -1);
+            });
+        });
+
+        describe('description()', function() {
+            it('setter should return this', function() {
+                var cal = ical();
+                assert.deepEqual(cal, cal.description(null));
+                assert.deepEqual(cal, cal.description('Testbeschreibung'));
+            });
+
+            it('getter should return value', function() {
+                var cal = ical();
+                assert.equal(cal.description(), null);
+                cal.description('Testbeschreibung');
+                assert.equal(cal.description(), 'Testbeschreibung');
+                cal.description(null);
+                assert.equal(cal.description(), null);
+            });
+
+            it('should change something', function() {
+                var cal = ical().description('Testbeschreibung');
+                cal.createEvent({
+                    start: new Date(),
+                    end: new Date(new Date().getTime() + 3600000),
+                    summary: 'Example Event'
+                });
+                assert.ok(cal.toString().indexOf('Testbeschreibung') > -1);
             });
         });
 
@@ -176,10 +213,15 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             it('setter should return this', function() {
                 var cal = ical();
                 assert.deepEqual(cal, cal.ttl(60 * 60 * 24));
+                assert.deepEqual(cal.ttl(), 86400);
+                assert.deepEqual(cal, cal.ttl(null));
+                assert.deepEqual(cal.ttl(), null);
             });
 
             it('getter should return value', function() {
-                var cal = ical().ttl(86400);
+                var cal = ical();
+                assert.equal(cal.ttl(), null);
+                cal.ttl(86400);
                 assert.equal(cal.ttl(), 86400);
             });
 
@@ -201,8 +243,12 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('getter should return value', function() {
-                var cal = ical().url('https://example.com/calendar.ical');
+                var cal = ical();
+                assert.equal(cal.url(), null);
+                cal.url('https://example.com/calendar.ical');
                 assert.equal(cal.url(), 'https://example.com/calendar.ical');
+                cal.url(null);
+                assert.equal(cal.url(), null);
             });
 
             it('should change something', function() {
@@ -408,6 +454,19 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
     });
 
     describe('ICalEvent', function() {
+        it('shouldn\'t work without calendar reference', function() {
+            var ICalEvent = require('../lib/event.js');
+            assert.throws(function() {
+                new ICalEvent({summary: 'Testevent'});
+            }, /`calendar`/);
+        });
+
+        it('should ignore unknown data attributes', function() {
+            var cal = ical(),
+                e = cal.createEvent({unknown: true, summary: 'test'});
+            assert.equal(e.summary(), 'test');
+        });
+
         describe('id()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
@@ -448,7 +507,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             it('should change something', function() {
                 var cal = ical();
                 cal.createEvent({
-                    sequenze: 512,
+                    sequence: 512,
                     start: new Date(),
                     end: new Date(new Date().getTime() + 3600000),
                     summary: 'Example Event'
@@ -503,13 +562,18 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('end()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.end(null));
                 assert.deepEqual(e, e.end(new Date()));
             });
 
             it('getter should return value', function() {
                 var now = new Date(),
-                    e = ical().createEvent().end(now);
+                    e = ical().createEvent();
+                assert.deepEqual(e.end(), null);
+                e.end(now);
                 assert.deepEqual(e.end(), now);
+                e.end(null);
+                assert.deepEqual(e.end(), null);
             });
 
             it('should throw error when end time is not a Date', function() {
@@ -549,6 +613,34 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
                 e.timezone('Europe/London');
                 assert.ok(cal.toString().indexOf('Europe/London') > -1);
+            });
+
+            it('should inherit from calendar', function() {
+                var cal = ical(),
+                    e = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example Event'
+                    });
+
+                assert.equal(cal.timezone(), null);
+                assert.equal(e.timezone(), null);
+
+                cal.timezone('Europe/London');
+                assert.equal(cal.timezone(), 'Europe/London');
+                assert.equal(e.timezone(), 'Europe/London');
+
+                e.timezone('Europe/Berlin');
+                assert.equal(cal.timezone(), 'Europe/London');
+                assert.equal(e.timezone(), 'Europe/Berlin');
+
+                cal.timezone(null);
+                assert.equal(cal.timezone(), null);
+                assert.equal(e.timezone(), 'Europe/Berlin');
+
+                e.timezone(null);
+                assert.equal(cal.timezone(), null);
+                assert.ok(!e.timezone());
             });
         });
 
@@ -620,6 +712,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('floating()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.floating(false));
                 assert.deepEqual(e, e.floating(true));
             });
 
@@ -659,6 +752,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('repeating()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.repeating(null));
                 assert.deepEqual(e, e.repeating({
                     freq: 'monthly',
                     count: 5,
@@ -669,8 +763,12 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
 
             it('getter should return value', function() {
                 var options = {freq: 'MONTHLY', count: 5, interval: 2, until: new Date()},
-                    e = ical().createEvent().repeating(options);
+                    e = ical().createEvent();
+                assert.deepEqual(e.repeating(), null);
+                e.repeating(options);
                 assert.deepEqual(e.repeating(), options);
+                e.repeating(null);
+                assert.deepEqual(e.repeating(), null);
             });
 
             it('should throw error when repeating without freq', function() {
@@ -859,12 +957,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('summary()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.summary(null));
                 assert.deepEqual(e, e.summary('Testevent'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().summary('Testevent');
+                var e = ical().createEvent();
+                assert.equal(e.summary(), '');
+                e.summary('Testevent');
                 assert.equal(e.summary(), 'Testevent');
+                e.summary(null);
+                assert.equal(e.summary(), '');
             });
 
             it('should change something', function() {
@@ -896,12 +999,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('location()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.location(null));
                 assert.deepEqual(e, e.location('Test Location'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().location('Test Location');
+                var e = ical().createEvent();
+                assert.equal(e.location(), null);
+                e.location('Test Location');
                 assert.equal(e.location(), 'Test Location');
+                e.location(null);
+                assert.equal(e.location(), null);
             });
 
             it('should change something', function() {
@@ -921,12 +1029,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('description()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.description(null));
                 assert.deepEqual(e, e.description('I don\'t need a description. I\'m far to awesome for descriptions…'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().description('I don\'t need a description. I\'m far to awesome for descriptions…');
+                var e = ical().createEvent();
+                assert.equal(e.description(), null);
+                e.description('I don\'t need a description. I\'m far to awesome for descriptions…');
                 assert.equal(e.description(), 'I don\'t need a description. I\'m far to awesome for descriptions…');
+                e.description(null);
+                assert.equal(e.description(), null);
             });
 
             it('should change something', function() {
@@ -946,14 +1059,20 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('organizer()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.organizer(null));
                 assert.deepEqual(e, e.organizer('Sebastian Pekarek <mail@example.com>'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().organizer('Sebastian Pekarek <mail@example.com>'),
-                    organizer = e.organizer();
-                assert.equal('Sebastian Pekarek', organizer.name);
-                assert.equal('mail@example.com', organizer.email);
+                var e = ical().createEvent();
+                assert.equal(e.organizer(), null);
+                e.organizer(null);
+                assert.equal(e.organizer(), null);
+                e.organizer('Sebastian Pekarek <mail@example.com>');
+                assert.equal('Sebastian Pekarek', e.organizer().name);
+                assert.equal('mail@example.com', e.organizer().email);
+                e.organizer(null);
+                assert.equal(e.organizer(), null);
             });
 
             it('should change something', function() {
@@ -1091,12 +1210,19 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('method()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.method(null));
                 assert.deepEqual(e, e.method('publish'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().method('publish');
+                var e = ical().createEvent();
+                assert.equal(e.method(), null);
+                e.method(null);
+                assert.equal(e.method(), null);
+                e.method('publish');
                 assert.equal(e.method(), 'PUBLISH');
+                e.method(null);
+                assert.equal(e.method(), null);
             });
 
             it('should throw error when method not allowed', function() {
@@ -1123,12 +1249,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('status()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.status(null));
                 assert.deepEqual(e, e.status('confirmed'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().status('confirmed');
+                var e = ical().createEvent();
+                assert.equal(e.status(), null);
+                e.status('confirmed');
                 assert.equal(e.status(), 'CONFIRMED');
+                e.status(null);
+                assert.equal(e.status(), null);
             });
 
             it('should throw error when method not allowed', function() {
@@ -1155,11 +1286,14 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('url()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
+                assert.deepEqual(e, e.url(null));
                 assert.deepEqual(e, e.url('http://sebbo.net/'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().url('http://sebbo.net/');
+                var e = ical().createEvent();
+                assert.equal(e.url(), null);
+                e.url('http://sebbo.net/');
                 assert.equal(e.url(), 'http://sebbo.net/');
             });
 
@@ -1438,15 +1572,26 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             }, /`event`/);
         });
 
+        it('should ignore unknown data attributes', function() {
+            var cal = ical(),
+                e = cal.createEvent().createAttendee({unknown: true, name: 'test'});
+            assert.equal(e.name(), 'test');
+        });
+
         describe('name()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAttendee();
+                assert.deepEqual(a, a.name(null));
                 assert.deepEqual(a, a.name('Sebastian'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAttendee().name('Sebastian');
-                assert.equal(e.name(), 'Sebastian');
+                var a = ical().createEvent().createAttendee();
+                assert.equal(a.name(), null);
+                a.name('Sebastian');
+                assert.equal(a.name(), 'Sebastian');
+                a.name(null);
+                assert.equal(a.name(), null);
             });
 
             it('should change something', function() {
@@ -1527,19 +1672,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('status()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAttendee();
+                assert.deepEqual(a, a.status(null));
                 assert.deepEqual(a, a.status('accepted'));
             });
 
             it('getter should return value', function() {
-                var a = ical().createEvent().createAttendee().status('accepted');
-                assert.equal(a.status(), 'ACCEPTED');
-            });
-
-            it('should throw error when method empty', function() {
                 var a = ical().createEvent().createAttendee();
-                assert.throws(function() {
-                    a.status('');
-                }, /`status` must be a non-empty string/);
+                assert.equal(a.status(), null);
+                a.status('accepted');
+                assert.equal(a.status(), 'ACCEPTED');
+                a.status(null);
+                assert.equal(a.status(), null);
             });
 
             it('should throw error when method not allowed', function() {
@@ -1565,19 +1708,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('type()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAttendee();
+                assert.deepEqual(a, a.type(null));
                 assert.deepEqual(a, a.type('individual'));
             });
 
             it('getter should return value', function() {
-                var a = ical().createEvent().createAttendee().type('room');
-                assert.equal(a.type(), 'ROOM');
-            });
-
-            it('should throw error when method empty', function() {
                 var a = ical().createEvent().createAttendee();
-                assert.throws(function() {
-                    a.type('');
-                }, /`type` must be a non-empty string/);
+                assert.equal(a.type(), null);
+                a.type('room');
+                assert.equal(a.type(), 'ROOM');
+                a.type(null);
+                assert.equal(a.type(), null);
             });
 
             it('should throw error when method not allowed', function() {
@@ -1603,12 +1744,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('delegatedTo()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAttendee();
+                assert.deepEqual(a, a.delegatedTo(null));
                 assert.deepEqual(a, a.delegatedTo('foo@example.com'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAttendee().delegatedTo('foo@example.com');
-                assert.equal(e.delegatedTo(), 'foo@example.com');
+                var a = ical().createEvent().createAttendee();
+                assert.equal(a.delegatedTo(), null);
+                a.delegatedTo('foo@example.com');
+                assert.equal(a.delegatedTo(), 'foo@example.com');
+                a.delegatedTo(null);
+                assert.equal(a.delegatedTo(), null);
             });
 
             it('should change something', function() {
@@ -1627,12 +1773,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('delegatedFrom()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAttendee();
+                assert.deepEqual(a, a.delegatedFrom(null));
                 assert.deepEqual(a, a.delegatedFrom('foo@example.com'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAttendee().delegatedFrom('foo@example.com');
-                assert.equal(e.delegatedFrom(), 'foo@example.com');
+                var a = ical().createEvent().createAttendee();
+                assert.equal(a.delegatedFrom(), null);
+                a.delegatedFrom('foo@example.com');
+                assert.equal(a.delegatedFrom(), 'foo@example.com');
+                a.delegatedFrom(null);
+                assert.equal(a.delegatedFrom(), null);
             });
 
             it('should change something', function() {
@@ -1717,15 +1868,26 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             }, /`event`/);
         });
 
+        it('should ignore unknown data attributes', function() {
+            var cal = ical(),
+                e = cal.createEvent().createAlarm({unknown: true, type: 'display'});
+            assert.equal(e.type(), 'display');
+        });
+
         describe('type()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAlarm();
+                assert.deepEqual(a, a.type(null));
                 assert.deepEqual(a, a.type('display'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAlarm().type('display');
-                assert.equal(e.type(), 'display');
+                var a = ical().createEvent().createAlarm();
+                assert.equal(a.type(), null);
+                a.type('display');
+                assert.equal(a.type(), 'display');
+                a.type(null);
+                assert.equal(a.type(), null);
             });
 
             it('should throw error when type not allowed', function() {
@@ -1751,19 +1913,29 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('trigger()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAlarm();
+                assert.deepEqual(a, a.trigger(null));
                 assert.deepEqual(a, a.trigger(60 * 10));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAlarm().trigger(300),
+                var a = ical().createEvent().createAlarm(),
                     now = new Date();
 
-                assert.equal(e.trigger(), 300);
-                assert.equal(e.triggerAfter(), -300);
+                assert.equal(a.trigger(), null);
+                assert.equal(a.triggerAfter(), null);
+
+                a.trigger(300);
+                assert.equal(a.trigger(), 300);
+                assert.equal(a.triggerAfter(), -300);
 
                 // Date
-                e.trigger(now);
-                assert.deepEqual(e.trigger(), now);
+                a.trigger(now);
+                assert.deepEqual(a.trigger(), now);
+
+                // Null
+                a.trigger(null);
+                assert.equal(a.trigger(), null);
+                assert.equal(a.triggerAfter(), null);
             });
 
             it('should throw error when trigger not allowed', function() {
@@ -1843,12 +2015,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('repeat()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAlarm();
+                assert.deepEqual(a, a.repeat(null));
                 assert.deepEqual(a, a.repeat(4));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAlarm().repeat(100);
+                var e = ical().createEvent().createAlarm();
+                assert.equal(e.repeat(), null);
+                e.repeat(100);
                 assert.equal(e.repeat(), 100);
+                e.repeat(null);
+                assert.equal(e.repeat(), null);
             });
 
             it('should throw error if repeat not allowed', function() {
@@ -1880,12 +2057,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('interval()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAlarm();
+                assert.deepEqual(a, a.interval(null));
                 assert.deepEqual(a, a.interval(60));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAlarm().interval(30);
+                var e = ical().createEvent().createAlarm();
+                assert.equal(e.interval(), null);
+                e.interval(30);
                 assert.equal(e.interval(), 30);
+                e.interval(null);
+                assert.equal(e.interval(), null);
             });
 
             it('should throw error if repeat not allowed', function() {
@@ -1917,12 +2099,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('attach()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAlarm();
+                assert.deepEqual(a, a.attach(null));
                 assert.deepEqual(a, a.attach('https://sebbo.net/beep.aud'));
             });
 
             it('getter should return value', function() {
                 var t = {uri: 'https://example.com/alarm.aud', mime: 'audio/basic'},
-                    e = ical().createEvent().createAlarm().attach(t);
+                    e = ical().createEvent().createAlarm();
+
+                assert.equal(e.attach(), null);
+
+                e.attach(t);
                 assert.deepEqual(e.attach(), t);
 
                 e.attach('https://www.example.com/beep.aud');
@@ -1938,6 +2125,9 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     uri: 'https://www.example.com/beep.aud',
                     mime: null
                 });
+
+                e.attach(null);
+                assert.equal(e.attach(), null);
             });
 
             it('should throw error withour uri', function() {
@@ -1982,12 +2172,17 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
         describe('description()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAlarm();
+                assert.deepEqual(a, a.description(null));
                 assert.deepEqual(a, a.description('Hey Ho!'));
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().createAlarm().description('blablabla');
+                var e = ical().createEvent().createAlarm();
+                assert.deepEqual(e.description(), null);
+                e.description('blablabla');
                 assert.deepEqual(e.description(), 'blablabla');
+                e.description(null);
+                assert.deepEqual(e.description(), null);
             });
 
             it('should change something', function() {
