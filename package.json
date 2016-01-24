@@ -19,6 +19,7 @@
   "scripts": {
     "test": "grunt && istanbul cover _mocha -- -R spec --no-colors"
   },
+  "tonicExampleFilename": "./example/example_tonic.js",
   "preferGlobal": false,
   "main": "./lib/index.js",
   "repository": {
