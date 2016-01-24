@@ -28,6 +28,11 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
     });
 
     describe('ICalCalendar', function() {
+        it('should ignore unknown data attributes', function() {
+            var cal = ical({unknown: true, name: 'test'});
+            assert.equal(cal.name(), 'test');
+        });
+
         describe('domain()', function() {
             it('setter should return this', function() {
                 var cal = ical();
@@ -198,10 +203,15 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             it('setter should return this', function() {
                 var cal = ical();
                 assert.deepEqual(cal, cal.ttl(60 * 60 * 24));
+                assert.deepEqual(cal.ttl(), 86400);
+                assert.deepEqual(cal, cal.ttl(null));
+                assert.deepEqual(cal.ttl(), null);
             });
 
             it('getter should return value', function() {
-                var cal = ical().ttl(86400);
+                var cal = ical();
+                assert.equal(cal.ttl(), null);
+                cal.ttl(86400);
                 assert.equal(cal.ttl(), 86400);
             });
 
@@ -223,8 +233,12 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('getter should return value', function() {
-                var cal = ical().url('https://example.com/calendar.ical');
+                var cal = ical();
+                assert.equal(cal.url(), null);
+                cal.url('https://example.com/calendar.ical');
                 assert.equal(cal.url(), 'https://example.com/calendar.ical');
+                cal.url(null);
+                assert.equal(cal.url(), null);
             });
 
             it('should change something', function() {
@@ -430,6 +444,12 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
     });
 
     describe('ICalEvent', function() {
+        it('should ignore unknown data attributes', function() {
+            var cal = ical(),
+                e = cal.createEvent({unknown: true, summary: 'test'});
+            assert.equal(e.summary(), 'test');
+        });
+
         describe('id()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();
@@ -1209,7 +1229,9 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('getter should return value', function() {
-                var e = ical().createEvent().url('http://sebbo.net/');
+                var e = ical().createEvent();
+                assert.equal(e.url(), null);
+                e.url('http://sebbo.net/');
                 assert.equal(e.url(), 'http://sebbo.net/');
             });
 
