@@ -1505,7 +1505,6 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                 cal.createEvent({
                     id: '123',
                     start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-                    end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
                     allDay: true,
                     stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
                     summary: 'Sample Event',
@@ -1564,7 +1563,6 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     {
                         id: '2',
                         start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-                        end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
                         stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
                         summary: 'repeating on Mo/We/Fr, twice',
                         repeating: {
