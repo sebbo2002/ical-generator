@@ -180,6 +180,10 @@ Use this method to set your feed's timezone. Is used to fill `TIMEZONE-ID` and `
 var cal = ical().timezone('Europe/Berlin');
 ```
 
+#### method([_String_ method])
+
+Calendar method. May be any of the following: `publish`, `request`, `reply`, `add`, `cancel`, `refresh`, `counter`, `declinecounter`.
+
 
 #### ttl([_Number_ ttl])
 
@@ -441,11 +445,6 @@ cal.attendees(); // --> [ICalAlarm, ICalAlarm]
 #### url([_String_ url])
 
 Appointment URL
-
-
-#### method([_String_ method])
-
-Appointment method. May be any of the following: `publish`, `request`, `reply`, `add`, `cancel`, `refresh`, `counter`, `declinecounter`.
 
 
 #### status([_String_ status])

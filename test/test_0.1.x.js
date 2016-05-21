@@ -346,7 +346,7 @@ describe('ical-generator 0.1.x', function() {
                     summary: 'hello',
                     method: 'hello world'
                 });
-            }, /event\.method must be one of the following/);
+            }, /method must be one of the following/);
         });
 
         it('should throw an error if status is not allowed', function() {

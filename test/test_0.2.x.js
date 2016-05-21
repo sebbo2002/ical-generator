@@ -119,6 +119,40 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('method()', function() {
+            it('setter should return this', function() {
+                var c = ical();
+                assert.deepEqual(c, c.method(null));
+                assert.deepEqual(c, c.method('publish'));
+            });
+
+            it('getter should return value', function() {
+                var c = ical();
+                assert.equal(c.method(), null);
+                c.method(null);
+                assert.equal(c.method(), null);
+                c.method('publish');
+                assert.equal(c.method(), 'PUBLISH');
+                c.method(null);
+                assert.equal(c.method(), null);
+            });
+
+            it('should throw error when method not allowed', function() {
+                var c = ical();
+                assert.throws(function() {
+                    c.method('KICK ASS');
+                }, /`method`/);
+            });
+
+            it('should change something', function() {
+                var c = ical({method: 'publish'}),
+                    str = c.toString();
+
+                c.method('add');
+                assert.ok(str !== c.toString());
+            });
+        });
+
         describe('name()', function() {
             it('setter should return this', function() {
                 var cal = ical();
@@ -1466,7 +1500,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('case #6 (attendee with simple delegation and alarm)', function() {
-                var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'}),
+                var cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN', method: 'publish'}),
                     string, json;
                 cal.createEvent({
                     id: '123',
@@ -1500,7 +1534,6 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                             description: 'I\'m a reminder :)'
                         }
                     ],
-                    method: 'add',
                     status: 'confirmed',
                     url: 'http://sebbo.net/'
                 });
