@@ -538,8 +538,8 @@ var cal = ical(),
     event = cal.createEvent(),
     alarm = cal.createAlarm();
 
-alarm.trigger(600); // -> 10 minutes after the event finishes
-alarm.trigger(new Date()); // -> now
+alarm.triggerAfter(600); // -> 10 minutes after the event finishes
+alarm.triggerAfter(new Date()); // -> now
 ```
 
 
