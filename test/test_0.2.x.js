@@ -797,7 +797,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
 
             it('getter should return value', function() {
-                var options = {freq: 'MONTHLY', count: 5, interval: 2, until: new Date()},
+                var options = {freq: 'MONTHLY', count: 5, interval: 2, exclude: new Date(), until: new Date()},
                     e = ical().createEvent();
                 assert.deepEqual(e.repeating(), null);
                 e.repeating(options);
