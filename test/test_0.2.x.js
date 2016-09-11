@@ -791,6 +791,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     freq: 'monthly',
                     count: 5,
                     interval: 2,
+                    exclude: new Date(),
                     unitl: new Date()
                 }));
             });
