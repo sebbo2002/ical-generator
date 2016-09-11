@@ -1478,7 +1478,8 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                         stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
                         summary: 'repeating by month',
                         repeating: {
-                            freq: 'monthly'
+                            freq: 'monthly',
+                            exclude: new Date('Fr Oct 06 2013 23:15:00 UTC')
                         }
                     },
                     {
