@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 [![CI Status](https://img.shields.io/travis/sebbo2002/ical-generator.svg?style=flat-square)](https://travis-ci.org/sebbo2002/ical-generator)
-[![Test Coverage](https://sebbo.helium.uberspace.de/teamcity-badges/ICalGenerator_UnitTests/coverage-istanbul)](https://ci.sebbo.net/project.html?projectId=ICalGenerator&tab=preport_project1_Test_Coverage&guest=1)
+<!-- [![Test Coverage](https://sebbo.helium.uberspace.de/teamcity-badges/ICalGenerator_UnitTests/coverage-istanbul)](https://ci.sebbo.net/project.html?projectId=ICalGenerator&tab=preport_project1_Test_Coverage&guest=1) -->
 
 ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable
 calendar feeds.
@@ -180,6 +180,10 @@ Use this method to set your feed's timezone. Is used to fill `TIMEZONE-ID` and `
 var cal = ical().timezone('Europe/Berlin');
 ```
 
+#### method([_String_ method])
+
+Calendar method. May be any of the following: `publish`, `request`, `reply`, `add`, `cancel`, `refresh`, `counter`, `declinecounter`.
+
 
 #### ttl([_Number_ ttl])
 
@@ -334,7 +338,8 @@ event.repeating({
     until: new Date('Jan 01 2014 00:00:00 UTC'),
     byDay: ['su', 'mo'], // repeat only sunday and monday
     byMonth: [1, 2], // repeat only in january und february,
-    byMonthDay: [1, 15] // repeat only on the 1st and 15th
+    byMonthDay: [1, 15], // repeat only on the 1st and 15th
+    exclude: [new Date('Dec 25 2013 00:00:00 UTC')] // exclude these dates
 });
 ```
 
@@ -347,6 +352,11 @@ Appointment summary, defaults to empty string.
 #### description([_String_ description])
 
 Appointment description
+
+
+#### htmlDescription([_String_ htmlDescription])
+
+Some calendar apps may support HTML descriptions. Like in emails, supported HTML tags and styling is limited. 
 
 
 #### location([_String_ location])
@@ -443,11 +453,6 @@ cal.attendees(); // --> [ICalAlarm, ICalAlarm]
 Appointment URL
 
 
-#### method([_String_ method])
-
-Appointment method. May be any of the following: `publish`, `request`, `reply`, `add`, `cancel`, `refresh`, `counter`, `declinecounter`.
-
-
 #### status([_String_ status])
 
 Appointment status. May be any of the following: `confirmed`, `tenative`, `cancelled`.
@@ -539,8 +544,8 @@ var cal = ical(),
     event = cal.createEvent(),
     alarm = cal.createAlarm();
 
-alarm.trigger(600); // -> 10 minutes after the event finishes
-alarm.trigger(new Date()); // -> now
+alarm.triggerAfter(600); // -> 10 minutes after the event finishes
+alarm.triggerAfter(new Date()); // -> now
 ```
 
 
