@@ -1125,6 +1125,36 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('htmlDescription()', function() {
+            it('setter should return this', function() {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.htmlDescription(null));
+                assert.deepEqual(e, e.htmlDescription('I don\'t need a description. I\'m far to awesome for descriptions…'));
+            });
+
+            it('getter should return value', function() {
+                var e = ical().createEvent();
+                assert.equal(e.htmlDescription(), null);
+                e.htmlDescription('<marquee>I\'m the best HTML tag in this universe!</marquee>');
+                assert.equal(e.htmlDescription(), '<marquee>I\'m the best HTML tag in this universe!</marquee>');
+                e.htmlDescription(null);
+                assert.equal(e.htmlDescription(), null);
+            });
+
+            it('should change something', function() {
+                var cal = ical(),
+                    event = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example Event'
+                    }),
+                    str = cal.toString();
+
+                event.htmlDescription('<marquee>I\'m the best HTML tag in this universe!</marquee>');
+                assert.ok(str !== cal.toString());
+            });
+        });
+
         describe('organizer()', function() {
             it('setter should return this', function() {
                 var e = ical().createEvent();

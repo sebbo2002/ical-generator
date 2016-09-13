@@ -354,6 +354,11 @@ Appointment summary, defaults to empty string.
 Appointment description
 
 
+#### htmlDescription([_String_ htmlDescription])
+
+Some calendar apps may support HTML descriptions. Like in emails, supported HTML tags and styling is limited. 
+
+
 #### location([_String_ location])
 
 Appointment location
