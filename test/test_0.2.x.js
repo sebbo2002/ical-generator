@@ -791,12 +791,13 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     freq: 'monthly',
                     count: 5,
                     interval: 2,
+                    exclude: new Date(),
                     unitl: new Date()
                 }));
             });
 
             it('getter should return value', function() {
-                var options = {freq: 'MONTHLY', count: 5, interval: 2, until: new Date()},
+                var options = {freq: 'MONTHLY', count: 5, interval: 2, exclude: new Date(), until: new Date()},
                     e = ical().createEvent();
                 assert.deepEqual(e.repeating(), null);
                 e.repeating(options);
@@ -985,6 +986,40 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                         }
                     });
                 }, /`repeating\.byMonthDay` contains invalid value `32`/);
+            });
+
+            it('should throw error when repeating.exclude is not valid', function() {
+                var cal = ical();
+                assert.throws(function() {
+                    cal.createEvent({
+                        start: new Date(),
+                        end: new Date(),
+                        summary: 'test',
+                        repeating: {
+                            freq: 'DAILY',
+                            interval: 2,
+                            byDay: ['SU'],
+                            exclude: 'FOO'
+                        }
+                    });
+                }, /`repeating\.exclude` contains invalid value `FOO`/);
+            });
+
+            it('should throw error when repeating.exclude is not valid (should throw on first err value', function() {
+                var cal = ical();
+                assert.throws(function() {
+                    cal.createEvent({
+                        start: new Date(),
+                        end: new Date(),
+                        summary: 'test',
+                        repeating: {
+                            freq: 'DAILY',
+                            interval: 2,
+                            byDay: ['SU'],
+                            exclude: [new Date(), 'BAR', 'FOO']
+                        }
+                    });
+                }, /`repeating\.exclude` contains invalid value `BAR`/);
             });
         });
 
@@ -1443,7 +1478,8 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                         stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
                         summary: 'repeating by month',
                         repeating: {
-                            freq: 'monthly'
+                            freq: 'monthly',
+                            exclude: new Date('Fr Oct 06 2013 23:15:00 UTC')
                         }
                     },
                     {

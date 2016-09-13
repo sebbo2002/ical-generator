@@ -293,6 +293,42 @@ describe('ical-generator 0.1.x', function() {
             }, /event\.repeating\.until must be a Date Object/);
         });
 
+        it('should throw error when repeating.exclude is not valid', function() {
+            var generator = require(__dirname + '/../lib/index.js'),
+                cal = generator();
+            assert.throws(function() {
+                cal.createEvent({
+                    start: new Date(),
+                    end: new Date(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'DAILY',
+                        interval: 2,
+                        byDay: ['SU'],
+                        exclude: 'FOO'
+                    }
+                });
+            }, /`repeating\.exclude` contains invalid value `FOO`/);
+        });
+
+        it('should throw error when repeating.exclude is not valid (should throw on first err value', function() {
+            var generator = require(__dirname + '/../lib/index.js'),
+                cal = generator();
+            assert.throws(function() {
+                cal.createEvent({
+                    start: new Date(),
+                    end: new Date(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'DAILY',
+                        interval: 2,
+                        byDay: ['SU'],
+                        exclude: [new Date(), 'BAR', 'FOO']
+                    }
+                });
+            }, /`repeating\.exclude` contains invalid value `BAR`/);
+        });
+
         it('should throw error when summary is empty', function() {
             var generator = require(__dirname + '/../lib/index.js'),
                 cal = generator();
@@ -470,7 +506,8 @@ describe('ical-generator 0.1.x', function() {
                 stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
                 summary: 'repeating by month',
                 repeating: {
-                    freq: 'MONTHLY'
+                    freq: 'MONTHLY',
+                    exclude: new Date('Fr Oct 06 2013 23:15:00 UTC')
                 }
             });
 
