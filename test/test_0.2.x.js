@@ -1863,7 +1863,7 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
                     });
 
                 event.createAttendee({email: 'mail@example.com', delegatedTo: 'foo@example.com'});
-                assert.ok(cal.toString().indexOf('foo@example.com') > -1);
+                assert.ok(cal.toString().indexOf('foo@example') > -1);
             });
         });
 
