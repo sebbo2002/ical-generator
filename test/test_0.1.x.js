@@ -454,6 +454,7 @@ describe('ical-generator 0.1.x', function() {
             });
 
             /*jslint stupid: true */
+            console.log(cal.toString());
             assert.equal(cal.toString(), fs.readFileSync(__dirname + '/results/generate_02.ics', 'utf8'));
         });
 

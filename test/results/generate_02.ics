@@ -9,6 +9,8 @@ DTSTART:20131004T223930Z
 DTEND:20131004T231500Z
 SUMMARY:Sample Event
 LOCATION:localhost
-DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat\, sed diam voluptua.\nbeep boop
+DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed
+  diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam era
+ t\, sed diam voluptua.\nbeep boop
 END:VEVENT
 END:VCALENDAR
