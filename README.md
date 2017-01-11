@@ -444,7 +444,7 @@ cal.alarms([
     {type: 'audio', trigger: 300}
 ]);
 
-cal.attendees(); // --> [ICalAlarm, ICalAlarm]
+cal.alarms(); // --> [ICalAlarm, ICalAlarm]
 ```
 
 
@@ -455,7 +455,7 @@ Appointment URL
 
 #### status([_String_ status])
 
-Appointment status. May be any of the following: `confirmed`, `tenative`, `cancelled`.
+Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
 
 
