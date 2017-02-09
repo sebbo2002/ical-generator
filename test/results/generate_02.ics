@@ -10,7 +10,7 @@ DTEND:20131004T231500Z
 SUMMARY:Sample Event
 LOCATION:localhost
 DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed
-  diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam era
- t\, sed diam voluptua.\nbeep boop
+ diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam era
+  t\, sed diam voluptua.\nbeep boop
 END:VEVENT
 END:VCALENDAR
