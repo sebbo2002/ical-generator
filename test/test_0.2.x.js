@@ -1766,6 +1766,42 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('rsvp()', function() {
+            it('setter should return this', function() {
+                var a = ical().createEvent().createAttendee();
+                assert.deepEqual(a, a.rsvp(null));
+                assert.deepEqual(a, a.rsvp('TRUE'));
+            });
+
+            it('getter should return value', function() {
+                var a = ical().createEvent().createAttendee();
+                assert.equal(a.rsvp(), null);
+                a.rsvp('false');
+                assert.equal(a.rsvp(), 'FALSE');
+                a.rsvp(null);
+                assert.equal(a.rsvp(), null);
+            });
+
+            it('should throw error when method not allowed', function() {
+                var a = ical().createEvent().createAttendee();
+                assert.throws(function() {
+                    a.rsvp('PROBABLY');
+                }, /`rsvp` must be one of the following/);
+            });
+
+            it('should change something', function() {
+                var cal = ical(),
+                    event = cal.createEvent({
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + 3600000),
+                        summary: 'Example Event'
+                    });
+
+                event.createAttendee({email: 'mail@example.com', rsvp: 'true'});
+                assert.ok(cal.toString().indexOf(';RSVP=TRUE') > -1);
+            });
+        });
+
         describe('status()', function() {
             it('setter should return this', function() {
                 var a = ical().createEvent().createAttendee();
