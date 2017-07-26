@@ -481,7 +481,7 @@ Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the follow
 Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`
 
 
-#### transp([_String_ transp])
+#### transparency([_String_ transparency])
 
 Appointment transparency. May be any of the following: `transparent`, `opaque`.
 
