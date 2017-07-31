@@ -61,5 +61,3 @@ publish_github:
     - ssh
   script:
     - git push "https://${GITHUB_AUTH}@github.com/sebbo2002/ical-generator.git" --all
-  only:
-    - master
