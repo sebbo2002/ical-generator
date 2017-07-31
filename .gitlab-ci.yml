@@ -1,0 +1,63 @@
+stages:
+  - test
+  - publish
+
+node_4:
+  image: node:4
+  services:
+  - docker:dind
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - docker
+  script:
+    - npm install -g grunt-cli
+    - npm install
+    - npm test
+
+node_6:
+  image: node:6
+  services:
+  - docker:dind
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - docker
+  script:
+    - npm install -g grunt-cli
+    - npm install
+    - npm test
+
+node_7:
+  image: node:7
+  services:
+  - docker:dind
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - docker
+  script:
+    - npm install -g grunt-cli
+    - npm install
+    - npm test
+
+node_8:
+  image: node:8
+  services:
+  - docker:dind
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - docker
+  script:
+    - npm install -g grunt-cli
+    - npm install
+    - npm test
+
+publish_github:
+  stage: publish
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - git push "https://${GITHUB_AUTH}@github.com/sebbo2002/ical-generator.git" --all
