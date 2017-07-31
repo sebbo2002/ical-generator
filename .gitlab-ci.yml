@@ -36,6 +36,7 @@ node_7:
     - docker
   script:
     - npm install -g grunt-cli
+    - npm install
     - npm test
 
 node_8:
