@@ -255,7 +255,7 @@ Return a shallow copy of the calendar's options for JSON stringification. Can be
 ```javascript
 var cal = ical(),
     json = JSON.stringify(cal);
-
+    
 // later
 cal = ical(json);
 ```
@@ -356,7 +356,7 @@ Appointment description
 
 #### htmlDescription([_String_ htmlDescription])
 
-Some calendar apps may support HTML descriptions. Like in emails, supported HTML tags and styling is limited.
+Some calendar apps may support HTML descriptions. Like in emails, supported HTML tags and styling is limited. 
 
 
 #### location([_String_ location])
@@ -444,7 +444,7 @@ cal.alarms([
     {type: 'audio', trigger: 300}
 ]);
 
-cal.alarms(); // --> [ICalAlarm, ICalAlarm]
+cal.attendees(); // --> [ICalAlarm, ICalAlarm]
 ```
 
 
@@ -455,7 +455,7 @@ Appointment URL
 
 #### status([_String_ status])
 
-Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
+Appointment status. May be any of the following: `confirmed`, `tenative`, `cancelled`.
 
 
 
@@ -479,11 +479,6 @@ Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the follow
 #### status([_String_ status])
 
 Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`
-
-
-#### transparency([_String_ transparency])
-
-Appointment transparency. May be any of the following: `transparent`, `opaque`.
 
 
 #### type([_String_ type])
