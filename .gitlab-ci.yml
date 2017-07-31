@@ -12,6 +12,7 @@ node_4:
     - docker
   script:
     - npm install -g grunt-cli
+    - npm install
     - npm test
 
 node_6:
@@ -24,6 +25,7 @@ node_6:
     - docker
   script:
     - npm install -g grunt-cli
+    - npm install
     - npm test
 
 node_7:
@@ -49,6 +51,7 @@ node_8:
     - docker
   script:
     - npm install -g grunt-cli
+    - npm install
     - npm test
 
 publish_github:
