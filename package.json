@@ -16,6 +16,9 @@
     "mocha": "^1.20.1",
     "portfinder": "^0.2.1"
   },
+  "peerDependencies": {
+    "@types/node": ">= 8.0.0",
+	},
   "scripts": {
     "test": "grunt && istanbul cover _mocha -- -R spec --no-colors"
   },
@@ -25,5 +28,6 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"
-  }
+  },
+  "typings": "index.d.ts"
 }
