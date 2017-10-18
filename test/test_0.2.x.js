@@ -1410,6 +1410,46 @@ describe('ical-generator 0.2.x / ICalCalendar', function() {
             });
         });
 
+        describe('created()', function () {
+            it('setter should return this', function () {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.created(new Date()));
+            });
+
+            it('getter should return value', function () {
+                var now = new Date(),
+                    e = ical().createEvent().created(now);
+                assert.deepEqual(e.created(), now);
+            });
+
+            it('should throw error when created is not a Date', function () {
+                var e = ical().createEvent();
+                assert.throws(function () {
+                    e.created('hallo');
+                }, /`created`/);
+            });
+        });
+
+        describe('lastModified()', function () {
+            it('setter should return this', function () {
+                var e = ical().createEvent();
+                assert.deepEqual(e, e.lastModified(new Date()));
+            });
+
+            it('getter should return value', function () {
+                var now = new Date(),
+                    e = ical().createEvent().lastModified(now);
+                assert.deepEqual(e.lastModified(), now);
+            });
+
+            it('should throw error when lastModified is not a Date', function () {
+                var e = ical().createEvent();
+                assert.throws(function () {
+                    e.lastModified('hallo');
+                }, /`lastModified`/);
+            });
+        });
+
         describe('generate()', function() {
             it('shoult throw an error without calendar', function() {
                 var e = ical().createEvent({
