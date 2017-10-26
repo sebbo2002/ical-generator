@@ -455,7 +455,7 @@ Appointment URL
 
 #### status([_String_ status])
 
-Appointment status. May be any of the following: `confirmed`, `tenative`, `cancelled`.
+Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
 
 

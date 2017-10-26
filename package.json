@@ -2,26 +2,39 @@
   "name": "ical-generator",
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <mail@sebbo.net>",
-  "version": "0.2.10",
   "bugs": {
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"
   },
-  "dependencies": {},
+  "dependencies": {
+    "moment": "^2.18.1"
+  },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-jshint": "^0.11.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "istanbul": "^0.3.0",
-    "mocha": "^1.20.1",
-    "portfinder": "^0.2.1"
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.5.0",
+    "istanbul": "^0.4.5",
+    "jshint": "^2.9.5",
+    "mocha": "^3.5.0",
+    "plato": "^1.7.0",
+    "portfinder": "^1.0.13",
+    "webpack": "^3.5.5"
   },
   "scripts": {
-    "test": "grunt && istanbul cover _mocha -- -R spec --no-colors"
+    "check": "npm run check:jshint && npm run check:eslint",
+    "check:jshint": "jshint ./",
+    "check:eslint": "eslint ./",
+    "visualize": "plato -rt ical-generator -d ./code-visualization ./src/*.js",
+    "test": "istanbul cover _mocha -- -R spec --no-colors",
+    "build:unminified": "webpack",
+    "build:minified": "WEBPACK_MINIFIED=1 webpack",
+    "build:dev": "WEBPACK_MINIFIED=1 webpack --progress --colors --watch"
   },
-  "tonicExampleFilename": "./example/example_tonic.js",
   "preferGlobal": false,
-  "main": "./lib/index.js",
+  "main": "./lib/ical-generator.js",
   "repository": {
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"

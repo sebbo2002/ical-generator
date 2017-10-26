@@ -2,3 +2,4 @@ code-visualization/**
 coverage/**
 lib/**
 node_modules/**
+test/**

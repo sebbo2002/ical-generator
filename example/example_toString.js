@@ -1,4 +1,4 @@
-var ical = require('../lib/'),
+var ical = require('../lib/ical-generator'),
     cal = ical({domain: 'localhost'}),
     event;
 
