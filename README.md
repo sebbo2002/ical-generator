@@ -187,7 +187,7 @@ Calendar method. May be any of the following: `publish`, `request`, `reply`, `ad
 
 #### ttl([_Number_ ttl])
 
-Use this method to set your feed's time to live. Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
+Use this method to set your feed's time to live (in seconds). Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
 
 ```javascript
 var cal = ical().ttl(60 * 60 * 24);
