@@ -19,7 +19,8 @@ describe('ical-generator Calendar', function () {
 
     describe('domain()', function () {
         it('getter should return value', function () {
-            const cal = ical().domain('loremipsum.de');
+            const cal = ical();
+            cal._data.domain = 'loremipsum.de';
             assert.equal(cal.domain(), 'loremipsum.de');
         });
 
@@ -36,10 +37,8 @@ describe('ical-generator Calendar', function () {
 
     describe('prodId()', function () {
         it('getter should return value', function () {
-            const cal = ical().prodId({
-                company: 'loremipsum.de',
-                product: 'ical-tests'
-            });
+            const cal = ical();
+            cal._data.prodid = '//loremipsum.de//ical-tests//EN';
             assert.equal(cal.prodId(), '//loremipsum.de//ical-tests//EN');
         });
 
