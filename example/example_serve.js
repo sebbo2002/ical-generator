@@ -1,6 +1,6 @@
 'use strict';
 
-var ical = require('../lib/ical-generator'),
+var ical = require('../lib/'),
     http = require('http'),
     cal = ical({
         domain: 'sebbo.net',
