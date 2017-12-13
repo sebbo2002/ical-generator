@@ -31,7 +31,9 @@ class ICalEvent {
             attendees: [],
             alarms: [],
             status: null,
-            url: null
+            url: null,
+            created: null,
+            lastModified: null
         };
         this._attributes = [
             'id',
@@ -52,7 +54,9 @@ class ICalEvent {
             'attendees',
             'alarms',
             'status',
-            'url'
+            'url',
+            'created',
+            'lastModified'
         ];
         this._vars = {
             allowedRepeatingFreq: ['SECONDLY', 'MINUTELY', 'HOURLY', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'],
@@ -719,6 +723,54 @@ class ICalEvent {
 
 
     /**
+     * Set/Get the event's creation date
+     *
+     * @param {moment|Date|String|Number} created
+     * @since 0.3.0
+     * @returns {ICalEvent|moment}
+     */
+    created(created) {
+        if (created === undefined) {
+            return this._data.created;
+        }
+
+        if (typeof created === 'string' || typeof created === 'number' || created instanceof Date) {
+            created = moment(created);
+        }
+        if (!(created instanceof moment) || !created.isValid()) {
+            throw new Error('Invalid `created` date!');
+        }
+
+        this._data.created = created;
+        return this;
+    }
+
+
+    /**
+     * Set/Get the event's last modification date
+     *
+     * @param {moment|Date|String|Number} lastModified
+     * @since 0.3.0
+     * @returns {ICalEvent|moment}
+     */
+    lastModified(lastModified) {
+        if (lastModified === undefined) {
+            return this._data.lastModified;
+        }
+
+        if (typeof lastModified === 'string' || typeof lastModified === 'number' || lastModified instanceof Date) {
+            lastModified = moment(lastModified);
+        }
+        if (!(lastModified instanceof moment) || !lastModified.isValid()) {
+            throw new Error('Invalid `lastModified` date!');
+        }
+
+        this._data.lastModified = lastModified;
+        return this;
+    }
+
+
+    /**
      * Export calender as JSON Object to use it later…
      *
      * @since 0.2.4
@@ -845,6 +897,16 @@ class ICalEvent {
         // STATUS
         if (this._data.status) {
             g += 'STATUS:' + this._data.status.toUpperCase() + '\r\n';
+        }
+
+        // CREATED
+        if(this._data.created) {
+            g += 'CREATED:' + ICalTools.formatDate(this._data.created) + '\r\n';
+        }
+
+        // LAST-MODIFIED
+        if(this._data.lastModified) {
+            g += 'LAST-MODIFIED:' + ICalTools.formatDate(this._data.lastModified) + '\r\n';
         }
 
         g += 'END:VEVENT\r\n';
