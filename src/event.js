@@ -543,11 +543,14 @@ class ICalEvent {
         let organizer = null;
         const organizerRegEx = /^(.+) ?<([^>]+)>$/;
 
-        if (typeof _organizer === 'string' && organizerRegEx.test(_organizer)) {
-            organizer = {
-                name: RegExp.$1.trim(),
-                email: RegExp.$2
-            };
+        if (typeof _organizer === 'string') {
+            const organizerRegExMatch = _organizer.match(organizerRegEx);
+            if (organizerRegExMatch) {
+                organizer = {
+                    name: organizerRegExMatch[1].trim(),
+                    email: organizerRegExMatch[2]
+                };
+            }
         }
         else if (typeof _organizer === 'object') {
             organizer = {
@@ -601,14 +604,17 @@ class ICalEvent {
             return _attendeeData;
         }
 
-        if (typeof _attendeeData === 'string' && attendeeRegEx.test(_attendeeData)) {
-            attendee = new ICalAttendee({
-                name: RegExp.$1.trim(),
-                email: RegExp.$2
-            }, this);
+        if (typeof _attendeeData === 'string') {
+            const attendeeRegexMatch = _attendeeData.match(attendeeRegEx);
+            if (attendeeRegexMatch) {
+                attendee = new ICalAttendee({
+                    name: attendeeRegexMatch[1].trim(),
+                    email: attendeeRegexMatch[2]
+                }, this);
 
-            this._data.attendees.push(attendee);
-            return attendee;
+                this._data.attendees.push(attendee);
+                return attendee;
+            }
         }
         if (typeof _attendeeData === 'string') {
             throw new Error(
