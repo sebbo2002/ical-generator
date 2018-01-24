@@ -50,6 +50,7 @@ class ICalEvent {
             'summary',
             'location',
             'description',
+            'htmlDescription',
             'organizer',
             'attendees',
             'alarms',
