@@ -7,3 +7,4 @@
 /.idea/
 /code-visualization
 /test-result
+/.nyc_output

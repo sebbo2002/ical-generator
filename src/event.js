@@ -559,13 +559,14 @@ class ICalEvent {
                 email: _organizer.email
             };
         }
-        else if (typeof _organizer === 'string') {
+
+        if (!organizer && typeof _organizer === 'string') {
             throw new Error(
                 '`organizer` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#organizer' +
                 'stringobject-organizer'
             );
         }
-        else {
+        else if(!organizer) {
             throw new Error(
                 '`organizer` needs to be a valid formed string or an object. See https://github.com/sebbo2002/ical-' +
                 'generator#organizerstringobject-organizer'
