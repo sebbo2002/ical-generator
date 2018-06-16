@@ -5,7 +5,7 @@ stages:
 node_4:
   image: node:4
   services:
-  - docker:dind
+    - docker:dind
   stage: test
   tags:
     - matt.sebbo.net
@@ -18,7 +18,7 @@ node_4:
 node_6:
   image: node:6
   services:
-  - docker:dind
+    - docker:dind
   stage: test
   tags:
     - matt.sebbo.net
@@ -31,7 +31,7 @@ node_6:
 node_7:
   image: node:7
   services:
-  - docker:dind
+    - docker:dind
   stage: test
   tags:
     - matt.sebbo.net
@@ -44,7 +44,33 @@ node_7:
 node_8:
   image: node:8
   services:
-  - docker:dind
+    - docker:dind
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - docker
+  script:
+    - npm install -g grunt-cli
+    - npm install
+    - npm test
+
+node_9:
+  image: node:9
+  services:
+    - docker:dind
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - docker
+  script:
+    - npm install -g grunt-cli
+    - npm install
+    - npm test
+
+node_10:
+  image: node:10
+  services:
+    - docker:dind
   stage: test
   tags:
     - matt.sebbo.net
