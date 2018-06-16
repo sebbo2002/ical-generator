@@ -328,7 +328,8 @@ describe('ical-generator Calendar', function () {
             const path = require('path');
             const file = path.join(__dirname, 'save.ical');
             const cal = ical();
-            const e = cal.createEvent();
+
+            cal.createEvent();
 
             assert.throws(function () {
                 cal.save(file);
@@ -354,11 +355,11 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when event invalid', function () {
-            const fs = require('fs');
             const path = require('path');
             const file = path.join(__dirname, 'save_sync.ical');
             const cal = ical();
-            const e = cal.createEvent();
+
+            cal.createEvent();
 
             assert.throws(function () {
                 /*jslint stupid: true */

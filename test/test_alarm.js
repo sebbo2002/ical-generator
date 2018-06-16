@@ -106,7 +106,7 @@ describe('ical-generator Alarm', function () {
                 end: moment().add(1, 'hour'),
                 summary: 'Example Event'
             });
-            const trigger = moment('20150201T133845Z');
+            const trigger = moment('2015-02-01T13:38:45.000Z');
 
             const alarm = event.createAlarm({type: 'display', trigger: 60 * 10});
             assert.ok(cal.toString().indexOf('TRIGGER:-PT10M') > -1);
@@ -365,7 +365,7 @@ describe('ical-generator Alarm', function () {
             }).createAlarm({trigger: 300});
 
             assert.throws(function () {
-                a.generate();
+                a._generate();
             }, /`type`/);
         });
 
@@ -377,7 +377,7 @@ describe('ical-generator Alarm', function () {
             }).createAlarm({type: 'display'});
 
             assert.throws(function () {
-                a.generate();
+                a._generate();
             }, /`trigger`/);
         });
 
@@ -389,7 +389,7 @@ describe('ical-generator Alarm', function () {
             }).createAlarm({type: 'display', trigger: 300, repeat: 4});
 
             assert.throws(function () {
-                a.generate();
+                a._generate();
             }, /for `interval`/);
         });
 
@@ -401,7 +401,7 @@ describe('ical-generator Alarm', function () {
             }).createAlarm({type: 'display', trigger: 300, interval: 60});
 
             assert.throws(function () {
-                a.generate();
+                a._generate();
             }, /for `repeat`/);
         });
     });

@@ -40,7 +40,7 @@ class ICalAlarm {
         }
 
         for (let i in data) {
-            if (this._data.hasOwnProperty(i) && this._attributes.indexOf(i) > -1) {
+            if (this._attributes.indexOf(i) > -1) {
                 this[i](data[i]);
             }
         }
@@ -299,7 +299,7 @@ class ICalAlarm {
         // ACTION
         g += 'ACTION:' + this._data.type.toUpperCase() + '\r\n';
 
-        if (moment.isDate(this._data.trigger)) {
+        if (moment.isMoment(this._data.trigger)) {
             g += 'TRIGGER;VALUE=DATE-TIME:' + ICalTools.formatDate(this._data.trigger) + '\r\n';
         }
         else if (this._data.trigger > 0) {
@@ -322,7 +322,7 @@ class ICalAlarm {
             throw new Error('No value for `repeat` in ICalAlarm given, but required for `interval`!');
         }
         if (this._data.interval) {
-            g += 'DURATION:' + ICalTools.duration(this._data.interval) + '\r\n';
+            g += 'DURATION:' + moment.duration(this._data.interval, 's').toISOString() + '\r\n';
         }
 
         // ATTACH

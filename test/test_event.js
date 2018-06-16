@@ -1014,7 +1014,6 @@ describe('ical-generator Event', function () {
             const cal = ical();
             const event = cal.createEvent();
             const ICalAttendee = require('../src/attendee');
-            const attendee = new ICalAttendee(null, event);
 
             assert.ok(event.createAttendee() instanceof ICalAttendee);
             assert.equal(event._data.attendees.length, 1, 'attendee pushed');

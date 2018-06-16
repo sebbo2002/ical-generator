@@ -70,7 +70,7 @@ class ICalEvent {
         }
 
         for (let i in data) {
-            if (data.hasOwnProperty(i) && this._attributes.indexOf(i) > -1) {
+            if (this._attributes.indexOf(i) > -1) {
                 this[i](data[i]);
             }
         }

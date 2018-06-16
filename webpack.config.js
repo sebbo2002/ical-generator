@@ -1,13 +1,15 @@
 const webpack = require('webpack');
 const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-const minified = !!(process.env.WEBPACK_MINIFIED);
 
 const config = {
-    entry: __dirname + '/src/index.js',
+    entry: {
+        'ical-generator': __dirname + '/src/index.js',
+        'tests': __dirname + '/src/tests.js'
+    },
     devtool: 'source-map',
     output: {
         path: __dirname + '/lib',
-        filename: 'ical-generator' + (minified ? '.min' : '') + '.js',
+        filename: 'ical-generator.js',
         library: 'ical-generator',
         libraryTarget: 'umd',
         umdNamedDefine: true
