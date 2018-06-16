@@ -482,7 +482,7 @@ The attendee's email address. An email address is required for every attendee!
 
 #### role([_String_ role])
 
-Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: `req-participant`, `non-participant`
+Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: `chair`, `req-participant`, `opt-participant`, `non-participant`
 
 
 #### status([_String_ status])

@@ -33,7 +33,7 @@ class ICalAttendee {
         ];
         this._vars = {
             allowed: {
-                role: ['REQ-PARTICIPANT', 'NON-PARTICIPANT'],
+                role: ['CHAIR', 'REQ-PARTICIPANT', 'OPT-PARTICIPANT', 'NON-PARTICIPANT'],
                 status: ['ACCEPTED', 'TENTATIVE', 'DECLINED', 'DELEGATED'],
                 type: ['INDIVIDUAL', 'GROUP', 'RESOURCE', 'ROOM', 'UNKNOWN'] // ref: https://tools.ietf.org/html/rfc2445#section-4.2.3
             }
