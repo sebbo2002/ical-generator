@@ -1,7 +1,7 @@
 'use strict';
 
 
-const moment = require('moment');
+const moment = require('moment-timezone');
 const ICalTools = require('./_tools');
 const ICalAttendee = require('./attendee');
 const ICalAlarm = require('./alarm');
@@ -810,19 +810,19 @@ class ICalEvent {
         // SEQUENCE
         g += 'SEQUENCE:' + this._data.sequence + '\r\n';
 
-        g += 'DTSTAMP:' + ICalTools.formatDate(this._data.stamp) + '\r\n';
+        g += 'DTSTAMP:' + ICalTools.formatDate(this._calendar.timezone(), this._data.stamp) + '\r\n';
         if (this._data.allDay) {
-            g += 'DTSTART;VALUE=DATE:' + ICalTools.formatDate(this._data.start, true) + '\r\n';
+            g += 'DTSTART;VALUE=DATE:' + ICalTools.formatDate(this._calendar.timezone(), this._data.start, true) + '\r\n';
             if (this._data.end) {
-                g += 'DTEND;VALUE=DATE:' + ICalTools.formatDate(this._data.end, true) + '\r\n';
+                g += 'DTEND;VALUE=DATE:' + ICalTools.formatDate(this._calendar.timezone(), this._data.end, true) + '\r\n';
             }
 
             g += 'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE\r\n';
             g += 'X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE\r\n';
         } else {
-            g += ICalTools.formatDateTZ('DTSTART', this._data.start, this._data) + '\r\n';
+            g += ICalTools.formatDateTZ(this._calendar.timezone(), 'DTSTART', this._data.start, this._data) + '\r\n';
             if (this._data.end) {
-                g += ICalTools.formatDateTZ('DTEND', this._data.end, this._data) + '\r\n';
+                g += ICalTools.formatDateTZ(this._calendar.timezone(), 'DTEND', this._data.end, this._data) + '\r\n';
             }
         }
 
@@ -839,7 +839,7 @@ class ICalEvent {
             }
 
             if (this._data.repeating.until) {
-                g += ';UNTIL=' + ICalTools.formatDate(this._data.repeating.until);
+                g += ';UNTIL=' + ICalTools.formatDate(this._calendar.timezone(), this._data.repeating.until);
             }
 
             if (this._data.repeating.byDay) {
@@ -859,7 +859,7 @@ class ICalEvent {
             // REPEATING EXCLUSION
             if (this._data.repeating.exclude) {
                 g += 'EXDATE:' + this._data.repeating.exclude.map(function (excludedDate) {
-                    return ICalTools.formatDate(excludedDate);
+                    return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
                 }).join(',') + '\r\n';
             }
         }
@@ -909,12 +909,12 @@ class ICalEvent {
 
         // CREATED
         if(this._data.created) {
-            g += 'CREATED:' + ICalTools.formatDate(this._data.created) + '\r\n';
+            g += 'CREATED:' + ICalTools.formatDate(this._calendar.timezone(), this._data.created) + '\r\n';
         }
 
         // LAST-MODIFIED
         if(this._data.lastModified) {
-            g += 'LAST-MODIFIED:' + ICalTools.formatDate(this._data.lastModified) + '\r\n';
+            g += 'LAST-MODIFIED:' + ICalTools.formatDate(this._calendar.timezone(), this._data.lastModified) + '\r\n';
         }
 
         g += 'END:VEVENT\r\n';

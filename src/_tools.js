@@ -1,6 +1,6 @@
 'use strict';
 
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 /**
  * @author Sebastian Pekarek
@@ -8,8 +8,8 @@ const moment = require('moment');
  * @class ICalTools
  */
 class ICalTools {
-    static formatDate(d, dateonly, floating) {
-        const m = moment(d).utc();
+    static formatDate(timezone, d, dateonly, floating) {
+        const m = timezone ? moment(d).tz(timezone) : moment(d).utc();
         let s = m.format('YYYYMMDD');
 
         if(!dateonly) {
@@ -26,7 +26,7 @@ class ICalTools {
 
     // For information about this format, see RFC 5545, section 3.3.5
     // https://tools.ietf.org/html/rfc5545#section-3.3.5
-    static formatDateTZ(property, date, eventData) {
+    static formatDateTZ(timezone, property, date, eventData) {
         let tzParam = '';
         let floating = eventData.floating;
 
@@ -38,7 +38,7 @@ class ICalTools {
             floating = true;
         }
 
-        return property + tzParam + ':' + module.exports.formatDate(date, false, floating);
+        return property + tzParam + ':' + module.exports.formatDate(timezone, date, false, floating);
     }
 
     static escape(str) {

@@ -7,15 +7,15 @@
     "email": "bugs@sebbo.net"
   },
   "dependencies": {
-    "moment": "^2.18.1"
+    "moment-timezone": "^0.5.17"
   },
   "devDependencies": {
     "babel": "^6.23.0",
-    "babel-core": "^6.26.0",
+    "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.1",
-    "eslint": "^4.5.0",
+    "eslint": "^4.19.1",
     "jshint": "^2.9.5",
     "mocha": "^3.5.0",
     "mochawesome": "^3.0.2",

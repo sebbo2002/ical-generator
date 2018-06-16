@@ -1,7 +1,7 @@
 'use strict';
 
 
-const moment = require('moment');
+const moment = require('moment-timezone');
 const ICalTools = require('./_tools');
 
 
@@ -300,7 +300,7 @@ class ICalAlarm {
         g += 'ACTION:' + this._data.type.toUpperCase() + '\r\n';
 
         if (moment.isMoment(this._data.trigger)) {
-            g += 'TRIGGER;VALUE=DATE-TIME:' + ICalTools.formatDate(this._data.trigger) + '\r\n';
+            g += 'TRIGGER;VALUE=DATE-TIME:' + ICalTools.formatDate(this._event._calendar.timezone(), this._data.trigger) + '\r\n';
         }
         else if (this._data.trigger > 0) {
             g += 'TRIGGER;RELATED=END:' + moment.duration(this._data.trigger, 's').toISOString() + '\r\n';
