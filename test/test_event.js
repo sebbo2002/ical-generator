@@ -1175,6 +1175,46 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('created()', function () {
+        it('setter should return this', function () {
+            const e = ical().createEvent();
+            assert.deepEqual(e, e.created(new Date()));
+        });
+
+        it('getter should return value', function () {
+            const now = new Date();
+            const e = ical().createEvent().created(now);
+            assert.deepEqual(e.created().valueOf(), now.getTime());
+        });
+
+        it('should throw error when created is not a Date', function () {
+            const e = ical().createEvent();
+            assert.throws(function () {
+                e.created('hallo');
+            }, /`created`/);
+        });
+    });
+
+    describe('lastModified()', function () {
+        it('setter should return this', function () {
+            const e = ical().createEvent();
+            assert.deepEqual(e, e.lastModified(new Date()));
+        });
+
+        it('getter should return value', function () {
+            const now = new Date();
+            const e = ical().createEvent().lastModified(now);
+            assert.deepEqual(e.lastModified().valueOf(), now.getTime());
+        });
+
+        it('should throw error when lastModified is not a Date', function () {
+            const e = ical().createEvent();
+            assert.throws(function () {
+                e.lastModified('hallo');
+            }, /`lastModified`/);
+        });
+    });
+
     describe('toJSON()', function () {
         it('should maybe work', function () {
             const date = moment().add(1, 'month');

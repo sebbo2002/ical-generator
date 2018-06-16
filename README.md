@@ -458,6 +458,15 @@ Appointment URL
 Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
 
+#### created([_Date_ created])
+
+Date object of the time the appointment was created.
+
+
+#### lastModified([_Date_ lastModified])
+
+Date object of the time the appointent was modified last.
+
 
 ### Attendee
 
