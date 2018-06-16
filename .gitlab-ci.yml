@@ -107,6 +107,7 @@ publish_npm_next:
     - ssh
   script:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+    - yarn install
     - npm run bump:develop
     - npm run build
     - echo $(cat ./package.json | jq '.version' -rce)
