@@ -91,6 +91,35 @@ describe('ical-generator Attendee', function () {
         });
     });
 
+    describe('rsvp()', function() {
+        it('setter should return this', function() {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.deepEqual(a, a.rsvp(null));
+            assert.deepEqual(a, a.rsvp('TRUE'));
+        });
+
+        it('getter should return value', function() {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.equal(a.rsvp(), null);
+            a.rsvp('false');
+            assert.equal(a.rsvp(), 'FALSE');
+            a.rsvp(null);
+            assert.equal(a.rsvp(), null);
+        });
+
+        it('should throw error when method not allowed', function() {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.throws(function() {
+                a.rsvp('PROBABLY');
+            }, /`rsvp` must be one of the following/);
+        });
+
+        it('should change something', function() {
+            const a = new ICalAttendee({email: 'mail@example.com', rsvp: 'true'}, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf(';RSVP=TRUE') > -1);
+        });
+    });
+
     describe('status()', function () {
         it('setter should return this', function () {
             const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));

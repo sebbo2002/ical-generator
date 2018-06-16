@@ -16,6 +16,7 @@ class ICalAttendee {
             email: null,
             status: null,
             role: 'REQ-PARTICIPANT',
+            rsvp: null,
             type: null,
             delegatedTo: null,
             delegatedFrom: null
@@ -24,6 +25,7 @@ class ICalAttendee {
             'name',
             'email',
             'role',
+            'rsvp',
             'status',
             'type',
             'delegatedTo',
@@ -34,6 +36,7 @@ class ICalAttendee {
         this._vars = {
             allowed: {
                 role: ['CHAIR', 'REQ-PARTICIPANT', 'OPT-PARTICIPANT', 'NON-PARTICIPANT'],
+                rsvp: ['TRUE', 'FALSE'],
                 status: ['ACCEPTED', 'TENTATIVE', 'DECLINED', 'DELEGATED'],
                 type: ['INDIVIDUAL', 'GROUP', 'RESOURCE', 'ROOM', 'UNKNOWN'] // ref: https://tools.ietf.org/html/rfc2445#section-4.2.3
             }
@@ -121,6 +124,27 @@ class ICalAttendee {
         }
 
         this._data.role = this._getAllowedStringFor('role', role);
+        return this;
+    }
+
+
+    /**
+     * Set/Get attendee's RSVP expectation
+     *
+     * @param {String} rsvp
+     * @since 0.2.1
+     * @returns {ICalAttendee|String}
+     */
+    rsvp(rsvp) {
+        if (rsvp === undefined) {
+            return this._data.rsvp;
+        }
+        if (!rsvp) {
+            this._data.rsvp = null;
+            return this;
+        }
+
+        this._data.rsvp = this._getAllowedStringFor('rsvp', rsvp);
         return this;
     }
 
@@ -288,6 +312,11 @@ class ICalAttendee {
         // PARTSTAT
         if (this._data.status) {
             g += ';PARTSTAT=' + this._data.status;
+        }
+
+        // RSVP
+        if (this._data.rsvp) {
+            g += ';RSVP=' + this._data.rsvp;
         }
 
         // DELEGATED-TO
