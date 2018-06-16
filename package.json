@@ -6,6 +6,9 @@
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"
   },
+ "engines": {
+   "node" : ">=0.6.0"
+ },
   "dependencies": {
     "moment-timezone": "^0.5.17"
   },

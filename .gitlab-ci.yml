@@ -2,19 +2,6 @@ stages:
   - test
   - publish
 
-node_4:
-  image: node:4
-  services:
-    - docker:dind
-  stage: test
-  tags:
-    - matt.sebbo.net
-    - docker
-  script:
-    - npm install -g grunt-cli
-    - npm install
-    - npm test
-
 node_6:
   image: node:6
   services:
