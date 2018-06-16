@@ -6,9 +6,9 @@
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"
   },
- "engines": {
-   "node" : ">=0.6.0"
- },
+  "engines": {
+    "node": ">=0.6.0"
+  },
   "dependencies": {
     "moment-timezone": "^0.5.17"
   },
@@ -20,15 +20,16 @@
     "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.19.1",
     "jshint": "^2.9.5",
-    "mocha": "^3.5.0",
+    "mocha": "^5.2.0",
     "mochawesome": "^3.0.2",
-    "nyc": "^11.7.1",
+    "nyc": "^13.0.0",
     "plato": "^1.7.0",
     "portfinder": "^1.0.13",
-    "webpack": "^3.5.5"
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8"
   },
   "scripts": {
-    "all": "",
+    "all": "npm run check && npm run visualize && npm run tests && npm run build",
     "check": "npm run check:eslint",
     "check:eslint": "eslint ./example ./src ./test/*.js",
     "visualize": "plato -rt ical-generator -d ./code-visualization -e ./.eslintrc.json ./src/*.js",

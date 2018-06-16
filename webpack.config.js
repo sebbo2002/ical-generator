@@ -1,10 +1,10 @@
 const webpack = require('webpack');
-const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const config = {
     entry: {
         'ical-generator': __dirname + '/src/index.js'
     },
+    mode: 'production',
     devtool: 'source-map',
     output: {
         path: __dirname + '/lib',
@@ -14,7 +14,7 @@ const config = {
         umdNamedDefine: true
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /(\.js)$/,
                 loader: 'babel-loader',
@@ -27,9 +27,6 @@ const config = {
         fs : 'fs',
         portfinder: 'portfinder'
     },
-    plugins: [
-        new UglifyJsPlugin({ minimize: true })
-    ],
     resolve: {
         extensions: ['.js']
     }
