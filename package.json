@@ -33,7 +33,11 @@
     "test": "mocha -c --reporter mochawesome --reporter-options reportDir=test-result/test,reportFilename=report,json=false ./test/*.js",
     "coverage": "nyc --reporter=html --reporter=text --report-dir ./test-result/coverage --check-coverage mocha -c ./test/*.js",
     "build": "webpack",
-    "build:dev": "webpack --progress --colors --watch"
+    "bump:reset": "export MODULEVERSION=$(npm view ical-generator version) && npm run bump:reset:save",
+    "bump:reset:next": "export MODULEVERSION=$(npm view ical-generator@next version) && npm run bump:reset:save",
+    "bump:reset:save": "echo $MODULEVERSION && npm version ${MODULEVERSION}",
+    "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version prerelease",
+    "bump:production": "npm run bump:reset && npm --no-git-tag-version version from-git"
   },
   "preferGlobal": false,
   "main": "./lib/ical-generator.js",

@@ -3,13 +3,12 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const config = {
     entry: {
-        'ical-generator': __dirname + '/src/index.js',
-        'tests': __dirname + '/src/tests.js'
+        'ical-generator': __dirname + '/src/index.js'
     },
     devtool: 'source-map',
     output: {
         path: __dirname + '/lib',
-        filename: 'ical-generator.js',
+        filename: '[name].js',
         library: 'ical-generator',
         libraryTarget: 'umd',
         umdNamedDefine: true
@@ -25,11 +24,12 @@ const config = {
     },
     externals: {
         moment: 'moment',
-        fs : 'fs'
+        fs : 'fs',
+        portfinder: 'portfinder'
     },
-    plugins: minified ? [
+    plugins: [
         new UglifyJsPlugin({ minimize: true })
-    ] : [],
+    ],
     resolve: {
         extensions: ['.js']
     }
