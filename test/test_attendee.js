@@ -1,13 +1,13 @@
 'use strict';
 
 const assert = require('assert');
-const moment = require('moment-timezone');
-const ical = require(__dirname + '/../src');
+const ICalCalendar = require('../src/calendar');
+const ICalEvent = require('../src/event');
+const ICalAttendee = require('../src/attendee');
 
 describe('ical-generator Attendee', function () {
     describe('constructor()', function () {
         it('shouldn\'t work without event reference', function () {
-            const ICalAttendee = require('../src/attendee');
             assert.throws(function () {
                 new ICalAttendee({email: 'foo@bar.com'});
             }, /`event`/);
@@ -16,7 +16,7 @@ describe('ical-generator Attendee', function () {
 
     describe('name()', function () {
         it('getter should return value', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.equal(a.name(), null);
 
             a._data.name = 'Sebastian';
@@ -24,13 +24,13 @@ describe('ical-generator Attendee', function () {
         });
 
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a, a.name(null));
             assert.deepEqual(a, a.name('Sebastian'));
         });
 
         it('setter should change something', function () {
-            const a = ical().createEvent({start: new Date(), summary: 'Example Event'}).createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
 
             a.name('Sebastian');
             assert.equal(a._data.name, 'Sebastian');
@@ -42,73 +42,64 @@ describe('ical-generator Attendee', function () {
 
     describe('email()', function () {
         it('getter should return value', function () {
-            const e = ical().createEvent().createAttendee().email('foo@example.com');
-            assert.equal(e.email(), 'foo@example.com');
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar())).email('foo@example.com');
+            assert.equal(a.email(), 'foo@example.com');
         });
 
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a, a.email('foo@example.com'));
         });
 
         it('should change something', function () {
-            const cal = ical(),
-                event = cal.createEvent({
-                    start: moment(),
-                    summary: 'Example Event'
-                });
-
-            event.createAttendee({email: 'mail@example.com'});
-            assert.ok(cal.toString().indexOf('mail@example.com') > -1);
+            const a = new ICalAttendee({email: 'mail@example.com'}, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('mail@example.com') > -1);
         });
     });
 
     describe('role()', function () {
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a, a.role('req-participant'));
         });
 
         it('getter should return value', function () {
-            const a = ical().createEvent().createAttendee().role('req-participant');
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar())).role('req-participant');
             assert.equal(a.role(), 'REQ-PARTICIPANT');
         });
 
         it('should throw error when method empty', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.throws(function () {
                 a.role('');
             }, /`role` must be a non-empty string/);
         });
 
         it('should throw error when method not allowed', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.throws(function () {
                 a.role('COOKING');
             }, /`role` must be one of the following/);
         });
 
         it('should change something', function () {
-            const cal = ical();
-            const event = cal.createEvent({
-                start: moment(),
-                summary: 'Example Event'
-            });
-
-            event.createAttendee({email: 'mail@example.com', role: 'non-participant'});
-            assert.ok(cal.toString().indexOf('NON-PARTICIPANT') > -1);
+            const a = new ICalAttendee({
+                email: 'mail@example.com',
+                role: 'non-participant'
+            }, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('NON-PARTICIPANT') > -1);
         });
     });
 
     describe('status()', function () {
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a, a.status(null));
             assert.deepEqual(a, a.status('accepted'));
         });
 
         it('getter should return value', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.equal(a.status(), null);
 
             a.status('accepted');
@@ -119,34 +110,27 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should throw error when method not allowed', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.throws(function () {
                 a.status('DRINKING');
             }, /`status` must be one of the following/);
         });
 
         it('should change something', function () {
-            const cal = ical();
-            const event = cal.createEvent({
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
-            });
-
-            event.createAttendee({email: 'mail@example.com', status: 'declined'});
-            assert.ok(cal.toString().indexOf('DECLINED') > -1);
+            const a = new ICalAttendee({email: 'mail@example.com', status: 'declined'}, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('DECLINED') > -1);
         });
     });
 
     describe('type()', function () {
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a.type(null), a);
             assert.deepEqual(a.type('individual'), a);
         });
 
         it('getter should return value', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.equal(a.type(), null);
             a.type('room');
             assert.equal(a.type(), 'ROOM');
@@ -155,34 +139,30 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should throw error when method not allowed', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.throws(function () {
                 a.type('DRINKING');
             }, /`type` must be one of the following/);
         });
 
         it('should change something', function () {
-            const cal = ical();
-            const event = cal.createEvent({
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
-            });
-
-            event.createAttendee({email: 'mailing-list@example.com', type: 'group'});
-            assert.ok(cal.toString().indexOf('GROUP') > -1);
+            const a = new ICalAttendee({
+                email: 'mailing-list@example.com',
+                type: 'group'
+            }, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('GROUP') > -1);
         });
     });
 
     describe('delegatedTo()', function () {
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a, a.delegatedTo(null));
             assert.deepEqual(a, a.delegatedTo('foo@example.com'));
         });
 
         it('getter should return value', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.equal(a.delegatedTo(), null);
 
             a.delegatedTo('foo@example.com');
@@ -193,27 +173,23 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should change something', function () {
-            const cal = ical();
-            const event = cal.createEvent({
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
-            });
-
-            event.createAttendee({email: 'mail@example.com', delegatedTo: 'foo@example.com'});
-            assert.ok(cal.toString().indexOf('foo@example') > -1);
+            const a = new ICalAttendee({
+                email: 'mail@example.com',
+                delegatedTo: 'foo@example.com'
+            }, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('foo@example') > -1);
         });
     });
 
     describe('delegatedFrom()', function () {
         it('setter should return this', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.deepEqual(a, a.delegatedFrom(null));
             assert.deepEqual(a, a.delegatedFrom('foo@example.com'));
         });
 
         it('getter should return value', function () {
-            const a = ical().createEvent().createAttendee();
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.equal(a.delegatedFrom(), null);
             a.delegatedFrom('foo@example.com');
             assert.equal(a.delegatedFrom(), 'foo@example.com');
@@ -222,36 +198,27 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should change something', function () {
-            const cal = ical();
-            const event = cal.createEvent({
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
-            });
-
-            event.createAttendee({email: 'mail@example.com', delegatedFrom: 'foo@example.com'});
-            assert.ok(cal.toString().indexOf('foo@example.com') > -1);
+            const a = new ICalAttendee({email: 'mail@example.com', delegatedFrom: 'foo@example.com'}, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('foo@example.com') > -1);
         });
     });
 
     describe('delegatesTo()', function () {
         it('should return a new ICalAttendee instance by default', function () {
-            const event = ical().createEvent();
-            const ICalAttendee = require('../src/attendee');
-
-            assert.ok(event.createAttendee().delegatesTo() instanceof ICalAttendee);
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a.delegatesTo() instanceof ICalAttendee);
         });
 
         it('should reuse the same ICalAttendee instance if passed', function () {
-            const event = ical().createEvent();
-            const attendee = event.createAttendee({name: 'Zac'}).delegatesTo({name: 'Cody'});
+            const event = new ICalEvent(null, new ICalCalendar());
+            const attendee = new ICalAttendee({name: 'Muh'}, event);
 
-            assert.deepEqual(event.createAttendee().delegatesTo(attendee), attendee);
+            assert.deepEqual(new ICalAttendee(null, event).delegatesTo(attendee), attendee);
         });
 
         it('should pass data to instance', function () {
-            const event = ical().createEvent();
-            const attendee = event.createAttendee({name: 'Zac'}).delegatesTo({name: 'Cody'});
+            const attendee = new ICalAttendee({name: 'Zac'}, new ICalEvent(null, new ICalCalendar()))
+                .delegatesTo({name: 'Cody'});
 
             assert.equal(attendee.name(), 'Cody');
         });
@@ -259,35 +226,26 @@ describe('ical-generator Attendee', function () {
 
     describe('delegatesFrom()', function () {
         it('should return a new ICalAttendee instance by default', function () {
-            const event = ical().createEvent();
-            const ICalAttendee = require('../src/attendee');
-
-            assert.ok(event.createAttendee().delegatesFrom() instanceof ICalAttendee);
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a.delegatesFrom() instanceof ICalAttendee);
         });
 
         it('should reuse the same ICalAttendee instance if passed', function () {
-            const event = ical().createEvent();
-            const attendee = event.createAttendee({name: 'Muh'});
+            const event = new ICalEvent(null, new ICalCalendar());
+            const attendee = new ICalAttendee({name: 'Muh'}, event);
 
-            assert.deepEqual(event.createAttendee().delegatesFrom(attendee), attendee);
+            assert.deepEqual(new ICalAttendee(null, event).delegatesFrom(attendee), attendee);
         });
 
         it('should pass data to instance', function () {
-            const event = ical().createEvent();
-            const attendee = event.createAttendee({name: 'Zac'}).delegatesFrom({name: 'Cody'});
-
-            assert.equal(attendee.name(), 'Cody');
+            const a = new ICalAttendee({name: 'Zac'}, new ICalEvent(null, new ICalCalendar())).delegatesFrom({name: 'Cody'});
+            assert.equal(a.name(), 'Cody');
         });
     });
 
     describe('generate()', function () {
         it('should throw an error without email', function () {
-            const a = ical().createEvent({
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
-            }).createAttendee({name: 'Testuser'});
-
+            const a = new ICalAttendee({name: 'Testuser'}, new ICalEvent(null, new ICalCalendar()));
             assert.throws(function () {
                 a._generate();
             }, /`email`/);

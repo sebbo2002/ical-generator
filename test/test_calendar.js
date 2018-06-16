@@ -2,67 +2,67 @@
 
 const assert = require('assert');
 const moment = require('moment-timezone');
-const ical = require(__dirname + '/../src');
+const ICalCalendar = require('../src/calendar');
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
         it('shoud set _attributes', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.ok(cal._attributes.length > 0);
         });
 
         it('shoud load json export', function () {
-            const cal = ical('{"name":"hello-world"}');
+            const cal = new ICalCalendar('{"name":"hello-world"}');
             assert.equal(cal._data.name, 'hello-world');
         });
     });
 
     describe('domain()', function () {
         it('getter should return value', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.domain = 'loremipsum.de';
             assert.equal(cal.domain(), 'loremipsum.de');
         });
 
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal, cal.domain('localhost'));
         });
 
         it('setter should save value in _data', function () {
-            const cal = ical().domain('loremipsum.de');
+            const cal = new ICalCalendar().domain('loremipsum.de');
             assert.equal(cal._data.domain, 'loremipsum.de');
         });
     });
 
     describe('prodId()', function () {
         it('getter should return value', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.prodid = '//loremipsum.de//ical-tests//EN';
             assert.equal(cal.prodId(), '//loremipsum.de//ical-tests//EN');
         });
 
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal, cal.prodId('//loremipsum.de//ical-tests//EN'));
         });
 
         it('should throw error when string misformed', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.throws(function () {
                 cal.prodId('enemenemuh!');
             }, /`prodid`/);
         });
 
         it('should throw error when not string/object', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.throws(function () {
                 cal.prodId(256);
             }, /`prodid`/);
         });
 
         it('should throw error when no company given', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.throws(function () {
                 cal.prodId({
                     product: 'ical-tests'
@@ -71,7 +71,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when no product given', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.throws(function () {
                 cal.prodId({
                     company: 'sebbo.net'
@@ -80,7 +80,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something #1', function () {
-            const cal = ical().prodId({
+            const cal = new ICalCalendar().prodId({
                 company: 'loremipsum.com',
                 product: 'awesome-unit-tests'
             });
@@ -89,7 +89,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something #2', function () {
-            const cal = ical().prodId({
+            const cal = new ICalCalendar().prodId({
                 company: 'loremipsum.com',
                 product: 'awesome-unit-tests',
                 language: 'DE'
@@ -101,13 +101,13 @@ describe('ical-generator Calendar', function () {
 
     describe('method()', function () {
         it('setter should return this', function () {
-            const c = ical();
+            const c = new ICalCalendar();
             assert.deepEqual(c, c.method(null), 'method(null)');
             assert.deepEqual(c, c.method('publish'), 'method(string)');
         });
 
         it('getter should return value', function () {
-            const c = ical();
+            const c = new ICalCalendar();
             assert.equal(c.method(), null);
             c.method(null);
             assert.equal(c.method(), null);
@@ -118,14 +118,14 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when method not allowed', function () {
-            const c = ical();
+            const c = new ICalCalendar();
             assert.throws(function () {
                 c.method('KICK ASS');
             }, /`method`/);
         });
 
         it('should change something', function () {
-            const c = ical({method: 'publish'});
+            const c = new ICalCalendar({method: 'publish'});
             assert.equal(c._data.method, 'PUBLISH');
 
             c.method('add');
@@ -135,13 +135,13 @@ describe('ical-generator Calendar', function () {
 
     describe('name()', function () {
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal, cal.name(null));
             assert.deepEqual(cal, cal.name('Testevents'));
         });
 
         it('getter should return value', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.name(), null);
             cal.name('Testevents');
             assert.equal(cal.name(), 'Testevents');
@@ -150,7 +150,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something', function () {
-            const cal = ical().name('Testevents');
+            const cal = new ICalCalendar().name('Testevents');
             cal.createEvent({
                 start: new Date(),
                 summary: 'Example Event'
@@ -161,13 +161,13 @@ describe('ical-generator Calendar', function () {
 
     describe('description()', function () {
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal, cal.description(null));
             assert.deepEqual(cal, cal.description('Testbeschreibung'));
         });
 
         it('getter should return value', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.description(), null);
             cal.description('Testbeschreibung');
             assert.equal(cal.description(), 'Testbeschreibung');
@@ -176,7 +176,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something', function () {
-            const cal = ical().description('Testbeschreibung');
+            const cal = new ICalCalendar().description('Testbeschreibung');
             cal.createEvent({
                 start: new Date(),
                 summary: 'Example Event'
@@ -188,12 +188,12 @@ describe('ical-generator Calendar', function () {
 
     describe('timezone()', function () {
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal, cal.timezone('Europe/Berlin'));
         });
 
         it('getter should return value', function () {
-            const cal = ical().timezone('Europe/Berlin');
+            const cal = new ICalCalendar().timezone('Europe/Berlin');
             assert.equal(cal.timezone(), 'Europe/Berlin');
 
             cal.timezone(null);
@@ -201,7 +201,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should make a difference to iCal output', function () {
-            const cal = ical().timezone('Europe/London');
+            const cal = new ICalCalendar().timezone('Europe/London');
             cal.createEvent({
                 start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
@@ -214,33 +214,33 @@ describe('ical-generator Calendar', function () {
 
     describe('ttl()', function () {
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal.ttl(60 * 60 * 24), cal);
             assert.deepEqual(cal.ttl(moment.duration(2, 'days')), cal);
             assert.deepEqual(cal.ttl(null), cal);
         });
 
         it('getter should return value', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.ttl(), null);
             cal.ttl(86400);
             assert.equal(cal.ttl().as('seconds'), 86400);
         });
 
         it('should change something', function () {
-            const cal = ical().ttl(86400);
+            const cal = new ICalCalendar().ttl(86400);
             assert.equal(cal._data.ttl.as('seconds'), 86400);
         });
     });
 
     describe('url()', function () {
         it('setter should return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.deepEqual(cal, cal.url('https://example.com/calendar.ical'));
         });
 
         it('getter should return value', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.url(), null);
             cal.url('https://example.com/calendar.ical');
             assert.equal(cal.url(), 'https://example.com/calendar.ical');
@@ -249,7 +249,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something', function () {
-            const cal = ical().url('https://example.com/calendar.ical');
+            const cal = new ICalCalendar().url('https://example.com/calendar.ical');
             cal.createEvent({
                 start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
@@ -261,14 +261,14 @@ describe('ical-generator Calendar', function () {
 
     describe('createEvent()', function () {
         it('should return a ICalEvent instance', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             const ICalEvent = require('../src/event');
 
             assert.ok(cal.createEvent() instanceof ICalEvent);
         });
 
         it('should pass data to instance', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             const event = cal.createEvent({summary: 'Patch-Day'});
 
             assert.equal(event.summary(), 'Patch-Day');
@@ -276,7 +276,7 @@ describe('ical-generator Calendar', function () {
 
         it('should not require optional parameters', function () {
             assert.doesNotThrow(function () {
-                ical().createEvent({
+                new ICalCalendar().createEvent({
                     start: new Date(),
                     summary: 'Patch-Day'
                 });
@@ -286,7 +286,7 @@ describe('ical-generator Calendar', function () {
 
     describe('events()', function () {
         it('getter should return an array of events…', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.events().length, 0);
 
             const event = cal.createEvent();
@@ -295,7 +295,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('setter should add events and return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.length(), 0);
 
             const cal2 = cal.events([{summary: 'Event A'}, {summary: 'Event B'}]);
@@ -309,7 +309,7 @@ describe('ical-generator Calendar', function () {
             const path = require('path');
             const fs = require('fs');
             const file = path.join(__dirname, 'save.ical');
-            const cal = ical();
+            const cal = new ICalCalendar();
 
             assert.deepEqual(cal, cal.save(file, function () {
                 /*jslint stupid: true */
@@ -327,7 +327,7 @@ describe('ical-generator Calendar', function () {
         it('should throw error when event invalid', function () {
             const path = require('path');
             const file = path.join(__dirname, 'save.ical');
-            const cal = ical();
+            const cal = new ICalCalendar();
 
             cal.createEvent();
 
@@ -342,7 +342,7 @@ describe('ical-generator Calendar', function () {
             const fs = require('fs');
             const path = require('path');
             const file = path.join(__dirname, 'save_sync.ical');
-            const cal = ical();
+            const cal = new ICalCalendar();
 
             /*jslint stupid: true */
             cal.saveSync(file);
@@ -357,7 +357,7 @@ describe('ical-generator Calendar', function () {
         it('should throw error when event invalid', function () {
             const path = require('path');
             const file = path.join(__dirname, 'save_sync.ical');
-            const cal = ical();
+            const cal = new ICalCalendar();
 
             cal.createEvent();
 
@@ -372,7 +372,7 @@ describe('ical-generator Calendar', function () {
         it('should work', function (done) {
             const portfinder = require('portfinder');
             const http = require('http');
-            const cal = ical();
+            const cal = new ICalCalendar();
 
             cal.createEvent({
                 start: new Date(),
@@ -395,8 +395,16 @@ describe('ical-generator Calendar', function () {
                         const req = http.request({port}, function (res) {
                             let file = '';
 
-                            assert.equal(res.headers['content-type'], 'text/calendar; charset=utf-8', 'Header: text/calendar; charset=utf-8');
-                            assert.equal(res.headers['content-disposition'], 'attachment; filename="calendar.ics"', 'Content-Disposition');
+                            assert.equal(
+                                res.headers['content-type'],
+                                'text/calendar; charset=utf-8',
+                                'Header: text/calendar; charset=utf-8'
+                            );
+                            assert.equal(
+                                res.headers['content-disposition'],
+                                'attachment; filename="calendar.ics"',
+                                'Content-Disposition'
+                            );
 
                             res.setEncoding('utf8');
                             res.on('data', function (chunk) {
@@ -428,7 +436,7 @@ describe('ical-generator Calendar', function () {
 
     describe('toJSON()', function () {
         it('should work', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.ok(cal.toJSON().prodId.length > 0);
             assert.equal(cal.toJSON().events.length, 0);
         });
@@ -436,7 +444,7 @@ describe('ical-generator Calendar', function () {
 
     describe('length()', function () {
         it('should work', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             assert.equal(cal.length(), 0);
 
             cal.createEvent({
@@ -450,7 +458,7 @@ describe('ical-generator Calendar', function () {
 
     describe('clear()', function () {
         it('should work and return this', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal.createEvent({
                 start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
@@ -465,39 +473,39 @@ describe('ical-generator Calendar', function () {
 
     describe('_generate()', function () {
         it('should include the URL', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.url = 'https://sebbo.net/foo';
             assert.ok(cal.toString().indexOf('URL:https://sebbo.net/foo') > -1);
         });
 
         it('should include the method', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.method = 'TEST';
             assert.ok(cal.toString().indexOf('METHOD:TEST') > -1);
         });
 
         it('should include the name', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.name = 'TEST';
             assert.ok(cal.toString().indexOf('NAME:TEST') > -1);
             assert.ok(cal.toString().indexOf('X-WR-CALNAME:TEST') > -1);
         });
 
         it('should include the description', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.description = 'TEST';
             assert.ok(cal.toString().indexOf('X-WR-CALDESC:TEST') > -1);
         });
 
         it('should include the timezone', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.timezone = 'TEST';
             assert.ok(cal.toString().indexOf('TIMEZONE-ID:TEST') > -1);
             assert.ok(cal.toString().indexOf('X-WR-TIMEZONE:TEST') > -1);
         });
 
         it('should include the timezone', function () {
-            const cal = ical();
+            const cal = new ICalCalendar();
             cal._data.ttl = moment.duration(3, 'days');
             assert.ok(cal.toString().indexOf('REFRESH-INTERVAL;VALUE=DURATION:P3D') > -1);
             assert.ok(cal.toString().indexOf('X-PUBLISHED-TTL:P3D') > -1);
