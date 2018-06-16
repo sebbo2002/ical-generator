@@ -44,6 +44,5 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"
-  },
-  "version": "0.3.0-dev"
+  }
 }
