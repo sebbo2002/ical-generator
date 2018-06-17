@@ -1,5 +1,7 @@
 /// <reference types="node" />
 
+import * as moment from 'moment';
+
 declare module 'ical-generator' {
   /**
    * Tool for generating iCal calendar data
@@ -12,8 +14,9 @@ declare module 'ical-generator' {
     type repeatingFreq = 'SECONDLY' | 'MINUTELY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
     type status = 'CONFIRMED' | 'TENTATIVE' | 'CANCELLED';
     type day = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
-    type attendeeRole = 'REQ-PARTICIPANT' | 'NON-PARTICIPANT';
+    type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT_PARTICIPANT' | 'NON-PARTICIPANT';
     type attendeeStatus = 'ACCEPTED' | 'TENTATIVE'| 'DECLINED'| 'DELEGATED';
+    type attendeeRsvp = 'true' | 'false'| true| false;
     type attendeeType = 'INDIVIDUAL'| 'GROUP'| 'RESOURCE'| 'ROOM'| 'UNKNOWN';
     type alarmType = 'display' | 'audio';
 
@@ -48,12 +51,12 @@ declare module 'ical-generator' {
      * Information used to create calendar events
      */
     interface EventData {
-      start: Date;
+      start: moment;
       summary: string;
       id?: string;
       uid?: string;
-      end?: Date;
-      stamp?: Date;
+      end?: moment.Moment | Date;
+      stamp?: moment.Moment | Date;
       description?: string;
       location?: string;
       url?: string;
@@ -73,12 +76,12 @@ declare module 'ical-generator' {
       freq: repeatingFreq;
       count?: number;
       interval?: number;
-      until?: string | Date;
+      until?: string | moment.Moment | Date;
       byDay?: day[];
       byMonth?: number[];
       byMonthDay?: number[];
       bySetPos?: number;
-      exclude?: Date[];
+      exclude?: moment.Moment[] | Date[];
     }
 
     /**
@@ -106,9 +109,9 @@ declare module 'ical-generator' {
 
     interface AlarmData {
       type?: alarmType;
-      trigger?: number | Date;
-      triggerBefore?: number | Date;
-      triggerAfter?: number | Date;
+      trigger?: number | moment.Moment | Date;
+      triggerBefore?: number | moment.Moment | Date;
+      triggerAfter?: number | moment.Moment | Date;
       repeat?: number;
       interval?: number;
       attach?: string | Attachment;
@@ -156,14 +159,14 @@ declare module 'ical-generator' {
       uid(id: string): ICalEvent;
       sequence(): number;
       sequence(sequence: number): ICalEvent;
-      start(): Date;
-      start(start: string | Date): ICalEvent;
-      end(): Date;
-      end(end: string | Date): ICalEvent;
+      start(): moment.Moment;
+      start(start: string | moment.Moment |  Date): ICalEvent;
+      end(): moment.Moment;
+      end(end: string | moment.Moment | Date): ICalEvent;
       timezone(): string;
       timezone(timezone: string): ICalEvent;
-      stamp(): Date;
-      stamp(stamp: string | Date): ICalEvent;
+      stamp(): moment.Moment;
+      stamp(stamp: string | moment.Moment | Date): ICalEvent;
       allDay(): boolean;
       allDay(allDay: boolean): ICalEvent;
       floating(): boolean;
@@ -203,6 +206,8 @@ declare module 'ical-generator' {
       email(email: string): ICalAttendee;
       role(): attendeeRole;
       role(role: attendeeRole): ICalAttendee;
+      rsvp(): attendeeRsvp;
+      rsvp(rsvp: attendeeRsvp): ICalAttendee;
       status(): attendeeStatus;
       status(status: attendeeStatus): ICalAttendee;
       type(): attendeeType;
@@ -220,12 +225,12 @@ declare module 'ical-generator' {
       constructor(data: AlarmData);
       type(): alarmType;
       type(type: alarmType): ICalAlarm;
-      trigger(): number | Date;
-      trigger(delay: number | Date | null): ICalAlarm;
-      triggerAfter(): number | Date;
-      triggerAfter(delay: number | Date): ICalAlarm;
-      triggerBefore(): number | Date;
-      triggerBefore(delay: number | Date): ICalAlarm;
+      trigger(): number | moment.Moment;
+      trigger(delay: number | moment.Moment | Date | null): ICalAlarm;
+      triggerAfter(): number | moment.Moment;
+      triggerAfter(delay: number | moment.Moment | Date): ICalAlarm;
+      triggerBefore(): number | moment.Moment;
+      triggerBefore(delay: number | moment.Moment | Date): ICalAlarm;
       repeat(): number;
       repeat(times: number): ICalAlarm;
       interval(): number;

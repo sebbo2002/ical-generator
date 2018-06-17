@@ -139,9 +139,16 @@ class ICalAttendee {
         if (rsvp === undefined) {
             return this._data.rsvp;
         }
-        if (!rsvp) {
+        if (rsvp === null) {
             this._data.rsvp = null;
             return this;
+        }
+
+        if(rsvp === true) {
+            rsvp = 'true';
+        }
+        if(rsvp === false) {
+            rsvp = 'false';
         }
 
         this._data.rsvp = this._getAllowedStringFor('rsvp', rsvp);
