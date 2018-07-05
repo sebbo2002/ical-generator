@@ -101,3 +101,18 @@ publish_npm_next:
     - npm publish --tag "next"
   only:
     - develop
+
+publish_npm:
+  stage: publish
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
+    - yarn install
+    - npm run bump:production
+    - npm run build
+    - echo $(cat ./package.json | jq '.version' -rce)
+    - npm publish
+  only:
+    - master
