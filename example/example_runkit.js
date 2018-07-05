@@ -1,4 +1,4 @@
-var ical = require('../lib/ical-generator'),
+var ical = require('ical-generator'),
     cal = ical({domain: 'localhost'}),
     event;
 
@@ -17,4 +17,4 @@ event = cal.createEvent({
 // update event's description
 event.description('It still works ;)');
 
-console.log(cal.toString());
+cal.toString();

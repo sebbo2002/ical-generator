@@ -43,7 +43,7 @@
     "bump:reset": "export MODULEVERSION=$(npm view ical-generator version) && npm run bump:reset:save",
     "bump:reset:next": "export MODULEVERSION=$(npm view ical-generator@next version) && npm run bump:reset:save",
     "bump:reset:save": "echo $MODULEVERSION && npm --no-git-tag-version version ${MODULEVERSION}",
-    "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version prerelease",
+    "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version ${DEVELOP_BUMP:-prepatch}",
     "bump:production": "npm run bump:reset && npm --no-git-tag-version version from-git"
   },
   "preferGlobal": false,
@@ -52,5 +52,6 @@
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"
   },
-  "typings": "index.d.ts"
+  "typings": "index.d.ts",
+  "runkitExampleFilename": "example/example_runkit.js"
 }

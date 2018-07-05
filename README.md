@@ -13,15 +13,6 @@ calendar feeds.
 	npm install ical-generator
 
 
-## Upgrade from 0.1.x
-
-ical-generator 0.2.0 introduces a completely new API, but because you guys used 0.1.x a lot, the old API still works. So
-you should be able to upgrade from ical-generator 0.1.x to 0.2.0 without any code changes. In case you need the old API
-docs, you can find the deprecated documentation [here](https://github.com/sebbo2002/ical-generator/blob/0.1.10/README.md).
-
-In case you have any issues with the new API, feel free to [create an issue](https://github.com/sebbo2002/ical-generator/issues/new).
-
-
 ## Quick Start
 
 ```javascript
@@ -99,7 +90,6 @@ cal = ical({
     ]
 }).toString();
 ```
-
 
 
 ## API
@@ -447,6 +437,38 @@ cal.alarms([
 cal.attendees(); // --> [ICalAlarm, ICalAlarm]
 ```
 
+#### createCategory([_Object_ options])
+
+Creates a new [Category](#category) ([`ICalCategory`](#category)) and returns it. Use options to prefill the categories' attributes.
+Calling this method without options will create an empty category.
+
+```javascript
+var ical = require('ical-generator'),
+    cal = ical(),
+    event = cal.createEvent(),
+    category = event.createCategory({name: 'APPOINTMENT'});
+
+// add another alarm
+event.createCategory({
+    name: 'MEETING'
+});
+```
+
+
+#### categories([_Object_ categories])
+
+Add categories to the event or return all selected categories.
+
+```javascript
+var event = ical().createEvent();
+cal.categories([
+    {name: 'APPOINTMENT'},
+    {name: 'MEETING'}
+]);
+
+cal.categories(); // --> [ICalCategory, ICalCategory]
+```
+
 
 #### url([_String_ url])
 
@@ -523,7 +545,6 @@ var cal = ical(),
 
 attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 ```
-
 
 
 ### Alarm
@@ -621,6 +642,11 @@ event.createAlarm({
 Alarm description; used to set the alarm message if type = display. Defaults to the event's summary.
 
 
+### Category
+
+#### name([_String_ name])
+
+Use this method to set the category name.
 
 
 ## Tests
@@ -628,6 +654,22 @@ Alarm description; used to set the alarm message if type = display. Defaults to 
 ```
 npm test
 ```
+
+
+## FAQ
+
+### Waht's `Error: Can't resolve 'fs'`?
+`ical-generator` uses the node.js `fs` module to save your calendar on the filesystem. In browser environments, you usually don't need this, so if you pass `null` for fs in your bundler. In webpack this looks like this:
+
+```json
+{
+  node: {
+    fs: 'empty'
+  }
+}
+```
+
+Thanks @rally25rs for this [tip](https://github.com/sebbo2002/ical-generator/issues/64#issuecomment-344637582).
 
 
 ## Copyright and license
