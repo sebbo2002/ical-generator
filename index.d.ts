@@ -118,6 +118,10 @@ declare module 'ical-generator' {
       description?: string;
     }
 
+    interface CategoryData {
+      name: string;
+    }
+
     /**
      * The calendar object containing all event data
      */
@@ -189,6 +193,9 @@ declare module 'ical-generator' {
       createAlarm(alarmData: AlarmData): ICalAlarm;
       alarms(): ICalAlarm[];
       alarms(alarms: AlarmData[]): ICalEvent;
+      createCategory(categoryData: CategoryData): ICalCategory;
+      categories(): ICalCategory[];
+      categories(categories: CategoryData[]): ICalEvent;
       method(): method;
       method(method: method): ICalEvent;
       status(): status;
@@ -240,6 +247,13 @@ declare module 'ical-generator' {
       description(): string;
       description(description: string): ICalAlarm;
       toJSON(): AlarmData;
+    }
+
+    class ICalCategory {
+      constructor(data: CalendarData);
+      name(): string;
+      name(name: string): ICalCategory;
+      toJSON(): CalendarData;
     }
   }
   export = ICalGenerator;
