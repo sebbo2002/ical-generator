@@ -5,6 +5,7 @@ const moment = require('moment-timezone');
 const ICalTools = require('./_tools');
 const ICalAttendee = require('./attendee');
 const ICalAlarm = require('./alarm');
+const ICalCategory = require('./category');
 
 
 /**
@@ -30,6 +31,7 @@ class ICalEvent {
             organizer: null,
             attendees: [],
             alarms: [],
+            categories: [],
             status: null,
             url: null,
             created: null,
@@ -54,6 +56,7 @@ class ICalEvent {
             'organizer',
             'attendees',
             'alarms',
+            'categories',
             'status',
             'url',
             'created',
@@ -566,7 +569,7 @@ class ICalEvent {
                 'stringobject-organizer'
             );
         }
-        else if(!organizer) {
+        else if (!organizer) {
             throw new Error(
                 '`organizer` needs to be a valid formed string or an object. See https://github.com/sebbo2002/ical-' +
                 'generator#organizerstringobject-organizer'
@@ -601,7 +604,7 @@ class ICalEvent {
         const attendeeRegEx = /^(.+) ?<([^>]+)>$/;
         let attendee;
 
-        if(_attendeeData instanceof ICalAttendee) {
+        if (_attendeeData instanceof ICalAttendee) {
             this._data.attendees.push(_attendeeData);
             return _attendeeData;
         }
@@ -682,6 +685,42 @@ class ICalEvent {
         const cal = this;
         alarms.forEach(function (e) {
             cal.createAlarm(e);
+        });
+
+        return cal;
+    }
+
+
+    /**
+     * Create a new categorie and return the category object…
+     *
+     * @param {object} [categoryData] Category-Options
+     * @since 0.3.0
+     * @returns {ICalCategory}
+     */
+    createCategory(categoryData) {
+        const category = new ICalCategory(categoryData, this);
+
+        this._data.categories.push(category);
+        return category;
+    }
+
+
+    /**
+     * Get all categories or add categories…
+     *
+     * @param {Array<Object>} [categorie]
+     * @since 0.3.0
+     * @returns {ICalCategories[]|ICalEvent}
+     */
+    categories(categories) {
+        if (!categories) {
+            return this._data.categories;
+        }
+
+        const cal = this;
+        categories.forEach(function (e) {
+            cal.createCategory(e);
         });
 
         return cal;
@@ -897,6 +936,11 @@ class ICalEvent {
             g += alarm._generate();
         });
 
+        // CATEGORIES
+        this._data.categories.forEach(function (category) {
+            g += category._generate();
+        });
+
         // URL
         if (this._data.url) {
             g += 'URL;VALUE=URI:' + ICalTools.escape(this._data.url) + '\r\n';
@@ -908,12 +952,12 @@ class ICalEvent {
         }
 
         // CREATED
-        if(this._data.created) {
+        if (this._data.created) {
             g += 'CREATED:' + ICalTools.formatDate(this._calendar.timezone(), this._data.created) + '\r\n';
         }
 
         // LAST-MODIFIED
-        if(this._data.lastModified) {
+        if (this._data.lastModified) {
             g += 'LAST-MODIFIED:' + ICalTools.formatDate(this._calendar.timezone(), this._data.lastModified) + '\r\n';
         }
 
