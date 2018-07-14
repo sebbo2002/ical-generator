@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<title>ical-generator | Browser Test</title>
+<link href="./mocha.css" rel="stylesheet" />
+<div id="mocha"></div>
+
+<script src="./jquery.min.js"></script>
+<script src="./mocha.js"></script>
+<script src="./moment.js"></script>
+
+<script>mocha.setup('bdd')</script>
+<script src="./tests.js"></script>
+
+<script>
+    mocha.checkLeaks();
+    mocha.globals([]);
+    mocha.run();
+</script>
+</body>
+</html>

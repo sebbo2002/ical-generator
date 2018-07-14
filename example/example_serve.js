@@ -1,14 +1,16 @@
 'use strict';
 
-var ical = require('../lib/'),
-    http = require('http'),
-    cal = ical({
+const ical = require('../src');
+const moment = require('moment');
+const http = require('http');
+
+const cal = ical({
         domain: 'sebbo.net',
         prodId: '//superman-industries.com//ical-generator//EN',
         events: [
             {
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
+                start: moment(),
+                end: moment().add(1, 'hour'),
                 summary: 'Example Event',
                 description: 'It works ;)',
                 url: 'http://sebbo.net/'

@@ -12,5 +12,8 @@ LOCATION:localhost
 DESCRIPTION:Lorem ipsum dolor sit amet\, consetetur sadipscing elitr\, sed
   diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam era
  t\, sed diam voluptua.\nbeep boop
+X-ALT-DESC;FMTTYPE=text/html:<p>Lorem ipsum dolor sit amet\, consetetur sa
+ dipscing elitr\, sed diam nonumy eirmod tempor invidunt ut labore et dolor
+ e magna aliquyam erat\, sed diam voluptua.\nbeep boop</p>
 END:VEVENT
 END:VCALENDAR

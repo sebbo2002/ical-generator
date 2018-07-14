@@ -13,15 +13,6 @@ calendar feeds.
 	npm install ical-generator
 
 
-## Upgrade from 0.1.x
-
-ical-generator 0.2.0 introduces a completely new API, but because you guys used 0.1.x a lot, the old API still works. So
-you should be able to upgrade from ical-generator 0.1.x to 0.2.0 without any code changes. In case you need the old API
-docs, you can find the deprecated documentation [here](https://github.com/sebbo2002/ical-generator/blob/0.1.10/README.md).
-
-In case you have any issues with the new API, feel free to [create an issue](https://github.com/sebbo2002/ical-generator/issues/new).
-
-
 ## Quick Start
 
 ```javascript
@@ -99,7 +90,6 @@ cal = ical({
     ]
 }).toString();
 ```
-
 
 
 ## API
@@ -187,7 +177,7 @@ Calendar method. May be any of the following: `publish`, `request`, `reply`, `ad
 
 #### ttl([_Number_ ttl])
 
-Use this method to set your feed's time to live. Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
+Use this method to set your feed's time to live (in seconds). Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
 
 ```javascript
 var cal = ical().ttl(60 * 60 * 24);
@@ -255,7 +245,7 @@ Return a shallow copy of the calendar's options for JSON stringification. Can be
 ```javascript
 var cal = ical(),
     json = JSON.stringify(cal);
-    
+
 // later
 cal = ical(json);
 ```
@@ -356,7 +346,7 @@ Appointment description
 
 #### htmlDescription([_String_ htmlDescription])
 
-Some calendar apps may support HTML descriptions. Like in emails, supported HTML tags and styling is limited. 
+Some calendar apps may support HTML descriptions. Like in emails, supported HTML tags and styling is limited.
 
 
 #### location([_String_ location])
@@ -447,6 +437,38 @@ cal.alarms([
 cal.attendees(); // --> [ICalAlarm, ICalAlarm]
 ```
 
+#### createCategory([_Object_ options])
+
+Creates a new [Category](#category) ([`ICalCategory`](#category)) and returns it. Use options to prefill the categories' attributes.
+Calling this method without options will create an empty category.
+
+```javascript
+var ical = require('ical-generator'),
+    cal = ical(),
+    event = cal.createEvent(),
+    category = event.createCategory({name: 'APPOINTMENT'});
+
+// add another alarm
+event.createCategory({
+    name: 'MEETING'
+});
+```
+
+
+#### categories([_Object_ categories])
+
+Add categories to the event or return all selected categories.
+
+```javascript
+var event = ical().createEvent();
+cal.categories([
+    {name: 'APPOINTMENT'},
+    {name: 'MEETING'}
+]);
+
+cal.categories(); // --> [ICalCategory, ICalCategory]
+```
+
 
 #### url([_String_ url])
 
@@ -455,8 +477,17 @@ Appointment URL
 
 #### status([_String_ status])
 
-Appointment status. May be any of the following: `confirmed`, `tenative`, `cancelled`.
+Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
+
+#### created([_Date_ created])
+
+Date object of the time the appointment was created.
+
+
+#### lastModified([_Date_ lastModified])
+
+Date object of the time the appointent was modified last.
 
 
 ### Attendee
@@ -470,15 +501,18 @@ Use this method to set the attendee's name.
 
 The attendee's email address. An email address is required for every attendee!
 
+#### rsvp([_String_ rsvp])
+
+Set the attendee's RSVP expectation. May be one of the following: `true`, `false`
 
 #### role([_String_ role])
 
-Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: `req-participant`, `non-participant`
+Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the following: `chair`, `req-participant`, `opt-participant`, `non-participant`
 
 
 #### status([_String_ status])
 
-Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`
+Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`, `needs-action` (See [Section 4.2.12](https://tools.ietf.org/html/rfc2445#section-4.2.12))
 
 
 #### type([_String_ type])
@@ -511,7 +545,6 @@ var cal = ical(),
 
 attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 ```
-
 
 
 ### Alarm
@@ -609,6 +642,11 @@ event.createAlarm({
 Alarm description; used to set the alarm message if type = display. Defaults to the event's summary.
 
 
+### Category
+
+#### name([_String_ name])
+
+Use this method to set the category name.
 
 
 ## Tests
@@ -616,6 +654,22 @@ Alarm description; used to set the alarm message if type = display. Defaults to 
 ```
 npm test
 ```
+
+
+## FAQ
+
+### Waht's `Error: Can't resolve 'fs'`?
+`ical-generator` uses the node.js `fs` module to save your calendar on the filesystem. In browser environments, you usually don't need this, so if you pass `null` for fs in your bundler. In webpack this looks like this:
+
+```json
+{
+  "node": {
+    "fs": "empty"
+  }
+}
+```
+
+Thanks @rally25rs for this [tip](https://github.com/sebbo2002/ical-generator/issues/64#issuecomment-344637582).
 
 
 ## Copyright and license

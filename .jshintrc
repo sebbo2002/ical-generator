@@ -1,6 +1,0 @@
-{
-  "maxerr": 50,
-  "quotmark": "single",
-  "node": true,
-  "mocha": true
-}
