@@ -16,16 +16,16 @@ calendar feeds.
 ## Quick Start
 
 ```javascript
-var ical = require('ical-generator'),
-	http = require('http'),
-	cal = ical({domain: 'github.com', name: 'my first iCal'});
+const ical = require('ical-generator');
+const http = require('http');
+const cal = ical({domain: 'github.com', name: 'my first iCal'});
 
 // overwrite domain
 cal.domain('sebbo.net');
 
 cal.createEvent({
-	start: new Date(),
-	end: new Date(new Date().getTime() + 3600000),
+	start: moment(),
+	end: moment().add(1, 'hour'),
 	summary: 'Example Event',
 	description: 'It works ;)',
 	location: 'my room',
@@ -43,15 +43,15 @@ http.createServer(function(req, res) {
 ## Just another example
 
 ```javascript
-var ical = require('ical-generator'),
+const ical = require('ical-generator');
 
-    // Create new Calendar and set optional fields
-    cal = ical({
-        domain: 'sebbo.net',
-        prodId: {company: 'superman-industries.com', product: 'ical-generator'},
-        name: 'My Testfeed',
-        timezone: 'Europe/Berlin'
-    });
+// Create new Calendar and set optional fields
+const cal = ical({
+    domain: 'sebbo.net',
+    prodId: {company: 'superman-industries.com', product: 'ical-generator'},
+    name: 'My Testfeed',
+    timezone: 'Europe/Berlin'
+});
 
 // You can also set values like this…
 cal.domain('sebbo.net');
@@ -60,10 +60,10 @@ cal.domain('sebbo.net');
 cal.domain(); // --> "sebbo.net"
 
 // create a new event
-var event = cal.createEvent({
-    start: new Date(),
-    end: new Date(new Date().getTime() + 3600000),
-    timestamp: new Date(),
+const event = cal.createEvent({
+    start: moment(),
+    end: moment().add(1, 'hour'),
+    timestamp: moment(),
     summary: 'My Event',
     organizer: 'Sebastian Pekarek <mail@example.com>'
 });
@@ -76,14 +76,14 @@ cal.toString(); // --> "BEGIN:VCALENDAR…"
 
 
 // You can also create events directly with ical()
-cal = ical({
+ical({
     domain: 'sebbo.net',
     prodId: '//superman-industries.com//ical-generator//EN',
     events: [
         {
-            start: new Date(),
-            end: new Date(new Date().getTime() + 3600000),
-            timestamp: new Date(),
+            start: moment(),
+            end: moment().add(1, 'hour'),
+            timestamp: moment(),
             summary: 'My Event',
             organizer: 'Sebastian Pekarek <mail@example.com>'
         }
@@ -101,23 +101,23 @@ cal = ical({
 Creates a new [Calendar](#calendar) ([`ICalCalendar`](#calendar)).
 
 ```javascript
-var ical = require('ical-generator'),
-    cal = ical();
+const ical = require('ical-generator');
+const cal = ical();
 ```
 
 You can pass options to setup your calendar or use setters to do this.
 
 ```javascript
-var ical = require('ical-generator'),
-    cal = ical({domain: 'sebbo.net'});
+const ical = require('ical-generator');
+const cal = ical({domain: 'sebbo.net'});
 
 // is the same as
 
-cal = ical().domain('sebbo.net');
+const cal = ical().domain('sebbo.net');
 
 // is the same as
 
-cal = ical();
+const cal = ical();
 cal.domain('sebbo.net');
 ```
 
@@ -158,7 +158,7 @@ Use this method to set your feed's name. Is used to fill `NAME` and `X-WR-CALNAM
 Use this method to set your feed's URL.
 
 ```javascript
-var cal = ical().url('https://example.com/calendar.ical');
+const cal = ical().url('https://example.com/calendar.ical');
 ```
 
 
@@ -167,7 +167,7 @@ var cal = ical().url('https://example.com/calendar.ical');
 Use this method to set your feed's timezone. Is used to fill `TIMEZONE-ID` and `X-WR-TIMEZONE` in your iCal.
 
 ```javascript
-var cal = ical().timezone('Europe/Berlin');
+const cal = ical().timezone('Europe/Berlin');
 ```
 
 #### method([_String_ method])
@@ -180,7 +180,7 @@ Calendar method. May be any of the following: `publish`, `request`, `reply`, `ad
 Use this method to set your feed's time to live (in seconds). Is used to fill `REFRESH-INTERVAL` and `X-PUBLISHED-TTL` in your iCal.
 
 ```javascript
-var cal = ical().ttl(60 * 60 * 24);
+const cal = ical().ttl(60 * 60 * 24);
 ```
 
 
@@ -190,9 +190,9 @@ Creates a new [Event](#event) ([`ICalEvent`](#event)) and returns it. Use option
 Calling this method without options will create an empty event.
 
 ```javascript
-var ical = require('ical-generator'),
-    cal = ical(),
-    event = cal.createEvent({summary: 'My Event'});
+const ical = require('ical-generator');
+const cal = ical();
+const event = cal.createEvent({summary: 'My Event'});
 
 // overwrite event summary
 event.summary('Your Event');
@@ -204,7 +204,8 @@ event.summary('Your Event');
 Add Events to calendar or return all attached events.
 
 ```javascript
-var cal = ical();
+const cal = ical();
+
 cal.events([
     {
         start: new Date(),
@@ -221,17 +222,22 @@ cal.events(); // --> [ICalEvent]
 
 #### save(**_String_ file**[, _Function_ cb])
 
-Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback).
+Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback). Woun't work in browsers.
 
 
 #### saveSync(**_String_ file**)
 
-Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options).
+Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options). Woun't work in browsers.
 
 
 #### serve(**_http.ServerResponse_ response**)
 
-Send Calendar to the User when using HTTP. See Quick Start above.
+Send Calendar to the User when using HTTP. See Quick Start above. Woun't work in browsers.
+
+
+#### toURL()
+
+Returns a download URL using the Blob. Only supported in browsers supporting this API.
 
 
 #### toString()
@@ -243,8 +249,8 @@ Return Calendar as a String.
 
 Return a shallow copy of the calendar's options for JSON stringification. Can be used for persistance.
 ```javascript
-var cal = ical(),
-    json = JSON.stringify(cal);
+const cal = ical();
+const json = JSON.stringify(cal);
 
 // later
 cal = ical(json);
@@ -274,12 +280,12 @@ Use this method to set the event's revision sequence number of the
 calendar component within a sequence of revisions.
 
 
-#### start([_Date_ start])
+#### start([_moment_|_Date_ start])
 
 Appointment date of beginning as Date object. This is required for all events!
 
 
-#### end([_Date_ end])
+#### end([_moment_|_Date_ end])
 
 Appointment date of end as Date object.
 
@@ -291,7 +297,7 @@ Use this method to set your event's timezone using the TZID property parameter o
 This and the 'floating' flag (see below) are mutually exclusive, and setting a timezone will unset the 'floating' flag.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format (see [date-time form #2 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5)).
 
 
-#### timestamp([_Date_ stamp]) or stamp([_Date_ stamp])
+#### timestamp([_moment_|_Date_ stamp]) or stamp([_moment_|_Date_ stamp])
 
 Appointment date of creation as Date object. Default to `new Date()`.
 
@@ -376,10 +382,10 @@ Creates a new [Attendee](#attendee) ([`ICalAttendee`](#attendee)) and returns it
 Calling this method without options will create an empty attendee.
 
 ```javascript
-var ical = require('ical-generator'),
-    cal = ical(),
-    event = cal.createEvent(),
-    attendee = event.createAttendee({email: 'hui@example.com', 'name': 'Hui'});
+const ical = require('ical-generator');
+const cal = ical();
+const event = cal.createEvent();
+const attendee = event.createAttendee({email: 'hui@example.com', 'name': 'Hui'});
 
 // overwrite attendee's email address
 attendee.email('hui@example.net');
@@ -394,7 +400,8 @@ event.createAttendee('Buh <buh@example.net>');
 Add Attendees to the event or return all attached attendees.
 
 ```javascript
-var event = ical().createEvent();
+const event = ical().createEvent();
+
 cal.attendees([
     {email: 'a@example.com', name: 'Person A'},
     {email: 'b@example.com', name: 'Person B'}
@@ -410,10 +417,10 @@ Creates a new [Alarm](#alarm) ([`ICalAlarm`](#alarm)) and returns it. Use option
 Calling this method without options will create an empty alarm.
 
 ```javascript
-var ical = require('ical-generator'),
-    cal = ical(),
-    event = cal.createEvent(),
-    alarm = event.createAlarm({type: 'display', trigger: 300});
+const ical = require('ical-generator');
+const cal = ical();
+const event = cal.createEvent();
+const alarm = event.createAlarm({type: 'display', trigger: 300});
 
 // add another alarm
 event.createAlarm({
@@ -428,7 +435,8 @@ event.createAlarm({
 Add alarms to the event or return all attached alarms.
 
 ```javascript
-var event = ical().createEvent();
+const event = ical().createEvent();
+
 cal.alarms([
     {type: 'display', trigger: 600},
     {type: 'audio', trigger: 300}
@@ -443,10 +451,10 @@ Creates a new [Category](#category) ([`ICalCategory`](#category)) and returns it
 Calling this method without options will create an empty category.
 
 ```javascript
-var ical = require('ical-generator'),
-    cal = ical(),
-    event = cal.createEvent(),
-    category = event.createCategory({name: 'APPOINTMENT'});
+const ical = require('ical-generator');
+const cal = ical();
+const event = cal.createEvent();
+const category = event.createCategory({name: 'APPOINTMENT'});
 
 // add another alarm
 event.createCategory({
@@ -460,7 +468,8 @@ event.createCategory({
 Add categories to the event or return all selected categories.
 
 ```javascript
-var event = ical().createEvent();
+const event = ical().createEvent();
+
 cal.categories([
     {name: 'APPOINTMENT'},
     {name: 'MEETING'}
@@ -480,12 +489,12 @@ Appointment URL
 Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
 
-#### created([_Date_ created])
+#### created([_moment_|_Date_ created])
 
 Date object of the time the appointment was created.
 
 
-#### lastModified([_Date_ lastModified])
+#### lastModified([_moment_|_Date_ lastModified])
 
 Date object of the time the appointent was modified last.
 
@@ -526,9 +535,9 @@ Set the attendee's type. May be one of the following: `individual`, `group`, `re
 Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
-    attendee = cal.createAttendee();
+const cal = ical();
+const event = cal.createEvent();
+const attendee = cal.createAttendee();
 
 attendee.delegatesTo({email: 'foo@bar.com', name: 'Foo'});
 ```
@@ -539,9 +548,9 @@ attendee.delegatesTo({email: 'foo@bar.com', name: 'Foo'});
 Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
-    attendee = cal.createAttendee();
+const cal = ical();
+const event = cal.createEvent();
+const attendee = cal.createAttendee();
 
 attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 ```
@@ -554,28 +563,28 @@ attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 Use this method to set the alarm type. Right now, `audio` and `display` is supported.
 
 
-#### trigger([_Number_|_Date_ trigger]) / triggerBefore([_Number_|_Date_ trigger])
+#### trigger([_Number_|_moment_|_Date_ trigger]) / triggerBefore([_Number_|_moment_|_Date_ trigger])
 
 Use this method to set the alarm time.
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
-    alarm = cal.createAlarm();
+const cal = ical();
+const event = cal.createEvent();
+const alarm = cal.createAlarm();
 
 alarm.trigger(600); // -> 10 minutes before event starts
 alarm.trigger(new Date()); // -> now
 ```
 
 
-#### triggerAfter([_Number_|_Date_ trigger])
+#### triggerAfter([_Number_|_moment_|_Date_ trigger])
 
 Use this method to set the alarm time.
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
-    alarm = cal.createAlarm();
+const cal = ical();
+const event = cal.createEvent();
+const alarm = cal.createAlarm();
 
 alarm.triggerAfter(600); // -> 10 minutes after the event finishes
 alarm.triggerAfter(new Date()); // -> now
@@ -587,8 +596,8 @@ alarm.triggerAfter(new Date()); // -> now
 Use this method to repeat the alarm.
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
+const cal = ical();
+const event = cal.createEvent();
 
 // repeat the alarm 4 times every 5 minutes…
 cal.createAlarm({
@@ -603,8 +612,8 @@ cal.createAlarm({
 Use this method to set the alarm's interval.
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
+const cal = ical();
+const event = cal.createEvent();
 
 // repeat the alarm 4 times every 5 minutes…
 cal.createAlarm({
@@ -619,8 +628,8 @@ cal.createAlarm({
 Alarm attachment; used to set the alarm sound if type = audio. Defaults to "Basso".
 
 ```javascript
-var cal = ical(),
-    event = cal.createEvent(),
+const cal = ical();
+const event = cal.createEvent();
 
 event.createAlarm({
     attach: 'https://example.com/notification.aud'
