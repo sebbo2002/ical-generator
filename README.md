@@ -663,8 +663,8 @@ npm test
 
 ```json
 {
-  node: {
-    fs: 'empty'
+  "node": {
+    "fs": "empty"
   }
 }
 ```
