@@ -2,12 +2,12 @@ const webpack = require('webpack');
 
 const config = {
     entry: {
-        'ical-generator': __dirname + '/src/index.js'
+        'tests': __dirname + '/src/tests.js'
     },
     mode: 'production',
     devtool: 'source-map',
     output: {
-        path: __dirname + '/lib',
+        path: __dirname + '/test-result/browser-test',
         filename: '[name].js',
         library: 'ical-generator',
         libraryTarget: 'umd',
@@ -23,6 +23,12 @@ const config = {
             }
         ]
     },
+    plugins: [
+        new webpack.NormalModuleReplacementPlugin(
+            /^moment-timezone/,
+            'moment-timezone/builds/moment-timezone-with-data'
+        )
+    ],
     externals: {
         moment: 'moment',
         fs : 'fs',
