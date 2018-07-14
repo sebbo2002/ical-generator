@@ -73,8 +73,12 @@ publish_github:
     - matt.sebbo.net
     - ssh
   script:
+    - git checkout $CI_COMMIT_REF_NAME
+    - git pull
     - git push --force "https://${GITHUB_AUTH}@github.com/sebbo2002/ical-generator.git" --all
     - git push --force "https://${GITHUB_AUTH}@github.com/sebbo2002/ical-generator.git" --tags
+  only:
+    - develop
 
 publish_plato:
   stage: publish
@@ -86,6 +90,8 @@ publish_plato:
     - npm run visualize
     - rm -rf /var/docker/static/ical-generator/plato/*
     - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
+  only:
+    - develop
 
 publish_npm_next:
   stage: publish
