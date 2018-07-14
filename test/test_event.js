@@ -1053,6 +1053,41 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('createCategory()', function () {
+        it('should return a ICalCategory instance', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            const ICalCategory = require('../src/category');
+
+            assert.ok(event.createCategory() instanceof ICalCategory);
+        });
+
+        it('should pass data to instance', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            const category = event.createCategory({name: 'foo'});
+
+            assert.equal(category._data.name, 'foo');
+        });
+    });
+
+    describe('categories()', function () {
+        it('getter should return an array of categories…', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            assert.equal(event.categories().length, 0);
+
+            const category = event.createCategory();
+            assert.equal(event.categories().length, 1);
+            assert.deepEqual(event.categories()[0], category);
+        });
+
+        it('setter should add category and return this', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            const foo = event.categories([{name: 'foo'}, {name: 'bar'}]);
+
+            assert.equal(event._data.categories.length, 2);
+            assert.deepEqual(foo, event);
+        });
+    });
+
     describe('status()', function () {
         it('getter should return value', function () {
             const event = new ICalEvent(null, new ICalCalendar());
@@ -1133,6 +1168,30 @@ describe('ical-generator Event', function () {
             assert.deepEqual(e, e.created(new Date()));
         });
 
+        it('setter should work with moment', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.created(moment());
+            assert.ok(moment.isMoment(e._data.created));
+        });
+
+        it('setter should work with Date', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.created(new Date());
+            assert.ok(moment.isMoment(e._data.created));
+        });
+
+        it('setter should work with String', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.created(moment().toJSON());
+            assert.ok(moment.isMoment(e._data.created));
+        });
+
+        it('setter should work with Number', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.created(new Date().getTime());
+            assert.ok(moment.isMoment(e._data.created));
+        });
+
         it('getter should return value', function () {
             const now = new Date();
             const e = new ICalEvent(null, new ICalCalendar()).created(now);
@@ -1151,6 +1210,30 @@ describe('ical-generator Event', function () {
         it('setter should return this', function () {
             const e = new ICalEvent(null, new ICalCalendar());
             assert.deepEqual(e, e.lastModified(new Date()));
+        });
+
+        it('setter should work with moment', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.lastModified(moment());
+            assert.ok(moment.isMoment(e._data.lastModified));
+        });
+
+        it('setter should work with Date', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.lastModified(new Date());
+            assert.ok(moment.isMoment(e._data.lastModified));
+        });
+
+        it('setter should work with String', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.lastModified(moment().toJSON());
+            assert.ok(moment.isMoment(e._data.lastModified));
+        });
+
+        it('setter should work with Number', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.lastModified(new Date().getTime());
+            assert.ok(moment.isMoment(e._data.lastModified));
         });
 
         it('getter should return value', function () {

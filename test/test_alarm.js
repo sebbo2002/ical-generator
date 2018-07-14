@@ -97,6 +97,37 @@ describe('ical-generator Alarm', function () {
             }, /`trigger`/);
         });
 
+        it('setter should work with null', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.trigger(60 * 10);
+            a.trigger(null);
+            assert.equal(a._data.trigger, null);
+        });
+
+        it('setter should work with date', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.trigger(new Date());
+            assert.ok(moment.isMoment(a._data.trigger));
+        });
+
+        it('setter should work with moment instance', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.trigger(moment());
+            assert.ok(moment.isMoment(a._data.trigger));
+        });
+
+        it('setter should work with moment.duration', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.trigger(moment.duration(2, 'minutes'));
+            assert.equal(a._data.trigger, -120);
+        });
+
+        it('setter should work with number', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.trigger(2 * 60);
+            assert.equal(a._data.trigger, -120);
+        });
+
         it('should change something', function () {
             const trigger = moment('2015-02-01T13:38:45.000Z');
 
@@ -120,7 +151,19 @@ describe('ical-generator Alarm', function () {
             assert.equal(a.trigger(), -300);
         });
 
-        it('should throw error when trigger not allowed', function () {
+        it('setter should work with moment.duration', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerAfter(moment.duration(2, 'minutes'));
+            assert.equal(a._data.trigger, -120);
+        });
+
+        it('setter should work with number', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerAfter(120);
+            assert.equal(a._data.trigger, 120);
+        });
+
+        it('setter should throw error when trigger not allowed', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             assert.throws(function () {
                 a.triggerAfter(Infinity);
@@ -140,6 +183,86 @@ describe('ical-generator Alarm', function () {
             assert.ok(a._generate().indexOf('TRIGGER;RELATED=END:PT10M') > -1);
 
             a.triggerAfter(trigger);
+            assert.ok(a._generate().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
+        });
+    });
+
+    describe('triggerBefore()', function () {
+        it('setter should return this', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            assert.deepEqual(a, a.triggerBefore(null));
+            assert.deepEqual(a, a.triggerBefore(60 * 10));
+        });
+
+        it('getter should return value', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            const now = new Date();
+
+            assert.equal(a.triggerBefore(), null);
+
+            a.trigger(300);
+            assert.equal(a.triggerBefore(), 300);
+
+            // Date
+            a.trigger(now);
+            assert.ok(a.triggerBefore().isSame(now));
+
+            // Null
+            a.trigger(null);
+            assert.equal(a.triggerBefore(), null);
+        });
+
+        it('should throw error when trigger not allowed', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            assert.throws(function () {
+                a.triggerBefore(Infinity);
+            }, /`trigger`/);
+            assert.throws(function () {
+                a.triggerBefore('hi');
+            }, /`trigger`/);
+            assert.throws(function () {
+                a.triggerBefore(true);
+            }, /`trigger`/);
+        });
+
+        it('setter should work with null', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerBefore(60 * 10);
+            a.triggerBefore(null);
+            assert.equal(a._data.trigger, null);
+        });
+
+        it('setter should work with date', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerBefore(new Date());
+            assert.ok(moment.isMoment(a._data.trigger));
+        });
+
+        it('setter should work with moment instance', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerBefore(moment());
+            assert.ok(moment.isMoment(a._data.trigger));
+        });
+
+        it('setter should work with moment.duration', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerBefore(moment.duration(2, 'minutes'));
+            assert.equal(a._data.trigger, -120);
+        });
+
+        it('setter should work with number', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.triggerBefore(2 * 60);
+            assert.equal(a._data.trigger, -120);
+        });
+
+        it('should change something', function () {
+            const trigger = moment('2015-02-01T13:38:45.000Z');
+
+            const a = new ICalAlarm({type: 'display', triggerBefore: 60 * 10}, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('TRIGGER:-PT10M') > -1);
+
+            a.triggerBefore(trigger);
             assert.ok(a._generate().indexOf('TRIGGER;VALUE=DATE-TIME:20150201T133845Z') > -1);
         });
     });
@@ -324,6 +447,19 @@ describe('ical-generator Alarm', function () {
             }, new ICalCalendar()));
 
             assert.ok(a._generate().indexOf('\r\nDESCRIPTION:Example Event') > -1);
+        });
+    });
+
+    describe('toJSON()', function () {
+        it('should work', function() {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            a.type('display');
+            a.triggerBefore(120);
+
+            assert.deepEqual(a.toJSON(), {
+                type: 'display',
+                trigger: 120
+            });
         });
     });
 

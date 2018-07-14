@@ -276,7 +276,9 @@ class ICalAlarm {
      * @returns {Object}
      */
     toJSON() {
-        return ICalTools.toJSON(this, this._attributes);
+        return ICalTools.toJSON(this, this._attributes, {
+            ignoreAttributes: ['triggerAfter', 'triggerBefore'],
+        });
     }
 
 

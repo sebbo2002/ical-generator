@@ -284,12 +284,8 @@ class ICalAttendee {
         return ICalTools.toJSON(this, this._attributes, {
             ignoreAttributes: ['delegatesTo', 'delegatesFrom'],
             hooks: {
-                delegatedTo: function (value) {
-                    return (value instanceof ICalAttendee ? value.email() : value);
-                },
-                delegatedFrom: function (value) {
-                    return (value instanceof ICalAttendee ? value.email() : value);
-                }
+                delegatedTo: value => value instanceof ICalAttendee ? value.email() : value,
+                delegatedFrom: value => value instanceof ICalAttendee ? value.email() : value
             }
         });
     }

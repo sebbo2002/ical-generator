@@ -897,7 +897,7 @@ class ICalEvent {
 
             // REPEATING EXCLUSION
             if (this._data.repeating.exclude) {
-                g += 'EXDATE:' + this._data.repeating.exclude.map(function (excludedDate) {
+                g += 'EXDATE:' + this._data.repeating.exclude.map(excludedDate => {
                     return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
                 }).join(',') + '\r\n';
             }

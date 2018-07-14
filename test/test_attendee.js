@@ -98,6 +98,16 @@ describe('ical-generator Attendee', function () {
             assert.deepEqual(a, a.rsvp('TRUE'));
         });
 
+        it('setter should also work with booleans', function () {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+
+            a.rsvp(true);
+            assert.equal(a._data.rsvp, 'TRUE');
+
+            a.rsvp(false);
+            assert.equal(a._data.rsvp, 'FALSE');
+        });
+
         it('getter should return value', function() {
             const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
             assert.equal(a.rsvp(), null);
@@ -269,6 +279,21 @@ describe('ical-generator Attendee', function () {
         it('should pass data to instance', function () {
             const a = new ICalAttendee({name: 'Zac'}, new ICalEvent(null, new ICalCalendar())).delegatesFrom({name: 'Cody'});
             assert.equal(a.name(), 'Cody');
+        });
+    });
+
+    describe('toJSON()', function () {
+        it('should work', function() {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            a.name('Max Mustermann');
+            a.delegatesTo('Moritz <moritz@example.com>');
+
+            assert.deepEqual(a.toJSON(), {
+                role: 'REQ-PARTICIPANT',
+                name: 'Max Mustermann',
+                delegatedTo: 'moritz@example.com',
+                status: 'DELEGATED'
+            });
         });
     });
 
