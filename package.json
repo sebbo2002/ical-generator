@@ -45,7 +45,7 @@
     "bump:reset": "export MODULEVERSION=$(npm view ical-generator version) && npm run bump:reset:save",
     "bump:reset:next": "export MODULEVERSION=$(npm view ical-generator@next version) && npm run bump:reset:save",
     "bump:reset:save": "echo $MODULEVERSION && npm --no-git-tag-version version ${MODULEVERSION}",
-    "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version ${DEVELOP_BUMP:-prepatch}",
+    "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version ${DEVELOP_BUMP:-prerelease}",
     "bump:production": "npm run bump:reset && npm --no-git-tag-version version from-git"
   },
   "preferGlobal": false,

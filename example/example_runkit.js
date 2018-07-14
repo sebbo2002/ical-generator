@@ -1,13 +1,13 @@
-var ical = require('ical-generator'),
-    cal = ical({domain: 'localhost'}),
-    event;
+const ical = require('ical-generator');
+const moment = require('moment');
+const cal = ical({domain: 'localhost'});
 
 // overwrite domain
 cal.domain('example.com');
 
-event = cal.createEvent({
-    start: new Date(new Date().getTime() + 3600000),
-    end: new Date(new Date().getTime() + 7200000),
+const event = cal.createEvent({
+    start: moment().add(1, 'hour'),
+    end: moment().add(2, 'hours'),
     summary: 'Example Event',
     description: 'It works ;)',
     organizer: 'Organizer\'s Name <organizer@example.com>',
