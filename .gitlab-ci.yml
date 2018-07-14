@@ -78,6 +78,9 @@ install:
     paths:
       - node_modules.tar.gz
     expire_in: 7 day
+  only:
+    - master
+    - develop
 
 publish_github:
   stage: publish
@@ -92,6 +95,7 @@ publish_github:
     - git push --force "https://${GITHUB_AUTH}@github.com/sebbo2002/ical-generator.git" --tags
   only:
     - develop
+    - master
 
 publish_plato:
   stage: publish
