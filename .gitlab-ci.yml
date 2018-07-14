@@ -67,12 +67,25 @@ node_10:
     - npm install
     - npm test
 
+install:
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - yarn install
+    - tar -czf "node_modules.tar.gz" ./node_modules
+  artifacts:
+    paths:
+      - node_modules.tar.gz
+    expire_in: 7 day
+
 publish_github:
   stage: publish
   tags:
     - matt.sebbo.net
     - ssh
   script:
+    - git reset --hard
     - git checkout $CI_COMMIT_REF_NAME
     - git pull
     - git push --force "https://${GITHUB_AUTH}@github.com/sebbo2002/ical-generator.git" --all
@@ -86,7 +99,7 @@ publish_plato:
     - matt.sebbo.net
     - ssh
   script:
-    - yarn install
+    - tar -xzf "node_modules.tar.gz" -C .
     - npm run visualize
     - rm -rf /var/docker/static/ical-generator/plato/*
     - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
@@ -100,7 +113,7 @@ publish_npm_next:
     - ssh
   script:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-    - yarn install
+    - tar -xzf "node_modules.tar.gz" -C .
     - npm run bump:develop
     - npm run build
     - echo $(cat ./package.json | jq '.version' -rce)
@@ -115,9 +128,8 @@ publish_npm:
     - ssh
   script:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
-    - yarn install
+    - tar -xzf "node_modules.tar.gz" -C .
     - npm run bump:production
-    - npm run build
     - echo $(cat ./package.json | jq '.version' -rce)
     - npm publish
   only:
