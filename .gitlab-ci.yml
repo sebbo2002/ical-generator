@@ -115,7 +115,6 @@ publish_npm_next:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     - tar -xzf "node_modules.tar.gz" -C .
     - npm run bump:develop
-    - npm run build
     - echo $(cat ./package.json | jq '.version' -rce)
     - npm publish --tag "next"
   only:
