@@ -49,7 +49,7 @@
     "bump:production": "npm run bump:reset && npm --no-git-tag-version version from-git"
   },
   "preferGlobal": false,
-  "main": "./lib/ical-generator.js",
+  "main": "./src/index.js",
   "repository": {
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"
