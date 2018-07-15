@@ -117,7 +117,7 @@ publish_coverage:
     - ssh
   script:
     - tar -xzf "node_modules.tar.gz" -C .
-    - npm run test
+    - npm run coverage
     - rm -rf /var/docker/static/ical-generator/coverage/*
     - mv ./test-result/coverage/* /var/docker/static/ical-generator/coverage/
   only:
