@@ -97,6 +97,32 @@ publish_github:
     - develop
     - master
 
+publish_test:
+  stage: publish
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - npm run test
+    - rm -rf /var/docker/static/ical-generator/test/*
+    - mv ./test-result/test/* /var/docker/static/ical-generator/test/
+  only:
+    - develop
+
+publish_coverage:
+  stage: publish
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - npm run test
+    - rm -rf /var/docker/static/ical-generator/coverage/*
+    - mv ./test-result/coverage/* /var/docker/static/ical-generator/coverage/
+  only:
+    - develop
+
 publish_plato:
   stage: publish
   tags:
