@@ -93,6 +93,47 @@ node_10:
     - npm install
     - npm test
 
+
+publish-test-report:
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - npm run test
+    - rm -rf /var/docker/static/ical-generator/test/*
+    - mv ./test-result/test/* /var/docker/static/ical-generator/test/
+  only:
+    - develop
+
+publish-coverage-report:
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - npm run coverage
+    - rm -rf /var/docker/static/ical-generator/coverage/*
+    - mv ./test-result/coverage/* /var/docker/static/ical-generator/coverage/
+  only:
+    - develop
+
+publish-plato-report:
+  stage: test
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - npm run visualize
+    - rm -rf /var/docker/static/ical-generator/plato/*
+    - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
+  only:
+    - develop
+
+
 sync_github:
   stage: publish
   tags:
@@ -107,46 +148,6 @@ sync_github:
   only:
     - develop
     - master
-
-publish-test-report:
-  stage: publish
-  tags:
-    - matt.sebbo.net
-    - ssh
-  script:
-    - tar -xzf "node_modules.tar.gz" -C .
-    - npm run test
-    - rm -rf /var/docker/static/ical-generator/test/*
-    - mv ./test-result/test/* /var/docker/static/ical-generator/test/
-  only:
-    - develop
-
-publish-coverage-report:
-  stage: publish
-  tags:
-    - matt.sebbo.net
-    - ssh
-  script:
-    - tar -xzf "node_modules.tar.gz" -C .
-    - npm run coverage
-    - rm -rf /var/docker/static/ical-generator/coverage/*
-    - mv ./test-result/coverage/* /var/docker/static/ical-generator/coverage/
-  only:
-    - develop
-
-publish-plato-report:
-  stage: publish
-  tags:
-    - matt.sebbo.net
-    - ssh
-  script:
-    - tar -xzf "node_modules.tar.gz" -C .
-    - npm run visualize
-    - rm -rf /var/docker/static/ical-generator/plato/*
-    - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
-  only:
-    - develop
-
 
 publish_npm_next:
   stage: publish
