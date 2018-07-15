@@ -24,16 +24,16 @@ const cal = ical({domain: 'github.com', name: 'my first iCal'});
 cal.domain('sebbo.net');
 
 cal.createEvent({
-	start: moment(),
-	end: moment().add(1, 'hour'),
-	summary: 'Example Event',
-	description: 'It works ;)',
-	location: 'my room',
-	url: 'http://sebbo.net/'
+    start: moment(),
+    end: moment().add(1, 'hour'),
+    summary: 'Example Event',
+    description: 'It works ;)',
+    location: 'my room',
+    url: 'http://sebbo.net/'
 });
 
 http.createServer(function(req, res) {
-	cal.serve(res);
+    cal.serve(res);
 }).listen(3000, '127.0.0.1', function() {
     console.log('Server running at http://127.0.0.1:3000/');
 });
@@ -137,9 +137,9 @@ a valid Product Identifier or an object:
 
 ```javascript
 cal.prodId({
-	company: 'My Company',
-	product: 'My Product',
-	language: 'EN' // optional, defaults to EN
+    company: 'My Company',
+    product: 'My Product',
+    language: 'EN' // optional, defaults to EN
 });
 
 // OR
@@ -662,12 +662,14 @@ Use this method to set the category name.
 
 ```
 npm test
+npm run coverage
+npm run browser-test
 ```
 
 
 ## FAQ
 
-### Waht's `Error: Can't resolve 'fs'`?
+### What's `Error: Can't resolve 'fs'`?
 `ical-generator` uses the node.js `fs` module to save your calendar on the filesystem. In browser environments, you usually don't need this, so if you pass `null` for fs in your bundler. In webpack this looks like this:
 
 ```json
@@ -678,7 +680,7 @@ npm test
 }
 ```
 
-Thanks @rally25rs for this [tip](https://github.com/sebbo2002/ical-generator/issues/64#issuecomment-344637582).
+Thanks [@rally25rs](https://github.com/rally25rs) for this [tip](https://github.com/sebbo2002/ical-generator/issues/64#issuecomment-344637582).
 
 
 ## Copyright and license
