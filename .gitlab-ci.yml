@@ -1,6 +1,22 @@
 stages:
+  - prepare
   - test
   - publish
+
+
+prepare:
+  stage: prepare
+  tags:
+    - matt.sebbo.net
+    - ssh
+  script:
+    - yarn install
+    - tar -czf "node_modules.tar.gz" ./node_modules
+  artifacts:
+    paths:
+      - node_modules.tar.gz
+    expire_in: 7 day
+
 
 node_6:
   image: node:6
@@ -11,6 +27,8 @@ node_6:
     - matt.sebbo.net
     - docker
   script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
     - npm test
@@ -24,6 +42,8 @@ node_7:
     - matt.sebbo.net
     - docker
   script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
     - npm test
@@ -37,6 +57,8 @@ node_8:
     - matt.sebbo.net
     - docker
   script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
     - npm test
@@ -50,6 +72,8 @@ node_9:
     - matt.sebbo.net
     - docker
   script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
     - npm test
@@ -63,26 +87,13 @@ node_10:
     - matt.sebbo.net
     - docker
   script:
+    - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
     - npm test
 
-install:
-  tags:
-    - matt.sebbo.net
-    - ssh
-  script:
-    - yarn install
-    - tar -czf "node_modules.tar.gz" ./node_modules
-  artifacts:
-    paths:
-      - node_modules.tar.gz
-    expire_in: 7 day
-  only:
-    - master
-    - develop
-
-publish_github:
+sync_github:
   stage: publish
   tags:
     - matt.sebbo.net
@@ -97,7 +108,7 @@ publish_github:
     - develop
     - master
 
-publish_test:
+publish-test-report:
   stage: publish
   tags:
     - matt.sebbo.net
@@ -110,7 +121,7 @@ publish_test:
   only:
     - develop
 
-publish_coverage:
+publish-coverage-report:
   stage: publish
   tags:
     - matt.sebbo.net
@@ -123,7 +134,7 @@ publish_coverage:
   only:
     - develop
 
-publish_plato:
+publish-plato-report:
   stage: publish
   tags:
     - matt.sebbo.net
@@ -135,6 +146,7 @@ publish_plato:
     - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
   only:
     - develop
+
 
 publish_npm_next:
   stage: publish
