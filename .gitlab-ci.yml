@@ -101,6 +101,7 @@ publish-test-report:
     - ssh
   script:
     - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm run test
     - rm -rf /var/docker/static/ical-generator/test/*
     - mv ./test-result/test/* /var/docker/static/ical-generator/test/
@@ -114,6 +115,7 @@ publish-coverage-report:
     - ssh
   script:
     - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm run coverage
     - rm -rf /var/docker/static/ical-generator/coverage/*
     - mv ./test-result/coverage/* /var/docker/static/ical-generator/coverage/
@@ -127,6 +129,7 @@ publish-plato-report:
     - ssh
   script:
     - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm run visualize
     - rm -rf /var/docker/static/ical-generator/plato/*
     - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
@@ -157,6 +160,7 @@ publish_npm_next:
   script:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm run bump:develop
     - echo $(cat ./package.json | jq '.version' -rce)
     - npm publish --tag "next"
@@ -171,6 +175,7 @@ publish_npm:
   script:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     - tar -xzf "node_modules.tar.gz" -C .
+    - rm -f ./node_modules.tar.gz
     - npm run bump:production
     - echo $(cat ./package.json | jq '.version' -rce)
     - npm publish
