@@ -95,7 +95,7 @@ declare module 'ical-generator' {
     interface AttendeeData extends PersonData {
       role?: attendeeRole;
       status?: attendeeStatus;
-      type?: attendeeStatus;
+      type?: attendeeType;
       delegatedTo?: ICalAttendee;
       delegatedFrom?: ICalAttendee;
       delegatesTo?: ICalAttendee;
