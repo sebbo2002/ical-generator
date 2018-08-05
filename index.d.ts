@@ -51,7 +51,7 @@ declare module 'ical-generator' {
      * Information used to create calendar events
      */
     interface EventData {
-      start: moment;
+      start: moment.Moment | Date;
       summary: string;
       id?: string;
       uid?: string;
