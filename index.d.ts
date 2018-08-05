@@ -51,7 +51,7 @@ declare module 'ical-generator' {
      * Information used to create calendar events
      */
     interface EventData {
-      start: moment;
+      start: moment.Moment | Date;
       summary: string;
       id?: string;
       uid?: string;
@@ -95,7 +95,7 @@ declare module 'ical-generator' {
     interface AttendeeData extends PersonData {
       role?: attendeeRole;
       status?: attendeeStatus;
-      type?: attendeeStatus;
+      type?: attendeeType;
       delegatedTo?: ICalAttendee;
       delegatedFrom?: ICalAttendee;
       delegatesTo?: ICalAttendee;
@@ -196,8 +196,6 @@ declare module 'ical-generator' {
       createCategory(categoryData: CategoryData): ICalCategory;
       categories(): ICalCategory[];
       categories(categories: CategoryData[]): ICalEvent;
-      method(): method;
-      method(method: method): ICalEvent;
       status(): status;
       status(status: status): ICalEvent;
       url(): string;
