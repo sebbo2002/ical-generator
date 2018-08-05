@@ -196,8 +196,6 @@ declare module 'ical-generator' {
       createCategory(categoryData: CategoryData): ICalCategory;
       categories(): ICalCategory[];
       categories(categories: CategoryData[]): ICalEvent;
-      method(): method;
-      method(method: method): ICalEvent;
       status(): status;
       status(status: status): ICalEvent;
       url(): string;
