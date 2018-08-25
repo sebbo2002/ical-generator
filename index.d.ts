@@ -149,7 +149,7 @@ declare module 'ical-generator' {
       save(path: string, cb: Function): ICalCalendar;
       saveSync(path: string): number;
       serve(respone: Response, filename: string): ICalCalendar;
-      tostring(): string;
+      toString(): string;
       toJSON(): any;
       length(): number;
       clear(): ICalCalendar;
