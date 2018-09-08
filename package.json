@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -46,14 +47,15 @@
     "bump:reset:next": "export MODULEVERSION=$(npm view ical-generator@next version) && npm run bump:reset:save",
     "bump:reset:save": "echo $MODULEVERSION && npm --no-git-tag-version version ${MODULEVERSION}",
     "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version ${DEVELOP_BUMP:-prerelease}",
-    "bump:production": "npm run bump:reset && npm --no-git-tag-version version ${PRODUCTION_BUMP:-patch}"
+    "bump:production": "npm run bump:reset && npm --no-git-tag-version version ${PRODUCTION_BUMP:-patch}",
+    "build": "babel src --presets babel-preset-es2015 --out-dir dist"
   },
   "preferGlobal": false,
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"
   },
   "typings": "index.d.ts",
-  "runkitExampleFilename": "example/example_runkit.js"
+  "runkitExampleFilename": "example/example_runkit.js",
 }
