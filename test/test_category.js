@@ -44,7 +44,7 @@ describe('ical-generator Category', function () {
 
         it('should change something', function () {
             const c = new ICalCategory({name: 'BANANA'}, new ICalEvent(null, new ICalCalendar()));
-            assert.ok(c._generate().indexOf(':BANANA') > -1);
+            assert.ok(c._generate().indexOf('BANANA') > -1);
         });
     });
 

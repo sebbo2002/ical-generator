@@ -76,7 +76,7 @@ class ICalCategory {
             throw new Error('No value for `name` in ICalCategory given!');
         }
 
-        return 'CATEGORIES:' + ICalTools.escape(this._data.name) + '\r\n';
+        return ICalTools.escape(this._data.name);
     }
 }
 
