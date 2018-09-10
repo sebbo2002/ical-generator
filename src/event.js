@@ -937,11 +937,11 @@ class ICalEvent {
         });
 
         // CATEGORIES
-		if(this._data.categories.length > 0){
-			g += 'CATEGORIES:' + this._data.categories.map(function (category) {
-				 return category._generate();
-			}).join() + '\r\n';
-		}
+        if (this._data.categories.length > 0) {
+            g += 'CATEGORIES:' + this._data.categories.map(function (category) {
+                return category._generate();
+            }).join() + '\r\n';
+        }
 
         // URL
         if (this._data.url) {
