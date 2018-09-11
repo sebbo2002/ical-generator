@@ -12,6 +12,8 @@ prepare:
   script:
     - yarn install
     - tar -czf "node_modules.tar.gz" ./node_modules
+  except:
+    - tags
   artifacts:
     paths:
       - node_modules.tar.gz
@@ -26,6 +28,8 @@ node_6:
   tags:
     - matt.sebbo.net
     - docker
+  except:
+    - tags
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
@@ -41,6 +45,8 @@ node_7:
   tags:
     - matt.sebbo.net
     - docker
+  except:
+    - tags
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
@@ -56,6 +62,8 @@ node_8:
   tags:
     - matt.sebbo.net
     - docker
+  except:
+    - tags
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
@@ -71,6 +79,8 @@ node_9:
   tags:
     - matt.sebbo.net
     - docker
+  except:
+    - tags
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
@@ -86,6 +96,8 @@ node_10:
   tags:
     - matt.sebbo.net
     - docker
+  except:
+    - tags
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
@@ -162,6 +174,7 @@ publish_npm:
     - npm config set //registry.npmjs.org/:_authToken $NPM_TOKEN
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
+    - npm run build
     - npm run bump:production
     - echo $(cat ./package.json | jq '.version' -rce)
     - npm publish
