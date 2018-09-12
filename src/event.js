@@ -897,9 +897,16 @@ class ICalEvent {
 
             // REPEATING EXCLUSION
             if (this._data.repeating.exclude) {
-                g += 'EXDATE:' + this._data.repeating.exclude.map(excludedDate => {
-                    return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
-                }).join(',') + '\r\n';
+                if (this._data.allDay) {
+                    g += 'EXDATE;VALUE=DATE:' + this._data.repeating.exclude.map(excludedDate => {
+                        return ICalTools.formatDate(this._calendar.timezone(), excludedDate, true);
+                    }).join(',') + '\r\n';
+                }
+                else{
+                    g += 'EXDATE:' + this._data.repeating.exclude.map(excludedDate => {
+                        return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
+                    }).join(',') + '\r\n';
+                }
             }
         }
 
