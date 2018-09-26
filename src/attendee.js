@@ -37,7 +37,7 @@ class ICalAttendee {
             allowed: {
                 role: ['CHAIR', 'REQ-PARTICIPANT', 'OPT-PARTICIPANT', 'NON-PARTICIPANT'],
                 rsvp: ['TRUE', 'FALSE'],
-                status: ['ACCEPTED', 'TENTATIVE', 'DECLINED', 'DELEGATED'],
+                status: ['ACCEPTED', 'TENTATIVE', 'DECLINED', 'DELEGATED', 'NEEDS-ACTION'],
                 type: ['INDIVIDUAL', 'GROUP', 'RESOURCE', 'ROOM', 'UNKNOWN'] // ref: https://tools.ietf.org/html/rfc2445#section-4.2.3
             }
         };

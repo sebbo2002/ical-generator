@@ -159,6 +159,11 @@ describe('ical-generator Attendee', function () {
             const a = new ICalAttendee({email: 'mail@example.com', status: 'declined'}, new ICalEvent(null, new ICalCalendar()));
             assert.ok(a._generate().indexOf('DECLINED') > -1);
         });
+
+        it('should change something too', function () {
+            const a = new ICalAttendee({email: 'mail@example.com', status: 'needs-action'}, new ICalEvent(null, new ICalCalendar()));
+            assert.ok(a._generate().indexOf('NEEDS-ACTION') > -1);
+        });
     });
 
     describe('type()', function () {
