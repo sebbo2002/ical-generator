@@ -1,5 +1,5 @@
 {
-  "name": "ical-generator",
+  "name": "ical-generator-2",
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <mail@sebbo.net>",
   "bugs": {
@@ -57,5 +57,6 @@
     "url": "http://github.com/sebbo2002/ical-generator.git"
   },
   "typings": "index.d.ts",
-  "runkitExampleFilename": "example/example_runkit.js"
+  "runkitExampleFilename": "example/example_runkit.js",
+  "version": "1.1.2"
 }

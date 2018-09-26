@@ -226,4 +226,31 @@ describe('ical-generator Cases', function() {
         const json = JSON.stringify(cal.toJSON());
         assert.equal(ical(json).toString(), string);
     });
+
+    it('case #8', function() {
+        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        cal.createEvent({
+            id: '123',
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            created: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            lastModified: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            summary: 'Simple Event',
+            attendees: [{
+                type: 'individual',
+                role: 'req-participant',
+                status: 'needs-action',
+                email: 'mail@example.com',
+                rsvp: 'true'
+            }]
+        });
+
+        /*jslint stupid: true */
+        const string = cal.toString();
+        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_08.ics', 'utf8'));
+
+        const json = JSON.stringify(cal.toJSON());
+        assert.equal(ical(json).toString(), string);
+    });
 });
