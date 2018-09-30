@@ -37,7 +37,7 @@ describe('ICalTools', function () {
         it('timezone=1 dateonly=0 floating=0', function () {
             assert.equal(
                 ICalTools.formatDate('Europe/Berlin', '2018-07-05T18:24:00.052Z', false, false),
-                '20180705T202400Z'
+                '20180705T182400Z'
             );
         });
 
