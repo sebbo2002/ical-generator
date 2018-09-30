@@ -934,10 +934,15 @@ class ICalEvent {
         // SUMMARY
         g += 'SUMMARY:' + ICalTools.escape(this._data.summary) + '\r\n';
 
-        // LOCATION
-        if (this._data.location) {
-            g += 'LOCATION:' + ICalTools.escape(this._data.location) + '\r\n';
-        }
+	    // LOCATION
+	    if (this._data.location) {
+		    g += 'LOCATION:' + ICalTools.escape(this._data.location) + '\r\n';
+	    }
+
+	    // GEO
+	    if (this._data.geo) {
+		    g += 'GEO:' + ICalTools.escape(this._data.geo.lat+';'+this._data.geo.lon) + '\r\n';
+	    }
 
         // DESCRIPTION
         if (this._data.description) {
