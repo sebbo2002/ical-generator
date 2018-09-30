@@ -32,7 +32,7 @@
     "webpack-cli": "^3.0.8"
   },
   "peerDependencies": {
-    "@types/node": ">= 8.0.0"
+    "@tes/node": ">= 8.0.0"
   },
   "scripts": {
     "all": "npm run check && npm run visualize && npm run tests",
