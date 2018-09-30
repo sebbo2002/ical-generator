@@ -971,6 +971,11 @@ var ICalEvent = function () {
                 g += 'LOCATION:' + ICalTools.escape(this._data.location) + '\r\n';
             }
 
+            // GEO
+            if (this._data.geo) {
+                g += 'GEO:' + ICalTools.escape(this._data.geo.lat + ';' + this._data.geo.lon) + '\r\n';
+            }
+
             // DESCRIPTION
             if (this._data.description) {
                 g += 'DESCRIPTION:' + ICalTools.escape(this._data.description) + '\r\n';
