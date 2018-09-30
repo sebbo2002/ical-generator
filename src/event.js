@@ -997,7 +997,7 @@ class ICalEvent {
 
 	    // GEO
 	    if (this._data.geo) {
-		    g += 'GEO:' + ICalTools.escape(this._data.geo.lat+';'+this._data.geo.lon) + '\r\n';
+		    g += 'GEO:' + ICalTools.escape(this._data.geo.lat)+';'+ICalTools.escape(this._data.geo.lon) + '\r\n';
 	    }
 
         // DESCRIPTION
