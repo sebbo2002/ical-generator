@@ -21,6 +21,7 @@ var ICalTools = function () {
         key: 'formatDate',
         value: function formatDate(timezone, d, dateonly, floating) {
             var m = timezone ? moment(d).tz(timezone) : moment(d).utc();
+            if (!dateonly && !floating) m = moment(d).utc();
             var s = m.format('YYYYMMDD');
 
             if (!dateonly) {
