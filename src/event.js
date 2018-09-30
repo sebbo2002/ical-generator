@@ -502,11 +502,21 @@ class ICalEvent {
 	 * @returns {ICalEvent|String}
 	 */
 	geo(geo) {
-		if (geo === undefined) {
-			return this._data.geo;
+  	    if (geo === undefined) {
+  	        if(!this._data.geo) return null;
+			return this._data.geo.lat+';'+this._data.geo.lon;
 		}
 
-		this._data.geo = geo ? geo.toString() : null;
+		let geoStruct = {};
+  	    if(typeof geo === "string") {
+  	        const geoParts = geo.split(';');
+  	        geoStruct.lat = parseFloat(geoParts[0]);
+	        geoStruct.lon = parseFloat(geoParts[1]);
+        } else geoStruct = geo;
+  	    if(!geoStruct || !isFinite(geoStruct.lat) || !isFinite(geoStruct.lon)){
+  	        //throw "invalid geo";
+	        this._data.geo = null;
+        } else this._data.geo = geoStruct;
 		return this;
 	}
 

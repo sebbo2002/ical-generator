@@ -833,14 +833,13 @@ describe('ical-generator Event', function () {
 			const e = new ICalEvent(null, new ICalCalendar());
 			assert.equal(e.geo(), null);
 
-			e._data.geo = '44.5;-3.4';
+			e._data.geo = {lat:44.5,lon:-3.4};
 			assert.equal(e.geo(), '44.5;-3.4');
 
 			e._data.geo = null;
 			assert.equal(e.geo(), null);
 		});
 
-		//TODO: throw error if geo have wrong format
 		it('setter should return this', function () {
 			const e = new ICalEvent(null, new ICalCalendar());
 			assert.deepEqual(e, e.geo(null));
@@ -854,7 +853,13 @@ describe('ical-generator Event', function () {
 			}, new ICalCalendar());
 
 			event.geo('44.5;-3.4');
-			assert.equal(event._data.geo, '44.5;-3.4');
+			assert.deepEqual(event._data.geo, {lat:44.5,lon:-3.4});
+
+			event.geo('somthingInvalid');
+			assert.deepEqual(event._data.geo, null);
+
+			event.geo({lat:44.5,lon:-3.4});
+			assert.deepEqual(event._data.geo, {lat:44.5,lon:-3.4});
 		});
 	});
 
