@@ -57,7 +57,7 @@ var ICalTools = function () {
     }, {
         key: 'escape',
         value: function escape(str) {
-            return str.replace(/[\\;,"]/g, function (match) {
+            return String(str).replace(/[\\;,"]/g, function (match) {
                 return '\\' + match;
             }).replace(/(?:\r\n|\r|\n)/g, '\\n');
         }
