@@ -48,7 +48,8 @@
     "bump:reset:save": "echo $MODULEVERSION && npm --no-git-tag-version version ${MODULEVERSION}",
     "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version ${DEVELOP_BUMP:-prerelease}",
     "bump:production": "npm run bump:reset && npm --no-git-tag-version version ${PRODUCTION_BUMP:-patch}",
-    "build": "babel src --presets babel-preset-es2015 --out-dir dist"
+    "build": "babel src --presets babel-preset-es2015 --out-dir dist",
+    "postinstall": "npm run build"
   },
   "preferGlobal": false,
   "main": "./dist/index.js",
