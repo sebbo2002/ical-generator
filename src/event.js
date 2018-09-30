@@ -25,7 +25,8 @@ class ICalEvent {
             floating: false,
             repeating: null,
             summary: '',
-            location: null,
+	        location: null,
+	        geo: null,
             description: null,
             htmlDescription: null,
             organizer: null,
@@ -50,7 +51,8 @@ class ICalEvent {
             'floating',
             'repeating',
             'summary',
-            'location',
+	        'location',
+	        'geo',
             'description',
             'htmlDescription',
             'organizer',
@@ -476,21 +478,37 @@ class ICalEvent {
     }
 
 
-    /**
-     * Set/Get the event's location
-     *
-     * @param {String} [location]
-     * @since 0.2.0
-     * @returns {ICalEvent|String}
-     */
-    location(location) {
-        if (location === undefined) {
-            return this._data.location;
-        }
+	/**
+	 * Set/Get the event's location
+	 *
+	 * @param {String} [location]
+	 * @since 0.2.0
+	 * @returns {ICalEvent|String}
+	 */
+	location(location) {
+		if (location === undefined) {
+			return this._data.location;
+		}
 
-        this._data.location = location ? location.toString() : null;
-        return this;
-    }
+		this._data.location = location ? location.toString() : null;
+		return this;
+	}
+
+	/**
+	 * Set/Get the event's geo
+	 *
+	 * @param {String} [geo]
+	 * @since 1.1.2
+	 * @returns {ICalEvent|String}
+	 */
+	geo(geo) {
+		if (geo === undefined) {
+			return this._data.geo;
+		}
+
+		this._data.geo = geo ? geo.toString() : null;
+		return this;
+	}
 
 
     /**
