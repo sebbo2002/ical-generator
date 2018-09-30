@@ -491,21 +491,47 @@ class ICalEvent {
     }
 
 
-    /**
-     * Set/Get the event's location
-     *
-     * @param {String} [location]
-     * @since 0.2.0
-     * @returns {ICalEvent|String}
-     */
-    location(location) {
-        if (location === undefined) {
-            return this._data.location;
-        }
+	/**
+	 * Set/Get the event's location
+	 *
+	 * @param {String} [location]
+	 * @since 0.2.0
+	 * @returns {ICalEvent|String}
+	 */
+	location(location) {
+		if (location === undefined) {
+			return this._data.location;
+		}
 
-        this._data.location = location ? location.toString() : null;
-        return this;
-    }
+		this._data.location = location ? location.toString() : null;
+		return this;
+	}
+
+	/**
+	 * Set/Get the event's geo
+	 *
+	 * @param {String} [geo]
+	 * @since 1.1.2
+	 * @returns {ICalEvent|String}
+	 */
+	geo(geo) {
+  	    if (geo === undefined) {
+  	        if(!this._data.geo) return null;
+			return this._data.geo.lat+';'+this._data.geo.lon;
+		}
+
+		let geoStruct = {};
+  	    if(typeof geo === "string") {
+  	        const geoParts = geo.split(';');
+  	        geoStruct.lat = parseFloat(geoParts[0]);
+	        geoStruct.lon = parseFloat(geoParts[1]);
+        } else geoStruct = geo;
+  	    if(!geoStruct || !isFinite(geoStruct.lat) || !isFinite(geoStruct.lon)){
+  	        //throw "invalid geo";
+	        this._data.geo = null;
+        } else this._data.geo = geoStruct;
+		return this;
+	}
 
 
     /**
