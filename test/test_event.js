@@ -1136,6 +1136,54 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('busystatus()', function () {
+        it('getter should return value', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            assert.equal(event.busystatus(), null);
+
+            event._data.busystatus = 'BUSY';
+            assert.equal(event.busystatus(), 'BUSY');
+
+            event._data.busystatus = null;
+            assert.equal(event.busystatus(), null);
+        });
+
+        it('setter should return this', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.deepEqual(e, e.busystatus(null));
+            assert.deepEqual(e, e.busystatus('busy'));
+        });
+
+        it('setter should allow setting null', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e._data.busystatus = 'BUSY';
+            e.busystatus(null);
+            assert.equal(e._data.busystatus, null);
+        });
+
+        it('setter should allow setting valid value', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.busystatus('busy');
+            assert.equal(e._data.busystatus, 'BUSY');
+        });
+
+        it('should throw error when method not allowed', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.throws(function () {
+                e.busystatus('COOKING');
+            }, /`busystatus`/);
+            assert.throws(function () {
+                e.busystatus(Infinity);
+            }, /`busystatus`/);
+            assert.throws(function () {
+                e.busystatus(NaN);
+            }, /`busystatus`/);
+            assert.throws(function () {
+                e.busystatus(-1);
+            }, /`busystatus`/);
+        });
+    });
+
     describe('url()', function () {
         it('getter should return value', function () {
             const e = new ICalEvent(null, new ICalCalendar());

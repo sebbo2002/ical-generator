@@ -489,6 +489,11 @@ Appointment URL
 Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
 
+#### busystatus([_String_ busystatus])
+
+Appointment busystatus. May be any of the following: `free`, `tentative`, `busy`, `oof`.
+
+
 #### created([_moment_|_Date_ created])
 
 Date object of the time the appointment was created.
@@ -521,7 +526,7 @@ Set the attendee's role, defaults to `REQ-PARTICIPANT`. May be one of the follow
 
 #### status([_String_ status])
 
-Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`, `needs-action` (See [Section 4.2.12](https://tools.ietf.org/html/rfc2445#section-4.2.12))
+Set the attendee's status. May be one of the following: `accepted`, `tentative`, `declined`, `delegated`, `needs-action` (See [Section 4.2.12](https://tools.ietf.org/html/rfc2445#section-4.2.12))
 
 
 #### type([_String_ type])

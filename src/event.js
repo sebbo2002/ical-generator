@@ -33,6 +33,7 @@ class ICalEvent {
             alarms: [],
             categories: [],
             status: null,
+            busystatus: null,
             url: null,
             created: null,
             lastModified: null
@@ -58,13 +59,15 @@ class ICalEvent {
             'alarms',
             'categories',
             'status',
+            'busystatus',
             'url',
             'created',
             'lastModified'
         ];
         this._vars = {
             allowedRepeatingFreq: ['SECONDLY', 'MINUTELY', 'HOURLY', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'],
-            allowedStatuses: ['CONFIRMED', 'TENTATIVE', 'CANCELLED']
+            allowedStatuses: ['CONFIRMED', 'TENTATIVE', 'CANCELLED'],
+            allowedBusyStatuses: ['FREE', 'TENTATIVE', 'BUSY', 'OOF']
         };
 
         this._calendar = _calendar;
@@ -753,6 +756,31 @@ class ICalEvent {
 
 
     /**
+     * Set/Get the event's busy status on Microsoft param
+     *
+     * @param {String} [busystatus]
+     * @since 1.0.2
+     * @returns {ICalEvent|String}
+     */
+    busystatus(busystatus) {
+        if (busystatus === undefined) {
+            return this._data.busystatus;
+        }
+        if (busystatus === null) {
+            this._data.busystatus = null;
+            return this;
+        }
+
+        if (this._vars.allowedBusyStatuses.indexOf(busystatus.toString().toUpperCase()) === -1) {
+            throw new Error('`busystatus` must be one of the following: ' + this._vars.allowedBusyStatuses.join(', ') + '!');
+        }
+
+        this._data.busystatus = busystatus.toString().toUpperCase();
+        return this;
+    }
+
+
+    /**
      * Set/Get the event's URL
      *
      * @param {String} [url] URL
@@ -897,9 +925,16 @@ class ICalEvent {
 
             // REPEATING EXCLUSION
             if (this._data.repeating.exclude) {
-                g += 'EXDATE:' + this._data.repeating.exclude.map(excludedDate => {
-                    return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
-                }).join(',') + '\r\n';
+                if (this._data.allDay) {
+                    g += 'EXDATE;VALUE=DATE:' + this._data.repeating.exclude.map(excludedDate => {
+                        return ICalTools.formatDate(this._calendar.timezone(), excludedDate, true);
+                    }).join(',') + '\r\n';
+                }
+                else{
+                    g += 'EXDATE:' + this._data.repeating.exclude.map(excludedDate => {
+                        return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
+                    }).join(',') + '\r\n';
+                }
             }
         }
 
@@ -951,6 +986,11 @@ class ICalEvent {
         // STATUS
         if (this._data.status) {
             g += 'STATUS:' + this._data.status.toUpperCase() + '\r\n';
+        }
+
+        // BUSYSTATUS
+        if (this._data.busystatus) {
+            g += 'X-MICROSOFT-CDO-BUSYSTATUS:' + this._data.busystatus.toUpperCase() + '\r\n';
         }
 
         // CREATED
