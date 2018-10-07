@@ -489,6 +489,11 @@ Appointment URL
 Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
 
 
+#### busystatus([_String_ busystatus])
+
+Appointment busystatus. May be any of the following: `free`, `tentative`, `busy`, `oof`.
+
+
 #### created([_moment_|_Date_ created])
 
 Date object of the time the appointment was created.
