@@ -35,7 +35,7 @@ node_6:
     - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
-    - npm test
+    - npm run all
 
 node_7:
   image: node:7
@@ -52,7 +52,7 @@ node_7:
     - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
-    - npm test
+    - npm run all
 
 node_8:
   image: node:8
@@ -69,7 +69,7 @@ node_8:
     - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
-    - npm test
+    - npm run all
 
 node_9:
   image: node:9
@@ -86,7 +86,7 @@ node_9:
     - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
-    - npm test
+    - npm run all
 
 node_10:
   image: node:10
@@ -103,7 +103,7 @@ node_10:
     - rm -f ./node_modules.tar.gz
     - npm install -g grunt-cli
     - npm install
-    - npm test
+    - npm run all
 
 
 publish-test-report:
