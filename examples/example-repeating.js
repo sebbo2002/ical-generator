@@ -12,7 +12,7 @@ const event = cal.createEvent({
     summary: 'Apollo 11 - First Man to walk on the Moon (1969)',
     url: 'http://www.nasa.gov/mission_pages/apollo/index.html',
     repeating: {
-    	freq: 'YEARLY'
+        freq: 'YEARLY'
     }
 });
 
