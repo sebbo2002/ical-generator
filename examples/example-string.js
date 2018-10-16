@@ -1,4 +1,6 @@
-const ical = require('../src');
+'use strict';
+
+const ical = require('ical-generator');
 const moment = require('moment');
 const cal = ical({domain: 'localhost'});
 
@@ -11,7 +13,7 @@ const event = cal.createEvent({
     summary: 'Example Event',
     description: 'It works ;)',
     organizer: 'Organizer\'s Name <organizer@example.com>',
-    url: 'http://sebbo.net/'
+    url: 'https://example.com'
 });
 
 // update event's description
