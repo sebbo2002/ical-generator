@@ -6,7 +6,7 @@ const cal = ical({domain: 'localhost'});
 // overwrite domain
 cal.domain('example.com');
 
-const event = cal.createEvent({
+cal.createEvent({
     start: new Date(1969, 6, 20, 20),
     allDay: true,
     summary: 'Apollo 11 - First Man to walk on the Moon (1969)',

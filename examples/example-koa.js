@@ -24,6 +24,6 @@ app.use(ctx => {
     ctx.status = 200; // Koa defaults to 404 when it sees that status is unset
     ctx.respond = false; // mark request as handled for Koa
     cal.serve(ctx.res);
-})
+});
 
 app.listen(3000);

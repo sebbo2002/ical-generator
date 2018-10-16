@@ -22,6 +22,6 @@ const app = express();
 
 app.get('/calendar', (req, res) => {
     cal.serve(res);
-})
+});
 
 app.listen(3000);

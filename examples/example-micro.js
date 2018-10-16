@@ -1,7 +1,7 @@
 'use strict';
 
 const ical = require('ical-generator');
-const moment = require('moment')
+const moment = require('moment');
 
 const cal = ical({
     domain: 'example.com',
