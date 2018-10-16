@@ -1,11 +1,11 @@
 'use strict';
 
-const ical = require('../src');
+const ical = require('ical-generator');
 const moment = require('moment');
 const http = require('http');
 
 const cal = ical({
-    domain: 'sebbo.net',
+    domain: 'example.com',
     prodId: '//superman-industries.com//ical-generator//EN',
     events: [
         {
@@ -13,7 +13,7 @@ const cal = ical({
             end: moment().add(1, 'hour'),
             summary: 'Example Event',
             description: 'It works ;)',
-            url: 'http://sebbo.net/'
+            url: 'https://example.com'
         }
     ]
 });
