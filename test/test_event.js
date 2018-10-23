@@ -897,6 +897,11 @@ describe('ical-generator Event', function () {
             e._data.organizer = {name: 'Sebastian Pekarek', email: 'mail@example.com'};
             assert.equal('Sebastian Pekarek', e.organizer().name);
             assert.equal('mail@example.com', e.organizer().email);
+
+            e._data.organizer = {name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com'};
+            assert.equal('Sebastian Pekarek', e.organizer().name);
+            assert.equal('mail@example.com', e.organizer().email);
+            assert.equal('mail2@example2.com', e.organizer().mailto);
         });
 
         it('setter should return this', function () {
@@ -913,6 +918,9 @@ describe('ical-generator Event', function () {
 
             event.organizer({name: 'Sebastian Pekarek', email: 'mail@example.com'});
             assert.deepEqual(event._data.organizer, {name: 'Sebastian Pekarek', email: 'mail@example.com'});
+
+            event.organizer({name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com'});
+            assert.deepEqual(event._data.organizer, {name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com'});
         });
 
         it('should work with valid strings', function () {
