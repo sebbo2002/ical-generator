@@ -318,8 +318,8 @@ class ICalAttendee {
     _generate() {
         let g = 'ATTENDEE';
 
-        if (!this._data.email && !this._data.mailto) {
-            throw new Error('No value for `email` or `mailto` in ICalAttendee given!');
+        if (!this._data.email) {
+            throw new Error('No value for `email` in ICalAttendee given!');
         }
 
         // ROLE

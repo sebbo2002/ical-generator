@@ -365,16 +365,25 @@ Appointment location
 Appointment organizer
 
 ```javascript
-cal.organizer({
+event.organizer({
     name: 'Organizer\'s Name',
     email: 'organizer@example.com'
 });
 
 // OR
 
-cal.organizer('Organizer\'s Name <organizer@example.com>');
+event.organizer('Organizer\'s Name <organizer@example.com>');
 ```
 
+You can also add an explicit `mailto` email address.
+
+```javascript
+event.organizer({
+    name: 'Organizer\'s Name',
+    email: 'organizer@example.com',
+    mailto: 'explicit@mailto.com'
+})
+```
 
 #### createAttendee([_Object_ options])
 
@@ -385,13 +394,22 @@ Calling this method without options will create an empty attendee.
 const ical = require('ical-generator');
 const cal = ical();
 const event = cal.createEvent();
-const attendee = event.createAttendee({email: 'hui@example.com', 'name': 'Hui'});
+const attendee = event.createAttendee({email: 'hui@example.com', name: 'Hui'});
 
 // overwrite attendee's email address
 attendee.email('hui@example.net');
 
 // add another attendee
 event.createAttendee('Buh <buh@example.net>');
+```
+
+As with the organizer, you can also add an explicit `mailto` address.
+
+```javascript
+event.createAttendee({email: 'hui@example.com', name: 'Hui', mailto: 'another@mailto.com'});
+
+// overwrite an attendee's mailto address
+attendee.mailto('another@mailto.net');
 ```
 
 

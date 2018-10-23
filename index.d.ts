@@ -90,6 +90,7 @@ declare module 'ical-generator' {
     interface PersonData {
       name: string;
       email: string;
+      mailto?: string;
     }
 
     interface AttendeeData extends PersonData {
