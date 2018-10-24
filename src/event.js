@@ -535,6 +535,7 @@ class ICalEvent {
      * @param {String|Object} [organizer]
      * @param {String} [organizer.name]
      * @param {String} [organizer.email]
+     * @param {String} [organizer.mailto]
      * @since 0.2.0
      * @returns {ICalEvent|Object}
      */
@@ -562,7 +563,8 @@ class ICalEvent {
         else if (typeof _organizer === 'object') {
             organizer = {
                 name: _organizer.name,
-                email: _organizer.email
+                email: _organizer.email,
+                mailto: _organizer.mailto
             };
         }
 
@@ -590,6 +592,11 @@ class ICalEvent {
             name: organizer.name,
             email: organizer.email
         };
+
+        if (organizer.mailto) {
+            this._data.organizer.mailto = organizer.mailto;
+        }
+
         return this;
     }
 
@@ -958,7 +965,11 @@ class ICalEvent {
 
         // ORGANIZER
         if (this._data.organizer) {
-            g += 'ORGANIZER;CN="' + ICalTools.escape(this._data.organizer.name) + '":mailto:' + ICalTools.escape(this._data.organizer.email) + '\r\n';
+            g += 'ORGANIZER;CN="' + ICalTools.escape(this._data.organizer.name) + '"';
+            if (this._data.organizer.email && this._data.organizer.mailto) {
+                g += ';EMAIL=' + ICalTools.escape(this._data.organizer.email);
+            }
+            g += ':mailto:' + ICalTools.escape(this._data.organizer.mailto || this._data.organizer.email) + '\r\n';
         }
 
         // ATTENDEES

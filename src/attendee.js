@@ -14,6 +14,7 @@ class ICalAttendee {
         this._data = {
             name: null,
             email: null,
+            mailto: null,
             status: null,
             role: 'REQ-PARTICIPANT',
             rsvp: null,
@@ -24,6 +25,7 @@ class ICalAttendee {
         this._attributes = [
             'name',
             'email',
+            'mailto',
             'role',
             'rsvp',
             'status',
@@ -107,6 +109,22 @@ class ICalAttendee {
         }
 
         this._data.email = email;
+        return this;
+    }
+
+    /**
+     * Set/Get the attendee's email address
+     *
+     * @param {String} [mailto] Email address
+     * @since x.x.x TODO: set correct version number
+     * @returns {ICalAttendee|String}
+     */
+    mailto(mailto) {
+        if (mailto === undefined) {
+            return this._data.mailto;
+        }
+
+        this._data.mailto = mailto || null;
         return this;
     }
 
@@ -334,10 +352,15 @@ class ICalAttendee {
 
         // CN / Name
         if (this._data.name) {
-            g += ';CN="' + this._data.name + '"';
+            g += ';CN="' + ICalTools.escape(this._data.name) + '"';
         }
 
-        g += ':MAILTO:' + this._data.email + '\r\n';
+        // EMAIL
+        if (this._data.email && this._data.mailto) {
+            g += ';EMAIL=' + ICalTools.escape(this._data.email);
+        }
+
+        g += ':MAILTO:' + ICalTools.escape(this._data.mailto || this._data.email) + '\r\n';
         return g;
     }
 }
