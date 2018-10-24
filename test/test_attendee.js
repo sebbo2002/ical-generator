@@ -57,6 +57,31 @@ describe('ical-generator Attendee', function () {
         });
     });
 
+    describe('mailto()', function () {
+        it('getter should return value', function () {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.equal(a.mailto(), null);
+
+            a._data.mailto = 'foo@example.com';
+            assert.equal(a.mailto(), 'foo@example.com');
+        });
+
+        it('setter should return this', function () {
+            const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
+            assert.deepEqual(a, a.mailto(null));
+            assert.deepEqual(a, a.mailto('foo@example.com'));
+        });
+
+        it('should change mailto and keep email if present', function () {
+            const a = new ICalAttendee({email: 'mail@example.com'}, new ICalEvent(null, new ICalCalendar()));
+            a.mailto('mail2@example2.com');
+            assert.ok(
+                a._generate().indexOf('EMAIL=mail@example.com') > -1 &&
+                a._generate().indexOf('MAILTO:mail2@example2.com') > -1
+            );
+        });
+    });
+
     describe('role()', function () {
         it('setter should return this', function () {
             const a = new ICalAttendee(null, new ICalEvent(null, new ICalCalendar()));
