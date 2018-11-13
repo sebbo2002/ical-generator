@@ -434,6 +434,18 @@ class ICalEvent {
             });
         }
 
+        if (repeating.bySetPos) {
+            if (!repeating.byDay) {
+                throw '`repeating.bySetPos` must be used along with `repeating.byDay`!';
+            }
+            if(typeof repeating.bySetPos !== 'number' || repeating.bySetPos < -1 || repeating.bySetPos > 4) {
+                throw '`repeating.bySetPos` contains invalid value `' + repeating.bySetPos + '`!';
+            }
+
+            c._data.repeating.byDay = [repeating.byDay[0]];
+            c._data.repeating.bySetPos = repeating.bySetPos;
+        }
+
         if (repeating.exclude) {
             if (!Array.isArray(repeating.exclude)) {
                 repeating.exclude = [repeating.exclude];
@@ -926,6 +938,10 @@ class ICalEvent {
 
             if (this._data.repeating.byMonthDay) {
                 g += ';BYMONTHDAY=' + this._data.repeating.byMonthDay.join(',');
+            }
+
+            if(this._data.repeating.bySetPos) {
+                g += ';BYSETPOS=' + this._data.repeating.bySetPos;
             }
 
             g += '\r\n';

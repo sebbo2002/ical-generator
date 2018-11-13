@@ -335,6 +335,7 @@ event.repeating({
     byDay: ['su', 'mo'], // repeat only sunday and monday
     byMonth: [1, 2], // repeat only in january und february,
     byMonthDay: [1, 15], // repeat only on the 1st and 15th
+    bySetPos: 3, // repeat every 3rd sunday (will take the first element of the byDay array)
     exclude: [new Date('Dec 25 2013 00:00:00 UTC')] // exclude these dates
 });
 ```
