@@ -704,6 +704,58 @@ describe('ical-generator Event', function () {
             assert.deepEqual(e._data.repeating.byMonthDay, [1, 15]);
         });
 
+        it('should throw error when repeating.bySetPos is not valid', function () {
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'MONTHLY',
+                        interval: 2,
+                        byDay: ['SU'],
+                        bySetPos: 6
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.bySetPos` contains invalid value `6`/);
+
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'MONTHLY',
+                        interval: 2,
+                        byDay: ['SU'],
+                        bySetPos: 'FOO'
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.bySetPos` contains invalid value `FOO`/);
+        });
+
+        it('should throw error when repeating.byDay is not present with repeating.bySetPos', function () {
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'MONTHLY',
+                        interval: 2,
+                        bySetPos: 6
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.bySetPos` must be used along with `repeating\.byDay`/);
+        });
+
+        it('setter should update repeating.bySetPos', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+
+            e.repeating({freq: 'monthly', byDay: ['SU'], bySetPos: 2});
+            assert.equal(e._data.repeating.bySetPos, 2);
+        });
+
         it('should throw error when repeating.exclude is not valid', function () {
             assert.throws(function () {
                 new ICalEvent({
