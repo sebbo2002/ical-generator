@@ -312,7 +312,7 @@ class ICalCalendar {
      * @returns {String}
      */
     toURL() {
-        const blob = new Blob(this._generate(), {type: 'text/calendar'});
+        const blob = new Blob([this._generate()], {type: 'text/calendar'});
         return URL.createObjectURL(blob);
     }
 
