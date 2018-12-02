@@ -12,8 +12,6 @@ prepare:
   script:
     - yarn install
     - tar -czf "node_modules.tar.gz" ./node_modules
-  except:
-    - tags
   artifacts:
     paths:
       - node_modules.tar.gz
