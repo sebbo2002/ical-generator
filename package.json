@@ -11,7 +11,7 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "moment-timezone": "^0.5.21"
+    "moment-timezone": "^0.5.23"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -26,6 +26,8 @@
     "mocha": "^5.2.0",
     "mochawesome": "^3.0.3",
     "moment": "^2.22.2",
+    "npm-check": "^5.9.0",
+    "nsp": "^3.2.1",
     "nyc": "^13.1.0",
     "plato": "^1.7.0",
     "portfinder": "^1.0.17",
@@ -37,18 +39,17 @@
   },
   "scripts": {
     "all": "npm run check && npm run visualize && npm run tests && npm run build",
-    "check": "npm run check:eslint",
+    "check": "npm run check:eslint && npm run check:npm && npm run check:nsp",
     "check:eslint": "eslint ./examples ./src ./test/*.js",
+    "check:quick": "npm run check:eslint && npm run check:nsp",
+    "check:nsp": "nsp check",
+    "check:npm": "npm-check -s -p",
     "visualize": "plato -rt ical-generator -d ./code-visualization -e ./.eslintrc.json ./src/*.js",
     "tests": "npm run test && npm run coverage",
     "test": "mocha -c --reporter mochawesome --reporter-options reportDir=test-result/test,reportFilename=report,json=false ./test/*.js",
     "coverage": "nyc --reporter=html --reporter=text --report-dir ./test-result/coverage --check-coverage mocha -c ./test/*.js",
     "browser-test": "webpack && mkdir -p ./test-result/browser-test && cp ./test/html/index.html ./test-result/browser-test && cp ./node_modules/mocha/mocha.css ./test-result/browser-test && cp ./node_modules/jquery/dist/jquery.min.js  ./test-result/browser-test && cp ./node_modules/mocha/mocha.js ./test-result/browser-test && cp ./node_modules/moment/moment.js ./test-result/browser-test && open ./test-result/browser-test/index.html",
-    "bump:reset": "export MODULEVERSION=$(npm view ical-generator version) && npm run bump:reset:save",
-    "bump:reset:next": "export MODULEVERSION=$(npm view ical-generator@next version) && npm run bump:reset:save",
-    "bump:reset:save": "echo $MODULEVERSION && npm --no-git-tag-version version ${MODULEVERSION}",
-    "bump:develop": "npm run bump:reset:next && npm --no-git-tag-version version ${DEVELOP_BUMP:-prerelease}",
-    "bump:production": "npm run bump:reset && npm --no-git-tag-version version ${PRODUCTION_BUMP:-patch}",
+    "bump": "jq -M \".version=\\\"$CI_COMMIT_TAG\\\"\" package.json|sponge package.json",
     "build": "babel src --presets babel-preset-es2015 --out-dir dist"
   },
   "preferGlobal": false,
