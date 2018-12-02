@@ -175,8 +175,7 @@ publish_npm:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
     - npm run build
-    - npm run bump:production
-    - echo $(cat ./package.json | jq '.version' -rce)
+    - npm run bump
     - npm publish
   only:
-    - master
+    - tags
