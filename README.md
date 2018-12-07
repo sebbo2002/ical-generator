@@ -220,7 +220,7 @@ cal.events(); // --> [ICalEvent]
 ```
 
 
-#### save(**_String_ file**[, _Function_ cb])
+#### save(**_String_ file**, _Function_ cb)
 
 Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback). Won't work in browsers.
 
@@ -269,7 +269,7 @@ Empty the Calender.
 
 ### Event
 
-#### uid([_String_|_Number_ uid]) or id([_String_|_Number_ id])
+#### uid([_String_ uid]) or id([_String_ id])
 
 Use this method to set the event's ID. If not set, an UID will be generated randomly.  When output, the ID will be suffixed with '@' + your calendar's domain.
 
