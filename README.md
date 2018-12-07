@@ -269,7 +269,7 @@ Empty the Calender.
 
 ### Event
 
-#### uid([_String_ uid]) or id([_String_ id])
+#### uid([_String_|_Number_ uid]) or id([_String_|_Number_ id])
 
 Use this method to set the event's ID. If not set, an UID will be generated randomly.  When output, the ID will be suffixed with '@' + your calendar's domain.
 
