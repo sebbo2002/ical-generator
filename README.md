@@ -132,7 +132,7 @@ server's one (`require('os').hostname()`).
 
 #### prodId([_String_|_Object_ prodId])
 
-Use this method to overwrite the default Product Identifier (`//sebbo.net//ical-generator//EN`). `prodId` can be ether
+Use this method to overwrite the default Product Identifier (`//sebbo.net//ical-generator//EN`). `prodId` can be either
 a valid Product Identifier or an object:
 
 ```javascript
@@ -220,19 +220,19 @@ cal.events(); // --> [ICalEvent]
 ```
 
 
-#### save(**_String_ file**[, _Function_ cb])
+#### save(**_String_ file**, _Function_ cb)
 
-Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback). Woun't work in browsers.
+Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback). Won't work in browsers.
 
 
 #### saveSync(**_String_ file**)
 
-Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options). Woun't work in browsers.
+Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options). Won't work in browsers.
 
 
 #### serve(**_http.ServerResponse_ response**)
 
-Send Calendar to the User when using HTTP. See Quick Start above. Woun't work in browsers.
+Send Calendar to the User when using HTTP. See Quick Start above. Won't work in browsers.
 
 
 #### toURL()
@@ -247,7 +247,7 @@ Return Calendar as a String.
 
 #### toJSON()
 
-Return a shallow copy of the calendar's options for JSON stringification. Can be used for persistance.
+Return a shallow copy of the calendar's options for JSON stringification. Can be used for persistence.
 ```javascript
 const cal = ical();
 const json = JSON.stringify(cal);
@@ -258,7 +258,7 @@ cal = ical(json);
 
 #### length()
 
-Returns the ammount of events in the calendar.
+Returns the amount of events in the calendar.
 
 
 #### clear()
@@ -556,7 +556,7 @@ Set the attendee's type. May be one of the following: `individual`, `group`, `re
 
 #### delegatesTo(**_ICalAttendee_|_Object_ attendee**)
 
-Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
+Creates a new Attendee if the passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
 
 ```javascript
 const cal = ical();
@@ -569,7 +569,7 @@ attendee.delegatesTo({email: 'foo@bar.com', name: 'Foo'});
 
 #### delegatesFrom(**_ICalAttendee_|_Object_ attendee**)
 
-Creates a new Attendee if passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
+Creates a new Attendee if the passed object is not already an attendee. Will set the delegatedTo and delegatedFrom attributes.
 
 ```javascript
 const cal = ical();
@@ -584,7 +584,7 @@ attendee.delegatesFrom({email: 'foo@bar.com', name: 'Foo'});
 
 #### type([_String_ type])
 
-Use this method to set the alarm type. Right now, `audio` and `display` is supported.
+Use this method to set the alarm type. Right now, `audio` and `display` are supported.
 
 
 #### trigger([_Number_|_moment_|_Date_ trigger]) / triggerBefore([_Number_|_moment_|_Date_ trigger])

@@ -277,7 +277,7 @@ class ICalCalendar {
      * Save ical file with `fs.saveSync`. Only works in node.js environments.
      *
      * @param {String} path Filepath
-     * @returns {Number{ Number of Bytes written
+     * @returns {Number} Number of Bytes written
      */
     saveSync(path) {
         return require('fs').writeFileSync(path, this._generate());
