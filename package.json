@@ -41,7 +41,7 @@
     "all": "npm run check && npm run visualize && npm run tests && npm run build",
     "check": "npm run check:eslint && npm run check:npm && npm run check:nsp",
     "check:eslint": "eslint ./examples ./src ./test/*.js",
-    "check:quick": "npm run check:eslint && npm run check:nsp",
+    "check:quick": "npm run check:eslint",
     "check:nsp": "npm_config_audit_level=moderate npm audit",
     "check:npm": "npm-check -s -p",
     "visualize": "plato -rt ical-generator -d ./code-visualization -e ./.eslintrc.json ./src/*.js",
