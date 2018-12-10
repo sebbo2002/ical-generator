@@ -1,8 +1,10 @@
 /// <reference types="node" />
 
-import * as moment from 'moment';
-
 declare module 'ical-generator' {
+  /** Imports must be inside the module declaration */
+  import moment from 'moment';
+  import http from 'http';
+
   /**
    * Tool for generating iCal calendar data
    * Exports a function that can be used to generate a calendar object
@@ -149,7 +151,7 @@ declare module 'ical-generator' {
       events(events: EventData[]): ICalCalendar;
       save(path: string, cb: Function): ICalCalendar;
       saveSync(path: string): number;
-      serve(respone: Response, filename: string): ICalCalendar;
+      serve(respone: http.ServerResponse, filename: string): ICalCalendar;
       toString(): string;
       toJSON(): any;
       length(): number;
@@ -219,7 +221,7 @@ declare module 'ical-generator' {
       type(): attendeeType;
       type(type: attendeeType): ICalAttendee;
       delegatedTo(): string | ICalAttendee;
-      delegatedTo(attendee: string | ICalAttendee);
+      delegatedTo(attendee: string | ICalAttendee): ICalAttendee;
       delegatedFrom(): string | ICalAttendee;
       delegatedFrom(attendee: string | ICalAttendee): ICalAttendee;
       delegatesTo(attendee: ICalAttendee | string | AttendeeData): ICalAttendee;
