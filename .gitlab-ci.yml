@@ -31,7 +31,7 @@ node_6:
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
-    - npm run checK:quick
+    - npm run check:quick
 
 node_7:
   image: node:7
@@ -46,7 +46,7 @@ node_7:
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
-    - npm run checK:quick
+    - npm run check:quick
 
 node_8:
   image: node:8
@@ -61,7 +61,7 @@ node_8:
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
-    - npm run checK:quick
+    - npm run check:quick
 
 node_9:
   image: node:9
@@ -76,7 +76,7 @@ node_9:
   script:
     - tar -xzf "node_modules.tar.gz" -C .
     - rm -f ./node_modules.tar.gz
-    - npm run checK:quick
+    - npm run check:quick
 
 node_10:
   image: node:10
