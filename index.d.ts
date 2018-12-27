@@ -2,8 +2,8 @@
 
 declare module 'ical-generator' {
   /** Imports must be inside the module declaration */
-  import moment from 'moment';
-  import http from 'http';
+  import { Moment } from 'moment';
+  import { ServerResponse } from 'http';
 
   /**
    * Tool for generating iCal calendar data
@@ -53,12 +53,12 @@ declare module 'ical-generator' {
      * Information used to create calendar events
      */
     interface EventData {
-      start: moment.Moment | Date;
+      start: Moment | Date;
       summary: string;
       id?: string;
       uid?: string;
-      end?: moment.Moment | Date;
-      stamp?: moment.Moment | Date;
+      end?: Moment | Date;
+      stamp?: Moment | Date;
       description?: string;
       location?: string;
       url?: string;
@@ -78,12 +78,12 @@ declare module 'ical-generator' {
       freq: repeatingFreq;
       count?: number;
       interval?: number;
-      until?: string | moment.Moment | Date;
+      until?: string | Moment | Date;
       byDay?: day[];
       byMonth?: number[];
       byMonthDay?: number[];
       bySetPos?: number;
-      exclude?: moment.Moment[] | Date[];
+      exclude?: Moment[] | Date[];
     }
 
     /**
@@ -112,9 +112,9 @@ declare module 'ical-generator' {
 
     interface AlarmData {
       type?: alarmType;
-      trigger?: number | moment.Moment | Date;
-      triggerBefore?: number | moment.Moment | Date;
-      triggerAfter?: number | moment.Moment | Date;
+      trigger?: number | Moment | Date;
+      triggerBefore?: number | Moment | Date;
+      triggerAfter?: number | Moment | Date;
       repeat?: number;
       interval?: number;
       attach?: string | Attachment;
@@ -151,7 +151,7 @@ declare module 'ical-generator' {
       events(events: EventData[]): ICalCalendar;
       save(path: string, cb: Function): ICalCalendar;
       saveSync(path: string): number;
-      serve(respone: http.ServerResponse, filename: string): ICalCalendar;
+      serve(respone: ServerResponse, filename: string): ICalCalendar;
       toString(): string;
       toJSON(): any;
       length(): number;
@@ -166,14 +166,14 @@ declare module 'ical-generator' {
       uid(id: string): ICalEvent;
       sequence(): number;
       sequence(sequence: number): ICalEvent;
-      start(): moment.Moment;
-      start(start: string | moment.Moment |  Date): ICalEvent;
-      end(): moment.Moment;
-      end(end: string | moment.Moment | Date): ICalEvent;
+      start(): Moment;
+      start(start: string | Moment |  Date): ICalEvent;
+      end(): Moment;
+      end(end: string | Moment | Date): ICalEvent;
       timezone(): string;
       timezone(timezone: string): ICalEvent;
-      stamp(): moment.Moment;
-      stamp(stamp: string | moment.Moment | Date): ICalEvent;
+      stamp(): Moment;
+      stamp(stamp: string | Moment | Date): ICalEvent;
       allDay(): boolean;
       allDay(allDay: boolean): ICalEvent;
       floating(): boolean;
@@ -233,12 +233,12 @@ declare module 'ical-generator' {
       constructor(data: AlarmData);
       type(): alarmType;
       type(type: alarmType): ICalAlarm;
-      trigger(): number | moment.Moment;
-      trigger(delay: number | moment.Moment | Date | null): ICalAlarm;
-      triggerAfter(): number | moment.Moment;
-      triggerAfter(delay: number | moment.Moment | Date): ICalAlarm;
-      triggerBefore(): number | moment.Moment;
-      triggerBefore(delay: number | moment.Moment | Date): ICalAlarm;
+      trigger(): number | Moment;
+      trigger(delay: number | Moment | Date | null): ICalAlarm;
+      triggerAfter(): number | Moment;
+      triggerAfter(delay: number | Moment | Date): ICalAlarm;
+      triggerBefore(): number | Moment;
+      triggerBefore(delay: number | Moment | Date): ICalAlarm;
       repeat(): number;
       repeat(times: number): ICalAlarm;
       interval(): number;
