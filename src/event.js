@@ -91,8 +91,8 @@ class ICalEvent {
      *
      * @param id ID
      * @since 0.2.0
-     * @param {string} [id]
-     * @returns {ICalEvent|String}
+     * @param {string|number} [id]
+     * @returns {ICalEvent|string|number}
      */
     id(id) {
         if (!id) {
@@ -109,8 +109,8 @@ class ICalEvent {
      * @param id ID
      * @since 0.2.0
      * @alias id
-     * @param {string} [id]
-     * @returns {ICalEvent|String}
+     * @param {string|number} [id]
+     * @returns {ICalEvent|string|number}
      */
     uid(id) {
         return this.id(id);
