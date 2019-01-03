@@ -20,26 +20,26 @@ describe('ical-generator Category', function () {
                 name: 'FOO'
             }, new ICalEvent(null, new ICalCalendar()));
 
-            assert.equal(a.name(), 'FOO');
+            assert.strictEqual(a.name(), 'FOO');
         });
     });
 
     describe('name()', function () {
         it('setter should return this', function () {
             const c = new ICalCategory(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(c, c.name(null));
-            assert.deepEqual(c, c.name('FOO'));
+            assert.deepStrictEqual(c, c.name(null));
+            assert.deepStrictEqual(c, c.name('FOO'));
         });
 
         it('getter should return value', function () {
             const c = new ICalCategory(null, new ICalEvent(null, new ICalCalendar()));
-            assert.equal(c.name(), null);
+            assert.strictEqual(c.name(), null);
 
             c.name('HELLO-WORLD');
-            assert.equal(c.name(), 'HELLO-WORLD');
+            assert.strictEqual(c.name(), 'HELLO-WORLD');
 
             c.name(null);
-            assert.equal(c.name(), null);
+            assert.strictEqual(c.name(), null);
         });
 
         it('should change something', function () {
@@ -51,7 +51,7 @@ describe('ical-generator Category', function () {
     describe('toJSON()', function () {
         it('should contain valued previously set', function () {
             const c = new ICalCategory({name: 'FOOBAR'}, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(c.toJSON(), {name: 'FOOBAR'});
+            assert.deepStrictEqual(c.toJSON(), {name: 'FOOBAR'});
         });
     });
 
