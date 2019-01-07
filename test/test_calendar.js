@@ -13,7 +13,7 @@ describe('ical-generator Calendar', function () {
 
         it('shoud load json export', function () {
             const cal = new ICalCalendar('{"name":"hello-world"}');
-            assert.equal(cal._data.name, 'hello-world');
+            assert.strictEqual(cal._data.name, 'hello-world');
         });
     });
 
@@ -21,17 +21,17 @@ describe('ical-generator Calendar', function () {
         it('getter should return value', function () {
             const cal = new ICalCalendar();
             cal._data.domain = 'loremipsum.de';
-            assert.equal(cal.domain(), 'loremipsum.de');
+            assert.strictEqual(cal.domain(), 'loremipsum.de');
         });
 
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal, cal.domain('localhost'));
+            assert.deepStrictEqual(cal, cal.domain('localhost'));
         });
 
         it('setter should save value in _data', function () {
             const cal = new ICalCalendar().domain('loremipsum.de');
-            assert.equal(cal._data.domain, 'loremipsum.de');
+            assert.strictEqual(cal._data.domain, 'loremipsum.de');
         });
     });
 
@@ -39,12 +39,12 @@ describe('ical-generator Calendar', function () {
         it('getter should return value', function () {
             const cal = new ICalCalendar();
             cal._data.prodid = '//loremipsum.de//ical-tests//EN';
-            assert.equal(cal.prodId(), '//loremipsum.de//ical-tests//EN');
+            assert.strictEqual(cal.prodId(), '//loremipsum.de//ical-tests//EN');
         });
 
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal, cal.prodId('//loremipsum.de//ical-tests//EN'));
+            assert.deepStrictEqual(cal, cal.prodId('//loremipsum.de//ical-tests//EN'));
         });
 
         it('should throw error when string misformed', function () {
@@ -85,7 +85,7 @@ describe('ical-generator Calendar', function () {
                 product: 'awesome-unit-tests'
             });
 
-            assert.equal(cal._data.prodid, '//loremipsum.com//awesome-unit-tests//EN');
+            assert.strictEqual(cal._data.prodid, '//loremipsum.com//awesome-unit-tests//EN');
         });
 
         it('should change something #2', function () {
@@ -95,26 +95,26 @@ describe('ical-generator Calendar', function () {
                 language: 'DE'
             });
 
-            assert.equal(cal._data.prodid, '//loremipsum.com//awesome-unit-tests//DE');
+            assert.strictEqual(cal._data.prodid, '//loremipsum.com//awesome-unit-tests//DE');
         });
     });
 
     describe('method()', function () {
         it('setter should return this', function () {
             const c = new ICalCalendar();
-            assert.deepEqual(c, c.method(null), 'method(null)');
-            assert.deepEqual(c, c.method('publish'), 'method(string)');
+            assert.deepStrictEqual(c, c.method(null), 'method(null)');
+            assert.deepStrictEqual(c, c.method('publish'), 'method(string)');
         });
 
         it('getter should return value', function () {
             const c = new ICalCalendar();
-            assert.equal(c.method(), null);
+            assert.strictEqual(c.method(), null);
             c.method(null);
-            assert.equal(c.method(), null);
+            assert.strictEqual(c.method(), null);
             c.method('publish');
-            assert.equal(c.method(), 'PUBLISH');
+            assert.strictEqual(c.method(), 'PUBLISH');
             c.method(null);
-            assert.equal(c.method(), null);
+            assert.strictEqual(c.method(), null);
         });
 
         it('should throw error when method not allowed', function () {
@@ -126,27 +126,27 @@ describe('ical-generator Calendar', function () {
 
         it('should change something', function () {
             const c = new ICalCalendar({method: 'publish'});
-            assert.equal(c._data.method, 'PUBLISH');
+            assert.strictEqual(c._data.method, 'PUBLISH');
 
             c.method('add');
-            assert.equal(c._data.method, 'ADD');
+            assert.strictEqual(c._data.method, 'ADD');
         });
     });
 
     describe('name()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal, cal.name(null));
-            assert.deepEqual(cal, cal.name('Testevents'));
+            assert.deepStrictEqual(cal, cal.name(null));
+            assert.deepStrictEqual(cal, cal.name('Testevents'));
         });
 
         it('getter should return value', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.name(), null);
+            assert.strictEqual(cal.name(), null);
             cal.name('Testevents');
-            assert.equal(cal.name(), 'Testevents');
+            assert.strictEqual(cal.name(), 'Testevents');
             cal.name(null);
-            assert.equal(cal.name(), null);
+            assert.strictEqual(cal.name(), null);
         });
 
         it('should change something', function () {
@@ -155,24 +155,24 @@ describe('ical-generator Calendar', function () {
                 start: new Date(),
                 summary: 'Example Event'
             });
-            assert.equal(cal._data.name, 'Testevents');
+            assert.strictEqual(cal._data.name, 'Testevents');
         });
     });
 
     describe('description()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal, cal.description(null));
-            assert.deepEqual(cal, cal.description('Testbeschreibung'));
+            assert.deepStrictEqual(cal, cal.description(null));
+            assert.deepStrictEqual(cal, cal.description('Testbeschreibung'));
         });
 
         it('getter should return value', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.description(), null);
+            assert.strictEqual(cal.description(), null);
             cal.description('Testbeschreibung');
-            assert.equal(cal.description(), 'Testbeschreibung');
+            assert.strictEqual(cal.description(), 'Testbeschreibung');
             cal.description(null);
-            assert.equal(cal.description(), null);
+            assert.strictEqual(cal.description(), null);
         });
 
         it('should change something', function () {
@@ -189,15 +189,15 @@ describe('ical-generator Calendar', function () {
     describe('timezone()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal, cal.timezone('Europe/Berlin'));
+            assert.deepStrictEqual(cal, cal.timezone('Europe/Berlin'));
         });
 
         it('getter should return value', function () {
             const cal = new ICalCalendar().timezone('Europe/Berlin');
-            assert.equal(cal.timezone(), 'Europe/Berlin');
+            assert.strictEqual(cal.timezone(), 'Europe/Berlin');
 
             cal.timezone(null);
-            assert.equal(cal.timezone(), null);
+            assert.strictEqual(cal.timezone(), null);
         });
 
         it('should make a difference to iCal output', function () {
@@ -208,44 +208,44 @@ describe('ical-generator Calendar', function () {
                 summary: 'Example Event'
             });
 
-            assert.equal(cal._data.timezone, 'Europe/London');
+            assert.strictEqual(cal._data.timezone, 'Europe/London');
         });
     });
 
     describe('ttl()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal.ttl(60 * 60 * 24), cal);
-            assert.deepEqual(cal.ttl(moment.duration(2, 'days')), cal);
-            assert.deepEqual(cal.ttl(null), cal);
+            assert.deepStrictEqual(cal.ttl(60 * 60 * 24), cal);
+            assert.deepStrictEqual(cal.ttl(moment.duration(2, 'days')), cal);
+            assert.deepStrictEqual(cal.ttl(null), cal);
         });
 
         it('getter should return value', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.ttl(), null);
+            assert.strictEqual(cal.ttl(), null);
             cal.ttl(86400);
-            assert.equal(cal.ttl().as('seconds'), 86400);
+            assert.strictEqual(cal.ttl().as('seconds'), 86400);
         });
 
         it('should change something', function () {
             const cal = new ICalCalendar().ttl(86400);
-            assert.equal(cal._data.ttl.as('seconds'), 86400);
+            assert.strictEqual(cal._data.ttl.as('seconds'), 86400);
         });
     });
 
     describe('url()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepEqual(cal, cal.url('https://example.com/calendar.ical'));
+            assert.deepStrictEqual(cal, cal.url('https://example.com/calendar.ical'));
         });
 
         it('getter should return value', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.url(), null);
+            assert.strictEqual(cal.url(), null);
             cal.url('https://example.com/calendar.ical');
-            assert.equal(cal.url(), 'https://example.com/calendar.ical');
+            assert.strictEqual(cal.url(), 'https://example.com/calendar.ical');
             cal.url(null);
-            assert.equal(cal.url(), null);
+            assert.strictEqual(cal.url(), null);
         });
 
         it('should change something', function () {
@@ -271,7 +271,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             const event = cal.createEvent({summary: 'Patch-Day'});
 
-            assert.equal(event.summary(), 'Patch-Day');
+            assert.strictEqual(event.summary(), 'Patch-Day');
         });
 
         it('should not require optional parameters', function () {
@@ -287,20 +287,20 @@ describe('ical-generator Calendar', function () {
     describe('events()', function () {
         it('getter should return an array of events…', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.events().length, 0);
+            assert.strictEqual(cal.events().length, 0);
 
             const event = cal.createEvent();
-            assert.equal(cal.events().length, 1);
-            assert.deepEqual(cal.events()[0], event);
+            assert.strictEqual(cal.events().length, 1);
+            assert.deepStrictEqual(cal.events()[0], event);
         });
 
         it('setter should add events and return this', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.length(), 0);
+            assert.strictEqual(cal.length(), 0);
 
             const cal2 = cal.events([{summary: 'Event A'}, {summary: 'Event B'}]);
-            assert.equal(cal.length(), 2);
-            assert.deepEqual(cal2, cal);
+            assert.strictEqual(cal.length(), 2);
+            assert.deepStrictEqual(cal2, cal);
         });
     });
 
@@ -311,12 +311,12 @@ describe('ical-generator Calendar', function () {
             const file = path.join(__dirname, 'save.ical');
             const cal = new ICalCalendar();
 
-            assert.deepEqual(cal, cal.save(file, function () {
+            assert.deepStrictEqual(cal, cal.save(file, function () {
                 /*jslint stupid: true */
                 assert.ok(fs.existsSync(file));
                 fs.unlinkSync(file);
 
-                assert.deepEqual(cal, cal.save(file, function () {
+                assert.deepStrictEqual(cal, cal.save(file, function () {
                     assert.ok(fs.existsSync(file));
                     fs.unlinkSync(file);
                     done();
@@ -395,12 +395,12 @@ describe('ical-generator Calendar', function () {
                         const req = http.request({port}, function (res) {
                             let file = '';
 
-                            assert.equal(
+                            assert.strictEqual(
                                 res.headers['content-type'],
                                 'text/calendar; charset=utf-8',
                                 'Header: text/calendar; charset=utf-8'
                             );
-                            assert.equal(
+                            assert.strictEqual(
                                 res.headers['content-disposition'],
                                 'attachment; filename="calendar.ics"',
                                 'Content-Disposition'
@@ -411,7 +411,7 @@ describe('ical-generator Calendar', function () {
                                 file += chunk;
                             });
                             res.on('end', function () {
-                                assert.equal(file, cal.toString());
+                                assert.strictEqual(file, cal.toString());
                                 cb();
                             });
                         });
@@ -438,21 +438,21 @@ describe('ical-generator Calendar', function () {
         it('should work', function () {
             const cal = new ICalCalendar();
             assert.ok(cal.toJSON().prodId.length > 0);
-            assert.equal(cal.toJSON().events.length, 0);
+            assert.strictEqual(cal.toJSON().events.length, 0);
         });
     });
 
     describe('length()', function () {
         it('should work', function () {
             const cal = new ICalCalendar();
-            assert.equal(cal.length(), 0);
+            assert.strictEqual(cal.length(), 0);
 
             cal.createEvent({
                 start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
                 summary: 'Example Event'
             });
-            assert.equal(cal.length(), 1);
+            assert.strictEqual(cal.length(), 1);
         });
     });
 
@@ -464,10 +464,10 @@ describe('ical-generator Calendar', function () {
                 end: new Date(new Date().getTime() + 3600000),
                 summary: 'Example Event'
             });
-            assert.equal(cal.length(), 1);
+            assert.strictEqual(cal.length(), 1);
 
-            assert.deepEqual(cal, cal.clear());
-            assert.equal(cal.length(), 0);
+            assert.deepStrictEqual(cal, cal.clear());
+            assert.strictEqual(cal.length(), 0);
         });
     });
 
