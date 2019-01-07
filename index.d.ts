@@ -55,8 +55,8 @@ declare module 'ical-generator' {
     interface EventData {
       start: moment.Moment | Date;
       summary: string;
-      id?: string;
-      uid?: string;
+      id?: string | number;
+      uid?: string | number;
       end?: moment.Moment | Date;
       stamp?: moment.Moment | Date;
       description?: string;
@@ -160,10 +160,10 @@ declare module 'ical-generator' {
 
     class ICalEvent {
       constructor(data: EventData, calendar: ICalCalendar);
-      id(): string;
-      id(id: string): ICalEvent;
-      uid(): string;
-      uid(id: string): ICalEvent;
+      id(): string | number;
+      id(id: string | number): ICalEvent;
+      uid(): string | number;
+      uid(id: string | number): ICalEvent;
       sequence(): number;
       sequence(sequence: number): ICalEvent;
       start(): moment.Moment;

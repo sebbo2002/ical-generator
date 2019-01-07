@@ -19,10 +19,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_01.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_01.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #2', function() {
@@ -40,10 +40,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_02.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_02.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #3', function() {
@@ -63,10 +63,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'), 'toString');
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_03.ics', 'utf8'), 'toString');
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string, 'toJSON / toString()');
+        assert.strictEqual(ical(json).toString(), string, 'toJSON / toString()');
     });
 
     it('case #4 (repeating)', function() {
@@ -110,10 +110,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_04.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #5 (floating)', function() {
@@ -129,10 +129,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_05.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #6 (attendee with simple delegation and alarm)', function() {
@@ -174,10 +174,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_06.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_06.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #7 (repeating: byDay, byMonth, byMonthDay)', function() {
@@ -221,10 +221,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_07.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_07.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #8', function() {
@@ -248,10 +248,10 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_08.ics', 'utf8'));
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_08.ics', 'utf8'));
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string);
+        assert.strictEqual(ical(json).toString(), string);
     });
 
     it('case #9 (organizer with mailto)', function() {
@@ -278,9 +278,9 @@ describe('ical-generator Cases', function() {
 
         /*jslint stupid: true */
         const string = cal.toString();
-        assert.equal(string, fs.readFileSync(__dirname + '/results/generate_09.ics', 'utf8'), 'toString');
+        assert.strictEqual(string, fs.readFileSync(__dirname + '/results/generate_09.ics', 'utf8'), 'toString');
 
         const json = JSON.stringify(cal.toJSON());
-        assert.equal(ical(json).toString(), string, 'toJSON / toString()');
+        assert.strictEqual(ical(json).toString(), string, 'toJSON / toString()');
     });
 });

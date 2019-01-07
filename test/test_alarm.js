@@ -21,26 +21,26 @@ describe('ical-generator Alarm', function () {
                 type: 'display'
             }, new ICalEvent(null, new ICalCalendar()));
 
-            assert.equal(a.type(), 'display');
+            assert.strictEqual(a.type(), 'display');
         });
     });
 
     describe('type()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.type(null));
-            assert.deepEqual(a, a.type('display'));
+            assert.deepStrictEqual(a, a.type(null));
+            assert.deepStrictEqual(a, a.type('display'));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.equal(a.type(), null);
+            assert.strictEqual(a.type(), null);
 
             a.type('display');
-            assert.equal(a.type(), 'display');
+            assert.strictEqual(a.type(), 'display');
 
             a.type(null);
-            assert.equal(a.type(), null);
+            assert.strictEqual(a.type(), null);
         });
 
         it('should throw error when type not allowed', function () {
@@ -59,20 +59,20 @@ describe('ical-generator Alarm', function () {
     describe('trigger()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.trigger(null));
-            assert.deepEqual(a, a.trigger(60 * 10));
+            assert.deepStrictEqual(a, a.trigger(null));
+            assert.deepStrictEqual(a, a.trigger(60 * 10));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             const now = new Date();
 
-            assert.equal(a.trigger(), null);
-            assert.equal(a.triggerAfter(), null);
+            assert.strictEqual(a.trigger(), null);
+            assert.strictEqual(a.triggerAfter(), null);
 
             a.trigger(300);
-            assert.equal(a.trigger(), 300);
-            assert.equal(a.triggerAfter(), -300);
+            assert.strictEqual(a.trigger(), 300);
+            assert.strictEqual(a.triggerAfter(), -300);
 
             // Date
             a.trigger(now);
@@ -80,8 +80,8 @@ describe('ical-generator Alarm', function () {
 
             // Null
             a.trigger(null);
-            assert.equal(a.trigger(), null);
-            assert.equal(a.triggerAfter(), null);
+            assert.strictEqual(a.trigger(), null);
+            assert.strictEqual(a.triggerAfter(), null);
         });
 
         it('should throw error when trigger not allowed', function () {
@@ -101,7 +101,7 @@ describe('ical-generator Alarm', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.trigger(60 * 10);
             a.trigger(null);
-            assert.equal(a._data.trigger, null);
+            assert.strictEqual(a._data.trigger, null);
         });
 
         it('setter should work with date', function () {
@@ -119,13 +119,13 @@ describe('ical-generator Alarm', function () {
         it('setter should work with moment.duration', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.trigger(moment.duration(2, 'minutes'));
-            assert.equal(a._data.trigger, -120);
+            assert.strictEqual(a._data.trigger, -120);
         });
 
         it('setter should work with number', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.trigger(2 * 60);
-            assert.equal(a._data.trigger, -120);
+            assert.strictEqual(a._data.trigger, -120);
         });
 
         it('should change something', function () {
@@ -142,25 +142,25 @@ describe('ical-generator Alarm', function () {
     describe('triggerAfter()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.triggerAfter(60 * 10));
+            assert.deepStrictEqual(a, a.triggerAfter(60 * 10));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar())).triggerAfter(300);
-            assert.equal(a.triggerAfter(), 300);
-            assert.equal(a.trigger(), -300);
+            assert.strictEqual(a.triggerAfter(), 300);
+            assert.strictEqual(a.trigger(), -300);
         });
 
         it('setter should work with moment.duration', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.triggerAfter(moment.duration(2, 'minutes'));
-            assert.equal(a._data.trigger, -120);
+            assert.strictEqual(a._data.trigger, -120);
         });
 
         it('setter should work with number', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.triggerAfter(120);
-            assert.equal(a._data.trigger, 120);
+            assert.strictEqual(a._data.trigger, 120);
         });
 
         it('setter should throw error when trigger not allowed', function () {
@@ -190,18 +190,18 @@ describe('ical-generator Alarm', function () {
     describe('triggerBefore()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.triggerBefore(null));
-            assert.deepEqual(a, a.triggerBefore(60 * 10));
+            assert.deepStrictEqual(a, a.triggerBefore(null));
+            assert.deepStrictEqual(a, a.triggerBefore(60 * 10));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             const now = new Date();
 
-            assert.equal(a.triggerBefore(), null);
+            assert.strictEqual(a.triggerBefore(), null);
 
             a.trigger(300);
-            assert.equal(a.triggerBefore(), 300);
+            assert.strictEqual(a.triggerBefore(), 300);
 
             // Date
             a.trigger(now);
@@ -209,7 +209,7 @@ describe('ical-generator Alarm', function () {
 
             // Null
             a.trigger(null);
-            assert.equal(a.triggerBefore(), null);
+            assert.strictEqual(a.triggerBefore(), null);
         });
 
         it('should throw error when trigger not allowed', function () {
@@ -229,7 +229,7 @@ describe('ical-generator Alarm', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.triggerBefore(60 * 10);
             a.triggerBefore(null);
-            assert.equal(a._data.trigger, null);
+            assert.strictEqual(a._data.trigger, null);
         });
 
         it('setter should work with date', function () {
@@ -247,13 +247,13 @@ describe('ical-generator Alarm', function () {
         it('setter should work with moment.duration', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.triggerBefore(moment.duration(2, 'minutes'));
-            assert.equal(a._data.trigger, -120);
+            assert.strictEqual(a._data.trigger, -120);
         });
 
         it('setter should work with number', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
             a.triggerBefore(2 * 60);
-            assert.equal(a._data.trigger, -120);
+            assert.strictEqual(a._data.trigger, -120);
         });
 
         it('should change something', function () {
@@ -270,17 +270,17 @@ describe('ical-generator Alarm', function () {
     describe('repeat()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.repeat(null));
-            assert.deepEqual(a, a.repeat(4));
+            assert.deepStrictEqual(a, a.repeat(null));
+            assert.deepStrictEqual(a, a.repeat(4));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.equal(a.repeat(), null);
+            assert.strictEqual(a.repeat(), null);
             a.repeat(100);
-            assert.equal(a.repeat(), 100);
+            assert.strictEqual(a.repeat(), 100);
             a.repeat(null);
-            assert.equal(a.repeat(), null);
+            assert.strictEqual(a.repeat(), null);
         });
 
         it('should throw error if repeat not allowed', function () {
@@ -310,17 +310,17 @@ describe('ical-generator Alarm', function () {
     describe('interval()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.interval(null));
-            assert.deepEqual(a, a.interval(60));
+            assert.deepStrictEqual(a, a.interval(null));
+            assert.deepStrictEqual(a, a.interval(60));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.equal(a.interval(), null);
+            assert.strictEqual(a.interval(), undefined);
             a.interval(30);
-            assert.equal(a.interval(), 30);
+            assert.strictEqual(a.interval(), 30);
             a.interval(null);
-            assert.equal(a.interval(), null);
+            assert.strictEqual(a.interval(), null);
         });
 
         it('should throw error if repeat not allowed', function () {
@@ -350,21 +350,21 @@ describe('ical-generator Alarm', function () {
     describe('attach()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.attach(null));
-            assert.deepEqual(a, a.attach('https://sebbo.net/beep.aud'));
+            assert.deepStrictEqual(a, a.attach(null));
+            assert.deepStrictEqual(a, a.attach('https://sebbo.net/beep.aud'));
         });
 
         it('getter should return value', function () {
             const t = {uri: 'https://example.com/alarm.aud', mime: 'audio/basic'};
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
 
-            assert.equal(a.attach(), null);
+            assert.strictEqual(a.attach(), null);
 
             a.attach(t);
-            assert.deepEqual(a.attach(), t);
+            assert.deepStrictEqual(a.attach(), t);
 
             a.attach('https://www.example.com/beep.aud');
-            assert.deepEqual(a.attach(), {
+            assert.deepStrictEqual(a.attach(), {
                 uri: 'https://www.example.com/beep.aud',
                 mime: null
             });
@@ -372,13 +372,13 @@ describe('ical-generator Alarm', function () {
             a.attach({
                 uri: 'https://www.example.com/beep.aud'
             });
-            assert.deepEqual(a.attach(), {
+            assert.deepStrictEqual(a.attach(), {
                 uri: 'https://www.example.com/beep.aud',
                 mime: null
             });
 
             a.attach(null);
-            assert.equal(a.attach(), null);
+            assert.strictEqual(a.attach(), null);
         });
 
         it('should throw error withour uri', function () {
@@ -416,17 +416,17 @@ describe('ical-generator Alarm', function () {
     describe('description()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a, a.description(null));
-            assert.deepEqual(a, a.description('Hey Ho!'));
+            assert.deepStrictEqual(a, a.description(null));
+            assert.deepStrictEqual(a, a.description('Hey Ho!'));
         });
 
         it('getter should return value', function () {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
-            assert.deepEqual(a.description(), null);
+            assert.deepStrictEqual(a.description(), null);
             a.description('blablabla');
-            assert.deepEqual(a.description(), 'blablabla');
+            assert.deepStrictEqual(a.description(), 'blablabla');
             a.description(null);
-            assert.deepEqual(a.description(), null);
+            assert.deepStrictEqual(a.description(), null);
         });
 
         it('should change something', function () {
@@ -456,7 +456,7 @@ describe('ical-generator Alarm', function () {
             a.type('display');
             a.triggerBefore(120);
 
-            assert.deepEqual(a.toJSON(), {
+            assert.deepStrictEqual(a.toJSON(), {
                 type: 'display',
                 trigger: 120
             });
