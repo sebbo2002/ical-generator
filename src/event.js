@@ -329,6 +329,7 @@ class ICalEvent {
      * @param {String} [repeating.byDay]
      * @param {Number} [repeating.byMonth]
      * @param {Number} [repeating.byMonthDay]
+     * @param {Number} [repeating.byYearDay]
      * @param {Array<Date|moment|String>} [repeating.excluded]
      * @since 0.2.0
      * @returns {ICalEvent|Object}
@@ -431,6 +432,21 @@ class ICalEvent {
                 }
 
                 c._data.repeating.byMonthDay.push(monthDay);
+            });
+        }
+
+        if (repeating.byYearDay) {
+            if (!Array.isArray(repeating.byYearDay)) {
+                repeating.byYearDay = [repeating.byYearDay];
+            }
+
+            c._data.repeating.byYearDay = [];
+            repeating.byYearDay.forEach(function (yearDay) {
+                if (typeof yearDay !== 'number' || yearDay < 1 || yearDay > 366) {
+                    throw new Error('`repeating.byYearDay` contains invalid value `' + yearDay + '`!');
+                }
+
+                c._data.repeating.byYearDay.push(yearDay);
             });
         }
 
@@ -938,6 +954,10 @@ class ICalEvent {
 
             if (this._data.repeating.byMonthDay) {
                 g += ';BYMONTHDAY=' + this._data.repeating.byMonthDay.join(',');
+            }
+
+            if (this._data.repeating.byYearDay) {
+                g += ';BYYEARDAY=' + this._data.repeating.byYearDay.join(',');
             }
 
             if(this._data.repeating.bySetPos) {
