@@ -10,7 +10,7 @@ calendar feeds.
 
 ## Installation
 
-	npm install ical-generator
+	npm install ical-generator-edtex
 
 
 ## Quick Start

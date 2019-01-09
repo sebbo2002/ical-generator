@@ -1,12 +1,12 @@
 'use strict';
 
-const ical = require('ical-generator');
+const ical = require('ical-generator-edtex');
 const moment = require('moment');
 const express = require('express');
 
 const cal = ical({
     domain: 'example.com',
-    prodId: '//superman-industries.com//ical-generator//EN',
+    prodId: '//superman-industries.com//ical-generator-edtex//EN',
     events: [
         {
             start: moment(),

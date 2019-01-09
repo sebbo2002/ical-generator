@@ -3,7 +3,7 @@
 const assert = require('assert');
 const ical = require(__dirname + '/../src');
 
-describe('ical-generator Index', function() {
+describe('ical-generator-edtex Index', function() {
     it('should be a function', function() {
         assert.strictEqual(typeof ical, 'function');
     });

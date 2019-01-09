@@ -1,6 +1,6 @@
 /// <reference types="node" />
 
-declare module 'ical-generator' {
+declare module 'ical-generator-edtex' {
   /** Imports must be inside the module declaration */
   import moment from 'moment';
   import http from 'http';

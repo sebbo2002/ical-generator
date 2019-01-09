@@ -1,5 +1,6 @@
 {
-  "name": "ical-generator",
+  "name": "ical-generator-edtex",
+  "version": "v0.1.0",
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <mail@sebbo.net>",
   "license": "MIT",

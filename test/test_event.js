@@ -5,7 +5,7 @@ const moment = require('moment-timezone');
 const ICalCalendar = require('../src/calendar');
 const ICalEvent = require('../src/event');
 
-describe('ical-generator Event', function () {
+describe('ical-generator-edtex Event', function () {
     describe('constructor()', function () {
         it('shoud set _data', function () {
             const event = new ICalEvent(null, new ICalCalendar());
@@ -1265,8 +1265,8 @@ describe('ical-generator Event', function () {
                 summary: 'Example Event'
             }, new ICalCalendar());
 
-            event.url('http://github.com/sebbo2002/ical-generator');
-            assert.strictEqual(event._data.url, 'http://github.com/sebbo2002/ical-generator');
+            event.url('http://github.com/sebbo2002/ical-generator-edtex');
+            assert.strictEqual(event._data.url, 'http://github.com/sebbo2002/ical-generator-edtex');
         });
     });
 
@@ -1404,7 +1404,7 @@ describe('ical-generator Event', function () {
         });
 
         /*it('case #1', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN'});
             cal.createEvent({
                 id: '123',
                 start: moment('2013-10-04T22:39:30Z'),
@@ -1423,7 +1423,7 @@ describe('ical-generator Event', function () {
         });
 
         it('case #2', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN'});
             cal.createEvent({
                 id: '123',
                 start: moment('2013-10-04T22:39:30.000Z'),
@@ -1444,7 +1444,7 @@ describe('ical-generator Event', function () {
         });
 
         it('case #3', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN', method: 'add'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN', method: 'add'});
             cal.createEvent({
                 id: '123',
                 start: moment('2013-10-04T22:39:30.000Z'),
@@ -1467,7 +1467,7 @@ describe('ical-generator Event', function () {
         });
 
         it('case #4 (repeating)', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN'});
             cal.events([
                 {
                     id: '1',
@@ -1515,7 +1515,7 @@ describe('ical-generator Event', function () {
         });
 
         it('case #5 (floating)', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN'});
             cal.createEvent({
                 id: '1',
                 start: moment('2013-10-04T22:39:30.000Z'),
@@ -1535,7 +1535,7 @@ describe('ical-generator Event', function () {
         });
 
         it('case #6 (attendee with simple delegation and alarm)', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN', method: 'publish'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN', method: 'publish'});
             cal.createEvent({
                 id: '123',
                 start: moment('2013-10-04T22:39:30.000Z'),
@@ -1581,7 +1581,7 @@ describe('ical-generator Event', function () {
         });
 
         it('case #7 (repeating: byDay, byMonth, byMonthDay)', function () {
-            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+            const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator-edtex.tests//EN'});
             cal.events([
                 {
                     id: '1',

@@ -4,7 +4,7 @@ const assert = require('assert');
 const moment = require('moment-timezone');
 const ICalCalendar = require('../src/calendar');
 
-describe('ical-generator Calendar', function () {
+describe('ical-generator-edtex Calendar', function () {
     describe('constructor()', function () {
         it('shoud set _attributes', function () {
             const cal = new ICalCalendar();

@@ -9,7 +9,7 @@ const config = {
     output: {
         path: __dirname + '/test-result/browser-test',
         filename: '[name].js',
-        library: 'ical-generator',
+        library: 'ical-generator-edtex',
         libraryTarget: 'umd',
         umdNamedDefine: true,
         globalObject: 'typeof self !== \'undefined\' ? self : this'

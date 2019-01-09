@@ -1,6 +1,6 @@
 'use strict';
 
-const ical = require('ical-generator');
+const ical = require('ical-generator-edtex');
 const cal = ical({domain: 'localhost'});
 
 // overwrite domain

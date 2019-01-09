@@ -5,7 +5,7 @@ const ICalCalendar = require('../src/calendar');
 const ICalEvent = require('../src/event');
 const ICalAttendee = require('../src/attendee');
 
-describe('ical-generator Attendee', function () {
+describe('ical-generator-edtex Attendee', function () {
     describe('constructor()', function () {
         it('shouldn\'t work without event reference', function () {
             assert.throws(function () {

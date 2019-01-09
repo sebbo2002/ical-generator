@@ -598,7 +598,7 @@ class ICalEvent {
 
         if (!organizer && typeof _organizer === 'string') {
             throw new Error(
-                '`organizer` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#organizer' +
+                '`organizer` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator-edtex#organizer' +
                 'stringobject-organizer'
             );
         }
@@ -661,7 +661,7 @@ class ICalEvent {
         }
         if (typeof _attendeeData === 'string') {
             throw new Error(
-                '`attendee` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#create' +
+                '`attendee` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator-edtex#create' +
                 'attendeeobject-options'
             );
         }

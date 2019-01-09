@@ -8,7 +8,7 @@ describe('Issues', function () {
         it('should work with Europe/Berlin', function() {
             const calendar = ical({
                 domain: 'sebbo.net',
-                prodId: '//superman-industries.com//ical-generator//EN',
+                prodId: '//superman-industries.com//ical-generator-edtex//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
@@ -23,7 +23,7 @@ describe('Issues', function () {
         it('should work with Brazil/East', function() {
             const calendar = ical({
                 domain: 'sebbo.net',
-                prodId: '//superman-industries.com//ical-generator//EN',
+                prodId: '//superman-industries.com//ical-generator-edtex//EN',
                 timezone: 'Brazil/East',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT-3'),
@@ -41,7 +41,7 @@ describe('Issues', function () {
         it('should work with repeating bySetPos', function() {
             const calendar = ical({
                 domain: 'sebbo.net',
-                prodId: '//superman-industries.com//ical-generator//EN',
+                prodId: '//superman-industries.com//ical-generator-edtex//EN',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
                     end: new Date('Sun May 01 2016 02:00:00 GMT+0200 (CEST)'),
@@ -64,7 +64,7 @@ describe('Issues', function () {
         it('should work with repeating bySetPos by taking the first elemnt of the byDay array', function() {
             const calendar = ical({
                 domain: 'sebbo.net',
-                prodId: '//superman-industries.com//ical-generator//EN',
+                prodId: '//superman-industries.com//ical-generator-edtex//EN',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
                     end: new Date('Sun May 01 2016 02:00:00 GMT+0200 (CEST)'),

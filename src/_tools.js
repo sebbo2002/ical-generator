@@ -4,7 +4,7 @@ const moment = require('moment-timezone');
 
 /**
  * @author Sebastian Pekarek
- * @module ical-generator
+ * @module ical-generator-edtex
  * @class ICalTools
  */
 class ICalTools {

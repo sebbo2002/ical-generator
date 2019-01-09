@@ -6,7 +6,7 @@ const ICalTools = require('./_tools');
 
 /**
  * @author Sebastian Pekarek
- * @module ical-generator
+ * @module ical-generator-edtex
  * @class ICalAttendee
  */
 class ICalAttendee {

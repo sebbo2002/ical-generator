@@ -6,7 +6,7 @@ const ICalCalendar = require('../src/calendar');
 const ICalEvent = require('../src/event');
 const ICalCategory = require('../src/category');
 
-describe('ical-generator Category', function () {
+describe('ical-generator-edtex Category', function () {
     describe('constructor()', function () {
         it('shouldn\'t work without event reference', function () {
             assert.throws(function () {

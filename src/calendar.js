@@ -7,7 +7,7 @@ const ICalEvent = require('./event');
 
 /**
  * @author Sebastian Pekarek
- * @module ical-generator
+ * @module ical-generator-edtex
  * @class ICalCalendar
  */
 class ICalCalendar {
@@ -52,11 +52,11 @@ class ICalCalendar {
 
     /**
      * Set/Get your feed's prodid. `prodid` can be either a
-     * string like "//sebbo.net//ical-generator//EN" or an
+     * string like "//sebbo.net//ical-generator-edtex//EN" or an
      * object like
      * {
      *   "company": "sebbo.net",
-     *   "product": "ical-generator"
+     *   "product": "ical-generator-edtex"
      *   "language": "EN"
      * }
      *
@@ -80,7 +80,7 @@ class ICalCalendar {
         }
         if (typeof prodid === 'string') {
             throw new Error(
-                '`prodid` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#' +
+                '`prodid` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator-edtex#' +
                 'prodidstringobject-prodid'
             );
         }
@@ -354,7 +354,7 @@ class ICalCalendar {
      * @returns {ICalCalendar}
      */
     clear() {
-        this._data.prodid = '//sebbo.net//ical-generator//EN';
+        this._data.prodid = '//sebbo.net//ical-generator-edtex//EN';
         this._data.method = null;
         this._data.name = null;
         this._data.description = null;
