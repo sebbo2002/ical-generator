@@ -31,7 +31,7 @@
     "nyc": "^13.1.0",
     "plato": "^1.7.0",
     "portfinder": "^1.0.20",
-    "webpack": "^4.28.3",
+    "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   },
   "peerDependencies": {
