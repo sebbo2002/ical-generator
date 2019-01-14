@@ -288,7 +288,7 @@ class ICalCalendar {
      * Save ical file with `fs.saveSync`
      *
      * @param {http.ServerResponse} response Response
-     * @param {String} [filename] Filename
+     * @param {String} [filename = 'calendar.ics'] Filename
      * @returns {Number} Number of Bytes written
      */
     serve(response, filename) {

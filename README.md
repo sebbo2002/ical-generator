@@ -230,9 +230,9 @@ Save Calendar to disk asynchronously using [fs.writeFile](http://nodejs.org/api/
 Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options). Won't work in browsers.
 
 
-#### serve(**_http.ServerResponse_ response**)
+#### serve(**_http.ServerResponse_ response**, [_String_ filename])
 
-Send Calendar to the User when using HTTP. See Quick Start above. Won't work in browsers.
+Send Calendar to the User when using HTTP. See Quick Start above. Won't work in browsers. Defaults to `'calendar.ics'`.
 
 
 #### toURL()
@@ -299,7 +299,7 @@ This and the 'floating' flag (see below) are mutually exclusive, and setting a t
 
 #### timestamp([_moment_|_Date_ stamp]) or stamp([_moment_|_Date_ stamp])
 
-Appointment date of creation as Date object. Default to `new Date()`.
+Appointment date of creation as Date object. Defaults to `new Date()`.
 
 
 #### allDay([_Boolean_ allDay])
