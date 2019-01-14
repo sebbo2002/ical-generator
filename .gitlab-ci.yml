@@ -164,6 +164,7 @@ publish_npm:
     - rm -f ./node_modules.tar.gz
     - npm run build
     - npm run bump
+    - yarn import
     - npm publish
   only:
     - tags
