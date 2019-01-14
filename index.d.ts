@@ -2,8 +2,8 @@
 
 declare module 'ical-generator' {
   /** Imports must be inside the module declaration */
-  import moment from 'moment';
-  import http from 'http';
+  import * as moment from 'moment';
+  import * as http from 'http';
 
   /**
    * Tool for generating iCal calendar data
