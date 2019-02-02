@@ -361,7 +361,7 @@ Some calendar apps may support HTML descriptions. Like in emails, supported HTML
 Appointment location
 
 
-#### geo([_String_|Object geo])
+#### geo([_String_|_Object_ geo])
 
 Appointment geo position (gps). See [rfc](https://tools.ietf.org/html/rfc5545#section-3.8.1.6) for more details
 

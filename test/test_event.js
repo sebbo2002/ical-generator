@@ -851,71 +851,71 @@ describe('ical-generator Event', function () {
         });
     });
 
-	describe('location()', function () {
-		it('getter should return value', function () {
-			const e = new ICalEvent(null, new ICalCalendar());
-			assert.equal(e.location(), null);
+    describe('location()', function () {
+        it('getter should return value', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.strictEqual(e.location(), null);
 
-			e._data.location = 'Test Location';
-			assert.equal(e.location(), 'Test Location');
+            e._data.location = 'Test Location';
+            assert.strictEqual(e.location(), 'Test Location');
 
-			e._data.location = null;
-			assert.equal(e.location(), null);
-		});
+            e._data.location = null;
+            assert.strictEqual(e.location(), null);
+        });
 
-		it('setter should return this', function () {
-			const e = new ICalEvent(null, new ICalCalendar());
-			assert.deepEqual(e, e.location(null));
-			assert.deepEqual(e, e.location('Test Location'));
-		});
+        it('setter should return this', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.deepStrictEqual(e, e.location(null));
+            assert.deepStrictEqual(e, e.location('Test Location'));
+        });
 
-		it('should update location', function () {
-			const event = new ICalEvent({
-				start: moment(),
-				summary: 'Example Event'
-			}, new ICalCalendar());
+        it('should update location', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
 
-			event.location('Europa-Park');
-			assert.equal(event._data.location, 'Europa-Park');
-		});
-	});
+            event.location('Europa-Park');
+            assert.strictEqual(event._data.location, 'Europa-Park');
+        });
+    });
 
-	describe('geo()', function () {
-		it('getter should return value', function () {
-			const e = new ICalEvent(null, new ICalCalendar());
-			assert.equal(e.geo(), null);
+    describe('geo()', function () {
+        it('getter should return value', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.strictEqual(e.geo(), null);
 
-			e._data.geo = {lat:44.5,lon:-3.4};
-			assert.equal(e.geo(), '44.5;-3.4');
+            e._data.geo = {lat:44.5,lon:-3.4};
+            assert.strictEqual(e.geo(), '44.5;-3.4');
 
-			e._data.geo = null;
-			assert.equal(e.geo(), null);
-		});
+            e._data.geo = null;
+            assert.strictEqual(e.geo(), null);
+        });
 
-		it('setter should return this', function () {
-			const e = new ICalEvent(null, new ICalCalendar());
-			assert.deepEqual(e, e.geo(null));
-			assert.deepEqual(e, e.geo('44.5;-3.4'));
-		});
+        it('setter should return this', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.deepStrictEqual(e, e.geo(null));
+            assert.deepStrictEqual(e, e.geo('44.5;-3.4'));
+        });
 
-		it('should update geo', function () {
-			const event = new ICalEvent({
-				start: moment(),
-				summary: 'Example Event'
-			}, new ICalCalendar());
+        it('should update geo', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
 
-			event.geo('44.5;-3.4');
-			assert.deepEqual(event._data.geo, {lat:44.5,lon:-3.4});
+            event.geo('44.5;-3.4');
+            assert.deepStrictEqual(event._data.geo, {lat:44.5,lon:-3.4});
 
-			event.geo('somthingInvalid');
-			assert.deepEqual(event._data.geo, null);
+            event.geo('somthingInvalid');
+            assert.deepStrictEqual(event._data.geo, null);
 
-			event.geo({lat:44.5,lon:-3.4});
-			assert.deepEqual(event._data.geo, {lat:44.5,lon:-3.4});
-		});
-	});
+            event.geo({lat:44.5,lon:-3.4});
+            assert.deepStrictEqual(event._data.geo, {lat:44.5,lon:-3.4});
+        });
+    });
 
-	describe('description()', function () {
+    describe('location()', function () {
         it('getter should return value', function () {
             const e = new ICalEvent(null, new ICalCalendar());
             assert.strictEqual(e.location(), null);
