@@ -9,9 +9,12 @@ const moment = require('moment-timezone');
  */
 class ICalTools {
     static formatDate(timezone, d, dateonly, floating) {
-        const m = timezone ? moment(d).tz(timezone) : moment(d).utc();
+        let m = timezone ? moment(d).tz(timezone) : moment(d).utc();
+        if(!dateonly && !floating) {
+            m = moment(d).utc();
+        }
+        
         let s = m.format('YYYYMMDD');
-
         if(!dateonly) {
             s += 'T';
             s += m.format('HHmmss');
