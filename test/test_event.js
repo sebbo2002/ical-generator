@@ -907,11 +907,27 @@ describe('ical-generator Event', function () {
             event.geo('44.5;-3.4');
             assert.deepStrictEqual(event._data.geo, {lat:44.5,lon:-3.4});
 
-            event.geo('somthingInvalid');
-            assert.deepStrictEqual(event._data.geo, null);
-
             event.geo({lat:44.5,lon:-3.4});
             assert.deepStrictEqual(event._data.geo, {lat:44.5,lon:-3.4});
+        });
+
+        it('should reset geo when setting to null', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            event.geo(null);
+            assert.strictEqual(event._data.geo, null);
+        });
+
+        it('should throw error when string is not valid', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            assert.throws(() => event.geo('somthingInvalid'), /`geo` isn't formated correctly/i);
         });
     });
 

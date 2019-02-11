@@ -532,9 +532,8 @@ class ICalEvent {
             geoStruct = geo;
         }
 
-        if (!geoStruct || !isFinite(geoStruct.lat) || !isFinite(geoStruct.lon)) {
-            //throw "invalid geo";
-            this._data.geo = null;
+        if (geoStruct !== null && (!geoStruct || !isFinite(geoStruct.lat) || !isFinite(geoStruct.lon))) {
+            throw new Error('`geo` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#geostringobject-geo');
         } else {
             this._data.geo = geoStruct;
         }
