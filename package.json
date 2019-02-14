@@ -36,7 +36,7 @@
     "@types/node": ">= 8.0.0"
   },
   "scripts": {
-    "all": "npm run check && npm run visualize && npm run tests && npm run build",
+    "all": "npm run check && npm run tests && npm run build",
     "check": "npm run check:eslint && npm run check:npm",
     "check:eslint": "eslint ./examples ./src ./test/*.js",
     "check:quick": "npm run check:eslint",
