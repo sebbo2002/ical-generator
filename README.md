@@ -361,6 +361,22 @@ Some calendar apps may support HTML descriptions. Like in emails, supported HTML
 Appointment location
 
 
+#### geo([_String_|_Object_ geo])
+
+Appointment geo position (gps). See [rfc](https://tools.ietf.org/html/rfc5545#section-3.8.1.6) for more details
+
+```javascript
+cal.geo({
+    lat: 44.4987,
+    lon: -6.87667
+});
+
+// OR
+
+cal.geo('44.4987;-6.87667');
+```
+
+
 #### organizer([_String_|Object organizer])
 
 Appointment organizer
