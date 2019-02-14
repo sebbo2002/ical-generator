@@ -122,20 +122,6 @@ publish-coverage-report:
   only:
     - develop
 
-publish-plato-report:
-  stage: test
-  tags:
-    - matt.sebbo.net
-    - ssh
-  script:
-    - tar -xzf "node_modules.tar.gz" -C .
-    - rm -f ./node_modules.tar.gz
-    - npm run visualize
-    - rm -rf /var/docker/static/ical-generator/plato/*
-    - mv ./code-visualization/* /var/docker/static/ical-generator/plato/
-  only:
-    - develop
-
 
 sync_github:
   stage: publish

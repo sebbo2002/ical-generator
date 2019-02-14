@@ -507,6 +507,40 @@ class ICalEvent {
         return this;
     }
 
+    /**
+     * Set/Get the event's geo
+     *
+     * @param {String|object} [geo]
+     * @since 1.5.0
+     * @returns {ICalEvent|String}
+     */
+    geo(geo) {
+        if (geo === undefined) {
+            if (!this._data.geo) {
+                return null;
+            } else {
+                return this._data.geo.lat + ';' + this._data.geo.lon;
+            }
+        }
+
+        let geoStruct = {};
+        if (typeof geo === 'string') {
+            const geoParts = geo.split(';');
+            geoStruct.lat = parseFloat(geoParts[0]);
+            geoStruct.lon = parseFloat(geoParts[1]);
+        } else {
+            geoStruct = geo;
+        }
+
+        if (geoStruct !== null && (!geoStruct || !isFinite(geoStruct.lat) || !isFinite(geoStruct.lon))) {
+            throw new Error('`geo` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#geostringobject-geo');
+        } else {
+            this._data.geo = geoStruct;
+        }
+
+        return this;
+    }
+
 
     /**
      * Set/Get the event's description
@@ -967,6 +1001,11 @@ class ICalEvent {
         // LOCATION
         if (this._data.location) {
             g += 'LOCATION:' + ICalTools.escape(this._data.location) + '\r\n';
+        }
+
+        // GEO
+        if (this._data.geo) {
+            g += 'GEO:' + ICalTools.escape(this._data.geo.lat) + ';' + ICalTools.escape(this._data.geo.lon) + '\r\n';
         }
 
         // DESCRIPTION

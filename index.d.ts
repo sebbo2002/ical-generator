@@ -61,6 +61,7 @@ declare module 'ical-generator' {
       stamp?: moment.Moment | Date;
       description?: string;
       location?: string;
+      geo?: GeoData;
       url?: string;
       sequence?: number;
       allDay?: boolean;
@@ -125,6 +126,11 @@ declare module 'ical-generator' {
       name: string;
     }
 
+    interface GeoData {
+      lat: number;
+      lon: number;
+    }
+
     /**
      * The calendar object containing all event data
      */
@@ -184,6 +190,8 @@ declare module 'ical-generator' {
       summary(summary: string): ICalEvent;
       location(): string;
       location(location: string): ICalEvent;
+      geo(): string | null;
+      geo(geo: string | GeoData | null): ICalEvent;
       description(): string;
       description(description: string): ICalEvent;
       htmlDescription(): string;
