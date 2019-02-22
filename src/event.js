@@ -62,7 +62,8 @@ class ICalEvent {
             'busystatus',
             'url',
             'created',
-            'lastModified'
+            'lastModified',
+            'recurrenceid'
         ];
         this._vars = {
             allowedRepeatingFreq: ['SECONDLY', 'MINUTELY', 'HOURLY', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'],
@@ -212,6 +213,36 @@ class ICalEvent {
             this._data.end = t;
         }
 
+        return this;
+    }
+
+    /**
+     * Set/Get the event's recurrence id
+     *
+     * @since 0.2.0
+     * @param {Date|moment|String|null} [recurrenceid] Recurrence date as moment.js object
+     * @returns {ICalEvent|Date}
+     */
+    recurrenceid(recurrenceid) {
+        if (recurrenceid === undefined) {
+            return this._data.recurrenceid;
+        }
+
+        if (typeof recurrenceid === 'string') {
+            recurrenceid = moment(recurrenceid);
+        }
+        else if (recurrenceid instanceof Date) {
+            recurrenceid = moment(recurrenceid);
+        }
+        else if (!(recurrenceid instanceof moment)) {
+            throw new Error('`recurrenceid` must be a Date or a moment object!');
+        }
+
+        if (!recurrenceid.isValid()) {
+            throw new Error('`recurrenceid` has to be a valid date!');
+        }
+
+        this._data.recurrenceid = recurrenceid;
         return this;
     }
 
@@ -993,6 +1024,11 @@ class ICalEvent {
                     }).join(',') + '\r\n';
                 }
             }
+        }
+
+        // RECURRENCE
+        if (this._data.recurrenceid) {
+            g += ICalTools.formatDateTZ(this._calendar.recurrenceid(), 'RECURRENCE-ID', this._data.recurrenceid, this._data) + '\r\n';
         }
 
         // SUMMARY

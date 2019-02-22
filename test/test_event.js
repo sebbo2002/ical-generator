@@ -199,6 +199,48 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('recurrenceid()', function () {
+        it('getter should return value', function () {
+            const now = moment();
+            const event = new ICalEvent(null, new ICalCalendar());
+            event._data.recurrenceid = now;
+            assert.ok(event.recurrenceid().isSame(now));
+        });
+
+        it('setter should parse string if required', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            const date = moment().add(1, 'week');
+            assert.deepStrictEqual(event, event.recurrenceid(date.toJSON()));
+            assert.ok(event._data.recurrenceid.isSame(date));
+        });
+
+        it('setter should handle Dates if required', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            const date = moment().add(1, 'week');
+            assert.deepStrictEqual(event, event.recurrenceid(date.toDate()));
+            assert.ok(event._data.recurrenceid.isSame(date));
+        });
+
+        it('setter should throw error when time is not a Date', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            assert.throws(function () {
+                event.recurrenceid(3);
+            }, /`recurrenceid`/, 'Number');
+            assert.throws(function () {
+                event.recurrenceid(NaN);
+            }, /`recurrenceid`/, 'NaN');
+            assert.throws(function () {
+                event.recurrenceid(new Date('hallo'));
+            }, /`recurrenceid`/, 'Invalid Date');
+        });
+
+        it('setter should return this', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            assert.deepStrictEqual(event, event.recurrenceid(moment()));
+            assert.deepStrictEqual(event, event.recurrenceid(new Date()));
+        });
+    });
+
     describe('timezone()', function () {
         it('getter should return value', function () {
             const e = new ICalEvent(null, new ICalCalendar()).timezone('Europe/Berlin');
