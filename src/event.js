@@ -1028,7 +1028,7 @@ class ICalEvent {
 
         // RECURRENCE
         if (this._data.recurrenceid) {
-            g += ICalTools.formatDateTZ(this._calendar.recurrenceid(), 'RECURRENCE-ID', this._data.recurrenceid, this._data) + '\r\n';
+            g += ICalTools.formatDateTZ(this._calendar.timezone(), 'RECURRENCE-ID', this._data.recurrenceid, this._data) + '\r\n';
         }
 
         // SUMMARY
