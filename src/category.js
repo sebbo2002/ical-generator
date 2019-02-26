@@ -10,7 +10,7 @@ const ICalTools = require('./_tools');
  * @class ICalCategory
  */
 class ICalCategory {
-    constructor(data, event) {
+    constructor (data, event) {
         this._data = {
             name: null
         };
@@ -38,7 +38,7 @@ class ICalCategory {
      * @since 0.3.0
      * @returns {ICalCategory|String}
      */
-    name(name) {
+    name (name) {
         if (name === undefined) {
             return this._data.name;
         }
@@ -58,7 +58,7 @@ class ICalCategory {
      * @since 0.2.4
      * @returns {Object}
      */
-    toJSON() {
+    toJSON () {
         return ICalTools.toJSON(this, this._attributes);
     }
 
@@ -69,10 +69,10 @@ class ICalCategory {
      * @since 0.2.0
      * @returns {String}
      */
-    _generate() {
+    _generate () {
 
         // CN / Name
-        if(!this._data.name) {
+        if (!this._data.name) {
             throw new Error('No value for `name` in ICalCategory given!');
         }
 

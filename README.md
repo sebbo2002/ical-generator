@@ -341,7 +341,7 @@ event.repeating({
 ```
 
 
-#### recurrenceid([_moment_|_Date_ stamp])
+#### recurrenceId([_moment_|_Date_ stamp])
 
 Recurrence date as Date object.
 
