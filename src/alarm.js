@@ -11,7 +11,7 @@ const ICalTools = require('./_tools');
  * @class ICalAlarm
  */
 class ICalAlarm {
-    constructor(data, event) {
+    constructor (data, event) {
         this._data = {
             type: null,
             trigger: null,
@@ -54,7 +54,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|String}
      */
-    type(type) {
+    type (type) {
         if (type === undefined) {
             return this._data.type;
         }
@@ -79,7 +79,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|Number|moment}
      */
-    trigger(trigger) {
+    trigger (trigger) {
         if (trigger === undefined && this._data.trigger instanceof moment) {
             return this._data.trigger;
         }
@@ -123,7 +123,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|Number|moment}
      */
-    triggerAfter(trigger) {
+    triggerAfter (trigger) {
         if (trigger === undefined) {
             return this._data.trigger;
         }
@@ -143,7 +143,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|Number|moment}
      */
-    triggerBefore(trigger) {
+    triggerBefore (trigger) {
         return this.trigger(trigger);
     }
 
@@ -155,7 +155,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|Number}
      */
-    repeat(repeat) {
+    repeat (repeat) {
         if (repeat === undefined) {
             return this._data.repeat;
         }
@@ -180,7 +180,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|Number|Null}
      */
-    interval(interval) {
+    interval (interval) {
         if (interval === undefined) {
             return this._data.interval;
         }
@@ -207,7 +207,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|Object}
      */
-    attach(attach) {
+    attach (attach) {
         if (attach === undefined) {
             return this._data.attach;
         }
@@ -255,7 +255,7 @@ class ICalAlarm {
      * @since 0.2.1
      * @returns {ICalAlarm|String}
      */
-    description(description) {
+    description (description) {
         if (description === undefined) {
             return this._data.description;
         }
@@ -275,9 +275,9 @@ class ICalAlarm {
      * @since 0.2.4
      * @returns {Object}
      */
-    toJSON() {
+    toJSON () {
         return ICalTools.toJSON(this, this._attributes, {
-            ignoreAttributes: ['triggerAfter', 'triggerBefore'],
+            ignoreAttributes: ['triggerAfter', 'triggerBefore']
         });
     }
 
@@ -288,7 +288,7 @@ class ICalAlarm {
      * @since 0.2.0
      * @returns {String}
      */
-    _generate() {
+    _generate () {
         let g = 'BEGIN:VALARM\r\n';
 
         if (!this._data.type) {

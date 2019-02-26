@@ -10,7 +10,7 @@ const ICalTools = require('./_tools');
  * @class ICalAttendee
  */
 class ICalAttendee {
-    constructor(data, event) {
+    constructor (data, event) {
         this._data = {
             name: null,
             email: null,
@@ -64,8 +64,8 @@ class ICalAttendee {
      * @returns {string}
      * @private
      */
-    _getAllowedStringFor(type, str) {
-        if (!str || typeof(str) !== 'string') {
+    _getAllowedStringFor (type, str) {
+        if (!str || typeof (str) !== 'string') {
             throw new Error('Input for `' + type + '` must be a non-empty string. You gave ' + str);
         }
 
@@ -86,7 +86,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee|String}
      */
-    name(name) {
+    name (name) {
         if (name === undefined) {
             return this._data.name;
         }
@@ -103,7 +103,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee|String}
      */
-    email(email) {
+    email (email) {
         if (!email) {
             return this._data.email;
         }
@@ -119,7 +119,7 @@ class ICalAttendee {
      * @since x.x.x TODO: set correct version number
      * @returns {ICalAttendee|String}
      */
-    mailto(mailto) {
+    mailto (mailto) {
         if (mailto === undefined) {
             return this._data.mailto;
         }
@@ -136,7 +136,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee|String}
      */
-    role(role) {
+    role (role) {
         if (role === undefined) {
             return this._data.role;
         }
@@ -153,7 +153,7 @@ class ICalAttendee {
      * @since 0.2.1
      * @returns {ICalAttendee|String}
      */
-    rsvp(rsvp) {
+    rsvp (rsvp) {
         if (rsvp === undefined) {
             return this._data.rsvp;
         }
@@ -162,10 +162,10 @@ class ICalAttendee {
             return this;
         }
 
-        if(rsvp === true) {
+        if (rsvp === true) {
             rsvp = 'true';
         }
-        if(rsvp === false) {
+        if (rsvp === false) {
             rsvp = 'false';
         }
 
@@ -181,7 +181,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee|String}
      */
-    status(status) {
+    status (status) {
         if (status === undefined) {
             return this._data.status;
         }
@@ -202,7 +202,7 @@ class ICalAttendee {
      * @since 0.2.3
      * @returns {ICalAttendee|String}
      */
-    type(type) {
+    type (type) {
         if (type === undefined) {
             return this._data.type;
         }
@@ -223,7 +223,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee|String}
      */
-    delegatedTo(delegatedTo) {
+    delegatedTo (delegatedTo) {
         if (delegatedTo === undefined) {
             return this._data.delegatedTo;
         }
@@ -248,7 +248,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee|String}
      */
-    delegatedFrom(delegatedFrom) {
+    delegatedFrom (delegatedFrom) {
         if (delegatedFrom === undefined) {
             return this._data.delegatedFrom;
         }
@@ -267,7 +267,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee}
      */
-    delegatesTo(options) {
+    delegatesTo (options) {
         const a = this._event.createAttendee(options);
         this.delegatedTo(a);
         a.delegatedFrom(this);
@@ -284,7 +284,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {ICalAttendee}
      */
-    delegatesFrom(options) {
+    delegatesFrom (options) {
         const a = this._event.createAttendee(options);
         this.delegatedFrom(a);
         a.delegatedTo(this);
@@ -298,7 +298,7 @@ class ICalAttendee {
      * @since 0.2.4
      * @returns {Object} Calendar
      */
-    toJSON() {
+    toJSON () {
         return ICalTools.toJSON(this, this._attributes, {
             ignoreAttributes: ['delegatesTo', 'delegatesFrom'],
             hooks: {
@@ -315,7 +315,7 @@ class ICalAttendee {
      * @since 0.2.0
      * @returns {String}
      */
-    _generate() {
+    _generate () {
         let g = 'ATTENDEE';
 
         if (!this._data.email) {

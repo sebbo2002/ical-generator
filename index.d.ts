@@ -73,6 +73,7 @@ declare module 'ical-generator' {
       alarms?: AlarmData[];
       status?: string;
       timezone?: string;
+      recurrenceId?: moment.Moment | Date;
     }
 
     interface RepeatingData {

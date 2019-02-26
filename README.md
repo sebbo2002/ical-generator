@@ -341,6 +341,11 @@ event.repeating({
 ```
 
 
+#### recurrenceId([_moment_|_Date_ stamp])
+
+Recurrence date as Date object.
+
+
 #### summary([_String_ summary])
 
 Appointment summary, defaults to empty string.
