@@ -975,9 +975,9 @@ class ICalEvent {
             g += 'X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE\r\n';
         }
         else {
-            g += ICalTools.formatDateTZ(this._calendar.timezone(), 'DTSTART', this._data.start, this._data) + '\r\n';
+            g += ICalTools.formatDateTZ(this.timezone(), 'DTSTART', this._data.start, this._data) + '\r\n';
             if (this._data.end) {
-                g += ICalTools.formatDateTZ(this._calendar.timezone(), 'DTEND', this._data.end, this._data) + '\r\n';
+                g += ICalTools.formatDateTZ(this.timezone(), 'DTEND', this._data.end, this._data) + '\r\n';
             }
         }
 
@@ -1032,7 +1032,7 @@ class ICalEvent {
 
         // RECURRENCE
         if (this._data.recurrenceId) {
-            g += ICalTools.formatDateTZ(this._calendar.timezone(), 'RECURRENCE-ID', this._data.recurrenceId, this._data) + '\r\n';
+            g += ICalTools.formatDateTZ(this.timezone(), 'RECURRENCE-ID', this._data.recurrenceId, this._data) + '\r\n';
         }
 
         // SUMMARY

@@ -84,4 +84,26 @@ describe('Issues', function () {
             assert.ok(str.indexOf('RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1;BYDAY=MO;BYSETPOS=3') > -1);
         });
     });
+
+    describe('Issue #154', function() {
+        ['DTSTART', 'DTEND', 'RECURRENCE-ID'].forEach(function (prop) {
+            it(`it should correctly set ${prop} when using different timezone in calendar and event`, function() {
+                const calendar = ical({
+                    domain: 'sebbo.net',
+                    timezone: 'America/Buenos_Aires',
+                    events: [
+                        {
+                            start: new Date(1553219772000),
+                            end: new Date(1553219772000),
+                            recurrenceId: new Date(1553219772000),
+                            timezone: 'America/La_Paz',
+                        }
+                    ]
+                });
+
+                const str = calendar.toString();
+                assert.ok(str.indexOf(`${prop};TZID=America/La_Paz:20190321T215612`) > -1, str);
+            });
+        });
+    });
 });
