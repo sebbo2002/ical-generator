@@ -5,7 +5,7 @@ const ical = require(__dirname + '/../src');
 
 describe('Issues', function () {
     describe('Issue #38', function () {
-        it('should work with Europe/Berlin', function() {
+        it('should work with Europe/Berlin', function () {
             const calendar = ical({
                 domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
@@ -20,7 +20,7 @@ describe('Issues', function () {
             const str = calendar.toString();
             assert.ok(str.indexOf('DTSTART;VALUE=DATE:20160501') > -1);
         });
-        it('should work with Brazil/East', function() {
+        it('should work with Brazil/East', function () {
             const calendar = ical({
                 domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
@@ -38,7 +38,7 @@ describe('Issues', function () {
     });
 
     describe('Issue #123', function () {
-        it('should work with repeating bySetPos', function() {
+        it('should work with repeating bySetPos', function () {
             const calendar = ical({
                 domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
@@ -61,7 +61,7 @@ describe('Issues', function () {
             assert.ok(str.indexOf('RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1;BYDAY=SU;BYSETPOS=3') > -1);
         });
 
-        it('should work with repeating bySetPos by taking the first elemnt of the byDay array', function() {
+        it('should work with repeating bySetPos by taking the first elemnt of the byDay array', function () {
             const calendar = ical({
                 domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
@@ -85,9 +85,9 @@ describe('Issues', function () {
         });
     });
 
-    describe('Issue #154', function() {
+    describe('Issue #154', function () {
         ['DTSTART', 'DTEND', 'RECURRENCE-ID'].forEach(function (prop) {
-            it(`it should correctly set ${prop} when using different timezone in calendar and event`, function() {
+            it(`it should correctly set ${prop} when using different timezone in calendar and event`, function () {
                 const calendar = ical({
                     domain: 'sebbo.net',
                     timezone: 'America/Buenos_Aires',
@@ -96,7 +96,7 @@ describe('Issues', function () {
                             start: new Date(1553219772000),
                             end: new Date(1553219772000),
                             recurrenceId: new Date(1553219772000),
-                            timezone: 'America/La_Paz',
+                            timezone: 'America/La_Paz'
                         }
                     ]
                 });
