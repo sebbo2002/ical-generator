@@ -469,7 +469,14 @@ describe('ical-generator Event', function () {
 
     describe('repeating()', function () {
         it('getter should return value', function () {
-            const options = {freq: 'MONTHLY', count: 5, interval: 2, exclude: moment(), excludeTimezone: 'Europe/Berlin', until: moment()};
+            const options = {
+                freq: 'MONTHLY',
+                count: 5,
+                interval: 2,
+                exclude: moment(),
+                excludeTimezone: 'Europe/Berlin',
+                until: moment()
+            };
             const e = new ICalEvent(null, new ICalCalendar());
             assert.deepStrictEqual(e.repeating(), null);
 
