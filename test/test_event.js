@@ -469,7 +469,14 @@ describe('ical-generator Event', function () {
 
     describe('repeating()', function () {
         it('getter should return value', function () {
-            const options = {freq: 'MONTHLY', count: 5, interval: 2, exclude: moment(), until: moment()};
+            const options = {
+                freq: 'MONTHLY',
+                count: 5,
+                interval: 2,
+                exclude: moment(),
+                excludeTimezone: 'Europe/Berlin',
+                until: moment()
+            };
             const e = new ICalEvent(null, new ICalCalendar());
             assert.deepStrictEqual(e.repeating(), null);
 
@@ -861,6 +868,37 @@ describe('ical-generator Event', function () {
             assert.ok(e._data.repeating.exclude[0].isSame(date), 'String');
             assert.ok(e._data.repeating.exclude[1].isSame(date), 'Date');
             assert.ok(e._data.repeating.exclude[2].isSame(date), 'Moment');
+        });
+
+        it('should throw error when repeating.excludeTimezone is used when no repeating.exclude', function () {
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'DAILY',
+                        interval: 2,
+                        byDay: ['SU'],
+                        excludeTimezone: 'Europe/Berlin'
+                    }
+                }, new ICalCalendar());
+            }, /must be used along with `repeating.exclude`!/);
+        });
+
+        it('setter should update repeating.excludeTimezone', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            const date = moment().add(1, 'week');
+
+            e.repeating({
+                freq: 'monthly', exclude: [
+                    date.toJSON(),
+                    date.toDate(),
+                    date
+                ], excludeTimezone: 'Europe/Berlin'
+            });
+
+            assert.ok(e._data.repeating.excludeTimezone, 'Europe/Berlin');
         });
     });
 

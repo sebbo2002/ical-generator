@@ -336,7 +336,8 @@ event.repeating({
     byMonth: [1, 2], // repeat only in january und february,
     byMonthDay: [1, 15], // repeat only on the 1st and 15th
     bySetPos: 3, // repeat every 3rd sunday (will take the first element of the byDay array)
-    exclude: [new Date('Dec 25 2013 00:00:00 UTC')] // exclude these dates
+    exclude: [new Date('Dec 25 2013 00:00:00 UTC')], // exclude these dates
+    excludeTimezone: 'Europe/Berlin' // timezone of exclude
 });
 ```
 
@@ -371,14 +372,14 @@ Appointment location
 Appointment geo position (gps). See [rfc](https://tools.ietf.org/html/rfc5545#section-3.8.1.6) for more details
 
 ```javascript
-cal.geo({
+event.geo({
     lat: 44.4987,
     lon: -6.87667
 });
 
 // OR
 
-cal.geo('44.4987;-6.87667');
+event.geo('44.4987;-6.87667');
 ```
 
 

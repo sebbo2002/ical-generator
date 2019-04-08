@@ -26,6 +26,7 @@ class ICalEvent {
             repeating: null,
             summary: '',
             location: null,
+            geo: null,
             description: null,
             htmlDescription: null,
             organizer: null,
@@ -52,6 +53,7 @@ class ICalEvent {
             'repeating',
             'summary',
             'location',
+            'geo',
             'description',
             'htmlDescription',
             'organizer',
@@ -500,6 +502,14 @@ class ICalEvent {
 
                 c._data.repeating.exclude.push(excludedDate);
             });
+        }
+
+        if (repeating.excludeTimezone) {
+            if (!c._data.repeating.exclude) {
+                throw '`repeating.excludeTimezone` must be used along with `repeating.exclude`!';
+            }
+
+            c._data.repeating.excludeTimezone = repeating.excludeTimezone;
         }
 
         return c;
@@ -975,9 +985,9 @@ class ICalEvent {
             g += 'X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE\r\n';
         }
         else {
-            g += ICalTools.formatDateTZ(this._calendar.timezone(), 'DTSTART', this._data.start, this._data) + '\r\n';
+            g += ICalTools.formatDateTZ(this.timezone(), 'DTSTART', this._data.start, this._data) + '\r\n';
             if (this._data.end) {
-                g += ICalTools.formatDateTZ(this._calendar.timezone(), 'DTEND', this._data.end, this._data) + '\r\n';
+                g += ICalTools.formatDateTZ(this.timezone(), 'DTEND', this._data.end, this._data) + '\r\n';
             }
         }
 
@@ -1023,16 +1033,26 @@ class ICalEvent {
                     }).join(',') + '\r\n';
                 }
                 else {
-                    g += 'EXDATE:' + this._data.repeating.exclude.map(excludedDate => {
-                        return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
-                    }).join(',') + '\r\n';
+                    g += 'EXDATE';
+                    if (this._data.repeating.excludeTimezone) {
+                        g += ';TZID=' + this._data.repeating.excludeTimezone + ':' + this._data.repeating.exclude.map(excludedDate => {
+                            // This isn't a 'floating' event because it has a timezone;
+                            // but we use it to omit the 'Z' UTC specifier in formatDate()
+                            return ICalTools.formatDate(this._data.repeating.excludeTimezone, excludedDate, false, true);
+                        }).join(',') + '\r\n';
+                    }
+                    else {
+                        g += ':' + this._data.repeating.exclude.map(excludedDate => {
+                            return ICalTools.formatDate(this._calendar.timezone(), excludedDate);
+                        }).join(',') + '\r\n';
+                    }
                 }
             }
         }
 
         // RECURRENCE
         if (this._data.recurrenceId) {
-            g += ICalTools.formatDateTZ(this._calendar.timezone(), 'RECURRENCE-ID', this._data.recurrenceId, this._data) + '\r\n';
+            g += ICalTools.formatDateTZ(this.timezone(), 'RECURRENCE-ID', this._data.recurrenceId, this._data) + '\r\n';
         }
 
         // SUMMARY
