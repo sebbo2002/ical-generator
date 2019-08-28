@@ -46,6 +46,7 @@ declare module 'ical-generator' {
       timezone?: string;
       ttl?: number;
       url?: string;
+      calscale?: string;
       events?: EventData[];
     }
 
@@ -151,6 +152,8 @@ declare module 'ical-generator' {
       timezone(timezone: string): ICalCalendar;
       url(): string;
       url(url: string): ICalCalendar;
+      calscale(): string;
+      calscale(scale: string): ICalCalendar;
       ttl(): number;
       ttl(ttl: number): ICalCalendar;
       createEvent(event: EventData): ICalEvent;

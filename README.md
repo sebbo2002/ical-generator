@@ -161,6 +161,14 @@ Use this method to set your feed's URL.
 const cal = ical().url('https://example.com/calendar.ical');
 ```
 
+#### calscale([_String_ scale])
+
+Use this method to set your feed's CALSCALE.
+
+```javascript
+const cal = ical().calscale('gregorian');
+```
+
 
 #### timezone([_String_ timezone])
 
