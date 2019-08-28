@@ -211,7 +211,12 @@ class ICalCalendar {
             return this._data.calscale;
         }
 
-        this._data.calscale = scale.toUpperCase() || null;
+        if (scale === null) {
+            this._data.calscale = null;
+        } else {
+            this._data.calscale = scale.toUpperCase()
+        }
+
         return this;
     }
 
