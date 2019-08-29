@@ -60,6 +60,7 @@ declare module 'ical-generator' {
       end?: moment.Moment | Date;
       stamp?: moment.Moment | Date;
       created?: moment.Moment | Date;
+      lastModified?: moment.Moment | Date;
       description?: string;
       location?: string;
       geo?: GeoData;
@@ -180,6 +181,8 @@ declare module 'ical-generator' {
       end(end: string | moment.Moment | Date): ICalEvent;
       created(): moment.Moment;
       created(created: string | moment.Moment | Date): ICalEvent;
+      lastModified(): moment.Moment;
+      lastModified(lastModified: string | moment.Moment | Date): ICalEvent;
       timezone(): string;
       timezone(timezone: string): ICalEvent;
       stamp(): moment.Moment;
