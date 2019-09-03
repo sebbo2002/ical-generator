@@ -55,5 +55,5 @@
     "url": "http://github.com/sebbo2002/ical-generator.git"
   },
   "typings": "index.d.ts",
-  "runkitExampleFilename": "examples/example-string.js"
+  "runkitExampleFilename": "examples/example-runkit.js"
 }
