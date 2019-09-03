@@ -13,7 +13,7 @@ const ICalEvent = require('./event');
 class ICalCalendar {
     constructor(data) {
         this._data = {};
-        this._attributes = ['domain', 'prodId', 'method', 'name', 'description', 'timezone', 'ttl', 'url', 'calscale', 'events'];
+        this._attributes = ['domain', 'prodId', 'method', 'name', 'description', 'timezone', 'ttl', 'url', 'scale', 'events'];
         this._vars = {
             allowedMethods: ['PUBLISH', 'REQUEST', 'REPLY', 'ADD', 'CANCEL', 'REFRESH', 'COUNTER', 'DECLINECOUNTER']
         };
@@ -199,22 +199,22 @@ class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's calscale
+     * Set/Get your feed's CALSCALE
      *
      * @param {string} [scale] CALSCALE
-     * @example cal.calscale('gregorian');
-     * @since 1.7.3
+     * @example cal.scale('gregorian');
+     * @since 1.8.0
      * @returns {ICalCalendar|String}
      */
-    calscale(scale) {
+    scale(scale) {
         if (scale === undefined) {
-            return this._data.calscale;
+            return this._data.scale;
         }
 
         if (scale === null) {
-            this._data.calscale = null;
+            this._data.scale = null;
         } else {
-            this._data.calscale = scale.toUpperCase()
+            this._data.scale = scale.toUpperCase();
         }
 
         return this;
@@ -383,7 +383,7 @@ class ICalCalendar {
         this._data.description = null;
         this._data.timezone = null;
         this._data.url = null;
-        this._data.calscale = null;
+        this._data.scale = null;
         this._data.ttl = null;
         this._data.events = [];
         return this;
@@ -411,8 +411,8 @@ class ICalCalendar {
         }
 
         // CALSCALE
-        if (this._data.calscale) {
-            g += 'CALSCALE:' + this._data.calscale + '\r\n';
+        if (this._data.scale) {
+            g += 'CALSCALE:' + this._data.scale + '\r\n';
         }
 
         // METHOD
