@@ -13,7 +13,7 @@ const ICalEvent = require('./event');
 class ICalCalendar {
     constructor(data) {
         this._data = {};
-        this._attributes = ['domain', 'prodId', 'method', 'name', 'description', 'timezone', 'ttl', 'url', 'events'];
+        this._attributes = ['domain', 'prodId', 'method', 'name', 'description', 'timezone', 'ttl', 'url', 'scale', 'events'];
         this._vars = {
             allowedMethods: ['PUBLISH', 'REQUEST', 'REPLY', 'ADD', 'CANCEL', 'REFRESH', 'COUNTER', 'DECLINECOUNTER']
         };
@@ -199,6 +199,29 @@ class ICalCalendar {
 
 
     /**
+     * Set/Get your feed's CALSCALE
+     *
+     * @param {string} [scale] CALSCALE
+     * @example cal.scale('gregorian');
+     * @since 1.8.0
+     * @returns {ICalCalendar|String}
+     */
+    scale(scale) {
+        if (scale === undefined) {
+            return this._data.scale;
+        }
+
+        if (scale === null) {
+            this._data.scale = null;
+        } else {
+            this._data.scale = scale.toUpperCase();
+        }
+
+        return this;
+    }
+
+
+    /**
      * Set/Get your feed's TTL.
      * Used to set `X-PUBLISHED-TTL` and `REFRESH-INTERVAL`.
      *
@@ -360,6 +383,7 @@ class ICalCalendar {
         this._data.description = null;
         this._data.timezone = null;
         this._data.url = null;
+        this._data.scale = null;
         this._data.ttl = null;
         this._data.events = [];
         return this;
@@ -384,6 +408,11 @@ class ICalCalendar {
         // URL
         if (this._data.url) {
             g += 'URL:' + this._data.url + '\r\n';
+        }
+
+        // CALSCALE
+        if (this._data.scale) {
+            g += 'CALSCALE:' + this._data.scale + '\r\n';
         }
 
         // METHOD

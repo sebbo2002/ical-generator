@@ -259,6 +259,32 @@ describe('ical-generator Calendar', function () {
         });
     });
 
+    describe('scale()', function () {
+        it('setter should return this', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.scale('gregorian'));
+        });
+
+        it('getter should return value', function () {
+            const cal = new ICalCalendar();
+            assert.strictEqual(cal.scale(), null);
+            cal.scale('GREGORIAN');
+            assert.strictEqual(cal.scale(), 'GREGORIAN');
+            cal.scale(null);
+            assert.strictEqual(cal.scale(), null);
+        });
+
+        it('should change something', function () {
+            const cal = new ICalCalendar().scale('gregorian');
+            cal.createEvent({
+                start: new Date(),
+                end: new Date(new Date().getTime() + 3600000),
+                summary: 'Example Event'
+            });
+            assert.ok(cal._data.scale, 'GREGORIAN');
+        });
+    });
+
     describe('createEvent()', function () {
         it('should return a ICalEvent instance', function () {
             const cal = new ICalCalendar();
