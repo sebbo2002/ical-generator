@@ -20,17 +20,17 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-preset-es2015": "^6.24.1",
-    "eslint": "^6.0.1",
+    "eslint": "^6.3.0",
     "jquery": "^3.4.1",
     "jshint": "^2.10.2",
-    "mocha": "^6.1.4",
-    "mochawesome": "^4.0.1",
+    "mocha": "^6.2.0",
+    "mochawesome": "^4.1.0",
     "moment": "^2.24.0",
     "npm-check": "^5.9.0",
     "nyc": "^14.1.1",
-    "portfinder": "^1.0.20",
-    "webpack": "^4.35.2",
-    "webpack-cli": "^3.3.5"
+    "portfinder": "^1.0.23",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7"
   },
   "peerDependencies": {
     "@types/node": ">= 8.0.0"
