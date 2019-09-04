@@ -80,7 +80,7 @@ class ICalAlarm {
      * @returns {ICalAlarm|Number|moment}
      */
     trigger (trigger) {
-        if (trigger === undefined && this._data.trigger instanceof moment) {
+        if (trigger === undefined && moment.isMoment(this._data.trigger)) {
             return this._data.trigger;
         }
         if (trigger === undefined && this._data.trigger) {

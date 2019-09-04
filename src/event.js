@@ -159,7 +159,7 @@ class ICalEvent {
         else if (start instanceof Date) {
             start = moment(start).utc();
         }
-        else if (!(start instanceof moment)) {
+        else if (!moment.isMoment(start)) {
             throw new Error('`start` must be a Date or a moment object!');
         }
 
@@ -200,7 +200,7 @@ class ICalEvent {
         else if (end instanceof Date) {
             end = moment(end);
         }
-        else if (!(end instanceof moment)) {
+        else if (!moment.isMoment(end)) {
             throw new Error('`end` must be a Date or a moment object!');
         }
 
@@ -236,7 +236,7 @@ class ICalEvent {
         else if (recurrenceId instanceof Date) {
             recurrenceId = moment(recurrenceId);
         }
-        else if (!(recurrenceId instanceof moment)) {
+        else if (!moment.isMoment(recurrenceId)) {
             throw new Error('`recurrenceId` must be a Date or a moment object!');
         }
 
@@ -291,7 +291,7 @@ class ICalEvent {
         else if (stamp instanceof Date) {
             stamp = moment(stamp);
         }
-        else if (!(stamp instanceof moment)) {
+        else if (!moment.isMoment(stamp)) {
             throw new Error('`stamp` must be a Date or a moment object!');
         }
 
@@ -410,7 +410,7 @@ class ICalEvent {
             else if (repeating.until instanceof Date) {
                 repeating.until = moment(repeating.until);
             }
-            else if (!(repeating.until instanceof moment)) {
+            else if (!moment.isMoment(repeating.until)) {
                 throw new Error('`repeating.until` must be a Date or a moment object!');
             }
 
@@ -492,7 +492,7 @@ class ICalEvent {
                 else if (excludedDate instanceof Date) {
                     excludedDate = moment(excludedDate);
                 }
-                else if (!(excludedDate instanceof moment)) {
+                else if (!moment.isMoment(excludedDate)) {
                     throw new Error('`repeating.exclude[' + i + ']` must be a Date or a moment object!');
                 }
 
@@ -909,7 +909,7 @@ class ICalEvent {
         if (typeof created === 'string' || typeof created === 'number' || created instanceof Date) {
             created = moment(created);
         }
-        if (!(created instanceof moment) || !created.isValid()) {
+        if (!moment.isMoment(created) || !created.isValid()) {
             throw new Error('Invalid `created` date!');
         }
 
@@ -933,7 +933,7 @@ class ICalEvent {
         if (typeof lastModified === 'string' || typeof lastModified === 'number' || lastModified instanceof Date) {
             lastModified = moment(lastModified);
         }
-        if (!(lastModified instanceof moment) || !lastModified.isValid()) {
+        if (!moment.isMoment(lastModified) || !lastModified.isValid()) {
             throw new Error('Invalid `lastModified` date!');
         }
 
