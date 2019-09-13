@@ -22,6 +22,13 @@ class ICalCalendar {
             data = JSON.parse(data);
         }
 
+        this._options = Object.assign({
+            enableCalnameExtension: true,
+            enableCaldescExtension: true,
+            enableTimezoneExtension: true,
+            enablePublishedTtlExtension: true,
+        }, data ? data.options || {} : {});
+
         this.clear();
 
         for (let i in data) {
@@ -235,10 +242,10 @@ class ICalCalendar {
             return this._data.ttl;
         }
 
-        if(moment.isDuration(ttl)) {
+        if (moment.isDuration(ttl)) {
             this._data.ttl = ttl;
         }
-        else if(parseInt(ttl, 10) > 0) {
+        else if (parseInt(ttl, 10) > 0) {
             this._data.ttl = moment.duration(parseInt(ttl, 10), 'seconds');
         }
         else {
@@ -335,7 +342,7 @@ class ICalCalendar {
      * @returns {String}
      */
     toURL() {
-        const blob = new Blob([this._generate()], {type: 'text/calendar'});
+        const blob = new Blob([this._generate()], { type: 'text/calendar' });
         return URL.createObjectURL(blob);
     }
 
@@ -423,24 +430,30 @@ class ICalCalendar {
         // NAME
         if (this._data.name) {
             g += 'NAME:' + this._data.name + '\r\n';
-            g += 'X-WR-CALNAME:' + this._data.name + '\r\n';
+            if (this._options.enableCalnameExtension) {
+                g += 'X-WR-CALNAME:' + this._data.name + '\r\n';
+            }
         }
 
         // Description
-        if (this._data.description) {
+        if (this._data.description && this._options.enableCaldescExtension) {
             g += 'X-WR-CALDESC:' + this._data.description + '\r\n';
         }
 
         // Timezone
         if (this._data.timezone) {
             g += 'TIMEZONE-ID:' + this._data.timezone + '\r\n';
-            g += 'X-WR-TIMEZONE:' + this._data.timezone + '\r\n';
+            if (this._options.enableTimezoneExtension) {
+                g += 'X-WR-TIMEZONE:' + this._data.timezone + '\r\n';
+            }
         }
 
         // TTL
         if (this._data.ttl) {
             g += 'REFRESH-INTERVAL;VALUE=DURATION:' + this._data.ttl.toISOString() + '\r\n';
-            g += 'X-PUBLISHED-TTL:' + this._data.ttl.toISOString() + '\r\n';
+            if (this._options.enablePublishedTtlExtension) {
+                g += 'X-PUBLISHED-TTL:' + this._data.ttl.toISOString() + '\r\n';
+            }
         }
 
         // Events

@@ -121,6 +121,17 @@ const cal = ical();
 cal.domain('sebbo.net');
 ```
 
+You can also configure the generator options through the `options` property.
+
+```javascript
+const ical = require('ical-generator');
+
+// omit the `X-WR-CALDESC` extension in the generated output
+const cal = ical({
+    options: { enabledCalndescExtension: false }
+});
+```
+
 
 ### Calendar
 

@@ -48,6 +48,17 @@ declare module 'ical-generator' {
       url?: string;
       calscale?: string;
       events?: EventData[];
+      options?: CalendarOptions;
+    }
+
+    /**
+     * Options for iCal generation
+     */
+    interface CalendarOptions {
+      enableCalnameExtension?: boolean;
+      enableCaldescExtension?: boolean;
+      enableTimezoneExtension?: boolean;
+      enablePublishedTtlExtension?: boolean;
     }
 
     /**

@@ -11,6 +11,12 @@ describe('ical-generator Calendar', function () {
             assert.ok(cal._attributes.length > 0);
         });
 
+        it('shoud extend default _options', function () {
+            const cal = new ICalCalendar({ options: { enableCalnameExtension: false } });
+            assert.equal(cal._options.enableCalnameExtension, false);
+            assert.equal(cal._options.enableCaldescExtension, true);
+        });
+
         it('shoud load json export', function () {
             const cal = new ICalCalendar('{"name":"hello-world"}');
             assert.strictEqual(cal._data.name, 'hello-world');
@@ -125,7 +131,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something', function () {
-            const c = new ICalCalendar({method: 'publish'});
+            const c = new ICalCalendar({ method: 'publish' });
             assert.strictEqual(c._data.method, 'PUBLISH');
 
             c.method('add');
@@ -295,7 +301,7 @@ describe('ical-generator Calendar', function () {
 
         it('should pass data to instance', function () {
             const cal = new ICalCalendar();
-            const event = cal.createEvent({summary: 'Patch-Day'});
+            const event = cal.createEvent({ summary: 'Patch-Day' });
 
             assert.strictEqual(event.summary(), 'Patch-Day');
         });
@@ -324,7 +330,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.strictEqual(cal.length(), 0);
 
-            const cal2 = cal.events([{summary: 'Event A'}, {summary: 'Event B'}]);
+            const cal2 = cal.events([{ summary: 'Event A' }, { summary: 'Event B' }]);
             assert.strictEqual(cal.length(), 2);
             assert.deepStrictEqual(cal2, cal);
         });
@@ -418,7 +424,7 @@ describe('ical-generator Calendar', function () {
                 }).listen(port, function () {
                     function request(cb) {
                         // make request
-                        const req = http.request({port}, function (res) {
+                        const req = http.request({ port }, function (res) {
                             let file = '';
 
                             assert.strictEqual(
@@ -517,10 +523,23 @@ describe('ical-generator Calendar', function () {
             assert.ok(cal.toString().indexOf('X-WR-CALNAME:TEST') > -1);
         });
 
+        it('should respect the enableCalnameExtension option', function () {
+            const cal = new ICalCalendar({ options: { enableCalnameExtension: false } });
+            cal._data.name = 'TEST';
+            assert.ok(cal.toString().indexOf('NAME:TEST') > -1);
+            assert.equal(cal.toString().indexOf('X-WR-CALNAME:TEST'), -1);
+        });
+
         it('should include the description', function () {
             const cal = new ICalCalendar();
             cal._data.description = 'TEST';
             assert.ok(cal.toString().indexOf('X-WR-CALDESC:TEST') > -1);
+        });
+
+        it('should respect the enableCalndescExtension option', function () {
+            const cal = new ICalCalendar({ options: { enableCaldescExtension: false } });
+            cal._data.description = 'TEST';
+            assert.equal(cal.toString().indexOf('X-WR-CALDESC:TEST'), -1);
         });
 
         it('should include the timezone', function () {
@@ -530,11 +549,25 @@ describe('ical-generator Calendar', function () {
             assert.ok(cal.toString().indexOf('X-WR-TIMEZONE:TEST') > -1);
         });
 
-        it('should include the timezone', function () {
+        it('should respect the enableTimezoneExtension option', function () {
+            const cal = new ICalCalendar({ options: { enableTimezoneExtension: false } });
+            cal._data.timezone = 'TEST';
+            assert.ok(cal.toString().indexOf('TIMEZONE-ID:TEST') > -1);
+            assert.equal(cal.toString().indexOf('X-WR-TIMEZONE:TEST'), -1);
+        });
+
+        it('should include the TTL', function () {
             const cal = new ICalCalendar();
             cal._data.ttl = moment.duration(3, 'days');
             assert.ok(cal.toString().indexOf('REFRESH-INTERVAL;VALUE=DURATION:P3D') > -1);
             assert.ok(cal.toString().indexOf('X-PUBLISHED-TTL:P3D') > -1);
+        });
+
+        it('should respect the enablePublishedTtlExtension option', function () {
+            const cal = new ICalCalendar({ options: { enablePublishedTtlExtension: false } });
+            cal._data.ttl = moment.duration(3, 'days');
+            assert.ok(cal.toString().indexOf('REFRESH-INTERVAL;VALUE=DURATION:P3D') > -1);
+            assert.equal(cal.toString().indexOf('X-PUBLISHED-TTL:P3D'), -1);
         });
     });
 });
