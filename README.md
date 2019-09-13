@@ -128,7 +128,7 @@ const ical = require('ical-generator');
 
 // omit the `X-WR-CALDESC` extension in the generated output
 const cal = ical({
-    options: { enabledCalndescExtension: false }
+    options: { enableCaldescExtension: false }
 });
 ```
 
