@@ -19,17 +19,17 @@
     "@babel/preset-env": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
-    "eslint": "^6.3.0",
+    "eslint": "^6.5.1",
     "jquery": "^3.4.1",
     "jshint": "^2.10.2",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.1",
     "mochawesome": "^4.1.0",
     "moment": "^2.24.0",
     "npm-check": "^5.9.0",
     "nyc": "^14.1.1",
-    "portfinder": "^1.0.23",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "portfinder": "^1.0.24",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
   },
   "peerDependencies": {
     "@types/node": ">= 8.0.0"
