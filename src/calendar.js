@@ -423,24 +423,24 @@ class ICalCalendar {
         // NAME
         if (this._data.name) {
             g += 'NAME:' + this._data.name + '\r\n';
-            g += 'X-WR-CALNAME:' + this._data.name + '\r\n';
+            g += 'X-WR-CALNAME;VALUE=TEXT:' + this._data.name + '\r\n';
         }
 
         // Description
         if (this._data.description) {
-            g += 'X-WR-CALDESC:' + this._data.description + '\r\n';
+            g += 'X-WR-CALDESC;VALUE=TEXT:' + this._data.description + '\r\n';
         }
 
         // Timezone
         if (this._data.timezone) {
             g += 'TIMEZONE-ID:' + this._data.timezone + '\r\n';
-            g += 'X-WR-TIMEZONE:' + this._data.timezone + '\r\n';
+            g += 'X-WR-TIMEZONE;VALUE=TEXT:' + this._data.timezone + '\r\n';
         }
 
         // TTL
         if (this._data.ttl) {
             g += 'REFRESH-INTERVAL;VALUE=DURATION:' + this._data.ttl.toISOString() + '\r\n';
-            g += 'X-PUBLISHED-TTL:' + this._data.ttl.toISOString() + '\r\n';
+            g += 'X-PUBLISHED-TTL;VALUE=TEXT:' + this._data.ttl.toISOString() + '\r\n';
         }
 
         // Events
