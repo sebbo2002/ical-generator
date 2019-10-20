@@ -440,7 +440,7 @@ class ICalCalendar {
         // TTL
         if (this._data.ttl) {
             g += 'REFRESH-INTERVAL;VALUE=DURATION:' + this._data.ttl.toISOString() + '\r\n';
-            g += 'X-PUBLISHED-TTL;VALUE=TEXT:' + this._data.ttl.toISOString() + '\r\n';
+            g += 'X-PUBLISHED-TTL;VALUE=DURATION:' + this._data.ttl.toISOString() + '\r\n';
         }
 
         // Events
