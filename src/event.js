@@ -1089,7 +1089,7 @@ class ICalEvent {
          // APPLE LOCATION
          if (this._data.appleLocation) {
             g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + ICalTools.escape(this._data.appleLocation.address) + ';X-APPLE-RADIUS=' + ICalTools.escape(this._data.appleLocation.radius)  + ';X-TITLE=' + ICalTools.escape(this._data.appleLocation.title) +
-            '\r\n:geo:' + ICalTools.escape(this._data.appleLocation.geo.lat) + ',' + ICalTools.escape(this._data.appleLocation.geo.lon) + '\r\n';
+            ':geo:' + ICalTools.escape(this._data.appleLocation.geo.lat) + ',' + ICalTools.escape(this._data.appleLocation.geo.lon) + '\r\n';
         }
 
         // GEO

@@ -65,7 +65,7 @@ declare module 'ical-generator' {
       lastModified?: moment.Moment | Date;
       description?: string;
       location?: string;
-      appleLocation: AppleLocationData;
+      appleLocation?: AppleLocationData;
       geo?: GeoData;
       url?: string;
       sequence?: number;
