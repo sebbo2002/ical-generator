@@ -567,7 +567,7 @@ class ICalEvent {
         }
 
         this._data.appleLocation = appleLocation;
-        this._data.location = null;
+        this._data.location = this._data.appleLocation.title + '\n' + this._data.appleLocation.address;
         return this;
     }
 
