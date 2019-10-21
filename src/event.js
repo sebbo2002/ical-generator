@@ -26,6 +26,7 @@ class ICalEvent {
             repeating: null,
             summary: '',
             location: null,
+            appleLocation: null,
             geo: null,
             description: null,
             htmlDescription: null,
@@ -53,6 +54,7 @@ class ICalEvent {
             'repeating',
             'summary',
             'location',
+            'appleLocation',
             'geo',
             'description',
             'htmlDescription',
@@ -545,6 +547,27 @@ class ICalEvent {
         }
 
         this._data.location = location ? location.toString() : null;
+        return this;
+    }
+
+    /**
+     * Set/Get the Apple event's location
+     *
+     * @param {object} [location]
+     * @since 0.2.0
+     * @returns {ICalEvent|String}
+     */
+    appleLocation (appleLocation) {
+        if (appleLocation === undefined) {
+            return this._data.appleLocation;
+        }
+
+        if (!appleLocation.title || !appleLocation.address || !appleLocation.radius || !appleLocation.geo || !appleLocation.geo.lat || !appleLocation.geo.lon) {
+            throw new Error('`appleLocation` isn\'t formatted correctly.');
+        }
+
+        this._data.appleLocation = appleLocation;
+        this._data.location = null;
         return this;
     }
 
@@ -1061,6 +1084,12 @@ class ICalEvent {
         // LOCATION
         if (this._data.location) {
             g += 'LOCATION:' + ICalTools.escape(this._data.location) + '\r\n';
+        }
+
+         // APPLE LOCATION
+         if (this._data.appleLocation) {
+            g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + ICalTools.escape(this._data.appleLocation.address) + ';X-APPLE-RADIUS=' + ICalTools.escape(this._data.appleLocation.radius)  + ';X-TITLE=' + ICalTools.escape(this._data.appleLocation.title) +
+            '\r\n:geo:' + ICalTools.escape(this._data.appleLocation.geo.lat) + ',' + ICalTools.escape(this._data.appleLocation.geo.lon) + '\r\n';
         }
 
         // GEO
