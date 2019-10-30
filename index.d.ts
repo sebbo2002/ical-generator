@@ -15,6 +15,7 @@ declare module 'ical-generator' {
     type method = 'PUBLISH' | 'REQUEST' | 'REPLY' | 'ADD' | 'CANCEL' | 'REFRESH' | 'COUNTER' | 'DECLINECOUNTER';
     type repeatingFreq = 'SECONDLY' | 'MINUTELY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
     type status = 'CONFIRMED' | 'TENTATIVE' | 'CANCELLED';
+    type busystatus = 'FREE' | 'TENTATIVE' | 'BUSY' | 'OOF';
     type day = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
     type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT_PARTICIPANT' | 'NON-PARTICIPANT';
     type attendeeStatus = 'ACCEPTED' | 'TENTATIVE'| 'DECLINED'| 'DELEGATED' | 'NEEDS-ACTION';
@@ -75,6 +76,7 @@ declare module 'ical-generator' {
       attendees?: AttendeeData[];
       alarms?: AlarmData[];
       status?: string;
+      busystatus?: string;
       timezone?: string;
       recurrenceId?: moment.Moment | Date;
     }
@@ -154,8 +156,8 @@ declare module 'ical-generator' {
       timezone(timezone: string): ICalCalendar;
       url(): string;
       url(url: string): ICalCalendar;
-      calscale(): string;
-      calscale(scale: string): ICalCalendar;
+      scale(): string;
+      scale(scale: string): ICalCalendar;
       ttl(): number;
       ttl(ttl: number): ICalCalendar;
       createEvent(event: EventData): ICalEvent;
@@ -164,6 +166,7 @@ declare module 'ical-generator' {
       save(path: string, cb: Function): ICalCalendar;
       saveSync(path: string): number;
       serve(response: http.ServerResponse, filename?: string): ICalCalendar;
+      toURL(): string;
       toString(): string;
       toJSON(): any;
       length(): number;
@@ -182,14 +185,14 @@ declare module 'ical-generator' {
       start(start: string | moment.Moment |  Date): ICalEvent;
       end(): moment.Moment;
       end(end: string | moment.Moment | Date): ICalEvent;
-      created(): moment.Moment;
-      created(created: string | moment.Moment | Date): ICalEvent;
-      lastModified(): moment.Moment;
-      lastModified(lastModified: string | moment.Moment | Date): ICalEvent;
+      recurrenceId(): moment.Moment;
+      recurrenceId(recurrenceId: string | moment.Moment | Date): ICalEvent;
       timezone(): string;
       timezone(timezone: string): ICalEvent;
       stamp(): moment.Moment;
       stamp(stamp: string | moment.Moment | Date): ICalEvent;
+      timestamp(): moment.Moment;
+      timestamp(stamp: string | moment.Moment | Date): ICalEvent;
       allDay(): boolean;
       allDay(allDay: boolean): ICalEvent;
       floating(): boolean;
@@ -219,8 +222,14 @@ declare module 'ical-generator' {
       categories(categories: CategoryData[]): ICalEvent;
       status(): status;
       status(status: status): ICalEvent;
+      busystatus(): busystatus;
+      busystatus(busystatus: busystatus): ICalEvent;
       url(): string;
       url(url: string): ICalEvent;
+      created(): moment.Moment;
+      created(created: string | moment.Moment | Date): ICalEvent;
+      lastModified(): moment.Moment;
+      lastModified(lastModified: string | moment.Moment | Date): ICalEvent;
       toJSON(): EventData;
     }
 
@@ -230,6 +239,8 @@ declare module 'ical-generator' {
       name(name: string): ICalAttendee;
       email(): string;
       email(email: string): ICalAttendee;
+      mailto(): string;
+      mailto(mailto: string): ICalAttendee;
       role(): attendeeRole;
       role(role: attendeeRole): ICalAttendee;
       rsvp(): attendeeRsvp;

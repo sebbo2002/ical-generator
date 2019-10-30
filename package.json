@@ -11,26 +11,25 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "moment-timezone": "^0.5.26"
+    "moment-timezone": "^0.5.27"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-add-module-exports": "^1.0.2",
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^6.3.0",
+    "eslint": "^6.6.0",
     "jquery": "^3.4.1",
     "jshint": "^2.10.2",
-    "mocha": "^6.2.0",
+    "mocha": "^6.2.2",
     "mochawesome": "^4.1.0",
     "moment": "^2.24.0",
     "npm-check": "^5.9.0",
     "nyc": "^14.1.1",
-    "portfinder": "^1.0.23",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.7"
+    "portfinder": "^1.0.25",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9"
   },
   "peerDependencies": {
     "@types/node": ">= 8.0.0"
@@ -46,7 +45,7 @@
     "coverage": "nyc --reporter=html --reporter=text --report-dir ./test-result/coverage --check-coverage mocha -c ./test/*.js",
     "browser-test": "webpack && mkdir -p ./test-result/browser-test && cp ./test/html/index.html ./test-result/browser-test && cp ./node_modules/mocha/mocha.css ./test-result/browser-test && cp ./node_modules/jquery/dist/jquery.min.js  ./test-result/browser-test && cp ./node_modules/mocha/mocha.js ./test-result/browser-test && cp ./node_modules/moment/moment.js ./test-result/browser-test && open ./test-result/browser-test/index.html",
     "bump": "jq -M \".version=\\\"$CI_COMMIT_TAG\\\"\" package.json|sponge package.json",
-    "build": "babel src --presets babel-preset-es2015 --out-dir dist"
+    "build": "babel src --out-dir dist"
   },
   "preferGlobal": false,
   "main": "./dist/index.js",

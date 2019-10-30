@@ -116,7 +116,7 @@ class ICalAttendee {
      * Set/Get the attendee's email address
      *
      * @param {String} [mailto] Email address
-     * @since x.x.x TODO: set correct version number
+     * @since 1.3.0 TODO: set correct version number
      * @returns {ICalAttendee|String}
      */
     mailto (mailto) {
