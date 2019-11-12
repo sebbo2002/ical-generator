@@ -235,13 +235,11 @@ class ICalCalendar {
             return this._data.ttl;
         }
 
-        if(moment.isDuration(ttl)) {
+        if (moment.isDuration(ttl)) {
             this._data.ttl = ttl;
-        }
-        else if(parseInt(ttl, 10) > 0) {
+        } else if (parseInt(ttl, 10) > 0) {
             this._data.ttl = moment.duration(parseInt(ttl, 10), 'seconds');
-        }
-        else {
+        } else {
             this._data.ttl = null;
         }
 
@@ -324,15 +322,20 @@ class ICalCalendar {
         return this;
     }
 
+
     /**
      * Returns a Blob which you can use to download or to create an url
-     * so it's only working on modern browsers supporting this API.
+     * so it's only working on modern browsers supporting the Blob API.
+     *
+     * Unfortunately, because node.js has no Blob implementation (they have Buffer
+     * instead), this can't be tested right now. Sorry Dave…
      *
      * @returns {Blob}
      */
     toBlob() {
         return new Blob([this._generate()], {type: 'text/calendar'});
     }
+
 
     /**
      * Returns a URL to download the ical file. Uses the Blob object internally,
@@ -344,7 +347,7 @@ class ICalCalendar {
      * @returns {String}
      */
     toURL() {
-        const blob = toBlob()
+        const blob = this.toBlob();
         return URL.createObjectURL(blob);
     }
 

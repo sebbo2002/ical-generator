@@ -243,13 +243,15 @@ Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/a
 
 Send Calendar to the User when using HTTP. See Quick Start above. Won't work in browsers. Defaults to `'calendar.ics'`.
 
+
 #### toBlob()
 
-Generates a blob to use to download or to generate a download URL. Only supported in browsers supporting this API.
+Generates a blob to use for downloads or to generate a download URL. Only supported in browsers supporting the Blob API.
+
 
 #### toURL()
 
-Returns a download URL using the Blob. Only supported in browsers supporting this API.
+Returns a download URL using the Blob. Only supported in browsers supporting the Blob API.
 
 
 #### toString()
