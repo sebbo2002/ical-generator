@@ -460,6 +460,59 @@ describe('ical-generator Calendar', function () {
         });
     });
 
+    describe('x()', function () {
+        it('setter should return this', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.x('X-FOO', 'bar'));
+        });
+
+        it('setter should work with key and value strings', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.x('X-FOO', 'bar'));
+            assert.deepEqual(cal._data.x, [['X-FOO', 'bar']]);
+
+            assert.deepStrictEqual(cal, cal.x('X-LOREM', 'ipsum'));
+            assert.deepEqual(cal._data.x, [['X-FOO', 'bar'], ['X-LOREM', 'ipsum']]);
+        });
+
+        it('setter should work with key and value array', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.x([{key: 'X-FOO', value: 'bar'}]));
+            assert.deepEqual(cal._data.x, [['X-FOO', 'bar']]);
+
+            assert.deepStrictEqual(cal, cal.x([{key: 'X-LOREM', value: 'ipsum'}]));
+            assert.deepEqual(cal._data.x, [['X-LOREM', 'ipsum']]);
+        });
+
+        it('setter should work with key and value object', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.x({'X-FOO': 'bar'}));
+            assert.deepEqual(cal._data.x, [['X-FOO', 'bar']]);
+
+            assert.deepStrictEqual(cal, cal.x({'X-LOREM': 'ipsum'}));
+            assert.deepEqual(cal._data.x, [['X-LOREM', 'ipsum']]);
+        });
+
+        it('getter should return value', function () {
+            const cal = new ICalCalendar();
+            assert.deepEqual(cal.x(), []);
+            cal.x('X-FOO', 'BAR');
+            assert.deepEqual(cal.x(), [{key: 'X-FOO', value: 'BAR'}]);
+            cal.x({});
+            assert.deepEqual(cal.x().length, 0);
+        });
+
+        it('should change something', function () {
+            const cal = new ICalCalendar().x('X-FOO', 'BAR');
+            cal.createEvent({
+                start: new Date(),
+                end: new Date(new Date().getTime() + 3600000),
+                summary: 'Example Event'
+            });
+            assert.ok(cal.toString().includes('X-FOO'));
+        });
+    });
+
     describe('toJSON()', function () {
         it('should work', function () {
             const cal = new ICalCalendar();
