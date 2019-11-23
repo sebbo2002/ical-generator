@@ -281,7 +281,7 @@ class ICalAlarm {
      * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
     x (keyOrArray, value) {
-        return ICalTools.addOrGetCustomAttributes (instance, keyOrArray, value);
+        return ICalTools.addOrGetCustomAttributes (this, keyOrArray, value);
     }
 
 

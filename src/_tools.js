@@ -126,6 +126,9 @@ class ICalTools {
 
             instance._data.x.push([keyOrArray, value]);
         }
+        else if (keyOrArray !== undefined || value !== undefined) {
+            throw new Error('Either key or value is not a string!');
+        }
         else {
             return instance._data.x.map(a => ({
                 key: a[0],

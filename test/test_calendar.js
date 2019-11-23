@@ -473,6 +473,18 @@ describe('ical-generator Calendar', function () {
 
             assert.deepStrictEqual(cal, cal.x('X-LOREM', 'ipsum'));
             assert.deepEqual(cal._data.x, [['X-FOO', 'bar'], ['X-LOREM', 'ipsum']]);
+
+            assert.throws(() => {
+                cal.x('LOREM', 'ipsum');
+            });
+
+            assert.throws(() => {
+                cal.x('X-LOREM', 1337);
+            });
+
+            assert.throws(() => {
+                cal.x(5, 'ipsum');
+            });
         });
 
         it('setter should work with key and value array', function () {
@@ -482,6 +494,18 @@ describe('ical-generator Calendar', function () {
 
             assert.deepStrictEqual(cal, cal.x([{key: 'X-LOREM', value: 'ipsum'}]));
             assert.deepEqual(cal._data.x, [['X-LOREM', 'ipsum']]);
+
+            assert.throws(() => {
+                cal.x([{key: 'LOREM', value: 'ipsum'}]);
+            });
+
+            assert.throws(() => {
+                cal.x([{key: 'X-LOREM', value: 1337}]);
+            });
+
+            assert.throws(() => {
+                cal.x([{key: 5, value: 'ipsum'}]);
+            });
         });
 
         it('setter should work with key and value object', function () {
@@ -491,6 +515,18 @@ describe('ical-generator Calendar', function () {
 
             assert.deepStrictEqual(cal, cal.x({'X-LOREM': 'ipsum'}));
             assert.deepEqual(cal._data.x, [['X-LOREM', 'ipsum']]);
+
+            assert.throws(() => {
+                cal.x({'LOREM': 'ipsum'});
+            });
+
+            assert.throws(() => {
+                cal.x({'X-LOREM': 1337});
+            });
+
+            assert.throws(() => {
+                cal.x({5: 'ipsum'});
+            });
         });
 
         it('getter should return value', function () {
