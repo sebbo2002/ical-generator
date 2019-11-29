@@ -25,7 +25,7 @@ jobs:
           key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node }}-
-      - run: npm ci
+      - run: npm install
       - run: npm run all
         env:
           CI: true
