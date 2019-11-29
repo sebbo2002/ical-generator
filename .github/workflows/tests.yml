@@ -4,28 +4,24 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
         node: [8.x, 10.x, 12.x, 13.x]
-        os: [macos-latest, windows-latest, ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - id: npm-cache
-        run: |
-          echo "::set-output name=dir::$(npm config get cache)"
       - uses: actions/cache@v1
         with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-${{ matrix.node }}-
-      - run: npm install
+            ${{ runner.os }}-node-
+      - run: npm ci
       - run: npm run all
         env:
           CI: true
