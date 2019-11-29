@@ -740,6 +740,9 @@ npm run browser-test
 }
 ```
 
+### Where's the changelog?
+It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md).
+
 Thanks [@rally25rs](https://github.com/rally25rs) for this [tip](https://github.com/sebbo2002/ical-generator/issues/64#issuecomment-344637582).
 
 
