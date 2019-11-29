@@ -162,7 +162,7 @@ _The following document documents changes to this library. Changes to the depend
 - Add `npm run browser-test` to prepare browser based unit tests
 - Update examples
 ### Breaking Changes
-- Dropped suuport for node.js <= 4
+- Dropped support for node.js <= 4
 
 
 ## [0.2.9](https://github.com/sebbo2002/ical-generator/releases/tag/0.2.9) - 2016-10-21
