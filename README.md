@@ -1,8 +1,7 @@
 # ical-generator
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![Status](https://git-badges.sebbo.net/8/develop/build)](https://static.sebbo.net/ical-generator/test/report.html)
-[![Test Coverage](https://git-badges.sebbo.net/8/develop/coverage)](https://static.sebbo.net/ical-generator/coverage/)
+![Status](https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square)
 
 ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable
 calendar feeds.
@@ -242,6 +241,11 @@ Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/a
 #### serve(**_http.ServerResponse_ response**, [_String_ filename])
 
 Send Calendar to the User when using HTTP. See Quick Start above. Won't work in browsers. Defaults to `'calendar.ics'`.
+
+
+#### x (**_String_ key, _String_ value**) /x (**_Object_ attributes**)
+
+Add a custom `X-` attribute to the generated calendar file.
 
 
 #### toBlob()
@@ -549,6 +553,11 @@ Appointment status. May be any of the following: `confirmed`, `tentative`, `canc
 Appointment busystatus. May be any of the following: `free`, `tentative`, `busy`, `oof`.
 
 
+#### x (**_String_ key, _String_ value**) /x (**_Object_ attributes**)
+
+Add a custom `X-` attribute to the generated calendar file.
+
+
 #### created([_moment_|_Date_ created])
 
 Date object of the time the appointment was created.
@@ -711,6 +720,12 @@ event.createAlarm({
 Alarm description; used to set the alarm message if type = display. Defaults to the event's summary.
 
 
+#### x (**_String_ key, _String_ value**) /x (**_Object_ attributes**)
+
+Add a custom `X-` attribute to the generated calendar file.
+
+
+
 ### Category
 
 #### name([_String_ name])
@@ -739,6 +754,9 @@ npm run browser-test
   }
 }
 ```
+
+### Where's the changelog?
+It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md).
 
 Thanks [@rally25rs](https://github.com/rally25rs) for this [tip](https://github.com/sebbo2002/ical-generator/issues/64#issuecomment-344637582).
 

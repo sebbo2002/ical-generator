@@ -450,6 +450,13 @@ describe('ical-generator Alarm', function () {
         });
     });
 
+    describe('x()', function () {
+        it('is there', function () {
+            const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));
+            assert.deepStrictEqual(a, a.x('X-FOO', 'bar'));
+        });
+    });
+
     describe('toJSON()', function () {
         it('should work', function() {
             const a = new ICalAlarm(null, new ICalEvent(null, new ICalCalendar()));

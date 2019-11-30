@@ -330,6 +330,7 @@ class ICalCalendar {
      * Unfortunately, because node.js has no Blob implementation (they have Buffer
      * instead), this can't be tested right now. Sorry Dave…
      *
+     * @since 1.9.0
      * @returns {Blob}
      */
     toBlob() {
@@ -359,6 +360,21 @@ class ICalCalendar {
      */
     toString() {
         return this._generate();
+    }
+
+
+    /**
+     * Get/Set X-* attributes. Woun't filter double attributes,
+     * which are also added by another method (e.g. busystatus),
+     * so these attributes may be inserted twice.
+     *
+     * @param {Array<Object<{key: String, value: String}>>|String} [key]
+     * @param {String} [value]
+     * @since 1.9.0
+     * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
+     */
+    x (keyOrArray, value) {
+        return ICalTools.addOrGetCustomAttributes (this, keyOrArray, value);
     }
 
 
@@ -398,6 +414,7 @@ class ICalCalendar {
         this._data.scale = null;
         this._data.ttl = null;
         this._data.events = [];
+        this._data.x = [];
         return this;
     }
 
@@ -459,6 +476,9 @@ class ICalCalendar {
         this._data.events.forEach(function (event) {
             g += event._generate();
         });
+
+        // CUSTOM X ATTRIBUTES
+        g += ICalTools.generateCustomAttributes(this);
 
         g += 'END:VCALENDAR';
 
