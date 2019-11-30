@@ -1,8 +1,7 @@
 # ical-generator
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![Status](https://git-badges.sebbo.net/8/develop/build)](https://static.sebbo.net/ical-generator/test/report.html)
-[![Test Coverage](https://git-badges.sebbo.net/8/develop/coverage)](https://static.sebbo.net/ical-generator/coverage/)
+![Status](https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square)
 
 ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable
 calendar feeds.
