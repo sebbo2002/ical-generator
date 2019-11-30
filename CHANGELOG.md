@@ -4,6 +4,14 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.9.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.9.0) - 2019-11-30
+### Feature
+- `x()` method – add custom parameters like `X-WR-CALNAME`
+
+### Maintenance
+- Add this changelog file
+- Move from private GitLab CI to GitHub Actions
+
 ## [1.8.3](https://github.com/sebbo2002/ical-generator/releases/tag/1.8.3) - 2019-11-12
 ### Feature
 - `toBlob()` method in (only for browsers)
