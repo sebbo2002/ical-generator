@@ -37,7 +37,8 @@ class ICalEvent {
             busystatus: null,
             url: null,
             created: null,
-            lastModified: null
+            lastModified: null,
+            x: []
         };
         this._attributes = [
             'id',
@@ -943,6 +944,21 @@ class ICalEvent {
 
 
     /**
+     * Get/Set X-* attributes. Woun't filter double attributes,
+     * which are also added by another method (e.g. busystatus),
+     * so these attributes may be inserted twice.
+     *
+     * @param {Array<Object<{key: String, value: String}>>|String} [key]
+     * @param {String} [value]
+     * @since ?
+     * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
+     */
+    x (keyOrArray, value) {
+        return ICalTools.addOrGetCustomAttributes (this, keyOrArray, value);
+    }
+
+
+    /**
      * Export calender as JSON Object to use it later…
      *
      * @since 0.2.4
@@ -1118,6 +1134,9 @@ class ICalEvent {
         if (this._data.busystatus) {
             g += 'X-MICROSOFT-CDO-BUSYSTATUS:' + this._data.busystatus.toUpperCase() + '\r\n';
         }
+
+        // CUSTOM X ATTRIBUTES
+        g += ICalTools.generateCustomAttributes(this);
 
         // CREATED
         if (this._data.created) {

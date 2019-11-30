@@ -243,6 +243,11 @@ Save Calendar to disk synchronously using [fs.writeFileSync](http://nodejs.org/a
 Send Calendar to the User when using HTTP. See Quick Start above. Won't work in browsers. Defaults to `'calendar.ics'`.
 
 
+#### x (**_String_ key, _String_ value**) /x (**_Object_ attributes**)
+
+Add a custom `X-` attribute to the generated calendar file.
+
+
 #### toBlob()
 
 Generates a blob to use for downloads or to generate a download URL. Only supported in browsers supporting the Blob API.
@@ -548,6 +553,11 @@ Appointment status. May be any of the following: `confirmed`, `tentative`, `canc
 Appointment busystatus. May be any of the following: `free`, `tentative`, `busy`, `oof`.
 
 
+#### x (**_String_ key, _String_ value**) /x (**_Object_ attributes**)
+
+Add a custom `X-` attribute to the generated calendar file.
+
+
 #### created([_moment_|_Date_ created])
 
 Date object of the time the appointment was created.
@@ -708,6 +718,12 @@ event.createAlarm({
 #### description([_String_| description])
 
 Alarm description; used to set the alarm message if type = display. Defaults to the event's summary.
+
+
+#### x (**_String_ key, _String_ value**) /x (**_Object_ attributes**)
+
+Add a custom `X-` attribute to the generated calendar file.
+
 
 
 ### Category

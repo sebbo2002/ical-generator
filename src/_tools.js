@@ -93,6 +93,57 @@ class ICalTools {
             return line.match(/(.{1,74})/g).join('\r\n ');
         }).join('\r\n');
     }
+
+    static addOrGetCustomAttributes (instance, keyOrArray, value) {
+        if (Array.isArray(keyOrArray)) {
+            instance._data.x = keyOrArray.map(o => {
+                if (typeof o.key !== 'string' || typeof o.value !== 'string') {
+                    throw new Error('Either key or value is not a string!');
+                }
+                if (o.key.substr(0, 2) !== 'X-') {
+                    throw new Error('Key has to start with `X-`!');
+                }
+
+                return [o.key, o.value];
+            });
+        }
+        else if (typeof keyOrArray === 'object') {
+            instance._data.x = Object.entries(keyOrArray).map(([key, value]) => {
+                if (typeof key !== 'string' || typeof value !== 'string') {
+                    throw new Error('Either key or value is not a string!');
+                }
+                if (key.substr(0, 2) !== 'X-') {
+                    throw new Error('Key has to start with `X-`!');
+                }
+
+                return [key, value];
+            });
+        }
+        else if (typeof keyOrArray === 'string' && typeof value === 'string') {
+            if (keyOrArray.substr(0, 2) !== 'X-') {
+                throw new Error('Key has to start with `X-`!');
+            }
+
+            instance._data.x.push([keyOrArray, value]);
+        }
+        else if (keyOrArray !== undefined || value !== undefined) {
+            throw new Error('Either key or value is not a string!');
+        }
+        else {
+            return instance._data.x.map(a => ({
+                key: a[0],
+                value: a[1]
+            }));
+        }
+
+        return instance;
+    }
+
+    static generateCustomAttributes (instance) {
+        return instance._data.x
+            .map(([key, value]) => key.toUpperCase() + ':' + ICalTools.escape(value))
+            .join('\r\n');
+    }
 }
 
 module.exports = ICalTools;

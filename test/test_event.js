@@ -1522,6 +1522,13 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('x()', function () {
+        it('is there', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.deepStrictEqual(e, e.x('X-FOO', 'bar'));
+        });
+    });
+
     describe('toJSON()', function () {
         it('should maybe work', function () {
             const date = moment().add(1, 'month');

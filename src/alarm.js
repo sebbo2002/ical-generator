@@ -18,7 +18,8 @@ class ICalAlarm {
             repeat: null,
             repeatInterval: null,
             attach: null,
-            description: null
+            description: null,
+            x: []
         };
         this._attributes = [
             'type',
@@ -270,6 +271,21 @@ class ICalAlarm {
 
 
     /**
+     * Get/Set X-* attributes. Woun't filter double attributes,
+     * which are also added by another method (e.g. busystatus),
+     * so these attributes may be inserted twice.
+     *
+     * @param {Array<Object<{key: String, value: String}>>|String} [key]
+     * @param {String} [value]
+     * @since ?
+     * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
+     */
+    x (keyOrArray, value) {
+        return ICalTools.addOrGetCustomAttributes (this, keyOrArray, value);
+    }
+
+
+    /**
      * Export calender as JSON Object to use it later…
      *
      * @since 0.2.4
@@ -345,6 +361,9 @@ class ICalAlarm {
         else if (this._data.type === 'display') {
             g += 'DESCRIPTION:' + ICalTools.escape(this._event.summary()) + '\r\n';
         }
+
+        // CUSTOM X ATTRIBUTES
+        g += ICalTools.generateCustomAttributes(this);
 
         g += 'END:VALARM\r\n';
         return g;
