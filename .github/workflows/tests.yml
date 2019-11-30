@@ -3,7 +3,7 @@ name: Tests
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,3 +25,4 @@ jobs:
       - run: npm run all
         env:
           CI: true
+
