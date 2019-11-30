@@ -22,9 +22,7 @@ jobs:
             ${{ runner.os }}-node-
       - run: npm ci
       - run: npm run build
-      - run: echo $GITHUB_REF
-      - run: jq -M ".version=\"$GITHUB_REF\"" package.json > ./package.json
-      - run: cat ./package.json
+      - run: jq -M ".version=\"${GITHUB_REF:11}\"" package.json > ./package.json
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
