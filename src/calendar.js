@@ -370,7 +370,7 @@ class ICalCalendar {
      *
      * @param {Array<Object<{key: String, value: String}>>|String} [key]
      * @param {String} [value]
-     * @since ?
+     * @since 1.9.0
      * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
     x (keyOrArray, value) {
