@@ -4,6 +4,11 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.9.2](https://github.com/sebbo2002/ical-generator/releases/tag/1.9.2) - 2019-12-14
+### Feature
+- Fix `\r\n` issue for custom attributes using `x()`
+
+
 ## [1.9.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.9.0) - 2019-11-30
 ### Feature
 - `x()` method – add custom parameters like `X-WR-CALNAME`
