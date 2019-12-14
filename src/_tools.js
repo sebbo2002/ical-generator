@@ -140,9 +140,10 @@ class ICalTools {
     }
 
     static generateCustomAttributes (instance) {
-        return instance._data.x
+        const str = instance._data.x
             .map(([key, value]) => key.toUpperCase() + ':' + ICalTools.escape(value))
             .join('\r\n');
+        return str.length ? str + '\r\n' : '';
     }
 }
 
