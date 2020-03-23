@@ -66,7 +66,8 @@ class ICalEvent {
             'url',
             'created',
             'lastModified',
-            'recurrenceId'
+            'recurrenceId',
+            'x'
         ];
         this._vars = {
             allowedRepeatingFreq: ['SECONDLY', 'MINUTELY', 'HOURLY', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'],
