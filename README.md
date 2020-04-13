@@ -385,6 +385,42 @@ Some calendar apps may support HTML descriptions. Like in emails, supported HTML
 Appointment location
 
 
+#### appleLocation([_Object_ appleLocation])
+
+This method can be used to pass the location as a structured object. The location is then displayed on the map in iCal.
+The passed object looks like this:
+
+```
+interface AppleLocationData {
+  title: string;
+  address: string;
+  radius: number;
+  geo: GeoData;
+}
+
+interface GeoData {
+  lat: number;
+  lon: number;
+}
+```
+
+An example:
+
+```js
+event.appleLocation({
+    title: 'My Title',
+    address: 'My Address',
+    radius: 40,
+    geo: {
+        lat: '52.063921',
+        lon: '5.128511'
+    }
+});
+```
+
+You can either use location() or appleLocation(), but now both. Thanks to [@focux](https://github.com/focux) for the [pull request](https://github.com/sebbo2002/ical-generator/pull/170)
+
+
 #### geo([_String_|_Object_ geo])
 
 Appointment geo position (gps). See [rfc](https://tools.ietf.org/html/rfc5545#section-3.8.1.6) for more details

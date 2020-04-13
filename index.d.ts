@@ -65,6 +65,7 @@ declare module 'ical-generator' {
       lastModified?: moment.Moment | Date;
       description?: string;
       location?: string;
+      appleLocation?: AppleLocationData;
       geo?: GeoData;
       url?: string;
       sequence?: number;
@@ -137,6 +138,13 @@ declare module 'ical-generator' {
       lon: number;
     }
 
+    interface AppleLocationData {
+      title: string;
+      address: string;
+      radius: number;
+      geo: GeoData;
+    }
+
     /**
      * The calendar object containing all event data
      */
@@ -203,6 +211,8 @@ declare module 'ical-generator' {
       summary(summary: string): ICalEvent;
       location(): string;
       location(location: string): ICalEvent;
+      appleLocation(): AppleLocationData;
+      appleLocation(location: AppleLocationData): ICalEvent;
       geo(): string | null;
       geo(geo: string | GeoData | null): ICalEvent;
       description(): string;
