@@ -1038,6 +1038,122 @@ describe('ical-generator Event', function () {
             event.location('Europa-Park');
             assert.strictEqual(event._data.location, 'Europa-Park');
         });
+
+        it('should reset appleLocation', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event',
+                appleLocation: {
+                    title: 'My Title',
+                    address: 'My Address',
+                    radius: 40,
+                    geo: {
+                        lat: '52.063921',
+                        lon: '5.128511'
+                    }
+                }
+            }, new ICalCalendar());
+
+            event.location('Europa-Park');
+            assert.strictEqual(event._data.appleLocation, null);
+        });
+    });
+
+    describe('appleLocation()', function () {
+        it('getter should return value', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.strictEqual(e.appleLocation(), null);
+
+            e._data.appleLocation = {
+                title: 'My Title',
+                address: 'My Address',
+                radius: 40,
+                geo: {
+                    lat: '52.063921',
+                    lon: '5.128511',
+                }
+            };
+            assert.deepEqual(e.appleLocation(), {
+                title: 'My Title',
+                address: 'My Address',
+                radius: 40,
+                geo: {
+                    lat: '52.063921',
+                    lon: '5.128511',
+                }
+            });
+
+            e._data.appleLocation = null;
+            assert.strictEqual(e.appleLocation(), null);
+        });
+
+        it('setter should return this', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.deepStrictEqual(e, e.appleLocation(null));
+            assert.deepStrictEqual(e, e.appleLocation({
+                title: 'My Title',
+                address: 'My Address',
+                radius: 40,
+                geo: {
+                    lat: '52.063921',
+                    lon: '5.128511',
+                }
+            }));
+        });
+
+        it('should update appleLocation', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            event.appleLocation({
+                title: 'My Title',
+                address: 'My Address',
+                radius: 40,
+                geo: {
+                    lat: '52.063921',
+                    lon: '5.128511',
+                }
+            });
+            assert.deepEqual(event._data.appleLocation, {
+                title: 'My Title',
+                address: 'My Address',
+                radius: 40,
+                geo: {
+                    lat: '52.063921',
+                    lon: '5.128511',
+                }
+            });
+        });
+
+        it('should reset location', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event',
+                location: 'Batman Cave'
+            }, new ICalCalendar());
+
+            event.appleLocation({
+                title: 'My Title',
+                address: 'My Address',
+                radius: 40,
+                geo: {
+                    lat: '52.063921',
+                    lon: '5.128511',
+                }
+            });
+            assert.ok(event._data.location !== 'Batman Cave', null);
+        });
+
+        it('should throw error when string is not valid', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            assert.throws(() => event.appleLocation({}), /`appleLocation` isn't formatted correctly/i);
+        });
     });
 
     describe('description()', function () {

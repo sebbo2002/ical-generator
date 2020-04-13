@@ -26,6 +26,7 @@ class ICalEvent {
             repeating: null,
             summary: '',
             location: null,
+            appleLocation: null,
             geo: null,
             description: null,
             htmlDescription: null,
@@ -54,6 +55,7 @@ class ICalEvent {
             'repeating',
             'summary',
             'location',
+            'appleLocation',
             'geo',
             'description',
             'htmlDescription',
@@ -545,8 +547,42 @@ class ICalEvent {
         if (location === undefined) {
             return this._data.location;
         }
+        if (this._data.appleLocation && location) {
+            this._data.appleLocation = null;
+        }
 
         this._data.location = location ? location.toString() : null;
+        return this;
+    }
+
+    /**
+     * Set/Get the Apple event's location
+     *
+     * @param {object|null} [appleLocation]
+     * @param {string} [appleLocation.title]
+     * @param {string} [appleLocation.address]
+     * @param {number} [appleLocation.radius]
+     * @param {object} [appleLocation.geo]
+     * @param {string|number} [appleLocation.lat]
+     * @param {string|number} [appleLocation.lon]
+     * @since 1.10.0
+     * @returns {ICalEvent|String}
+     */
+    appleLocation (appleLocation) {
+        if (appleLocation === undefined) {
+            return this._data.appleLocation;
+        }
+        if (appleLocation === null) {
+            this._data.location = null;
+            return this;
+        }
+
+        if (!appleLocation.title || !appleLocation.address || !appleLocation.radius || !appleLocation.geo || !appleLocation.geo.lat || !appleLocation.geo.lon) {
+            throw new Error('`appleLocation` isn\'t formatted correctly. See https://github.com/sebbo2002/ical-generator#applelocationobject-applelocation');
+        }
+
+        this._data.appleLocation = appleLocation;
+        this._data.location = this._data.appleLocation.title + '\n' + this._data.appleLocation.address;
         return this;
     }
 
@@ -955,7 +991,7 @@ class ICalEvent {
      * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
     x (keyOrArray, value) {
-        return ICalTools.addOrGetCustomAttributes (this, keyOrArray, value);
+        return ICalTools.addOrGetCustomAttributes(this, keyOrArray, value);
     }
 
 
@@ -1078,6 +1114,12 @@ class ICalEvent {
         // LOCATION
         if (this._data.location) {
             g += 'LOCATION:' + ICalTools.escape(this._data.location) + '\r\n';
+        }
+
+        // APPLE LOCATION
+        if (this._data.appleLocation) {
+            g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + ICalTools.escape(this._data.appleLocation.address) + ';X-APPLE-RADIUS=' + ICalTools.escape(this._data.appleLocation.radius) + ';X-TITLE=' + ICalTools.escape(this._data.appleLocation.title) +
+                ':geo:' + ICalTools.escape(this._data.appleLocation.geo.lat) + ',' + ICalTools.escape(this._data.appleLocation.geo.lon) + '\r\n';
         }
 
         // GEO
