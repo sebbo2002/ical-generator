@@ -358,7 +358,7 @@ class ICalEvent {
     /**
      * Set/Get the event's repeating stuff
      *
-     * @param {object} [repeating]
+     * @param {object|String} [repeating]
      * @param {String} [repeating.freq]
      * @param {Number} [repeating.count]
      * @param {Number} [repeating.interval]
@@ -378,6 +378,11 @@ class ICalEvent {
         }
         if (!repeating) {
             c._data.repeating = null;
+            return c;
+        }
+
+        if (typeof repeating === 'string' || repeating instanceof String) {
+            c._data.repeating = {rrule: repeating};
             return c;
         }
 
@@ -1046,34 +1051,39 @@ class ICalEvent {
 
         // REPEATING
         if (this._data.repeating) {
-            g += 'RRULE:FREQ=' + this._data.repeating.freq;
-
-            if (this._data.repeating.count) {
-                g += ';COUNT=' + this._data.repeating.count;
+            if (this._data.repeating.rrule) {
+                g += this._data.repeating.rrule;
             }
+            else {
+                g += 'RRULE:FREQ=' + this._data.repeating.freq;
 
-            if (this._data.repeating.interval) {
-                g += ';INTERVAL=' + this._data.repeating.interval;
-            }
-
-            if (this._data.repeating.until) {
-                g += ';UNTIL=' + ICalTools.formatDate(this._calendar.timezone(), this._data.repeating.until);
-            }
-
-            if (this._data.repeating.byDay) {
-                g += ';BYDAY=' + this._data.repeating.byDay.join(',');
-            }
-
-            if (this._data.repeating.byMonth) {
-                g += ';BYMONTH=' + this._data.repeating.byMonth.join(',');
-            }
-
-            if (this._data.repeating.byMonthDay) {
-                g += ';BYMONTHDAY=' + this._data.repeating.byMonthDay.join(',');
-            }
-
-            if (this._data.repeating.bySetPos) {
-                g += ';BYSETPOS=' + this._data.repeating.bySetPos;
+                if (this._data.repeating.count) {
+                    g += ';COUNT=' + this._data.repeating.count;
+                }
+    
+                if (this._data.repeating.interval) {
+                    g += ';INTERVAL=' + this._data.repeating.interval;
+                }
+    
+                if (this._data.repeating.until) {
+                    g += ';UNTIL=' + ICalTools.formatDate(this._calendar.timezone(), this._data.repeating.until);
+                }
+    
+                if (this._data.repeating.byDay) {
+                    g += ';BYDAY=' + this._data.repeating.byDay.join(',');
+                }
+    
+                if (this._data.repeating.byMonth) {
+                    g += ';BYMONTH=' + this._data.repeating.byMonth.join(',');
+                }
+    
+                if (this._data.repeating.byMonthDay) {
+                    g += ';BYMONTHDAY=' + this._data.repeating.byMonthDay.join(',');
+                }
+    
+                if (this._data.repeating.bySetPos) {
+                    g += ';BYSETPOS=' + this._data.repeating.bySetPos;
+                }
             }
 
             g += '\r\n';

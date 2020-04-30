@@ -340,9 +340,9 @@ Appointment is a "floating" time. From [section 3.3.12 of RFC 554](https://tools
 This and the 'timezone' setting (see above) are mutually exclusive, and setting the floating flag will unset the 'timezone'.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format (see [date-time form #2 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5)).
 
 
-#### repeating([_Object_ repeating])
+#### repeating([_Object_ repeating _|_ _String_ rrule])
 
-Appointment is a repeating event
+Appointment is a repeating event. Specify the repetition parameters as an object. Alternatively, pass in a standard rrule string.
 
 ```javascript
 event.repeating({
@@ -357,6 +357,10 @@ event.repeating({
     exclude: [new Date('Dec 25 2013 00:00:00 UTC')], // exclude these dates
     excludeTimezone: 'Europe/Berlin' // timezone of exclude
 });
+```
+
+```javascript
+event.repeating('RRULE:FREQ=WEEKLY;COUNT=30;INTERVAL=1;WKST=MO');
 ```
 
 
