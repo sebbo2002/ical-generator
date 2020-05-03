@@ -47,7 +47,7 @@ declare module 'ical-generator' {
       timezone?: string;
       ttl?: number;
       url?: string;
-      calscale?: string;
+      scale?: string;
       events?: EventData[];
     }
 
