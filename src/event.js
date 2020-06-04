@@ -912,7 +912,7 @@ class ICalEvent {
             return this;
         }
 
-        if(this._vars.allowedTranspValues.indexOf(transparency.toUpperCase()) === -1) {
+        if(this._vars.allowedTranspValues.indexOf(transparency.toString().toUpperCase()) === -1) {
             throw new Error('`transparency` must be one of the following: ' + this._vars.allowedTranspValues.join(', ') + '!');
         }
 
