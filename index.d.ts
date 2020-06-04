@@ -77,6 +77,7 @@ declare module 'ical-generator' {
       status?: string;
       timezone?: string;
       recurrenceId?: moment.Moment | Date;
+      transparency?: string;
     }
 
     interface RepeatingData {
@@ -222,6 +223,8 @@ declare module 'ical-generator' {
       url(): string;
       url(url: string): ICalEvent;
       toJSON(): EventData;
+      transparency(): string;
+      transparency(transparency: string): string;
     }
 
     class ICalAttendee {
