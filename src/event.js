@@ -37,6 +37,7 @@ class ICalEvent {
             status: null,
             busystatus: null,
             url: null,
+            transparency: null,
             created: null,
             lastModified: null,
             x: []
@@ -66,6 +67,7 @@ class ICalEvent {
             'status',
             'busystatus',
             'url',
+            'transparency',
             'created',
             'lastModified',
             'recurrenceId',
@@ -74,7 +76,8 @@ class ICalEvent {
         this._vars = {
             allowedRepeatingFreq: ['SECONDLY', 'MINUTELY', 'HOURLY', 'DAILY', 'WEEKLY', 'MONTHLY', 'YEARLY'],
             allowedStatuses: ['CONFIRMED', 'TENTATIVE', 'CANCELLED'],
-            allowedBusyStatuses: ['FREE', 'TENTATIVE', 'BUSY', 'OOF']
+            allowedBusyStatuses: ['FREE', 'TENTATIVE', 'BUSY', 'OOF'],
+            allowedTranspValues: ['TRANSPARENT', 'OPAQUE']
         };
 
         this._calendar = _calendar;
@@ -931,6 +934,30 @@ class ICalEvent {
         return this;
     }
 
+    /**
+     * Set/Get the event's transparency
+     *
+     * @param {String} transparency
+     * @since 1.7.3
+     * @returns {ICalEvent|String}
+     */
+    transparency (transparency) {
+        if(transparency === undefined) {
+            return this._data.transparency;
+        }
+        if(!transparency) {
+            this._data.transparency = null;
+            return this;
+        }
+
+        if(this._vars.allowedTranspValues.indexOf(transparency.toString().toUpperCase()) === -1) {
+            throw new Error('`transparency` must be one of the following: ' + this._vars.allowedTranspValues.join(', ') + '!');
+        }
+
+        this._data.transparency = transparency.toUpperCase();
+        return this;
+    }
+
 
     /**
      * Set/Get the event's creation date
@@ -1110,6 +1137,11 @@ class ICalEvent {
 
         // SUMMARY
         g += 'SUMMARY:' + ICalTools.escape(this._data.summary) + '\r\n';
+
+        // TRANSPARENCY
+        if(this._data.transparency) {
+            g += 'TRANSP:' + ICalTools.escape(this._data.transparency) + '\r\n';
+        }
 
         // LOCATION
         if (this._data.location) {

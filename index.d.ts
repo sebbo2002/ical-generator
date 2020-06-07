@@ -80,6 +80,7 @@ declare module 'ical-generator' {
       busystatus?: string;
       timezone?: string;
       recurrenceId?: moment.Moment | Date;
+      transparency?: string;
     }
 
     interface RepeatingData {
@@ -241,6 +242,8 @@ declare module 'ical-generator' {
       lastModified(): moment.Moment;
       lastModified(lastModified: string | moment.Moment | Date): ICalEvent;
       toJSON(): EventData;
+      transparency(): string;
+      transparency(transparency: string): string;
     }
 
     class ICalAttendee {

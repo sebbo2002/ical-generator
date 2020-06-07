@@ -1656,6 +1656,52 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('transparency()', function () {
+        it('getter should return value', function () {
+            const event = new ICalEvent(null, new ICalCalendar());
+            assert.strictEqual(event.transparency(), null);
+
+            event._data.transparency = 'OPAQUE';
+            assert.strictEqual(event.transparency(), 'OPAQUE');
+
+            event._data.transparency = null;
+            assert.strictEqual(event.transparency(), null);
+        });
+
+        it('setter should return this', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.deepStrictEqual(e, e.transparency(null));
+            assert.deepStrictEqual(e, e.transparency('TRANSPARENT'));
+        });
+
+        it('setter should allow setting null', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e._data.transparency = 'OPAQUE';
+            e.transparency(null);
+            assert.strictEqual(e._data.transparency, null);
+        });
+
+        it('setter should allow setting valid value', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            e.transparency('OPAQUE');
+            assert.strictEqual(e._data.transparency, 'OPAQUE');
+        });
+
+        it('should throw error when method not allowed', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+            assert.throws(function () {
+                e.transparency('COOKING');
+            }, /`transparency`/);
+            assert.throws(function () {
+                e.transparency(Infinity);
+            }, /`transparency`/);
+            assert.throws(function () {
+                e.transparency(-1);
+            }, /`transparency`/);
+        });
+    });
+
+
     describe('_generate()', function () {
         it('shoult throw an error without start', function () {
             const e = new ICalEvent({
@@ -1666,7 +1712,7 @@ describe('ical-generator Event', function () {
             }, /`start`/);
         });
 
-        it('shoult make use of escaping', function () {
+        it('should make use of escaping', function () {
             const e = new ICalEvent({
                 start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
