@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.10.2",
     "babel-loader": "^8.1.0",
     "babel-plugin-add-module-exports": "^1.0.2",
-    "eslint": "^7.1.0",
+    "eslint": "^7.2.0",
     "jquery": "^3.5.1",
     "jshint": "^2.11.1",
     "mocha": "^7.2.0",
