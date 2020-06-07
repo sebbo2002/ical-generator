@@ -579,6 +579,13 @@ cal.categories(); // --> [ICalCategory, ICalCategory]
 Appointment URL
 
 
+#### transparency([_String_ transparency])
+
+Set the field to `opaque` if the person or resource is no longer available due to this event. If the calendar entry has
+no influence on availability, you can set the field to `transparent`. This value is mostly used to find out if a person
+has time on a certain date or not (see `TRANSP` in iCal specification).
+
+
 #### status([_String_ status])
 
 Appointment status. May be any of the following: `confirmed`, `tentative`, `cancelled`.
