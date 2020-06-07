@@ -4,6 +4,24 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.11.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.11.0) - 2020-06-07
+### Bugfix
+- Fix scale typescript definition
+
+### Feature
+- Add Transparency Method
+
+
+## [1.10.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.10.0) - 2020-04-13
+### Feature
+- Add appleLocation method
+
+
+## [1.9.3](https://github.com/sebbo2002/ical-generator/releases/tag/1.9.4) - 2020-03-27
+### Bugfix
+- Allow X-attrs to be specified in constructor
+
+
 ## [1.9.2](https://github.com/sebbo2002/ical-generator/releases/tag/1.9.2) - 2019-12-14
 ### Feature
 - Fix `\r\n` issue for custom attributes using `x()`
