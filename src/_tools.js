@@ -51,7 +51,7 @@ class ICalTools {
         for (let i = 0; i < 2 && i + 1 < zone.untils.length; i++) {
             const type = i % 2 == 0 ? 'STANDARD' : 'DAYLIGHT';
             const momDtStart = moment.tz(zone.untils[i], timezone);
-            const momNext = moment.tz(zone.untils[i+1], timezone);
+            let momNext = moment.tz(zone.untils[i+1], timezone);
             
             if (!momNext.isValid()) {
                 momNext = momDtStart;
