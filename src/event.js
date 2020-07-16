@@ -1048,13 +1048,15 @@ class ICalEvent {
         }
 
         // TIMEZONE
-        g += 'BEGIN:VTIMEZONE\r\n';
-        g += 'TZID:' + this.timezone() + '\r\n';
-
-        g += ICalTools.formatVTZ(this.timezone());
+        if (this._data.timezone) {
+            g += 'BEGIN:VTIMEZONE\r\n';
+            g += 'TZID:' + this.timezone() + '\r\n';
+    
+            g += ICalTools.formatVTZ(this.timezone());
+            
+            g += 'END:VTIMEZONE\r\n';
+        }
         
-        g += 'END:VTIMEZONE\r\n';
-
         // DATE & TIME
         g += 'BEGIN:VEVENT\r\n';
         g += 'UID:' + this._data.id + '@' + this._calendar.domain() + '\r\n';
