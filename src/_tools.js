@@ -44,6 +44,26 @@ class ICalTools {
         return property + tzParam + ':' + module.exports.formatDate(timezone, date, false, floating);
     }
 
+    static formatVTZ (timezone) {
+        const zone = moment.tz.zone(timezone);
+  
+        for (let i=0; i< MAX_OCCUR && i+1 < zone.untils.length; i++){
+            const type = i%2 == 0 ? 'STANDARD' : 'DAYLIGHT';
+            const momDtStart = moment.tz(zone.untils[i], timezone);
+            const momNext = moment.tz(zone.untils[i+1], timezone);
+
+            const item = 
+            `BEGIN:${type}
+            DTSTART:${momDtStart.format('YYYYMMDDTHHmmss')}
+            TZOFFSETFROM:${momDtStart.format('ZZ')}
+            TZOFFSETTO:${momNext.format('ZZ')}
+            TZNAME:${zone.abbrs[i]}
+            END:${type}\n`;
+        }
+
+        return item;
+    }
+
     static escape (str) {
         return String(str).replace(/[\\;,"]/g, function (match) {
             return '\\' + match;

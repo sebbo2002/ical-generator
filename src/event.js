@@ -1047,6 +1047,14 @@ class ICalEvent {
             throw new Error('No value for `start` in ICalEvent #' + this._data.id + ' given!');
         }
 
+        // TIMEZONE
+        g += 'BEGIN:VTIMEZONE\r\n';
+        g += 'TZID:' + this.timezone() + '\r\n';
+
+        g += ICalTools.formatVTZ(this.timezone()) + '\r\n';
+        
+        g += 'END:VTIMEZONE\r\n';
+
         // DATE & TIME
         g += 'BEGIN:VEVENT\r\n';
         g += 'UID:' + this._data.id + '@' + this._calendar.domain() + '\r\n';
