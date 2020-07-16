@@ -46,22 +46,26 @@ class ICalTools {
 
     static formatVTZ (timezone) {
         const zone = moment.tz.zone(timezone);
-  
-        for (let i=0; i< MAX_OCCUR && i+1 < zone.untils.length; i++){
-            const type = i%2 == 0 ? 'STANDARD' : 'DAYLIGHT';
+        
+        let g = '';
+        for (let i = 0; i < 2 && i + 1 < zone.untils.length; i++) {
+            const type = i % 2 == 0 ? 'STANDARD' : 'DAYLIGHT';
             const momDtStart = moment.tz(zone.untils[i], timezone);
             const momNext = moment.tz(zone.untils[i+1], timezone);
+            
+            if (!momNext.isValid()) {
+                momNext = momDtStart;
+            }
 
-            const item = 
-            `BEGIN:${type}
-            DTSTART:${momDtStart.format('YYYYMMDDTHHmmss')}
-            TZOFFSETFROM:${momDtStart.format('ZZ')}
-            TZOFFSETTO:${momNext.format('ZZ')}
-            TZNAME:${zone.abbrs[i]}
-            END:${type}\n`;
+            g += 'BEGIN:' + type + '\r\n';
+            g += 'DTSTART:' + momDtStart.format('YYYYMMDDTHHmmss') + '\r\n';
+            g += 'TZOFFSETFROM:' + momDtStart.format('ZZ') + '\r\n';
+            g += 'TZOFFSETTO:' + momNext.format('ZZ') + '\r\n';
+            g += 'TZNAME:' + zone.abbrs[i] + '\r\n';
+            g += 'END:' + type + '\r\n';
         }
 
-        return item;
+        return g;
     }
 
     static escape (str) {

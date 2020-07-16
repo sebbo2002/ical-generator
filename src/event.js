@@ -1051,7 +1051,7 @@ class ICalEvent {
         g += 'BEGIN:VTIMEZONE\r\n';
         g += 'TZID:' + this.timezone() + '\r\n';
 
-        g += ICalTools.formatVTZ(this.timezone()) + '\r\n';
+        g += ICalTools.formatVTZ(this.timezone());
         
         g += 'END:VTIMEZONE\r\n';
 
