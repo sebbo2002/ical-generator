@@ -15,7 +15,7 @@ const ICalCategory = require('./category');
 class ICalEvent {
     constructor (data, _calendar) {
         this._data = {
-            id: ('0000' + (Math.random() * Math.pow(36, 4) << 0).toString(36)).substr(-4),
+            id: ('0000000000' + Math.floor(Math.random() * Math.pow(36, 10) << 0).toString(36)).substr(-10),
             sequence: 0,
             start: null,
             end: null,
