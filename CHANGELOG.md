@@ -4,6 +4,12 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.12.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.12.0) - 2020-07-28
+### Feature
+- Increase event Id entropy
+- Add missing string input options to interface
+
+
 ## [1.11.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.11.0) - 2020-06-07
 ### Bugfix
 - Fix scale typescript definition
