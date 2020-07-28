@@ -55,14 +55,14 @@ declare module 'ical-generator' {
      * Information used to create calendar events
      */
     interface EventData {
-      start: moment.Moment | Date;
+      start: moment.Moment | Date | string;
       summary: string;
       id?: string | number;
       uid?: string | number;
-      end?: moment.Moment | Date;
-      stamp?: moment.Moment | Date;
-      created?: moment.Moment | Date;
-      lastModified?: moment.Moment | Date;
+      end?: moment.Moment | Date | string;
+      stamp?: moment.Moment | Date | string;
+      created?: moment.Moment | Date | string;
+      lastModified?: moment.Moment | Date | string;
       description?: string;
       location?: string;
       appleLocation?: AppleLocationData;
@@ -79,7 +79,7 @@ declare module 'ical-generator' {
       status?: string;
       busystatus?: string;
       timezone?: string;
-      recurrenceId?: moment.Moment | Date;
+      recurrenceId?: moment.Moment | Date | string;
       transparency?: string;
     }
 
@@ -92,7 +92,7 @@ declare module 'ical-generator' {
       byMonth?: number[];
       byMonthDay?: number[];
       bySetPos?: number;
-      exclude?: moment.Moment[] | Date[];
+      exclude?: moment.Moment[] | Date[] | string[];
     }
 
     /**

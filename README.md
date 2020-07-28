@@ -298,14 +298,14 @@ Use this method to set the event's revision sequence number of the
 calendar component within a sequence of revisions.
 
 
-#### start([_moment_|_Date_ start])
+#### start([_moment_|_Date_|_string_ start])
 
-Appointment date of beginning as Date object. This is required for all events!
+Appointment date of beginning as a Moment or Date object or ISO 8601 string. This is required for all events!
 
 
-#### end([_moment_|_Date_ end])
+#### end([_moment_|_Date_|_string_ end])
 
-Appointment date of end as Date object.
+Appointment date of end as a Moment or Date object or ISO 8601 string.
 
 
 #### timezone([_String_ timezone])
@@ -315,9 +315,9 @@ Use this method to set your event's timezone using the TZID property parameter o
 This and the 'floating' flag (see below) are mutually exclusive, and setting a timezone will unset the 'floating' flag.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format (see [date-time form #2 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5)).
 
 
-#### timestamp([_moment_|_Date_ stamp]) or stamp([_moment_|_Date_ stamp])
+#### timestamp([_moment_|_Date_|_string_ stamp]) or stamp([_moment_|_Date_|_string_ stamp])
 
-Appointment date of creation as Date object. Defaults to `new Date()`.
+Appointment date of creation as as a Moment or Date object or ISO 8601 string. Defaults to `new Date()`.
 
 
 #### allDay([_Boolean_ allDay])
@@ -360,9 +360,9 @@ event.repeating({
 ```
 
 
-#### recurrenceId([_moment_|_Date_ stamp])
+#### recurrenceId([_moment_|_Date_|_string_ stamp])
 
-Recurrence date as Date object.
+Recurrence date as a Moment or Date object or ISO 8601 string.
 
 
 #### summary([_String_ summary])
@@ -601,14 +601,14 @@ Appointment busystatus. May be any of the following: `free`, `tentative`, `busy`
 Add a custom `X-` attribute to the generated calendar file.
 
 
-#### created([_moment_|_Date_ created])
+#### created([_moment_|_Date_|_string_ created])
 
-Date object of the time the appointment was created.
+Moment or Date object or ISO 8601 string of the time the appointment was created.
 
 
-#### lastModified([_moment_|_Date_ lastModified])
+#### lastModified([_moment_|_Date_|_string_ lastModified])
 
-Date object of the time the appointent was modified last.
+Moment or Date object or ISO 8601 string of the time the appointent was modified last.
 
 
 ### Attendee
