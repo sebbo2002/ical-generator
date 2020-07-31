@@ -418,7 +418,7 @@ event.appleLocation({
 });
 ```
 
-You can either use location() or appleLocation(), but now both. Thanks to [@focux](https://github.com/focux) for the [pull request](https://github.com/sebbo2002/ical-generator/pull/170)
+You can either use location() or appleLocation(), but not both. Thanks to [@focux](https://github.com/focux) for the [pull request](https://github.com/sebbo2002/ical-generator/pull/170)
 
 
 #### geo([_String_|_Object_ geo])
@@ -537,7 +537,7 @@ cal.alarms([
     {type: 'audio', trigger: 300}
 ]);
 
-cal.attendees(); // --> [ICalAlarm, ICalAlarm]
+cal.alarms(); // --> [ICalAlarm, ICalAlarm]
 ```
 
 #### createCategory([_Object_ options])
