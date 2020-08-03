@@ -801,7 +801,8 @@ describe('ical-generator Event', function () {
         it('setter should update repeating.bySetPos', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({freq: 'monthly', byDay: ['SU'], bySetPos: 2});
+            e.repeating({freq: 'monthly', byDay: ['su'], bySetPos: 2});
+            assert.strictEqual(e._data.repeating.byDay[0], 'SU');
             assert.strictEqual(e._data.repeating.bySetPos, 2);
         });
 
