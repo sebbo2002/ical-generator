@@ -351,7 +351,7 @@ event.repeating({
     interval: 2,
     until: new Date('Jan 01 2014 00:00:00 UTC'),
     byDay: ['su', 'mo'], // repeat only sunday and monday
-    byMonth: [1, 2], // repeat only in january und february,
+    byMonth: [1, 2], // repeat only in january and february,
     byMonthDay: [1, 15], // repeat only on the 1st and 15th
     bySetPos: 3, // repeat every 3rd sunday (will take the first element of the byDay array)
     exclude: [new Date('Dec 25 2013 00:00:00 UTC')], // exclude these dates
@@ -418,7 +418,7 @@ event.appleLocation({
 });
 ```
 
-You can either use location() or appleLocation(), but now both. Thanks to [@focux](https://github.com/focux) for the [pull request](https://github.com/sebbo2002/ical-generator/pull/170)
+You can either use location() or appleLocation(), but not both. Thanks to [@focux](https://github.com/focux) for the [pull request](https://github.com/sebbo2002/ical-generator/pull/170)
 
 
 #### geo([_String_|_Object_ geo])
@@ -537,7 +537,7 @@ cal.alarms([
     {type: 'audio', trigger: 300}
 ]);
 
-cal.attendees(); // --> [ICalAlarm, ICalAlarm]
+cal.alarms(); // --> [ICalAlarm, ICalAlarm]
 ```
 
 #### createCategory([_Object_ options])

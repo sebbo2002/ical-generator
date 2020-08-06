@@ -482,7 +482,7 @@ class ICalEvent {
                 throw '`repeating.bySetPos` contains invalid value `' + repeating.bySetPos + '`!';
             }
 
-            c._data.repeating.byDay = [repeating.byDay[0]];
+            c._data.repeating.byDay.splice(1);
             c._data.repeating.bySetPos = repeating.bySetPos;
         }
 
