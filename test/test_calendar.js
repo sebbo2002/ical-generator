@@ -555,6 +555,22 @@ describe('ical-generator Calendar', function () {
             assert.ok(cal.toJSON().prodId.length > 0);
             assert.strictEqual(cal.toJSON().events.length, 0);
         });
+
+        it('should work with params', function () {
+            const cal = new ICalCalendar();
+            cal.createEvent({
+                start: new Date(),
+                end: new Date(new Date().getTime() + (1000 * 60 * 60)),
+                summary: 'HTTP Calendar Event',
+                x: [{key:'X-FOO', value:'bar'}, {key:'X-LOREM', value:'ipsum'}]
+            });
+            assert.ok(cal.toJSON().prodId.length > 0);
+            assert.strictEqual(cal.toJSON().events.length, 1);
+            assert.deepEqual(cal.toJSON().events[0].x,  [
+                {'key': 'X-FOO', 'value': 'bar'},
+                {'key': 'X-LOREM', 'value': 'ipsum'},
+            ]);
+        });
     });
 
     describe('length()', function () {
