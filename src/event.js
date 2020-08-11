@@ -411,7 +411,7 @@ class ICalEvent {
         }
 
         if (repeating.until !== undefined) {
-            let { until } = repeating;
+            let {until} = repeating;
 
             if (typeof until === 'string') {
                 until = moment(repeating.until);
@@ -431,7 +431,7 @@ class ICalEvent {
         }
 
         if (repeating.byDay) {
-            let { byDay } = repeating;
+            let {byDay} = repeating;
 
             if (!Array.isArray(byDay)) {
                 byDay = [byDay];
@@ -449,7 +449,7 @@ class ICalEvent {
         }
 
         if (repeating.byMonth) {
-            let { byMonth } = repeating;
+            let {byMonth} = repeating;
 
             if (!Array.isArray(byMonth)) {
                 byMonth = [byMonth];
@@ -466,7 +466,7 @@ class ICalEvent {
         }
 
         if (repeating.byMonthDay) {
-            let { byMonthDay } = repeating;
+            let {byMonthDay} = repeating;
 
             if (!Array.isArray(byMonthDay)) {
                 byMonthDay = [byMonthDay];
@@ -495,7 +495,7 @@ class ICalEvent {
         }
 
         if (repeating.exclude) {
-            let { exclude } = repeating;
+            let {exclude} = repeating;
 
             if (!Array.isArray(exclude)) {
                 exclude = [exclude];
@@ -952,15 +952,15 @@ class ICalEvent {
      * @returns {ICalEvent|String}
      */
     transparency (transparency) {
-        if(transparency === undefined) {
+        if (transparency === undefined) {
             return this._data.transparency;
         }
-        if(!transparency) {
+        if (!transparency) {
             this._data.transparency = null;
             return this;
         }
 
-        if(this._vars.allowedTranspValues.indexOf(transparency.toString().toUpperCase()) === -1) {
+        if (this._vars.allowedTranspValues.indexOf(transparency.toString().toUpperCase()) === -1) {
             throw new Error('`transparency` must be one of the following: ' + this._vars.allowedTranspValues.join(', ') + '!');
         }
 
@@ -1149,7 +1149,7 @@ class ICalEvent {
         g += 'SUMMARY:' + ICalTools.escape(this._data.summary) + '\r\n';
 
         // TRANSPARENCY
-        if(this._data.transparency) {
+        if (this._data.transparency) {
             g += 'TRANSP:' + ICalTools.escape(this._data.transparency) + '\r\n';
         }
 
