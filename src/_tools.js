@@ -79,7 +79,7 @@ class ICalTools {
             if (Array.isArray(result[attribute])) {
                 newObj = [];
                 result[attribute].forEach(function (object) {
-                    newObj.push(object.toJSON());
+                    ('toJSON' in object) ? newObj.push(object.toJSON()) : newObj.push(object);
                 });
                 result[attribute] = newObj;
             }
