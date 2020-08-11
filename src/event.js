@@ -411,30 +411,34 @@ class ICalEvent {
         }
 
         if (repeating.until !== undefined) {
-            if (typeof repeating.until === 'string') {
-                repeating.until = moment(repeating.until);
+            let {until} = repeating;
+
+            if (typeof until === 'string') {
+                until = moment(repeating.until);
             }
-            else if (repeating.until instanceof Date) {
-                repeating.until = moment(repeating.until);
+            else if (until instanceof Date) {
+                until = moment(repeating.until);
             }
-            else if (!moment.isMoment(repeating.until)) {
+            else if (!moment.isMoment(until)) {
                 throw new Error('`repeating.until` must be a Date or a moment object!');
             }
 
-            if (!repeating.until.isValid()) {
+            if (!until.isValid()) {
                 throw new Error('`repeating.until` has to be a valid date!');
             }
 
-            c._data.repeating.until = repeating.until;
+            c._data.repeating.until = until;
         }
 
         if (repeating.byDay) {
-            if (!Array.isArray(repeating.byDay)) {
-                repeating.byDay = [repeating.byDay];
+            let {byDay} = repeating;
+
+            if (!Array.isArray(byDay)) {
+                byDay = [byDay];
             }
 
             c._data.repeating.byDay = [];
-            repeating.byDay.forEach(function (symbol) {
+            byDay.forEach(function (symbol) {
                 const s = symbol.toString().toUpperCase().match(/^(\d*||-\d+)(\w+)$/);
                 if (['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].indexOf(s[2]) === -1) {
                     throw new Error('`repeating.byDay` contains invalid value `' + s[2] + '`!');
@@ -445,12 +449,14 @@ class ICalEvent {
         }
 
         if (repeating.byMonth) {
-            if (!Array.isArray(repeating.byMonth)) {
-                repeating.byMonth = [repeating.byMonth];
+            let {byMonth} = repeating;
+
+            if (!Array.isArray(byMonth)) {
+                byMonth = [byMonth];
             }
 
             c._data.repeating.byMonth = [];
-            repeating.byMonth.forEach(function (month) {
+            byMonth.forEach(function (month) {
                 if (typeof month !== 'number' || month < 1 || month > 12) {
                     throw new Error('`repeating.byMonth` contains invalid value `' + month + '`!');
                 }
@@ -460,12 +466,14 @@ class ICalEvent {
         }
 
         if (repeating.byMonthDay) {
-            if (!Array.isArray(repeating.byMonthDay)) {
-                repeating.byMonthDay = [repeating.byMonthDay];
+            let {byMonthDay} = repeating;
+
+            if (!Array.isArray(byMonthDay)) {
+                byMonthDay = [byMonthDay];
             }
 
             c._data.repeating.byMonthDay = [];
-            repeating.byMonthDay.forEach(function (monthDay) {
+            byMonthDay.forEach(function (monthDay) {
                 if (typeof monthDay !== 'number' || monthDay < 1 || monthDay > 31) {
                     throw new Error('`repeating.byMonthDay` contains invalid value `' + monthDay + '`!');
                 }
@@ -487,12 +495,14 @@ class ICalEvent {
         }
 
         if (repeating.exclude) {
-            if (!Array.isArray(repeating.exclude)) {
-                repeating.exclude = [repeating.exclude];
+            let {exclude} = repeating;
+
+            if (!Array.isArray(exclude)) {
+                exclude = [exclude];
             }
 
             c._data.repeating.exclude = [];
-            repeating.exclude.forEach(function (excludedDate, i) {
+            exclude.forEach(function (excludedDate, i) {
                 if (typeof excludedDate === 'string') {
                     excludedDate = moment(excludedDate);
                 }
@@ -942,15 +952,15 @@ class ICalEvent {
      * @returns {ICalEvent|String}
      */
     transparency (transparency) {
-        if(transparency === undefined) {
+        if (transparency === undefined) {
             return this._data.transparency;
         }
-        if(!transparency) {
+        if (!transparency) {
             this._data.transparency = null;
             return this;
         }
 
-        if(this._vars.allowedTranspValues.indexOf(transparency.toString().toUpperCase()) === -1) {
+        if (this._vars.allowedTranspValues.indexOf(transparency.toString().toUpperCase()) === -1) {
             throw new Error('`transparency` must be one of the following: ' + this._vars.allowedTranspValues.join(', ') + '!');
         }
 
@@ -1139,7 +1149,7 @@ class ICalEvent {
         g += 'SUMMARY:' + ICalTools.escape(this._data.summary) + '\r\n';
 
         // TRANSPARENCY
-        if(this._data.transparency) {
+        if (this._data.transparency) {
             g += 'TRANSP:' + ICalTools.escape(this._data.transparency) + '\r\n';
         }
 
