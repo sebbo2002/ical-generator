@@ -4,6 +4,12 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.12.2](https://github.com/sebbo2002/ical-generator/releases/tag/1.12.2) - 2020-08-11
+### Bugfix
+- Don't modify input to createEvent()
+- Add check for toJSON to exist to fix bug serialization when param set
+- Add type for x in index.d.ts
+
 ## [1.12.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.12.0) - 2020-07-28
 ### Feature
 - Increase event Id entropy
