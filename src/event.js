@@ -1061,9 +1061,9 @@ class ICalEvent {
         g += 'BEGIN:VEVENT\r\n';
         let domain = this._calendar.domain();
         if (domain) {
-          g += 'UID:' + this._data.id + '@' + domain + '\r\n';
+            g += 'UID:' + this._data.id + '@' + domain + '\r\n';
         } else {
-          g += 'UID:' + this._data.id + '\r\n';
+            g += 'UID:' + this._data.id + '\r\n';
         }
 
         // SEQUENCE
