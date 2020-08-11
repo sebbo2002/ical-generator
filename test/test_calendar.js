@@ -416,7 +416,7 @@ describe('ical-generator Calendar', function () {
                 const server = http.createServer(function (req, res) {
                     cal.serve(res);
                 }).listen(port, function () {
-                    function request(cb) {
+                    function request (cb) {
                         // make request
                         const req = http.request({port}, function (res) {
                             let file = '';
@@ -562,13 +562,13 @@ describe('ical-generator Calendar', function () {
                 start: new Date(),
                 end: new Date(new Date().getTime() + (1000 * 60 * 60)),
                 summary: 'HTTP Calendar Event',
-                x: [{key:'X-FOO', value:'bar'}, {key:'X-LOREM', value:'ipsum'}]
+                x: [{key: 'X-FOO', value: 'bar'}, {key: 'X-LOREM', value: 'ipsum'}]
             });
             assert.ok(cal.toJSON().prodId.length > 0);
             assert.strictEqual(cal.toJSON().events.length, 1);
-            assert.deepEqual(cal.toJSON().events[0].x,  [
+            assert.deepEqual(cal.toJSON().events[0].x, [
                 {'key': 'X-FOO', 'value': 'bar'},
-                {'key': 'X-LOREM', 'value': 'ipsum'},
+                {'key': 'X-LOREM', 'value': 'ipsum'}
             ]);
         });
     });
