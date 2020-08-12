@@ -504,7 +504,12 @@ class ICalEvent {
             c._data.repeating.exclude = [];
             exclude.forEach(function (excludedDate, i) {
                 if (typeof excludedDate === 'string') {
-                    excludedDate = moment(excludedDate);
+                    let timezone = repeating.excludeTimezone || c._calendar._data.timezone;
+                    if (timezone) {
+                        excludedDate = moment.tz(excludedDate, timezone);
+                    } else {
+                        excludedDate = moment(excludedDate);
+                    }
                 }
                 else if (excludedDate instanceof Date) {
                     excludedDate = moment(excludedDate);
