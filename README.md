@@ -125,8 +125,8 @@ cal.domain('sebbo.net');
 
 #### domain([_String_ domain])
 
-Use this method to set your server's hostname. It will be used to generate the feed's UID. Default hostname is your
-server's one (`require('os').hostname()`).
+Use this method to set your server's hostname. If provided, it will be used to generate the feed's UID.
+`require('os').hostname()` can be used to get your server's hostname.
 
 
 #### prodId([_String_|_Object_ prodId])
@@ -289,7 +289,10 @@ Empty the Calender.
 
 #### uid([_String_|_Number_ uid]) or id([_String_|_Number_ id])
 
-Use this method to set the event's ID. If not set, an UID will be generated randomly.  When output, the ID will be suffixed with '@' + your calendar's domain.
+Use this method to set the event's ID. If not set, an UID will be generated randomly.
+If your calendar's domain is provided, the ID will be suffixed with '@' + your calendar's domain.
+If you do not provide a calendar domain, generating an ID using the
+[uuid](https://www.npmjs.com/package/uuid) module is recommended.
 
 
 #### sequence([_Number_ sequence])
