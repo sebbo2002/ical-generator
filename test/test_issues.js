@@ -106,4 +106,47 @@ describe('Issues', function () {
             });
         });
     });
+
+    describe('Issue #210', function () {
+        it('should repeat/exclude with Europe/Berlin', function () {
+            const calendar = ical({
+                domain: 'sebbo.net',
+                prodId: '//superman-industries.com//ical-generator//EN',
+                timezone: 'Europe/Berlin',
+                events: [{
+                    start: '2020-08-13T00:00:00',
+                    summary: 'Example Event',
+                    repeating: {
+                        freq: 'MONTHLY',
+                        count: 12,
+                        exclude: '2020-12-13T00:00:00',
+                        excludeTimezone: 'Europe/Berlin'
+                   }
+                }]
+            });
+
+            const str = calendar.toString();
+            assert.ok(str.indexOf('EXDATE;TZID=Europe/Berlin:20201213T000000') > -1);
+        });
+        it('should repeat/exclude with America/New_York', function () {
+            const calendar = ical({
+                domain: 'sebbo.net',
+                prodId: '//superman-industries.com//ical-generator//EN',
+                timezone: 'America/New_York',
+                events: [{
+                    start: '2020-08-13T00:00:00',
+                    summary: 'Example Event',
+                    repeating: {
+                        freq: 'MONTHLY',
+                        count: 12,
+                        exclude: '2020-12-13T00:00:00',
+                        excludeTimezone: 'America/New_York',
+                   }
+                }]
+            });
+
+            const str = calendar.toString();
+            assert.ok(str.indexOf('EXDATE;TZID=America/New_York:20201213T000000') > -1);
+        });
+    });
 });
