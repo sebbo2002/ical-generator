@@ -121,7 +121,7 @@ describe('Issues', function () {
                         count: 12,
                         exclude: '2020-12-13T00:00:00',
                         excludeTimezone: 'Europe/Berlin'
-                   }
+                    }
                 }]
             });
 
@@ -141,7 +141,7 @@ describe('Issues', function () {
                         count: 12,
                         exclude: '2020-12-13T00:00:00',
                         excludeTimezone: 'America/New_York',
-                   }
+                    }
                 }]
             });
 
