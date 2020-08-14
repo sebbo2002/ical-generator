@@ -81,7 +81,7 @@ declare module 'ical-generator' {
       timezone?: string;
       recurrenceId?: moment.Moment | Date | string;
       transparency?: string;
-      x: { key:string, value:string }[];
+      x?: { key:string, value:string }[];
     }
 
     interface RepeatingData {
