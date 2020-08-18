@@ -4,7 +4,15 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
-## [1.13.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.12.0) - 2020-08-12
+## [1.14.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.14.0) - 2020-08-18
+### Bugfix
+- Make x key optional in types (#211)
+
+### Feature
+- Events: Use provided timezone when constructing `repeating.exclude`
+
+
+## [1.13.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.13.0) - 2020-08-12
 ### Feature
 - Made Event.domain optional
 
