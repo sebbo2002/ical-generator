@@ -1778,7 +1778,6 @@ describe('ical-generator Event', function () {
                 }
             }, cal);
             assert.ok(event._generate().indexOf('WKST') > -1, 'without WKST');
-            console.log(event._generate())
         });
 
         /*it('case #1', function () {
