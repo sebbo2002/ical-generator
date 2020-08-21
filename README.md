@@ -358,7 +358,8 @@ event.repeating({
     byMonthDay: [1, 15], // repeat only on the 1st and 15th
     bySetPos: 3, // repeat every 3rd sunday (will take the first element of the byDay array)
     exclude: [new Date('Dec 25 2013 00:00:00 UTC')], // exclude these dates
-    excludeTimezone: 'Europe/Berlin' // timezone of exclude
+    excludeTimezone: 'Europe/Berlin', // timezone of exclude
+    wkst: 'SU' // Start the week on Sunday, default is Monday
 });
 ```
 
