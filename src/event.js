@@ -507,7 +507,8 @@ class ICalEvent {
                     let timezone = repeating.excludeTimezone || c._calendar._data.timezone;
                     if (timezone) {
                         excludedDate = moment.tz(excludedDate, timezone);
-                    } else {
+                    }
+                    else {
                         excludedDate = moment(excludedDate);
                     }
                 }
@@ -532,6 +533,14 @@ class ICalEvent {
             }
 
             c._data.repeating.excludeTimezone = repeating.excludeTimezone;
+        }
+
+        if (repeating.wkst) {
+            let {wkst} = repeating;
+            if (['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].indexOf(wkst) === -1) {
+                throw new Error('`repeating.wkst` contains invalid value `' + wkst + '`!');
+            }
+            c._data.repeating.wkst = wkst;
         }
 
         return c;
@@ -1067,7 +1076,8 @@ class ICalEvent {
         let domain = this._calendar.domain();
         if (domain) {
             g += 'UID:' + this._data.id + '@' + domain + '\r\n';
-        } else {
+        }
+        else {
             g += 'UID:' + this._data.id + '\r\n';
         }
 
@@ -1121,6 +1131,10 @@ class ICalEvent {
 
             if (this._data.repeating.bySetPos) {
                 g += ';BYSETPOS=' + this._data.repeating.bySetPos;
+            }
+
+            if (this._data.repeating.wkst) {
+                g += ';WKST=' + this._data.repeating.wkst;
             }
 
             g += '\r\n';

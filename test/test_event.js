@@ -901,6 +901,27 @@ describe('ical-generator Event', function () {
 
             assert.ok(e._data.repeating.excludeTimezone, 'Europe/Berlin');
         });
+
+        it('should throw error when repeating.wkst is not valid', function () {
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: 'DAILY',
+                        interval: 2,
+                        wkst: 'FOO'
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.wkst` contains invalid value `FOO`/);
+        });
+
+        it('setter should update repeating.wkst', function () {
+            const e = new ICalEvent(null, new ICalCalendar());
+
+            e.repeating({freq: 'monthly', wkst: 'SU'});
+            assert.deepStrictEqual(e._data.repeating.wkst, 'SU');
+        });
     });
 
     describe('summary()', function () {
@@ -1071,7 +1092,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             };
             assert.deepEqual(e.appleLocation(), {
@@ -1080,7 +1101,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
 
@@ -1097,7 +1118,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             }));
         });
@@ -1114,7 +1135,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
             assert.deepEqual(event._data.appleLocation, {
@@ -1123,7 +1144,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
         });
@@ -1141,7 +1162,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
             assert.ok(event._data.location !== 'Batman Cave', null);
@@ -1735,6 +1756,28 @@ describe('ical-generator Event', function () {
 
             cal.domain('dojo-enterprises.wtf');
             assert.ok(event._generate().indexOf('UID:42@dojo-enterprises.wtf') > -1, 'with domain');
+        });
+
+        it('should include wkst only if provided', function () {
+            const cal = new ICalCalendar();
+            let event = new ICalEvent({
+                start: moment(),
+                end: moment(),
+                repeating: {
+                    freq: 'weekly'
+                }
+            }, cal);
+            assert.ok(event._generate().indexOf('WKST') === -1, 'without WKST');
+
+            event = new ICalEvent({
+                start: moment(),
+                end: moment(),
+                repeating: {
+                    freq: 'weekly',
+                    wkst: 'SU'
+                }
+            }, cal);
+            assert.ok(event._generate().indexOf('WKST') > -1, 'without WKST');
         });
 
         /*it('case #1', function () {
