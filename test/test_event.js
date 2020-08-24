@@ -20,7 +20,7 @@ describe('ical-generator Event', function () {
 
         it('shouldn\'t work without calendar reference', function () {
             assert.throws(function () {
-                new ICalEvent({ summary: 'Testevent' });
+                new ICalEvent({summary: 'Testevent'});
             }, /`calendar`/);
         });
 
@@ -128,7 +128,7 @@ describe('ical-generator Event', function () {
         it('setter should flip start and end if necessary', function () {
             const start = moment().add(5, 'minutes');
             const end = moment();
-            const event = new ICalEvent({ end, start }, new ICalCalendar());
+            const event = new ICalEvent({end, start}, new ICalCalendar());
             assert.ok(event._data.start.isSame(end));
             assert.ok(event._data.end.isSame(start));
         });
@@ -187,7 +187,7 @@ describe('ical-generator Event', function () {
         it('setter should flip start and end if necessary', function () {
             const start = moment().add(5, 'minutes');
             const end = moment();
-            const event = new ICalEvent({ start, end }, new ICalCalendar());
+            const event = new ICalEvent({start, end}, new ICalCalendar());
             assert.ok(event._data.start.isSame(end));
             assert.ok(event._data.end.isSame(start));
         });
@@ -496,7 +496,7 @@ describe('ical-generator Event', function () {
         it('setter should return this', function () {
             const e = new ICalEvent(null, new ICalCalendar());
             assert.deepStrictEqual(e, e.repeating(null), 'repeating(null)');
-            assert.deepStrictEqual(e, e.repeating({ freq: 'MONTHLY' }), 'repeating({freq: \'MONTHLY\'})');
+            assert.deepStrictEqual(e, e.repeating({freq: 'MONTHLY'}), 'repeating({freq: \'MONTHLY\'})');
         });
 
         it('setter should throw error when repeating without freq', function () {
@@ -524,7 +524,7 @@ describe('ical-generator Event', function () {
         it('setter should update freq', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly' });
+            e.repeating({freq: 'monthly'});
             assert.strictEqual(e._data.repeating.freq, 'MONTHLY');
         });
 
@@ -555,7 +555,7 @@ describe('ical-generator Event', function () {
         it('setter should update count', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', count: 5 });
+            e.repeating({freq: 'monthly', count: 5});
             assert.strictEqual(e._data.repeating.count, 5);
         });
 
@@ -586,7 +586,7 @@ describe('ical-generator Event', function () {
         it('setter should update interval', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', interval: 5 });
+            e.repeating({freq: 'monthly', interval: 5});
             assert.strictEqual(e._data.repeating.interval, 5);
         });
 
@@ -606,37 +606,37 @@ describe('ical-generator Event', function () {
         it('setter should parse repeating.until string if required', function () {
             const event = new ICalEvent(null, new ICalCalendar());
             const date = moment().add(1, 'week');
-            event.repeating({ freq: 'monthly', until: date.toJSON() });
+            event.repeating({freq: 'monthly', until: date.toJSON()});
             assert.ok(event._data.repeating.until.isSame(date));
         });
 
         it('setter should handle repeating.until Dates if required', function () {
             const event = new ICalEvent(null, new ICalCalendar());
             const date = moment().add(1, 'week');
-            event.repeating({ freq: 'monthly', until: date.toDate() });
+            event.repeating({freq: 'monthly', until: date.toDate()});
             assert.ok(event._data.repeating.until.isSame(date));
         });
 
         it('setter should handle repeating.until moments', function () {
             const event = new ICalEvent(null, new ICalCalendar());
             const date = moment().add(1, 'week');
-            event.repeating({ freq: 'monthly', until: date });
+            event.repeating({freq: 'monthly', until: date});
             assert.ok(event._data.repeating.until.isSame(date));
         });
 
         it('setter should throw error when repeating.until is not a Date', function () {
             const event = new ICalEvent(null, new ICalCalendar());
             assert.throws(function () {
-                event.repeating({ freq: 'monthly', until: 3 });
+                event.repeating({freq: 'monthly', until: 3});
             }, /`repeating.until`/, 'Number');
             assert.throws(function () {
-                event.repeating({ freq: 'monthly', until: null });
+                event.repeating({freq: 'monthly', until: null});
             }, /`repeating.until`/, 'null');
             assert.throws(function () {
-                event.repeating({ freq: 'monthly', until: NaN });
+                event.repeating({freq: 'monthly', until: NaN});
             }, /`repeating.until`/, 'NaN');
             assert.throws(function () {
-                event.repeating({ freq: 'monthly', until: new Date('foo') });
+                event.repeating({freq: 'monthly', until: new Date('foo')});
             }, /`repeating.until`/, 'Invalid Date');
         });
 
@@ -681,7 +681,7 @@ describe('ical-generator Event', function () {
         it('setter should update repeating.byDay', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', byDay: ['SU', 'we', 'Th'] });
+            e.repeating({freq: 'monthly', byDay: ['SU', 'we', 'Th']});
             assert.deepStrictEqual(e._data.repeating.byDay, ['SU', 'WE', 'TH']);
         });
 
@@ -714,7 +714,7 @@ describe('ical-generator Event', function () {
         it('setter should update repeating.byMonth', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', byMonth: [1, 12, 7] });
+            e.repeating({freq: 'monthly', byMonth: [1, 12, 7]});
             assert.deepStrictEqual(e._data.repeating.byMonth, [1, 12, 7]);
         });
 
@@ -749,7 +749,7 @@ describe('ical-generator Event', function () {
         it('setter should update repeating.byMonthDay', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', byMonthDay: [1, 15] });
+            e.repeating({freq: 'monthly', byMonthDay: [1, 15]});
             assert.deepStrictEqual(e._data.repeating.byMonthDay, [1, 15]);
         });
 
@@ -801,7 +801,7 @@ describe('ical-generator Event', function () {
         it('setter should update repeating.bySetPos', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', byDay: ['su'], bySetPos: 2 });
+            e.repeating({freq: 'monthly', byDay: ['su'], bySetPos: 2});
             assert.strictEqual(e._data.repeating.byDay[0], 'SU');
             assert.strictEqual(e._data.repeating.bySetPos, 2);
         });
@@ -919,7 +919,7 @@ describe('ical-generator Event', function () {
         it('setter should update repeating.wkst', function () {
             const e = new ICalEvent(null, new ICalCalendar());
 
-            e.repeating({ freq: 'monthly', wkst: 'SU' });
+            e.repeating({freq: 'monthly', wkst: 'SU'});
             assert.deepStrictEqual(e._data.repeating.wkst, 'SU');
         });
     });
@@ -987,7 +987,7 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent(null, new ICalCalendar());
             assert.strictEqual(e.geo(), null);
 
-            e._data.geo = { lat: 44.5, lon: -3.4 };
+            e._data.geo = {lat: 44.5, lon: -3.4};
             assert.strictEqual(e.geo(), '44.5;-3.4');
 
             e._data.geo = null;
@@ -1007,10 +1007,10 @@ describe('ical-generator Event', function () {
             }, new ICalCalendar());
 
             event.geo('44.5;-3.4');
-            assert.deepStrictEqual(event._data.geo, { lat: 44.5, lon: -3.4 });
+            assert.deepStrictEqual(event._data.geo, {lat: 44.5, lon: -3.4});
 
-            event.geo({ lat: 44.5, lon: -3.4 });
-            assert.deepStrictEqual(event._data.geo, { lat: 44.5, lon: -3.4 });
+            event.geo({lat: 44.5, lon: -3.4});
+            assert.deepStrictEqual(event._data.geo, {lat: 44.5, lon: -3.4});
         });
 
         it('should reset geo when setting to null', function () {
@@ -1092,7 +1092,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             };
             assert.deepEqual(e.appleLocation(), {
@@ -1101,7 +1101,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
 
@@ -1118,7 +1118,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             }));
         });
@@ -1135,7 +1135,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
             assert.deepEqual(event._data.appleLocation, {
@@ -1144,7 +1144,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
         });
@@ -1162,7 +1162,7 @@ describe('ical-generator Event', function () {
                 radius: 40,
                 geo: {
                     lat: '52.063921',
-                    lon: '5.128511',
+                    lon: '5.128511'
                 }
             });
             assert.ok(event._data.location !== 'Batman Cave', null);
@@ -1244,11 +1244,11 @@ describe('ical-generator Event', function () {
             e._data.organizer = null;
             assert.strictEqual(e.organizer(), null);
 
-            e._data.organizer = { name: 'Sebastian Pekarek', email: 'mail@example.com' };
+            e._data.organizer = {name: 'Sebastian Pekarek', email: 'mail@example.com'};
             assert.strictEqual('Sebastian Pekarek', e.organizer().name);
             assert.strictEqual('mail@example.com', e.organizer().email);
 
-            e._data.organizer = { name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com' };
+            e._data.organizer = {name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com'};
             assert.strictEqual('Sebastian Pekarek', e.organizer().name);
             assert.strictEqual('mail@example.com', e.organizer().email);
             assert.strictEqual('mail2@example2.com', e.organizer().mailto);
@@ -1266,10 +1266,10 @@ describe('ical-generator Event', function () {
                 summary: 'Example Event'
             }, new ICalCalendar());
 
-            event.organizer({ name: 'Sebastian Pekarek', email: 'mail@example.com' });
-            assert.deepStrictEqual(event._data.organizer, { name: 'Sebastian Pekarek', email: 'mail@example.com' });
+            event.organizer({name: 'Sebastian Pekarek', email: 'mail@example.com'});
+            assert.deepStrictEqual(event._data.organizer, {name: 'Sebastian Pekarek', email: 'mail@example.com'});
 
-            event.organizer({ name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com' });
+            event.organizer({name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com'});
             assert.deepStrictEqual(event._data.organizer, {
                 name: 'Sebastian Pekarek',
                 email: 'mail@example.com',
@@ -1284,7 +1284,7 @@ describe('ical-generator Event', function () {
             }, new ICalCalendar());
 
             event.organizer('Sebastian Pekarek <mail@example.com>');
-            assert.deepStrictEqual(event._data.organizer, { name: 'Sebastian Pekarek', email: 'mail@example.com' });
+            assert.deepStrictEqual(event._data.organizer, {name: 'Sebastian Pekarek', email: 'mail@example.com'});
         });
 
         it('should throw error when string misformated', function () {
@@ -1297,11 +1297,11 @@ describe('ical-generator Event', function () {
         it('should throw error when object misses data', function () {
             const e = new ICalEvent(null, new ICalCalendar());
             assert.throws(function () {
-                e.organizer({ name: 'Sebastian Pekarek' });
+                e.organizer({name: 'Sebastian Pekarek'});
             }, /`organizer\.email`/);
 
             assert.throws(function () {
-                e.organizer({ email: 'foo' });
+                e.organizer({email: 'foo'});
             }, /`organizer\.name`/);
         });
 
@@ -1353,7 +1353,7 @@ describe('ical-generator Event', function () {
 
         it('should accept object', function () {
             const event = new ICalEvent(null, new ICalCalendar());
-            const attendee = event.createAttendee({ name: 'Zac', email: 'zac@example.com' });
+            const attendee = event.createAttendee({name: 'Zac', email: 'zac@example.com'});
 
             assert.strictEqual(attendee._data.name, 'Zac');
             assert.strictEqual(attendee._data.email, 'zac@example.com');
@@ -1373,7 +1373,7 @@ describe('ical-generator Event', function () {
 
         it('setter should add attendees and return this', function () {
             const event = new ICalEvent(null, new ICalCalendar());
-            const foo = event.attendees([{ name: 'Person A' }, { name: 'Person B' }]);
+            const foo = event.attendees([{name: 'Person A'}, {name: 'Person B'}]);
 
             assert.strictEqual(event.attendees().length, 2);
             assert.deepStrictEqual(foo, event);
@@ -1390,7 +1390,7 @@ describe('ical-generator Event', function () {
 
         it('should pass data to instance', function () {
             const event = new ICalEvent(null, new ICalCalendar());
-            const alarm = event.createAlarm({ type: 'audio' });
+            const alarm = event.createAlarm({type: 'audio'});
 
             assert.strictEqual(alarm._data.type, 'audio');
         });
@@ -1408,7 +1408,7 @@ describe('ical-generator Event', function () {
 
         it('setter should add alarms and return this', function () {
             const event = new ICalEvent(null, new ICalCalendar());
-            const foo = event.alarms([{ type: 'audio' }, { type: 'display' }]);
+            const foo = event.alarms([{type: 'audio'}, {type: 'display'}]);
 
             assert.strictEqual(event._data.alarms.length, 2);
             assert.deepStrictEqual(foo, event);
@@ -1425,7 +1425,7 @@ describe('ical-generator Event', function () {
 
         it('should pass data to instance', function () {
             const event = new ICalEvent(null, new ICalCalendar());
-            const category = event.createCategory({ name: 'foo' });
+            const category = event.createCategory({name: 'foo'});
 
             assert.strictEqual(category._data.name, 'foo');
         });
@@ -1443,7 +1443,7 @@ describe('ical-generator Event', function () {
 
         it('setter should add category and return this', function () {
             const event = new ICalEvent(null, new ICalCalendar());
-            const foo = event.categories([{ name: 'foo' }, { name: 'bar' }]);
+            const foo = event.categories([{name: 'foo'}, {name: 'bar'}]);
 
             assert.strictEqual(event._data.categories.length, 2);
             assert.deepStrictEqual(foo, event);
@@ -1764,7 +1764,7 @@ describe('ical-generator Event', function () {
                 start: moment(),
                 end: moment(),
                 repeating: {
-                    freq: 'weekly',
+                    freq: 'weekly'
                 }
             }, cal);
             assert.ok(event._generate().indexOf('WKST') === -1, 'without WKST');
@@ -1774,7 +1774,7 @@ describe('ical-generator Event', function () {
                 end: moment(),
                 repeating: {
                     freq: 'weekly',
-                    wkst: 'SU',
+                    wkst: 'SU'
                 }
             }, cal);
             assert.ok(event._generate().indexOf('WKST') > -1, 'without WKST');

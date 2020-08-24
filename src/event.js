@@ -13,7 +13,7 @@ const ICalCategory = require('./category');
  * @class ICalEvent
  */
 class ICalEvent {
-    constructor(data, _calendar) {
+    constructor (data, _calendar) {
         this._data = {
             id: ('0000000000' + Math.floor(Math.random() * Math.pow(36, 10) << 0).toString(36)).substr(-10),
             sequence: 0,
@@ -104,7 +104,7 @@ class ICalEvent {
      * @param {string|number} [id]
      * @returns {ICalEvent|string|number}
      */
-    id(id) {
+    id (id) {
         if (!id) {
             return this._data.id;
         }
@@ -122,7 +122,7 @@ class ICalEvent {
      * @param {string|number} [id]
      * @returns {ICalEvent|string|number}
      */
-    uid(id) {
+    uid (id) {
         return this.id(id);
     }
 
@@ -133,7 +133,7 @@ class ICalEvent {
      * @since 0.2.6
      * @returns {ICalEvent|Number}
      */
-    sequence(sequence) {
+    sequence (sequence) {
         if (sequence === undefined) {
             return this._data.sequence;
         }
@@ -154,7 +154,7 @@ class ICalEvent {
      * @param {Date|moment|String} [start] Start date as moment.js object
      * @returns {ICalEvent|Date}
      */
-    start(start) {
+    start (start) {
         if (start === undefined) {
             return this._data.start;
         }
@@ -191,7 +191,7 @@ class ICalEvent {
      * @param {Date|moment|String|null} [end] End date as moment.js object
      * @returns {ICalEvent|Date}
      */
-    end(end) {
+    end (end) {
         if (end === undefined) {
             return this._data.end;
         }
@@ -232,7 +232,7 @@ class ICalEvent {
      * @param {Date|moment|String|null} [recurrenceId] Recurrence date as moment.js object
      * @returns {ICalEvent|Date}
      */
-    recurrenceId(recurrenceId) {
+    recurrenceId (recurrenceId) {
         if (recurrenceId === undefined) {
             return this._data.recurrenceId;
         }
@@ -264,7 +264,7 @@ class ICalEvent {
      * @since 0.2.6
      * @returns {ICalEvent|String}
      */
-    timezone(timezone) {
+    timezone (timezone) {
         if (timezone === undefined && this._data.timezone !== undefined) {
             return this._data.timezone;
         }
@@ -287,7 +287,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|moment}
      */
-    stamp(stamp) {
+    stamp (stamp) {
         if (stamp === undefined) {
             return this._data.stamp;
         }
@@ -318,7 +318,7 @@ class ICalEvent {
      * @alias stamp
      * @returns {ICalEvent|moment}
      */
-    timestamp(stamp) {
+    timestamp (stamp) {
         return this.stamp(stamp);
     }
 
@@ -329,7 +329,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|Boolean}
      */
-    allDay(allDay) {
+    allDay (allDay) {
         if (allDay === undefined) {
             return this._data.allDay;
         }
@@ -346,7 +346,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|Boolean}
      */
-    floating(floating) {
+    floating (floating) {
         if (floating === undefined) {
             return this._data.floating;
         }
@@ -373,7 +373,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|Object}
      */
-    repeating(repeating) {
+    repeating (repeating) {
         const c = this;
 
         if (repeating === undefined) {
@@ -411,7 +411,7 @@ class ICalEvent {
         }
 
         if (repeating.until !== undefined) {
-            let { until } = repeating;
+            let {until} = repeating;
 
             if (typeof until === 'string') {
                 until = moment(repeating.until);
@@ -431,7 +431,7 @@ class ICalEvent {
         }
 
         if (repeating.byDay) {
-            let { byDay } = repeating;
+            let {byDay} = repeating;
 
             if (!Array.isArray(byDay)) {
                 byDay = [byDay];
@@ -449,7 +449,7 @@ class ICalEvent {
         }
 
         if (repeating.byMonth) {
-            let { byMonth } = repeating;
+            let {byMonth} = repeating;
 
             if (!Array.isArray(byMonth)) {
                 byMonth = [byMonth];
@@ -466,7 +466,7 @@ class ICalEvent {
         }
 
         if (repeating.byMonthDay) {
-            let { byMonthDay } = repeating;
+            let {byMonthDay} = repeating;
 
             if (!Array.isArray(byMonthDay)) {
                 byMonthDay = [byMonthDay];
@@ -495,7 +495,7 @@ class ICalEvent {
         }
 
         if (repeating.exclude) {
-            let { exclude } = repeating;
+            let {exclude} = repeating;
 
             if (!Array.isArray(exclude)) {
                 exclude = [exclude];
@@ -507,7 +507,8 @@ class ICalEvent {
                     let timezone = repeating.excludeTimezone || c._calendar._data.timezone;
                     if (timezone) {
                         excludedDate = moment.tz(excludedDate, timezone);
-                    } else {
+                    }
+                    else {
                         excludedDate = moment(excludedDate);
                     }
                 }
@@ -535,7 +536,7 @@ class ICalEvent {
         }
 
         if (repeating.wkst) {
-            let { wkst } = repeating;
+            let {wkst} = repeating;
             if (['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'].indexOf(wkst) === -1) {
                 throw new Error('`repeating.wkst` contains invalid value `' + wkst + '`!');
             }
@@ -552,7 +553,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|String}
      */
-    summary(summary) {
+    summary (summary) {
         if (summary === undefined) {
             return this._data.summary;
         }
@@ -569,7 +570,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|String}
      */
-    location(location) {
+    location (location) {
         if (location === undefined) {
             return this._data.location;
         }
@@ -594,7 +595,7 @@ class ICalEvent {
      * @since 1.10.0
      * @returns {ICalEvent|String}
      */
-    appleLocation(appleLocation) {
+    appleLocation (appleLocation) {
         if (appleLocation === undefined) {
             return this._data.appleLocation;
         }
@@ -619,7 +620,7 @@ class ICalEvent {
      * @since 1.5.0
      * @returns {ICalEvent|String}
      */
-    geo(geo) {
+    geo (geo) {
         if (geo === undefined) {
             if (!this._data.geo) {
                 return null;
@@ -657,7 +658,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|String}
      */
-    description(description) {
+    description (description) {
         if (description === undefined) {
             return this._data.description;
         }
@@ -673,7 +674,7 @@ class ICalEvent {
      * @since 0.2.8
      * @returns {ICalEvent|String}
      */
-    htmlDescription(htmlDescription) {
+    htmlDescription (htmlDescription) {
         if (htmlDescription === undefined) {
             return this._data.htmlDescription;
         }
@@ -693,7 +694,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|Object}
      */
-    organizer(_organizer) {
+    organizer (_organizer) {
         if (_organizer === undefined) {
             return this._data.organizer;
         }
@@ -764,7 +765,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalAttendee}
      */
-    createAttendee(_attendeeData) {
+    createAttendee (_attendeeData) {
         const attendeeRegEx = /^(.+) ?<([^>]+)>$/;
         let attendee;
 
@@ -805,7 +806,7 @@ class ICalEvent {
      * @param {Array<String|Object>} [attendees]
      * @returns {ICalAttendees[]|ICalEvent}
      */
-    attendees(attendees) {
+    attendees (attendees) {
         if (!attendees) {
             return this._data.attendees;
         }
@@ -826,7 +827,7 @@ class ICalEvent {
      * @since 0.2.1
      * @returns {ICalAlarm}
      */
-    createAlarm(alarmData) {
+    createAlarm (alarmData) {
         const alarm = new ICalAlarm(alarmData, this);
 
         this._data.alarms.push(alarm);
@@ -841,7 +842,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalAlarms[]|ICalEvent}
      */
-    alarms(alarms) {
+    alarms (alarms) {
         if (!alarms) {
             return this._data.alarms;
         }
@@ -862,7 +863,7 @@ class ICalEvent {
      * @since 0.3.0
      * @returns {ICalCategory}
      */
-    createCategory(categoryData) {
+    createCategory (categoryData) {
         const category = new ICalCategory(categoryData, this);
 
         this._data.categories.push(category);
@@ -877,7 +878,7 @@ class ICalEvent {
      * @since 0.3.0
      * @returns {ICalCategories[]|ICalEvent}
      */
-    categories(categories) {
+    categories (categories) {
         if (!categories) {
             return this._data.categories;
         }
@@ -898,7 +899,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|String}
      */
-    status(status) {
+    status (status) {
         if (status === undefined) {
             return this._data.status;
         }
@@ -923,7 +924,7 @@ class ICalEvent {
      * @since 1.0.2
      * @returns {ICalEvent|String}
      */
-    busystatus(busystatus) {
+    busystatus (busystatus) {
         if (busystatus === undefined) {
             return this._data.busystatus;
         }
@@ -948,7 +949,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {ICalEvent|String}
      */
-    url(url) {
+    url (url) {
         if (url === undefined) {
             return this._data.url;
         }
@@ -964,7 +965,7 @@ class ICalEvent {
      * @since 1.7.3
      * @returns {ICalEvent|String}
      */
-    transparency(transparency) {
+    transparency (transparency) {
         if (transparency === undefined) {
             return this._data.transparency;
         }
@@ -989,7 +990,7 @@ class ICalEvent {
      * @since 0.3.0
      * @returns {ICalEvent|moment}
      */
-    created(created) {
+    created (created) {
         if (created === undefined) {
             return this._data.created;
         }
@@ -1013,7 +1014,7 @@ class ICalEvent {
      * @since 0.3.0
      * @returns {ICalEvent|moment}
      */
-    lastModified(lastModified) {
+    lastModified (lastModified) {
         if (lastModified === undefined) {
             return this._data.lastModified;
         }
@@ -1040,7 +1041,7 @@ class ICalEvent {
      * @since 1.9.0
      * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
-    x(keyOrArray, value) {
+    x (keyOrArray, value) {
         return ICalTools.addOrGetCustomAttributes(this, keyOrArray, value);
     }
 
@@ -1051,7 +1052,7 @@ class ICalEvent {
      * @since 0.2.4
      * @returns {Object} Calendar
      */
-    toJSON() {
+    toJSON () {
         return ICalTools.toJSON(this, this._attributes);
     }
 
@@ -1063,7 +1064,7 @@ class ICalEvent {
      * @since 0.2.0
      * @returns {String}
      */
-    _generate() {
+    _generate () {
         let g = '';
 
         if (!this._data.start) {
@@ -1075,7 +1076,8 @@ class ICalEvent {
         let domain = this._calendar.domain();
         if (domain) {
             g += 'UID:' + this._data.id + '@' + domain + '\r\n';
-        } else {
+        }
+        else {
             g += 'UID:' + this._data.id + '\r\n';
         }
 
