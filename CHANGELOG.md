@@ -4,6 +4,11 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.15.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.0) - 2020-08-24
+### Feature
+- Events: Add WKST support
+
+
 ## [1.14.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.14.0) - 2020-08-18
 ### Bugfix
 - Make x key optional in types (#211)
