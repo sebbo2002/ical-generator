@@ -18,9 +18,9 @@ declare module 'ical-generator' {
     type busystatus = 'FREE' | 'TENTATIVE' | 'BUSY' | 'OOF';
     type day = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
     type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT_PARTICIPANT' | 'NON-PARTICIPANT';
-    type attendeeStatus = 'ACCEPTED' | 'TENTATIVE'| 'DECLINED'| 'DELEGATED' | 'NEEDS-ACTION';
-    type attendeeRsvp = 'true' | 'false'| true| false;
-    type attendeeType = 'INDIVIDUAL'| 'GROUP'| 'RESOURCE'| 'ROOM'| 'UNKNOWN';
+    type attendeeStatus = 'ACCEPTED' | 'TENTATIVE' | 'DECLINED' | 'DELEGATED' | 'NEEDS-ACTION';
+    type attendeeRsvp = 'true' | 'false' | true | false;
+    type attendeeType = 'INDIVIDUAL' | 'GROUP' | 'RESOURCE' | 'ROOM' | 'UNKNOWN';
     type alarmType = 'display' | 'audio';
 
 
@@ -81,7 +81,7 @@ declare module 'ical-generator' {
       timezone?: string;
       recurrenceId?: moment.Moment | Date | string;
       transparency?: string;
-      x?: { key:string, value:string }[];
+      x?: { key: string, value: string }[];
     }
 
     interface RepeatingData {
@@ -94,6 +94,7 @@ declare module 'ical-generator' {
       byMonthDay?: number[];
       bySetPos?: number;
       exclude?: moment.Moment[] | Date[] | string[];
+      wkst?: day;
     }
 
     /**
@@ -192,7 +193,7 @@ declare module 'ical-generator' {
       sequence(): number;
       sequence(sequence: number): ICalEvent;
       start(): moment.Moment;
-      start(start: string | moment.Moment |  Date): ICalEvent;
+      start(start: string | moment.Moment | Date): ICalEvent;
       end(): moment.Moment;
       end(end: string | moment.Moment | Date): ICalEvent;
       recurrenceId(): moment.Moment;
