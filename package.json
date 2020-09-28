@@ -11,7 +11,8 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "moment-timezone": "^0.5.31"
+    "moment-timezone": "^0.5.31",
+    "uuid-random": "^1.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",

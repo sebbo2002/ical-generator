@@ -1752,10 +1752,7 @@ describe('ical-generator Event', function () {
                 summary: ':)'
             }, cal);
 
-            assert.ok(event._generate().indexOf('UID:42\r') > -1, 'without domain');
-
-            cal.domain('dojo-enterprises.wtf');
-            assert.ok(event._generate().indexOf('UID:42@dojo-enterprises.wtf') > -1, 'with domain');
+            assert.ok(event._generate().indexOf('UID:42\r') > -1);
         });
 
         it('should include wkst only if provided', function () {
