@@ -4,6 +4,10 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.15.1](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.1) - 2020-10-03
+### Bugfix
+- Typings: OPT_PARTICIPANT should be OPT-PARTICIPANT (#192)
+
 ## [1.15.0](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.0) - 2020-08-24
 ### Feature
 - Events: Add WKST support

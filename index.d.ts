@@ -17,7 +17,7 @@ declare module 'ical-generator' {
     type status = 'CONFIRMED' | 'TENTATIVE' | 'CANCELLED';
     type busystatus = 'FREE' | 'TENTATIVE' | 'BUSY' | 'OOF';
     type day = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
-    type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT_PARTICIPANT' | 'NON-PARTICIPANT';
+    type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT-PARTICIPANT' | 'NON-PARTICIPANT';
     type attendeeStatus = 'ACCEPTED' | 'TENTATIVE' | 'DECLINED' | 'DELEGATED' | 'NEEDS-ACTION';
     type attendeeRsvp = 'true' | 'false' | true | false;
     type attendeeType = 'INDIVIDUAL' | 'GROUP' | 'RESOURCE' | 'ROOM' | 'UNKNOWN';
