@@ -39,7 +39,6 @@ declare module 'ical-generator' {
      * Meta data that can be applied to a calendar
      */
     interface CalendarData {
-      domain?: string;
       prodId?: string | ProdId;
       method?: method;
       name?: string;
@@ -153,8 +152,6 @@ declare module 'ical-generator' {
      */
     class ICalCalendar {
       constructor(data?: CalendarData);
-      domain(): string;
-      domain(domain: string): ICalCalendar;
       prodId(): string;
       prodId(prodId: string | ProdId): ICalCalendar;
       method(): method;

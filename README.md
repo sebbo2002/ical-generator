@@ -17,10 +17,7 @@ calendar feeds.
 ```javascript
 const ical = require('ical-generator');
 const http = require('http');
-const cal = ical({domain: 'github.com', name: 'my first iCal'});
-
-// overwrite domain
-cal.domain('sebbo.net');
+const cal = ical({name: 'my first iCal'});
 
 cal.createEvent({
     start: moment(),
@@ -46,17 +43,16 @@ const ical = require('ical-generator');
 
 // Create new Calendar and set optional fields
 const cal = ical({
-    domain: 'sebbo.net',
     prodId: {company: 'superman-industries.com', product: 'ical-generator'},
     name: 'My Testfeed',
     timezone: 'Europe/Berlin'
 });
 
 // You can also set values like this…
-cal.domain('sebbo.net');
+cal.name('My Testfeed');
 
 // … or get values
-cal.domain(); // --> "sebbo.net"
+cal.name(); // --> "My Testfeed"
 
 // create a new event
 const event = cal.createEvent({
@@ -76,7 +72,6 @@ cal.toString(); // --> "BEGIN:VCALENDAR…"
 
 // You can also create events directly with ical()
 ical({
-    domain: 'sebbo.net',
     prodId: '//superman-industries.com//ical-generator//EN',
     events: [
         {
@@ -108,26 +103,20 @@ You can pass options to setup your calendar or use setters to do this.
 
 ```javascript
 const ical = require('ical-generator');
-const cal = ical({domain: 'sebbo.net'});
+const cal = ical({name: 'My Testfeed'});
 
 // is the same as
 
-const cal = ical().domain('sebbo.net');
+const cal = ical().name('My Testfeed');
 
 // is the same as
 
 const cal = ical();
-cal.domain('sebbo.net');
+cal.name('My Testfeed');
 ```
 
 
 ### Calendar
-
-#### domain([_String_ domain])
-
-Use this method to set your server's hostname. If provided, it will be used to generate the feed's UID.
-`require('os').hostname()` can be used to get your server's hostname.
-
 
 #### prodId([_String_|_Object_ prodId])
 
@@ -289,10 +278,7 @@ Empty the Calender.
 
 #### uid([_String_|_Number_ uid]) or id([_String_|_Number_ id])
 
-Use this method to set the event's ID. If not set, an UID will be generated randomly.
-If your calendar's domain is provided, the ID will be suffixed with '@' + your calendar's domain.
-If you do not provide a calendar domain, generating an ID using the
-[uuid](https://www.npmjs.com/package/uuid) module is recommended.
+Use this method to set the event's ID. If not set, an UUID will be generated randomly.
 
 
 #### sequence([_Number_ sequence])

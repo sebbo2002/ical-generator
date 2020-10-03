@@ -17,24 +17,6 @@ describe('ical-generator Calendar', function () {
         });
     });
 
-    describe('domain()', function () {
-        it('getter should return value', function () {
-            const cal = new ICalCalendar();
-            cal._data.domain = 'loremipsum.de';
-            assert.strictEqual(cal.domain(), 'loremipsum.de');
-        });
-
-        it('setter should return this', function () {
-            const cal = new ICalCalendar();
-            assert.deepStrictEqual(cal, cal.domain('localhost'));
-        });
-
-        it('setter should save value in _data', function () {
-            const cal = new ICalCalendar().domain('loremipsum.de');
-            assert.strictEqual(cal._data.domain, 'loremipsum.de');
-        });
-    });
-
     describe('prodId()', function () {
         it('getter should return value', function () {
             const cal = new ICalCalendar();

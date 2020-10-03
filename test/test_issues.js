@@ -7,7 +7,6 @@ describe('Issues', function () {
     describe('Issue #38', function () {
         it('should work with Europe/Berlin', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
@@ -22,7 +21,6 @@ describe('Issues', function () {
         });
         it('should work with Brazil/East', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Brazil/East',
                 events: [{
@@ -40,7 +38,6 @@ describe('Issues', function () {
     describe('Issue #123', function () {
         it('should work with repeating bySetPos', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
@@ -63,7 +60,6 @@ describe('Issues', function () {
 
         it('should work with repeating bySetPos by taking the first elemnt of the byDay array', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
@@ -89,7 +85,6 @@ describe('Issues', function () {
         ['DTSTART', 'DTEND', 'RECURRENCE-ID'].forEach(function (prop) {
             it(`it should correctly set ${prop} when using different timezone in calendar and event`, function () {
                 const calendar = ical({
-                    domain: 'sebbo.net',
                     timezone: 'America/Buenos_Aires',
                     events: [
                         {
@@ -110,7 +105,6 @@ describe('Issues', function () {
     describe('Issue #210', function () {
         it('should repeat/exclude with Europe/Berlin', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
@@ -130,7 +124,6 @@ describe('Issues', function () {
         });
         it('should repeat/exclude with America/New_York', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'America/New_York',
                 events: [{

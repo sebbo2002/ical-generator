@@ -13,7 +13,7 @@ const ICalEvent = require('./event');
 class ICalCalendar {
     constructor(data) {
         this._data = {};
-        this._attributes = ['domain', 'prodId', 'method', 'name', 'description', 'timezone', 'ttl', 'url', 'scale', 'events'];
+        this._attributes = ['prodId', 'method', 'name', 'description', 'timezone', 'ttl', 'url', 'scale', 'events'];
         this._vars = {
             allowedMethods: ['PUBLISH', 'REQUEST', 'REPLY', 'ADD', 'CANCEL', 'REFRESH', 'COUNTER', 'DECLINECOUNTER']
         };
@@ -29,24 +29,6 @@ class ICalCalendar {
                 this[i](data[i]);
             }
         }
-    }
-
-
-    /**
-     * Set/Get your feed's domain…
-     *
-     * @param {string} [domain] Domain
-     * @since 0.2.0
-     * @deprecated 0.3.0
-     * @returns {ICalCalendar|String}
-     */
-    domain(domain) {
-        if (!domain) {
-            return this._data.domain;
-        }
-
-        this._data.domain = domain.toString();
-        return this;
     }
 
 

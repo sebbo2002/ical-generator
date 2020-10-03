@@ -6,7 +6,7 @@ const ical = require(__dirname + '/../src');
 
 describe('ical-generator Cases', function() {
     it('case #1', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
             id: '123',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -26,7 +26,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #2', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
             id: '123',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -47,7 +47,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #3', function() {
-        const cal = ical({domain: 'sebbo.net', method: 'add', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({method: 'add', prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
             id: '123',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -70,7 +70,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #4 (repeating)', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.events([
             {
                 id: '1',
@@ -117,7 +117,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #5 (floating)', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
             id: '1',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -136,7 +136,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #6 (attendee with simple delegation and alarm)', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN', method: 'publish'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN', method: 'publish'});
         cal.createEvent({
             id: '123',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -181,7 +181,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #7 (repeating: byDay, byMonth, byMonthDay)', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.events([
             {
                 id: '1',
@@ -228,7 +228,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #8', function() {
-        const cal = ical({domain: 'sebbo.net', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
             id: '123',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
@@ -255,7 +255,7 @@ describe('ical-generator Cases', function() {
     });
 
     it('case #9 (organizer with mailto)', function() {
-        const cal = ical({domain: 'sebbo.net', method: 'request', prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({method: 'request', prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
             id: '123',
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
