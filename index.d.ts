@@ -76,8 +76,8 @@ declare module 'ical-generator' {
       organizer?: string | PersonData;
       attendees?: AttendeeData[];
       alarms?: AlarmData[];
-      status?: string;
-      busystatus?: string;
+      status?: status;
+      busystatus?: busystatus;
       timezone?: string;
       recurrenceId?: moment.Moment | Date | string;
       transparency?: string;
