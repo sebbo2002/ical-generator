@@ -16,6 +16,7 @@ declare module 'ical-generator' {
     type repeatingFreq = 'SECONDLY' | 'MINUTELY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
     type status = 'CONFIRMED' | 'TENTATIVE' | 'CANCELLED';
     type busystatus = 'FREE' | 'TENTATIVE' | 'BUSY' | 'OOF';
+    type transparency = 'OPAQUE' | 'TRANSPARENT';
     type day = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
     type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT-PARTICIPANT' | 'NON-PARTICIPANT';
     type attendeeStatus = 'ACCEPTED' | 'TENTATIVE' | 'DECLINED' | 'DELEGATED' | 'NEEDS-ACTION';
@@ -80,7 +81,7 @@ declare module 'ical-generator' {
       busystatus?: busystatus;
       timezone?: string;
       recurrenceId?: moment.Moment | Date | string;
-      transparency?: string;
+      transparency?: transparency;
       x?: { key: string, value: string }[];
     }
 
@@ -245,8 +246,8 @@ declare module 'ical-generator' {
       lastModified(): moment.Moment;
       lastModified(lastModified: string | moment.Moment | Date): ICalEvent;
       toJSON(): EventData;
-      transparency(): string;
-      transparency(transparency: string): string;
+      transparency(): transparency;
+      transparency(transparency: transparency): string;
     }
 
     class ICalAttendee {
