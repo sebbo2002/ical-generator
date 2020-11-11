@@ -110,6 +110,7 @@ declare module 'ical-generator' {
       role?: attendeeRole;
       status?: attendeeStatus;
       type?: attendeeType;
+      rsvp?: attendeeRsvp,
       delegatedTo?: ICalAttendee;
       delegatedFrom?: ICalAttendee;
       delegatesTo?: ICalAttendee;
