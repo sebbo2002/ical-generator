@@ -4,6 +4,12 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.15.2](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.2) - 2020-11-12
+### Bugfix
+- Types: Add rsvp to AttendeeData
+- Types: Specify possible values for status and busystatus
+- Types: Specify possible values for transparency
+
 ## [1.15.1](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.1) - 2020-10-03
 ### Bugfix
 - Typings: OPT_PARTICIPANT should be OPT-PARTICIPANT (#192)
