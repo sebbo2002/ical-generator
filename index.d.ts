@@ -16,6 +16,7 @@ declare module 'ical-generator' {
     type repeatingFreq = 'SECONDLY' | 'MINUTELY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY';
     type status = 'CONFIRMED' | 'TENTATIVE' | 'CANCELLED';
     type busystatus = 'FREE' | 'TENTATIVE' | 'BUSY' | 'OOF';
+    type transparency = 'OPAQUE' | 'TRANSPARENT';
     type day = 'SU' | 'MO' | 'TU' | 'WE' | 'TH' | 'FR' | 'SA';
     type attendeeRole = 'CHAIR' | 'REQ-PARTICIPANT' | 'OPT-PARTICIPANT' | 'NON-PARTICIPANT';
     type attendeeStatus = 'ACCEPTED' | 'TENTATIVE' | 'DECLINED' | 'DELEGATED' | 'NEEDS-ACTION';
@@ -76,11 +77,11 @@ declare module 'ical-generator' {
       organizer?: string | PersonData;
       attendees?: AttendeeData[];
       alarms?: AlarmData[];
-      status?: string;
-      busystatus?: string;
+      status?: status;
+      busystatus?: busystatus;
       timezone?: string;
       recurrenceId?: moment.Moment | Date | string;
-      transparency?: string;
+      transparency?: transparency;
       x?: { key: string, value: string }[];
     }
 
@@ -110,6 +111,7 @@ declare module 'ical-generator' {
       role?: attendeeRole;
       status?: attendeeStatus;
       type?: attendeeType;
+      rsvp?: attendeeRsvp,
       delegatedTo?: ICalAttendee;
       delegatedFrom?: ICalAttendee;
       delegatesTo?: ICalAttendee;
@@ -244,8 +246,8 @@ declare module 'ical-generator' {
       lastModified(): moment.Moment;
       lastModified(lastModified: string | moment.Moment | Date): ICalEvent;
       toJSON(): EventData;
-      transparency(): string;
-      transparency(transparency: string): string;
+      transparency(): transparency;
+      transparency(transparency: transparency): string;
     }
 
     class ICalAttendee {
