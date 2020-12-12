@@ -6,6 +6,14 @@
 ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable
 calendar feeds.
 
+<table><tr><td>
+<b>⚠️ Version 2.0.0</b><br /><br />
+<p>I started working on version 2.0.0, a complete rewrite using typescript. You can find the
+<a href="https://github.com/sebbo2002/ical-generator/blob/master/README.md">old Readme here</a>. You can also have a look at the
+<a href="https://github.com/sebbo2002/ical-generator/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22v2.0.0+%F0%9F%8E%89%22">
+Issues assigned to the 2.0.0 Milestone</a>.</p>
+</td></tr></table>
+
 
 ## Installation
 
