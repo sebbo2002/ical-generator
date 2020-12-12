@@ -11,25 +11,25 @@
     "node": ">=6.0.0"
   },
   "dependencies": {
-    "moment-timezone": "^0.5.31"
+    "moment-timezone": "^0.5.32"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
-    "babel-loader": "^8.1.0",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-loader": "^8.2.2",
     "babel-plugin-add-module-exports": "^1.0.4",
-    "eslint": "^7.10.0",
+    "eslint": "^7.15.0",
     "jquery": "^3.5.1",
     "jshint": "^2.12.0",
-    "mocha": "^8.1.3",
-    "mochawesome": "^6.1.1",
-    "moment": "^2.29.0",
+    "mocha": "^8.2.1",
+    "mochawesome": "^6.2.1",
+    "moment": "^2.29.1",
     "npm-check": "^5.9.2",
     "nyc": "^15.1.0",
     "portfinder": "^1.0.28",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
   },
   "peerDependencies": {
     "@types/node": ">= 8.0.0"
