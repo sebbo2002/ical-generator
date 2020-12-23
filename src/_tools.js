@@ -99,7 +99,7 @@ class ICalTools {
                 var charsize = Buffer.from(ch).length;
                 c += charsize;
                 if (c > 74) {
-                    result += "\n ";
+                    result += '\r\n ';
                     c = charsize;
                 }
                 result += ch;
