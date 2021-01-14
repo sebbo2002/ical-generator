@@ -90,18 +90,23 @@ class ICalTools {
 
     static foldLines (input) {
         return input.split('\r\n').map(function (line) {
-            var result = '';
-            var c = 0;
-            for (var i = 0; i < line.length; i++) {
-                var ch = line.charAt(i);
-                if (ch >= '\ud800' && ch <= '\udbff') // surrogate pair, see https://mathiasbynens.be/notes/javascript-encoding#surrogate-pairs
+            let result = '';
+            let c = 0;
+            for (let i = 0; i < line.length; i++) {
+                let ch = line.charAt(i);
+
+                // surrogate pair, see https://mathiasbynens.be/notes/javascript-encoding#surrogate-pairs
+                if (ch >= '\ud800' && ch <= '\udbff') {
                     ch += line.charAt(++i);
-                var charsize = Buffer.from(ch).length;
+                }
+
+                const charsize = Buffer.from(ch).length;
                 c += charsize;
                 if (c > 74) {
                     result += '\r\n ';
                     c = charsize;
                 }
+
                 result += ch;
             }
             return result;
