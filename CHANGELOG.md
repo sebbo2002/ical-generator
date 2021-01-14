@@ -4,6 +4,10 @@ _The following document documents changes to this library. Changes to the depend
 
 <br />
 
+## [1.15.4](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.4) - 2021-01-14
+### Budgfix
+- Fix: Line folding breaks surrogate pairs ([#221](https://github.com/sebbo2002/ical-generator/issues/221))
+
 ## [1.15.2](https://github.com/sebbo2002/ical-generator/releases/tag/1.15.2) - 2020-11-12
 ### Bugfix
 - Types: Add rsvp to AttendeeData
