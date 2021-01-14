@@ -90,7 +90,26 @@ class ICalTools {
 
     static foldLines (input) {
         return input.split('\r\n').map(function (line) {
-            return line.match(/(.{1,74})/g).join('\r\n ');
+            let result = '';
+            let c = 0;
+            for (let i = 0; i < line.length; i++) {
+                let ch = line.charAt(i);
+
+                // surrogate pair, see https://mathiasbynens.be/notes/javascript-encoding#surrogate-pairs
+                if (ch >= '\ud800' && ch <= '\udbff') {
+                    ch += line.charAt(++i);
+                }
+
+                const charsize = Buffer.from(ch).length;
+                c += charsize;
+                if (c > 74) {
+                    result += '\r\n ';
+                    c = charsize;
+                }
+
+                result += ch;
+            }
+            return result;
         }).join('\r\n');
     }
 
