@@ -1,10 +1,7 @@
 'use strict';
 
 const ical = require('ical-generator');
-const cal = ical({domain: 'localhost'});
-
-// overwrite domain
-cal.domain('example.com');
+const cal = ical();
 
 cal.createEvent({
     start: new Date(1969, 6, 20, 20),
