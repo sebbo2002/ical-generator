@@ -61,7 +61,7 @@
   "main": "./dist/index.js",
   "repository": {
     "type": "git",
-    "url": "http://github.com/sebbo2002/ical-generator.git"
+    "url": "https://github.com/sebbo2002/ical-generator.git"
   },
   "runkitExampleFilename": "examples/example-runkit.js"
 }
