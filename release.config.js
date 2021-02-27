@@ -35,7 +35,7 @@ module.exports = {
         }],
         ['@qiwi/semantic-release-gh-pages-plugin', {
             'msg': 'docs: Updated for <%= nextRelease.gitTag %>',
-            'src': './doc',
+            'src': './docs',
             'dst': `./${process.env.BRANCH}`,
             'pullTagsBranch': 'main'
         }]

@@ -1,11 +1,16 @@
 name: Tests
 
-on: [push, pull_request]
-
+on:
+  push:
+    branches-ignore:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - *
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node: [10.x, 12.x, 14.x, 15.x]
