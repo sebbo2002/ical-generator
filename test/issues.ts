@@ -1,13 +1,13 @@
 'use strict';
 
-const assert = require('assert');
-const ical = require(__dirname + '/../src');
+import assert from 'assert';
+import ical from '../src';
+import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
 
 describe('Issues', function () {
     describe('Issue #38', function () {
         it('should work with Europe/Berlin', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
@@ -22,7 +22,6 @@ describe('Issues', function () {
         });
         it('should work with Brazil/East', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Brazil/East',
                 events: [{
@@ -40,7 +39,6 @@ describe('Issues', function () {
     describe('Issue #123', function () {
         it('should work with repeating bySetPos', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
@@ -48,10 +46,10 @@ describe('Issues', function () {
                     summary: 'Example Event',
                     allDay: true,
                     repeating: {
-                        freq: 'MONTHLY',
+                        freq: ICalEventRepeatingFreq.MONTHLY,
                         count: 3,
                         interval: 1,
-                        byDay: ['SU'],
+                        byDay: [ICalWeekday.SU],
                         bySetPos: 3
                     }
                 }]
@@ -63,7 +61,6 @@ describe('Issues', function () {
 
         it('should work with repeating bySetPos by taking the first elemnt of the byDay array', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
                     start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
@@ -71,10 +68,10 @@ describe('Issues', function () {
                     summary: 'Example Event',
                     allDay: true,
                     repeating: {
-                        freq: 'MONTHLY',
+                        freq: ICalEventRepeatingFreq.MONTHLY,
                         count: 3,
                         interval: 1,
-                        byDay: ['MO', 'FR'],
+                        byDay: [ICalWeekday.MO, ICalWeekday.FR],
                         bySetPos: 3
                     }
                 }]
@@ -89,7 +86,6 @@ describe('Issues', function () {
         ['DTSTART', 'DTEND', 'RECURRENCE-ID'].forEach(function (prop) {
             it(`it should correctly set ${prop} when using different timezone in calendar and event`, function () {
                 const calendar = ical({
-                    domain: 'sebbo.net',
                     timezone: 'America/Buenos_Aires',
                     events: [
                         {
@@ -110,17 +106,15 @@ describe('Issues', function () {
     describe('Issue #210', function () {
         it('should repeat/exclude with Europe/Berlin', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
-                    start: '2020-08-13T00:00:00',
+                    start: '2020-08-13T00:00:00+01:00',
                     summary: 'Example Event',
                     repeating: {
-                        freq: 'MONTHLY',
+                        freq: ICalEventRepeatingFreq.MONTHLY,
                         count: 12,
-                        exclude: '2020-12-13T00:00:00',
-                        excludeTimezone: 'Europe/Berlin'
+                        exclude: '2020-12-13T00:00:00+01:00'
                     }
                 }]
             });
@@ -130,17 +124,15 @@ describe('Issues', function () {
         });
         it('should repeat/exclude with America/New_York', function () {
             const calendar = ical({
-                domain: 'sebbo.net',
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'America/New_York',
                 events: [{
-                    start: '2020-08-13T00:00:00',
+                    start: '2020-08-13T00:00:00-05:00',
                     summary: 'Example Event',
                     repeating: {
-                        freq: 'MONTHLY',
+                        freq: ICalEventRepeatingFreq.MONTHLY,
                         count: 12,
-                        exclude: '2020-12-13T00:00:00',
-                        excludeTimezone: 'America/New_York',
+                        exclude: '2020-12-13T00:00:00-05:00'
                     }
                 }]
             });

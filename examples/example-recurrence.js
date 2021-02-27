@@ -2,10 +2,7 @@
 
 const ical = require('../src/index');
 const moment = require('moment');
-const cal = ical({domain: 'localhost'});
-
-// overwrite domain
-cal.domain('example.com');
+const cal = ical();
 
 cal.createEvent({
     start: moment().add(1, 'hour'),
