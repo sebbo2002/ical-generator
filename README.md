@@ -8,10 +8,12 @@ calendar feeds.
 
 <table><tr><td>
 <b>⚠️ Version 2.0.0</b><br /><br />
-<p>I started working on version 2.0.0, a complete rewrite using typescript. You can find the
-<a href="https://github.com/sebbo2002/ical-generator/blob/master/README.md">old Readme here</a>. You can also have a look at the
-<a href="https://github.com/sebbo2002/ical-generator/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22v2.0.0+%F0%9F%8E%89%22">
-Issues assigned to the 2.0.0 Milestone</a>.</p>
+<p>You are looking at the readme for the new, future version 2.0.0, a completely new version in Typescript, with some
+new features and changes. If you are looking for the readme of the current version, you can find it
+<a href="https://github.com/sebbo2002/ical-generator/blob/master/README.md">here</a>.</p>
+<p>If you want to help out or want to know what's in the pipeline with the new version, you're welcome to take a look
+<a href="https://github.com/sebbo2002/ical-generator/milestones/v2.0.0%20%F0%9F%8E%89">here</a> and get an idea of
+what's in the new version.</p>
 </td></tr></table>
 
 
