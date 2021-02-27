@@ -5,9 +5,10 @@ on:
     branches-ignore:
       - main
       - develop
-  pull_request:
-    branches:
-      - *
+  pull_request: null
+  schedule:
+    - cron: '15 2 * * 1'
+
 jobs:
   tests:
     runs-on: ubuntu-latest
