@@ -5,7 +5,6 @@ const moment = require('moment');
 const express = require('express');
 
 const cal = ical({
-    domain: 'example.com',
     prodId: '//superman-industries.com//ical-generator//EN',
     events: [
         {

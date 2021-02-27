@@ -3,49 +3,59 @@
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <mail@sebbo.net>",
   "license": "MIT",
+  "version": "v2.0.0-develop",
   "bugs": {
     "url": "http://github.com/sebbo2002/ical-generator/issues",
     "email": "bugs@sebbo.net"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=10.1.0"
   },
-  "dependencies": {
-    "moment-timezone": "^0.5.32"
-  },
+  "files": [
+    "/dist"
+  ],
   "devDependencies": {
-    "@babel/cli": "^7.12.10",
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.10",
-    "babel-loader": "^8.2.2",
-    "babel-plugin-add-module-exports": "^1.0.4",
-    "eslint": "^7.15.0",
-    "jquery": "^3.5.1",
-    "jshint": "^2.12.0",
-    "mocha": "^8.2.1",
-    "mochawesome": "^6.2.1",
+    "@qiwi/semantic-release-gh-pages-plugin": "^5.0.2",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/npm": "^7.0.8",
+    "@semantic-release/release-notes-generator": "^9.0.1",
+    "@types/luxon": "^1.25.0",
+    "@types/mocha": "^8.2.0",
+    "@types/node": "^14.14.9",
+    "@typescript-eslint/eslint-plugin": "^4.8.1",
+    "@typescript-eslint/parser": "^4.8.1",
+    "dayjs": "^1.9.6",
+    "eslint": "^7.14.0",
+    "luxon": "^1.25.0",
+    "mocha": "^8.1.3",
+    "mochawesome": "^6.1.1",
     "moment": "^2.29.1",
-    "npm-check": "^5.9.2",
+    "moment-timezone": "^0.5.32",
     "nyc": "^15.1.0",
     "portfinder": "^1.0.28",
-    "webpack": "^5.10.1",
-    "webpack-cli": "^4.2.0"
+    "semantic-release": "^17.3.0",
+    "ts-node": "^9.0.0",
+    "typedoc": "^0.19.2",
+    "typescript": "^4.1.2"
   },
   "peerDependencies": {
-    "@types/node": ">= 8.0.0"
+    "@types/node": ">= 10.0.0",
+    "dayjs": "^1.9.6",
+    "luxon": "^1.25.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32"
   },
   "scripts": {
-    "all": "npm run check && npm run tests && npm run build",
-    "check": "npm run check:eslint && npm run check:npm",
-    "check:eslint": "eslint ./examples ./src ./test/*.js",
-    "check:quick": "npm run check:eslint",
-    "check:npm": "npm-check -s -p",
-    "tests": "npm run test && npm run coverage",
-    "test": "mocha -c --reporter mochawesome --reporter-options reportDir=test-result/test,reportFilename=report,json=false ./test/*.js",
-    "coverage": "nyc --reporter=html --reporter=text --report-dir ./test-result/coverage --check-coverage mocha -c ./test/*.js",
-    "browser-test": "webpack && mkdir -p ./test-result/browser-test && cp ./test/html/index.html ./test-result/browser-test && cp ./node_modules/mocha/mocha.css ./test-result/browser-test && cp ./node_modules/jquery/dist/jquery.min.js  ./test-result/browser-test && cp ./node_modules/mocha/mocha.js ./test-result/browser-test && cp ./node_modules/moment/moment.js ./test-result/browser-test && open ./test-result/browser-test/index.html",
-    "bump": "jq -M \".version=\\\"$CI_COMMIT_TAG\\\"\" package.json|sponge package.json",
-    "build": "babel src --out-dir dist"
+    "all": "npm run lint && npm run build",
+    "build": "./build.sh",
+    "example": "node ./dist/examples/push.js",
+    "lint": "eslint . --ext .ts",
+    "test": "mocha",
+    "coverage": "nyc mocha"
   },
   "preferGlobal": false,
   "main": "./dist/index.js",
@@ -53,6 +63,5 @@
     "type": "git",
     "url": "http://github.com/sebbo2002/ical-generator.git"
   },
-  "typings": "index.d.ts",
   "runkitExampleFilename": "examples/example-runkit.js"
 }
