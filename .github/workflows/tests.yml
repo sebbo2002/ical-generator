@@ -31,3 +31,12 @@ jobs:
       - run: npm run all
         env:
           CI: true
+
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: github/codeql-action/init@v1
+        with:
+          languages: 'javascript'
+      - uses: github/codeql-action/analyze@v1
