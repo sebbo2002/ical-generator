@@ -1,0 +1,54 @@
+{
+    "env": {
+        "node": true,
+        "browser": true,
+        "es6": true,
+        "mocha": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "semi": "error",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "indent": [
+            "error",
+            4
+        ]
+    },
+    "overrides": [
+        {
+            "files": [
+                "src/**/*.ts"
+            ],
+            "rules": {
+                "@typescript-eslint/ban-ts-comment": "warn"
+            }
+        },
+        {
+            "files": [
+                "test/**/*.ts"
+            ],
+            "rules": {
+                "@typescript-eslint/ban-ts-ignore": "off",
+                "@typescript-eslint/ban-ts-comment": "off"
+            }
+        }
+    ]
+}

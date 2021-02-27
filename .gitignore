@@ -1,0 +1,5 @@
+/.nyc_output
+/.idea
+/dist
+/docs
+/node_modules
