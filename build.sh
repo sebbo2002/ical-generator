@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
+set -e
 
 echo "########################"
 echo "# build.sh"
 echo "# Branch = ${BRANCH}"
 echo "########################"
 
+# Typescript Build in ./dist
 npx tsc
 
 if [ "$BRANCH" != "develop" ] && [ "$BRANCH" != "main" ] && [ "$BRANCH" != "" ]; then
@@ -13,12 +15,17 @@ if [ "$BRANCH" != "develop" ] && [ "$BRANCH" != "main" ] && [ "$BRANCH" != "" ];
 fi;
 
 
-rm -rf ./doc
+mkdir -p ./docs/
+rm -rf ./docs/coverage/ ./docs/reference/ ./docs/tests/
+
+
+# TypeDoc in ./docs/referece
 npx typedoc
 
+# Test Report in ./docs/tests
 npx mocha --reporter mochawesome
-mv ./mochawesome-report/mochawesome.html ./mochawesome-report/index.html
-mkdir -p ./doc
-mv ./mochawesome-report ./doc/tests
+mv -f ./mochawesome-report/mochawesome.html ./mochawesome-report/index.html
+mv -f ./mochawesome-report ./docs/tests
 
+# Coverage Report in ./doc/coverage
 npm run coverage

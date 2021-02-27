@@ -1,6 +1,5 @@
-/.github
 /.nyc_output
 /.idea
 /dist
-/doc
+/docs
 /node_modules

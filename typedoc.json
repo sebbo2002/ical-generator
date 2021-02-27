@@ -1,19 +1,11 @@
 {
-    "inputFiles": [
-        "./src/index.ts"
-    ],
-    "exclude": [
-        "./lib/tools.ts"
-    ],
-    "out": "./doc/reference",
-    "mode": "file",
+    "entryPoints": ["./src/index.ts"],
+    "exclude": [],
+    "out": "./docs/reference",
     "theme": "minimal",
     "name": "ical-generator",
     "readme": "none",
     "includeVersion": true,
-    "excludeNotExported": true,
     "excludePrivate": true,
-    "excludeProtected": true,
-    "stripInternal": true,
-    "module": "node"
+    "excludeProtected": true
 }
