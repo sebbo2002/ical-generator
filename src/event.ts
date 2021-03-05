@@ -1,6 +1,7 @@
 'use strict';
 
 import moment from 'moment-timezone';
+import uuid from 'uuid-random';
 import {
     addOrGetCustomAttributes,
     checkDate,
@@ -128,7 +129,7 @@ export default class ICalEvent {
 
     constructor(data: ICalEventData, calendar: ICalCalendar) {
         this.data = {
-            id: ('0000000000' + Math.floor(Math.random() * Math.pow(36, 10) << 0).toString(36)).substr(-10),
+            id: uuid(),
             sequence: 0,
             start: null,
             end: null,
