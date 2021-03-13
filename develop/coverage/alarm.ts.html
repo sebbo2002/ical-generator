@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.73% </span>
+                <span class="strong">97.86% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>129/132</span>
+                <span class='fraction'>137/140</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.48% </span>
+                <span class="strong">91.91% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>116/119</span>
+                <span class='fraction'>159/173</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.73% </span>
+                <span class="strong">97.86% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>129/132</span>
+                <span class='fraction'>137/140</span>
             </div>
         
             
@@ -459,7 +459,15 @@
 <a name='L400'></a><a href='#L400'>400</a>
 <a name='L401'></a><a href='#L401'>401</a>
 <a name='L402'></a><a href='#L402'>402</a>
-<a name='L403'></a><a href='#L403'>403</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L403'></a><a href='#L403'>403</a>
+<a name='L404'></a><a href='#L404'>404</a>
+<a name='L405'></a><a href='#L405'>405</a>
+<a name='L406'></a><a href='#L406'>406</a>
+<a name='L407'></a><a href='#L407'>407</a>
+<a name='L408'></a><a href='#L408'>408</a>
+<a name='L409'></a><a href='#L409'>409</a>
+<a name='L410'></a><a href='#L410'>410</a>
+<a name='L411'></a><a href='#L411'>411</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -523,6 +531,14 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
+<span class="cline-any cline-yes">59x</span>
 <span class="cline-any cline-yes">59x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -865,7 +881,7 @@
 &nbsp;
 import moment from 'moment-timezone';
 import ICalEvent from './event';
-import {addOrGetCustomAttributes, formatDate, escape, generateCustomAttributes, applyInternalData} from './tools';
+import {addOrGetCustomAttributes, formatDate, escape, generateCustomAttributes} from './tools';
 &nbsp;
 &nbsp;
 export enum ICalAlarmType {
@@ -925,7 +941,15 @@ export default class ICalAlarm {
             throw new Error('`event` option required!');
         }
 &nbsp;
-        applyInternalData(this, data);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>ype &amp;&amp; this.type(data.type);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>rigger &amp;&amp; this.trigger(data.trigger);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>riggerBefore &amp;&amp; this.triggerBefore(data.triggerBefore);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>riggerAfter &amp;&amp; this.triggerAfter(data.triggerAfter);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.r</span>epeat &amp;&amp; this.repeat(data.repeat);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.i</span>nterval &amp;&amp; this.interval(data.interval);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.a</span>ttach &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.attach(data.attach);</span>
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>escription &amp;&amp; this.description(data.description);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.x</span> &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.x(data.x);</span>
     }
 &nbsp;
 &nbsp;
@@ -1160,10 +1184,10 @@ export default class ICalAlarm {
      *
      * @since 1.9.0
      */
-    x (keyOrArray: ({key: string, value: string})[] | Record&lt;string, string&gt;): this;
+    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record&lt;string, string&gt;): this;
     x (keyOrArray: string, value: string): this;
     x (): {key: string, value: string}[];
-    x (keyOrArray?: ({key: string, value: string})[] | Record&lt;string, string&gt; | string, value?: string): this | void | ({key: string, value: string})[] {
+    x (keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record&lt;string, string&gt; | string, value?: string): this | void | ({key: string, value: string})[] {
         if(keyOrArray === undefined) {
             return addOrGetCustomAttributes (this.data);
         }
@@ -1270,7 +1294,7 @@ export default class ICalAlarm {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Mar 05 2021 15:29:36 GMT+0000 (Coordinated Universal Time)
+                at Sat Mar 13 2021 19:51:09 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>

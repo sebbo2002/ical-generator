@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.28% </span>
+                <span class="strong">98.39% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>114/116</span>
+                <span class='fraction'>122/124</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.05% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>81/88</span>
+                <span class='fraction'>133/152</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.28% </span>
+                <span class="strong">98.39% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>114/116</span>
+                <span class='fraction'>122/124</span>
             </div>
         
             
@@ -436,7 +436,11 @@
 <a name='L377'></a><a href='#L377'>377</a>
 <a name='L378'></a><a href='#L378'>378</a>
 <a name='L379'></a><a href='#L379'>379</a>
-<a name='L380'></a><a href='#L380'>380</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L380'></a><a href='#L380'>380</a>
+<a name='L381'></a><a href='#L381'>381</a>
+<a name='L382'></a><a href='#L382'>382</a>
+<a name='L383'></a><a href='#L383'>383</a>
+<a name='L384'></a><a href='#L384'>384</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -516,12 +520,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">65x</span>
-<span class="cline-any cline-yes">59x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">59x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
+<span class="cline-any cline-yes">65x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -894,13 +902,17 @@ export default class ICalAttendee {
             throw new Error('`event` option required!');
         }
 &nbsp;
-        for (const i in data) {
-            <span class="missing-if-branch" title="else path not taken" >E</span>if ([...Object.keys(this.data), 'delegatesTo', 'delegatesFrom'].includes(i)) {
-&nbsp;
-                // @ts-ignore
-                this[i](data[i]);
-            }
-        }
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.n</span>ame &amp;&amp; this.name(data.name);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.e</span>mail &amp;&amp; this.email(data.email);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.m</span>ailto &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.mailto(data.mailto);</span>
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.s</span>tatus &amp;&amp; this.status(data.status);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.r</span>ole &amp;&amp; this.role(data.role);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.r</span>svp &amp;&amp; this.rsvp(data.rsvp);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.t</span>ype &amp;&amp; this.type(data.type);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>elegatedTo &amp;&amp; this.delegatedTo(data.delegatedTo);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>elegatedFrom &amp;&amp; this.delegatedFrom(data.delegatedFrom);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>elegatesTo &amp;&amp; this.delegatesTo(data.delegatesTo);
+        data<span class="branch-0 cbranch-no" title="branch not covered" >?.d</span>elegatesFrom &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.delegatesFrom(data.delegatesFrom);</span>
     }
 &nbsp;
 &nbsp;
@@ -1201,7 +1213,7 @@ export default class ICalAttendee {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Mar 05 2021 15:29:36 GMT+0000 (Coordinated Universal Time)
+                at Sat Mar 13 2021 19:51:09 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
