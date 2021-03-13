@@ -20,13 +20,7 @@ export default class ICalCategory {
             name: null
         };
 
-        for (const i in data) {
-            if (Object.keys(this.data).includes(i)) {
-
-                // @ts-ignore
-                this[i](data[i]);
-            }
-        }
+        data?.name && this.name(data.name);
     }
 
 

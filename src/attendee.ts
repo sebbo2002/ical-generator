@@ -77,13 +77,17 @@ export default class ICalAttendee {
             throw new Error('`event` option required!');
         }
 
-        for (const i in data) {
-            if ([...Object.keys(this.data), 'delegatesTo', 'delegatesFrom'].includes(i)) {
-
-                // @ts-ignore
-                this[i](data[i]);
-            }
-        }
+        data?.name && this.name(data.name);
+        data?.email && this.email(data.email);
+        data?.mailto && this.mailto(data.mailto);
+        data?.status && this.status(data.status);
+        data?.role && this.role(data.role);
+        data?.rsvp && this.rsvp(data.rsvp);
+        data?.type && this.type(data.type);
+        data?.delegatedTo && this.delegatedTo(data.delegatedTo);
+        data?.delegatedFrom && this.delegatedFrom(data.delegatedFrom);
+        data?.delegatesTo && this.delegatesTo(data.delegatesTo);
+        data?.delegatesFrom && this.delegatesFrom(data.delegatesFrom);
     }
 
 

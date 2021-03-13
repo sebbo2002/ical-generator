@@ -72,7 +72,7 @@ export interface ICalEventData {
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
     lastModified?: ICalDateTimeValue | null,
-    x?: ([string, string] | { key: string, value: string })[];
+    x?: ({key: string, value: string})[] | [string, string][] | Record<string, string>;
 }
 
 export interface ICalEventInternalData {
@@ -163,13 +163,33 @@ export default class ICalEvent {
             throw new Error('`calendar` option required!');
         }
 
-        for (const i in data) {
-            if (Object.keys(this.data).includes(i)) {
-
-                // @ts-ignore
-                this[i](data[i]);
-            }
-        }
+        data?.id && this.id(data.id);
+        data?.sequence && this.sequence(data.sequence);
+        data?.start && this.start(data.start);
+        data?.end && this.end(data.end);
+        data?.recurrenceId && this.recurrenceId(data.recurrenceId);
+        data?.timezone && this.timezone(data.timezone);
+        data?.stamp && this.stamp(data.stamp);
+        data?.allDay && this.allDay(data.allDay);
+        data?.floating && this.floating(data.floating);
+        data?.repeating && this.repeating(data.repeating);
+        data?.summary && this.summary(data.summary);
+        data?.location && this.location(data.location);
+        data?.appleLocation && this.appleLocation(data.appleLocation);
+        data?.geo && this.geo(data.geo);
+        data?.description && this.description(data.description);
+        data?.htmlDescription && this.htmlDescription(data.htmlDescription);
+        data?.organizer && this.organizer(data.organizer);
+        data?.attendees && this.attendees(data.attendees);
+        data?.alarms && this.alarms(data.alarms);
+        data?.categories && this.categories(data.categories);
+        data?.status && this.status(data.status);
+        data?.busystatus && this.busystatus(data.busystatus);
+        data?.url && this.url(data.url);
+        data?.transparency && this.transparency(data.transparency);
+        data?.created && this.created(data.created);
+        data?.lastModified && this.lastModified(data.lastModified);
+        data?.x && this.x(data.x);
     }
 
     /**
@@ -828,10 +848,10 @@ export default class ICalEvent {
      * @since 1.9.0
      * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
-    x(keyOrArray: ({ key: string, value: string })[] | Record<string, string>): this;
+    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): this;
     x(keyOrArray: string, value: string): this;
     x(): { key: string, value: string }[];
-    x(keyOrArray?: ({ key: string, value: string })[] | Record<string, string> | string, value?: string): this | void | ({ key: string, value: string })[] {
+    x(keyOrArray?: ({ key: string, value: string })[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({ key: string, value: string })[] {
         if (keyOrArray === undefined) {
             return addOrGetCustomAttributes(this.data);
         }

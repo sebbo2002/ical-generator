@@ -70,12 +70,15 @@ export function foldLines (input: string): string {
     }).join('\r\n');
 }
 
-export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray: ({key: string, value: string})[] | Record<string, string>): void;
+export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): void;
 export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray: string, value: string): void;
 export function addOrGetCustomAttributes (data: {x: [string, string][]}): ({key: string, value: string})[];
-export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray?: ({key: string, value: string})[] | Record<string, string> | string  | undefined, value?: string | undefined): void | ({key: string, value: string})[] {
+export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record<string, string> | string  | undefined, value?: string | undefined): void | ({key: string, value: string})[] {
     if (Array.isArray(keyOrArray)) {
-        data.x = keyOrArray.map(o => {
+        data.x = keyOrArray.map((o: {key: string, value: string} | [string, string]) => {
+            if(Array.isArray(o)) {
+                return o;
+            }
             if (typeof o.key !== 'string' || typeof o.value !== 'string') {
                 throw new Error('Either key or value is not a string!');
             }
@@ -83,7 +86,7 @@ export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrAr
                 throw new Error('Key has to start with `X-`!');
             }
 
-            return [o.key, o.value];
+            return [o.key, o.value] as [string, string];
         });
     }
     else if (typeof keyOrArray === 'object') {
@@ -208,19 +211,4 @@ export function checkDate(value: ICalDateTimeValue, attribute: string): moment.M
     }
 
     return value;
-}
-
-export function applyInternalData<O, D>(object: O, data: D): void {
-    for (const i in data) {
-        if (Object.keys(data).includes(i)) {
-            // @ts-ignore
-            const m = object[i];
-
-            if(typeof m === 'function') {
-
-                // @ts-ignore
-                m.call(object, data[i]);
-            }
-        }
-    }
 }

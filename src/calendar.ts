@@ -69,13 +69,16 @@ export default class ICalCalendar {
             x: []
         };
 
-        for (const i in data) {
-            if (Object.keys(this.data).includes(i)) {
-
-                // @ts-ignore
-                this[i](data[i]);
-            }
-        }
+        data?.prodId && this.prodId(data.prodId);
+        data?.method && this.method(data.method);
+        data?.name && this.name(data.name);
+        data?.description && this.description(data.description);
+        data?.timezone && this.timezone(data.timezone);
+        data?.url && this.url(data.url);
+        data?.scale && this.scale(data.scale);
+        data?.ttl && this.ttl(data.ttl);
+        data?.events && this.events(data.events);
+        data?.x && this.x(data.x);
     }
 
 
@@ -294,8 +297,8 @@ export default class ICalCalendar {
      * @returns {ICalEvent[]|ICalCalendar}
      */
     events(): ICalEvent[];
-    events(events: ICalEvent[] | ICalEventData[]): this;
-    events(events?: ICalEvent[] | ICalEventData[]): this | ICalEvent[] {
+    events(events: (ICalEvent | ICalEventData)[]): this;
+    events(events?: (ICalEvent | ICalEventData)[]): this | ICalEvent[] {
         if (!events) {
             return this.data.events;
         }
@@ -383,10 +386,10 @@ export default class ICalCalendar {
      *
      * @since 1.9.0
      */
-    x (keyOrArray: ({key: string, value: string})[] | Record<string, string>): this;
+    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): this;
     x (keyOrArray: string, value: string): this;
     x (): {key: string, value: string}[];
-    x (keyOrArray?: ({key: string, value: string})[] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
+    x (keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
         if(keyOrArray === undefined) {
             return addOrGetCustomAttributes (this.data);
         }

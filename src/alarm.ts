@@ -2,7 +2,7 @@
 
 import moment from 'moment-timezone';
 import ICalEvent from './event';
-import {addOrGetCustomAttributes, formatDate, escape, generateCustomAttributes, applyInternalData} from './tools';
+import {addOrGetCustomAttributes, formatDate, escape, generateCustomAttributes} from './tools';
 
 
 export enum ICalAlarmType {
@@ -62,7 +62,15 @@ export default class ICalAlarm {
             throw new Error('`event` option required!');
         }
 
-        applyInternalData(this, data);
+        data?.type && this.type(data.type);
+        data?.trigger && this.trigger(data.trigger);
+        data?.triggerBefore && this.triggerBefore(data.triggerBefore);
+        data?.triggerAfter && this.triggerAfter(data.triggerAfter);
+        data?.repeat && this.repeat(data.repeat);
+        data?.interval && this.interval(data.interval);
+        data?.attach && this.attach(data.attach);
+        data?.description && this.description(data.description);
+        data?.x && this.x(data.x);
     }
 
 
@@ -297,10 +305,10 @@ export default class ICalAlarm {
      *
      * @since 1.9.0
      */
-    x (keyOrArray: ({key: string, value: string})[] | Record<string, string>): this;
+    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): this;
     x (keyOrArray: string, value: string): this;
     x (): {key: string, value: string}[];
-    x (keyOrArray?: ({key: string, value: string})[] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
+    x (keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
         if(keyOrArray === undefined) {
             return addOrGetCustomAttributes (this.data);
         }

@@ -35,14 +35,6 @@
     "overrides": [
         {
             "files": [
-                "src/**/*.ts"
-            ],
-            "rules": {
-                "@typescript-eslint/ban-ts-comment": "warn"
-            }
-        },
-        {
-            "files": [
                 "test/**/*.ts"
             ],
             "rules": {
