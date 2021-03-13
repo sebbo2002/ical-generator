@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">98.98% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>102/102</span>
+                <span class='fraction'>97/98</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.51% </span>
+                <span class="strong">96.43% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>83/86</span>
+                <span class='fraction'>81/84</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">98.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>100/100</span>
+                <span class='fraction'>95/96</span>
             </div>
         
             
@@ -271,19 +271,7 @@
 <a name='L212'></a><a href='#L212'>212</a>
 <a name='L213'></a><a href='#L213'>213</a>
 <a name='L214'></a><a href='#L214'>214</a>
-<a name='L215'></a><a href='#L215'>215</a>
-<a name='L216'></a><a href='#L216'>216</a>
-<a name='L217'></a><a href='#L217'>217</a>
-<a name='L218'></a><a href='#L218'>218</a>
-<a name='L219'></a><a href='#L219'>219</a>
-<a name='L220'></a><a href='#L220'>220</a>
-<a name='L221'></a><a href='#L221'>221</a>
-<a name='L222'></a><a href='#L222'>222</a>
-<a name='L223'></a><a href='#L223'>223</a>
-<a name='L224'></a><a href='#L224'>224</a>
-<a name='L225'></a><a href='#L225'>225</a>
-<a name='L226'></a><a href='#L226'>226</a>
-<a name='L227'></a><a href='#L227'>227</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L215'></a><a href='#L215'>215</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -361,6 +349,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">83x</span>
 <span class="cline-any cline-yes">28x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -494,21 +485,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">231x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">59x</span>
-<span class="cline-any cline-yes">43x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">43x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">43x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">42x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
 import moment from 'moment-timezone';
@@ -581,12 +557,15 @@ export function foldLines (input: string): string {
     }).join('\r\n');
 }
 &nbsp;
-export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray: ({key: string, value: string})[] | Record&lt;string, string&gt;): void;
+export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray: ({key: string, value: string})[] | [string, string][] | Record&lt;string, string&gt;): void;
 export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray: string, value: string): void;
 export function addOrGetCustomAttributes (data: {x: [string, string][]}): ({key: string, value: string})[];
-export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray?: ({key: string, value: string})[] | Record&lt;string, string&gt; | string  | undefined, value?: string | undefined): void | ({key: string, value: string})[] {
+export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record&lt;string, string&gt; | string  | undefined, value?: string | undefined): void | ({key: string, value: string})[] {
     if (Array.isArray(keyOrArray)) {
-        data.x = keyOrArray.map(o =&gt; {
+        data.x = keyOrArray.map((o: {key: string, value: string} | [string, string]) =&gt; {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if(Array.isArray(o)) {
+<span class="cstat-no" title="statement not covered" >                return o;</span>
+            }
             if (typeof o.key !== 'string' || typeof o.value !== 'string') {
                 throw new Error('Either key or value is not a string!');
             }
@@ -594,7 +573,7 @@ export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrAr
                 throw new Error('Key has to start with `X-`!');
             }
 &nbsp;
-            return [o.key, o.value];
+            return [o.key, o.value] as [string, string];
         });
     }
     else if (typeof keyOrArray === 'object') {
@@ -720,21 +699,6 @@ export function checkDate(value: ICalDateTimeValue, attribute: string): moment.M
 &nbsp;
     return value;
 }
-&nbsp;
-export function applyInternalData&lt;O, D&gt;(object: O, data: D): void {
-    for (const i in data) {
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (Object.keys(data).includes(i)) {
-            // @ts-ignore
-            const m = object[i];
-&nbsp;
-            if(typeof m === 'function') {
-&nbsp;
-                // @ts-ignore
-                m.call(object, data[i]);
-            }
-        }
-    }
-}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -742,7 +706,7 @@ export function applyInternalData&lt;O, D&gt;(object: O, data: D): void {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Mar 05 2021 15:29:36 GMT+0000 (Coordinated Universal Time)
+                at Sat Mar 13 2021 19:51:09 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
