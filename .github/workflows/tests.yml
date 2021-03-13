@@ -5,6 +5,7 @@ on:
     branches-ignore:
       - main
       - develop
+      - gh-pages
   pull_request: null
   schedule:
     - cron: '15 2 * * 1'
