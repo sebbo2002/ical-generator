@@ -12,13 +12,14 @@ describe('Issues', function () {
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
-                    start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
+                    start: moment('2016-04-30T22:00:00.000Z'),
                     summary: 'Example Event',
                     allDay: true
                 }]
             });
 
             const str = calendar.toString();
+            console.log(str);
             assert.ok(str.indexOf('DTSTART;VALUE=DATE:20160501') > -1);
         });
         it('should work with Brazil/East', function () {
@@ -26,7 +27,7 @@ describe('Issues', function () {
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Brazil/East',
                 events: [{
-                    start: new Date('Sun May 01 2016 00:00:00 GMT-3'),
+                    start: moment('Sun May 01 2016 00:00:00 GMT-3'),
                     summary: 'Example Event',
                     allDay: true
                 }]
@@ -42,8 +43,8 @@ describe('Issues', function () {
             const calendar = ical({
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
-                    start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
-                    end: new Date('Sun May 01 2016 02:00:00 GMT+0200 (CEST)'),
+                    start: moment('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
+                    end: moment('Sun May 01 2016 02:00:00 GMT+0200 (CEST)'),
                     summary: 'Example Event',
                     allDay: true,
                     repeating: {
@@ -64,8 +65,8 @@ describe('Issues', function () {
             const calendar = ical({
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
-                    start: new Date('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
-                    end: new Date('Sun May 01 2016 02:00:00 GMT+0200 (CEST)'),
+                    start: moment('Sun May 01 2016 00:00:00 GMT+0200 (CEST)'),
+                    end: moment('Sun May 01 2016 02:00:00 GMT+0200 (CEST)'),
                     summary: 'Example Event',
                     allDay: true,
                     repeating: {
@@ -110,12 +111,12 @@ describe('Issues', function () {
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'Europe/Berlin',
                 events: [{
-                    start: '2020-08-13T00:00:00+01:00',
+                    start: moment('2020-08-13T00:00:00+01:00'),
                     summary: 'Example Event',
                     repeating: {
                         freq: ICalEventRepeatingFreq.MONTHLY,
                         count: 12,
-                        exclude: '2020-12-13T00:00:00+01:00'
+                        exclude: moment('2020-12-13T00:00:00+01:00')
                     }
                 }]
             });

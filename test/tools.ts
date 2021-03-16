@@ -76,7 +76,7 @@ describe('ICalTools', function () {
         it('should work with timezone', function () {
             const ed = {timezone: 'Europe/Berlin'};
             assert.strictEqual(
-                formatDateTZ('Europe/Berlin', 'DSTART', '2018-07-02T15:48:05.000Z', ed),
+                formatDateTZ('Europe/Berlin', 'DSTART', moment('2018-07-02T15:48:05.000Z'), ed),
                 'DSTART;TZID=Europe/Berlin:20180702T174805'
             );
         });
