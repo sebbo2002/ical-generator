@@ -88,21 +88,21 @@ describe('ical-generator Event', function () {
             const now = moment();
             const event = new ICalEvent({}, new ICalCalendar());
             event.start(now);
-            assert.ok(event.start()?.isSame(now));
+            assert.strictEqual(event.start(), now);
         });
 
         it('setter should parse string if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.start(date.toJSON()));
-            assert.ok(event.start()?.isSame(date));
+            const date = moment().add(1, 'week').toJSON();
+            assert.deepStrictEqual(event, event.start(date));
+            assert.deepStrictEqual(event.start(), date);
         });
 
         it('setter should handle Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.start(date.toDate()));
-            assert.ok(event.start()?.isSame(date));
+            const date = moment().add(1, 'week').toDate();
+            assert.deepStrictEqual(event, event.start(date));
+            assert.deepStrictEqual(event.start(), date);
         });
 
         it('setter should throw error when start time is not a Date', function () {
@@ -128,8 +128,8 @@ describe('ical-generator Event', function () {
             const start = moment().add(5, 'minutes');
             const end = moment();
             const event = new ICalEvent({end, start}, new ICalCalendar());
-            assert.ok(event.start()?.isSame(end));
-            assert.ok(event.end()?.isSame(start));
+            assert.deepStrictEqual(event.start(), end);
+            assert.deepStrictEqual(event.end(), start);
         });
 
         it('setter should return this', function () {
@@ -144,21 +144,21 @@ describe('ical-generator Event', function () {
             const now = moment();
             const event = new ICalEvent({}, new ICalCalendar());
             event.end(now);
-            assert.ok(event.end()?.isSame(now));
+            assert.deepStrictEqual(event.end(), now);
         });
 
         it('setter should parse string if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.end(date.toJSON()));
-            assert.ok(event.end()?.isSame(date));
+            const date = moment().add(1, 'week').toJSON();
+            assert.deepStrictEqual(event, event.end(date));
+            assert.deepStrictEqual(event.end(), date);
         });
 
         it('setter should handle Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.end(date.toDate()));
-            assert.ok(event.end()?.isSame(date));
+            const date = moment().add(1, 'week').toDate();
+            assert.deepStrictEqual(event, event.end(date));
+            assert.deepStrictEqual(event.end(), date);
         });
 
         it('setter should throw error when time is not a Date', function () {
@@ -180,8 +180,8 @@ describe('ical-generator Event', function () {
             const start = moment().add(5, 'minutes');
             const end = moment();
             const event = new ICalEvent({start, end}, new ICalCalendar());
-            assert.ok(event.start()?.isSame(end));
-            assert.ok(event.end()?.isSame(start));
+            assert.deepStrictEqual(event.start(), end);
+            assert.deepStrictEqual(event.end(), start);
         });
 
         it('setter should return this', function () {
@@ -196,21 +196,21 @@ describe('ical-generator Event', function () {
             const now = moment();
             const event = new ICalEvent({}, new ICalCalendar());
             event.recurrenceId(now);
-            assert.ok(event.recurrenceId()?.isSame(now));
+            assert.deepStrictEqual(event.recurrenceId(), now);
         });
 
         it('setter should parse string if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.recurrenceId(date.toJSON()));
-            assert.ok(event.recurrenceId()?.isSame(date));
+            const date = moment().add(1, 'week').toJSON();
+            assert.deepStrictEqual(event, event.recurrenceId(date));
+            assert.deepStrictEqual(event.recurrenceId(), date);
         });
 
         it('setter should handle Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.recurrenceId(date.toDate()));
-            assert.ok(event.recurrenceId()?.isSame(date));
+            const date = moment().add(1, 'week').toDate();
+            assert.deepStrictEqual(event, event.recurrenceId(date));
+            assert.deepStrictEqual(event.recurrenceId(), date);
         });
 
         it('setter should throw error when time is not a Date', function () {
@@ -311,21 +311,21 @@ describe('ical-generator Event', function () {
         it('getter should return value', function () {
             const now = moment().add(1, 'day');
             const e = new ICalEvent({}, new ICalCalendar()).stamp(now);
-            assert.ok(e.stamp().isSame(now));
+            assert.deepStrictEqual(e.stamp(), now);
         });
 
         it('setter should parse string if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.stamp(date.toJSON()));
-            assert.ok(event.stamp()?.isSame(date));
+            const date = moment().add(1, 'week').toJSON();
+            assert.deepStrictEqual(event, event.stamp(date));
+            assert.deepStrictEqual(event.stamp(), date);
         });
 
         it('setter should handle Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.stamp(date.toDate()));
-            assert.ok(event.stamp()?.isSame(date));
+            const date = moment().add(1, 'week').toDate();
+            assert.deepStrictEqual(event, event.stamp(date));
+            assert.deepStrictEqual(event.stamp(), date);
         });
 
         it('setter should throw error when time is not a Date', function () {
@@ -357,21 +357,21 @@ describe('ical-generator Event', function () {
         it('getter should return value', function () {
             const now = moment().add(1, 'day');
             const e = new ICalEvent({}, new ICalCalendar()).timestamp(now);
-            assert.ok(e.timestamp().isSame(now));
+            assert.deepStrictEqual(e.timestamp(), now);
         });
 
         it('setter should parse string if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.timestamp(date.toJSON()));
-            assert.ok(event.stamp()?.isSame(date));
+            const date = moment().add(1, 'week').toJSON();
+            assert.deepStrictEqual(event, event.timestamp(date));
+            assert.deepStrictEqual(event.stamp(), date);
         });
 
         it('setter should handle Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            assert.deepStrictEqual(event, event.timestamp(date.toDate()));
-            assert.ok(event.stamp()?.isSame(date));
+            const date = moment().add(1, 'week').toDate();
+            assert.deepStrictEqual(event, event.timestamp(date));
+            assert.deepStrictEqual(event.stamp(), date);
         });
 
         it('setter should throw error when time is not a Date', function () {
@@ -607,31 +607,31 @@ describe('ical-generator Event', function () {
                     repeating: {
                         freq: ICalEventRepeatingFreq.DAILY,
                         // @ts-ignore
-                        until: 1413277003
+                        until: null
                     }
                 }, new ICalCalendar());
-            }, /`repeating\.until` must be a Date or a moment object/);
+            }, /Error: `repeating\.until` has to be a valid date!/);
         });
 
         it('setter should parse repeating.until string if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date.toJSON()});
-            assert.ok(event.repeating()?.until?.isSame(date));
+            const date = moment().add(1, 'week').toJSON();
+            event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date});
+            assert.deepStrictEqual(event.repeating()?.until, date);
         });
 
         it('setter should handle repeating.until Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const date = moment().add(1, 'week');
-            event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date.toDate()});
-            assert.ok(event.repeating()?.until?.isSame(date));
+            const date = moment().add(1, 'week').toDate();
+            event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date});
+            assert.deepStrictEqual(event.repeating()?.until, date);
         });
 
         it('setter should handle repeating.until moments', function () {
             const event = new ICalEvent({}, new ICalCalendar());
             const date = moment().add(1, 'week');
             event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date});
-            assert.ok(event.repeating()?.until?.isSame(date));
+            assert.deepStrictEqual(event.repeating()?.until, date);
         });
 
         it('setter should throw error when repeating.until is not a Date', function () {
@@ -880,7 +880,7 @@ describe('ical-generator Event', function () {
                         exclude: 42
                     }
                 }, new ICalCalendar());
-            }, /must be a Date or a moment object/);
+            }, /`repeating.exclude\[0\]` has to be a valid date!/);
         });
 
         it('setter should update repeating.exclude', function () {
@@ -900,9 +900,9 @@ describe('ical-generator Event', function () {
             assert.ok(Array.isArray(result));
             assert.strictEqual(result.length, 3);
 
-            assert.ok(result[0].isSame(date), 'String');
-            assert.ok(result[1].isSame(date), 'Date');
-            assert.ok(result[2].isSame(date), 'Moment');
+            assert.deepStrictEqual(result[0], date.toJSON(), 'String');
+            assert.deepStrictEqual(result[1], date.toDate(), 'Date');
+            assert.deepStrictEqual(result[2], date, 'Moment');
         });
 
         it('should throw error when repeating.startOfWeek is not valid', function () {
@@ -1613,19 +1613,19 @@ describe('ical-generator Event', function () {
         it('setter should work with Date', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             e.created(new Date());
-            assert.ok(moment.isMoment(e.created()));
+            assert.ok(e.created() instanceof Date);
         });
 
         it('setter should work with String', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             e.created(moment().toJSON());
-            assert.ok(moment.isMoment(e.created()));
+            assert.strictEqual(typeof e.created(), 'string');
         });
 
         it('setter should work with Number', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             e.created(new Date());
-            assert.ok(moment.isMoment(e.created()));
+            assert.ok(e.created() instanceof Date);
         });
 
         it('getter should return value', function () {
@@ -1657,19 +1657,20 @@ describe('ical-generator Event', function () {
         it('setter should work with Date', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             e.lastModified(new Date());
-            assert.ok(moment.isMoment(e.lastModified()));
+            assert.ok(e.lastModified() instanceof Date);
         });
 
         it('setter should work with String', function () {
             const e = new ICalEvent({}, new ICalCalendar());
-            e.lastModified(moment().toJSON());
-            assert.ok(moment.isMoment(e.lastModified()));
+            const date = moment().toJSON();
+            e.lastModified(date);
+            assert.strictEqual(e.lastModified(), date);
         });
 
         it('setter should work with Number', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             e.lastModified(new Date());
-            assert.ok(moment.isMoment(e.lastModified()));
+            assert.ok(e.lastModified() instanceof Date);
         });
 
         it('getter should return value', function () {
@@ -1699,7 +1700,7 @@ describe('ical-generator Event', function () {
             const event = new ICalEvent({}, new ICalCalendar()).summary('foo').start(date);
 
             assert.strictEqual(event.toJSON().summary, 'foo', 'summary is okay');
-            assert.ok(date.isSame(event.toJSON().start), 'start is okay');
+            assert.deepStrictEqual(event.toJSON().start, date.toJSON(), 'start is okay');
             assert.strictEqual(typeof event.toJSON().start, 'string', 'start is string');
         });
     });

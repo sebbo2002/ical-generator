@@ -1,10 +1,10 @@
 import {Moment} from 'moment';
-// import {MomentTimezone} from 'moment-timezone';
-// import {Dayjs} from 'dayjs';
-// import {DateTime} from 'luxon';
+import {Moment as MomentTZ} from 'moment-timezone';
+import {Dayjs} from 'dayjs';
+import {DateTime as LuxonDateTime} from 'luxon';
 
 
-export type ICalDateTimeValue = Date | Moment | string;
+export type ICalDateTimeValue = Date | Moment | MomentTZ | Dayjs | LuxonDateTime | string;
 
 export interface ICalRepeatingOptions {
     freq: ICalEventRepeatingFreq;

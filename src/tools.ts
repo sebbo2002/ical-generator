@@ -1,30 +1,82 @@
 'use strict';
 
-import moment from 'moment-timezone';
+import {Moment} from 'moment';
+import {Moment as MomentTZ} from 'moment-timezone';
+import {Dayjs} from 'dayjs';
+import {DateTime as LuxonDateTime} from 'luxon';
 import {ICalDateTimeValue, ICalOrganizer} from './types';
 
-export function formatDate (timezone: string | null, d: moment.Moment | Date | string, dateonly?: boolean, floating?: boolean): string {
-    let m = timezone ? moment(d).tz(timezone) : moment(d).utc();
-    if (!dateonly && !floating) {
-        m = moment(d).utc();
-    }
+export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateonly?: boolean, floating?: boolean): string {
+    if(typeof d === 'string' || d instanceof Date) {
+        const m = new Date(d);
 
-    let s = m.format('YYYYMMDD');
-    if (!dateonly) {
-        s += 'T';
-        s += m.format('HHmmss');
+        // (!dateonly && !floating) || !timezone => utc
+        let s = m.getUTCFullYear() +
+            String(m.getUTCMonth() + 1).padStart(2, '0') +
+            m.getUTCDate().toString().padStart(2, '0');
 
-        if (!floating) {
-            s += 'Z';
+        // (dateonly || floating) && timezone => tz
+        if(timezone) {
+            s = m.getFullYear() +
+                String(m.getMonth() + 1).padStart(2, '0') +
+                m.getDate().toString().padStart(2, '0');
         }
-    }
 
-    return s;
+        if(dateonly) {
+            return s;
+        }
+
+        if(timezone) {
+            s += 'T' + m.getHours().toString().padStart(2, '0') +
+                m.getMinutes().toString().padStart(2, '0') +
+                m.getSeconds().toString().padStart(2, '0');
+
+            return s;
+        }
+
+        s += 'T' + m.getUTCHours().toString().padStart(2, '0') +
+            m.getUTCMinutes().toString().padStart(2, '0') +
+            m.getUTCSeconds().toString().padStart(2, '0') +
+            (floating ? '' : 'Z');
+
+        return s;
+    }
+    else if(isMoment(d)) {
+        // @see https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/
+        const m = timezone ? (isMomentTZ(d) && !d.tz() ? d.clone().tz(timezone) : d) : d.utc();
+        return m.format('YYYYMMDD') + (!dateonly ? (
+            'T' + m.format('HHmmss') + (floating || timezone ? '' : 'Z')
+        ) : '');
+    }
+    else if(isLuxonDate(d)) {
+        let m = timezone ? d.setZone(timezone) : d.setZone('utc');
+        if(!m.isValid) {
+            m = d;
+        }
+
+        return m.toFormat('yyyyLLdd') + (!dateonly ? (
+            'T' + m.toFormat('HHmmss') + (floating || timezone ? '' : 'Z')
+        ) : '');
+    }
+    else {
+        // @see https://day.js.org/docs/en/plugin/utc
+        // @ts-ignore
+        let m = typeof d.utc === 'function' ? d.utc() : d;
+        if(timezone) {
+            // @see https://day.js.org/docs/en/plugin/timezone
+            // @ts-ignore
+            m = typeof d.tz === 'function' ? d.tz(timezone) : d;
+        }
+
+        return m.format('YYYYMMDD') + (!dateonly ? (
+            'T' + m.format('HHmmss') + (floating || timezone ? '' : 'Z')
+        ) : '');
+    }
 }
 
 // For information about this format, see RFC 5545, section 3.3.5
 // https://tools.ietf.org/html/rfc5545#section-3.3.5
-export function formatDateTZ (timezone: string | null, property: string, date: moment.Moment | Date | string, eventData?: {floating?: boolean | null, timezone?: string | null}): string {
+export function formatDateTZ (timezone: string | null, property: string, date: ICalDateTimeValue | Date | string, eventData?: {floating?: boolean | null, timezone?: string | null}): string {
     let tzParam = '';
     let floating = eventData?.floating || false;
 
@@ -198,17 +250,116 @@ export function checkEnum(type: Record<string, string>, value: unknown): unknown
  * Checks if the given input is a valid date and
  * returns the internal representation (= moment object)
  */
-export function checkDate(value: ICalDateTimeValue, attribute: string): moment.Moment {
-    if (typeof value === 'string' || value instanceof Date) {
-        value = moment(value).utc();
-    }
-    else if (!moment.isMoment(value)) {
-        throw new Error(`\`${attribute}\` must be a Date or a moment object!`);
-    }
+export function checkDate(value: ICalDateTimeValue, attribute: string): ICalDateTimeValue {
 
-    if (!value.isValid()) {
+    // Date & String
+    if(
+        (value instanceof Date && isNaN(value.getTime())) ||
+        (typeof value === 'string' && isNaN(new Date(value).getTime()))
+    ) {
         throw new Error(`\`${attribute}\` has to be a valid date!`);
     }
+    if(value instanceof Date || typeof value === 'string') {
+        return value;
+    }
 
-    return value;
+    // Luxon
+    if(isLuxonDate(value) && value.isValid === true) {
+        return value;
+    }
+
+    // Moment / Moment Timezone
+    if((isMoment(value) || isDayjs(value)) && value.isValid()) {
+        return value;
+    }
+
+    throw new Error(`\`${attribute}\` has to be a valid date!`);
+}
+
+export function toDate(value: ICalDateTimeValue): Date {
+    if(typeof value === 'string' || value instanceof Date) {
+        return new Date(value);
+    }
+
+    // @ts-ignore
+    if(isLuxonDate(value)) {
+        return value.toJSDate();
+    }
+
+    return value.toDate();
+}
+
+export function isMoment(value: ICalDateTimeValue): value is Moment {
+
+    // @ts-ignore
+    return value != null && value._isAMomentObject != null;
+}
+export function isMomentTZ(value: ICalDateTimeValue): value is MomentTZ {
+    return isMoment(value) && typeof value.tz === 'function';
+}
+export function isDayjs(value: ICalDateTimeValue): value is Dayjs {
+    return typeof value === 'object' &&
+        value !== null &&
+        !(value instanceof Date) &&
+        !isMoment(value) &&
+        !isLuxonDate(value);
+}
+export function isLuxonDate(value: ICalDateTimeValue): value is LuxonDateTime {
+    return typeof value === 'object' && value !== null && typeof (value as LuxonDateTime).toJSDate === 'function';
+}
+
+export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {
+    if(!value) {
+        return value;
+    }
+    if(typeof value === 'string') {
+        return value;
+    }
+
+    return value.toJSON();
+}
+
+export function toDurationString(seconds: number): string {
+    let string = '';
+
+    // < 0
+    if(seconds < 0) {
+        string = '-';
+        seconds *= -1;
+    }
+
+    string += 'P';
+
+    // DAYS
+    if(seconds >= 86400) {
+        string += Math.floor(seconds / 86400) + 'D';
+        seconds %= 86400;
+    }
+    if(!seconds && string.length > 1) {
+        return string;
+    }
+
+    string += 'T';
+
+    // HOURS
+    if(seconds >= 3600) {
+        string += Math.floor(seconds / 3600) + 'H';
+        seconds %= 3600;
+    }
+
+    // MINUTES
+    if(seconds >= 60) {
+        string += Math.floor(seconds / 60) + 'M';
+        seconds %= 60;
+    }
+
+    // SECONDS
+    if(seconds > 0) {
+        string += seconds + 'S';
+    }
+    else if(string.length <= 2) {
+        string += '0S';
+    }
+
+    return string;
 }

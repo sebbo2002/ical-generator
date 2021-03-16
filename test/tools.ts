@@ -1,64 +1,74 @@
 'use strict';
 
 import assert from 'assert';
+import moment from 'moment-timezone';
 import { formatDate, formatDateTZ, foldLines, escape } from '../src/tools';
 
 describe('ICalTools', function () {
     describe('formatDate()', function () {
-        it('timezone=0 dateonly=0 floating=0', function () {
-            assert.strictEqual(
-                formatDate(null, '2018-07-05T18:24:00.052Z', false, false),
-                '20180705T182400Z'
-            );
+        describe('Date / String', function () {
+            it('timezone=0 dateonly=0 floating=0', function () {
+                assert.strictEqual(
+                    formatDate(null, '2018-07-05T18:24:00.052Z', false, false),
+                    '20180705T182400Z'
+                );
+            });
+            it('timezone=0 dateonly=0 floating=1', function () {
+                assert.strictEqual(
+                    formatDate(null, '2018-07-05T18:24:00.052Z', false, true),
+                    '20180705T182400'
+                );
+            });
+            it('timezone=0 dateonly=1 floating=0', function () {
+                assert.strictEqual(
+                    formatDate(null, '2018-07-05T18:24:00.052Z', true, false),
+                    '20180705'
+                );
+            });
+            it('timezone=0 dateonly=1 floating=1', function () {
+                assert.strictEqual(
+                    formatDate(null, '2018-07-05T18:24:00.052Z', true, true),
+                    '20180705'
+                );
+            });
+            it('timezone=1 dateonly=0 floating=0', function () {
+                assert.strictEqual(
+                    formatDate('Europe/Berlin', '2018-07-05T18:24:00.052', false, false),
+                    '20180705T182400'
+                );
+            });
+            it('timezone=1 dateonly=0 floating=1', function () {
+                assert.strictEqual(
+                    formatDate('Europe/Berlin', '2018-07-05T18:24:00.052', false, true),
+                    '20180705T182400'
+                );
+            });
+            it('timezone=1 dateonly=1 floating=0', function () {
+                assert.strictEqual(
+                    formatDate('Europe/Berlin', '2018-07-05T18:24:00.052', true, false),
+                    '20180705'
+                );
+            });
+            it('timezone=1 dateonly=1 floating=1', function () {
+                assert.strictEqual(
+                    formatDate('Europe/Berlin', '2018-07-05T18:24:00.052', true, true),
+                    '20180705'
+                );
+            });
         });
-
-        it('timezone=0 dateonly=0 floating=1', function () {
-            assert.strictEqual(
-                formatDate(null, '2018-07-05T18:24:00.052Z', false, true),
-                '20180705T182400'
-            );
-        });
-
-        it('timezone=0 dateonly=1 floating=0', function () {
-            assert.strictEqual(
-                formatDate(null, '2018-07-05T18:24:00.052Z', true, false),
-                '20180705'
-            );
-        });
-
-        it('timezone=0 dateonly=1 floating=1', function () {
-            assert.strictEqual(
-                formatDate(null, '2018-07-05T18:24:00.052Z', true, true),
-                '20180705'
-            );
-        });
-
-        it('timezone=1 dateonly=0 floating=0', function () {
-            assert.strictEqual(
-                formatDate('Europe/Berlin', '2018-07-05T18:24:00.052Z', false, false),
-                '20180705T182400Z'
-            );
-        });
-
-        it('timezone=1 dateonly=0 floating=1', function () {
-            assert.strictEqual(
-                formatDate('Europe/Berlin', '2018-07-05T18:24:00.052Z', false, true),
-                '20180705T202400'
-            );
-        });
-
-        it('timezone=1 dateonly=1 floating=0', function () {
-            assert.strictEqual(
-                formatDate('Europe/Berlin', '2018-07-05T18:24:00.052Z', true, false),
-                '20180705'
-            );
-        });
-
-        it('timezone=1 dateonly=1 floating=1', function () {
-            assert.strictEqual(
-                formatDate('Europe/Berlin', '2018-07-05T18:24:00.052Z', true, true),
-                '20180705'
-            );
+        describe('moment.js', function () {
+            it('should work without setting a timezone', function () {
+                assert.strictEqual(
+                    formatDate(null, moment('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T182400Z'
+                );
+            });
+            it('should work with timezone in event / calendar (with moment-timezone)', function () {
+                assert.strictEqual(
+                    formatDate('Canada/Saskatchewan', moment('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T122400'
+                );
+            });
         });
     });
 

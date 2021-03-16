@@ -10,7 +10,7 @@ import {
     escape,
     formatDate,
     formatDateTZ,
-    generateCustomAttributes
+    generateCustomAttributes, toDate, toJSON
 } from './tools';
 import ICalAttendee, {ICalAttendeeData} from './attendee';
 import ICalAlarm, {ICalAlarmData} from './alarm';
@@ -78,11 +78,11 @@ export interface ICalEventData {
 export interface ICalEventInternalData {
     id: string,
     sequence: number,
-    start: moment.Moment | null,
-    end: moment.Moment | null,
-    recurrenceId: moment.Moment | null,
+    start: ICalDateTimeValue | null,
+    end: ICalDateTimeValue | null,
+    recurrenceId: ICalDateTimeValue | null,
     timezone: string | null,
-    stamp: moment.Moment,
+    stamp: ICalDateTimeValue,
     allDay: boolean,
     floating: boolean,
     repeating: ICalEventInternalRepeatingData | null,
@@ -100,8 +100,8 @@ export interface ICalEventInternalData {
     busystatus: ICalEventBusyStatus | null,
     url: string | null,
     transparency: ICalEventTransparency | null,
-    created: moment.Moment | null,
-    lastModified: moment.Moment | null,
+    created: ICalDateTimeValue | null,
+    lastModified: ICalDateTimeValue | null,
     x: [string, string][];
 }
 
@@ -109,12 +109,12 @@ export interface ICalEventInternalRepeatingData {
     freq: ICalEventRepeatingFreq;
     count?: number;
     interval?: number;
-    until?: moment.Moment;
+    until?: ICalDateTimeValue;
     byDay?: ICalWeekday[];
     byMonth?: number[];
     byMonthDay?: number[];
     bySetPos?: number;
-    exclude?: moment.Moment[];
+    exclude?: ICalDateTimeValue[];
     startOfWeek?: ICalWeekday;
 }
 
@@ -247,15 +247,15 @@ export default class ICalEvent {
      *
      * @since 0.2.0
      */
-    start(): moment.Moment | null;
+    start(): ICalDateTimeValue | null;
     start(start: ICalDateTimeValue): this;
-    start(start?: ICalDateTimeValue): this | moment.Moment | null {
+    start(start?: ICalDateTimeValue): this | ICalDateTimeValue | null {
         if (start === undefined) {
             return this.data.start;
         }
 
         this.data.start = checkDate(start, 'start');
-        if (this.data.start && this.data.end && this.data.start.isAfter(this.data.end)) {
+        if (this.data.start && this.data.end && toDate(this.data.start).getTime() > toDate(this.data.end).getTime()) {
             const t = this.data.start;
             this.data.start = this.data.end;
             this.data.end = t;
@@ -269,9 +269,9 @@ export default class ICalEvent {
      *
      * @since 0.2.0
      */
-    end(): moment.Moment | null;
+    end(): ICalDateTimeValue | null;
     end(end: ICalDateTimeValue | null): this;
-    end(end?: ICalDateTimeValue | null): this | moment.Moment | null {
+    end(end?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (end === undefined) {
             return this.data.end;
         }
@@ -281,7 +281,7 @@ export default class ICalEvent {
         }
 
         this.data.end = checkDate(end, 'end');
-        if (this.data.start && this.data.end && this.data.start.isAfter(this.data.end)) {
+        if (this.data.start && this.data.end && toDate(this.data.start).getTime() > toDate(this.data.end).getTime()) {
             const t = this.data.start;
             this.data.start = this.data.end;
             this.data.end = t;
@@ -294,9 +294,9 @@ export default class ICalEvent {
      * Set/Get the event's recurrence id
      * @since 0.2.0
      */
-    recurrenceId(): moment.Moment | null;
+    recurrenceId(): ICalDateTimeValue | null;
     recurrenceId(recurrenceId: ICalDateTimeValue | null): this;
-    recurrenceId(recurrenceId?: ICalDateTimeValue | null): this | moment.Moment | null {
+    recurrenceId(recurrenceId?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (recurrenceId === undefined) {
             return this.data.recurrenceId;
         }
@@ -338,9 +338,9 @@ export default class ICalEvent {
      * Set/Get the event's timestamp
      * @since 0.2.0
      */
-    stamp(): moment.Moment;
+    stamp(): ICalDateTimeValue;
     stamp(stamp: ICalDateTimeValue): this;
-    stamp(stamp?: ICalDateTimeValue): this | moment.Moment {
+    stamp(stamp?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (stamp === undefined) {
             return this.data.stamp;
         }
@@ -355,9 +355,9 @@ export default class ICalEvent {
      * @since 0.2.0
      * @alias stamp
      */
-    timestamp(): moment.Moment;
+    timestamp(): ICalDateTimeValue;
     timestamp(stamp: ICalDateTimeValue): this;
-    timestamp(stamp?: ICalDateTimeValue): this | moment.Moment {
+    timestamp(stamp?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (stamp === undefined) {
             return this.stamp();
         }
@@ -802,9 +802,9 @@ export default class ICalEvent {
      * Set/Get the event's creation date
      * @since 0.3.0
      */
-    created(): moment.Moment | null;
+    created(): ICalDateTimeValue | null;
     created(created: ICalDateTimeValue | null): this;
-    created(created?: ICalDateTimeValue | null): this | moment.Moment | null {
+    created(created?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (created === undefined) {
             return this.data.created;
         }
@@ -822,9 +822,9 @@ export default class ICalEvent {
      * Set/Get the event's last modification date
      * @since 0.3.0
      */
-    lastModified(): moment.Moment | null;
+    lastModified(): ICalDateTimeValue | null;
     lastModified(lastModified: ICalDateTimeValue | null): this;
-    lastModified(lastModified?: ICalDateTimeValue | null): this | moment.Moment | null {
+    lastModified(lastModified?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (lastModified === undefined) {
             return this.data.lastModified;
         }
@@ -873,15 +873,15 @@ export default class ICalEvent {
      */
     toJSON(): ICalEventInternalData {
         return Object.assign({}, this.data, {
-            start: this.data.start?.toJSON() || null,
-            end: this.data.end?.toJSON() || null,
-            recurrenceId: this.data.recurrenceId?.toJSON() || null,
-            stamp: this.data.stamp?.toJSON() || null,
-            created: this.data.created?.toJSON() || null,
-            lastModified: this.data.lastModified?.toJSON() || null,
+            start: toJSON(this.data.start) || null,
+            end: toJSON(this.data.end) || null,
+            recurrenceId: toJSON(this.data.recurrenceId) || null,
+            stamp: toJSON(this.data.stamp) || null,
+            created: toJSON(this.data.created) || null,
+            lastModified: toJSON(this.data.lastModified) || null,
             repeating: this.data.repeating ? Object.assign({}, this.data.repeating, {
-                until: this.data.repeating.until?.toJSON(),
-                exclude: this.data.repeating.exclude?.map(d => d.toJSON()),
+                until: toJSON(this.data.repeating.until),
+                exclude: this.data.repeating.exclude?.map(d => toJSON(d)),
             }) : null,
             x: this.x()
         });

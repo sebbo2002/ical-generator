@@ -2,7 +2,15 @@
 
 import moment from 'moment-timezone';
 import ICalEvent from './event';
-import {addOrGetCustomAttributes, formatDate, escape, generateCustomAttributes} from './tools';
+import {
+    addOrGetCustomAttributes,
+    formatDate,
+    escape,
+    generateCustomAttributes,
+    checkDate,
+    toDurationString
+} from './tools';
+import {ICalDateTimeValue} from './types';
 
 
 export enum ICalAlarmType {
@@ -19,9 +27,9 @@ interface ICalAttachment {
 
 export interface ICalAlarmData {
     type?: ICalAlarmType | null;
-    trigger?: number | moment.Moment | Date | null;
-    triggerBefore?: number | moment.Moment | Date | null;
-    triggerAfter?: number | moment.Moment | Date | null;
+    trigger?: number | ICalDateTimeValue | null;
+    triggerBefore?: number | ICalDateTimeValue | null;
+    triggerAfter?: number | ICalDateTimeValue | null;
     repeat?: number | null;
     interval?: number | null;
     attach?: string | ICalAttachment | null;
@@ -31,7 +39,7 @@ export interface ICalAlarmData {
 
 interface ICalInternalAlarmData {
     type: ICalAlarmType | null;
-    trigger: moment.Moment | number | null;
+    trigger: ICalDateTimeValue | number | null;
     repeat: number | null;
     interval: number | null;
     attach: ICalAttachment | null;
@@ -108,16 +116,16 @@ export default class ICalAlarm {
      *
      * @since 0.2.1
      */
-    trigger (trigger: number | moment.Moment | moment.Duration | Date | null): this;
-    trigger (): number | moment.Moment | null;
-    trigger (trigger?: number | moment.Moment | moment.Duration | Date | null): this | number | moment.Moment | null {
+    trigger (trigger: number | ICalDateTimeValue | Date | null): this;
+    trigger (): number | ICalDateTimeValue | null;
+    trigger (trigger?: number | ICalDateTimeValue | Date | null): this | number | ICalDateTimeValue | null {
 
         // Getter
-        if (trigger === undefined && moment.isMoment(this.data.trigger)) {
-            return this.data.trigger;
-        }
         if (trigger === undefined && typeof this.data.trigger === 'number') {
             return -1 * this.data.trigger;
+        }
+        if (trigger === undefined && this.data.trigger) {
+            return this.data.trigger;
         }
         if (trigger === undefined) {
             return null;
@@ -126,26 +134,18 @@ export default class ICalAlarm {
         // Setter
         if (!trigger) {
             this.data.trigger = null;
-            return this;
         }
-        if (trigger instanceof Date) {
-            this.data.trigger = moment(trigger);
-            return this;
-        }
-        if (moment.isMoment(trigger)) {
-            this.data.trigger = trigger;
-            return this;
-        }
-        if (moment.isDuration(trigger)) {
-            this.data.trigger = -1 * trigger.as('seconds');
-            return this;
-        }
-        if (typeof trigger === 'number' && isFinite(trigger)) {
+        else if (typeof trigger === 'number' && isFinite(trigger)) {
             this.data.trigger = -1 * trigger;
-            return this;
+        }
+        else if(typeof trigger === 'number') {
+            throw new Error('`trigger` is not correct, must be a finite number or a supported date!');
+        }
+        else {
+            this.data.trigger = checkDate(trigger, 'trigger');
         }
 
-        throw new Error('`trigger` is not correct, must be a `Number`, `Date` or `moment` or a `moment.duration`!');
+        return this;
     }
 
 
@@ -153,15 +153,11 @@ export default class ICalAlarm {
      * Set/Get seconds after event to trigger alarm
      * @since 0.2.1
      */
-    triggerAfter (trigger: number | moment.Moment | moment.Duration | Date | null): this;
-    triggerAfter (): number | moment.Moment | null;
-    triggerAfter (trigger?: number | moment.Moment | moment.Duration | Date | null): this | number | moment.Moment | null {
+    triggerAfter (trigger: number | ICalDateTimeValue | null): this;
+    triggerAfter (): number | ICalDateTimeValue | null;
+    triggerAfter (trigger?: number | ICalDateTimeValue | null): this | number | ICalDateTimeValue | null {
         if (trigger === undefined) {
             return this.data.trigger;
-        }
-        if (moment.isDuration(trigger)) {
-            this.data.trigger = -1 * trigger.as('seconds');
-            return this;
         }
 
         return this.trigger(typeof trigger === 'number' ? -1 * trigger : trigger);
@@ -172,9 +168,9 @@ export default class ICalAlarm {
      * Set/Get seconds before event to trigger alarm
      * @since 0.2.1
      */
-    triggerBefore (trigger: number | moment.Moment | moment.Duration | Date | null): this;
-    triggerBefore (): number | moment.Moment | null;
-    triggerBefore (trigger?: number | moment.Moment | moment.Duration | Date | null): this | number | moment.Moment | null {
+    triggerBefore (trigger: number | ICalDateTimeValue | null): this;
+    triggerBefore (): number | ICalDateTimeValue | null;
+    triggerBefore (trigger?: number | ICalDateTimeValue | null): this | number | ICalDateTimeValue | null {
         if(trigger === undefined) {
             return this.trigger();
         }
@@ -356,14 +352,14 @@ export default class ICalAlarm {
         // ACTION
         g += 'ACTION:' + this.data.type.toUpperCase() + '\r\n';
 
-        if (moment.isMoment(this.data.trigger)) {
-            g += 'TRIGGER;VALUE=DATE-TIME:' + formatDate(this.event.timezone(), this.data.trigger) + '\r\n';
+        if (typeof this.data.trigger === 'number' && this.data.trigger > 0) {
+            g += 'TRIGGER;RELATED=END:' + toDurationString(this.data.trigger) + '\r\n';
         }
-        else if (this.data.trigger > 0) {
-            g += 'TRIGGER;RELATED=END:' + moment.duration(this.data.trigger, 's').toISOString() + '\r\n';
+        else if (typeof this.data.trigger === 'number') {
+            g += 'TRIGGER:' + toDurationString(this.data.trigger) + '\r\n';
         }
         else {
-            g += 'TRIGGER:' + moment.duration(this.data.trigger, 's').toISOString() + '\r\n';
+            g += 'TRIGGER;VALUE=DATE-TIME:' + formatDate(this.event.timezone(), this.data.trigger) + '\r\n';
         }
 
         // REPEAT

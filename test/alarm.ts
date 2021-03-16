@@ -84,8 +84,7 @@ describe('ical-generator Alarm', function () {
             // Date
             a.trigger(now);
             const dateResult = a.trigger();
-            assert.ok(moment.isMoment(dateResult));
-            assert.ok(dateResult.isSame(now));
+            assert.deepStrictEqual(dateResult, now);
 
             // Null
             a.trigger(null);
@@ -118,19 +117,13 @@ describe('ical-generator Alarm', function () {
         it('setter should work with date', function () {
             const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
             a.trigger(new Date());
-            assert.ok(moment.isMoment(a.trigger()));
+            assert.ok(a.trigger() instanceof Date);
         });
 
         it('setter should work with moment instance', function () {
             const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
             a.trigger(moment());
             assert.ok(moment.isMoment(a.trigger()));
-        });
-
-        it('setter should work with moment.duration', function () {
-            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
-            a.trigger(moment.duration(2, 'minutes'));
-            assert.strictEqual(a.trigger(), 120);
         });
 
         it('setter should work with number', function () {
@@ -163,12 +156,6 @@ describe('ical-generator Alarm', function () {
             const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar())).triggerAfter(300);
             assert.strictEqual(a.triggerAfter(), 300);
             assert.strictEqual(a.trigger(), -300);
-        });
-
-        it('setter should work with moment.duration', function () {
-            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
-            a.triggerAfter(moment.duration(2, 'minutes'));
-            assert.strictEqual(a.trigger(), 120);
         });
 
         it('setter should work with number', function () {
@@ -225,8 +212,7 @@ describe('ical-generator Alarm', function () {
             // Date
             a.trigger(now);
             const dateResult = a.triggerBefore();
-            assert.ok(moment.isMoment(dateResult));
-            assert.ok(dateResult.isSame(now));
+            assert.deepStrictEqual(dateResult, now);
 
             // Null
             a.trigger(null);
@@ -257,20 +243,15 @@ describe('ical-generator Alarm', function () {
 
         it('setter should work with date', function () {
             const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
-            a.triggerBefore(new Date());
-            assert.ok(moment.isMoment(a.trigger()));
+            const now = new Date();
+            a.triggerBefore(now);
+            assert.deepStrictEqual(a.trigger(), now);
         });
 
         it('setter should work with moment instance', function () {
             const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
             a.triggerBefore(moment());
             assert.ok(moment.isMoment(a.trigger()));
-        });
-
-        it('setter should work with moment.duration', function () {
-            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
-            a.triggerBefore(moment.duration(2, 'minutes'));
-            assert.strictEqual(a.trigger(), 120);
         });
 
         it('setter should work with number', function () {

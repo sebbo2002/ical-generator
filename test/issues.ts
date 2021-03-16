@@ -1,6 +1,7 @@
 'use strict';
 
 import assert from 'assert';
+import moment from 'moment-timezone';
 import ical from '../src';
 import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
 
@@ -89,9 +90,9 @@ describe('Issues', function () {
                     timezone: 'America/Buenos_Aires',
                     events: [
                         {
-                            start: new Date(1553219772000),
-                            end: new Date(1553219772000),
-                            recurrenceId: new Date(1553219772000),
+                            start: moment(1553219772000),
+                            end: moment(1553219772000),
+                            recurrenceId: moment(1553219772000),
                             timezone: 'America/La_Paz'
                         }
                     ]
@@ -127,12 +128,12 @@ describe('Issues', function () {
                 prodId: '//superman-industries.com//ical-generator//EN',
                 timezone: 'America/New_York',
                 events: [{
-                    start: '2020-08-13T00:00:00-05:00',
+                    start: moment('2020-08-13T00:00:00-05:00'),
                     summary: 'Example Event',
                     repeating: {
                         freq: ICalEventRepeatingFreq.MONTHLY,
                         count: 12,
-                        exclude: '2020-12-13T00:00:00-05:00'
+                        exclude: moment('2020-12-13T00:00:00-05:00')
                     }
                 }]
             });
