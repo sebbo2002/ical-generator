@@ -1,3 +1,10 @@
+# [1.3.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v1.3.0-develop.3...v1.3.0-develop.4) (2021-03-21)
+
+
+### Features
+
+* Support moment.js, Day.js and Luxon ([#91](https://github.com/sebbo2002/ical-generator/issues/91), BREAKING CHANGE) ([6db24ee](https://github.com/sebbo2002/ical-generator/commit/6db24ee4887fca212a3a730e84fda9dd9c84ea01))
+
 # [1.3.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v1.3.0-develop.2...v1.3.0-develop.3) (2021-03-13)
 
 # [1.3.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v1.3.0-develop.1...v1.3.0-develop.2) (2021-03-05)
