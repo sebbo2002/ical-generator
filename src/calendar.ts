@@ -294,7 +294,6 @@ export default class ICalCalendar {
      * that have already been added are retained.
      *
      * @since 0.2.0
-     * @returns {ICalEvent[]|ICalCalendar}
      */
     events(): ICalEvent[];
     events(events: (ICalEvent | ICalEventData)[]): this;
@@ -304,6 +303,18 @@ export default class ICalCalendar {
         }
 
         events.forEach((e: ICalEvent | ICalEventData) => this.createEvent(e));
+        return this;
+    }
+
+
+    /**
+     * Remove all events from the calendar without
+     * touching any other data like name or prodId.
+     *
+     * @since 2.0.0-develop.1
+     */
+    clear(): this {
+        this.data.events = [];
         return this;
     }
 

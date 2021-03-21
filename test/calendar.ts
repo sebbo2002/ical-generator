@@ -314,6 +314,16 @@ describe('ical-generator Calendar', function () {
         });
     });
 
+    describe('clear()', function () {
+        it('should do the job', function () {
+            const cal = new ICalCalendar();
+            cal.createEvent({});
+            assert.strictEqual(cal.events().length, 1);
+            assert.deepStrictEqual(cal.clear(), cal);
+            assert.strictEqual(cal.events().length, 0);
+        });
+    });
+
     describe('save()', function () {
         it('should return all public methods and save it', function (done) {
             const file = join(__dirname, 'save.ical');
