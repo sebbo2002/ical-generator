@@ -19,7 +19,6 @@ describe('Issues', function () {
             });
 
             const str = calendar.toString();
-            console.log(str);
             assert.ok(str.indexOf('DTSTART;VALUE=DATE:20160501') > -1);
         });
         it('should work with Brazil/East', function () {

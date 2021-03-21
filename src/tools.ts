@@ -43,13 +43,13 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
     }
     else if(isMoment(d)) {
         // @see https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/
-        const m = timezone ? (isMomentTZ(d) && !d.tz() ? d.clone().tz(timezone) : d) : d.utc();
+        const m = timezone ? (isMomentTZ(d) && !d.tz() ? d.clone().tz(timezone) : d) : (floating ? d : d.utc());
         return m.format('YYYYMMDD') + (!dateonly ? (
             'T' + m.format('HHmmss') + (floating || timezone ? '' : 'Z')
         ) : '');
     }
     else if(isLuxonDate(d)) {
-        let m = timezone ? d.setZone(timezone) : d.setZone('utc');
+        let m = timezone ? d.setZone(timezone) : (floating ? d : d.setZone('utc'));
         if(!m.isValid) {
             m = d;
         }
@@ -60,12 +60,24 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
     }
     else {
         // @see https://day.js.org/docs/en/plugin/utc
-        // @ts-ignore
-        let m = typeof d.utc === 'function' ? d.utc() : d;
+
+        let m = d;
         if(timezone) {
             // @see https://day.js.org/docs/en/plugin/timezone
             // @ts-ignore
             m = typeof d.tz === 'function' ? d.tz(timezone) : d;
+        }
+        else if(floating) {
+            // m = d;
+        }
+
+        // @ts-ignore
+        else if (typeof d.utc === 'function') {
+            // @ts-ignore
+            m = d.utc();
+        }
+        else {
+            throw new Error('Unable to convert dayjs object to UTC value: UTC plugin is not available!');
         }
 
         return m.format('YYYYMMDD') + (!dateonly ? (

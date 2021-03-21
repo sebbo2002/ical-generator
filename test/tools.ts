@@ -2,7 +2,14 @@
 
 import assert from 'assert';
 import moment from 'moment-timezone';
+import {DateTime} from 'luxon';
+import dayjs from 'dayjs';
+import dayJsUTCPlugin from 'dayjs/plugin/utc';
+import dayJsTimezonePlugin from 'dayjs/plugin/timezone';
 import { formatDate, formatDateTZ, foldLines, escape } from '../src/tools';
+
+dayjs.extend(dayJsUTCPlugin);
+dayjs.extend(dayJsTimezonePlugin);
 
 describe('ICalTools', function () {
     describe('formatDate()', function () {
@@ -67,6 +74,52 @@ describe('ICalTools', function () {
                 assert.strictEqual(
                     formatDate('Canada/Saskatchewan', moment('2018-07-05T18:24:00.052Z'), false, false),
                     '20180705T122400'
+                );
+            });
+            it('should work with floating flag', function () {
+                assert.strictEqual(
+                    formatDate(null, moment('2018-07-05T18:24:00.052'), false, true),
+                    '20180705T182400'
+                );
+            });
+        });
+        describe('Luxon', function () {
+            it('should work without setting a timezone', function () {
+                assert.strictEqual(
+                    formatDate(null, DateTime.fromISO('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T182400Z'
+                );
+            });
+            it('should work with timezone in event / calendar (with moment-timezone)', function () {
+                assert.strictEqual(
+                    formatDate('Canada/Saskatchewan', DateTime.fromISO('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T122400'
+                );
+            });
+            it('should work with floating flag', function () {
+                assert.strictEqual(
+                    formatDate(null, DateTime.fromISO('2018-07-05T18:24:00.052'), false, true),
+                    '20180705T182400'
+                );
+            });
+        });
+        describe('Day.js', function () {
+            it('should work without setting a timezone', function () {
+                assert.strictEqual(
+                    formatDate(null, dayjs('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T182400Z'
+                );
+            });
+            it('should work with timezone in event / calendar (with moment-timezone)', function () {
+                assert.strictEqual(
+                    formatDate('Canada/Saskatchewan', dayjs('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T122400'
+                );
+            });
+            it('should work with floating flag', function () {
+                assert.strictEqual(
+                    formatDate(null, dayjs('2018-07-05T18:24:00.052'), false, true),
+                    '20180705T182400'
                 );
             });
         });
