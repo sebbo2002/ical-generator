@@ -55,7 +55,7 @@ export enum ICalCalendarMethod {
 export default class ICalCalendar {
     private readonly data: ICalCalendarInternalData;
 
-    constructor(data?: ICalCalendarData) {
+    constructor(data: ICalCalendarData = {}) {
         this.data = {
             prodId: '//sebbo.net//ical-generator//EN',
             method: null,
@@ -69,16 +69,16 @@ export default class ICalCalendar {
             x: []
         };
 
-        data?.prodId && this.prodId(data.prodId);
-        data?.method && this.method(data.method);
-        data?.name && this.name(data.name);
-        data?.description && this.description(data.description);
-        data?.timezone && this.timezone(data.timezone);
-        data?.url && this.url(data.url);
-        data?.scale && this.scale(data.scale);
-        data?.ttl && this.ttl(data.ttl);
-        data?.events && this.events(data.events);
-        data?.x && this.x(data.x);
+        data.prodId && this.prodId(data.prodId);
+        data.method && this.method(data.method);
+        data.name && this.name(data.name);
+        data.description && this.description(data.description);
+        data.timezone && this.timezone(data.timezone);
+        data.url && this.url(data.url);
+        data.scale && this.scale(data.scale);
+        data.ttl && this.ttl(data.ttl);
+        data.events && this.events(data.events);
+        data.x && this.x(data.x);
     }
 
 

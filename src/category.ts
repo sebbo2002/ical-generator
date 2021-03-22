@@ -20,7 +20,7 @@ export default class ICalCategory {
             name: null
         };
 
-        data?.name && this.name(data.name);
+        data.name && this.name(data.name);
     }
 
 

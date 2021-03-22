@@ -127,7 +127,10 @@ describe('ical-generator Event', function () {
         it('setter should flip start and end if necessary', function () {
             const start = moment().add(5, 'minutes');
             const end = moment();
-            const event = new ICalEvent({end, start}, new ICalCalendar());
+            const event = new ICalEvent({}, new ICalCalendar())
+                .end(end)
+                .start(start);
+
             assert.deepStrictEqual(event.start(), end);
             assert.deepStrictEqual(event.end(), start);
         });
@@ -179,7 +182,10 @@ describe('ical-generator Event', function () {
         it('setter should flip start and end if necessary', function () {
             const start = moment().add(5, 'minutes');
             const end = moment();
-            const event = new ICalEvent({start, end}, new ICalCalendar());
+            const event = new ICalEvent({}, new ICalCalendar())
+                .start(start)
+                .end(end);
+
             assert.deepStrictEqual(event.start(), end);
             assert.deepStrictEqual(event.end(), start);
         });
@@ -961,12 +967,27 @@ describe('ical-generator Event', function () {
     });
 
     describe('location()', function () {
-        it('getter should return value', function () {
+        it('getter should return value (string)', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             assert.strictEqual(e.location(), null);
 
             e.location('Test Location');
-            assert.strictEqual(e.location(), 'Test Location');
+            assert.deepStrictEqual(e.location(), {title: 'Test Location'});
+
+            e.location(null);
+            assert.strictEqual(e.location(), null);
+        });
+
+        it('getter should return value (obj)', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            assert.strictEqual(e.location(), null);
+
+            e.location({
+                title: 'Foo',
+                geo: {lat: 44.5, lon: -3.4}
+            });
+            assert.deepStrictEqual(e.location()?.title, 'Foo');
+            assert.deepStrictEqual(e.location()?.geo, {lat: 44.5, lon: -3.4});
 
             e.location(null);
             assert.strictEqual(e.location(), null);
@@ -985,205 +1006,20 @@ describe('ical-generator Event', function () {
             }, new ICalCalendar());
 
             event.location('Europa-Park');
-            assert.strictEqual(event.location(), 'Europa-Park');
-        });
-    });
-
-    describe('geo()', function () {
-        it('getter should return value', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.strictEqual(e.geo(), null);
-
-            e.geo({lat: 44.5, lon: -3.4});
-            assert.deepStrictEqual(e.geo(), {lat: 44.5, lon: -3.4});
-
-            e.geo(null);
-            assert.strictEqual(e.geo(), null);
+            assert.strictEqual(event.location()?.title, 'Europa-Park');
         });
 
-        it('setter should return this', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.deepStrictEqual(e, e.geo(null));
-            assert.deepStrictEqual(e, e.geo({lat: 44.5, lon: -3.4}));
-        });
-
-        it('should update geo', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event'
-            }, new ICalCalendar());
-
-            event.geo({lat: 44.5, lon: -3.4});
-            assert.deepStrictEqual(event.geo(), {lat: 44.5, lon: -3.4});
-
-            event.geo({lat: 44.5, lon: -3.4});
-            assert.deepStrictEqual(event.geo(), {lat: 44.5, lon: -3.4});
-        });
-
-        it('should reset geo when setting to null', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event'
-            }, new ICalCalendar());
-
-            event.geo(null);
-            assert.strictEqual(event.geo(), null);
-        });
-
-        it('should throw error when string is not valid', function () {
+        it('should throw error when location is not valid', function () {
             const event = new ICalEvent({
                 start: moment(),
                 summary: 'Example Event'
             }, new ICalCalendar());
 
             // @ts-ignore
-            assert.throws(() => event.geo('somthingInvalid'), /`geo` isn't formated correctly/i);
-        });
-    });
-
-    describe('location()', function () {
-        it('getter should return value', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.strictEqual(e.location(), null);
-
-            e.location('Test Location');
-            assert.strictEqual(e.location(), 'Test Location');
-
-            e.location(null);
-            assert.strictEqual(e.location(), null);
-        });
-
-        it('setter should return this', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.deepStrictEqual(e, e.location(null));
-            assert.deepStrictEqual(e, e.location('Test Location'));
-        });
-
-        it('should update location', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event'
-            }, new ICalCalendar());
-
-            event.location('Europa-Park');
-            assert.strictEqual(event.location(), 'Europa-Park');
-        });
-
-        it('should reset appleLocation', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event',
-                appleLocation: {
-                    title: 'My Title',
-                    address: 'My Address',
-                    radius: 40,
-                    geo: {
-                        lat: 52.063921,
-                        lon: 5.128511
-                    }
-                }
-            }, new ICalCalendar());
-
-            event.location('Europa-Park');
-            assert.strictEqual(event.appleLocation(), null);
-        });
-    });
-
-    describe('appleLocation()', function () {
-        it('getter should return value', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.strictEqual(e.appleLocation(), null);
-
-            e.appleLocation({
-                title: 'My Title',
-                address: 'My Address',
-                radius: 40,
-                geo: {
-                    lat: 52.063921,
-                    lon: 5.128511
-                }
-            });
-            assert.deepEqual(e.appleLocation(), {
-                title: 'My Title',
-                address: 'My Address',
-                radius: 40,
-                geo: {
-                    lat: '52.063921',
-                    lon: '5.128511'
-                }
-            });
-
-            e.appleLocation(null);
-            assert.strictEqual(e.appleLocation(), null);
-        });
-
-        it('setter should return this', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.deepStrictEqual(e, e.appleLocation(null));
-            assert.deepStrictEqual(e, e.appleLocation({
-                title: 'My Title',
-                address: 'My Address',
-                radius: 40,
-                geo: {
-                    lat: 52.063921,
-                    lon: 5.128511
-                }
-            }));
-        });
-
-        it('should update appleLocation', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event'
-            }, new ICalCalendar());
-
-            event.appleLocation({
-                title: 'My Title',
-                address: 'My Address',
-                radius: 40,
-                geo: {
-                    lat: 52.063921,
-                    lon: 5.128511
-                }
-            });
-            assert.deepEqual(event.appleLocation(), {
-                title: 'My Title',
-                address: 'My Address',
-                radius: 40,
-                geo: {
-                    lat: '52.063921',
-                    lon: '5.128511'
-                }
-            });
-        });
-
-        it('should reset location', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event',
-                location: 'Batman Cave'
-            }, new ICalCalendar());
-
-            event.appleLocation({
-                title: 'My Title',
-                address: 'My Address',
-                radius: 40,
-                geo: {
-                    lat: 52.063921,
-                    lon: 5.128511
-                }
-            });
-            assert.ok(event.location() !== 'Batman Cave');
-        });
-
-        it('should throw error when string is not valid', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event'
-            }, new ICalCalendar());
+            assert.throws(() => event.location({geo: 3}), /`location` isn't formatted correctly/i);
 
             // @ts-ignore
-            assert.throws(() => event.appleLocation({}), /`appleLocation` isn't formatted correctly/i);
+            assert.throws(() => event.location({}), /`location` isn't formatted correctly/i);
         });
     });
 

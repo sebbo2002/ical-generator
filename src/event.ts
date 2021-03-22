@@ -57,9 +57,7 @@ export interface ICalEventData {
     floating?: boolean,
     repeating?: ICalRepeatingOptions | null,
     summary?: string,
-    location?: string | null,
-    appleLocation?: ICalLocation | null,
-    geo?: ICalGeo | null,
+    location?: ICalLocation | string | null,
     description?: string | null,
     htmlDescription?: string | null,
     organizer?: ICalOrganizer | string | null,
@@ -87,9 +85,7 @@ export interface ICalEventInternalData {
     floating: boolean,
     repeating: ICalEventInternalRepeatingData | null,
     summary: string,
-    location: string | null,
-    appleLocation: ICalLocation | null,
-    geo: ICalGeo | null,
+    location: ICalLocation | null,
     description: string | null,
     htmlDescription: string | null,
     organizer: ICalOrganizer | null,
@@ -141,8 +137,6 @@ export default class ICalEvent {
             repeating: null,
             summary: '',
             location: null,
-            appleLocation: null,
-            geo: null,
             description: null,
             htmlDescription: null,
             organizer: null,
@@ -163,33 +157,31 @@ export default class ICalEvent {
             throw new Error('`calendar` option required!');
         }
 
-        data?.id && this.id(data.id);
-        data?.sequence && this.sequence(data.sequence);
-        data?.start && this.start(data.start);
-        data?.end && this.end(data.end);
-        data?.recurrenceId && this.recurrenceId(data.recurrenceId);
-        data?.timezone && this.timezone(data.timezone);
-        data?.stamp && this.stamp(data.stamp);
-        data?.allDay && this.allDay(data.allDay);
-        data?.floating && this.floating(data.floating);
-        data?.repeating && this.repeating(data.repeating);
-        data?.summary && this.summary(data.summary);
-        data?.location && this.location(data.location);
-        data?.appleLocation && this.appleLocation(data.appleLocation);
-        data?.geo && this.geo(data.geo);
-        data?.description && this.description(data.description);
-        data?.htmlDescription && this.htmlDescription(data.htmlDescription);
-        data?.organizer && this.organizer(data.organizer);
-        data?.attendees && this.attendees(data.attendees);
-        data?.alarms && this.alarms(data.alarms);
-        data?.categories && this.categories(data.categories);
-        data?.status && this.status(data.status);
-        data?.busystatus && this.busystatus(data.busystatus);
-        data?.url && this.url(data.url);
-        data?.transparency && this.transparency(data.transparency);
-        data?.created && this.created(data.created);
-        data?.lastModified && this.lastModified(data.lastModified);
-        data?.x && this.x(data.x);
+        data.id && this.id(data.id);
+        data.sequence && this.sequence(data.sequence);
+        data.start && this.start(data.start);
+        data.end && this.end(data.end);
+        data.recurrenceId && this.recurrenceId(data.recurrenceId);
+        data.timezone && this.timezone(data.timezone);
+        data.stamp && this.stamp(data.stamp);
+        data.allDay && this.allDay(data.allDay);
+        data.floating && this.floating(data.floating);
+        data.repeating && this.repeating(data.repeating);
+        data.summary && this.summary(data.summary);
+        data.location && this.location(data.location);
+        data.description && this.description(data.description);
+        data.htmlDescription && this.htmlDescription(data.htmlDescription);
+        data.organizer && this.organizer(data.organizer);
+        data.attendees && this.attendees(data.attendees);
+        data.alarms && this.alarms(data.alarms);
+        data.categories && this.categories(data.categories);
+        data.status && this.status(data.status);
+        data.busystatus && this.busystatus(data.busystatus);
+        data.url && this.url(data.url);
+        data.transparency && this.transparency(data.transparency);
+        data.created && this.created(data.created);
+        data.lastModified && this.lastModified(data.lastModified);
+        data.x && this.x(data.x);
     }
 
     /**
@@ -513,69 +505,28 @@ export default class ICalEvent {
 
     /**
      * Set/Get the event's location
-     *
-     * @param {String} [location]
      * @since 0.2.0
-     * @returns {ICalEvent|String}
      */
-    location(): string | null;
-    location(location: string | null): this;
-    location(location?: string | null): this | string | null {
+    location(): ICalLocation | null;
+    location(location: ICalLocation | string | null): this;
+    location(location?: ICalLocation | string | null): this | ICalLocation | null {
         if (location === undefined) {
             return this.data.location;
         }
-        if (this.data.appleLocation && location) {
-            this.data.appleLocation = null;
-        }
-
-        this.data.location = location ? String(location) : null;
-        return this;
-    }
-
-    /**
-     * Set/Get the Apple event's location
-     * @since 1.10.0
-     */
-    appleLocation(): ICalLocation | null;
-    appleLocation(location: ICalLocation | null): this;
-    appleLocation(location?: ICalLocation | null): this | ICalLocation | null {
-        if (location === undefined) {
-            return this.data.appleLocation;
-        }
-        if (location === null) {
-            this.data.appleLocation = null;
+        if (typeof location === 'string') {
+            this.data.location = {
+                title: location
+            };
             return this;
         }
-
-        if (!location.title || !location.address || !location.radius || !location.geo || !location.geo.lat || !location.geo.lon) {
-            throw new Error('`appleLocation` isn\'t formatted correctly. See https://github.com/sebbo2002/ical-generator#applelocationobject-applelocation');
+        if (
+            (location && !location.title) ||
+            (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon)))
+        ) {
+            throw new Error('`location` isn\'t formatted correctly. See https://github.com/sebbo2002/ical-generator#locationobject-location');
         }
 
-        this.data.appleLocation = location;
-        this.data.location = location.title + '\n' + location.address;
-        return this;
-    }
-
-    /**
-     * Set/Get the event's geo
-     * @since 1.5.0
-     */
-    geo(): ICalGeo | null;
-    geo(geo: ICalGeo | null): this;
-    geo(geo?: ICalGeo | null): this | ICalGeo | null {
-        if (geo === undefined) {
-            return this.data.geo;
-        }
-        if (geo === null) {
-            this.data.geo = null;
-            return this;
-        }
-
-        if ((!geo || !isFinite(geo.lat) || !isFinite(geo.lon))) {
-            throw new Error('`geo` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#geostringobject-geo');
-        }
-
-        this.data.geo = geo;
+        this.data.location = location || null;
         return this;
     }
 
@@ -1000,21 +951,21 @@ export default class ICalEvent {
         }
 
         // LOCATION
-        if (this.data.location) {
-            g += 'LOCATION:' + escape(this.data.location) + '\r\n';
-        }
+        if (this.data.location?.title) {
+            if (this.data.location.address && this.data.location.radius && this.data.location.geo) {
+                g += 'LOCATION:' + escape(this.data.location.title + '\n' + this.data.location.address) + '\r\n';
 
-        // APPLE LOCATION
-        if (this.data.appleLocation) {
-            g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + escape(this.data.appleLocation.address) + ';' +
-                'X-APPLE-RADIUS=' + escape(this.data.appleLocation.radius) + ';' +
-                'X-TITLE=' + escape(this.data.appleLocation.title) +
-                ':geo:' + escape(this.data.appleLocation.geo.lat) + ',' + escape(this.data.appleLocation.geo.lon) + '\r\n';
-        }
+                g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + escape(this.data.location.address) + ';' +
+                    'X-APPLE-RADIUS=' + escape(this.data.location.radius) + ';' +
+                    'X-TITLE=' + escape(this.data.location.title) +
+                    ':geo:' + escape(this.data.location.geo?.lat) + ',' + escape(this.data.location.geo?.lon) + '\r\n';
+            } else {
+                g += 'LOCATION:' + escape(this.data.location.title) + '\r\n';
+            }
 
-        // GEO
-        if (this.data.geo) {
-            g += 'GEO:' + escape(this.data.geo.lat) + ';' + escape(this.data.geo.lon) + '\r\n';
+            if(this.data.location.geo) {
+                g += 'GEO:' + escape(this.data.location.geo?.lat) + ';' + escape(this.data.location.geo?.lon) + '\r\n';
+            }
         }
 
         // DESCRIPTION

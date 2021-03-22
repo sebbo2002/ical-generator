@@ -58,6 +58,12 @@ describe('ical-generator Cases', function () {
             allDay: true,
             stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
             summary: 'Sample Event',
+            location: {
+                title: 'Apple Store Kurfürstendamm',
+                address: 'Kurfürstendamm 26, 10719 Berlin, Deutschland',
+                radius: 141.1751386318387,
+                geo: {lat: 52.503630, lon: 13.328650}
+            },
             organizer: 'Sebastian Pekarek <mail@sebbo.net>',
             status: ICalEventStatus.CONFIRMED,
             categories: [{name: 'WORK'}],

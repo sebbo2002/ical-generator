@@ -21,9 +21,9 @@ export interface ICalRepeatingOptions {
 
 export interface ICalLocation {
     title: string;
-    address: string;
-    radius: number;
-    geo: ICalGeo;
+    address?: string;
+    radius?: number;
+    geo?: ICalGeo;
 }
 
 export interface ICalGeo {
@@ -56,5 +56,3 @@ export enum ICalWeekday {
     FR = 'FR',
     SA = 'SA'
 }
-
-

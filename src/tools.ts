@@ -49,9 +49,9 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
         ) : '');
     }
     else if(isLuxonDate(d)) {
-        let m = timezone ? d.setZone(timezone) : (floating ? d : d.setZone('utc'));
+        const m = timezone ? d.setZone(timezone) : (floating ? d : d.setZone('utc'));
         if(!m.isValid) {
-            m = d;
+            throw new Error('Unable to format DateTime: value is not valid!');
         }
 
         return m.toFormat('yyyyLLdd') + (!dateonly ? (
