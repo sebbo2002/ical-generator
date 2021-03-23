@@ -67,6 +67,7 @@ export interface ICalEventData {
     categories?: ICalCategory[] | ICalCategoryData[],
     status?: ICalEventStatus | null,
     busystatus?: ICalEventBusyStatus | null,
+    priority?: number | null,
     url?: string | null,
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
@@ -94,6 +95,7 @@ export interface ICalEventInternalData {
     categories: ICalCategory[],
     status: ICalEventStatus | null,
     busystatus: ICalEventBusyStatus | null,
+    priority: number | null,
     url: string | null,
     transparency: ICalEventTransparency | null,
     created: ICalDateTimeValue | null,
@@ -121,6 +123,7 @@ export interface ICalEventJSONData {
     categories: ICalCategory[],
     status: ICalEventStatus | null,
     busystatus: ICalEventBusyStatus | null,
+    priority?: number | null,
     url: string | null,
     transparency: ICalEventTransparency | null,
     created: string | null,
@@ -171,6 +174,7 @@ export default class ICalEvent {
             categories: [],
             status: null,
             busystatus: null,
+            priority: null,
             url: null,
             transparency: null,
             created: null,
@@ -202,6 +206,7 @@ export default class ICalEvent {
         data.categories && this.categories(data.categories);
         data.status && this.status(data.status);
         data.busystatus && this.busystatus(data.busystatus);
+        data.priority && this.priority(data.priority);
         data.url && this.url(data.url);
         data.transparency && this.transparency(data.transparency);
         data.created && this.created(data.created);
@@ -738,6 +743,33 @@ export default class ICalEvent {
 
 
     /**
+     * Set/Get the event's priority. A value of 1 represents
+     * the highest priority, 9 the lowest. 0 specifies an undefined
+     * priority.
+     *
+     * @see https://www.kanzaki.com/docs/ical/priority.html
+     */
+    priority(): number | null;
+    priority(priority: number | null): this;
+    priority(priority?: number | null): this | number | null {
+        if (priority === undefined) {
+            return this.data.priority;
+        }
+        if (priority === null) {
+            this.data.priority = null;
+            return this;
+        }
+
+        if(priority < 0 || priority > 9) {
+            throw new Error('`priority` is invalid, musst be 0 ≤ priority ≤ 9.');
+        }
+
+        this.data.priority = Math.round(priority);
+        return this;
+    }
+
+
+    /**
      * Set/Get the event's URL
      * @since 0.2.0
      */
@@ -1061,6 +1093,11 @@ export default class ICalEvent {
         // BUSYSTATUS
         if (this.data.busystatus) {
             g += 'X-MICROSOFT-CDO-BUSYSTATUS:' + this.data.busystatus.toUpperCase() + '\r\n';
+        }
+
+        // PRIORITY
+        if (this.data.priority !== null) {
+            g += 'PRIORITY:' + this.data.priority + '\r\n';
         }
 
         // CUSTOM X ATTRIBUTES

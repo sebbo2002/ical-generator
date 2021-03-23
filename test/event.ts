@@ -1469,6 +1469,33 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('priority()', function () {
+        it('getter should return value', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            assert.strictEqual(e.priority(), null);
+
+            e.priority(5);
+            assert.strictEqual(e.priority(), 5);
+        });
+
+        it('setter should return this', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            assert.deepStrictEqual(e, e.priority(null));
+            assert.deepStrictEqual(e, e.priority(5));
+        });
+
+        it('should update value', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            event.priority(5);
+            assert.strictEqual(event.priority(), 5);
+            assert.ok(event.toString().includes('PRIORITY:5'));
+        });
+    });
+
     describe('url()', function () {
         it('getter should return value', function () {
             const e = new ICalEvent({}, new ICalCalendar());
