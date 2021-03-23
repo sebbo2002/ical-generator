@@ -8,6 +8,8 @@ import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
 import ICalAttendee from '../src/attendee';
 import ICalAlarm, {ICalAlarmType} from '../src/alarm';
 import ICalCategory from '../src/category';
+import {isRRule} from '../src/tools';
+import {RRule} from 'rrule';
 
 describe('ical-generator Event', function () {
     describe('constructor()', function () {
@@ -538,7 +540,10 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent({}, new ICalCalendar());
 
             e.repeating({freq: ICalEventRepeatingFreq.MONTHLY});
-            assert.strictEqual(e.repeating()?.freq, 'MONTHLY');
+
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.strictEqual(result.freq, 'MONTHLY');
         });
 
         it('setter should throw error when repeating.count is not a number', function () {
@@ -570,7 +575,10 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent({}, new ICalCalendar());
 
             e.repeating({freq: ICalEventRepeatingFreq.MONTHLY, count: 5});
-            assert.strictEqual(e.repeating()?.count, 5);
+
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.strictEqual(result.count, 5);
         });
 
         it('should throw error when repeating.interval is not a number', function () {
@@ -602,7 +610,10 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent({}, new ICalCalendar());
 
             e.repeating({freq: ICalEventRepeatingFreq.MONTHLY, interval: 5});
-            assert.strictEqual(e.repeating()?.interval, 5);
+
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.strictEqual(result.interval, 5);
         });
 
         it('should throw error when repeating.until is not a date', function () {
@@ -623,21 +634,30 @@ describe('ical-generator Event', function () {
             const event = new ICalEvent({}, new ICalCalendar());
             const date = moment().add(1, 'week').toJSON();
             event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date});
-            assert.deepStrictEqual(event.repeating()?.until, date);
+
+            const result = event.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.until, date);
         });
 
         it('setter should handle repeating.until Dates if required', function () {
             const event = new ICalEvent({}, new ICalCalendar());
             const date = moment().add(1, 'week').toDate();
             event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date});
-            assert.deepStrictEqual(event.repeating()?.until, date);
+
+            const result = event.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.until, date);
         });
 
         it('setter should handle repeating.until moments', function () {
             const event = new ICalEvent({}, new ICalCalendar());
             const date = moment().add(1, 'week');
             event.repeating({freq: ICalEventRepeatingFreq.MONTHLY, until: date});
-            assert.deepStrictEqual(event.repeating()?.until, date);
+
+            const result = event.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.until, date);
         });
 
         it('setter should throw error when repeating.until is not a Date', function () {
@@ -708,7 +728,9 @@ describe('ical-generator Event', function () {
                 byDay: [ICalWeekday.SU, ICalWeekday.WE, ICalWeekday.TH]
             });
 
-            assert.deepStrictEqual(e.repeating()?.byDay, ['SU', 'WE', 'TH']);
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.byDay, ['SU', 'WE', 'TH']);
         });
 
         it('should throw error when repeating.byMonth is not valid', function () {
@@ -742,7 +764,10 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent({}, new ICalCalendar());
 
             e.repeating({freq: ICalEventRepeatingFreq.MONTHLY, byMonth: [1, 12, 7]});
-            assert.deepStrictEqual(e.repeating()?.byMonth, [1, 12, 7]);
+
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.byMonth, [1, 12, 7]);
         });
 
         it('should throw error when repeating.byMonthDay is not valid', function () {
@@ -778,7 +803,10 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent({}, new ICalCalendar());
 
             e.repeating({freq: ICalEventRepeatingFreq.MONTHLY, byMonthDay: [1, 15]});
-            assert.deepStrictEqual(e.repeating()?.byMonthDay, [1, 15]);
+
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.byMonthDay, [1, 15]);
         });
 
         it('should throw error when repeating.bySetPos is not valid', function () {
@@ -836,8 +864,10 @@ describe('ical-generator Event', function () {
                 bySetPos: 2
             });
 
-            assert.strictEqual(e.repeating()?.byDay?.length, 1);
-            assert.strictEqual(e.repeating()?.bySetPos, 2);
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.strictEqual(result.byDay?.length, 1);
+            assert.strictEqual(result.bySetPos, 2);
         });
 
         it('should throw error when repeating.exclude is not valid', function () {
@@ -902,13 +932,14 @@ describe('ical-generator Event', function () {
                 ]
             });
 
-            const result = e.repeating()?.exclude;
-            assert.ok(Array.isArray(result));
-            assert.strictEqual(result.length, 3);
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.ok(Array.isArray(result.exclude));
+            assert.strictEqual(result.exclude.length, 3);
 
-            assert.deepStrictEqual(result[0], date.toJSON(), 'String');
-            assert.deepStrictEqual(result[1], date.toDate(), 'Date');
-            assert.deepStrictEqual(result[2], date, 'Moment');
+            assert.deepStrictEqual(result.exclude[0], date.toJSON(), 'String');
+            assert.deepStrictEqual(result.exclude[1], date.toDate(), 'Date');
+            assert.deepStrictEqual(result.exclude[2], date, 'Moment');
         });
 
         it('should throw error when repeating.startOfWeek is not valid', function () {
@@ -933,7 +964,38 @@ describe('ical-generator Event', function () {
                 freq: ICalEventRepeatingFreq.MONTHLY,
                 startOfWeek: ICalWeekday.SU
             });
-            assert.deepStrictEqual(e.repeating()?.startOfWeek, 'SU');
+
+            const result = e.repeating();
+            assert.ok(result && !isRRule(result) && typeof result !== 'string');
+            assert.deepStrictEqual(result.startOfWeek, 'SU');
+        });
+
+        it('should support RRules', function () {
+            const start = new Date(Date.UTC(2012, 1, 1, 10, 30));
+            const e = new ICalEvent({start}, new ICalCalendar());
+            const rule = new RRule({
+                freq: RRule.WEEKLY,
+                interval: 5,
+                byweekday: [RRule.MO, RRule.FR],
+                dtstart: start,
+                until: new Date(Date.UTC(2012, 12, 31))
+            });
+
+            e.repeating(rule);
+
+            const result = e.repeating();
+            assert.ok(isRRule(result));
+            assert.deepStrictEqual(result, rule);
+            assert.ok(e.toString().includes('RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z'));
+        });
+        it('should support strings', function () {
+            const e = new ICalEvent({start: new Date()}, new ICalCalendar());
+            const rule = 'RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z';
+            e.repeating(rule);
+
+            const result = e.repeating();
+            assert.deepStrictEqual(result, rule);
+            assert.ok(e.toString().includes('RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z'));
         });
     });
 
@@ -1528,6 +1590,25 @@ describe('ical-generator Event', function () {
             assert.strictEqual(event.toJSON().summary, 'foo', 'summary is okay');
             assert.deepStrictEqual(event.toJSON().start, date.toJSON(), 'start is okay');
             assert.strictEqual(typeof event.toJSON().start, 'string', 'start is string');
+        });
+        it('should stringify RRule objects', function() {
+            const date = new Date();
+            const rule = new RRule({
+                freq: RRule.WEEKLY,
+                interval: 5,
+                byweekday: [RRule.MO, RRule.FR],
+                dtstart: date,
+                until: new Date(Date.UTC(2012, 12, 31))
+            });
+
+            const event = new ICalEvent({}, new ICalCalendar()).summary('foo').start(date).repeating(rule);
+            const json = event.toJSON();
+            const before = event.toString();
+            assert.ok(typeof json.repeating === 'string');
+
+            const event2 = new ICalEvent(event.toJSON(), new ICalCalendar());
+            const after = event2.toString();
+            assert.strictEqual(after, before);
         });
     });
 

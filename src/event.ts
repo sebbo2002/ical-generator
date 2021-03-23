@@ -1,5 +1,6 @@
 'use strict';
 
+import type {RRule} from 'rrule';
 import uuid from 'uuid-random';
 import {
     addOrGetCustomAttributes,
@@ -9,7 +10,7 @@ import {
     escape,
     formatDate,
     formatDateTZ,
-    generateCustomAttributes,
+    generateCustomAttributes, isRRule,
     toDate,
     toJSON
 } from './tools';
@@ -56,7 +57,7 @@ export interface ICalEventData {
     stamp?: ICalDateTimeValue,
     allDay?: boolean,
     floating?: boolean,
-    repeating?: ICalRepeatingOptions | null,
+    repeating?: ICalRepeatingOptions | RRule | string | null,
     summary?: string,
     location?: ICalLocation | string | null,
     description?: ICalDescription | string | null,
@@ -83,7 +84,7 @@ export interface ICalEventInternalData {
     stamp: ICalDateTimeValue,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | null,
+    repeating: ICalEventInternalRepeatingData | RRule | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -394,14 +395,18 @@ export default class ICalEvent {
      * Set/Get the event's repeating stuff
      * @since 0.2.0
      */
-    repeating(): ICalEventInternalRepeatingData | null;
-    repeating(repeating: ICalRepeatingOptions | null): this;
-    repeating(repeating?: ICalRepeatingOptions | null): this | ICalEventInternalRepeatingData | null {
+    repeating(): ICalEventInternalRepeatingData | RRule | string | null;
+    repeating(repeating: ICalRepeatingOptions | RRule | string | null): this;
+    repeating(repeating?: ICalRepeatingOptions | RRule | string | null): this | ICalEventInternalRepeatingData | RRule | string | null {
         if (repeating === undefined) {
             return this.data.repeating;
         }
         if (!repeating) {
             this.data.repeating = null;
+            return this;
+        }
+        if(isRRule(repeating) || typeof repeating === 'string') {
+            this.data.repeating = repeating;
             return this;
         }
 
@@ -814,6 +819,17 @@ export default class ICalEvent {
      * @since 0.2.4
      */
     toJSON(): ICalEventInternalData {
+        let repeating: ICalEventInternalRepeatingData | string | null = null;
+        if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
+            repeating = this.data.repeating.toString();
+        }
+        else if(this.data.repeating) {
+            repeating = Object.assign({}, this.data.repeating, {
+                until: toJSON(this.data.repeating.until),
+                exclude: this.data.repeating.exclude?.map(d => toJSON(d)),
+            });
+        }
+
         return Object.assign({}, this.data, {
             start: toJSON(this.data.start) || null,
             end: toJSON(this.data.end) || null,
@@ -821,10 +837,7 @@ export default class ICalEvent {
             stamp: toJSON(this.data.stamp) || null,
             created: toJSON(this.data.created) || null,
             lastModified: toJSON(this.data.lastModified) || null,
-            repeating: this.data.repeating ? Object.assign({}, this.data.repeating, {
-                until: toJSON(this.data.repeating.until),
-                exclude: this.data.repeating.exclude?.map(d => toJSON(d)),
-            }) : null,
+            repeating,
             x: this.x()
         });
     }
@@ -866,7 +879,15 @@ export default class ICalEvent {
         }
 
         // REPEATING
-        if (this.data.repeating) {
+        if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
+            g += this.data.repeating
+                .toString()
+                .replace(/\r\n/g, '\n')
+                .split('\n')
+                .filter(l => l && !l.startsWith('DTSTART:'))
+                .join('\r\n') + '\r\n';
+        }
+        else if (this.data.repeating) {
             g += 'RRULE:FREQ=' + this.data.repeating.freq;
 
             if (this.data.repeating.count) {

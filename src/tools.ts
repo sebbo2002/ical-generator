@@ -4,6 +4,8 @@ import type {Moment, Duration} from 'moment';
 import type {Moment as MomentTZ} from 'moment-timezone';
 import type {Dayjs} from 'dayjs';
 import type {DateTime as LuxonDateTime} from 'luxon';
+import type { RRule } from 'rrule';
+
 import {ICalDateTimeValue, ICalOrganizer} from './types';
 
 export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateonly?: boolean, floating?: boolean): string {
@@ -324,6 +326,12 @@ export function isMomentDuration(value: unknown): value is Duration {
 
     // @ts-ignore
     return value !== null && typeof value === 'object' && typeof value.asSeconds === 'function';
+}
+
+export function isRRule(value: unknown): value is RRule {
+
+    // @ts-ignore
+    return value !== null && typeof value === 'object' && typeof value.between === 'function' && typeof value.toString === 'function';
 }
 
 export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {
