@@ -1,6 +1,5 @@
 'use strict';
 
-import moment from 'moment-timezone';
 import uuid from 'uuid-random';
 import {
     addOrGetCustomAttributes,
@@ -131,7 +130,7 @@ export default class ICalEvent {
             end: null,
             recurrenceId: null,
             timezone: null,
-            stamp: moment(),
+            stamp: new Date(),
             allDay: false,
             floating: false,
             repeating: null,
