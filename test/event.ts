@@ -1675,8 +1675,7 @@ describe('ical-generator Event', function () {
         });
     });
 
-
-    describe('_generate()', function () {
+    describe('toString()', function () {
         it('shoult throw an error without start', function () {
             const e = new ICalEvent({
                 summary: 'Example Event'
