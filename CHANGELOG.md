@@ -1,3 +1,10 @@
+# [2.0.0-develop.6](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.5...v2.0.0-develop.6) (2021-03-23)
+
+
+### Features
+
+* **Event:** Make organizer.email optional ([8450492](https://github.com/sebbo2002/ical-generator/commit/8450492525d43d0de9d01a8f756cb76c43a77ff3)), closes [#137](https://github.com/sebbo2002/ical-generator/issues/137)
+
 # [2.0.0-develop.5](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.4...v2.0.0-develop.5) (2021-03-23)
 
 
