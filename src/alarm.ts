@@ -45,7 +45,6 @@ interface ICalInternalAlarmData {
     attach: ICalAttachment | null;
     description: string | null;
     x: [string, string][];
-    [key: string]: unknown;
 }
 
 interface ICalAlarmJSONData {

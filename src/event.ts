@@ -747,6 +747,7 @@ export default class ICalEvent {
      * the highest priority, 9 the lowest. 0 specifies an undefined
      * priority.
      *
+     * @since v2.0.0-develop.7
      * @see https://www.kanzaki.com/docs/ical/priority.html
      */
     priority(): number | null;

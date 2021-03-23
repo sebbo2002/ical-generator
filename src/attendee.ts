@@ -1,7 +1,7 @@
 'use strict';
 
 
-import {checkEnum, checkNameAndMail, escape} from './tools';
+import {addOrGetCustomAttributes, checkEnum, checkNameAndMail, escape, generateCustomAttributes} from './tools';
 import ICalEvent from './event';
 
 
@@ -15,6 +15,7 @@ interface ICalInternalAttendeeData {
     type: ICalAttendeeType | null;
     delegatedTo: ICalAttendee | null;
     delegatedFrom: ICalAttendee | null;
+    x: [string, string][];
 }
 
 export interface ICalAttendeeData {
@@ -29,6 +30,7 @@ export interface ICalAttendeeData {
     delegatedFrom?: ICalAttendee | ICalAttendeeData | string | null;
     delegatesTo?: ICalAttendee | ICalAttendeeData | string | null;
     delegatesFrom?: ICalAttendee | ICalAttendeeData | string | null;
+    x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
 interface ICalAttendeeJSONData {
@@ -41,6 +43,7 @@ interface ICalAttendeeJSONData {
     type: ICalAttendeeType | null;
     delegatedTo: string | null;
     delegatedFrom: string | null;
+    x: {key: string, value: string}[];
 }
 
 export enum ICalAttendeeRole {
@@ -82,7 +85,8 @@ export default class ICalAttendee {
             rsvp: null,
             type: null,
             delegatedTo: null,
-            delegatedFrom: null
+            delegatedFrom: null,
+            x: []
         };
         this.event = event;
         if (!this.event) {
@@ -100,6 +104,7 @@ export default class ICalAttendee {
         data.delegatedFrom && this.delegatedFrom(data.delegatedFrom);
         data.delegatesTo && this.delegatesTo(data.delegatesTo);
         data.delegatesFrom && this.delegatesFrom(data.delegatesFrom);
+        data.x && this.x(data.x);
     }
 
 
@@ -323,6 +328,34 @@ export default class ICalAttendee {
         return a;
     }
 
+    /**
+     * Get/Set X-* attributes. Woun't filter double attributes,
+     * which are also added by another method (e.g. delegatesTo),
+     * so these attributes may be inserted twice.
+     *
+     * @since v2.0.0-develop.8
+     */
+    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): this;
+    x (keyOrArray: string, value: string): this;
+    x (): {key: string, value: string}[];
+    x (keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
+        if(keyOrArray === undefined) {
+            return addOrGetCustomAttributes (this.data);
+        }
+
+        if(typeof keyOrArray === 'string' && typeof value === 'string') {
+            addOrGetCustomAttributes (this.data, keyOrArray, value);
+        }
+        else if(typeof keyOrArray === 'object') {
+            addOrGetCustomAttributes (this.data, keyOrArray);
+        }
+        else {
+            throw new Error('Either key or value is not a string!');
+        }
+
+        return this;
+    }
+
 
     /**
      * Export calender as JSON Object to use it later…
@@ -331,7 +364,8 @@ export default class ICalAttendee {
     toJSON(): ICalAttendeeJSONData {
         return Object.assign({}, this.data, {
             delegatedTo: this.data.delegatedTo?.email() || null,
-            delegatedFrom: this.data.delegatedFrom?.email() || null
+            delegatedFrom: this.data.delegatedFrom?.email() || null,
+            x: this.x()
         });
     }
 
@@ -386,7 +420,15 @@ export default class ICalAttendee {
             g += ';EMAIL=' + escape(this.data.email);
         }
 
+        // CUSTOM X ATTRIBUTES
+        if(this.data.x.length) {
+            g += ';' + this.data.x
+                .map(([key, value]) => key.toUpperCase() + '=' + escape(value))
+                .join(';');
+        }
+
         g += ':MAILTO:' + escape(this.data.mailto || this.data.email) + '\r\n';
+
         return g;
     }
 }

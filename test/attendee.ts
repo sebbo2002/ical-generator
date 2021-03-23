@@ -323,6 +323,14 @@ describe('ical-generator Attendee', function () {
         });
     });
 
+    describe('x()', function () {
+        it('works as expected', function () {
+            const a = new ICalAttendee({email: 'foo@example.org'}, new ICalEvent({}, new ICalCalendar()));
+            assert.deepStrictEqual(a, a.x('X-NUM-GUESTS', '5'));
+            assert.ok(a.toString().includes('ATTENDEE;ROLE=REQ-PARTICIPANT;X-NUM-GUESTS=5:MAILTO:foo@example.org'));
+        });
+    });
+
     describe('toJSON()', function () {
         it('should work', function() {
             const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar()));
@@ -338,7 +346,8 @@ describe('ical-generator Attendee', function () {
                 role: 'REQ-PARTICIPANT',
                 rsvp: null,
                 status: 'DELEGATED',
-                type: null
+                type: null,
+                x: []
             });
         });
 
