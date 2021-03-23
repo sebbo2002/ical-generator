@@ -10,7 +10,9 @@ import {
     escape,
     formatDate,
     formatDateTZ,
-    generateCustomAttributes, toDate, toJSON
+    generateCustomAttributes,
+    toDate,
+    toJSON
 } from './tools';
 import ICalAttendee, {ICalAttendeeData} from './attendee';
 import ICalAlarm, {ICalAlarmData} from './alarm';

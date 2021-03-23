@@ -1,7 +1,7 @@
-import {Moment} from 'moment';
-import {Moment as MomentTZ} from 'moment-timezone';
-import {Dayjs} from 'dayjs';
-import {DateTime as LuxonDateTime} from 'luxon';
+import type {Moment} from 'moment';
+import type {Moment as MomentTZ} from 'moment-timezone';
+import type {Dayjs} from 'dayjs';
+import type {DateTime as LuxonDateTime} from 'luxon';
 
 
 export type ICalDateTimeValue = Date | Moment | MomentTZ | Dayjs | LuxonDateTime | string;
@@ -35,6 +35,11 @@ export interface ICalOrganizer {
     name: string;
     email: string;
     mailto?: string;
+}
+
+export interface ICalDescription {
+    plain: string;
+    html?: string;
 }
 
 export enum ICalEventRepeatingFreq {

@@ -210,12 +210,12 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.strictEqual(cal.ttl(), null);
             cal.ttl(86400);
-            assert.strictEqual(cal.ttl()?.as('seconds'), 86400);
+            assert.strictEqual(cal.ttl(), 86400);
         });
 
         it('should change something', function () {
             const cal = new ICalCalendar().ttl(86400);
-            assert.strictEqual(cal.ttl()?.as('seconds'), 86400);
+            assert.strictEqual(cal.ttl(), 86400);
         });
     });
 

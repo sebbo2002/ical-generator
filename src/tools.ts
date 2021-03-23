@@ -1,9 +1,9 @@
 'use strict';
 
-import {Moment} from 'moment';
-import {Moment as MomentTZ} from 'moment-timezone';
-import {Dayjs} from 'dayjs';
-import {DateTime as LuxonDateTime} from 'luxon';
+import type {Moment, Duration} from 'moment';
+import type {Moment as MomentTZ} from 'moment-timezone';
+import type {Dayjs} from 'dayjs';
+import type {DateTime as LuxonDateTime} from 'luxon';
 import {ICalDateTimeValue, ICalOrganizer} from './types';
 
 export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateonly?: boolean, floating?: boolean): string {
@@ -318,6 +318,12 @@ export function isDayjs(value: ICalDateTimeValue): value is Dayjs {
 }
 export function isLuxonDate(value: ICalDateTimeValue): value is LuxonDateTime {
     return typeof value === 'object' && value !== null && typeof (value as LuxonDateTime).toJSDate === 'function';
+}
+
+export function isMomentDuration(value: unknown): value is Duration {
+
+    // @ts-ignore
+    return value !== null && typeof value === 'object' && typeof value.asSeconds === 'function';
 }
 
 export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {

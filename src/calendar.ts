@@ -1,7 +1,14 @@
 'use strict';
 
-import moment from 'moment-timezone';
-import {addOrGetCustomAttributes, checkEnum, foldLines, generateCustomAttributes} from './tools';
+import type {Duration} from 'moment-timezone';
+import {
+    addOrGetCustomAttributes,
+    checkEnum,
+    foldLines,
+    generateCustomAttributes,
+    isMomentDuration,
+    toDurationString
+} from './tools';
 import ICalEvent, {ICalEventData} from './event';
 import {writeFile, writeFileSync} from 'fs';
 import {promises as fsPromises} from 'fs';
@@ -16,7 +23,7 @@ export interface ICalCalendarData {
     timezone?: string | null;
     url?: string | null;
     scale?: string | null;
-    ttl?: number | moment.Duration | string | null;
+    ttl?: number | Duration | null;
     events?: (ICalEvent | ICalEventData)[];
     x?: [string, string][];
 }
@@ -29,7 +36,7 @@ interface ICalCalendarInternalData {
     timezone: string | null;
     url: string | null;
     scale: string | null;
-    ttl: moment.Duration | null;
+    ttl: number | null;
     events: ICalEvent[];
     x: [string, string][];
 }
@@ -254,21 +261,18 @@ export default class ICalCalendar {
      * @example cal.ttl(60 * 60 * 24); // 1 day
      * @since 0.2.5
      */
-    ttl(): moment.Duration | null;
-    ttl(ttl: number | moment.Duration | string | null): this;
-    ttl(ttl?: number | moment.Duration | string | null): this | moment.Duration | null {
+    ttl(): number | null;
+    ttl(ttl: number | Duration | null): this;
+    ttl(ttl?: number | Duration | null): this | number | null {
         if (ttl === undefined) {
             return this.data.ttl;
         }
 
-        if (moment.isDuration(ttl)) {
-            this.data.ttl = ttl;
-        }
-        else if (typeof ttl === 'string') {
-            this.data.ttl = moment.duration(ttl);
+        if (isMomentDuration(ttl)) {
+            this.data.ttl = ttl.asSeconds();
         }
         else if (ttl && ttl > 0) {
-            this.data.ttl = moment.duration(ttl, 'seconds');
+            this.data.ttl = ttl;
         }
         else {
             this.data.ttl = null;
@@ -489,8 +493,8 @@ export default class ICalCalendar {
 
         // TTL
         if (this.data.ttl) {
-            g += 'REFRESH-INTERVAL;VALUE=DURATION:' + this.data.ttl.toISOString() + '\r\n';
-            g += 'X-PUBLISHED-TTL:' + this.data.ttl.toISOString() + '\r\n';
+            g += 'REFRESH-INTERVAL;VALUE=DURATION:' + toDurationString(this.data.ttl) + '\r\n';
+            g += 'X-PUBLISHED-TTL:' + toDurationString(this.data.ttl) + '\r\n';
         }
 
         // Events

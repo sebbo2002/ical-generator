@@ -1,6 +1,5 @@
 'use strict';
 
-import moment from 'moment-timezone';
 import ICalEvent from './event';
 import {
     addOrGetCustomAttributes,
@@ -375,7 +374,7 @@ export default class ICalAlarm {
             throw new Error('No value for `repeat` in ICalAlarm given, but required for `interval`!');
         }
         if (this.data.interval) {
-            g += 'DURATION:' + moment.duration(this.data.interval, 's').toISOString() + '\r\n';
+            g += 'DURATION:' + toDurationString(this.data.interval) + '\r\n';
         }
 
         // ATTACH
