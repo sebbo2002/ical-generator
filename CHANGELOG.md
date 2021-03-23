@@ -1,3 +1,10 @@
+# [2.0.0-develop.5](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.4...v2.0.0-develop.5) (2021-03-23)
+
+
+### Features
+
+* **Event:** Support RRule objects and raw strings in `repeating()` ([4436785](https://github.com/sebbo2002/ical-generator/commit/4436785894dfda4d0186283f89848d9a9a00ce6a)), closes [#190](https://github.com/sebbo2002/ical-generator/issues/190)
+
 # [2.0.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.3...v2.0.0-develop.4) (2021-03-23)
 
 
