@@ -20,8 +20,8 @@ import ICalCategory, {ICalCategoryData} from './category';
 import ICalCalendar from './calendar';
 import {
     ICalDateTimeValue,
+    ICalDescription,
     ICalEventRepeatingFreq,
-    ICalGeo,
     ICalLocation,
     ICalOrganizer,
     ICalRepeatingOptions,
@@ -60,8 +60,7 @@ export interface ICalEventData {
     repeating?: ICalRepeatingOptions | null,
     summary?: string,
     location?: ICalLocation | string | null,
-    description?: string | null,
-    htmlDescription?: string | null,
+    description?: ICalDescription | string | null,
     organizer?: ICalOrganizer | string | null,
     attendees?: ICalAttendee[] | ICalAttendeeData[],
     alarms?: ICalAlarm[] | ICalAlarmData[],
@@ -72,7 +71,7 @@ export interface ICalEventData {
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
     lastModified?: ICalDateTimeValue | null,
-    x?: ({key: string, value: string})[] | [string, string][] | Record<string, string>;
+    x?: ({ key: string, value: string })[] | [string, string][] | Record<string, string>;
 }
 
 export interface ICalEventInternalData {
@@ -88,8 +87,7 @@ export interface ICalEventInternalData {
     repeating: ICalEventInternalRepeatingData | null,
     summary: string,
     location: ICalLocation | null,
-    description: string | null,
-    htmlDescription: string | null,
+    description: ICalDescription | null,
     organizer: ICalOrganizer | null,
     attendees: ICalAttendee[],
     alarms: ICalAlarm[],
@@ -140,7 +138,6 @@ export default class ICalEvent {
             summary: '',
             location: null,
             description: null,
-            htmlDescription: null,
             organizer: null,
             attendees: [],
             alarms: [],
@@ -172,7 +169,6 @@ export default class ICalEvent {
         data.summary && this.summary(data.summary);
         data.location && this.location(data.location);
         data.description && this.description(data.description);
-        data.htmlDescription && this.htmlDescription(data.htmlDescription);
         data.organizer && this.organizer(data.organizer);
         data.attendees && this.attendees(data.attendees);
         data.alarms && this.alarms(data.alarms);
@@ -537,29 +533,23 @@ export default class ICalEvent {
      * Set/Get the event's description
      * @since 0.2.0
      */
-    description(): string | null;
-    description(description: string | null): this;
-    description(description?: string | null): this | string | null {
+    description(): ICalDescription | null;
+    description(description: ICalDescription | string | null): this;
+    description(description?: ICalDescription | string | null): this | ICalDescription | null {
         if (description === undefined) {
             return this.data.description;
         }
-
-        this.data.description = description ? String(description) : null;
-        return this;
-    }
-
-    /**
-     * Set/Get the event's HTML description
-     * @since 0.2.8
-     */
-    htmlDescription(): string | null;
-    htmlDescription(description: string | null): this;
-    htmlDescription(description?: string | null): this | string | null {
-        if (description === undefined) {
-            return this.data.htmlDescription;
+        if (description === null) {
+            this.data.description = null;
+            return this;
         }
 
-        this.data.htmlDescription = description ? String(description) : null;
+        if (typeof description === 'string') {
+            this.data.description = {plain: description};
+        }
+        else {
+            this.data.description = description;
+        }
         return this;
     }
 
@@ -801,7 +791,7 @@ export default class ICalEvent {
      * @since 1.9.0
      * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
-    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): this;
+    x(keyOrArray: ({ key: string, value: string })[] | [string, string][] | Record<string, string>): this;
     x(keyOrArray: string, value: string): this;
     x(): { key: string, value: string }[];
     x(keyOrArray?: ({ key: string, value: string })[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({ key: string, value: string })[] {
@@ -961,23 +951,24 @@ export default class ICalEvent {
                     'X-APPLE-RADIUS=' + escape(this.data.location.radius) + ';' +
                     'X-TITLE=' + escape(this.data.location.title) +
                     ':geo:' + escape(this.data.location.geo?.lat) + ',' + escape(this.data.location.geo?.lon) + '\r\n';
-            } else {
+            }
+            else {
                 g += 'LOCATION:' + escape(this.data.location.title) + '\r\n';
             }
 
-            if(this.data.location.geo) {
+            if (this.data.location.geo) {
                 g += 'GEO:' + escape(this.data.location.geo?.lat) + ';' + escape(this.data.location.geo?.lon) + '\r\n';
             }
         }
 
         // DESCRIPTION
         if (this.data.description) {
-            g += 'DESCRIPTION:' + escape(this.data.description) + '\r\n';
-        }
+            g += 'DESCRIPTION:' + escape(this.data.description.plain) + '\r\n';
 
-        // HTML DESCRIPTION
-        if (this.data.htmlDescription) {
-            g += 'X-ALT-DESC;FMTTYPE=text/html:' + escape(this.data.htmlDescription) + '\r\n';
+            // HTML DESCRIPTION
+            if (this.data.description.html) {
+                g += 'X-ALT-DESC;FMTTYPE=text/html:' + escape(this.data.description.html) + '\r\n';
+            }
         }
 
         // ORGANIZER

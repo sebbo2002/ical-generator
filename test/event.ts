@@ -1029,7 +1029,18 @@ describe('ical-generator Event', function () {
             assert.strictEqual(e.description(), null);
 
             e.description('I don\'t need a description. I\'m far to awesome for descriptions…');
-            assert.strictEqual(e.description(), 'I don\'t need a description. I\'m far to awesome for descriptions…');
+            assert.deepStrictEqual(e.description(), {
+                plain: 'I don\'t need a description. I\'m far to awesome for descriptions…'
+            });
+
+            e.description({
+                plain: 'I don\'t need a description. I\'m far to awesome for descriptions…',
+                html: 'I don\'t need a description.<br />I\'m far to awesome for descriptions…'
+            });
+            assert.deepStrictEqual(e.description(), {
+                plain: 'I don\'t need a description. I\'m far to awesome for descriptions…',
+                html: 'I don\'t need a description.<br />I\'m far to awesome for descriptions…'
+            });
 
             e.description(null);
             assert.strictEqual(e.description(), null);
@@ -1048,36 +1059,15 @@ describe('ical-generator Event', function () {
             }, new ICalCalendar());
 
             event.description('Well. But other people need descriptions… :/');
-            assert.strictEqual(event.description(), 'Well. But other people need descriptions… :/');
-        });
-    });
+            assert.deepStrictEqual(event.description(), {
+                plain: 'Well. But other people need descriptions… :/'
+            });
 
-    describe('htmlDescription()', function () {
-        it('getter should return value', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.strictEqual(e.htmlDescription(), null);
-
-            e.htmlDescription('<marquee>I\'m the best HTML tag in this universe!</marquee>');
-            assert.strictEqual(e.htmlDescription(), '<marquee>I\'m the best HTML tag in this universe!</marquee>');
-
-            e.htmlDescription(null);
-            assert.strictEqual(e.htmlDescription(), null);
-        });
-
-        it('setter should return this', function () {
-            const e = new ICalEvent({}, new ICalCalendar());
-            assert.deepStrictEqual(e, e.htmlDescription(null));
-            assert.deepStrictEqual(e, e.htmlDescription('I don\'t need a description. I\'m far to awesome for descriptions…'));
-        });
-
-        it('should change something', function () {
-            const event = new ICalEvent({
-                start: moment(),
-                summary: 'Example Event'
-            }, new ICalCalendar());
-
-            event.htmlDescription('<marquee>I\'m the best HTML tag in this universe!</marquee>');
-            assert.strictEqual(event.htmlDescription(), '<marquee>I\'m the best HTML tag in this universe!</marquee>');
+            event.description({
+                plain: 'I am uncool text.',
+                html: '<marquee>I\'m the best HTML tag in this universe!</marquee>'
+            });
+            assert.ok(event.toString().includes('<marquee>I\'m the best HTML tag in this universe!</marquee>'));
         });
     });
 
