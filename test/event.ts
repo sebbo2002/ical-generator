@@ -1199,11 +1199,6 @@ describe('ical-generator Event', function () {
             const e = new ICalEvent({}, new ICalCalendar());
             assert.throws(function () {
                 // @ts-ignore
-                e.organizer({name: 'Sebastian Pekarek'});
-            }, /`organizer\.email`/);
-
-            assert.throws(function () {
-                // @ts-ignore
                 e.organizer({email: 'foo'});
             }, /`organizer\.name`/);
         });
@@ -1218,6 +1213,20 @@ describe('ical-generator Event', function () {
                 // @ts-ignore
                 e.organizer(NaN);
             }, /`organizer`/);
+        });
+
+        it('should work without an email', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            event.organizer({name: 'Sebastian Pekarek'});
+            assert.deepStrictEqual(event.organizer(), {
+                name: 'Sebastian Pekarek',
+                email: undefined,
+                mailto: undefined
+            });
         });
     });
 

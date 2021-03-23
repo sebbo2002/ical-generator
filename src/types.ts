@@ -33,7 +33,7 @@ export interface ICalGeo {
 
 export interface ICalOrganizer {
     name: string;
-    email: string;
+    email?: string;
     mailto?: string;
 }
 

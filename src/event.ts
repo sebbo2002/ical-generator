@@ -994,10 +994,14 @@ export default class ICalEvent {
         // ORGANIZER
         if (this.data.organizer) {
             g += 'ORGANIZER;CN="' + escape(this.data.organizer.name) + '"';
+
             if (this.data.organizer.email && this.data.organizer.mailto) {
                 g += ';EMAIL=' + escape(this.data.organizer.email);
             }
-            g += ':mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email) + '\r\n';
+            if(this.data.organizer.email) {
+                g += ':mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email);
+            }
+            g += '\r\n';
         }
 
         // ATTENDEES

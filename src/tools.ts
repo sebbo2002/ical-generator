@@ -236,10 +236,7 @@ export function checkNameAndMail (attribute: string, value: string | ICalOrganiz
     }
 
     if (!result.name) {
-        throw new Error('`organizer.name` is empty!');
-    }
-    if (!result.email) {
-        throw new Error('`organizer.email` is empty!');
+        throw new Error('`' + attribute + '.name` is empty!');
     }
 
     return result;
