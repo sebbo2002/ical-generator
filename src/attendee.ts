@@ -31,6 +31,18 @@ export interface ICalAttendeeData {
     delegatesFrom?: ICalAttendee | ICalAttendeeData | string | null;
 }
 
+interface ICalAttendeeJSONData {
+    name: string | null;
+    email: string | null;
+    mailto: string | null;
+    status: ICalAttendeeStatus | null;
+    role: ICalAttendeeRole;
+    rsvp: boolean | null;
+    type: ICalAttendeeType | null;
+    delegatedTo: string | null;
+    delegatedFrom: string | null;
+}
+
 export enum ICalAttendeeRole {
     CHAIR = 'CHAIR',
     REQ = 'REQ-PARTICIPANT',
@@ -314,11 +326,9 @@ export default class ICalAttendee {
 
     /**
      * Export calender as JSON Object to use it later…
-     *
      * @since 0.2.4
-     * @returns {Object} Calendar
      */
-    toJSON(): ICalInternalAttendeeData {
+    toJSON(): ICalAttendeeJSONData {
         return Object.assign({}, this.data, {
             delegatedTo: this.data.delegatedTo?.email() || null,
             delegatedFrom: this.data.delegatedFrom?.email() || null
@@ -330,7 +340,6 @@ export default class ICalAttendee {
      * Export Event to iCal
      *
      * @since 0.2.0
-     * @returns {String}
      */
     toString (): string {
         let g = 'ATTENDEE';

@@ -486,6 +486,11 @@ describe('ical-generator Alarm', function () {
                 x: []
             });
         });
+
+        it('should be compatible with constructor (type check)', function () {
+            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
+            new ICalAlarm(a.toJSON(), new ICalEvent({}, new ICalCalendar()));
+        });
     });
 
     describe('generate()', function () {

@@ -8,6 +8,7 @@ import {join} from 'path';
 import {getPortPromise} from 'portfinder';
 import ICalCalendar, {ICalCalendarMethod} from '../src/calendar';
 import ICalEvent from '../src/event';
+import ICalAlarm from '../src/alarm';
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
@@ -578,6 +579,11 @@ describe('ical-generator Calendar', function () {
                 {'key': 'X-FOO', 'value': 'bar'},
                 {'key': 'X-LOREM', 'value': 'ipsum'}
             ]);
+        });
+
+        it('should be compatible with constructor (type check)', function () {
+            const a = new ICalCalendar();
+            new ICalCalendar(a.toJSON());
         });
     });
 

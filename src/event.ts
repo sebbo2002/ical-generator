@@ -71,7 +71,7 @@ export interface ICalEventData {
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
     lastModified?: ICalDateTimeValue | null,
-    x?: ({ key: string, value: string })[] | [string, string][] | Record<string, string>;
+    x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
 export interface ICalEventInternalData {
@@ -99,6 +99,33 @@ export interface ICalEventInternalData {
     created: ICalDateTimeValue | null,
     lastModified: ICalDateTimeValue | null,
     x: [string, string][];
+}
+
+export interface ICalEventJSONData {
+    id: string,
+    sequence: number,
+    start: string | null,
+    end: string | null,
+    recurrenceId: string | null,
+    timezone: string | null,
+    stamp: string,
+    allDay: boolean,
+    floating: boolean,
+    repeating: ICalEventInternalRepeatingData | string | null,
+    summary: string,
+    location: ICalLocation | null,
+    description: ICalDescription | null,
+    organizer: ICalOrganizer | null,
+    attendees: ICalAttendee[],
+    alarms: ICalAlarm[],
+    categories: ICalCategory[],
+    status: ICalEventStatus | null,
+    busystatus: ICalEventBusyStatus | null,
+    url: string | null,
+    transparency: ICalEventTransparency | null,
+    created: string | null,
+    lastModified: string | null,
+    x: {key: string, value: string}[];
 }
 
 export interface ICalEventInternalRepeatingData {
@@ -818,7 +845,7 @@ export default class ICalEvent {
      * Export calender as JSON Object to use it later…
      * @since 0.2.4
      */
-    toJSON(): ICalEventInternalData {
+    toJSON(): ICalEventJSONData {
         let repeating: ICalEventInternalRepeatingData | string | null = null;
         if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
             repeating = this.data.repeating.toString();

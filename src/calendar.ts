@@ -9,7 +9,7 @@ import {
     isMomentDuration,
     toDurationString
 } from './tools';
-import ICalEvent, {ICalEventData} from './event';
+import ICalEvent, {ICalEventData, ICalEventJSONData} from './event';
 import {writeFile, writeFileSync} from 'fs';
 import {promises as fsPromises} from 'fs';
 import {ServerResponse} from 'http';
@@ -25,7 +25,7 @@ export interface ICalCalendarData {
     scale?: string | null;
     ttl?: number | Duration | null;
     events?: (ICalEvent | ICalEventData)[];
-    x?: [string, string][];
+    x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
 interface ICalCalendarInternalData {
@@ -39,6 +39,19 @@ interface ICalCalendarInternalData {
     ttl: number | null;
     events: ICalEvent[];
     x: [string, string][];
+}
+
+interface ICalCalendarJSONData {
+    prodId: string;
+    method: ICalCalendarMethod | null;
+    name: string | null;
+    description: string | null;
+    timezone: string | null;
+    url: string | null;
+    scale: string | null;
+    ttl: number | null;
+    events: ICalEventJSONData[];
+    x: {key: string, value: string}[];
 }
 
 export interface ICalCalendarProdIdData {
@@ -401,10 +414,10 @@ export default class ICalCalendar {
      *
      * @since 1.9.0
      */
-    x (keyOrArray: ({key: string, value: string})[] | [string, string][] | Record<string, string>): this;
+    x (keyOrArray: {key: string, value: string}[] | [string, string][] | Record<string, string>): this;
     x (keyOrArray: string, value: string): this;
     x (): {key: string, value: string}[];
-    x (keyOrArray?: ({key: string, value: string})[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
+    x (keyOrArray?: {key: string, value: string}[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
         if(keyOrArray === undefined) {
             return addOrGetCustomAttributes (this.data);
         }
@@ -427,10 +440,9 @@ export default class ICalCalendar {
      * Export calender as JSON Object to use it later…
      * @since 0.2.4
      */
-    toJSON(): ICalCalendarInternalData {
+    toJSON(): ICalCalendarJSONData {
         return Object.assign({}, this.data, {
             events: this.data.events.map(event => event.toJSON()),
-            ttl: this.data.ttl ? this.data.ttl.toString() : null,
             x: this.x()
         });
     }

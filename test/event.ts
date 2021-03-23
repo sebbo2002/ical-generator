@@ -1600,6 +1600,7 @@ describe('ical-generator Event', function () {
             assert.deepStrictEqual(event.toJSON().start, date.toJSON(), 'start is okay');
             assert.strictEqual(typeof event.toJSON().start, 'string', 'start is string');
         });
+
         it('should stringify RRule objects', function() {
             const date = new Date();
             const rule = new RRule({
@@ -1618,6 +1619,11 @@ describe('ical-generator Event', function () {
             const event2 = new ICalEvent(event.toJSON(), new ICalCalendar());
             const after = event2.toString();
             assert.strictEqual(after, before);
+        });
+
+        it('should be compatible with constructor (type check)', function () {
+            const a = new ICalEvent({}, new ICalCalendar());
+            new ICalEvent(a.toJSON(), new ICalCalendar());
         });
     });
 

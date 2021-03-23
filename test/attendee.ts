@@ -4,6 +4,7 @@ import assert from 'assert';
 import ICalCalendar from '../src/calendar';
 import ICalEvent from '../src/event';
 import ICalAttendee, {ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
+import ICalAlarm from '../src/alarm';
 
 describe('ical-generator Attendee', function () {
     describe('constructor()', function () {
@@ -339,6 +340,11 @@ describe('ical-generator Attendee', function () {
                 status: 'DELEGATED',
                 type: null
             });
+        });
+
+        it('should be compatible with constructor (type check)', function () {
+            const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar()));
+            new ICalAttendee(a.toJSON(), new ICalEvent({}, new ICalCalendar()));
         });
     });
 

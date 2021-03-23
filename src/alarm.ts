@@ -7,7 +7,8 @@ import {
     escape,
     generateCustomAttributes,
     checkDate,
-    toDurationString
+    toDurationString,
+    toJSON
 } from './tools';
 import {ICalDateTimeValue} from './types';
 
@@ -33,7 +34,7 @@ export interface ICalAlarmData {
     interval?: number | null;
     attach?: string | ICalAttachment | null;
     description?: string | null;
-    x?: [string, string][];
+    x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
 interface ICalInternalAlarmData {
@@ -45,6 +46,16 @@ interface ICalInternalAlarmData {
     description: string | null;
     x: [string, string][];
     [key: string]: unknown;
+}
+
+interface ICalAlarmJSONData {
+    type: ICalAlarmType | null;
+    trigger: string | number | null;
+    repeat: number | null;
+    interval: number | null;
+    attach: ICalAttachment | null;
+    description: string | null;
+    x: {key: string, value: string}[];
 }
 
 
@@ -326,9 +337,10 @@ export default class ICalAlarm {
      * Export calender as JSON Object to use it later…
      * @since 0.2.4
      */
-    toJSON (): ICalInternalAlarmData {
+    toJSON (): ICalAlarmJSONData {
+        const trigger = this.trigger();
         return Object.assign({}, this.data, {
-            trigger: this.trigger(),
+            trigger: typeof trigger === 'number' ? trigger : toJSON(trigger),
             x: this.x()
         });
     }
