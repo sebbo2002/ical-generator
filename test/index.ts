@@ -4,9 +4,7 @@ import assert from 'assert';
 import ical, {
     ICalCalendar,
     ICalCalendarMethod,
-    ICalEvent,
-    checkDate,
-    formatDate
+    ICalEvent
 } from '../src';
 
 describe('ical-generator Index', function() {
@@ -28,13 +26,5 @@ describe('ical-generator Index', function() {
 
     it('should export ICalEvent', function() {
         assert.ok(ICalEvent);
-    });
-
-    it('should export checkDate', function() {
-        assert.ok(checkDate);
-    });
-
-    it('should export formatDate', function() {
-        assert.ok(formatDate);
     });
 });

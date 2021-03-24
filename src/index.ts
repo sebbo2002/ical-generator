@@ -46,10 +46,13 @@ export {
 
 export {
     default as ICalEvent,
-    ICalEventData
+    ICalEventStatus,
+    ICalEventBusyStatus,
+    ICalEventTransparency,
+    ICalEventData,
+    ICalEventJSONData
 } from './event';
 
 export {
-    checkDate,
-    formatDate
-} from './tools';
+    ICalDateTimeValue
+} from './types';

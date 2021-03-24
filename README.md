@@ -17,12 +17,12 @@ what's in the new version.</p>
 </td></tr></table>
 
 
-## Installation
+## 📦 Installation
 
 	npm install ical-generator
 
 
-## Quick Start
+## ⚡️ Quick Start
 
 ```javascript
 const ical = require('ical-generator');
@@ -48,8 +48,9 @@ http.createServer(function(req, res) {
 });
 ```
 
+## 📑 API-Reference
 
-## Just another example
+## 🕒 Date, Time & Timezones
 
 ```javascript
 const ical = require('ical-generator');

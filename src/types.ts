@@ -4,6 +4,12 @@ import type {Dayjs} from 'dayjs';
 import type {DateTime as LuxonDateTime} from 'luxon';
 
 
+/**
+ * ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
+ * [moment.js](https://momentjs.com/) (and [moment-timezone](https://momentjs.com/timezone/), [Day.js](https://day.js.org/en/) and
+ * [Luxon](https://moment.github.io/luxon/)'s [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
+ * objects. You can also pass a string which is then passed to javascript's Date internally.
+ */
 export type ICalDateTimeValue = Date | Moment | MomentTZ | Dayjs | LuxonDateTime | string;
 
 export interface ICalRepeatingOptions {
