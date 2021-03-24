@@ -72,9 +72,41 @@ export enum ICalCalendarMethod {
 }
 
 
+/**
+ * Usually you get an `ICalCalendar` object like this:
+ * ```javascript
+ * import ical from 'ical-generator';
+ * const calendar = ical();
+ * ```
+ *
+ * But you can also use the constructor directly like this:
+ * ```javascript
+ * import {ICalCalendar} from 'ical-generator';
+ * const calendar = new ICalCalendar();
+ * ```
+ */
 export default class ICalCalendar {
     private readonly data: ICalCalendarInternalData;
 
+    /**
+     * You can pass options to setup your calendar or use setters to do this.
+     *
+     * ```javascript
+     * const ical = require('ical-generator');
+     * const cal = ical({domain: 'sebbo.net'});
+     *
+     * // is the same as
+     *
+     * const cal = ical().domain('sebbo.net');
+     *
+     * // is the same as
+     *
+     * const cal = ical();
+     * cal.domain('sebbo.net');
+     * ```
+     *
+     * @param data Calendar data
+     */
     constructor(data: ICalCalendarData = {}) {
         this.data = {
             prodId: '//sebbo.net//ical-generator//EN',
@@ -103,22 +135,29 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's prodid. `prodid` can be either a
-     * string like "//sebbo.net//ical-generator//EN" or an
-     * object like
-     * {
-     *   "company": "sebbo.net",
-     *   "product": "ical-generator"
-     *   "language": "EN"
-     * }
+     * Get your feed's prodid. Will always return a string.
+     * @since 0.2.0
+     */
+    prodId(): string;
+
+    /**
+     * Set your feed's prodid. `prodid` can be either a
+     * string like `//sebbo.net//ical-generator//EN` or a
+     * valid [[`ICalCalendarProdIdData`]] object. `language`
+     * is optional and defaults to `EN`.
      *
-     * `language` is optional and defaults to `EN`.
+     * ```javascript
+     * cal.prodId({
+     *     company: 'My Company',
+     *     product: 'My Product',
+     *     language: 'EN' // optional, defaults to EN
+     * });
+     * ```
      *
      * @since 0.2.0
      */
-    prodId(): string | null;
     prodId(prodId: ICalCalendarProdIdData | string): this;
-    prodId(prodId?: ICalCalendarProdIdData | string): this | string | null {
+    prodId(prodId?: ICalCalendarProdIdData | string): this | string {
         if (!prodId) {
             return this.data.prodId;
         }
@@ -154,10 +193,25 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's method
+     * Get the feed method attribute.
+     * See [[`ICalCalendarMethod`]] for possible results.
+     *
      * @since 0.2.8
      */
     method(): ICalCalendarMethod | null;
+
+    /**
+     * Set the feed method attribute.
+     * See [[`ICalCalendarMethod`]] for available options.
+     *
+     * #### Typescript Example
+     * ```typescript
+     * import {ICalCalendarMethod} from 'ical-generator';
+     * calendar.method(ICalCalendarMethod.PUBLISH);
+     * ```
+     *
+     * @since 0.2.8
+     */
     method(method: ICalCalendarMethod | null): this;
     method(method?: ICalCalendarMethod | null): this | ICalCalendarMethod | null {
         if (method === undefined) {
@@ -174,10 +228,17 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's name…
+     * Get your feed's name
      * @since 0.2.0
      */
     name(): string | null;
+
+    /**
+     * Set your feed's name. Is used to fill `NAME`
+     * and `X-WR-CALNAME` in your iCal file.
+     *
+     * @since 0.2.0
+     */
     name(name: string | null): this;
     name(name?: string | null): this | string | null {
         if (name === undefined) {
@@ -190,10 +251,15 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's description…
+     * Get your feed's description
      * @since 0.2.7
      */
     description(): string | null;
+
+    /**
+     * Set your feed's description
+     * @since 0.2.7
+     */
     description(description: string | null): this;
     description(description?: string | null): this | string | null {
         if (description === undefined) {
@@ -206,13 +272,23 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's timezone.
-     * Used to set `X-WR-TIMEZONE`.
-     *
-     * @example cal.timezone('America/New_York');
+     * Get the current calendar timezone
      * @since 0.2.0
      */
     timezone(): string | null;
+
+    /**
+     * Use this method to set your feed's timezone. Is used
+     * to fill `TIMEZONE-ID` and `X-WR-TIMEZONE` in your iCal export.
+     * Please not that all date values are treaded differently, if
+     * a timezone was set. See [[`formatDate`]] for details.
+     *
+     * ```javascript
+     * cal.timezone('America/New_York');
+     * ```
+     *
+     * @since 0.2.0
+     */
     timezone(timezone: string | null): this;
     timezone(timezone?: string | null): this | string | null {
         if (timezone === undefined) {
@@ -225,12 +301,20 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's URL
-     *
-     * @example cal.url('http://example.com/my/feed.ical');
+     * Get your feed's URL
      * @since 0.2.5
      */
     url(): string | null;
+
+    /**
+     * Set your feed's URL
+     *
+     * ```javascript
+     * calendar.url('http://example.com/my/feed.ical');
+     * ```
+     *
+     * @since 0.2.5
+     */
     url(url: string | null): this;
     url(url?: string | null): this | string | null {
         if (url === undefined) {
@@ -243,13 +327,26 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's CALSCALE
+     * Get current value of the `CALSCALE` attribute. It will
+     * return `null` if no value was set. The iCal standard
+     * specifies this as `GREGORIAN` if no value is present.
      *
-     * @example cal.scale('gregorian');
      * @since 1.8.0
-     * @returns {ICalCalendar|String}
      */
     scale(): string | null;
+
+    /**
+     * Use this method to set your feed's `CALSCALE` attribute. There is no
+     * default value for this property and it will not appear in your iCal
+     * file unless set. The iCal standard specifies this as `GREGORIAN` if
+     * no value is present.
+     *
+     * ```javascript
+     * cal.scale('gregorian');
+     * ```
+     *
+     * @since 1.8.0
+     */
     scale(scale: string | null): this;
     scale(scale?: string | null): this | string | null {
         if (scale === undefined) {
@@ -268,13 +365,25 @@ export default class ICalCalendar {
 
 
     /**
-     * Set/Get your feed's TTL.
-     * Used to set `X-PUBLISHED-TTL` and `REFRESH-INTERVAL`.
-     *
-     * @example cal.ttl(60 * 60 * 24); // 1 day
+     * Get the current ttl duration in seconds
      * @since 0.2.5
      */
     ttl(): number | null;
+
+    /**
+     * Use this method to set your feed's time to live
+     * (in seconds). Is used to fill `REFRESH-INTERVAL` and
+     * `X-PUBLISHED-TTL` in your iCal.
+     *
+     * ```javascript
+     * const cal = ical().ttl(60 * 60 * 24); // 1 day
+     * ```
+     *
+     * You can also pass a moment.js duration object. Zero, null
+     * or negative numbers will reset the `ttl` attribute.
+     *
+     * @since 0.2.5
+     */
     ttl(ttl: number | Duration | null): this;
     ttl(ttl?: number | Duration | null): this | number | null {
         if (ttl === undefined) {
@@ -296,7 +405,18 @@ export default class ICalCalendar {
 
 
     /**
-     * Create a new Event and return the event object…
+     * Creates a new [[`ICalEvent`]] and returns it. Use options to prefill the event's attributes.
+     * Calling this method without options will create an empty event.
+     *
+     * ```javascript
+     * const ical = require('ical-generator');
+     * const cal = ical();
+     * const event = cal.createEvent({summary: 'My Event'});
+     *
+     * // overwrite event summary
+     * event.summary('Your Event');
+     * ```
+     *
      * @since 0.2.0
      */
     createEvent(data: ICalEvent | ICalEventData): ICalEvent {
@@ -307,12 +427,49 @@ export default class ICalCalendar {
 
 
     /**
-     * Get all events or add multiple events. Events
-     * that have already been added are retained.
+     * Returns all events of this calendar.
+     *
+     * ```javascript
+     * const cal = ical();
+     *
+     * cal.events([
+     *     {
+     *        start: new Date(),
+     *        end: new Date(new Date().getTime() + 3600000),
+     *        summary: 'Example Event',
+     *        description: 'It works ;)',
+     *        url: 'http://sebbo.net/'
+     *     }
+     * ]);
+     *
+     * cal.events(); // --> [ICalEvent]
+     * ```
      *
      * @since 0.2.0
      */
     events(): ICalEvent[];
+
+    /**
+     * Add multiple events to your calendar.
+     *
+     * ```javascript
+     * const cal = ical();
+     *
+     * cal.events([
+     *     {
+     *        start: new Date(),
+     *        end: new Date(new Date().getTime() + 3600000),
+     *        summary: 'Example Event',
+     *        description: 'It works ;)',
+     *        url: 'http://sebbo.net/'
+     *     }
+     * ]);
+     *
+     * cal.events(); // --> [ICalEvent]
+     * ```
+     *
+     * @since 0.2.0
+     */
     events(events: (ICalEvent | ICalEventData)[]): this;
     events(events?: (ICalEvent | ICalEventData)[]): this | ICalEvent[] {
         if (!events) {
@@ -337,10 +494,25 @@ export default class ICalCalendar {
 
 
     /**
-     * Save ical file with `fs.save`. Only works in node.js environments.
-     * If no callback is specified, `fs/promises` is used and a promise is returned.
+     * Save ical file using [`fs/promises`](https://nodejs.org/api/fs.html#fs_fspromises_writefile_file_data_options).
+     * Only works in node.js environments.
+     *
+     * ```javascript
+     * await calendar.save('./calendar.ical');
+     * ```
      */
     save(path: string): Promise<void>;
+
+    /**
+     * Save ical file with [`fs.writeFile`](http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback).
+     * Only works in node.js environments.
+     *
+     * ```javascript
+     * calendar.save('./calendar.ical', err => {
+     *     console.log(err);
+     * });
+     * ```
+     */
     save(path: string, cb?: (err: NodeJS.ErrnoException | null) => void): this;
     save(path: string, cb?: (err: NodeJS.ErrnoException | null) => void): this | Promise<void> {
         if (cb) {
@@ -353,7 +525,13 @@ export default class ICalCalendar {
 
 
     /**
-     * Save ical file with `fs.saveSync`. Only works in node.js environments.
+     * Save Calendar to disk synchronously using
+     * [fs.writeFileSync](http://nodejs.org/api/fs.html#fs_fs_writefilesync_filename_data_options).
+     * Only works in node.js environments.
+     *
+     * ```javascript
+     * calendar.saveSync('./calendar.ical');
+     * ```
      */
     saveSync(path: string): this {
         writeFileSync(path, this.toString());
@@ -362,11 +540,11 @@ export default class ICalCalendar {
 
 
     /**
-     * Serve ical file
+     * Send calendar to the user when using HTTP using the passed `ServerResponse` object.
+     * Use second parameter `filename` to change the filename, which defaults to `'calendar.ics'`.
      *
-     * @param {http.ServerResponse} response Response
-     * @param {String} [filename = 'calendar.ics'] Filename
-     * @returns {Number} Number of Bytes written
+     * @param response HTTP Response object which is used to send the calendar
+     * @param [filename = 'calendar.ics'] Filename of the calendar file
      */
     serve(response: ServerResponse, filename = 'calendar.ics'): this {
         response.writeHead(200, {
@@ -380,11 +558,11 @@ export default class ICalCalendar {
 
 
     /**
-     * Returns a Blob which you can use to download or to create an url
-     * so it's only working on modern browsers supporting the Blob API.
+     * Generates a blob to use for downloads or to generate a download URL.
+     * Only supported in browsers supporting the Blob API.
      *
      * Unfortunately, because node.js has no Blob implementation (they have Buffer
-     * instead), this can't be tested right now. Sorry Dave…
+     * instead), this method is currently untested. Sorry Dave…
      *
      * @since 1.9.0
      */
@@ -395,7 +573,7 @@ export default class ICalCalendar {
 
     /**
      * Returns a URL to download the ical file. Uses the Blob object internally,
-     * so it's only working on modern browsers supporting this API.
+     * so it's only supported in browsers supporting the Blob API.
      *
      * Unfortunately, because node.js has no Blob implementation (they have Buffer
      * instead), this can't be tested right now. Sorry Dave…
@@ -408,14 +586,48 @@ export default class ICalCalendar {
 
 
     /**
-     * Get/Set X-* attributes. Woun't filter double attributes,
+     * Set X-* attributes. Woun't filter double attributes,
      * which are also added by another method (e.g. busystatus),
      * so these attributes may be inserted twice.
+     *
+     * ```javascript
+     * calendar.x([
+     *     {
+     *         key: "X-MY-CUSTOM-ATTR",
+     *         value: "1337!"
+     *     }
+     * ]);
+     *
+     * calendar.x([
+     *     ["X-MY-CUSTOM-ATTR", "1337!"]
+     * ]);
+     *
+     * calendar.x({
+     *     "X-MY-CUSTOM-ATTR": "1337!"
+     * });
+     * ```
      *
      * @since 1.9.0
      */
     x (keyOrArray: {key: string, value: string}[] | [string, string][] | Record<string, string>): this;
+
+    /**
+     * Set a X-* attribute. Woun't filter double attributes,
+     * which are also added by another method (e.g. busystatus),
+     * so these attributes may be inserted twice.
+     *
+     * ```javascript
+     * calendar.x("X-MY-CUSTOM-ATTR", "1337!");
+     * ```
+     *
+     * @since 1.9.0
+     */
     x (keyOrArray: string, value: string): this;
+
+    /**
+     * Get all custom X-* attributes.
+     * @since 1.9.0
+     */
     x (): {key: string, value: string}[];
     x (keyOrArray?: {key: string, value: string}[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({key: string, value: string})[] {
         if(keyOrArray === undefined) {
@@ -437,7 +649,18 @@ export default class ICalCalendar {
 
 
     /**
-     * Export calender as JSON Object to use it later…
+     * Return a shallow copy of the calendar's options for JSON stringification.
+     * Third party objects like moment.js values or RRule objects are stringified
+     * as well. Can be used for persistence.
+     *
+     * ```javascript
+     * const cal = ical();
+     * const json = JSON.stringify(cal);
+     *
+     * // later: restore calendar data
+     * cal = ical(json);
+     * ```
+     *
      * @since 0.2.4
      */
     toJSON(): ICalCalendarJSONData {
@@ -449,7 +672,7 @@ export default class ICalCalendar {
 
 
     /**
-     * Get number of events in calendar…
+     * Get the number of events added to your calendar
      */
     length(): number {
         return this.data.events.length;
@@ -457,10 +680,12 @@ export default class ICalCalendar {
 
 
     /**
-     * Return ical as string…
+     * Return generated calendar as a string.
      *
-     * @returns {string}
-     * @private
+     * ```javascript
+     * const cal = ical();
+     * console.log(cal.toString()); // → BEGIN:VCALENDAR…
+     * ```
      */
     toString(): string {
         let g = '';
