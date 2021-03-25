@@ -2705,10 +2705,40 @@ img {
 <nav class="tsd-navigation secondary">
 	<ul>
 		<li class=" tsd-kind-enum">
+			<a href="../enums/icalalarmtype.html" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Type</a>
+		</li>
+		<li class=" tsd-kind-enum">
+			<a href="../enums/icalattendeerole.html" class="tsd-kind-icon">ICal<wbr>Attendee<wbr>Role</a>
+		</li>
+		<li class=" tsd-kind-enum">
+			<a href="../enums/icalattendeestatus.html" class="tsd-kind-icon">ICal<wbr>Attendee<wbr>Status</a>
+		</li>
+		<li class=" tsd-kind-enum">
+			<a href="../enums/icalattendeetype.html" class="tsd-kind-icon">ICal<wbr>Attendee<wbr>Type</a>
+		</li>
+		<li class=" tsd-kind-enum">
 			<a href="../enums/icalcalendarmethod.html" class="tsd-kind-icon">ICal<wbr>Calendar<wbr>Method</a>
+		</li>
+		<li class=" tsd-kind-enum">
+			<a href="../enums/icaleventbusystatus.html" class="tsd-kind-icon">ICal<wbr>Event<wbr>Busy<wbr>Status</a>
+		</li>
+		<li class=" tsd-kind-enum">
+			<a href="../enums/icaleventstatus.html" class="tsd-kind-icon">ICal<wbr>Event<wbr>Status</a>
+		</li>
+		<li class=" tsd-kind-enum">
+			<a href="../enums/icaleventtransparency.html" class="tsd-kind-icon">ICal<wbr>Event<wbr>Transparency</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="icalalarm.html" class="tsd-kind-icon">ICal<wbr>Alarm</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="icalattendee.html" class="tsd-kind-icon">ICal<wbr>Attendee</a>
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="icalcalendar.html" class="tsd-kind-icon">ICal<wbr>Calendar</a>
+		</li>
+		<li class=" tsd-kind-class">
+			<a href="icalcategory.html" class="tsd-kind-icon">ICal<wbr>Category</a>
 		</li>
 		<li class="current tsd-kind-class">
 			<a href="icalevent.html" class="tsd-kind-icon">ICal<wbr>Event</a>
@@ -2815,22 +2845,46 @@ img {
 			</ul>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalalarmdata.html" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Data</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalalarmjsondata.html" class="tsd-kind-icon">ICal<wbr>AlarmJSONData</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalattachment.html" class="tsd-kind-icon">ICal<wbr>Attachment</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalattendeedata.html" class="tsd-kind-icon">ICal<wbr>Attendee<wbr>Data</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalattendeejsondata.html" class="tsd-kind-icon">ICal<wbr>AttendeeJSONData</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="../interfaces/icalcalendardata.html" class="tsd-kind-icon">ICal<wbr>Calendar<wbr>Data</a>
+		</li>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalcalendarjsondata.html" class="tsd-kind-icon">ICal<wbr>CalendarJSONData</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="../interfaces/icalcalendarprodiddata.html" class="tsd-kind-icon">ICal<wbr>Calendar<wbr>Prod<wbr>IdData</a>
 		</li>
 		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icalcategorydata.html" class="tsd-kind-icon">ICal<wbr>Category<wbr>Data</a>
+		</li>
+		<li class=" tsd-kind-interface">
 			<a href="../interfaces/icaleventdata.html" class="tsd-kind-icon">ICal<wbr>Event<wbr>Data</a>
 		</li>
-		<li class=" tsd-kind-function">
-			<a href="../index.html#checkdate" class="tsd-kind-icon">check<wbr>Date</a>
+		<li class=" tsd-kind-interface">
+			<a href="../interfaces/icaleventjsondata.html" class="tsd-kind-icon">ICal<wbr>EventJSONData</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../index.html#icalalarmtypevalue" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value</a>
+		</li>
+		<li class=" tsd-kind-type-alias">
+			<a href="../index.html#icaldatetimevalue" class="tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="../index.html#default" class="tsd-kind-icon">default</a>
-		</li>
-		<li class=" tsd-kind-function">
-			<a href="../index.html#formatdate" class="tsd-kind-icon">format<wbr>Date</a>
 		</li>
 	</ul>
 </nav>
@@ -2838,11 +2892,13 @@ img {
 	<div class="content-wrap">
 		<section class="tsd-panel tsd-comment">
 			<div class="tsd-comment tsd-typography">
-				<dl class="tsd-comment-tags">
-					<dt>author</dt>
-					<dd><p>Sebastian Pekarek</p>
-					</dd>
-				</dl>
+				<div class="lead">
+					<p>Usually you get an <code>ICalCalendar</code> object like this:</p>
+					<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">calendar</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #001080">calendar</span><span style="color: #000000">.</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+</code></pre>
+				</div>
 			</div>
 		</section>
 		<section class="tsd-panel tsd-hierarchy">
@@ -2915,16 +2971,28 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L154">event.ts:154</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L158">event.ts:158</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Constructor of [[<code>ICalEvent</code>]. The calendar reference is
+								required to query the calendar&#39;s timezone when required.</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>data: <a href="../interfaces/icaleventdata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalEventData</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Calendar Event Data</p>
+								</div>
 							</li>
 							<li>
 								<h5>calendar: <a href="icalcalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Reference to ICalCalendar object</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -2938,19 +3006,19 @@ img {
 				<a name="alarms" class="tsd-anchor"></a>
 				<h3>alarms</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">alarms<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span></li>
-					<li class="tsd-signature tsd-kind-icon">alarms<span class="tsd-signature-symbol">(</span>alarms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAlarmData</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">alarms<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a><span class="tsd-signature-symbol">[]</span></li>
+					<li class="tsd-signature tsd-kind-icon">alarms<span class="tsd-signature-symbol">(</span>alarms<span class="tsd-signature-symbol">: </span><a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalalarmdata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAlarmData</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L666">event.ts:666</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L931">event.ts:931</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Get all alarms or add alarms…</p>
+								<p>Get all alarms</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -2958,18 +3026,37 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a><span class="tsd-signature-symbol">[]</span></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L667">event.ts:667</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L949">event.ts:949</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add one or multiple alarms</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">().</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">alarms</span><span style="color: #000000">([</span>
+<span style="color: #000000">    {</span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;display&#039;</span><span style="color: #000000">, </span><span style="color: #001080">trigger:</span><span style="color: #000000"> </span><span style="color: #098658">600</span><span style="color: #000000">},</span>
+<span style="color: #000000">    {</span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;audio&#039;</span><span style="color: #000000">, </span><span style="color: #001080">trigger:</span><span style="color: #000000"> </span><span style="color: #098658">300</span><span style="color: #000000">}</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">alarms</span><span style="color: #000000">(); </span><span style="color: #008000">// --&gt; [ICalAlarm, ICalAlarm]</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>alarms: <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAlarmData</span><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>alarms: <a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalalarmdata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAlarmData</a><span class="tsd-signature-symbol">[]</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -2987,12 +3074,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L394">event.ts:394</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L484">event.ts:484</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s allDay flag</p>
+								<p>Get the event&#39;s allDay flag</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3005,9 +3092,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L395">event.ts:395</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L495">event.ts:495</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s allDay flag.</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">allDay</span><span style="color: #000000">(</span><span style="color: #0000FF">true</span><span style="color: #000000">); </span><span style="color: #008000">// → appointment is for the whole day</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3022,19 +3121,19 @@ img {
 				<a name="attendees" class="tsd-anchor"></a>
 				<h3>attendees</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">attendees<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span></li>
-					<li class="tsd-signature tsd-kind-icon">attendees<span class="tsd-signature-symbol">(</span>attendees<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAttendeeData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">attendees<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a><span class="tsd-signature-symbol">[]</span></li>
+					<li class="tsd-signature tsd-kind-icon">attendees<span class="tsd-signature-symbol">(</span>attendees<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalattendeedata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAttendeeData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L636">event.ts:636</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L872">event.ts:872</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Get all attendees or add attendees…</p>
+								<p>Get all attendees</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3042,18 +3141,37 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a><span class="tsd-signature-symbol">[]</span></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L637">event.ts:637</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L890">event.ts:890</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add multiple attendees to your event</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">().</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">attendees</span><span style="color: #000000">([</span>
+<span style="color: #000000">    {</span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;a@example.com&#039;</span><span style="color: #000000">, </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Person A&#039;</span><span style="color: #000000">},</span>
+<span style="color: #000000">    {</span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;b@example.com&#039;</span><span style="color: #000000">, </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Person B&#039;</span><span style="color: #000000">}</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">attendees</span><span style="color: #000000">(); </span><span style="color: #008000">// --&gt; [ICalAttendee, ICalAttendee]</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>attendees: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAttendeeData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>attendees: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalattendeedata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAttendeeData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3064,19 +3182,19 @@ img {
 				<a name="busystatus" class="tsd-anchor"></a>
 				<h3>busystatus</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">busystatus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventBusyStatus</span></li>
-					<li class="tsd-signature tsd-kind-icon">busystatus<span class="tsd-signature-symbol">(</span>busystatus<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventBusyStatus</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">busystatus<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventbusystatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventBusyStatus</a></li>
+					<li class="tsd-signature tsd-kind-icon">busystatus<span class="tsd-signature-symbol">(</span>busystatus<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventbusystatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventBusyStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L729">event.ts:729</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1052">event.ts:1052</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s busy status on Microsoft param</p>
+								<p>Get the event&#39;s busy status</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3084,18 +3202,31 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventBusyStatus</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventbusystatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventBusyStatus</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L730">event.ts:730</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1064">event.ts:1064</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s busy status</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000">, {</span><span style="color: #001080">ICalEventBusyStatus</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">busystatus</span><span style="color: #000000">(</span><span style="color: #001080">ICalEventStatus</span><span style="color: #000000">.</span><span style="color: #0070C1">BUSY</span><span style="color: #000000">);</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>1.0.2</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>busystatus: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventBusyStatus</span></h5>
+								<h5>busystatus: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventbusystatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventBusyStatus</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3106,19 +3237,19 @@ img {
 				<a name="categories" class="tsd-anchor"></a>
 				<h3>categories</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">categories<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span></li>
-					<li class="tsd-signature tsd-kind-icon">categories<span class="tsd-signature-symbol">(</span>categories<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalCategoryData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">categories<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a><span class="tsd-signature-symbol">[]</span></li>
+					<li class="tsd-signature tsd-kind-icon">categories<span class="tsd-signature-symbol">(</span>categories<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalcategorydata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCategoryData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L693">event.ts:693</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L988">event.ts:988</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Get all categories or add categories…</p>
+								<p>Get all categories</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3126,18 +3257,37 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">[]</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a><span class="tsd-signature-symbol">[]</span></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L694">event.ts:694</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1006">event.ts:1006</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Add categories to the event or return all selected categories.</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">().</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+
+<span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">categories</span><span style="color: #000000">([</span>
+<span style="color: #000000">    {</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;APPOINTMENT&#039;</span><span style="color: #000000">},</span>
+<span style="color: #000000">    {</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;MEETING&#039;</span><span style="color: #000000">}</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">categories</span><span style="color: #000000">(); </span><span style="color: #008000">// --&gt; [ICalCategory, ICalCategory]</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.3.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>categories: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalCategoryData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+								<h5>categories: <span class="tsd-signature-symbol">(</span><a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalcategorydata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCategoryData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3148,19 +3298,31 @@ img {
 				<a name="createalarm" class="tsd-anchor"></a>
 				<h3>create<wbr>Alarm</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">create<wbr>Alarm<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAlarmData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span></li>
+					<li class="tsd-signature tsd-kind-icon">create<wbr>Alarm<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalalarmdata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAlarmData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L652">event.ts:652</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L920">event.ts:920</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Create a new Alarm and return the alarm object…</p>
+								<p>Creates a new <a href="icalalarm.html"><code>ICalAlarm</code></a> and returns it. Use options to prefill
+									the alarm&#39;s attributes. Calling this method without options will create
+								an empty alarm.</p>
 							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cal</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">alarm</span><span style="color: #000000"> = </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createAlarm</span><span style="color: #000000">({</span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;display&#039;</span><span style="color: #000000">, </span><span style="color: #001080">trigger:</span><span style="color: #000000"> </span><span style="color: #098658">300</span><span style="color: #000000">});</span>
+
+<span style="color: #008000">// add another alarm</span>
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createAlarm</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;audio&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">trigger:</span><span style="color: #000000"> </span><span style="color: #098658">300</span><span style="color: #000000">, </span><span style="color: #008000">// 5min before event</span>
+<span style="color: #000000">});</span>
+</code></pre>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
 								<dd><p>0.2.1</p>
@@ -3170,10 +3332,10 @@ img {
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>data: <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAlarmData</span><span class="tsd-signature-symbol"> = ...</span></h5>
+								<h5>data: <a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalalarmdata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAlarmData</a><span class="tsd-signature-symbol"> = ...</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">default</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="icalalarm.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAlarm</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -3181,19 +3343,34 @@ img {
 				<a name="createattendee" class="tsd-anchor"></a>
 				<h3>create<wbr>Attendee</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">create<wbr>Attendee<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAttendeeData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span></li>
+					<li class="tsd-signature tsd-kind-icon">create<wbr>Attendee<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalattendeedata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAttendeeData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L617">event.ts:617</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L853">event.ts:853</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Create a new Attendee and return the attendee object…</p>
+								<p>Creates a new <a href="icalattendee.html"><code>ICalAttendee</code></a> and returns it. Use options to prefill
+									the attendee&#39;s attributes. Calling this method without options will create
+								an empty attendee.</p>
 							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cal</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">attendee</span><span style="color: #000000"> = </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createAttendee</span><span style="color: #000000">({</span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;hui@example.com&#039;</span><span style="color: #000000">, </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Hui&#039;</span><span style="color: #000000">});</span>
+
+<span style="color: #008000">// add another attendee</span>
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createAttendee</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Buh &lt;buh@example.net&gt;&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+							<p>As with the organizer, you can also add an explicit <code>mailto</code> address.</p>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createAttendee</span><span style="color: #000000">({</span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;hui@example.com&#039;</span><span style="color: #000000">, </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Hui&#039;</span><span style="color: #000000">, </span><span style="color: #001080">mailto:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;another@mailto.com&#039;</span><span style="color: #000000">});</span>
+
+<span style="color: #008000">// overwrite an attendee&#039;s mailto address</span>
+<span style="color: #001080">attendee</span><span style="color: #000000">.</span><span style="color: #795E26">mailto</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;another@mailto.net&#039;</span><span style="color: #000000">);</span>
+</code></pre>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
 								<dd><p>0.2.0</p>
@@ -3203,10 +3380,10 @@ img {
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>data: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalAttendeeData</span><span class="tsd-signature-symbol"> = ...</span></h5>
+								<h5>data: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalattendeedata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalAttendeeData</a><span class="tsd-signature-symbol"> = ...</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">default</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="icalattendee.html" class="tsd-signature-type" data-tsd-kind="Class">ICalAttendee</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -3214,19 +3391,29 @@ img {
 				<a name="createcategory" class="tsd-anchor"></a>
 				<h3>create<wbr>Category</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">create<wbr>Category<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalCategoryData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">default</span></li>
+					<li class="tsd-signature tsd-kind-icon">create<wbr>Category<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalcategorydata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCategoryData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L682">event.ts:682</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L977">event.ts:977</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Create a new categorie and return the category object…</p>
+								<p>Creates a new <a href="icalcategory.html"><code>ICalCategory</code></a> and returns it. Use options to prefill the categories&#39; attributes.
+								Calling this method without options will create an empty category.</p>
 							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cal</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #001080">cal</span><span style="color: #000000">.</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">category</span><span style="color: #000000"> = </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createCategory</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;APPOINTMENT&#039;</span><span style="color: #000000">});</span>
+
+<span style="color: #008000">// add another alarm</span>
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">createCategory</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;MEETING&#039;</span>
+<span style="color: #000000">});</span>
+</code></pre>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
 								<dd><p>0.3.0</p>
@@ -3236,10 +3423,10 @@ img {
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>data: <span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalCategoryData</span><span class="tsd-signature-symbol"> = ...</span></h5>
+								<h5>data: <a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/icalcategorydata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCategoryData</a><span class="tsd-signature-symbol"> = ...</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">default</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="icalcategory.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCategory</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -3247,19 +3434,19 @@ img {
 				<a name="created" class="tsd-anchor"></a>
 				<h3>created</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">created<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">created<span class="tsd-signature-symbol">(</span>created<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">created<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">created<span class="tsd-signature-symbol">(</span>created<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L812">event.ts:812</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1175">event.ts:1175</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s creation date</p>
+								<p>Get the event&#39;s creation date</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3267,18 +3454,28 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L813">event.ts:813</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1181">event.ts:1181</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s creation date</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.3.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>created: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>created: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3296,12 +3493,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L572">event.ts:572</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L744">event.ts:744</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s description</p>
+								<p>Get the event&#39;s description as an [[<code>ICalDescription</code>]] object.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3314,9 +3511,27 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L573">event.ts:573</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L761">event.ts:761</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the events description by passing a plaintext string or
+									an object containing both a plaintext and a html description.
+									Only a few calendar apps support html descriptions and like in
+								emails, supported HTML tags and styling is limited.</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">description</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">plain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Hello World!&#039;</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">html</span><span style="color: #000000">: </span><span style="color: #A31515">&#039;&lt;p&gt;Hello World!&lt;/p&gt;&#039;</span><span style="color: #000000">;</span>
+<span style="color: #000000">});</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3331,19 +3546,20 @@ img {
 				<a name="end" class="tsd-anchor"></a>
 				<h3>end</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span>end<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">end<span class="tsd-signature-symbol">(</span>end<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L294">event.ts:294</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L337">event.ts:337</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s end date</p>
+								<p>Get the event end time which is currently
+								set. Can be any supported date object.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3351,18 +3567,30 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L295">event.ts:295</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L346">event.ts:346</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the appointment date of end. You can use any supported date object, see
+									<a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
+								for details about supported values and timezone handling.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>end: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>end: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3380,13 +3608,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L411">event.ts:411</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L509">event.ts:509</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s floating flag. This unsets the event&#39;s timezone.
-								See <a href="https://tools.ietf.org/html/rfc5545#section-3.3.12">https://tools.ietf.org/html/rfc5545#section-3.3.12</a></p>
+								<p>Get the event&#39;s floating flag.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3399,7 +3626,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L412">event.ts:412</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L510">event.ts:510</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3423,12 +3650,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L221">event.ts:221</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L232">event.ts:232</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s ID</p>
+								<p>Get the event&#39;s ID</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3441,13 +3668,22 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L222">event.ts:222</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L240">event.ts:240</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Use this method to set the event&#39;s ID.
+								If not set, a UUID will be generated randomly.</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Event ID you want to set</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3458,19 +3694,19 @@ img {
 				<a name="lastmodified" class="tsd-anchor"></a>
 				<h3>last<wbr>Modified</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">last<wbr>Modified<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">last<wbr>Modified<span class="tsd-signature-symbol">(</span>lastModified<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">last<wbr>Modified<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">last<wbr>Modified<span class="tsd-signature-symbol">(</span>lastModified<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L832">event.ts:832</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1200">event.ts:1200</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s last modification date</p>
+								<p>Get the event&#39;s last modification date</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3478,18 +3714,28 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L833">event.ts:833</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1206">event.ts:1206</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s last modification date</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.3.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>lastModified: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>lastModified: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3507,12 +3753,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L544">event.ts:544</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L696">event.ts:696</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s location</p>
+								<p>Get the event&#39;s location</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3525,9 +3771,31 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L545">event.ts:545</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L717">event.ts:717</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s location by passing a string (minimum) or
+									an [[<code>ICalLocation</code>]] object which will also fill the iCal
+								<code>GEO</code> attribute and Apple&#39;s <code>X-APPLE-STRUCTURED-LOCATION</code>.</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">location</span><span style="color: #000000">({</span>
+<span style="color: #000000">   </span><span style="color: #001080">title:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Apple Store Kurfürstendamm&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">address:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Kurfürstendamm 26, 10719 Berlin, Deutschland&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">radius:</span><span style="color: #000000"> </span><span style="color: #098658">141.1751386318387</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">geo:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">       </span><span style="color: #001080">lat:</span><span style="color: #000000"> </span><span style="color: #098658">52.503630</span><span style="color: #000000">,</span>
+<span style="color: #000000">       </span><span style="color: #001080">lon:</span><span style="color: #000000"> </span><span style="color: #098658">13.328650</span>
+<span style="color: #000000">   }</span>
+<span style="color: #000000">});</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3549,12 +3817,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L597">event.ts:597</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L785">event.ts:785</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s organizer</p>
+								<p>Get the event&#39;s organizer</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3567,9 +3835,35 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L598">event.ts:598</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L813">event.ts:813</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s organizer</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #000000">    </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">organizer</span><span style="color: #000000">({</span>
+<span style="color: #000000">   </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Organizer</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s Name&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;organizer@example.com&#039;</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// OR</span>
+
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">organizer</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Organizer</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s Name &lt;organizer@example.com&gt;&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+							<p>You can also add an explicit <code>mailto</code> email address.</p>
+							<pre><code class="language-javascript"><span style="color: #000000">    </span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">organizer</span><span style="color: #000000">({</span>
+<span style="color: #000000">   </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Organizer</span><span style="color: #EE0000">\&#039;</span><span style="color: #A31515">s Name&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;organizer@example.com&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">mailto:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;explicit@mailto.com&#039;</span>
+<span style="color: #000000">})</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3591,21 +3885,18 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L753">event.ts:753</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1086">event.ts:1086</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s priority. A value of 1 represents
+								<p>Get the event&#39;s priority. A value of 1 represents
 									the highest priority, 9 the lowest. 0 specifies an undefined
 								priority.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
 								<dd><p>v2.0.0-develop.7</p>
-								</dd>
-								<dt>see</dt>
-								<dd><p><a href="https://www.kanzaki.com/docs/ical/priority.html">https://www.kanzaki.com/docs/ical/priority.html</a></p>
 								</dd>
 							</dl>
 						</div>
@@ -3614,9 +3905,21 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L754">event.ts:754</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1095">event.ts:1095</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s priority. A value of 1 represents
+									the highest priority, 9 the lowest. 0 specifies an undefined
+								priority.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>v2.0.0-develop.7</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3631,19 +3934,19 @@ img {
 				<a name="recurrenceid" class="tsd-anchor"></a>
 				<h3>recurrence<wbr>Id</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">recurrence<wbr>Id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">recurrence<wbr>Id<span class="tsd-signature-symbol">(</span>recurrenceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">recurrence<wbr>Id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">recurrence<wbr>Id<span class="tsd-signature-symbol">(</span>recurrenceId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L319">event.ts:319</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L370">event.ts:370</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s recurrence id</p>
+								<p>Get the event&#39;s recurrence id</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3651,18 +3954,30 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L320">event.ts:320</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L379">event.ts:379</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s recurrence id. You can use any supported date object, see
+									<a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
+								for details about supported values and timezone handling.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>recurrenceId: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>recurrenceId: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3674,18 +3989,20 @@ img {
 				<h3>repeating</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 					<li class="tsd-signature tsd-kind-icon">repeating<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventInternalRepeatingData</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span></li>
-					<li class="tsd-signature tsd-kind-icon">repeating<span class="tsd-signature-symbol">(</span>repeating<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalRepeatingOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">repeating<span class="tsd-signature-symbol">(</span>repeating<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalRepeatingOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">repeating<span class="tsd-signature-symbol">(</span>repeating<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">repeating<span class="tsd-signature-symbol">(</span>repeating<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L430">event.ts:430</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L536">../event.ts:536</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s repeating stuff</p>
+								<p>Get the event&#39;s repeating options</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3698,13 +4015,85 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L431">event.ts:431</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L559">../event.ts:559</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s repeating options by passing an [[<code>ICalRepeatingOptions</code>]] object.</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">repeating</span><span style="color: #000000">({</span>
+<span style="color: #000000">   </span><span style="color: #001080">freq:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;MONTHLY&#039;</span><span style="color: #000000">, </span><span style="color: #008000">// required</span>
+<span style="color: #000000">   </span><span style="color: #001080">count:</span><span style="color: #000000"> </span><span style="color: #098658">5</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">interval:</span><span style="color: #000000"> </span><span style="color: #098658">2</span><span style="color: #000000">,</span>
+<span style="color: #000000">   </span><span style="color: #001080">until:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Jan 01 2014 00:00:00 UTC&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">   </span><span style="color: #001080">byDay:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;su&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;mo&#039;</span><span style="color: #000000">], </span><span style="color: #008000">// repeat only sunday and monday</span>
+<span style="color: #000000">   </span><span style="color: #001080">byMonth:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">], </span><span style="color: #008000">// repeat only in january and february,</span>
+<span style="color: #000000">   </span><span style="color: #001080">byMonthDay:</span><span style="color: #000000"> [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">15</span><span style="color: #000000">], </span><span style="color: #008000">// repeat only on the 1st and 15th</span>
+<span style="color: #000000">   </span><span style="color: #001080">bySetPos:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #008000">// repeat every 3rd sunday (will take the first element of the byDay array)</span>
+<span style="color: #000000">   </span><span style="color: #001080">exclude:</span><span style="color: #000000"> [</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Date</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Dec 25 2013 00:00:00 UTC&#039;</span><span style="color: #000000">)], </span><span style="color: #008000">// exclude these dates</span>
+<span style="color: #000000">   </span><span style="color: #001080">excludeTimezone:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Europe/Berlin&#039;</span><span style="color: #000000">, </span><span style="color: #008000">// timezone of exclude</span>
+<span style="color: #000000">   </span><span style="color: #001080">wkst:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;SU&#039;</span><span style="color: #000000"> </span><span style="color: #008000">// Start the week on Sunday, default is Monday</span>
+<span style="color: #000000">});</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>repeating: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalRepeatingOptions</span></h5>
+								<h5>repeating: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalRepeatingOptions</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L565">../event.ts:565</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s repeating options by passing an <a href="https://github.com/jakubroztocil/rrule">RRule object</a>.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>2.0.0-develop.5</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>repeating: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">default</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L571">../event.ts:571</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the events repeating options by passing a string which is inserted in the ical file.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>2.0.0-develop.5</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>repeating: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3722,12 +4111,13 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L251">event.ts:251</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L275">event.ts:275</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s SEQUENCE number</p>
+								<p>Get the event&#39;s SEQUENCE number. Use this method to get the event&#39;s
+								revision sequence number of the calendar component within a sequence of revisions.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3740,13 +4130,23 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L252">event.ts:252</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L284">event.ts:284</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s SEQUENCE number. For a new event, this should be zero.
+									Each time the organizer  makes a significant revision, the sequence
+								number should be incremented.</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>sequence: <span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Sequence number or null to unset it</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3757,19 +4157,19 @@ img {
 				<a name="stamp" class="tsd-anchor"></a>
 				<h3>stamp</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">stamp<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">stamp<span class="tsd-signature-symbol">(</span>stamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">stamp<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">stamp<span class="tsd-signature-symbol">(</span>stamp<span class="tsd-signature-symbol">: </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L363">event.ts:363</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L437">event.ts:437</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s timestamp</p>
+								<p>Get the event&#39;s timestamp</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3777,18 +4177,30 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L364">event.ts:364</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L446">event.ts:446</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the appointment date of creation. Defaults to the current time and date (<code>new Date()</code>). You can use
+									any supported date object, see <a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
+								for details about supported values and timezone handling.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>stamp: <span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>stamp: <a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3799,19 +4211,20 @@ img {
 				<a name="start" class="tsd-anchor"></a>
 				<h3>start</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span>start<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span>start<span class="tsd-signature-symbol">: </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L272">event.ts:272</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L305">event.ts:305</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s start date</p>
+								<p>Get the event start time which is currently
+								set. Can be any supported date object.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3819,18 +4232,31 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L273">event.ts:273</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L315">event.ts:315</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the appointment date of beginning, which is required for all events.
+									You can use any supported date object, see
+									<a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">Readme</a>
+								for details about supported values and timezone handling.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>start: <span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>start: <a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3841,19 +4267,19 @@ img {
 				<a name="status" class="tsd-anchor"></a>
 				<h3>status</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventStatus</span></li>
-					<li class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">(</span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventStatus</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventstatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventStatus</a></li>
+					<li class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">(</span>status<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventstatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventStatus</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L709">event.ts:709</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1021">event.ts:1021</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s status</p>
+								<p>Get the event&#39;s status</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3861,18 +4287,31 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventStatus</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventstatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventStatus</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L710">event.ts:710</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1033">event.ts:1033</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s status</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000">, {</span><span style="color: #001080">ICalEventStatus</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">status</span><span style="color: #000000">(</span><span style="color: #001080">ICalEventStatus</span><span style="color: #000000">.</span><span style="color: #0070C1">CONFIRMED</span><span style="color: #000000">);</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>status: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventStatus</span></h5>
+								<h5>status: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventstatus.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventStatus</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3890,12 +4329,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L528">event.ts:528</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L673">event.ts:673</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s summary</p>
+								<p>Get the event&#39;s summary</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3908,9 +4347,20 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L529">event.ts:529</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L681">event.ts:681</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s summary.
+								Defaults to an empty string if nothing is set.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -3925,19 +4375,19 @@ img {
 				<a name="timestamp" class="tsd-anchor"></a>
 				<h3>timestamp</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICalDateTimeValue</span></li>
-					<li class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">(</span>stamp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICalDateTimeValue</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></li>
+					<li class="tsd-signature tsd-kind-icon">timestamp<span class="tsd-signature-symbol">(</span>stamp<span class="tsd-signature-symbol">: </span><a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L380">event.ts:380</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L461">event.ts:461</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s timestamp</p>
+								<p>Get the event&#39;s timestamp</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -3948,18 +4398,33 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ICalDateTimeValue</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L381">event.ts:381</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L471">event.ts:471</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the appointment date of creation. Defaults to the current time and date (<code>new Date()</code>). You can use
+									any supported date object, see <a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
+								for details about supported values and timezone handling.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+								<dt>alias</dt>
+								<dd><p>stamp</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>stamp: <span class="tsd-signature-type">ICalDateTimeValue</span></h5>
+								<h5>stamp: <a href="../index.html#icaldatetimevalue" class="tsd-signature-type" data-tsd-kind="Type alias">ICalDateTimeValue</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -3977,18 +4442,14 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L341">event.ts:341</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L397">event.ts:397</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s timezone. This unsets the event&#39;s floating flag.
-								Used on date properties</p>
+								<p>Get the event&#39;s timezone.</p>
 							</div>
 							<dl class="tsd-comment-tags">
-								<dt>example</dt>
-								<dd><p>event.timezone(&#39;America/New_York&#39;);</p>
-								</dd>
 								<dt>since</dt>
 								<dd><p>0.2.6</p>
 								</dd>
@@ -3999,9 +4460,27 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L342">event.ts:342</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L416">event.ts:416</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Use this method to set your event&#39;s timezone using the TZID property parameter on start and end dates,
+								as per <a href="https://tools.ietf.org/html/rfc5545#section-3.3.5">date-time form #3 in section 3.3.5 of RFC 554</a>.</p>
+							</div>
+							<p>This and the &#39;floating&#39; flag (see below) are mutually exclusive, and setting a timezone will unset the
+								&#39;floating&#39; flag.  If neither &#39;timezone&#39; nor &#39;floating&#39; are set, the date will be output with in UTC format
+							(see <a href="https://tools.ietf.org/html/rfc5545#section-3.3.5">date-time form #2 in section 3.3.5 of RFC 554</a>).</p>
+							<p>See <a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">Readme</a> for details about
+							supported values and timezone handling.</p>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">timezone</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;America/New_York&#039;</span><span style="color: #000000">);</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.6</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -4016,26 +4495,34 @@ img {
 				<a name="tojson" class="tsd-anchor"></a>
 				<h3>toJSON</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ICalEventJSONData</span></li>
+					<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/icaleventjsondata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalEventJSONData</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L881">event.ts:881</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1296">event.ts:1296</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Export calender as JSON Object to use it later…</p>
+								<p>Return a shallow copy of the events&#39;s options for JSON stringification.
+									Third party objects like moment.js values or RRule objects are stringified
+								as well. Can be used for persistence.</p>
 							</div>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">().</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">json</span><span style="color: #000000"> = </span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">);</span>
+
+<span style="color: #008000">// later: restore event data</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">calendar</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">().</span><span style="color: #795E26">createEvent</span><span style="color: #000000">(</span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">parse</span><span style="color: #000000">(</span><span style="color: #001080">json</span><span style="color: #000000">));</span>
+</code></pre>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
 								<dd><p>0.2.4</p>
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ICalEventJSONData</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="../interfaces/icaleventjsondata.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalEventJSONData</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -4049,18 +4536,16 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L910">event.ts:910</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1329">event.ts:1329</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Export Event to iCal</p>
+								<p>Return generated event as a string.</p>
 							</div>
-							<dl class="tsd-comment-tags">
-								<dt>since</dt>
-								<dd><p>0.2.0</p>
-								</dd>
-							</dl>
+							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">event</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">().</span><span style="color: #795E26">createEvent</span><span style="color: #000000">();</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">toString</span><span style="color: #000000">()); </span><span style="color: #008000">// → BEGIN:VEVENT…</span>
+</code></pre>
 						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 					</li>
@@ -4070,19 +4555,19 @@ img {
 				<a name="transparency" class="tsd-anchor"></a>
 				<h3>transparency</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">transparency<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventTransparency</span></li>
-					<li class="tsd-signature tsd-kind-icon">transparency<span class="tsd-signature-symbol">(</span>transparency<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventTransparency</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
+					<li class="tsd-signature tsd-kind-icon">transparency<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventtransparency.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventTransparency</a></li>
+					<li class="tsd-signature tsd-kind-icon">transparency<span class="tsd-signature-symbol">(</span>transparency<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventtransparency.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventTransparency</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L792">event.ts:792</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1138">event.ts:1138</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s transparency</p>
+								<p>Get the event&#39;s transparency</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -4090,18 +4575,36 @@ img {
 								</dd>
 							</dl>
 						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventTransparency</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventtransparency.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventTransparency</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L793">event.ts:793</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1156">event.ts:1156</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s transparency</p>
+							</div>
+							<p>Set the field to <code>OPAQUE</code> if the person or resource is no longer
+								available due to this event. If the calendar entry has no influence
+								on availability, you can set the field to <code>TRANSPARENT</code>. This value
+								is mostly used to find out if a person has time on a certain date or
+							not (see <code>TRANSP</code> in iCal specification).</p>
+							<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000">, {</span><span style="color: #001080">ICalEventTransparency</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">transparency</span><span style="color: #000000">(</span><span style="color: #001080">ICalEventTransparency</span><span style="color: #000000">.</span><span style="color: #0070C1">OPAQUE</span><span style="color: #000000">);</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>1.7.3</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>transparency: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ICalEventTransparency</span></h5>
+								<h5>transparency: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/icaleventtransparency.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalEventTransparency</a></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -4119,12 +4622,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L238">event.ts:238</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L255">event.ts:255</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s ID</p>
+								<p>Get the event&#39;s ID</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -4140,13 +4643,27 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L239">event.ts:239</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L264">event.ts:264</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Use this method to set the event&#39;s ID.
+								If not set, a UUID will be generated randomly.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>alias</dt>
+								<dd><p>id</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>id: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>Event ID you want to set</p>
+								</div>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
@@ -4164,12 +4681,12 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L777">event.ts:777</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1118">event.ts:1118</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Set/Get the event&#39;s URL</p>
+								<p>Get the event&#39;s URL</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
@@ -4182,9 +4699,19 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L778">event.ts:778</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1124">event.ts:1124</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set the event&#39;s URL</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>0.2.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -4207,15 +4734,30 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L858">event.ts:858</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1245">event.ts:1245</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
-								<p>Get/Set X-* attributes. Woun&#39;t filter double attributes,
-									which are also added by another method (e.g. busystatus),
+								<p>Set X-* attributes. Woun&#39;t filter double attributes,
+									which are also added by another method (e.g. summary),
 								so these attributes may be inserted twice.</p>
 							</div>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">x</span><span style="color: #000000">([</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">        </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;X-MY-CUSTOM-ATTR&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;1337!&quot;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">x</span><span style="color: #000000">([</span>
+<span style="color: #000000">    [</span><span style="color: #A31515">&quot;X-MY-CUSTOM-ATTR&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;1337!&quot;</span><span style="color: #000000">]</span>
+<span style="color: #000000">]);</span>
+
+<span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">x</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;X-MY-CUSTOM-ATTR&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;1337!&quot;</span>
+<span style="color: #000000">});</span>
+</code></pre>
 							<dl class="tsd-comment-tags">
 								<dt>since</dt>
 								<dd><p>1.9.0</p>
@@ -4229,18 +4771,27 @@ img {
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <a href="icalevent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4>
-						<blockquote>
-							<blockquote>
-								<p>}</p>
-							</blockquote>
-						</blockquote>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L859">event.ts:859</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1258">event.ts:1258</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Set a X-* attribute. Woun&#39;t filter double attributes,
+									which are also added by another method (e.g. summary),
+								so these attributes may be inserted twice.</p>
+							</div>
+							<pre><code class="language-javascript"><span style="color: #001080">event</span><span style="color: #000000">.</span><span style="color: #795E26">x</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;X-MY-CUSTOM-ATTR&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;1337!&quot;</span><span style="color: #000000">);</span>
+</code></pre>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>1.9.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
@@ -4255,9 +4806,19 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/76d0897/src/event.ts#L860">event.ts:860</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2f34d54/src/event.ts#L1264">event.ts:1264</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Get all custom X-* attributes.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>since</dt>
+								<dd><p>1.9.0</p>
+								</dd>
+							</dl>
+						</div>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h4>
 					</li>
 				</ul>
