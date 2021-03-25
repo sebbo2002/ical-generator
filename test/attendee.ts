@@ -4,7 +4,6 @@ import assert from 'assert';
 import ICalCalendar from '../src/calendar';
 import ICalEvent from '../src/event';
 import ICalAttendee, {ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
-import ICalAlarm from '../src/alarm';
 
 describe('ical-generator Attendee', function () {
     describe('constructor()', function () {

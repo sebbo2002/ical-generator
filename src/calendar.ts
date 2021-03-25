@@ -41,7 +41,7 @@ interface ICalCalendarInternalData {
     x: [string, string][];
 }
 
-interface ICalCalendarJSONData {
+export interface ICalCalendarJSONData {
     prodId: string;
     method: ICalCalendarMethod | null;
     name: string | null;
@@ -658,7 +658,7 @@ export default class ICalCalendar {
      * const json = JSON.stringify(cal);
      *
      * // later: restore calendar data
-     * cal = ical(json);
+     * cal = ical(JSON.parse(json));
      * ```
      *
      * @since 0.2.4

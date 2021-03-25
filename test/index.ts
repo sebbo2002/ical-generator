@@ -2,29 +2,84 @@
 
 import assert from 'assert';
 import ical, {
+    ICalAlarm,
+    ICalAlarmType,
+    ICalAttendee,
+    ICalAttendeeType,
+    ICalAttendeeRole,
+    ICalAttendeeStatus,
+    ICalCategory,
     ICalCalendar,
     ICalCalendarMethod,
-    ICalEvent
+    ICalEvent,
+    ICalEventStatus,
+    ICalEventBusyStatus,
+    ICalEventTransparency
 } from '../src';
+import {} from '../dist/alarm';
 
 describe('ical-generator Index', function() {
-    it('should be a function', function() {
-        assert.strictEqual(typeof ical, 'function');
+    describe('default', function () {
+        it('should be a function', function() {
+            assert.strictEqual(typeof ical, 'function');
+        });
+        it('should return a ICalCalendar', function() {
+            assert.ok(ical() instanceof ICalCalendar);
+        });
     });
 
-    it('should return a ICalCalendar', function() {
-        assert.ok(ical() instanceof ICalCalendar);
+    describe('Alarm', function () {
+        it('should export ICalAlarm', function () {
+            assert.ok(ICalAlarm);
+        });
+        it('should export ICalAlarmType', function () {
+            assert.ok(ICalAlarmType);
+        });
     });
 
-    it('should export ICalCalendar', function() {
-        assert.ok(ICalCalendar);
+    describe('Attendee', function () {
+        it('should export ICalAttendee', function () {
+            assert.ok(ICalAttendee);
+        });
+        it('should export ICalAttendeeType', function () {
+            assert.ok(ICalAttendeeType);
+        });
+        it('should export ICalAttendeeRole', function () {
+            assert.ok(ICalAttendeeRole);
+        });
+        it('should export ICalAttendeeStatus', function () {
+            assert.ok(ICalAttendeeStatus);
+        });
     });
 
-    it('should export ICalCalendarMethod', function() {
-        assert.ok(ICalCalendarMethod);
+    describe('Calendar', function () {
+        it('should export ICalCalendar', function() {
+            assert.ok(ICalCalendar);
+        });
+
+        it('should export ICalCalendarMethod', function() {
+            assert.ok(ICalCalendarMethod);
+        });
     });
 
-    it('should export ICalEvent', function() {
-        assert.ok(ICalEvent);
+    describe('Category', function () {
+        it('should export ICalCategory', function () {
+            assert.ok(ICalCategory);
+        });
+    });
+
+    describe('Event', function () {
+        it('should export ICalEvent', function() {
+            assert.ok(ICalEvent);
+        });
+        it('should export ICalEventStatus', function() {
+            assert.ok(ICalEventStatus);
+        });
+        it('should export ICalEventBusyStatus', function() {
+            assert.ok(ICalEventBusyStatus);
+        });
+        it('should export ICalEventTransparency', function() {
+            assert.ok(ICalEventTransparency);
+        });
     });
 });

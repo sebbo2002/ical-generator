@@ -8,7 +8,6 @@ import {join} from 'path';
 import {getPortPromise} from 'portfinder';
 import ICalCalendar, {ICalCalendarMethod} from '../src/calendar';
 import ICalEvent from '../src/event';
-import ICalAlarm from '../src/alarm';
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {

@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ICalCalendar, {ICalCalendarData, ICalCalendarMethod, ICalCalendarProdIdData} from './calendar';
+import ICalCalendar, {ICalCalendarData} from './calendar';
 
 
 /**
@@ -38,11 +38,35 @@ export default function (data?: ICalCalendarData): ICalCalendar {
 }
 
 export {
+    default as ICalAlarm,
+    ICalAlarmData,
+    ICalAlarmType,
+    ICalAlarmTypeValue,
+    ICalAlarmJSONData,
+    ICalAttachment
+} from './alarm';
+
+export {
+    default as ICalAttendee,
+    ICalAttendeeData,
+    ICalAttendeeType,
+    ICalAttendeeRole,
+    ICalAttendeeStatus,
+    ICalAttendeeJSONData
+} from './attendee';
+
+export {
     default as ICalCalendar,
     ICalCalendarData,
     ICalCalendarProdIdData,
-    ICalCalendarMethod
+    ICalCalendarMethod,
+    ICalCalendarJSONData
 } from './calendar';
+
+export {
+    default as ICalCategory,
+    ICalCategoryData
+} from './category';
 
 export {
     default as ICalEvent,
@@ -54,5 +78,5 @@ export {
 } from './event';
 
 export {
-    ICalDateTimeValue
+    ICalDateTimeValue,
 } from './types';

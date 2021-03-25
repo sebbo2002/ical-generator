@@ -75,7 +75,7 @@ export interface ICalEventData {
     x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
-export interface ICalEventInternalData {
+interface ICalEventInternalData {
     id: string,
     sequence: number,
     start: ICalDateTimeValue | null,
@@ -131,7 +131,7 @@ export interface ICalEventJSONData {
     x: {key: string, value: string}[];
 }
 
-export interface ICalEventInternalRepeatingData {
+interface ICalEventInternalRepeatingData {
     freq: ICalEventRepeatingFreq;
     count?: number;
     interval?: number;
@@ -146,13 +146,24 @@ export interface ICalEventInternalRepeatingData {
 
 
 /**
- * @author Sebastian Pekarek
- * @class ICalEvent
+ * Usually you get an `ICalCalendar` object like this:
+ * ```javascript
+ * import ical from 'ical-generator';
+ * const calendar = ical();
+ * const event = calendar.createEvent();
+ * ```
  */
 export default class ICalEvent {
     private readonly data: ICalEventInternalData;
     private readonly calendar: ICalCalendar;
 
+    /**
+     * Constructor of [[`ICalEvent`]. The calendar reference is
+     * required to query the calendar's timezone when required.
+     *
+     * @param data Calendar Event Data
+     * @param calendar Reference to ICalCalendar object
+     */
     constructor(data: ICalEventData, calendar: ICalCalendar) {
         this.data = {
             id: uuid(),
@@ -215,10 +226,17 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's ID
+     * Get the event's ID
      * @since 0.2.0
      */
     id(): string;
+
+    /**
+     * Use this method to set the event's ID.
+     * If not set, a UUID will be generated randomly.
+     *
+     * @param id Event ID you want to set
+     */
     id(id: string | number): this;
     id(id?: string | number): this | string {
         if (id === undefined) {
@@ -230,25 +248,39 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's ID
-     *
+     * Get the event's ID
      * @since 0.2.0
      * @alias id
      */
     uid(): string;
+
+    /**
+     * Use this method to set the event's ID.
+     * If not set, a UUID will be generated randomly.
+     *
+     * @param id Event ID you want to set
+     * @alias id
+     */
     uid(id: string | number): this;
     uid(id?: string | number): this | string {
         return id === undefined ? this.id() : this.id(id);
     }
 
     /**
-     * Set/Get the event's SEQUENCE number
+     * Get the event's SEQUENCE number. Use this method to get the event's
+     * revision sequence number of the calendar component within a sequence of revisions.
      *
-     * @param {Number} sequence
      * @since 0.2.6
-     * @returns {ICalEvent|Number}
      */
     sequence(): number;
+
+    /**
+     * Set the event's SEQUENCE number. For a new event, this should be zero.
+     * Each time the organizer  makes a significant revision, the sequence
+     * number should be incremented.
+     *
+     * @param sequence Sequence number or null to unset it
+     */
     sequence(sequence: number): this;
     sequence(sequence?: number): this | number {
         if (sequence === undefined) {
@@ -265,11 +297,21 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's start date
+     * Get the event start time which is currently
+     * set. Can be any supported date object.
      *
      * @since 0.2.0
      */
     start(): ICalDateTimeValue | null;
+
+    /**
+     * Set the appointment date of beginning, which is required for all events.
+     * You can use any supported date object, see
+     * [Readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
+     * for details about supported values and timezone handling.
+     *
+     * @since 0.2.0
+     */
     start(start: ICalDateTimeValue): this;
     start(start?: ICalDateTimeValue): this | ICalDateTimeValue | null {
         if (start === undefined) {
@@ -287,11 +329,20 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's end date
+     * Get the event end time which is currently
+     * set. Can be any supported date object.
      *
      * @since 0.2.0
      */
     end(): ICalDateTimeValue | null;
+
+    /**
+     * Set the appointment date of end. You can use any supported date object, see
+     * [readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
+     * for details about supported values and timezone handling.
+     *
+     * @since 0.2.0
+     */
     end(end: ICalDateTimeValue | null): this;
     end(end?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (end === undefined) {
@@ -313,10 +364,18 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's recurrence id
+     * Get the event's recurrence id
      * @since 0.2.0
      */
     recurrenceId(): ICalDateTimeValue | null;
+
+    /**
+     * Set the event's recurrence id. You can use any supported date object, see
+     * [readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
+     * for details about supported values and timezone handling.
+     *
+     * @since 0.2.0
+     */
     recurrenceId(recurrenceId: ICalDateTimeValue | null): this;
     recurrenceId(recurrenceId?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (recurrenceId === undefined) {
@@ -332,13 +391,28 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's timezone. This unsets the event's floating flag.
-     * Used on date properties
-     *
-     * @example event.timezone('America/New_York');
+     * Get the event's timezone.
      * @since 0.2.6
      */
     timezone(): string | null;
+
+    /**
+     * Use this method to set your event's timezone using the TZID property parameter on start and end dates,
+     * as per [date-time form #3 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5).
+     *
+     * This and the 'floating' flag (see below) are mutually exclusive, and setting a timezone will unset the
+     * 'floating' flag.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format
+     * (see [date-time form #2 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5)).
+     *
+     * See [Readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones) for details about
+     * supported values and timezone handling.
+     *
+     * ```javascript
+     * event.timezone('America/New_York');
+     * ```
+     *
+     * @since 0.2.6
+     */
     timezone(timezone: string | null): this;
     timezone(timezone?: string | null): this | string | null {
         if (timezone === undefined && this.data.timezone !== null) {
@@ -357,10 +431,18 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's timestamp
+     * Get the event's timestamp
      * @since 0.2.0
      */
     stamp(): ICalDateTimeValue;
+
+    /**
+     * Set the appointment date of creation. Defaults to the current time and date (`new Date()`). You can use
+     * any supported date object, see [readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
+     * for details about supported values and timezone handling.
+     *
+     * @since 0.2.0
+     */
     stamp(stamp: ICalDateTimeValue): this;
     stamp(stamp?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (stamp === undefined) {
@@ -372,12 +454,20 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's timestamp
-     *
+     * Get the event's timestamp
      * @since 0.2.0
      * @alias stamp
      */
     timestamp(): ICalDateTimeValue;
+
+    /**
+     * Set the appointment date of creation. Defaults to the current time and date (`new Date()`). You can use
+     * any supported date object, see [readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
+     * for details about supported values and timezone handling.
+     *
+     * @since 0.2.0
+     * @alias stamp
+     */
     timestamp(stamp: ICalDateTimeValue): this;
     timestamp(stamp?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (stamp === undefined) {
@@ -388,10 +478,20 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's allDay flag
+     * Get the event's allDay flag
      * @since 0.2.0
      */
     allDay(): boolean;
+
+    /**
+     * Set the event's allDay flag.
+     *
+     * ```javascript
+     * event.allDay(true); // → appointment is for the whole day
+     * ```
+     *
+     * @since 0.2.0
+     */
     allDay(allDay: boolean): this;
     allDay(allDay?: boolean): this | boolean {
         if (allDay === undefined) {
@@ -403,13 +503,19 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's floating flag. This unsets the event's timezone.
-     * See https://tools.ietf.org/html/rfc5545#section-3.3.12
-     *
+     * Get the event's floating flag.
      * @since 0.2.0
      */
     floating(): boolean;
     floating(floating: boolean): this;
+
+    /**
+     * Set the event's floating flag. This unsets the event's timezone.
+     * Events whose floating flag is set to true always take place at the
+     * same time, regardless of the time zone.
+     *
+     * @since 0.2.0
+     */
     floating(floating?: boolean): this | boolean {
         if (floating === undefined) {
             return this.data.floating;
@@ -424,10 +530,49 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's repeating stuff
+     * Get the event's repeating options
      * @since 0.2.0
      */
     repeating(): ICalEventInternalRepeatingData | RRule | string | null;
+
+    /**
+     * Set the event's repeating options by passing an [[`ICalRepeatingOptions`]] object.
+     *
+     * ```javascript
+     * event.repeating({
+     *    freq: 'MONTHLY', // required
+     *    count: 5,
+     *    interval: 2,
+     *    until: new Date('Jan 01 2014 00:00:00 UTC'),
+     *    byDay: ['su', 'mo'], // repeat only sunday and monday
+     *    byMonth: [1, 2], // repeat only in january and february,
+     *    byMonthDay: [1, 15], // repeat only on the 1st and 15th
+     *    bySetPos: 3, // repeat every 3rd sunday (will take the first element of the byDay array)
+     *    exclude: [new Date('Dec 25 2013 00:00:00 UTC')], // exclude these dates
+     *    excludeTimezone: 'Europe/Berlin', // timezone of exclude
+     *    wkst: 'SU' // Start the week on Sunday, default is Monday
+     * });
+     * ```
+     *
+     * @since 0.2.0
+     */
+    repeating(repeating: ICalRepeatingOptions | null): this;
+
+    /**
+     * Set the event's repeating options by passing an [RRule object](https://github.com/jakubroztocil/rrule).
+     * @since 2.0.0-develop.5
+     */
+    repeating(repeating: RRule | null): this;
+
+    /**
+     * Set the events repeating options by passing a string which is inserted in the ical file.
+     * @since 2.0.0-develop.5
+     */
+    repeating(repeating: string | null): this;
+
+    /**
+     * @internal
+     */
     repeating(repeating: ICalRepeatingOptions | RRule | string | null): this;
     repeating(repeating?: ICalRepeatingOptions | RRule | string | null): this | ICalEventInternalRepeatingData | RRule | string | null {
         if (repeating === undefined) {
@@ -522,10 +667,17 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's summary
+     * Get the event's summary
      * @since 0.2.0
      */
     summary(): string;
+
+    /**
+     * Set the event's summary.
+     * Defaults to an empty string if nothing is set.
+     *
+     * @since 0.2.0
+     */
     summary(summary: string): this;
     summary(summary?: string): this | string {
         if (summary === undefined) {
@@ -538,10 +690,30 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's location
+     * Get the event's location
      * @since 0.2.0
      */
     location(): ICalLocation | null;
+
+    /**
+     * Set the event's location by passing a string (minimum) or
+     * an [[`ICalLocation`]] object which will also fill the iCal
+     * `GEO` attribute and Apple's `X-APPLE-STRUCTURED-LOCATION`.
+     *
+     * ```javascript
+     * event.location({
+     *    title: 'Apple Store Kurfürstendamm',
+     *    address: 'Kurfürstendamm 26, 10719 Berlin, Deutschland',
+     *    radius: 141.1751386318387,
+     *    geo: {
+     *        lat: 52.503630,
+     *        lon: 13.328650
+     *    }
+     * });
+     * ```
+     *
+     * @since 0.2.0
+     */
     location(location: ICalLocation | string | null): this;
     location(location?: ICalLocation | string | null): this | ICalLocation | null {
         if (location === undefined) {
@@ -566,10 +738,26 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's description
+     * Get the event's description as an [[`ICalDescription`]] object.
      * @since 0.2.0
      */
     description(): ICalDescription | null;
+
+    /**
+     * Set the events description by passing a plaintext string or
+     * an object containing both a plaintext and a html description.
+     * Only a few calendar apps support html descriptions and like in
+     * emails, supported HTML tags and styling is limited.
+     *
+     * ```javascript
+     * event.description({
+     *     plain: 'Hello World!';
+     *     html: '<p>Hello World!</p>';
+     * });
+     * ```
+     *
+     * @since 0.2.0
+     */
     description(description: ICalDescription | string | null): this;
     description(description?: ICalDescription | string | null): this | ICalDescription | null {
         if (description === undefined) {
@@ -591,10 +779,37 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's organizer
+     * Get the event's organizer
      * @since 0.2.0
      */
     organizer(): ICalOrganizer | null;
+
+    /**
+     * Set the event's organizer
+     *
+     * ```javascript
+     *     event.organizer({
+     *    name: 'Organizer\'s Name',
+     *    email: 'organizer@example.com'
+     * });
+     *
+     * // OR
+     *
+     * event.organizer('Organizer\'s Name <organizer@example.com>');
+     * ```
+     *
+     * You can also add an explicit `mailto` email address.
+     *
+     * ```javascript
+     *     event.organizer({
+     *    name: 'Organizer\'s Name',
+     *    email: 'organizer@example.com',
+     *    mailto: 'explicit@mailto.com'
+     * })
+     * ```
+     *
+     * @since 0.2.0
+     */
     organizer(organizer: ICalOrganizer | string | null): this;
     organizer(organizer?: ICalOrganizer | string | null): this | ICalOrganizer | null {
         if (organizer === undefined) {
@@ -611,7 +826,28 @@ export default class ICalEvent {
 
 
     /**
-     * Create a new Attendee and return the attendee object…
+     * Creates a new [[`ICalAttendee`]] and returns it. Use options to prefill
+     * the attendee's attributes. Calling this method without options will create
+     * an empty attendee.
+     *
+     * ```javascript
+     * const cal = ical();
+     * const event = cal.createEvent();
+     * const attendee = event.createAttendee({email: 'hui@example.com', name: 'Hui'});
+     *
+     * // add another attendee
+     * event.createAttendee('Buh <buh@example.net>');
+     * ```
+     *
+     * As with the organizer, you can also add an explicit `mailto` address.
+     *
+     * ```javascript
+     * event.createAttendee({email: 'hui@example.com', name: 'Hui', mailto: 'another@mailto.com'});
+     *
+     * // overwrite an attendee's mailto address
+     * attendee.mailto('another@mailto.net');
+     * ```
+     *
      * @since 0.2.0
      */
     createAttendee(data: ICalAttendee | ICalAttendeeData | string = {}): ICalAttendee {
@@ -630,10 +866,27 @@ export default class ICalEvent {
 
 
     /**
-     * Get all attendees or add attendees…
+     * Get all attendees
      * @since 0.2.0
      */
     attendees(): ICalAttendee[];
+
+    /**
+     * Add multiple attendees to your event
+     *
+     * ```javascript
+     * const event = ical().createEvent();
+     *
+     * cal.attendees([
+     *     {email: 'a@example.com', name: 'Person A'},
+     *     {email: 'b@example.com', name: 'Person B'}
+     * ]);
+     *
+     * cal.attendees(); // --> [ICalAttendee, ICalAttendee]
+     * ```
+     *
+     * @since 0.2.0
+     */
     attendees(attendees: (ICalAttendee | ICalAttendeeData | string)[]): this;
     attendees(attendees?: (ICalAttendee | ICalAttendeeData | string)[]): this | ICalAttendee[] {
         if (!attendees) {
@@ -646,7 +899,22 @@ export default class ICalEvent {
 
 
     /**
-     * Create a new Alarm and return the alarm object…
+     * Creates a new [[`ICalAlarm`]] and returns it. Use options to prefill
+     * the alarm's attributes. Calling this method without options will create
+     * an empty alarm.
+     *
+     * ```javascript
+     * const cal = ical();
+     * const event = cal.createEvent();
+     * const alarm = event.createAlarm({type: 'display', trigger: 300});
+     *
+     * // add another alarm
+     * event.createAlarm({
+     *     type: 'audio',
+     *     trigger: 300, // 5min before event
+     * });
+     * ```
+     *
      * @since 0.2.1
      */
     createAlarm(data: ICalAlarm | ICalAlarmData = {}): ICalAlarm {
@@ -657,13 +925,27 @@ export default class ICalEvent {
 
 
     /**
-     * Get all alarms or add alarms…
-     *
-     * @param {Array<Object>} [alarms]
+     * Get all alarms
      * @since 0.2.0
-     * @returns {ICalAlarms[]|ICalEvent}
      */
     alarms(): ICalAlarm[];
+
+    /**
+     * Add one or multiple alarms
+     *
+     * ```javascript
+     * const event = ical().createEvent();
+     *
+     * cal.alarms([
+     *     {type: 'display', trigger: 600},
+     *     {type: 'audio', trigger: 300}
+     * ]);
+     *
+     * cal.alarms(); // --> [ICalAlarm, ICalAlarm]
+     ```
+     *
+     * @since 0.2.0
+     */
     alarms(alarms: ICalAlarm[] | ICalAlarmData[]): this;
     alarms(alarms?: ICalAlarm[] | ICalAlarmData[]): this | ICalAlarm[] {
         if (!alarms) {
@@ -676,7 +958,20 @@ export default class ICalEvent {
 
 
     /**
-     * Create a new categorie and return the category object…
+     * Creates a new [[`ICalCategory`]] and returns it. Use options to prefill the categories' attributes.
+     * Calling this method without options will create an empty category.
+     *
+     * ```javascript
+     * const cal = ical();
+     * const event = cal.createEvent();
+     * const category = event.createCategory({name: 'APPOINTMENT'});
+     *
+     * // add another alarm
+     * event.createCategory({
+     *     name: 'MEETING'
+     * });
+     * ```
+     *
      * @since 0.3.0
      */
     createCategory(data: ICalCategory | ICalCategoryData = {}): ICalCategory {
@@ -687,10 +982,27 @@ export default class ICalEvent {
 
 
     /**
-     * Get all categories or add categories…
+     * Get all categories
      * @since 0.3.0
      */
     categories(): ICalCategory[];
+
+    /**
+     * Add categories to the event or return all selected categories.
+     *
+     * ```javascript
+     * const event = ical().createEvent();
+     *
+     * cal.categories([
+     *     {name: 'APPOINTMENT'},
+     *     {name: 'MEETING'}
+     * ]);
+     *
+     * cal.categories(); // --> [ICalCategory, ICalCategory]
+     * ```
+     *
+     * @since 0.3.0
+     */
     categories(categories: (ICalCategory | ICalCategoryData)[]): this;
     categories(categories?: (ICalCategory | ICalCategoryData)[]): this | ICalCategory[] {
         if (!categories) {
@@ -703,10 +1015,21 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's status
+     * Get the event's status
      * @since 0.2.0
      */
     status(): ICalEventStatus | null;
+
+    /**
+     * Set the event's status
+     *
+     * ```javascript
+     * import ical, {ICalEventStatus} from 'ical-generator';
+     * event.status(ICalEventStatus.CONFIRMED);
+     * ```
+     *
+     * @since 0.2.0
+     */
     status(status: ICalEventStatus | null): this;
     status(status?: ICalEventStatus | null): this | ICalEventStatus | null {
         if (status === undefined) {
@@ -723,10 +1046,21 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's busy status on Microsoft param
+     * Get the event's busy status
      * @since 1.0.2
      */
     busystatus(): ICalEventBusyStatus | null;
+
+    /**
+     * Set the event's busy status
+     *
+     * ```javascript
+     * import ical, {ICalEventBusyStatus} from 'ical-generator';
+     * event.busystatus(ICalEventStatus.BUSY);
+     * ```
+     *
+     * @since 1.0.2
+     */
     busystatus(busystatus: ICalEventBusyStatus | null): this;
     busystatus(busystatus?: ICalEventBusyStatus | null): this | ICalEventBusyStatus | null {
         if (busystatus === undefined) {
@@ -743,14 +1077,21 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's priority. A value of 1 represents
+     * Get the event's priority. A value of 1 represents
      * the highest priority, 9 the lowest. 0 specifies an undefined
      * priority.
      *
      * @since v2.0.0-develop.7
-     * @see https://www.kanzaki.com/docs/ical/priority.html
      */
     priority(): number | null;
+
+    /**
+     * Set the event's priority. A value of 1 represents
+     * the highest priority, 9 the lowest. 0 specifies an undefined
+     * priority.
+     *
+     * @since v2.0.0-develop.7
+     */
     priority(priority: number | null): this;
     priority(priority?: number | null): this | number | null {
         if (priority === undefined) {
@@ -771,10 +1112,15 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's URL
+     * Get the event's URL
      * @since 0.2.0
      */
     url(): string | null;
+
+    /**
+     * Set the event's URL
+     * @since 0.2.0
+     */
     url(url: string | null): this;
     url(url?: string | null): this | string | null {
         if (url === undefined) {
@@ -786,10 +1132,27 @@ export default class ICalEvent {
     }
 
     /**
-     * Set/Get the event's transparency
+     * Get the event's transparency
      * @since 1.7.3
      */
     transparency(): ICalEventTransparency | null;
+
+    /**
+     * Set the event's transparency
+     *
+     * Set the field to `OPAQUE` if the person or resource is no longer
+     * available due to this event. If the calendar entry has no influence
+     * on availability, you can set the field to `TRANSPARENT`. This value
+     * is mostly used to find out if a person has time on a certain date or
+     * not (see `TRANSP` in iCal specification).
+     *
+     * ```javascript
+     * import ical, {ICalEventTransparency} from 'ical-generator';
+     * event.transparency(ICalEventTransparency.OPAQUE);
+     * ```
+     *
+     * @since 1.7.3
+     */
     transparency(transparency: ICalEventTransparency | null): this;
     transparency(transparency?: ICalEventTransparency | null): this | ICalEventTransparency | null {
         if (transparency === undefined) {
@@ -806,10 +1169,15 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's creation date
+     * Get the event's creation date
      * @since 0.3.0
      */
     created(): ICalDateTimeValue | null;
+
+    /**
+     * Set the event's creation date
+     * @since 0.3.0
+     */
     created(created: ICalDateTimeValue | null): this;
     created(created?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (created === undefined) {
@@ -826,10 +1194,15 @@ export default class ICalEvent {
 
 
     /**
-     * Set/Get the event's last modification date
+     * Get the event's last modification date
      * @since 0.3.0
      */
     lastModified(): ICalDateTimeValue | null;
+
+    /**
+     * Set the event's last modification date
+     * @since 0.3.0
+     */
     lastModified(lastModified: ICalDateTimeValue | null): this;
     lastModified(lastModified?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (lastModified === undefined) {
@@ -846,18 +1219,49 @@ export default class ICalEvent {
 
 
     /**
-     * Get/Set X-* attributes. Woun't filter double attributes,
-     * which are also added by another method (e.g. busystatus),
+     * Set X-* attributes. Woun't filter double attributes,
+     * which are also added by another method (e.g. summary),
      * so these attributes may be inserted twice.
      *
-     * @param {Array<Object<{key: String, value: String}>>|String} [key]
-     * @param {String} [value]
+     * ```javascript
+     * event.x([
+     *     {
+     *         key: "X-MY-CUSTOM-ATTR",
+     *         value: "1337!"
+     *     }
+     * ]);
+     *
+     * event.x([
+     *     ["X-MY-CUSTOM-ATTR", "1337!"]
+     * ]);
+     *
+     * event.x({
+     *     "X-MY-CUSTOM-ATTR": "1337!"
+     * });
+     * ```
+     *
      * @since 1.9.0
-     * @returns {ICalEvent|Array<Object<{key: String, value: String}>>}
      */
-    x(keyOrArray: ({ key: string, value: string })[] | [string, string][] | Record<string, string>): this;
-    x(keyOrArray: string, value: string): this;
-    x(): { key: string, value: string }[];
+    x (keyOrArray: {key: string, value: string}[] | [string, string][] | Record<string, string>): this;
+
+    /**
+     * Set a X-* attribute. Woun't filter double attributes,
+     * which are also added by another method (e.g. summary),
+     * so these attributes may be inserted twice.
+     *
+     * ```javascript
+     * event.x("X-MY-CUSTOM-ATTR", "1337!");
+     * ```
+     *
+     * @since 1.9.0
+     */
+    x (keyOrArray: string, value: string): this;
+
+    /**
+     * Get all custom X-* attributes.
+     * @since 1.9.0
+     */
+    x (): {key: string, value: string}[];
     x(keyOrArray?: ({ key: string, value: string })[] | [string, string][] | Record<string, string> | string, value?: string): this | void | ({ key: string, value: string })[] {
         if (keyOrArray === undefined) {
             return addOrGetCustomAttributes(this.data);
@@ -875,7 +1279,18 @@ export default class ICalEvent {
 
 
     /**
-     * Export calender as JSON Object to use it later…
+     * Return a shallow copy of the events's options for JSON stringification.
+     * Third party objects like moment.js values or RRule objects are stringified
+     * as well. Can be used for persistence.
+     *
+     * ```javascript
+     * const event = ical().createEvent();
+     * const json = JSON.stringify(event);
+     *
+     * // later: restore event data
+     * const calendar = ical().createEvent(JSON.parse(json));
+     * ```
+     *
      * @since 0.2.4
      */
     toJSON(): ICalEventJSONData {
@@ -904,8 +1319,12 @@ export default class ICalEvent {
 
 
     /**
-     * Export Event to iCal
-     * @since 0.2.0
+     * Return generated event as a string.
+     *
+     * ```javascript
+     * const event = ical().createEvent();
+     * console.log(event.toString()); // → BEGIN:VEVENT…
+     * ```
      */
     toString(): string {
         let g = '';

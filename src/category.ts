@@ -12,9 +12,32 @@ export interface ICalCategoryInternalData {
     name: string | null
 }
 
+
+/**
+ * Usually you get an `ICalCategory` object like this:
+ *
+ * ```javascript
+ * import ical from 'ical-generator';
+ * const calendar = ical();
+ * const event = calendar.createEvent();
+ * const category = event.createCategory();
+ * ```
+ *
+ * You can also use the [[`ICalCategory`]] object directly:
+ *
+ * ```javascript
+ * import ical, {ICalCategory} from 'ical-generator';
+ * const category = new ICalCategory();
+ * event.categories([category]);
+ * ```
+ */
 export default class ICalCategory {
     private readonly data: ICalCategoryInternalData;
 
+    /**
+     * Constructor of [[`ICalCategory`]].
+     * @param data Category Data
+     */
     constructor(data: ICalCategoryData) {
         this.data = {
             name: null
@@ -25,10 +48,15 @@ export default class ICalCategory {
 
 
     /**
-     * Set/Get the category name
+     * Get the category name
      * @since 0.3.0
      */
     name(): string | null;
+
+    /**
+     * Set the category name
+     * @since 0.3.0
+     */
     name(name: string): this;
     name(name?: string): this | string | null {
         if (name === undefined) {
@@ -41,7 +69,9 @@ export default class ICalCategory {
 
 
     /**
-     * Export calender as JSON Object to use it later…
+     * Return a shallow copy of the category's options for JSON stringification.
+     * Can be used for persistence.
+     *
      * @since 0.2.4
      */
     toJSON(): ICalCategoryInternalData {
@@ -50,8 +80,11 @@ export default class ICalCategory {
 
 
     /**
-     * Export Event to iCal
-     * @since 0.2.0
+     * Return generated category name as a string.
+     *
+     * ```javascript
+     * console.log(category.toString());
+     * ```
      */
     toString(): string {
 
