@@ -79,4 +79,11 @@ export {
 
 export {
     ICalDateTimeValue,
+    ICalRepeatingOptions,
+    ICalLocation,
+    ICalGeo,
+    ICalOrganizer,
+    ICalDescription,
+    ICalEventRepeatingFreq,
+    ICalWeekday
 } from './types';

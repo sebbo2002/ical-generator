@@ -33,7 +33,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.throws(function () {
                 cal.prodId('enemenemuh!');
-            }, /`prodid`/);
+            }, /`prodId`/);
         });
 
         it('should throw error when not string/object', function () {

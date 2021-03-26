@@ -423,8 +423,8 @@ export default class ICalAlarm {
         }
         else {
             throw new Error(
-                '`attach` needs to be a valid formed string or an object. See https://github.com/sebbo2002/ical-' +
-                'generator#attachstringobject-attach'
+                '`attachment` needs to be a valid formed string or an object. See https://sebbo2002.github.io/' +
+                'ical-generator/develop/reference/classes/icalalarm.html#attach'
             );
         }
 

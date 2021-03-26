@@ -729,7 +729,10 @@ export default class ICalEvent {
             (location && !location.title) ||
             (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon)))
         ) {
-            throw new Error('`location` isn\'t formatted correctly. See https://github.com/sebbo2002/ical-generator#locationobject-location');
+            throw new Error(
+                '`location` isn\'t formatted correctly. See https://sebbo2002.github.io/ical-generator/'+
+                'develop/reference/classes/icalevent.html#location'
+            );
         }
 
         this.data.location = location || null;
@@ -788,7 +791,7 @@ export default class ICalEvent {
      * Set the event's organizer
      *
      * ```javascript
-     *     event.organizer({
+     * event.organizer({
      *    name: 'Organizer\'s Name',
      *    email: 'organizer@example.com'
      * });

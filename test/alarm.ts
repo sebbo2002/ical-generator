@@ -405,7 +405,7 @@ describe('ical-generator Alarm', function () {
             assert.throws(function () {
                 // @ts-ignore
                 a.attach(Infinity);
-            }, /`attach`/);
+            }, /`attachment`/);
         });
 
         it('should change something', function () {

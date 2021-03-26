@@ -14,7 +14,9 @@ import ical, {
     ICalEvent,
     ICalEventStatus,
     ICalEventBusyStatus,
-    ICalEventTransparency
+    ICalEventTransparency,
+    ICalEventRepeatingFreq,
+    ICalWeekday
 } from '../src';
 import {} from '../dist/alarm';
 
@@ -80,6 +82,15 @@ describe('ical-generator Index', function() {
         });
         it('should export ICalEventTransparency', function() {
             assert.ok(ICalEventTransparency);
+        });
+    });
+
+    describe('Type', function () {
+        it('should export ICalEventRepeatingFreq', function () {
+            assert.ok(ICalEventRepeatingFreq);
+        });
+        it('should export ICalWeekday', function () {
+            assert.ok(ICalWeekday);
         });
     });
 });

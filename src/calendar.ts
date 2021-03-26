@@ -170,8 +170,8 @@ export default class ICalCalendar {
         }
         if (typeof prodId === 'string') {
             throw new Error(
-                '`prodid` isn\'t formated correctly. See https://github.com/sebbo2002/ical-generator#' +
-                'prodidstringobject-prodid'
+                '`prodId` isn\'t formated correctly. See https://sebbo2002.github.io/ical-generator/develop/reference/'+
+                'classes/icalcalendar.html#prodid'
             );
         }
 
