@@ -1,18 +1,25 @@
+![ical-generator Logo](https://d.sebbo.net/ical-generator-logo-AvKRjlfYJe4OlPV9l0zgSDlgyW59bOzFzjUUTG9tGM0ySKQuZ1PbzkZO9XYZ1vjLt8XwRgjZH2CYw22vD9OTzFeTvEWlqPFfyuox.jpg)
+
 # ical-generator
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-![Status](https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square)
+![Size](https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square)
+[![Status](https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square)](https://github.com/sebbo2002/ical-generator/actions)
+![Dependencies](https://img.shields.io/depfu/sebbo2002/ical-generator?style=flat-square)
 
-ical-generator is a small piece of code which generates ical calendar files. I use this to generate subscriptionable
-calendar feeds.
+`ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
+to generate subscriptionable calendar feeds.
 
 <table><tr><td>
 <b>⚠️ Version 2.0.0</b><br /><br />
-<p>You are looking at the readme for the new, future version 2.0.0, a completely new version in Typescript, with some
-new features and changes. If you are looking for the readme of the current version, you can find it
+<p>You are looking at the readme of the new version 2.0.0, which is currently still under development. The new version is
+a complete rewrite in Typescript, but I tried to keep most of the API. Nevertheless, there are some changes. You can
+install this future version by running <code>npm i ical-generator@next</code>.</p>
+
+<p>If you are looking for the readme of the current version, you can find it
 <a href="https://github.com/sebbo2002/ical-generator/blob/master/README.md">here</a>.</p>
 <p>If you want to help out or want to know what's in the pipeline with the new version, you're welcome to take a look
-<a href="https://github.com/sebbo2002/ical-generator/milestones/v2.0.0%20%F0%9F%8E%89">here</a> and get an idea of
+<a href="https://github.com/sebbo2002/ical-generator/issues?q=milestone%3A%22v2.0.0+%F0%9F%8E%89%22+">here</a> and get an idea of
 what's in the new version.</p>
 </td></tr></table>
 
