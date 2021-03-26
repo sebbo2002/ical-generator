@@ -1052,7 +1052,9 @@ export default class ICalEvent {
     busystatus(): ICalEventBusyStatus | null;
 
     /**
-     * Set the event's busy status
+     * Set the event's busy status. Will add the
+     * [`X-MICROSOFT-CDO-BUSYSTATUS`](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcical/cd68eae7-ed65-4dd3-8ea7-ad585c76c736)
+     * attribute to your event.
      *
      * ```javascript
      * import ical, {ICalEventBusyStatus} from 'ical-generator';
