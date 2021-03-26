@@ -1,3 +1,15 @@
+# [2.0.0-develop.13](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.12...v2.0.0-develop.13) (2021-03-26)
+
+
+### Code Refactoring
+
+* Update error URLs ([2aedf55](https://github.com/sebbo2002/ical-generator/commit/2aedf552f4d79da49c6a3b0d990fb1f4b82c5a64))
+
+
+### BREAKING CHANGES
+
+* Some error messages changed, so if you check for error , please double check them now.
+
 # [2.0.0-develop.12](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.11...v2.0.0-develop.12) (2021-03-26)
 
 
