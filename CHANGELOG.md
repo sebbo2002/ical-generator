@@ -1,3 +1,10 @@
+# [2.0.0-develop.12](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.11...v2.0.0-develop.12) (2021-03-26)
+
+
+### Reverts
+
+* Revert "chore: Update package.json" ([2ad5716](https://github.com/sebbo2002/ical-generator/commit/2ad57163882b7171f45269b3742da9ead23510f4))
+
 # [2.0.0-develop.11](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.10...v2.0.0-develop.11) (2021-03-26)
 
 
