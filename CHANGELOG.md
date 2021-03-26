@@ -1,3 +1,15 @@
+# [2.0.0-develop.11](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.10...v2.0.0-develop.11) (2021-03-26)
+
+
+### chore
+
+* Update package.json ([a3c7037](https://github.com/sebbo2002/ical-generator/commit/a3c7037404c6c12fec7a892d39bfd4cfd8c6a00a))
+
+
+### BREAKING CHANGES
+
+* Set minimum node.js version to 12.0.0
+
 # [2.0.0-develop.10](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.9...v2.0.0-develop.10) (2021-03-25)
 
 # [2.0.0-develop.9](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.8...v2.0.0-develop.9) (2021-03-24)
