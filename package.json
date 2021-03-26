@@ -1,16 +1,15 @@
 {
   "name": "ical-generator",
   "description": "ical-generator is a small piece of code which generates ical calendar files",
-  "author": "Sebastian Pekarek <gineeyaingasiajeipat@e.sebbo.net>",
-  "homepage": "https://github.com/sebbo2002/ical-generator",
-  "keywords": ["ical", "ics", "icalendar", "generator", "calendar", "subscription", "outlook", "rfc", "rfc5545", "events", "alarms"],
+  "author": "Sebastian Pekarek <mail@sebbo.net>",
   "license": "MIT",
   "version": "v2.0.0-develop",
   "bugs": {
-    "url": "http://github.com/sebbo2002/ical-generator/issues"
+    "url": "http://github.com/sebbo2002/ical-generator/issues",
+    "email": "bugs@sebbo.net"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=10.1.0"
   },
   "files": [
     "/dist"
