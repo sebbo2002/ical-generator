@@ -57,8 +57,8 @@ export default class ICalCategory {
      * Set the category name
      * @since 0.3.0
      */
-    name(name: string): this;
-    name(name?: string): this | string | null {
+    name(name: string | null): this;
+    name(name?: string | null): this | string | null {
         if (name === undefined) {
             return this.data.name;
         }

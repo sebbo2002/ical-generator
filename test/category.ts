@@ -20,6 +20,7 @@ describe('ical-generator Category', function () {
         it('setter should return this', function () {
             const c = new ICalCategory({});
             assert.deepStrictEqual(c, c.name('FOO'));
+            assert.deepStrictEqual(c, c.name(null));
         });
 
         it('getter should return value', function () {
@@ -43,7 +44,7 @@ describe('ical-generator Category', function () {
         });
     });
 
-    describe('generate()', function () {
+    describe('toString()', function () {
         it('shoult throw an error without name', function () {
             const c = new ICalCategory({});
             assert.throws(function () {
