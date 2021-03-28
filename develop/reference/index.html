@@ -2798,18 +2798,122 @@ img {
 			<a href="interfaces/icalrepeatingoptions.html" class="tsd-kind-icon">ICal<wbr>Repeating<wbr>Options</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
-			<a href="index.html#icalalarmtypevalue" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value</a>
+			<a href="modules.html#icalalarmtypevalue" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value</a>
 		</li>
 		<li class=" tsd-kind-type-alias">
-			<a href="index.html#icaldatetimevalue" class="tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value</a>
+			<a href="modules.html#icaldatetimevalue" class="tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value</a>
 		</li>
 		<li class=" tsd-kind-function">
-			<a href="index.html#default" class="tsd-kind-icon">default</a>
+			<a href="modules.html#default" class="tsd-kind-icon">default</a>
 		</li>
 	</ul>
 </nav>
 <div class="container container-main">
 	<div class="content-wrap">
+		<div class="tsd-panel tsd-typography">
+			<p><img src="https://d.sebbo.net/ical-generator-logo-AvKRjlfYJe4OlPV9l0zgSDlgyW59bOzFzjUUTG9tGM0ySKQuZ1PbzkZO9XYZ1vjLt8XwRgjZH2CYw22vD9OTzFeTvEWlqPFfyuox.jpg" alt="ical-generator Logo"></p>
+			<a href="#ical-generator" id="ical-generator" style="color: inherit; text-decoration: none;">
+				<h1>ical-generator</h1>
+			</a>
+			<p><a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="License"></a>
+				<img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Size">
+				<a href="https://github.com/sebbo2002/ical-generator/actions"><img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square" alt="Status"></a>
+			<img src="https://img.shields.io/depfu/sebbo2002/ical-generator?style=flat-square" alt="Dependencies"></p>
+			<p><code>ical-generator</code> is a small but fine library with which you can very easily create a valid iCal calendars, for example
+			to generate subscriptionable calendar feeds.</p>
+			<table><tr><td>
+						<b>⚠️ Version 2.0.0</b><br /><br />
+						<p>You are looking at the readme of the new version 2.0.0, which is currently still under development. The new version is
+							a complete rewrite in Typescript, but I tried to keep most of the API. Nevertheless, there are some changes. You can
+						install this future version by running <code>npm i ical-generator@next</code>.</p>
+						<p>If you are looking for the readme of the current version, you can find it
+						<a href="https://github.com/sebbo2002/ical-generator/blob/master/README.md">here</a>.</p>
+						<p>If you want to help out or want to know what's in the pipeline with the new version, you're welcome to take a look
+							<a href="https://github.com/sebbo2002/ical-generator/issues?q=milestone%3A%22v2.0.0+%F0%9F%8E%89%22+">here</a> and get an idea of
+						what's in the new version.</p>
+			</td></tr></table>
+			<a href="#📦-installation" id="📦-installation" style="color: inherit; text-decoration: none;">
+				<h2>📦 Installation</h2>
+			</a>
+			<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000">-</span><span style="color: #001080">generator</span>
+</code></pre>
+			<a href="#⚡️-quick-start" id="⚡️-quick-start" style="color: inherit; text-decoration: none;">
+				<h2>⚡️ Quick Start</h2>
+			</a>
+			<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">http</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">calendar</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">({</span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my first iCal&#039;</span><span style="color: #000000">});</span>
+<span style="color: #001080">calendar</span><span style="color: #000000">.</span><span style="color: #795E26">createEvent</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">start:</span><span style="color: #000000"> </span><span style="color: #795E26">moment</span><span style="color: #000000">(),</span>
+<span style="color: #000000">    </span><span style="color: #001080">end:</span><span style="color: #000000"> </span><span style="color: #795E26">moment</span><span style="color: #000000">().</span><span style="color: #795E26">add</span><span style="color: #000000">(</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;hour&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    </span><span style="color: #001080">summary:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Example Event&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">description:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;It works ;)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">location:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;my room&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">url:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http://sebbo.net/&#039;</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">http</span><span style="color: #000000">.</span><span style="color: #795E26">createServer</span><span style="color: #000000">((</span><span style="color: #001080">req</span><span style="color: #000000">, </span><span style="color: #001080">res</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">calendar</span><span style="color: #000000">.</span><span style="color: #795E26">serve</span><span style="color: #000000">(</span><span style="color: #001080">res</span><span style="color: #000000">))</span>
+<span style="color: #000000">    .</span><span style="color: #795E26">listen</span><span style="color: #000000">(</span><span style="color: #098658">3000</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;127.0.0.1&#039;</span><span style="color: #000000">, () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;Server running at http://127.0.0.1:3000/&#039;</span><span style="color: #000000">);</span>
+<span style="color: #000000">    });</span>
+</code></pre>
+			<a href="#📑-api-reference" id="📑-api-reference" style="color: inherit; text-decoration: none;">
+				<h2>📑 API-Reference</h2>
+			</a>
+			<ul>
+				<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/">Index</a><ul>
+						<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalcalendar.html">ICalCalendar</a></li>
+						<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalevent.html">ICalEvent</a><ul>
+								<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalalarm.html">ICalAlarm</a></li>
+								<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalattendee.html">ICalAttendee</a></li>
+								<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalcategory.html">ICalCategory</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<a href="#🕒-date-time-amp-timezones" id="🕒-date-time-amp-timezones" style="color: inherit; text-decoration: none;">
+				<h2>🕒 Date, Time &amp; Timezones</h2>
+			</a>
+			<p>ical-generator supports <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">native Date</a>,
+				<a href="https://momentjs.com/">moment.js</a> (and <a href="https://momentjs.com/timezone/">moment-timezone</a>, <a href="https://day.js.org/en/">Day.js</a> and
+				<a href="https://moment.github.io/luxon/">Luxon&#39;s</a> <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html">DateTime</a>
+			objects. You can also pass a string which is then passed to javascript&#39;s <code>Date</code> internally.</p>
+			<p>It is recommended to use UTC time as far as possible. <code>ical-generator</code> will output all time information as UTC time as
+				long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
+				set, <code>ical-generator</code> assumes that the given time matches the time zone. If a <code>moment-timezone</code> object or Luxon&#39;s
+			<code>setZone</code> method works, <code>ical-generator</code> sets it according to the time zone set in the calendar/event.</p>
+			<a href="#🚦-tests" id="🚦-tests" style="color: inherit; text-decoration: none;">
+				<h2>🚦 Tests</h2>
+			</a>
+			<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">test</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">coverage</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">browser</span><span style="color: #000000">-</span><span style="color: #001080">test</span>
+</code></pre>
+			<a href="#🙋-faq" id="🙋-faq" style="color: inherit; text-decoration: none;">
+				<h2>🙋 FAQ</h2>
+			</a>
+			<a href="#what39s-error-can39t-resolve-39fs39" id="what39s-error-can39t-resolve-39fs39" style="color: inherit; text-decoration: none;">
+				<h3>What&#39;s <code>Error: Can&#39;t resolve &#39;fs&#39;</code>?</h3>
+			</a>
+			<p><code>ical-generator</code> uses the node.js <code>fs</code> module to save your calendar on the filesystem. In browser environments, you usually don&#39;t need this, so if you pass <code>null</code> for fs in your bundler. In webpack this looks like this:</p>
+			<pre><code class="language-json"><span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #0451A5">&quot;node&quot;</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #0451A5">&quot;fs&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;empty&quot;</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+			<a href="#where39s-the-changelog" id="where39s-the-changelog" style="color: inherit; text-decoration: none;">
+				<h3>Where&#39;s the changelog?</h3>
+			</a>
+			<p>It&#39;s <a href="https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md">here</a>.</p>
+			<a href="#🙆🏼♂️-copyright-and-license" id="🙆🏼♂️-copyright-and-license" style="color: inherit; text-decoration: none;">
+				<h2>🙆🏼‍♂️ Copyright and license</h2>
+			</a>
+			<p>Copyright (c) Sebastian Pekarek under the <a href="LICENSE">MIT license</a>.</p>
+		</div>
+		<div style="position:relative;"><a name="typedoc-main-index" class="tsd-anchor"></a></div>
 		<section class="tsd-panel-group tsd-index-group">
 			<h2>Index</h2>
 			<section class="tsd-panel tsd-index-panel">
@@ -2863,14 +2967,14 @@ img {
 					<section class="tsd-index-section ">
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-type-alias"><a href="index.html#icalalarmtypevalue" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value</a></li>
-							<li class="tsd-kind-type-alias"><a href="index.html#icaldatetimevalue" class="tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value</a></li>
+							<li class="tsd-kind-type-alias"><a href="modules.html#icalalarmtypevalue" class="tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value</a></li>
+							<li class="tsd-kind-type-alias"><a href="modules.html#icaldatetimevalue" class="tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
 						<h3>Functions</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-function"><a href="index.html#default" class="tsd-kind-icon">default</a></li>
+							<li class="tsd-kind-function"><a href="modules.html#default" class="tsd-kind-icon">default</a></li>
 						</ul>
 					</section>
 				</div>
@@ -2884,7 +2988,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><a href="enums/icalalarmtype.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalAlarmType</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/62d9407/src/alarm.ts#L21">alarm.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/90951bb/src/alarm.ts#L21">alarm.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -2894,7 +2998,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MomentTZ</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dayjs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LuxonDateTime</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/62d9407/src/types.ts#L13">types.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/90951bb/src/types.ts#L13">types.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -2919,7 +3023,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/62d9407/src/index.ts#L7">index.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/90951bb/src/index.ts#L7">index.ts:7</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
