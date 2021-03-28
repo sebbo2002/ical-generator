@@ -1,3 +1,10 @@
+# [2.0.0-develop.14](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.13...v2.0.0-develop.14) (2021-03-28)
+
+
+### Bug Fixes
+
+* Allow to set null values within object constructors ([8b87183](https://github.com/sebbo2002/ical-generator/commit/8b8718305096466669b5d2cdcf318825cb8145ae))
+
 # [2.0.0-develop.13](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.12...v2.0.0-develop.13) (2021-03-26)
 
 
