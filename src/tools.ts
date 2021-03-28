@@ -52,10 +52,6 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
     }
     else if(isLuxonDate(d)) {
         const m = timezone ? d.setZone(timezone) : (floating ? d : d.setZone('utc'));
-        if(!m.isValid) {
-            throw new Error('Unable to format DateTime: value is not valid!');
-        }
-
         return m.toFormat('yyyyLLdd') + (!dateonly ? (
             'T' + m.toFormat('HHmmss') + (floating || timezone ? '' : 'Z')
         ) : '');
