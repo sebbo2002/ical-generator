@@ -121,16 +121,16 @@ export default class ICalCalendar {
             x: []
         };
 
-        data.prodId && this.prodId(data.prodId);
-        data.method && this.method(data.method);
-        data.name && this.name(data.name);
-        data.description && this.description(data.description);
-        data.timezone && this.timezone(data.timezone);
-        data.url && this.url(data.url);
-        data.scale && this.scale(data.scale);
-        data.ttl && this.ttl(data.ttl);
-        data.events && this.events(data.events);
-        data.x && this.x(data.x);
+        data.prodId !== undefined && this.prodId(data.prodId);
+        data.method !== undefined && this.method(data.method);
+        data.name !== undefined && this.name(data.name);
+        data.description !== undefined && this.description(data.description);
+        data.timezone !== undefined && this.timezone(data.timezone);
+        data.url !== undefined && this.url(data.url);
+        data.scale !== undefined && this.scale(data.scale);
+        data.ttl !== undefined && this.ttl(data.ttl);
+        data.events !== undefined && this.events(data.events);
+        data.x !== undefined && this.x(data.x);
     }
 
 

@@ -118,18 +118,18 @@ export default class ICalAttendee {
             throw new Error('`event` option required!');
         }
 
-        data.name && this.name(data.name);
-        data.email && this.email(data.email);
-        data.mailto && this.mailto(data.mailto);
-        data.status && this.status(data.status);
-        data.role && this.role(data.role);
-        data.rsvp && this.rsvp(data.rsvp);
-        data.type && this.type(data.type);
-        data.delegatedTo && this.delegatedTo(data.delegatedTo);
-        data.delegatedFrom && this.delegatedFrom(data.delegatedFrom);
+        data.name !== undefined && this.name(data.name);
+        data.email !== undefined && this.email(data.email);
+        data.mailto !== undefined && this.mailto(data.mailto);
+        data.status !== undefined && this.status(data.status);
+        data.role !== undefined && this.role(data.role);
+        data.rsvp !== undefined && this.rsvp(data.rsvp);
+        data.type !== undefined && this.type(data.type);
+        data.delegatedTo !== undefined && this.delegatedTo(data.delegatedTo);
+        data.delegatedFrom !== undefined && this.delegatedFrom(data.delegatedFrom);
         data.delegatesTo && this.delegatesTo(data.delegatesTo);
         data.delegatesFrom && this.delegatesFrom(data.delegatesFrom);
-        data.x && this.x(data.x);
+        data.x !== undefined && this.x(data.x);
     }
 
 

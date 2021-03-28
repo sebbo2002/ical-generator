@@ -103,15 +103,15 @@ export default class ICalAlarm {
             throw new Error('`event` option required!');
         }
 
-        data.type && this.type(data.type);
-        data.trigger && this.trigger(data.trigger);
-        data.triggerBefore && this.triggerBefore(data.triggerBefore);
-        data.triggerAfter && this.triggerAfter(data.triggerAfter);
-        data.repeat && this.repeat(data.repeat);
-        data.interval && this.interval(data.interval);
-        data.attach && this.attach(data.attach);
-        data.description && this.description(data.description);
-        data.x && this.x(data.x);
+        data.type !== undefined && this.type(data.type);
+        data.trigger !== undefined && this.trigger(data.trigger);
+        data.triggerBefore !== undefined && this.triggerBefore(data.triggerBefore);
+        data.triggerAfter !== undefined && this.triggerAfter(data.triggerAfter);
+        data.repeat !== undefined && this.repeat(data.repeat);
+        data.interval !== undefined && this.interval(data.interval);
+        data.attach !== undefined && this.attach(data.attach);
+        data.description !== undefined && this.description(data.description);
+        data.x !== undefined && this.x(data.x);
     }
 
 
