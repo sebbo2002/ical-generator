@@ -3,10 +3,27 @@
 import assert from 'assert';
 import ICalCalendar from '../src/calendar';
 import ICalEvent from '../src/event';
-import ICalAttendee, {ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
+import ICalAttendee, {ICalAttendeeData, ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
 
 describe('ical-generator Attendee', function () {
     describe('constructor()', function () {
+        it('shoud set data from constructor', function () {
+            const data: ICalAttendeeData = {
+                name: 'John Doe',
+                email: 'john@example.org',
+                mailto: 'john+calendar@example.org',
+                status: ICalAttendeeStatus.ACCEPTED,
+                role: ICalAttendeeRole.REQ,
+                rsvp: false,
+                type: ICalAttendeeType.INDIVIDUAL,
+                delegatedTo: null,
+                delegatedFrom: null,
+                x: []
+            };
+            const event = new ICalAttendee(data, new ICalEvent({}, new ICalCalendar()));
+            assert.deepStrictEqual(event.toJSON(), data);
+        });
+
         it('shouldn\'t work without event reference', function () {
             assert.throws(function () {
                 // @ts-ignore

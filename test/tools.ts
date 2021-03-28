@@ -6,7 +6,7 @@ import {DateTime} from 'luxon';
 import dayjs from 'dayjs';
 import dayJsUTCPlugin from 'dayjs/plugin/utc';
 import dayJsTimezonePlugin from 'dayjs/plugin/timezone';
-import { formatDate, formatDateTZ, foldLines, escape } from '../src/tools';
+import {formatDate, formatDateTZ, foldLines, escape, checkDate, toDate} from '../src/tools';
 
 dayjs.extend(dayJsUTCPlugin);
 dayjs.extend(dayJsTimezonePlugin);
@@ -102,6 +102,12 @@ describe('ICalTools', function () {
                     '20180705T182400'
                 );
             });
+            it('should work with dateonly flag', function () {
+                assert.strictEqual(
+                    formatDate(null, DateTime.fromISO('2018-07-05T18:24:00.052'), true, false),
+                    '20180705'
+                );
+            });
         });
         describe('Day.js', function () {
             it('should work without setting a timezone', function () {
@@ -122,6 +128,12 @@ describe('ICalTools', function () {
                     '20180705T182400'
                 );
             });
+            it('should work with dateonly flag', function () {
+                assert.strictEqual(
+                    formatDate(null, dayjs('2018-07-05T18:24:00.052'), true, false),
+                    '20180705'
+                );
+            });
         });
     });
 
@@ -136,6 +148,12 @@ describe('ICalTools', function () {
         it('should work without timezone', function () {
             assert.strictEqual(
                 formatDateTZ(null, 'DSTART', '2018-07-02T15:48:05.000Z', {}),
+                'DSTART:20180702T154805Z'
+            );
+        });
+        it('should work without eventdata parameter', function () {
+            assert.strictEqual(
+                formatDateTZ(null, 'DSTART', '2018-07-02T15:48:05.000Z'),
                 'DSTART:20180702T154805Z'
             );
         });
@@ -192,6 +210,92 @@ describe('ICalTools', function () {
                 foldLines('👋🏼12345678ikjhgztrde546rf7g8hjiomkjnhgqfcdxerdftgzuinjhgcfvtzvzvuwcbiweciujvguhbghbbqwxowidoi21e8981'),
                 '👋🏼12345678ikjhgztrde546rf7g8hjiomkjnhgqfcdxerdftgzuinjhgcfvtzvzvuwcb\r\n iweciujvguhbghbbqwxowidoi21e8981'
             );
+        });
+    });
+
+    describe('checkDate()', function () {
+        describe('Date', function () {
+            it('should work with valid Date', function () {
+                const date = new Date();
+                assert.equal(checkDate(date, 'foo'), date);
+            });
+            it('should throw error for invalid Date', function () {
+                const date = new Date('foo');
+                assert.throws(() => {
+                    checkDate(date, 'foo');
+                }, /`foo` has to be a valid date!/);
+            });
+        });
+        describe('String', function () {
+            it('should work with valid String', function () {
+                const date = '2021-03-28T13:15:23.587Z';
+                assert.equal(checkDate(date, 'foo'), date);
+            });
+            it('should throw error for invalid String', function () {
+                const date = 'foo';
+                assert.throws(() => {
+                    checkDate(date, 'foo');
+                }, /`foo` has to be a valid date!/);
+            });
+        });
+        describe('Luxon', function () {
+            it('should work with valid Luxon', function () {
+                const date = DateTime.now();
+                assert.equal(checkDate(date, 'foo'), date);
+            });
+            it('should throw error for invalid Luxon', function () {
+                const date = DateTime.fromISO('foo');
+                assert.throws(() => {
+                    checkDate(date, 'foo');
+                }, /`foo` has to be a valid date!/);
+            });
+        });
+        describe('Moment', function () {
+            it('should work with valid Moment', function () {
+                const date = moment();
+                assert.equal(checkDate(date, 'foo'), date);
+            });
+            it('should throw error for invalid Moment', function () {
+                const date = moment('foo');
+                assert.throws(() => {
+                    checkDate(date, 'foo');
+                }, /`foo` has to be a valid date!/);
+            });
+        });
+        describe('Day.js', function () {
+            it('should work with valid Day.js', function () {
+                const date = dayjs();
+                assert.equal(checkDate(date, 'foo'), date);
+            });
+            it('should throw error for invalid Day.js', function () {
+                const date = dayjs('foo');
+                assert.throws(() => {
+                    checkDate(date, 'foo');
+                }, /`foo` has to be a valid date!/);
+            });
+        });
+    });
+
+    describe('toDate()', function () {
+        it('should work with strings', function () {
+            const date = new Date();
+            assert.deepStrictEqual(toDate(date.toJSON()), date);
+        });
+        it('should work with native Date', function () {
+            const date = new Date();
+            assert.deepStrictEqual(toDate(date), date);
+        });
+        it('should work with moment object', function () {
+            const date = new Date();
+            assert.deepStrictEqual(toDate(moment(date)), date);
+        });
+        it('should work with Day.js object', function () {
+            const date = new Date();
+            assert.deepStrictEqual(toDate(dayjs(date)), date);
+        });
+        it('should work with luxon DateTime object', function () {
+            const date = new Date();
+            assert.deepStrictEqual(toDate(DateTime.fromJSDate(date)), date);
         });
     });
 });

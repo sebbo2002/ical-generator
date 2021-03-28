@@ -18,7 +18,6 @@ import ical, {
     ICalEventRepeatingFreq,
     ICalWeekday
 } from '../src';
-import {} from '../dist/alarm';
 
 describe('ical-generator Index', function() {
     describe('default', function () {

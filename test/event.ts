@@ -3,7 +3,7 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 import ICalCalendar from '../src/calendar';
-import ICalEvent, {ICalEventBusyStatus, ICalEventStatus, ICalEventTransparency} from '../src/event';
+import ICalEvent, {ICalEventBusyStatus, ICalEventData, ICalEventStatus, ICalEventTransparency} from '../src/event';
 import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
 import ICalAttendee from '../src/attendee';
 import ICalAlarm, {ICalAlarmType} from '../src/alarm';
@@ -13,10 +13,36 @@ import {RRule} from 'rrule';
 
 describe('ical-generator Event', function () {
     describe('constructor()', function () {
-        it('shoud set _data', function () {
-            const event = new ICalEvent({}, new ICalCalendar());
-            assert.ok(event.id(), 'data.id set');
-            assert.ok(event.stamp(), 'data.stamp set');
+        it('shoud set data from constructor', function () {
+            const data: ICalEventData = {
+                id: 'FOO',
+                sequence: 1,
+                start: new Date().toJSON(),
+                end: new Date().toJSON(),
+                recurrenceId: new Date().toJSON(),
+                timezone: 'Europe/Berlin',
+                stamp: new Date().toJSON(),
+                allDay: true,
+                floating: false,
+                repeating: null,
+                summary: 'Hello.',
+                location: null,
+                description: null,
+                organizer: null,
+                attendees: [],
+                alarms: [],
+                categories: [],
+                status: null,
+                busystatus: ICalEventBusyStatus.BUSY,
+                priority: 5,
+                url: 'https://github.com/sebbo2002/ical-generator',
+                transparency: ICalEventTransparency.TRANSPARENT,
+                created: new Date().toJSON(),
+                lastModified: new Date().toJSON(),
+                x: []
+            };
+            const event = new ICalEvent(data, new ICalCalendar());
+            assert.deepStrictEqual(event.toJSON(), data);
         });
 
         it('shouldn\'t work without calendar reference', function () {

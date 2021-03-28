@@ -6,14 +6,26 @@ import * as http from 'http';
 import moment from 'moment';
 import {join} from 'path';
 import {getPortPromise} from 'portfinder';
-import ICalCalendar, {ICalCalendarMethod} from '../src/calendar';
+import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar';
 import ICalEvent from '../src/event';
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
         it('shoud load json export', function () {
-            const cal = new ICalCalendar({name: 'hello-world'});
-            assert.strictEqual(cal.name(), 'hello-world');
+            const data: ICalCalendarJSONData = {
+                prodId: '//sebbo.net//ical-generator//EN',
+                method: ICalCalendarMethod.PUBLISH,
+                name: 'Test Calendar',
+                description: 'Hi, I am the description.',
+                timezone: null,
+                url: 'https://github.com/sebbo2002/ical-generator',
+                scale: null,
+                ttl: null,
+                events: [],
+                x: []
+            };
+            const cal = new ICalCalendar(data);
+            assert.deepStrictEqual(cal.toJSON(), data);
         });
     });
 
