@@ -96,7 +96,14 @@ npm run browser-test
 ```
 
 ### Where's the changelog?
-It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md).
+It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md). If you need the changelog for
+`ical-generator` 1.x.x and older, you'll find it [here](https://github.com/sebbo2002/ical-generator/blob/25338b8bf98f9afd3c88849e735fa33fa45fb766/CHANGELOG.md).
+
+### I use Typescript and get `TS2307: Cannot find module` errors
+`ical-generator` supports some third-party libraries such as moment.js or Day.js. To enable Typescript to do something
+with these types, they must of course also be installed. Unfortunately, npm does not install `peerDependencies` in
+versions 4-6, so these dependencies have to be installed manually. The best thing to do is to update your npm installation
+and reinstall `ical-generator`, which should solve the problem.
 
 
 ## 🙆🏼‍♂️ Copyright and license
