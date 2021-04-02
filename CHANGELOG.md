@@ -1,3 +1,10 @@
+# [2.0.0-develop.16](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.15...v2.0.0-develop.16) (2021-04-02)
+
+
+### Bug Fixes
+
+* **deps:** Put necessary typings in peerDependencies as well :/ ([14f0f43](https://github.com/sebbo2002/ical-generator/commit/14f0f43dc23facea9f7aec16144a8546d0b7af3f))
+
 # [2.0.0-develop.15](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.14...v2.0.0-develop.15) (2021-04-02)
 
 
