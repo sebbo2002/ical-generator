@@ -4,6 +4,7 @@ set -e
 echo "########################"
 echo "# build.sh"
 echo "# Branch = ${BRANCH}"
+echo "# npm version = $(npm -v)"
 echo "########################"
 
 # Typescript Build in ./dist
