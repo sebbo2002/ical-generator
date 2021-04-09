@@ -1,3 +1,10 @@
+# [2.0.0-develop.18](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.17...v2.0.0-develop.18) (2021-04-09)
+
+
+### Features
+
+* **Event:** Allow `X-APPLE-STRUCTURED-LOCATION` without address ([4e63e29](https://github.com/sebbo2002/ical-generator/commit/4e63e2914a4ac7956047b9011cfca177bcdb926a)), closes [#236](https://github.com/sebbo2002/ical-generator/issues/236)
+
 # [2.0.0-develop.17](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.16...v2.0.0-develop.17) (2021-04-02)
 
 # [2.0.0-develop.16](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.15...v2.0.0-develop.16) (2021-04-02)
