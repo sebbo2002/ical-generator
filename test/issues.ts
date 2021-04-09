@@ -142,4 +142,43 @@ describe('Issues', function () {
             assert.ok(str.indexOf('EXDATE;TZID=America/New_York:20201213T000000') > -1);
         });
     });
+
+    describe('Issue #236', function () {
+        it('should look like in the example', function () {
+            const calendar = ical({
+                events: [{
+                    id: 'foo',
+                    start: new Date('2020-08-13T00:00:00-05:00'),
+                    stamp: new Date('2020-08-13T00:00:00-05:00'),
+                    summary: 'Example Event',
+                    location: {
+                        title: 'Los Angeles, California, United States',
+                        geo: {
+                            lon: -118.24368,
+                            lat: 34.05223,
+                        },
+                        radius: 400
+                    }
+                }]
+            });
+
+            assert.strictEqual(calendar.toString(), [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//sebbo.net//ical-generator//EN',
+                'BEGIN:VEVENT',
+                'UID:foo',
+                'SEQUENCE:0',
+                'DTSTAMP:20200813T050000Z',
+                'DTSTART:20200813T050000Z',
+                'SUMMARY:Example Event',
+                'LOCATION:Los Angeles\\, California\\, United States',
+                'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-APPLE-RADIUS=400;X-TITLE=Los Angel',
+                ' es\\, California\\, United States:geo:34.05223,-118.24368',
+                'GEO:34.05223;-118.24368',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n'));
+        });
+    });
 });

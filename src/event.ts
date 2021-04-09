@@ -1448,10 +1448,14 @@ export default class ICalEvent {
 
         // LOCATION
         if (this.data.location?.title) {
-            if (this.data.location.address && this.data.location.radius && this.data.location.geo) {
-                g += 'LOCATION:' + escape(this.data.location.title + '\n' + this.data.location.address) + '\r\n';
+            if (this.data.location.radius && this.data.location.geo) {
+                g += 'LOCATION:' + escape(
+                    this.data.location.title +
+                    (this.data.location.address ? '\n' + this.data.location.address : '')
+                ) + '\r\n';
 
-                g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=' + escape(this.data.location.address) + ';' +
+                g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;' +
+                    (this.data.location.address ? 'X-ADDRESS=' + escape(this.data.location.address) + ';' : '') +
                     'X-APPLE-RADIUS=' + escape(this.data.location.radius) + ';' +
                     'X-TITLE=' + escape(this.data.location.title) +
                     ':geo:' + escape(this.data.location.geo?.lat) + ',' + escape(this.data.location.geo?.lon) + '\r\n';
