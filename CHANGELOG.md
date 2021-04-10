@@ -1,3 +1,10 @@
+# [2.0.0-develop.19](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.18...v2.0.0-develop.19) (2021-04-10)
+
+
+### Features
+
+* Add ReleaseBot ([2fba164](https://github.com/sebbo2002/ical-generator/commit/2fba16478db12c0dd50b7c537cc3806395e64818))
+
 # [2.0.0-develop.18](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.17...v2.0.0-develop.18) (2021-04-09)
 
 
