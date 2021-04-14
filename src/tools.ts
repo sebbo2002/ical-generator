@@ -102,7 +102,7 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
         floating = true;
     }
 
-    return property + tzParam + ':' + module.exports.formatDate(timezone, date, false, floating);
+    return property + tzParam + ':' + formatDate(timezone, date, false, floating);
 }
 
 export function escape (str: string | unknown): string {

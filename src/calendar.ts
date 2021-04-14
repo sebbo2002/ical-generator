@@ -779,7 +779,9 @@ export default class ICalCalendar {
                     return;
                 }
 
-                g += s.replace(/\n/g, '\r\n');
+                g += s.replace(/\r\n/g, '\n')
+                    .replace(/\n/g, '\r\n')
+                    .trim() + '\r\n';
             });
         }
         if (this.data.timezone?.name) {

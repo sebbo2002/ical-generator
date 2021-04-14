@@ -8,6 +8,7 @@ import {ICalEventStatus} from '../src/event';
 import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
 import {ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
 import {ICalAlarmType} from '../src/alarm';
+import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 
 describe('ical-generator Cases', function () {
     it('case #1', async function () {
@@ -79,6 +80,7 @@ describe('ical-generator Cases', function () {
 
     it('case #4 (repeating)', async function () {
         const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
+        cal.timezone({name: null, generator: getVtimezoneComponent});
         cal.events([
             {
                 id: '1',
@@ -93,9 +95,10 @@ describe('ical-generator Cases', function () {
             },
             {
                 id: '2',
-                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-                end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+                start: new Date('Fr Oct 04 2013 22:39:30'),
+                end: new Date('Fr Oct 06 2013 23:15:00'),
                 stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+                timezone: 'Europe/Berlin',
                 summary: 'repeating by day, twice',
                 repeating: {
                     freq: ICalEventRepeatingFreq.DAILY,
@@ -116,9 +119,13 @@ describe('ical-generator Cases', function () {
             }
         ]);
 
-        const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_04.ics', 'utf8'));
-        assert.strictEqual(ical(cal.toJSON()).toString(), string);
+        assert.strictEqual(cal.toString(), await fs.readFile(__dirname + '/results/generate_04.ics', 'utf8'), 'first check');
+
+        // Wount be same, as reference to VTimezone generator is not exported
+        // assert.strictEqual(ical(cal.toJSON()).toString(), string);
+
+        cal.timezone(null);
+        assert.strictEqual(ical(cal.toJSON()).toString(), cal.toString(), 'second check');
     });
 
     it('case #5 (floating)', async function () {
