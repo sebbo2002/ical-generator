@@ -13,6 +13,7 @@ import ICalEvent, {ICalEventData, ICalEventJSONData} from './event';
 import {writeFile, writeFileSync} from 'fs';
 import {promises as fsPromises} from 'fs';
 import {ServerResponse} from 'http';
+import {ICalTimezone} from './types';
 
 
 export interface ICalCalendarData {
@@ -20,7 +21,7 @@ export interface ICalCalendarData {
     method?: ICalCalendarMethod | null;
     name?: string | null;
     description?: string | null;
-    timezone?: string | null;
+    timezone?: ICalTimezone | string | null;
     url?: string | null;
     scale?: string | null;
     ttl?: number | Duration | null;
@@ -33,7 +34,7 @@ interface ICalCalendarInternalData {
     method: ICalCalendarMethod | null;
     name: string | null;
     description: string | null;
-    timezone: string | null;
+    timezone: ICalTimezone | null;
     url: string | null;
     scale: string | null;
     ttl: number | null;
@@ -289,13 +290,22 @@ export default class ICalCalendar {
      *
      * @since 0.2.0
      */
-    timezone(timezone: string | null): this;
-    timezone(timezone?: string | null): this | string | null {
+    timezone(timezone: ICalTimezone | string | null): this;
+    timezone(timezone?: ICalTimezone | string | null): this | string | null {
         if (timezone === undefined) {
-            return this.data.timezone;
+            return this.data.timezone?.name || null;
         }
 
-        this.data.timezone = timezone ? String(timezone) : null;
+        if(typeof timezone === 'string') {
+            this.data.timezone = {name: timezone};
+        }
+        else if(timezone === null) {
+            this.data.timezone = null;
+        }
+        else {
+            this.data.timezone = timezone;
+        }
+
         return this;
     }
 
@@ -665,6 +675,7 @@ export default class ICalCalendar {
      */
     toJSON(): ICalCalendarJSONData {
         return Object.assign({}, this.data, {
+            timezone: this.timezone(),
             events: this.data.events.map(event => event.toJSON()),
             x: this.x()
         });
@@ -723,9 +734,28 @@ export default class ICalCalendar {
         }
 
         // Timezone
-        if (this.data.timezone) {
-            g += 'TIMEZONE-ID:' + this.data.timezone + '\r\n';
-            g += 'X-WR-TIMEZONE:' + this.data.timezone + '\r\n';
+        if(this.data.timezone?.generator) {
+            const timezones = [...new Set([
+                this.timezone(),
+                ...this.data.events.map(event => event.timezone())
+            ])].filter(tz => tz !== null && !tz.startsWith('/')) as string[];
+
+            timezones.forEach(tz => {
+                if(!this.data.timezone?.generator) {
+                    return;
+                }
+
+                const s = this.data.timezone.generator(tz);
+                if(!s) {
+                    return;
+                }
+
+                g += s.replace(/\n/g, '\r\n');
+            });
+        }
+        if (this.data.timezone?.name) {
+            g += 'TIMEZONE-ID:' + this.data.timezone.name + '\r\n';
+            g += 'X-WR-TIMEZONE:' + this.data.timezone.name + '\r\n';
         }
 
         // TTL

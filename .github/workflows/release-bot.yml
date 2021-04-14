@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: ☁️ Checkout ReleaseBot
         uses: actions/checkout@v2
         with:

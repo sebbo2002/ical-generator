@@ -48,6 +48,11 @@ export interface ICalDescription {
     html?: string;
 }
 
+export interface ICalTimezone {
+    name: string | null;
+    generator?: (timezone: string) => string|null;
+}
+
 export enum ICalEventRepeatingFreq {
     SECONDLY = 'SECONDLY',
     MINUTELY = 'MINUTELY',
