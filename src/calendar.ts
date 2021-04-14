@@ -290,7 +290,36 @@ export default class ICalCalendar {
      *
      * @since 0.2.0
      */
-    timezone(timezone: ICalTimezone | string | null): this;
+    timezone(timezone: string | null): this;
+
+    /**
+     * For the best support of time zones, a VTimezone entry in the calendar is
+     * recommended, which informs the client about the corresponding time zones
+     * (daylight saving time, deviation from UTC, etc.). `ical-generator` itself
+     * does not have a time zone database, so an external generator is needed here.
+     *
+     * A VTimezone generator is a function that takes a time zone as a string and
+     * returns a VTimezone component according to the ical standard. For example,
+     * ical-timezones can be used for this:
+     *
+     * ```typescript
+     * import ical from 'ical-generator';
+     * import {getVtimezoneComponent} from '@touch4it/ical-timezones';
+     *
+     * const cal = new ICalCalendar();
+     * cal.timezone({
+     *     name: 'FOO',
+     *     generator: getVtimezoneComponent
+     * });
+     * cal.createEvent({
+     *     start: new Date(),
+     *     timezone: 'Europe/London'
+     * });
+     * ```
+     *
+     * @since 2.0.0
+     */
+    timezone(timezone: ICalTimezone): this;
     timezone(timezone?: ICalTimezone | string | null): this | string | null {
         if (timezone === undefined) {
             return this.data.timezone?.name || null;
