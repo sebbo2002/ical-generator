@@ -1,3 +1,15 @@
+# [2.0.0-develop.20](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.19...v2.0.0-develop.20) (2021-04-14)
+
+
+### Bug Fixes
+
+* **Tools:** Prevent formatDate() from using global timezones prefixed with a slash ([85ab7b2](https://github.com/sebbo2002/ical-generator/commit/85ab7b221b0ab7cee858d82374c52405cf610c94))
+
+
+### Features
+
+* **Calendar:** Add support for external VTimezone generator ([f4bc8e0](https://github.com/sebbo2002/ical-generator/commit/f4bc8e0535caecd1651b765f513722929d6b72b8)), closes [#122](https://github.com/sebbo2002/ical-generator/issues/122)
+
 # [2.0.0-develop.19](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.18...v2.0.0-develop.19) (2021-04-10)
 
 
