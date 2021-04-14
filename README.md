@@ -69,8 +69,29 @@ objects. You can also pass a string which is then passed to javascript's `Date` 
 
 It is recommended to use UTC time as far as possible. `ical-generator` will output all time information as UTC time as
 long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
-set, `ical-generator` assumes that the given time matches the time zone. If a `moment-timezone` object or Luxon's
-`setZone` method works, `ical-generator` sets it according to the time zone set in the calendar/event.
+set, `ical-generator` assumes that the given time matches the time zone. If a time zone is used, it is also recommended
+to use a VTimezone generator. Such a function generates a VTimezone entry and returns it. For example, ical-timezones can
+be used for this:
+
+```typescript
+import ical from 'ical-generator';
+import {getVtimezoneComponent} from '@touch4it/ical-timezones';
+
+const cal = new ICalCalendar();
+cal.timezone({
+    name: 'FOO',
+    generator: getVtimezoneComponent
+});
+cal.createEvent({
+    start: new Date(),
+    timezone: 'Europe/London'
+});
+```
+
+If a `moment-timezone` object or Luxon's `setZone` method works, `ical-generator` sets it according to the time zone set
+in the calendar/event.
+
+
 
 
 ## 🚦 Tests

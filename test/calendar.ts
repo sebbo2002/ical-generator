@@ -8,6 +8,7 @@ import {join} from 'path';
 import {getPortPromise} from 'portfinder';
 import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar';
 import ICalEvent from '../src/event';
+import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
@@ -188,6 +189,11 @@ describe('ical-generator Calendar', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
             assert.deepStrictEqual(cal, cal.timezone('Europe/Berlin'));
+            assert.deepStrictEqual(cal, cal.timezone(null));
+            assert.deepStrictEqual(cal, cal.timezone({
+                name: 'Europe/Berlin',
+                generator: getVtimezoneComponent
+            }));
         });
 
         it('getter should return value', function () {
@@ -196,17 +202,9 @@ describe('ical-generator Calendar', function () {
 
             cal.timezone(null);
             assert.strictEqual(cal.timezone(), null);
-        });
 
-        it('should make a difference to iCal output', function () {
-            const cal = new ICalCalendar().timezone('Europe/London');
-            cal.createEvent({
-                start: new Date(),
-                end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
-            });
-
-            assert.strictEqual(cal.timezone(), 'Europe/London');
+            cal.timezone({name: 'Europe/Berlin'});
+            assert.strictEqual(cal.timezone(), 'Europe/Berlin');
         });
     });
 
@@ -645,7 +643,30 @@ describe('ical-generator Calendar', function () {
             assert.ok(cal.toString().indexOf('X-WR-TIMEZONE:TEST') > -1);
         });
 
-        it('should include the timezone', function () {
+        it('should include VTimezone objects if generator was supplied', function () {
+            const cal = new ICalCalendar();
+            cal.timezone({name: 'Europe/Berlin', generator: getVtimezoneComponent});
+            cal.createEvent({
+                start: new Date(),
+                timezone: 'Europe/London'
+            });
+
+            assert.ok(cal.toString().includes('BEGIN:VTIMEZONE\r\n'), 'BEGIN:VTIMEZONE');
+            assert.ok(cal.toString().includes('TZID:Europe/Berlin\r\n'), 'TZID:Europe/Berlin');
+            assert.ok(cal.toString().includes('TZID:Europe/London\r\n'), 'TZID:Europe/London');
+        });
+        it('should also work if VTimezone was not found', function () {
+            const cal = new ICalCalendar();
+            cal.timezone({name: 'FOO', generator: getVtimezoneComponent});
+            assert.ok(!cal.toString().includes('TZID:Foo\r\n'));
+        });
+        it('should ignore global timezone ids', function () {
+            const cal = new ICalCalendar();
+            cal.timezone({name: '/Europe/Berlin', generator: getVtimezoneComponent});
+            assert.ok(!cal.toString().includes('TZID:/Europe/Berlin\r\n'));
+        });
+
+        it('should include the ttl', function () {
             const cal = new ICalCalendar();
             cal.ttl(moment.duration(3, 'days'));
             assert.ok(cal.toString().indexOf('REFRESH-INTERVAL;VALUE=DURATION:P3D') > -1);

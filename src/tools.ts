@@ -9,6 +9,10 @@ import type { RRule } from 'rrule';
 import {ICalDateTimeValue, ICalOrganizer} from './types';
 
 export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateonly?: boolean, floating?: boolean): string {
+    if(timezone?.startsWith('/')) {
+        timezone = timezone.substr(1);
+    }
+
     if(typeof d === 'string' || d instanceof Date) {
         const m = new Date(d);
 
@@ -98,7 +102,7 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
         floating = true;
     }
 
-    return property + tzParam + ':' + module.exports.formatDate(timezone, date, false, floating);
+    return property + tzParam + ':' + formatDate(timezone, date, false, floating);
 }
 
 export function escape (str: string | unknown): string {

@@ -85,5 +85,6 @@ export {
     ICalOrganizer,
     ICalDescription,
     ICalEventRepeatingFreq,
-    ICalWeekday
+    ICalWeekday,
+    ICalTimezone
 } from './types';
