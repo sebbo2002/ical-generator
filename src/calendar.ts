@@ -319,7 +319,7 @@ export default class ICalCalendar {
      *
      * @since 2.0.0
      */
-    timezone(timezone: ICalTimezone): this;
+    timezone(timezone: ICalTimezone | string | null): this;
     timezone(timezone?: ICalTimezone | string | null): this | string | null {
         if (timezone === undefined) {
             return this.data.timezone?.name || null;
