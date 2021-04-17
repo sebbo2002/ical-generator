@@ -71,6 +71,35 @@
     "moment-timezone": "^0.5.33",
     "rrule": "^2.6.8"
   },
+  "peerDependenciesMeta": {
+    "@touch4it/ical-timezones": {
+      "optional": true
+    },
+    "@types/luxon": {
+      "optional": true
+    },
+    "@types/mocha": {
+      "optional": true
+    },
+    "@types/node": {
+      "optional": true
+    },
+    "dayjs": {
+      "optional": true
+    },
+    "luxon": {
+      "optional": true
+    },
+    "moment": {
+      "optional": true
+    },
+    "moment-timezone": {
+      "optional": true
+    },
+    "rrule": {
+      "optional": true
+    }
+  },
   "scripts": {
     "all": "npm run lint && npm run build",
     "build": "./build.sh",
