@@ -1,8 +1,5 @@
 const ical = require('ical-generator');
-const cal = ical({domain: 'localhost'});
-
-// overwrite domain
-cal.domain('example.com');
+const cal = ical();
 
 const event = cal.createEvent({
     start: new Date(),

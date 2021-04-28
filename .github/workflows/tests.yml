@@ -1,14 +1,21 @@
 name: Tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - main
+      - develop
+      - gh-pages
+  pull_request: null
+  schedule:
+    - cron: '15 2 * * 1'
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
-        node: [10.x, 12.x, 13.x, 14.x]
+        node: [10.x, 12.x, 14.x, 15.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -26,3 +33,11 @@ jobs:
         env:
           CI: true
 
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: github/codeql-action/init@v1
+        with:
+          languages: 'javascript'
+      - uses: github/codeql-action/analyze@v1

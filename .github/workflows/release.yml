@@ -1,19 +1,23 @@
 name: Release
-
 on:
   push:
-    tags:
-      - v*
+    branches:
+      - main
+      - develop
 
 jobs:
-  publish-npm:
+  tests:
     runs-on: ubuntu-latest
+    if: contains(toJson(github.event.commits), '[skip ci]') == false
+    strategy:
+      matrix:
+        node: [10.x, 12.x, 14.x, 15.x]
+
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
+          node-version: ${{ matrix.node }}
       - uses: actions/cache@v1
         with:
           path: ~/.npm
@@ -21,8 +25,35 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - run: npm ci
-      - run: npm run build
-      - run: jq -M ".version=\"${GITHUB_REF:11}\"" package.json > tmp.json && mv tmp.json package.json
-      - run: npm publish
+      - run: npm run all
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          CI: true
+
+  release:
+    runs-on: ubuntu-latest
+    needs: tests
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - run: npm ci && mkdir ./docs
+      - name: semantic-release
+        run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Merge main back to develop
+        if: ${{ github.ref == 'ref/head/main' }}
+        uses: everlytic/branch-merge@1.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_ref: 'main'
+          target_branch: 'develop'
+          commit_message_template: 'Merge branch {source_ref} into {target_branch} [skip ci]'
