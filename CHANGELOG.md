@@ -1,3 +1,49 @@
+# [2.0.0](https://github.com/sebbo2002/ical-generator/compare/v1.15.4...v2.0.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* **package.json:** add temporary version ([0bc117e](https://github.com/sebbo2002/ical-generator/commit/0bc117e557d3fb4680345287c4dbb2549b2ecd32))
+* Allow to set null values within object constructors ([8b87183](https://github.com/sebbo2002/ical-generator/commit/8b8718305096466669b5d2cdcf318825cb8145ae))
+* **deps:** Also define libs as devDependency for tests ([c04ae32](https://github.com/sebbo2002/ical-generator/commit/c04ae321c59739f86df89b71ff0db11b63ef762f))
+* **deps:** Define supported libs as peerDependencies ([84e2784](https://github.com/sebbo2002/ical-generator/commit/84e278460a33ec4dbb08fdeeed55f6fd1a9be15b))
+* Make peer dependencies optional ([b384ac7](https://github.com/sebbo2002/ical-generator/commit/b384ac7838f1694f698f1fd921ddbd401ad66424)), closes [#244](https://github.com/sebbo2002/ical-generator/issues/244)
+* **Tools:** Prevent formatDate() from using global timezones prefixed with a slash ([85ab7b2](https://github.com/sebbo2002/ical-generator/commit/85ab7b221b0ab7cee858d82374c52405cf610c94))
+* **deps:** Put necessary typings in peerDependencies as well :/ ([14f0f43](https://github.com/sebbo2002/ical-generator/commit/14f0f43dc23facea9f7aec16144a8546d0b7af3f))
+* **Event:** Remove `moment` dependency in constructor ([8331d4c](https://github.com/sebbo2002/ical-generator/commit/8331d4ce09949d68f678211ff1f1906d1cd5d98d)), closes [#234](https://github.com/sebbo2002/ical-generator/issues/234)
+
+
+### Code Refactoring
+
+* **Calendar:** Remove moment.Duration from `ttl()` method ([c6ccd12](https://github.com/sebbo2002/ical-generator/commit/c6ccd12ed9e4f63e1876e3e06e7f13c38f1400ae))
+* Update error URLs ([2aedf55](https://github.com/sebbo2002/ical-generator/commit/2aedf552f4d79da49c6a3b0d990fb1f4b82c5a64))
+
+
+### Features
+
+* **Event:** Add `priority()` method ([247039f](https://github.com/sebbo2002/ical-generator/commit/247039fe2959dd5c5dbcb7772d4d2afa3406b987)), closes [#163](https://github.com/sebbo2002/ical-generator/issues/163)
+* **Attendee:** Add `x()` method for custom attributes ([5d9d686](https://github.com/sebbo2002/ical-generator/commit/5d9d6863dbc07c1054d858e83c3890588e8a6840)), closes [#183](https://github.com/sebbo2002/ical-generator/issues/183)
+* **Calendar:** add new clear method ([1ebefcb](https://github.com/sebbo2002/ical-generator/commit/1ebefcb3057db88870474bbb8da6c70ed9cb7336)), closes [#188](https://github.com/sebbo2002/ical-generator/issues/188)
+* Add ReleaseBot ([2fba164](https://github.com/sebbo2002/ical-generator/commit/2fba16478db12c0dd50b7c537cc3806395e64818))
+* **Calendar:** Add support for external VTimezone generator ([f4bc8e0](https://github.com/sebbo2002/ical-generator/commit/f4bc8e0535caecd1651b765f513722929d6b72b8)), closes [#122](https://github.com/sebbo2002/ical-generator/issues/122)
+* **Event:** Allow `X-APPLE-STRUCTURED-LOCATION` without address ([4e63e29](https://github.com/sebbo2002/ical-generator/commit/4e63e2914a4ac7956047b9011cfca177bcdb926a)), closes [#236](https://github.com/sebbo2002/ical-generator/issues/236)
+* **Event:** Make organizer.email optional ([8450492](https://github.com/sebbo2002/ical-generator/commit/8450492525d43d0de9d01a8f756cb76c43a77ff3)), closes [#137](https://github.com/sebbo2002/ical-generator/issues/137)
+* **Event:** Merge `location()`, `appleLocation()` and `geo()` ([62c1516](https://github.com/sebbo2002/ical-generator/commit/62c1516ce8c1ffee566dfb8cc70f2431a6325fe9)), closes [#187](https://github.com/sebbo2002/ical-generator/issues/187)
+* Merge event's `description()` and `htmlDescription()` ([ce537f8](https://github.com/sebbo2002/ical-generator/commit/ce537f8f56c1f3651938b75e884ae76814187daf))
+* Support moment.js, Day.js and Luxon ([#91](https://github.com/sebbo2002/ical-generator/issues/91), BREAKING CHANGE) ([6db24ee](https://github.com/sebbo2002/ical-generator/commit/6db24ee4887fca212a3a730e84fda9dd9c84ea01))
+* **Event:** Support RRule objects and raw strings in `repeating()` ([4436785](https://github.com/sebbo2002/ical-generator/commit/4436785894dfda4d0186283f89848d9a9a00ce6a)), closes [#190](https://github.com/sebbo2002/ical-generator/issues/190)
+* Updated the entire codebase to Typescript ([d013dc0](https://github.com/sebbo2002/ical-generator/commit/d013dc0199c9a9dce5181b9c89adf144bde17cea))
+* **Events:** Use uuid-random for random UUIDs (close [#215](https://github.com/sebbo2002/ical-generator/issues/215)) ([a4c19cc](https://github.com/sebbo2002/ical-generator/commit/a4c19ccdba037e7196b47bb571c26f2e6068f538))
+
+
+### BREAKING CHANGES
+
+* Some error messages changed, so if you check for error , please double check them now.
+* `htmlDescription()` was removed, use `description()` instead.
+* **Calendar:** `ttl()` will now return a number, not a `moment.Duration`. You can still use `moment.Duration` to set the `ttl` value.
+* **Event:** `geo()` and `appleLocation()` are not available anymore, use `location()` instead and pass an location object (with title, radius, etc.)
+* **Calendar:** Calendar's `clear()` method is a completely new implementation and, unlike previous versions, will not reset metadata such as `name` or `prodId`. Only the events will be removed
+
 # [2.0.0-develop.22](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.21...v2.0.0-develop.22) (2021-04-28)
 
 # [2.0.0-develop.21](https://github.com/sebbo2002/ical-generator/compare/v2.0.0-develop.20...v2.0.0-develop.21) (2021-04-17)
