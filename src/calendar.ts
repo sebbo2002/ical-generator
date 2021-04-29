@@ -93,7 +93,12 @@ export default class ICalCalendar {
      * You can pass options to setup your calendar or use setters to do this.
      *
      * ```javascript
-     * const ical = require('ical-generator');
+     *  * import ical from 'ical-generator';
+     *
+     * // or use require:
+     * // const ical = require('ical-generator').default;
+     *
+     *
      * const cal = ical({domain: 'sebbo.net'});
      *
      * // is the same as
@@ -448,7 +453,11 @@ export default class ICalCalendar {
      * Calling this method without options will create an empty event.
      *
      * ```javascript
-     * const ical = require('ical-generator');
+     * import ical from 'ical-generator';
+     *
+     * // or use require:
+     * // const ical = require('ical-generator').default;
+     *
      * const cal = ical();
      * const event = cal.createEvent({summary: 'My Event'});
      *

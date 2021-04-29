@@ -11,14 +11,21 @@ import ICalCalendar, {ICalCalendarData} from './calendar';
  * Create a new, empty calendar and returns it.
  *
  * ```javascript
- * const ical = require('ical-generator');
+ * import ical from 'ical-generator';
+ *
+ * // or use require:
+ * // const ical = require('ical-generator').default;
+ *
  * const cal = ical();
  * ```
  *
  * You can pass options to setup your calendar or use setters to do this.
  *
  * ```javascript
- * const ical = require('ical-generator');
+ * import ical from 'ical-generator';
+ *
+ * // or use require:
+ * // const ical = require('ical-generator').default;
  * const cal = ical({domain: 'sebbo.net'});
  *
  * // is the same as
