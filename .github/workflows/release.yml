@@ -8,7 +8,7 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    if: contains(toJson(github.event.commits), '[skip ci]') == false || github.ref == 'refs/head/main'
+    if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main'
     strategy:
       matrix:
         node: [10.x, 12.x, 14.x, 15.x]
