@@ -10,19 +10,6 @@
 `ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
 to generate subscriptionable calendar feeds.
 
-<table><tr><td>
-<b>⚠️ Version 2.0.0</b><br /><br />
-<p>You are looking at the readme of the new version 2.0.0, which is currently still under development. The new version is
-a complete rewrite in Typescript, but I tried to keep most of the API. Nevertheless, there are some changes. You can
-install this future version by running <code>npm i ical-generator@next</code>.</p>
-
-<p>If you are looking for the readme of the current version, you can find it
-<a href="https://github.com/sebbo2002/ical-generator/blob/main/README.md">here</a>.</p>
-<p>If you want to help out or want to know what's in the pipeline with the new version, you're welcome to take a look
-<a href="https://github.com/sebbo2002/ical-generator/issues?q=milestone%3A%22v2.0.0+%F0%9F%8E%89%22+">here</a> and get an idea of
-what's in the new version.</p>
-</td></tr></table>
-
 
 ## 📦 Installation
 
