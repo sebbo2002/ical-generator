@@ -3015,7 +3015,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><a href="enums/icalalarmtype.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalAlarmType</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/06fbbe6/src/alarm.ts#L21">alarm.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/17198d6/src/alarm.ts#L21">alarm.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3025,7 +3025,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MomentTZ</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dayjs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LuxonDateTime</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/06fbbe6/src/types.ts#L13">types.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/17198d6/src/types.ts#L13">types.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3050,18 +3050,25 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/06fbbe6/src/index.ts#L7">index.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/17198d6/src/index.ts#L7">index.ts:7</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
 							<div class="lead">
 								<p>Create a new, empty calendar and returns it.</p>
 							</div>
-							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ical</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">);</span>
+							<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #008000">// or use require:</span>
+<span style="color: #008000">// const ical = require(&#039;ical-generator&#039;).default;</span>
+
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cal</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">();</span>
 </code></pre>
 							<p>You can pass options to setup your calendar or use setters to do this.</p>
-							<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ical</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">);</span>
+							<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;ical-generator&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #008000">// or use require:</span>
+<span style="color: #008000">// const ical = require(&#039;ical-generator&#039;).default;</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cal</span><span style="color: #000000"> = </span><span style="color: #795E26">ical</span><span style="color: #000000">({</span><span style="color: #001080">domain:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;sebbo.net&#039;</span><span style="color: #000000">});</span>
 
 <span style="color: #008000">// is the same as</span>
