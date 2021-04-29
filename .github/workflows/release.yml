@@ -50,7 +50,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Merge main back to develop
-        if: ${{ github.ref == 'ref/head/main' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         uses: everlytic/branch-merge@1.1.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
