@@ -2907,8 +2907,10 @@ img {
 			</a>
 			<p><code>ical-generator</code> uses the node.js <code>fs</code> module to save your calendar on the filesystem. In browser environments, you usually don&#39;t need this, so if you pass <code>null</code> for fs in your bundler. In webpack this looks like this:</p>
 			<pre><code class="language-json"><span style="color: #000000">{</span>
-<span style="color: #000000">  </span><span style="color: #0451A5">&quot;node&quot;</span><span style="color: #000000">: {</span>
-<span style="color: #000000">    </span><span style="color: #0451A5">&quot;fs&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;empty&quot;</span>
+<span style="color: #000000">  </span><span style="color: #CD3131">resolve</span><span style="color: #000000">: {</span>
+<span style="color: #000000">    </span><span style="color: #CD3131">fallback</span><span style="color: #000000">: {</span>
+<span style="color: #000000">      </span><span style="color: #CD3131">fs</span><span style="color: #000000">: </span><span style="color: #0000FF">false</span>
+<span style="color: #000000">    }</span>
 <span style="color: #000000">  }</span>
 <span style="color: #000000">}</span>
 </code></pre>
@@ -3004,7 +3006,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><a href="enums/icalalarmtype.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalAlarmType</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/19a567e/src/alarm.ts#L21">alarm.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/d5215b1/src/alarm.ts#L21">alarm.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3014,7 +3016,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MomentTZ</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dayjs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LuxonDateTime</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/19a567e/src/types.ts#L13">types.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/d5215b1/src/types.ts#L13">types.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3039,7 +3041,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/19a567e/src/index.ts#L7">index.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/d5215b1/src/index.ts#L7">index.ts:7</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
