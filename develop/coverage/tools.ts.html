@@ -445,7 +445,24 @@
 <a name='L386'></a><a href='#L386'>386</a>
 <a name='L387'></a><a href='#L387'>387</a>
 <a name='L388'></a><a href='#L388'>388</a>
-<a name='L389'></a><a href='#L389'>389</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L389'></a><a href='#L389'>389</a>
+<a name='L390'></a><a href='#L390'>390</a>
+<a name='L391'></a><a href='#L391'>391</a>
+<a name='L392'></a><a href='#L392'>392</a>
+<a name='L393'></a><a href='#L393'>393</a>
+<a name='L394'></a><a href='#L394'>394</a>
+<a name='L395'></a><a href='#L395'>395</a>
+<a name='L396'></a><a href='#L396'>396</a>
+<a name='L397'></a><a href='#L397'>397</a>
+<a name='L398'></a><a href='#L398'>398</a>
+<a name='L399'></a><a href='#L399'>399</a>
+<a name='L400'></a><a href='#L400'>400</a>
+<a name='L401'></a><a href='#L401'>401</a>
+<a name='L402'></a><a href='#L402'>402</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -537,6 +554,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">89x</span>
 <span class="cline-any cline-yes">89x</span>
@@ -550,11 +570,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">89x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">157x</span>
 <span class="cline-any cline-yes">39x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -835,6 +861,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
+&nbsp;
 import type {Moment, Duration} from 'moment';
 import type {Moment as MomentTZ} from 'moment-timezone';
 import type {Dayjs} from 'dayjs';
@@ -843,6 +870,9 @@ import type { RRule } from 'rrule';
 &nbsp;
 import {ICalDateTimeValue, ICalOrganizer} from './types';
 &nbsp;
+/**
+ * Converts a valid date/time object supported by this library to a string.
+ */
 export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateonly?: boolean, floating?: boolean): string {
     <span class="missing-if-branch" title="if path not taken" >I</span>if(timezone?.startsWith('/')) {
 <span class="cstat-no" title="statement not covered" >        timezone = timezone.substr(1);</span>
@@ -923,8 +953,11 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
     }
 }
 &nbsp;
-// For information about this format, see RFC 5545, section 3.3.5
-// https://tools.ietf.org/html/rfc5545#section-3.3.5
+/**
+ * Converts a valid date/time object supported by this library to a string.
+ * For information about this format, see RFC 5545, section 3.3.5
+ * https://tools.ietf.org/html/rfc5545#section-3.3.5
+ */
 export function formatDateTZ (timezone: string | null, property: string, date: ICalDateTimeValue | Date | string, eventData?: {floating?: boolean | null, timezone?: string | null}): string {
     let tzParam = '';
     let floating = eventData?.floating || false;
@@ -940,12 +973,18 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
     return property + tzParam + ':' + formatDate(timezone, date, false, floating);
 }
 &nbsp;
+/**
+ * Escapes special characters in the given string
+ */
 export function escape (str: string | unknown): string {
     return String(str).replace(/[\\;,"]/g, function (match) {
         return '\\' + match;
     }).replace(/(?:\r\n|\r|\n)/g, '\\n');
 }
 &nbsp;
+/**
+ * Trim line length of given string
+ */
 export function foldLines (input: string): string {
     return input.split('\r\n').map(function (line) {
         let result = '';
@@ -1228,7 +1267,7 @@ export function toDurationString(seconds: number): string {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Apr 30 2021 13:27:47 GMT+0000 (Coordinated Universal Time)
+                at Fri Apr 30 2021 14:01:49 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
