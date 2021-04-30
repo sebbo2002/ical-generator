@@ -1,3 +1,10 @@
+# [2.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.0.1-develop.3...v2.1.0-develop.1) (2021-04-30)
+
+
+### Features
+
+* Export `formatDate` and some other tool functions ([6142e11](https://github.com/sebbo2002/ical-generator/commit/6142e11f631011aff9be8df129980dfac411d4f2)), closes [#248](https://github.com/sebbo2002/ical-generator/issues/248)
+
 ## [2.0.1-develop.3](https://github.com/sebbo2002/ical-generator/compare/v2.0.1-develop.2...v2.0.1-develop.3) (2021-04-30)
 
 ## [2.0.1-develop.2](https://github.com/sebbo2002/ical-generator/compare/v2.0.1-develop.1...v2.0.1-develop.2) (2021-04-29)
