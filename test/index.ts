@@ -16,7 +16,11 @@ import ical, {
     ICalEventBusyStatus,
     ICalEventTransparency,
     ICalEventRepeatingFreq,
-    ICalWeekday
+    ICalWeekday,
+    formatDate,
+    formatDateTZ,
+    escape,
+    foldLines
 } from '../src';
 
 describe('ical-generator Index', function() {
@@ -90,6 +94,21 @@ describe('ical-generator Index', function() {
         });
         it('should export ICalWeekday', function () {
             assert.ok(ICalWeekday);
+        });
+    });
+
+    describe('Tools', function () {
+        it('should export formatDate', function () {
+            assert.ok(typeof formatDate === 'function');
+        });
+        it('should export formatDateTZ', function () {
+            assert.ok(typeof formatDateTZ === 'function');
+        });
+        it('should export escape', function () {
+            assert.ok(typeof escape === 'function');
+        });
+        it('should export foldLines', function () {
+            assert.ok(typeof foldLines === 'function');
         });
     });
 });

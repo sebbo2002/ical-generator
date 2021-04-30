@@ -95,3 +95,10 @@ export {
     ICalWeekday,
     ICalTimezone
 } from './types';
+
+export {
+    formatDate,
+    formatDateTZ,
+    escape,
+    foldLines
+} from './tools';
