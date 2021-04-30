@@ -97,8 +97,10 @@ npm run browser-test
 
 ```json
 {
-  "node": {
-    "fs": "empty"
+  resolve: {
+    fallback: {
+      fs: false
+    }
   }
 }
 ```
