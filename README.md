@@ -92,14 +92,20 @@ npm run browser-test
 
 ## 🙋 FAQ
 
+### I updated to `ical-generator@2.x.x` and now get `TypeError: ical is not a function` errors
+
+If you still want to use `require()` to import in version 2 onwards, please use `require('ical-generator').default`.
+The reason for this change is that from version 2 on, other objects such as types and interfaces required for typescript
+are exported as well ([#247](https://github.com/sebbo2002/ical-generator/issues/247)).
+
 ### What's `Error: Can't resolve 'fs'`?
 `ical-generator` uses the node.js `fs` module to save your calendar on the filesystem. In browser environments, you usually don't need this, so if you pass `null` for fs in your bundler. In webpack this looks like this:
 
 ```json
 {
-  resolve: {
-    fallback: {
-      fs: false
+  "resolve": {
+    "fallback": {
+      "fs": false
     }
   }
 }
