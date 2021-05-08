@@ -1,0 +1,63 @@
+{
+  "name": "@sebbo2002/js-template-test",
+  "version": "1.0.0",
+  "description": "A template that I use to start new projects and services.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build-all": "./.github/workflows/build.sh",
+    "build": "tsc",
+    "start": "node ./dist/bin/start.js",
+    "develop": "ts-node ./src/bin/start.ts",
+    "lint": "eslint . --ext .ts",
+    "test": "mocha",
+    "coverage": "nyc mocha",
+    "license-check": "license-checker --production --summary"
+  },
+  "bin": {
+    "test-cli": "./dist/bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebbo2002/js-template-test.git"
+  },
+  "author": "Sebastian Pekarek <oojeesheibashumaofie@e.sebbo.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sebbo2002/template/issues"
+  },
+  "homepage": "https://github.com/sebbo2002/template#readme",
+  "devDependencies": {
+    "@amanda-mitchell/semantic-release-npm-multiple": "^2.8.0",
+    "@eclass/semantic-release-docker": "^1.0.7",
+    "@qiwi/semantic-release-gh-pages-plugin": "^5.0.7",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/commit-analyzer": "^8.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/github": "^7.2.1",
+    "@semantic-release/release-notes-generator": "^9.0.2",
+    "@types/express": "^4.17.11",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.25.0",
+    "license-checker": "^25.0.1",
+    "mocha": "^8.3.2",
+    "mochawesome": "^6.2.2",
+    "nyc": "^15.1.0",
+    "semantic-release-license": "^1.0.2",
+    "ts-node": "^9.1.1",
+    "typedoc": "^0.20.36",
+    "typescript": "^4.2.4"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "files": [
+    "/dist"
+  ],
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
