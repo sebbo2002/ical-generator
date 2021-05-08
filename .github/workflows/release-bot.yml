@@ -1,0 +1,33 @@
+name: ReleaseBot
+on:
+  workflow_dispatch:
+  push:
+    branches: ['develop']
+  schedule:
+    - cron: '30 8 * * 3'
+
+jobs:
+  release-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ☁️ Checkout Project
+        uses: actions/checkout@v2
+      - name: ☁️ Checkout ReleaseBot
+        uses: actions/checkout@v2
+        with:
+          repository: sebbo2002/release-bot
+          path: ./.actions/release-bot
+      - name: 🔧 Setup npm cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-releasebot-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-releasebot-
+      - name: 📦 Install Dependencies
+        run: npm ci
+        working-directory: ./.actions/release-bot
+      - name: 🤖 Run ReleaseBot
+        uses: ./.actions/release-bot
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
