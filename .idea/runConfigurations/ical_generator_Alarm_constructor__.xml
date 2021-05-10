@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ical-generator Alarm.constructor()" type="mocha-javascript-test-runner" nameIsGenerated="true">
+    <node-interpreter>project</node-interpreter>
+    <node-options />
+    <mocha-package>$PROJECT_DIR$/node_modules/mocha</mocha-package>
+    <working-directory>$PROJECT_DIR$</working-directory>
+    <pass-parent-env>true</pass-parent-env>
+    <ui>bdd</ui>
+    <extra-mocha-options />
+    <test-kind>SUITE</test-kind>
+    <test-file>$PROJECT_DIR$/test/test_alarm.js</test-file>
+    <test-names>
+      <name value="ical-generator Alarm" />
+      <name value="constructor()" />
+    </test-names>
+    <method v="2" />
+  </configuration>
+</component>
