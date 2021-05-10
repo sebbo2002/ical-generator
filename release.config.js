@@ -20,12 +20,7 @@ module.exports = {
         }],
         '@semantic-release/changelog',
         'semantic-release-license',
-        ['@amanda-mitchell/semantic-release-npm-multiple', {
-            'registries': {
-                'github': {},
-                'public': {}
-            }
-        }],
+        '@semantic-release/npm',
         ['@semantic-release/github', {
             'labels': false,
             'assignees': process.env.GH_OWNER

@@ -31,14 +31,13 @@
     "uuid-random": "^1.3.2"
   },
   "devDependencies": {
-    "@amanda-mitchell/semantic-release-npm-multiple": "^2.8.0",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.0.7",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/commit-analyzer": "^8.0.1",
     "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/github": "^7.2.1",
-    "@semantic-release/npm": "^7.1.1",
+    "@semantic-release/npm": "^7.1.3",
     "@semantic-release/release-notes-generator": "^9.0.2",
     "@touch4it/ical-timezones": "^1.6.0",
     "@types/luxon": "^1.26.5",
