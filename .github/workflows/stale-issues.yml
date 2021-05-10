@@ -1,14 +1,14 @@
-name: Manage stale issues and PRs
-
+name: Cleanup issues and PRs
 on:
   schedule:
-    - cron: "0 10 * * *"
+    - cron: '0 10 * * *'
 
 jobs:
   stale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v1.1.0
+      - name: 🧹 Cleanup issues & pull requests
+        uses: actions/stale@v1.1.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-issue-message: |

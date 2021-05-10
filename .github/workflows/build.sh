@@ -8,7 +8,7 @@ echo "# npm version = $(npm -v)"
 echo "########################"
 
 # Typescript Build in ./dist
-npx tsc
+npm run build
 
 if [ "$BRANCH" != "develop" ] && [ "$BRANCH" != "main" ] && [ "$BRANCH" != "" ]; then
     echo "Skip documentation as branch is not develop and not main (is: ${BRANCH}).";
