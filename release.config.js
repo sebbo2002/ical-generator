@@ -34,17 +34,6 @@ module.exports = {
             'assets': ['CHANGELOG.md', 'LICENSE'],
             'message': 'chore(release): :bookmark: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
         }],
-        ['@eclass/semantic-release-docker', {
-            'baseImageName': process.env.DOCKER_REGISTRY_IMAGE + '@' + process.env.DOCKER_DIGEST,
-            'registries': [
-                {
-                    'url': 'docker.io',
-                    'imageName': process.env.DOCKER_REGISTRY_IMAGE,
-                    'user': 'DOCKER_REGISTRY_USERNAME',
-                    'password': 'DOCKER_REGISTRY_TOKEN'
-                }
-            ]
-        }],
         ['@qiwi/semantic-release-gh-pages-plugin', {
             'msg': 'docs: Updated for <%= nextRelease.gitTag %>',
             'src': './docs',
