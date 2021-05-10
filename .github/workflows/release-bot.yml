@@ -1,5 +1,4 @@
 name: ReleaseBot
-
 on:
   workflow_dispatch:
   push:
@@ -18,6 +17,13 @@ jobs:
         with:
           repository: sebbo2002/release-bot
           path: ./.actions/release-bot
+      - name: 🔧 Setup npm cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-releasebot-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-releasebot-
       - name: 📦 Install Dependencies
         run: npm ci
         working-directory: ./.actions/release-bot
