@@ -106,5 +106,5 @@ export {
 } from './tools';
 
 if (typeof module !== 'undefined') {
-  module.exports = Object.assign(ical, module.exports);
+    module.exports = Object.assign(ical, module.exports);
 }
