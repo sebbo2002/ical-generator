@@ -1,3 +1,10 @@
+# [2.1.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.3...v2.1.0-develop.4) (2021-05-12)
+
+
+### Features
+
+* Allow use of `require('ical-generator')` without `.default` ([31833a6](https://github.com/sebbo2002/ical-generator/commit/31833a60d3123f9b4ac10677dcad3871a892f32c)), closes [#253](https://github.com/sebbo2002/ical-generator/issues/253)
+
 # [2.1.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.2...v2.1.0-develop.3) (2021-05-10)
 
 
