@@ -1,3 +1,5 @@
+# [2.1.0-develop.5](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.4...v2.1.0-develop.5) (2021-05-12)
+
 # [2.1.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.3...v2.1.0-develop.4) (2021-05-12)
 
 
