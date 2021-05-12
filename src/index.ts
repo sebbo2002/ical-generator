@@ -40,9 +40,11 @@ import ICalCalendar, {ICalCalendarData} from './calendar';
  *
  * @param data Calendar data
  */
-export default function (data?: ICalCalendarData): ICalCalendar {
+function ical(data?: ICalCalendarData): ICalCalendar {
     return new ICalCalendar(data);
 }
+
+export default ical;
 
 export {
     default as ICalAlarm,
@@ -102,3 +104,8 @@ export {
     escape,
     foldLines
 } from './tools';
+
+/* istanbul ignore else */
+if (typeof module !== 'undefined') {
+    module.exports = Object.assign(ical, module.exports);
+}
