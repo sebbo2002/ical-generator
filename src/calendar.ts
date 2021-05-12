@@ -96,7 +96,7 @@ export default class ICalCalendar {
      *  * import ical from 'ical-generator';
      *
      * // or use require:
-     * // const ical = require('ical-generator').default;
+     * // const ical = require('ical-generator');
      *
      *
      * const cal = ical({domain: 'sebbo.net'});
@@ -456,7 +456,7 @@ export default class ICalCalendar {
      * import ical from 'ical-generator';
      *
      * // or use require:
-     * // const ical = require('ical-generator').default;
+     * // const ical = require('ical-generator');
      *
      * const cal = ical();
      * const event = cal.createEvent({summary: 'My Event'});
