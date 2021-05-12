@@ -18,7 +18,7 @@
   --color-panel-divider: #eee;
   --color-comment-tag: #707070;
   --color-comment-tag-text: #fff;
-  --color-code-background: rgba(#000, 0.04);
+  --color-code-background: rgba(0, 0, 0, 0.04);
   --color-ts: #9600ff;
   --color-ts-interface: #647f1b;
   --color-ts-enum: #937210;
@@ -2914,12 +2914,6 @@ img {
 			<a href="#🙋-faq" id="🙋-faq" style="color: inherit; text-decoration: none;">
 				<h2>🙋 FAQ</h2>
 			</a>
-			<a href="#i-updated-to-ical-generator2xx-and-now-get-typeerror-ical-is-not-a-function-errors" id="i-updated-to-ical-generator2xx-and-now-get-typeerror-ical-is-not-a-function-errors" style="color: inherit; text-decoration: none;">
-				<h3>I updated to <code>ical-generator@2.x.x</code> and now get <code>TypeError: ical is not a function</code> errors</h3>
-			</a>
-			<p>If you still want to use <code>require()</code> to import in version 2 onwards, please use <code>require(&#39;ical-generator&#39;).default</code>.
-				The reason for this change is that from version 2 on, other objects such as types and interfaces required for typescript
-			are exported as well (<a href="https://github.com/sebbo2002/ical-generator/issues/247">#247</a>).</p>
 			<a href="#what39s-error-can39t-resolve-39fs39" id="what39s-error-can39t-resolve-39fs39" style="color: inherit; text-decoration: none;">
 				<h3>What&#39;s <code>Error: Can&#39;t resolve &#39;fs&#39;</code>?</h3>
 			</a>
@@ -3028,7 +3022,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><a href="enums/icalalarmtype.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalAlarmType</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/alarm.ts#L21">alarm.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/alarm.ts#L21">alarm.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3038,7 +3032,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MomentTZ</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dayjs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LuxonDateTime</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/types.ts#L13">types.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/types.ts#L13">types.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3063,7 +3057,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/index.ts#L7">index.ts:7</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/index.ts#L43">index.ts:43</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3117,7 +3111,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/tools.ts#L118">tools.ts:118</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/tools.ts#L118">tools.ts:118</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3145,7 +3139,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/tools.ts#L127">tools.ts:127</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/tools.ts#L127">tools.ts:127</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3173,7 +3167,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/tools.ts#L15">tools.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/tools.ts#L15">tools.ts:15</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3210,7 +3204,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/dd165bd/src/tools.ts#L100">tools.ts:100</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/31833a6/src/tools.ts#L100">tools.ts:100</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
