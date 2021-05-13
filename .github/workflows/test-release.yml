@@ -136,77 +136,77 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
 
-  release:
-    name: Release
-    runs-on: ubuntu-latest
-    needs:
-      - coverage
-      - tests
-      - license-checker
-      - docker-image
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
-    steps:
-      - name: ☁️ Checkout Project
-        uses: actions/checkout@v2
-      - name: 🔧 Setup node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-      - name: 🔧 Setup npm cache
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-      - name: 📦 Install dependencies
-        run: npm ci
-      - name: 📂 Create docs folder
-        run: mkdir ./docs
-      - name: 🔐 Login to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: 🔐 Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: ⬇️ Pull Containers
-        run: |
-          docker pull "${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
-          docker pull "ghcr.io/${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
-      - name: 🪄 Run semantic-release
-        run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
-        env:
-          GH_REPO: ${{ github.repository }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_OWNER: ${{ github.repository_owner }}
-          GITHUB_NPM_CONFIG_REGISTRY: https://npm.pkg.github.com/
-          GITHUB_NPM_TOKEN: ${{ secrets.GH_TOKEN }}
-          PUBLIC_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
-          PUBLIC_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          DOCKER_DIGEST: ${{ needs.docker-image.outputs.digest }}
-          DOCKER_REGISTRY_IMAGE: ${{ github.repository }}
-          DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
-          DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          GITHUB_REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
-          GITHUB_REGISTRY_USERNAME: ${{ github.repository_owner }}
-          GITHUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: 🖊 Update Docker Hub Description
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: peter-evans/dockerhub-description@v2
-        with:
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ github.repository }}
-      - name: 🔃 Merge main back into develop
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: everlytic/branch-merge@1.1.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_ref: 'main'
-          target_branch: 'develop'
-          commit_message_template: 'Merge branch {source_ref} into {target_branch} [skip ci]'
+#  release:
+#    name: Release
+#    runs-on: ubuntu-latest
+#    needs:
+#      - coverage
+#      - tests
+#      - license-checker
+#      - docker-image
+#    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+#    steps:
+#      - name: ☁️ Checkout Project
+#        uses: actions/checkout@v2
+#      - name: 🔧 Setup node.js
+#        uses: actions/setup-node@v2
+#        with:
+#          node-version: ${{ matrix.node }}
+#      - name: 🔧 Setup npm cache
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
+#      - name: 📦 Install dependencies
+#        run: npm ci
+#      - name: 📂 Create docs folder
+#        run: mkdir ./docs
+#      - name: 🔐 Login to GitHub Container Registry
+#        uses: docker/login-action@v1
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.repository_owner }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#      - name: 🔐 Login to DockerHub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ github.repository_owner }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#      - name: ⬇️ Pull Containers
+#        run: |
+#          docker pull "${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
+#          docker pull "ghcr.io/${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
+#      - name: 🪄 Run semantic-release
+#        run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
+#        env:
+#          GH_REPO: ${{ github.repository }}
+#          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+#          GH_OWNER: ${{ github.repository_owner }}
+#          GITHUB_NPM_CONFIG_REGISTRY: https://npm.pkg.github.com/
+#          GITHUB_NPM_TOKEN: ${{ secrets.GH_TOKEN }}
+#          PUBLIC_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+#          PUBLIC_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#          DOCKER_DIGEST: ${{ needs.docker-image.outputs.digest }}
+#          DOCKER_REGISTRY_IMAGE: ${{ github.repository }}
+#          DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+#          DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+#          GITHUB_REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
+#          GITHUB_REGISTRY_USERNAME: ${{ github.repository_owner }}
+#          GITHUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: 🖊 Update Docker Hub Description
+#        if: ${{ github.ref == 'refs/heads/main' }}
+#        uses: peter-evans/dockerhub-description@v2
+#        with:
+#          username: ${{ github.repository_owner }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#          repository: ${{ github.repository }}
+#      - name: 🔃 Merge main back into develop
+#        if: ${{ github.ref == 'refs/heads/main' }}
+#        uses: everlytic/branch-merge@1.1.0
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          source_ref: 'main'
+#          target_branch: 'develop'
+#          commit_message_template: 'Merge branch {source_ref} into {target_branch} [skip ci]'
