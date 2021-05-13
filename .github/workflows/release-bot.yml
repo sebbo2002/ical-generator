@@ -1,10 +1,10 @@
 name: ReleaseBot
 on:
   workflow_dispatch:
-  push:
-    branches: ['develop']
-  schedule:
-    - cron: '30 8 * * 3'
+#  push:
+#    branches: ['develop']
+#  schedule:
+#    - cron: '30 8 * * 3'
 
 jobs:
   release-bot:
