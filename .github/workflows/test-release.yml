@@ -195,13 +195,6 @@ jobs:
 #          GITHUB_REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
 #          GITHUB_REGISTRY_USERNAME: ${{ github.repository_owner }}
 #          GITHUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#      - name: 🖊 Update Docker Hub Description
-#        if: ${{ github.ref == 'refs/heads/main' }}
-#        uses: peter-evans/dockerhub-description@v2
-#        with:
-#          username: ${{ github.repository_owner }}
-#          password: ${{ secrets.DOCKERHUB_TOKEN }}
-#          repository: ${{ github.repository }}
 #      - name: 🔃 Merge main back into develop
 #        if: ${{ github.ref == 'refs/heads/main' }}
 #        uses: everlytic/branch-merge@1.1.0
