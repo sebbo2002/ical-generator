@@ -5,7 +5,7 @@ updates:
     assignees:
       - sebbo2002
     commit-message:
-      prefix: "ci(deps): Update Actions: "
+      prefix: "ci"
       include: scope
     schedule:
       interval: weekly
@@ -14,8 +14,8 @@ updates:
     assignees:
       - sebbo2002
     commit-message:
-      prefix: "build(deps): "
-      prefix-development: "chore(deps): "
+      prefix: "build"
+      prefix-development: "chore"
       include: scope
     schedule:
       interval: daily
@@ -24,6 +24,7 @@ updates:
     assignees:
       - sebbo2002
     commit-message:
-      prefix: "build(deps): Update docker base image"
+      prefix: "build"
     schedule:
       interval: weekly
+
