@@ -10,6 +10,7 @@ a template that I use to start new projects and services.
 - [ ] Update project name in `package.json`
 - [ ] Create `main` and `develop` branches
 - [ ] Set `develop` as default branch
+- [ ] Setup branch protection rules
 - [ ] Create Docker Repository
     - [ ] Add Repository Description
     - [ ] Add secret: `DOCKERHUB_TOKEN`
