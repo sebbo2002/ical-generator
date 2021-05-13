@@ -60,7 +60,7 @@ jobs:
   license-checker:
     name: License Checker
     runs-on: ubuntu-latest
-    if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false && github.ref != 'refs/heads/main'
+    if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v2
