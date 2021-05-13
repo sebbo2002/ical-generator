@@ -1,3 +1,36 @@
+# [2.1.0-develop.6](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.5...v2.1.0-develop.6) (2021-05-13)
+
+# [2.1.0-develop.5](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.4...v2.1.0-develop.5) (2021-05-12)
+
+# [2.1.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.3...v2.1.0-develop.4) (2021-05-12)
+
+
+### Features
+
+* Allow use of `require('ical-generator')` without `.default` ([31833a6](https://github.com/sebbo2002/ical-generator/commit/31833a60d3123f9b4ac10677dcad3871a892f32c)), closes [#253](https://github.com/sebbo2002/ical-generator/issues/253)
+
+# [2.1.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.2...v2.1.0-develop.3) (2021-05-10)
+
+
+### Features
+
+* first commit ([dc8fa4a](https://github.com/sebbo2002/ical-generator/commit/dc8fa4a2ce97c6f0ab55e3371b83f5388b5da0c9))
+
+# [2.1.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v2.1.0-develop.1...v2.1.0-develop.2) (2021-05-01)
+
+# [2.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.0.1-develop.3...v2.1.0-develop.1) (2021-04-30)
+
+
+### Features
+
+* Export `formatDate` and some other tool functions ([6142e11](https://github.com/sebbo2002/ical-generator/commit/6142e11f631011aff9be8df129980dfac411d4f2)), closes [#248](https://github.com/sebbo2002/ical-generator/issues/248)
+
+## [2.0.1-develop.3](https://github.com/sebbo2002/ical-generator/compare/v2.0.1-develop.2...v2.0.1-develop.3) (2021-04-30)
+
+## [2.0.1-develop.2](https://github.com/sebbo2002/ical-generator/compare/v2.0.1-develop.1...v2.0.1-develop.2) (2021-04-29)
+
+## [2.0.1-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.0.0...v2.0.1-develop.1) (2021-04-29)
+
 # [2.0.0](https://github.com/sebbo2002/ical-generator/compare/v1.15.4...v2.0.0) (2021-04-28)
 
 

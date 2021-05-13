@@ -9,28 +9,24 @@ module.exports = {
     ],
     'plugins': [
         ['@semantic-release/commit-analyzer', {
-            'preset': 'angular',
             'releaseRules': [
-                {'type': 'refactor', 'release': 'patch'},
-                {'type': 'style', 'release': 'patch'},
                 {'type': 'build', 'scope': 'deps', 'release': 'patch'},
                 {'type': 'docs', 'release': 'patch'}
             ]
         }],
-        ['@semantic-release/release-notes-generator', {
-            'preset': 'angular',
-            'writerOpts': {
-                'commitsSort': ['subject', 'scope']
-            }
-        }],
+        '@semantic-release/release-notes-generator',
         ['@semantic-release/exec', {
-            'prepareCmd': './build.sh'
+            'prepareCmd': './.github/workflows/build.sh'
         }],
         '@semantic-release/changelog',
+        'semantic-release-license',
         '@semantic-release/npm',
-        '@semantic-release/github',
+        ['@semantic-release/github', {
+            'labels': false,
+            'assignees': process.env.GH_OWNER
+        }],
         ['@semantic-release/git', {
-            'assets': ['CHANGELOG.md'],
+            'assets': ['CHANGELOG.md', 'LICENSE'],
             'message': 'chore(release): :bookmark: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
         }],
         ['@qiwi/semantic-release-gh-pages-plugin', {

@@ -1,5 +1,6 @@
 'use strict';
 
+
 import type {Moment, Duration} from 'moment';
 import type {Moment as MomentTZ} from 'moment-timezone';
 import type {Dayjs} from 'dayjs';
@@ -8,6 +9,9 @@ import type { RRule } from 'rrule';
 
 import {ICalDateTimeValue, ICalOrganizer} from './types';
 
+/**
+ * Converts a valid date/time object supported by this library to a string.
+ */
 export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateonly?: boolean, floating?: boolean): string {
     if(timezone?.startsWith('/')) {
         timezone = timezone.substr(1);
@@ -88,8 +92,11 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
     }
 }
 
-// For information about this format, see RFC 5545, section 3.3.5
-// https://tools.ietf.org/html/rfc5545#section-3.3.5
+/**
+ * Converts a valid date/time object supported by this library to a string.
+ * For information about this format, see RFC 5545, section 3.3.5
+ * https://tools.ietf.org/html/rfc5545#section-3.3.5
+ */
 export function formatDateTZ (timezone: string | null, property: string, date: ICalDateTimeValue | Date | string, eventData?: {floating?: boolean | null, timezone?: string | null}): string {
     let tzParam = '';
     let floating = eventData?.floating || false;
@@ -105,12 +112,18 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
     return property + tzParam + ':' + formatDate(timezone, date, false, floating);
 }
 
+/**
+ * Escapes special characters in the given string
+ */
 export function escape (str: string | unknown): string {
     return String(str).replace(/[\\;,"]/g, function (match) {
         return '\\' + match;
     }).replace(/(?:\r\n|\r|\n)/g, '\\n');
 }
 
+/**
+ * Trim line length of given string
+ */
 export function foldLines (input: string): string {
     return input.split('\r\n').map(function (line) {
         let result = '';
