@@ -15,6 +15,10 @@ to generate subscriptionable calendar feeds.
 
 	npm install ical-generator
 
+    # For TypeScript Users
+    # (see "I use Typescript and get TS2307: Cannot find module errors" section below)
+    npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon
+
 
 ## ⚡️ Quick Start
 
@@ -111,9 +115,15 @@ It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.m
 
 ### I use Typescript and get `TS2307: Cannot find module` errors
 `ical-generator` supports some third-party libraries such as moment.js or Day.js. To enable Typescript to do something
-with these types, they must of course also be installed. Unfortunately, npm does not install `peerDependencies` in
-versions 4-6, so these dependencies have to be installed manually. The best thing to do is to update your npm installation
-and reinstall `ical-generator`, which should solve the problem.
+with these types, they must of course also be installed. Unfortunately, npm does not install optional `peerDependencies`.
+Because these modules are not necessary for JavaScript users, I have marked these modules as optional. So if you use
+Typescript, you need the following modules to build the code that uses `ical-calendar':
+
+```bash
+npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon
+```
+
+For JavaScript users they are not necessary.
 
 
 ## 🙆🏼‍♂️ Copyright and license
