@@ -2840,6 +2840,10 @@ img {
 				<h2>📦 Installation</h2>
 			</a>
 			<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">ical</span><span style="color: #000000">-</span><span style="color: #001080">generator</span>
+
+<span style="color: #000000"># </span><span style="color: #001080">For</span><span style="color: #000000"> </span><span style="color: #001080">TypeScript</span><span style="color: #000000"> </span><span style="color: #001080">Users</span>
+<span style="color: #000000"># (</span><span style="color: #001080">see</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;I use Typescript and get TS2307: Cannot find module errors&quot;</span><span style="color: #000000"> </span><span style="color: #001080">section</span><span style="color: #000000"> </span><span style="color: #001080">below</span><span style="color: #000000">)</span>
+<span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> -</span><span style="color: #0070C1">D</span><span style="color: #000000"> @</span><span style="color: #001080">types</span><span style="color: #000000">/</span><span style="color: #001080">node</span><span style="color: #000000"> </span><span style="color: #001080">rrule</span><span style="color: #000000"> </span><span style="color: #001080">moment</span><span style="color: #000000">-</span><span style="color: #001080">timezone</span><span style="color: #000000"> </span><span style="color: #001080">moment</span><span style="color: #000000"> </span><span style="color: #001080">dayjs</span><span style="color: #000000"> @</span><span style="color: #001080">types</span><span style="color: #000000">/</span><span style="color: #001080">luxon</span>
 </code></pre>
 			<a href="#⚡️-quick-start" id="⚡️-quick-start" style="color: inherit; text-decoration: none;">
 				<h2>⚡️ Quick Start</h2>
@@ -2935,9 +2939,12 @@ img {
 				<h3>I use Typescript and get <code>TS2307: Cannot find module</code> errors</h3>
 			</a>
 			<p><code>ical-generator</code> supports some third-party libraries such as moment.js or Day.js. To enable Typescript to do something
-				with these types, they must of course also be installed. Unfortunately, npm does not install <code>peerDependencies</code> in
-				versions 4-6, so these dependencies have to be installed manually. The best thing to do is to update your npm installation
-			and reinstall <code>ical-generator</code>, which should solve the problem.</p>
+				with these types, they must of course also be installed. Unfortunately, npm does not install optional <code>peerDependencies</code>.
+				Because these modules are not necessary for JavaScript users, I have marked these modules as optional. So if you use
+			Typescript, you need the following modules to build the code that uses `ical-calendar&#39;:</p>
+			<pre><code class="language-bash"><span style="color: #000000">npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon</span>
+</code></pre>
+			<p>For JavaScript users they are not necessary.</p>
 			<a href="#🙆🏼♂️-copyright-and-license" id="🙆🏼♂️-copyright-and-license" style="color: inherit; text-decoration: none;">
 				<h2>🙆🏼‍♂️ Copyright and license</h2>
 			</a>
@@ -3023,7 +3030,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Alarm<wbr>Type<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><a href="enums/icalalarmtype.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalAlarmType</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/alarm.ts#L21">alarm.ts:21</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/alarm.ts#L21">alarm.ts:21</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3033,7 +3040,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">ICal<wbr>Date<wbr>Time<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Moment</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MomentTZ</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dayjs</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">LuxonDateTime</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/types.ts#L13">types.ts:13</a></li>
+						<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/types.ts#L13">types.ts:13</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3058,7 +3065,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/index.ts#L43">index.ts:43</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/index.ts#L43">index.ts:43</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3112,7 +3119,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/tools.ts#L118">tools.ts:118</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/tools.ts#L118">tools.ts:118</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3140,7 +3147,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/tools.ts#L127">tools.ts:127</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/tools.ts#L127">tools.ts:127</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3168,7 +3175,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/tools.ts#L15">tools.ts:15</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/tools.ts#L15">tools.ts:15</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3205,7 +3212,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/0027954/src/tools.ts#L100">tools.ts:100</a></li>
+								<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/a6232c6/src/tools.ts#L100">tools.ts:100</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
