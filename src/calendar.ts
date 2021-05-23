@@ -349,13 +349,14 @@ export default class ICalCalendar {
 
     
     /**
-     * Get your feed's refresh URL
+     * Get current value of the `SOURCE` attribute. 
      * @since 0.x.x
      */
     source(): string | null;
 
     /**
-     * Set your feed's refresh URL
+     * Use this method to set your feed's `SOURCE` attribute.
+     * This tells the client where to refresh your feed.
      *
      * ```javascript
      * calendar.source('http://example.com/my/original_source.ical');
@@ -782,7 +783,7 @@ export default class ICalCalendar {
         
         // SOURCE
         if (this.data.source) {
-            g += 'SOURCE:' + this.data.source + '\r\n';
+            g += 'SOURCE;VALUE=URI:' + this.data.source + '\r\n';
         }
 
         // CALSCALE
