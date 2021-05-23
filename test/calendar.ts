@@ -20,6 +20,7 @@ describe('ical-generator Calendar', function () {
                 description: 'Hi, I am the description.',
                 timezone: null,
                 url: 'https://github.com/sebbo2002/ical-generator',
+                source: 'http://example.com/my/original_source.ical',
                 scale: null,
                 ttl: null,
                 events: [],
@@ -226,6 +227,32 @@ describe('ical-generator Calendar', function () {
         it('should change something', function () {
             const cal = new ICalCalendar().ttl(86400);
             assert.strictEqual(cal.ttl(), 86400);
+        });
+    });
+    
+    describe('source()', function () {
+        it('setter should return this', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.source('http://example.com/my/original_source.ical'));
+        });
+
+        it('getter should return value', function () {
+            const cal = new ICalCalendar();
+            assert.strictEqual(cal.source(), null);
+            cal.source('http://example.com/my/original_source.ical');
+            assert.strictEqual(cal.source(), 'http://example.com/my/original_source.ical');
+            cal.url(null);
+            assert.strictEqual(cal.url(), null);
+        });
+
+        it('should change something', function () {
+            const cal = new ICalCalendar().source('http://example.com/my/original_source.ical');
+            cal.createEvent({
+                start: new Date(),
+                end: new Date(new Date().getTime() + 3600000),
+                summary: 'Example Event'
+            });
+            assert.ok(cal.url(), 'http://example.com/my/original_source.ical');
         });
     });
 
