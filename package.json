@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build-all": "./.github/workflows/build.sh",
-    "build": "tsc",
+    "build": "tsc && chmod +x ./dist/bin/*.js",
     "start": "node ./dist/bin/start.js",
     "develop": "ts-node ./src/bin/start.ts",
     "lint": "eslint . --ext .ts",

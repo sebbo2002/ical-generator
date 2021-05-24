@@ -1,4 +1,6 @@
+#!/usr/bin/env node
 'use strict';
+
 /* istanbul ignore file */
 
 import Magic from '../lib';
