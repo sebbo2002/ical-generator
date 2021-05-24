@@ -50,6 +50,7 @@ export interface ICalCalendarJSONData {
     name: string | null;
     description: string | null;
     timezone: string | null;
+    source: string | null;
     url: string | null;
     scale: string | null;
     ttl: number | null;
@@ -347,7 +348,7 @@ export default class ICalCalendar {
         return this;
     }
 
-    
+
     /**
      * Get current value of the `SOURCE` attribute. 
      * @since 0.x.x
@@ -359,14 +360,14 @@ export default class ICalCalendar {
      * This tells the client where to refresh your feed.
      *
      * ```javascript
-     * calendar.source('http://example.com/my/original_source.ical');
+     * cal.source('http://example.com/my/original_source.ical');
      * ```
      *
      * @since 0.x.x
      */
     source(source: string | null): this;
     source(source?: string | null): this | string | null {
-        if (url === undefined) {
+        if (source === undefined) {
             return this.data.source;
         }
 
@@ -780,7 +781,7 @@ export default class ICalCalendar {
         if (this.data.url) {
             g += 'URL:' + this.data.url + '\r\n';
         }
-        
+
         // SOURCE
         if (this.data.source) {
             g += 'SOURCE;VALUE=URI:' + this.data.source + '\r\n';
