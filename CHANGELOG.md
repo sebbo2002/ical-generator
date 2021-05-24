@@ -1,3 +1,10 @@
+# [2.2.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.1.1-develop.1...v2.2.0-develop.1) (2021-05-24)
+
+
+### Features
+
+* **Calendar:** Add `source()`, thanks [@irfaan](https://github.com/irfaan) ([91a764f](https://github.com/sebbo2002/ical-generator/commit/91a764fa135fe325b58f391b6a198f8807796350)), closes [#260](https://github.com/sebbo2002/ical-generator/issues/260)
+
 ## [2.1.1-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.1.0...v2.1.1-develop.1) (2021-05-17)
 
 # [2.1.0](https://github.com/sebbo2002/ical-generator/compare/v2.0.0...v2.1.0) (2021-05-13)
