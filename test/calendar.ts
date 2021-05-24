@@ -20,6 +20,7 @@ describe('ical-generator Calendar', function () {
                 description: 'Hi, I am the description.',
                 timezone: null,
                 url: 'https://github.com/sebbo2002/ical-generator',
+                source: 'http://example.com/my/original_source.ical',
                 scale: null,
                 ttl: null,
                 events: [],
@@ -226,6 +227,24 @@ describe('ical-generator Calendar', function () {
         it('should change something', function () {
             const cal = new ICalCalendar().ttl(86400);
             assert.strictEqual(cal.ttl(), 86400);
+        });
+    });
+
+    describe('source()', function () {
+        it('setter should return this', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.source('http://example.com/my/original_source.ical'));
+        });
+
+        it('getter should return value', function () {
+            const cal = new ICalCalendar();
+            assert.strictEqual(cal.source(), null);
+
+            cal.source('http://example.com/my/original_source.ical');
+            assert.strictEqual(cal.source(), 'http://example.com/my/original_source.ical');
+
+            cal.url(null);
+            assert.strictEqual(cal.url(), null);
         });
     });
 
@@ -641,6 +660,12 @@ describe('ical-generator Calendar', function () {
             cal.timezone('TEST');
             assert.ok(cal.toString().indexOf('TIMEZONE-ID:TEST') > -1);
             assert.ok(cal.toString().indexOf('X-WR-TIMEZONE:TEST') > -1);
+        });
+
+        it('should include the source', function () {
+            const cal = new ICalCalendar();
+            cal.source('http://foo.bar.example.com/ical.cal');
+            assert.ok(cal.toString().includes('http://foo.bar.example.com/ical.cal'));
         });
 
         it('should include VTimezone objects if generator was supplied', function () {
