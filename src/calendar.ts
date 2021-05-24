@@ -22,6 +22,7 @@ export interface ICalCalendarData {
     name?: string | null;
     description?: string | null;
     timezone?: ICalTimezone | string | null;
+    source?: string | null;
     url?: string | null;
     scale?: string | null;
     ttl?: number | Duration | null;
@@ -35,6 +36,7 @@ interface ICalCalendarInternalData {
     name: string | null;
     description: string | null;
     timezone: ICalTimezone | null;
+    source: string | null;
     url: string | null;
     scale: string | null;
     ttl: number | null;
@@ -48,6 +50,7 @@ export interface ICalCalendarJSONData {
     name: string | null;
     description: string | null;
     timezone: string | null;
+    source: string | null;
     url: string | null;
     scale: string | null;
     ttl: number | null;
@@ -120,6 +123,7 @@ export default class ICalCalendar {
             name: null,
             description: null,
             timezone: null,
+            source: null,
             url: null,
             scale: null,
             ttl: null,
@@ -132,6 +136,7 @@ export default class ICalCalendar {
         data.name !== undefined && this.name(data.name);
         data.description !== undefined && this.description(data.description);
         data.timezone !== undefined && this.timezone(data.timezone);
+        data.source !== undefined && this.source(data.source);
         data.url !== undefined && this.url(data.url);
         data.scale !== undefined && this.scale(data.scale);
         data.ttl !== undefined && this.ttl(data.ttl);
@@ -340,6 +345,33 @@ export default class ICalCalendar {
             this.data.timezone = timezone;
         }
 
+        return this;
+    }
+
+
+    /**
+     * Get current value of the `SOURCE` attribute.
+     * @since 2.2.0-develop.1
+     */
+    source(): string | null;
+
+    /**
+     * Use this method to set your feed's `SOURCE` attribute.
+     * This tells the client where to refresh your feed.
+     *
+     * ```javascript
+     * cal.source('http://example.com/my/original_source.ical');
+     * ```
+     *
+     * @since 2.2.0-develop.1
+     */
+    source(source: string | null): this;
+    source(source?: string | null): this | string | null {
+        if (source === undefined) {
+            return this.data.source;
+        }
+
+        this.data.source = source || null;
         return this;
     }
 
@@ -748,6 +780,11 @@ export default class ICalCalendar {
         // URL
         if (this.data.url) {
             g += 'URL:' + this.data.url + '\r\n';
+        }
+
+        // SOURCE
+        if (this.data.source) {
+            g += 'SOURCE;VALUE=URI:' + this.data.source + '\r\n';
         }
 
         // CALSCALE
