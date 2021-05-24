@@ -350,8 +350,8 @@ export default class ICalCalendar {
 
 
     /**
-     * Get current value of the `SOURCE` attribute. 
-     * @since 0.x.x
+     * Get current value of the `SOURCE` attribute.
+     * @since 2.2.0-develop.1
      */
     source(): string | null;
 
@@ -363,7 +363,7 @@ export default class ICalCalendar {
      * cal.source('http://example.com/my/original_source.ical');
      * ```
      *
-     * @since 0.x.x
+     * @since 2.2.0-develop.1
      */
     source(source: string | null): this;
     source(source?: string | null): this | string | null {
