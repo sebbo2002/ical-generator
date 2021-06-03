@@ -42,7 +42,7 @@
     "@touch4it/ical-timezones": "1.7.0",
     "@types/luxon": "^1.26.5",
     "@types/mocha": "^8.2.2",
-    "@types/node": "15.6.1",
+    "@types/node": "15.9.0",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
     "dayjs": "^1.10.4",
