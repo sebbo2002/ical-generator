@@ -1,3 +1,15 @@
+# [3.0.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.2.0...v3.0.0-develop.1) (2021-06-08)
+
+
+### chore
+
+* Remove node.js 10 Support ([2b910c0](https://github.com/sebbo2002/ical-generator/commit/2b910c09bc8a41085fc4472159494d8738d5521e))
+
+
+### BREAKING CHANGES
+
+* Removed support for node.js v10
+
 # [2.2.0](https://github.com/sebbo2002/ical-generator/compare/v2.1.0...v2.2.0) (2021-05-24)
 
 

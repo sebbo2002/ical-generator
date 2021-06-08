@@ -22,7 +22,7 @@
     "url": "http://github.com/sebbo2002/ical-generator/issues"
   },
   "engines": {
-    "node": ">=10.1.0"
+    "node": ">=12.0.0"
   },
   "files": [
     "/dist"
