@@ -59,7 +59,7 @@
     "semantic-release": "^17.4.3",
     "semantic-release-license": "^1.0.2",
     "ts-node": "^10.0.0",
-    "typedoc": "^0.20.36",
+    "typedoc": "^0.21.0-beta.2",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
