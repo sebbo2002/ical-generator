@@ -38,7 +38,7 @@
     "@semantic-release/release-notes-generator": "^9.0.2",
     "@types/express": "^4.17.12",
     "@types/mocha": "^8.2.2",
-    "@types/node": "^15.6.1",
+    "@types/node": "^15.12.2",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "eslint": "^7.28.0",
@@ -48,7 +48,7 @@
     "nyc": "^15.1.0",
     "semantic-release-license": "^1.0.3",
     "ts-node": "^10.0.0",
-    "typedoc": "^0.20.36",
+    "typedoc": "^0.21.0-beta.2",
     "typescript": "^4.3.2"
   },
   "engines": {
