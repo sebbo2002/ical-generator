@@ -43,7 +43,7 @@
     "@typescript-eslint/parser": "^4.26.0",
     "eslint": "^7.28.0",
     "license-checker": "^25.0.1",
-    "mocha": "^8.4.0",
+    "mocha": "^9.0.0",
     "mochawesome": "^6.2.2",
     "nyc": "^15.1.0",
     "semantic-release-license": "^1.0.3",
