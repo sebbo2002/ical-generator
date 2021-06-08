@@ -1,14 +1,15 @@
 name: ReleaseBot
 on:
   workflow_dispatch:
-#  push:
-#    branches: ['develop']
-#  schedule:
-#    - cron: '30 8 * * 3'
+  push:
+    branches: ['develop']
+  schedule:
+    - cron: '30 8 * * 3'
 
 jobs:
   release-bot:
     runs-on: ubuntu-latest
+    if: ${{ github.repository != 'sebbo2002/js-template' }}
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v2
