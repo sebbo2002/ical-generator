@@ -49,7 +49,7 @@
     "eslint": "^7.26.0",
     "license-checker": "^25.0.1",
     "luxon": "^1.26.0",
-    "mocha": "^8.4.0",
+    "mocha": "^9.0.0",
     "mochawesome": "^6.2.2",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
