@@ -1,0 +1,19 @@
+name: Dependabot Auto-Merge
+on:
+  pull_request:
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: ☁️ Checkout MergeBot
+        uses: actions/checkout@v2
+        with:
+          repository: sebbo2002/merge-bot
+          path: ./.actions/merge-bot
+      - name: 🤖 Run Dependabot Auto-Merge
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          target: minor
