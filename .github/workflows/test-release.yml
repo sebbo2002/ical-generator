@@ -134,6 +134,12 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
           cache-from: ghcr.io/${{ github.repository }}:build-container
+      - name: 🏁 Boot-up Check
+        run: |
+          docker run --rm --name "app" -d "ghcr.io/${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
+          sleep 5
+          docker run app echo "Ok."
+          docker stop app
     outputs:
       digest: ${{ steps.build.outputs.digest }}
 
