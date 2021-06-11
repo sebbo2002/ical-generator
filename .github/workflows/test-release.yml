@@ -139,7 +139,7 @@ jobs:
         run: |
           docker run --rm --name "app" -d $IMAGE
           sleep 5
-          docker run app echo "Ok."
+          docker exec app echo "Ok."
           docker stop app
         env:
           IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
