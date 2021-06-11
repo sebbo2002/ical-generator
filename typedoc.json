@@ -1,13 +1,13 @@
 {
     "entryPoints": ["./src/index.ts"],
     "exclude": [],
-    "out": "./docs/reference",
-    "theme": "minimal",
-    "plugin": [],
-    "name": "ical-generator",
-    "readme": "README.md",
-    "includeVersion": true,
+    "excludeInternal": true,
     "excludePrivate": true,
     "excludeProtected": true,
-    "excludeInternal": true
+    "includeVersion": true,
+    "name": "ical-generator",
+    "out": "./docs/reference",
+    "plugin": [],
+    "readme": "README.md",
+    "theme": "minimal"
 }
