@@ -137,10 +137,12 @@ jobs:
       - name: 🏁 Boot-up Check
         if: github.repository != 'sebbo2002/js-template'
         run: |
-          docker run --rm --name "app" -d $IMAGE
+          docker run --name "app" -d $IMAGE
           sleep 5
+          docker logs app
           docker exec app echo "Ok."
           docker stop app
+          docker rm app
         env:
           IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
     outputs:
