@@ -13,3 +13,5 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           target: minor
+    permissions:
+      pull-requests: write
