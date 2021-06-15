@@ -83,6 +83,8 @@ jobs:
   docker-image:
     name: Build Docker Image
     runs-on: ubuntu-latest
+    env:
+      PUSH_TO_DOCKERHUB: ${{ (github.repository != 'sebbo2002/js-template') && (secrets.DOCKERHUB_TOKEN != null) }}
     steps:
       - name: ☁️ Checkout
         uses: actions/checkout@v2
@@ -99,7 +101,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: 🔐 Login to DockerHub
         uses: docker/login-action@v1
-        if: ${{ github.repository != 'sebbo2002/js-template' && secrets.DOCKERHUB_TOKEN }}
+        if: ${{ env.PUSH_TO_DOCKERHUB == true }}
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -133,7 +135,7 @@ jobs:
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
           cache-from: ghcr.io/${{ github.repository }}:build-container
       - name: 🔄 Push container to DockerHub
-        if: ${{ github.repository != 'sebbo2002/js-template' && secrets.DOCKERHUB_TOKEN }}
+        if: ${{ env.PUSH_TO_DOCKERHUB == true }}
         run: |
           docker pull $SOURCE
           docker tag $SOURCE $TARGET
