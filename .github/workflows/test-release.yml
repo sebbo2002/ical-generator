@@ -160,6 +160,8 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    env:
+      PUSH_TO_DOCKERHUB: ${{ (github.repository != 'sebbo2002/js-template') && (secrets.DOCKERHUB_TOKEN != null) }}
     needs:
       - coverage
       - tests
@@ -195,10 +197,18 @@ jobs:
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: ⬇️ Pull Containers
+      - name: ⬇️ Pull GitHub Containers
         run: |
-          docker pull "${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
-          docker pull "ghcr.io/${{ github.repository }}@${{ needs.docker-image.outputs.digest }}"
+          docker pull "$CONTAINER"
+        env:
+          DOCKER_HUB: ${{ github.repository }}@${{ needs.docker-image.outputs.digest }}
+          CONTAINER: ghcr.io/${{ github.repository }}@${{ needs.docker-image.outputs.digest }}
+      - name: ⬇️ Pull Docker Hub Containers
+        if: ${{ env.PUSH_TO_DOCKERHUB == true }}
+        run: |
+          docker pull "$CONTAINER"
+        env:
+          CONTAINER: ${{ github.repository }}@${{ needs.docker-image.outputs.digest }}
       - name: 🪄 Run semantic-release
         run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
         env:
