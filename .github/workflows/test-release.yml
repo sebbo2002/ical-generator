@@ -198,15 +198,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: ⬇️ Pull GitHub Containers
-        run: |
-          docker pull "$CONTAINER"
+        run: docker pull $CONTAINER
         env:
-          DOCKER_HUB: ${{ github.repository }}@${{ needs.docker-image.outputs.digest }}
           CONTAINER: ghcr.io/${{ github.repository }}@${{ needs.docker-image.outputs.digest }}
       - name: ⬇️ Pull Docker Hub Containers
         if: ${{ env.PUSH_TO_DOCKERHUB == true }}
-        run: |
-          docker pull "$CONTAINER"
+        run: docker pull $CONTAINER
         env:
           CONTAINER: ${{ github.repository }}@${{ needs.docker-image.outputs.digest }}
       - name: 🪄 Run semantic-release
