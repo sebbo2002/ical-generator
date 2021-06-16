@@ -13,5 +13,3 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           target: minor
-    permissions:
-      pull-requests: write
