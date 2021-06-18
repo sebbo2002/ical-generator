@@ -229,7 +229,7 @@ jobs:
           GITHUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 🔃 Merge main back into develop
         if: ${{ github.ref == 'refs/heads/main' }}
-        uses: everlytic/branch-merge@1.1.0
+        uses: everlytic/branch-merge@1.1.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_ref: 'main'
