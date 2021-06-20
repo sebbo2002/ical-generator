@@ -93,6 +93,14 @@ jobs:
       - name: 🔧 Set up Buildx
         id: buildx
         uses: docker/setup-buildx-action@master
+      - name: 🔧 Set up Docker Layer Cache
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ hashFiles('**/package*.json') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-${{ hashFiles('**/package*.json') }}
+            ${{ runner.os }}-buildx
       - name: 🔐 Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
@@ -112,22 +120,25 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          github-token: ${{ secrets.GH_TOKEN }}
           target: build-container
           builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
           pull: true
-          push: ${{ github.ref == 'refs/heads/develop' && github.repository != 'sebbo2002/js-template' }}
-          tags: ghcr.io/${{ github.repository }}:build-container
-          cache-from: ghcr.io/${{ github.repository }}:build-container
+          push: true
+          tags: ghcr.io/${{ github.repository }}:build-container-${{ github.sha }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
       - name: 🪄 Build and push (2/2)
         id: build
         uses: docker/build-push-action@v2
         with:
           context: .
+          github-token: ${{ secrets.GH_TOKEN }}
           builder: ${{ steps.buildx.outputs.name }}
           platforms: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/arm/v7,linux/arm/v6
           pull: true
-          push: ${{ github.repository != 'sebbo2002/js-template' }}
+          push: true
           tags: ghcr.io/${{ github.repository }}:${{ github.sha }}
           labels: |
             org.opencontainers.image.authors=${{ github.repository_owner }}
@@ -135,7 +146,17 @@ jobs:
             org.opencontainers.image.ref.name=${{ github.ref }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
-          cache-from: ghcr.io/${{ github.repository }}:build-container
+          cache-from: |
+            type=local,src=/tmp/.buildx-cache
+            type=local,src=/tmp/.buildx-cache-new
+            type=registry,ref=ghcr.io/${{ github.repository }}:build-container-${{ github.sha }}
+            type=registry,ref=ghcr.io/${{ github.repository }}:next
+            type=registry,ref=ghcr.io/${{ github.repository }}:latest
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+      - name: 📄 Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
       - name: 🔄 Push container to DockerHub
         if: ${{ env.PUSH_TO_DOCKERHUB == true }}
         run: |
@@ -220,7 +241,7 @@ jobs:
           GITHUB_NPM_TOKEN: ${{ secrets.GH_TOKEN }}
           PUBLIC_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
           PUBLIC_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          DOCKER_DIGEST: ${{ needs.docker-image.outputs.digest }}
+          DOCKER_TAG: ${{ github.sha }}
           DOCKER_REGISTRY_IMAGE: ${{ github.repository }}
           DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
           DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
