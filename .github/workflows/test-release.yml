@@ -221,13 +221,21 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: ⬇️ Pull GitHub Containers
-        run: docker pull "${IMAGE}@${DIGEST}"
+        id: github
+        run: |
+          docker pull "${IMAGE}@${DIGEST}"
+          docker tag "${IMAGE}@${DIGEST}" "${DIGEST}-github:latest"
+          echo "::set-output name=image::${DIGEST}-github:latest"
         env:
           IMAGE: ghcr.io/${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
       - name: ⬇️ Pull Docker Hub Containers
         if: ${{ env.PUSH_TO_DOCKERHUB == true }}
-        run: docker pull "${IMAGE}@${DIGEST}"
+        id: dockerhub
+        run: |
+          docker pull "${IMAGE}@${DIGEST}"
+          docker tag "${IMAGE}@${DIGEST}" "${DIGEST}-dockerhub:latest"
+          echo "::set-output name=image::${DIGEST}-dockerhub:latest"
         env:
           IMAGE: ${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
@@ -241,7 +249,8 @@ jobs:
           GITHUB_NPM_TOKEN: ${{ secrets.GH_TOKEN }}
           PUBLIC_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
           PUBLIC_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          DOCKER_TAG: ${{ github.sha }}
+          DOCKER_LOCAL_IMAGE_GH: ${{ steps.github.outputs.image }}
+          DOCKER_LOCAL_IMAGE_DH: ${{ steps.dockerhub.outputs.image }}
           DOCKER_REGISTRY_IMAGE: ${{ github.repository }}
           DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
           DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
