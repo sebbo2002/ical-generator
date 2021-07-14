@@ -215,8 +215,8 @@ jobs:
         id: github
         run: |
           docker pull "${IMAGE}@${DIGEST}"
-          docker tag "${IMAGE}@${DIGEST}" "${DIGEST}-github:latest"
-          echo "::set-output name=image::${DIGEST}-github:latest"
+          docker tag "${IMAGE}@${DIGEST}" "${IMAGE}-local-github:latest"
+          echo "::set-output name=image::${IMAGE}-local-github"
         env:
           IMAGE: ghcr.io/${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
@@ -225,8 +225,8 @@ jobs:
         id: dockerhub
         run: |
           docker pull "${IMAGE}@${DIGEST}"
-          docker tag "${IMAGE}@${DIGEST}" "${DIGEST}-dockerhub:latest"
-          echo "::set-output name=image::${DIGEST}-dockerhub:latest"
+          docker tag "${IMAGE}@${DIGEST}" "${IMAGE}-local-dockerhub:latest"
+          echo "::set-output name=image::${IMAGE}-local-dockerhub"
         env:
           IMAGE: ${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
