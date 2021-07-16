@@ -215,8 +215,7 @@ jobs:
         id: github
         run: |
           docker pull "${IMAGE}@${DIGEST}"
-          docker tag "${IMAGE}@${DIGEST}" "${IMAGE}-local-github:latest"
-          echo "::set-output name=image::${IMAGE}-local-github"
+          echo "::set-output name=image::${IMAGE}@${DIGEST}"
         env:
           IMAGE: ghcr.io/${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
@@ -225,8 +224,7 @@ jobs:
         id: dockerhub
         run: |
           docker pull "${IMAGE}@${DIGEST}"
-          docker tag "${IMAGE}@${DIGEST}" "${IMAGE}-local-dockerhub:latest"
-          echo "::set-output name=image::${IMAGE}-local-dockerhub"
+          echo "::set-output name=image::${IMAGE}@${DIGEST}"
         env:
           IMAGE: ${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
@@ -242,12 +240,6 @@ jobs:
           PUBLIC_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           DOCKER_LOCAL_IMAGE_GH: ${{ steps.github.outputs.image }}
           DOCKER_LOCAL_IMAGE_DH: ${{ steps.dockerhub.outputs.image }}
-          DOCKER_REGISTRY_IMAGE: ${{ github.repository }}
-          DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
-          DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-          GITHUB_REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
-          GITHUB_REGISTRY_USERNAME: ${{ github.repository_owner }}
-          GITHUB_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 🔃 Merge main back into develop
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: everlytic/branch-merge@1.1.2
