@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 ![Size](https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square)
 [![Status](https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square)](https://github.com/sebbo2002/ical-generator/actions)
-![Dependencies](https://img.shields.io/depfu/sebbo2002/ical-generator?style=flat-square)
+![Dependencies](https://img.shields.io/david/sebbo2002/ical-generator?style=flat-square)
 
 `ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
 to generate subscriptionable calendar feeds.

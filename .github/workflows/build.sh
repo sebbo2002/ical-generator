@@ -4,6 +4,7 @@ set -e
 echo "########################"
 echo "# build.sh"
 echo "# Branch = ${BRANCH}"
+echo "# node version = $(node -v)"
 echo "# npm version = $(npm -v)"
 echo "########################"
 
