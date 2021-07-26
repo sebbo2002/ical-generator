@@ -8,7 +8,6 @@ a template that I use to start new projects and services.
 
 ## 🚨 Template Usage Checklist
 - [ ] Update project name in `package.json`
-- [ ] Remove comments in workflow files
 - [ ] Create `main` and `develop` branches
 - [ ] Set `develop` as default branch
 - [ ] Create Docker Repository
