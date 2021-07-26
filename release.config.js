@@ -44,22 +44,16 @@ configuration.plugins.push(['@semantic-release/git', {
     'message': 'chore(release): :bookmark: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
 }]);
 
+const dockerImages = [];
 if (process.env.DOCKER_LOCAL_IMAGE_DH) {
-    configuration.plugins.push(['@semantic-release-plus/docker', {
-        name: process.env.DOCKER_LOCAL_IMAGE_DH,
-        publishLatestTag: true,
-        publishMajorTag: true,
-        publishMinorTag: true
-    }]);
+    dockerImages.push(process.env.DOCKER_LOCAL_IMAGE_DH);
 }
-
 if (process.env.DOCKER_LOCAL_IMAGE_GH) {
-    configuration.plugins.push(['@semantic-release-plus/docker', {
-        name: process.env.DOCKER_LOCAL_IMAGE_GH,
-        registryUrl: 'ghcr.io',
-        publishLatestTag: true,
-        publishMajorTag: true,
-        publishMinorTag: true
+    dockerImages.push(process.env.DOCKER_LOCAL_IMAGE_GH);
+}
+if(dockerImages.length > 0) {
+    configuration.plugins.push(['@sebbo2002/semantic-release-docker', {
+        images: dockerImages
     }]);
 }
 

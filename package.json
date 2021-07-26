@@ -13,7 +13,7 @@
   "devDependencies": {
     "@amanda-mitchell/semantic-release-npm-multiple": "^2.8.0",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.0.7",
-    "@semantic-release-plus/docker": "^2.3.3",
+    "@sebbo2002/semantic-release-docker": "^1.0.0-develop.1",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/exec": "^5.0.0",
     "@semantic-release/git": "^9.0.0",
