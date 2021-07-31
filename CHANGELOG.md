@@ -1,3 +1,32 @@
+# [3.0.0-develop.7](https://github.com/sebbo2002/ical-generator/compare/v3.0.0-develop.6...v3.0.0-develop.7) (2021-07-28)
+
+# [3.0.0-develop.6](https://github.com/sebbo2002/ical-generator/compare/v3.0.0-develop.5...v3.0.0-develop.6) (2021-07-28)
+
+# [3.0.0-develop.5](https://github.com/sebbo2002/ical-generator/compare/v3.0.0-develop.4...v3.0.0-develop.5) (2021-07-28)
+
+# [3.0.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v3.0.0-develop.3...v3.0.0-develop.4) (2021-07-22)
+
+
+### Bug Fixes
+
+* Make peerDependencies less strict ([1c3a8f2](https://github.com/sebbo2002/ical-generator/commit/1c3a8f2f1d8880c6f94d7e06df8b5498a7418f01)), closes [#303](https://github.com/sebbo2002/ical-generator/issues/303)
+
+# [3.0.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.0.0-develop.2...v3.0.0-develop.3) (2021-06-18)
+
+# [3.0.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.0.0-develop.1...v3.0.0-develop.2) (2021-06-08)
+
+# [3.0.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v2.2.0...v3.0.0-develop.1) (2021-06-08)
+
+
+### chore
+
+* Remove node.js 10 Support ([2b910c0](https://github.com/sebbo2002/ical-generator/commit/2b910c09bc8a41085fc4472159494d8738d5521e))
+
+
+### BREAKING CHANGES
+
+* Removed support for node.js v10
+
 # [2.2.0](https://github.com/sebbo2002/ical-generator/compare/v2.1.0...v2.2.0) (2021-05-24)
 
 

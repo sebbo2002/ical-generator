@@ -12,7 +12,7 @@ jobs:
     if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main'
     strategy:
       matrix:
-        node: [10.x, 12.x, 14.x, 15.x]
+        node: [12.x, 14.x, 16.x]
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
       - coverage
       - tests
       - license-checker
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    if: ${{ github.repository != 'sebbo2002/js-template' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v2
@@ -117,7 +117,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: 🔃 Merge main back into develop
         if: ${{ github.ref == 'refs/heads/main' }}
-        uses: everlytic/branch-merge@1.1.0
+        uses: everlytic/branch-merge@1.1.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           source_ref: 'main'

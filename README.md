@@ -1,15 +1,30 @@
-![ical-generator Logo](https://d.sebbo.net/ical-generator-logo-AvKRjlfYJe4OlPV9l0zgSDlgyW59bOzFzjUUTG9tGM0ySKQuZ1PbzkZO9XYZ1vjLt8XwRgjZH2CYw22vD9OTzFeTvEWlqPFfyuox.jpg)
+<br />
+<br />
 
-# ical-generator
+<p align="center">
+    <img src="https://d.sebbo.net/ical-generator-logo-w-dark-2IyGhq7rHoLzQwaNbK7MvxoNpe0bivGDzbjrai56R5YTfQuvfI8DtDfbfnNeRborwoj2y0gS5urh7OKdd4wik9F5PT4LxRnReyXA.svg" alt="ical-generator" />
+</p>
+<p align="center">
+    <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE">
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" />
+    </a>
+    <a href="https://bundlephobia.com/package/ical-generator">
+        <img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" />
+    </a>
+    <a href="https://github.com/sebbo2002/ical-generator/actions">
+        <img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square" alt="CI Status" />
+    </a>
+    <img src="https://img.shields.io/david/sebbo2002/ical-generator?style=flat-square" alt="Dependency Status" />
+</p>
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-![Size](https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square)
-[![Status](https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square)](https://github.com/sebbo2002/ical-generator/actions)
-![Dependencies](https://img.shields.io/depfu/sebbo2002/ical-generator?style=flat-square)
+<br />
+
 
 `ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
 to generate subscriptionable calendar feeds.
 
+<br />
+<br />
 
 ## 📦 Installation
 

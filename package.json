@@ -1,7 +1,48 @@
 {
-  "name": "ical-generator",
-  "description": "ical-generator is a small piece of code which generates ical calendar files",
   "author": "Sebastian Pekarek <gineeyaingasiajeipat@e.sebbo.net>",
+  "bugs": {
+    "url": "http://github.com/sebbo2002/ical-generator/issues"
+  },
+  "dependencies": {
+    "uuid-random": "^1.3.2"
+  },
+  "description": "ical-generator is a small piece of code which generates ical calendar files",
+  "devDependencies": {
+    "@qiwi/semantic-release-gh-pages-plugin": "^5.1.1",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/exec": "^5.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/npm": "^7.1.3",
+    "@touch4it/ical-timezones": "1.7.0",
+    "@types/luxon": "^1.27.1",
+    "@types/mocha": "^8.2.3",
+    "@types/node": "^15.14.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.0",
+    "dayjs": "^1.10.6",
+    "eslint": "^7.30.0",
+    "eslint-plugin-jsonc": "^1.4.0",
+    "license-checker": "^25.0.1",
+    "luxon": "^2.0.1",
+    "mocha": "^9.0.2",
+    "mochawesome": "^6.2.2",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "nyc": "^15.1.0",
+    "portfinder": "^1.0.28",
+    "rrule": "^2.6.8",
+    "semantic-release": "^17.4.3",
+    "semantic-release-license": "^1.0.2",
+    "ts-node": "^10.1.0",
+    "typedoc": "^0.21.4",
+    "typescript": "^4.3.5"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "/dist"
+  ],
   "homepage": "https://github.com/sebbo2002/ical-generator",
   "keywords": [
     "ical",
@@ -17,61 +58,18 @@
     "alarms"
   ],
   "license": "MIT",
-  "version": "v2.0.0-develop",
-  "bugs": {
-    "url": "http://github.com/sebbo2002/ical-generator/issues"
-  },
-  "engines": {
-    "node": ">=10.1.0"
-  },
-  "files": [
-    "/dist"
-  ],
-  "dependencies": {
-    "uuid-random": "^1.3.2"
-  },
-  "devDependencies": {
-    "@qiwi/semantic-release-gh-pages-plugin": "^5.0.7",
-    "@semantic-release/changelog": "^5.0.1",
-    "@semantic-release/commit-analyzer": "^8.0.1",
-    "@semantic-release/exec": "^5.0.0",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/github": "^7.2.3",
-    "@semantic-release/npm": "^7.1.3",
-    "@semantic-release/release-notes-generator": "^9.0.2",
-    "@touch4it/ical-timezones": "1.6.1",
-    "@types/luxon": "^1.26.5",
-    "@types/mocha": "^8.2.2",
-    "@types/node": "15.6.0",
-    "@typescript-eslint/eslint-plugin": "^4.23.0",
-    "@typescript-eslint/parser": "^4.23.0",
-    "dayjs": "^1.10.4",
-    "eslint": "^7.26.0",
-    "license-checker": "^25.0.1",
-    "luxon": "^1.26.0",
-    "mocha": "^8.4.0",
-    "mochawesome": "^6.2.2",
-    "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
-    "nyc": "^15.1.0",
-    "portfinder": "^1.0.28",
-    "rrule": "^2.6.8",
-    "semantic-release": "^17.4.3",
-    "semantic-release-license": "^1.0.2",
-    "ts-node": "^10.0.0",
-    "typedoc": "^0.20.36",
-    "typescript": "^4.2.4"
-  },
+  "main": "./dist/index.js",
+  "name": "ical-generator",
   "peerDependencies": {
-    "@touch4it/ical-timezones": "^1.6.1",
-    "@types/luxon": "^1.26.0",
-    "@types/mocha": "^8.2.1",
-    "@types/node": "^15.0.3",
-    "dayjs": "^1.10.4",
-    "luxon": "^1.26.0",
-    "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
-    "rrule": "^2.6.8"
+    "@touch4it/ical-timezones": ">=1.6.0",
+    "@types/luxon": ">= 1.26.0",
+    "@types/mocha": ">= 8.2.1",
+    "@types/node": ">= 15.0.0",
+    "dayjs": ">= 1.10.0",
+    "luxon": ">= 1.26.0",
+    "moment": ">= 2.29.0",
+    "moment-timezone": ">= 0.5.33",
+    "rrule": ">= 2.6.8"
   },
   "peerDependenciesMeta": {
     "@touch4it/ical-timezones": {
@@ -102,22 +100,22 @@
       "optional": true
     }
   },
-  "scripts": {
-    "build-all": "./.github/workflows/build.sh",
-    "build": "tsc",
-    "example": "node ./dist/examples/push.js",
-    "start": "node ./dist/bin/start.js",
-    "develop": "ts-node ./src/bin/start.ts",
-    "lint": "eslint . --ext .ts",
-    "test": "mocha",
-    "coverage": "nyc mocha",
-    "license-check": "license-checker --production --summary"
-  },
   "preferGlobal": false,
-  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/sebbo2002/ical-generator.git"
   },
-  "runkitExampleFilename": "examples/example-runkit.js"
+  "runkitExampleFilename": "examples/example-runkit.js",
+  "scripts": {
+    "build": "tsc",
+    "build-all": "./.github/workflows/build.sh",
+    "coverage": "nyc mocha",
+    "develop": "ts-node ./src/bin/start.ts",
+    "example": "node ./dist/examples/push.js",
+    "license-check": "license-checker --production --summary",
+    "lint": "eslint . --ext .ts",
+    "start": "node ./dist/bin/start.js",
+    "test": "mocha"
+  },
+  "version": "v2.0.0-develop"
 }
