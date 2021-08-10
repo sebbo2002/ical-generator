@@ -34,7 +34,7 @@
     "semantic-release": "^17.4.3",
     "semantic-release-license": "^1.0.2",
     "ts-node": "^10.1.0",
-    "typedoc": "^0.21.4",
+    "typedoc": "^0.21.5",
     "typescript": "^4.3.5"
   },
   "engines": {
