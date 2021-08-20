@@ -102,16 +102,16 @@ export default class ICalCalendar {
      * // const ical = require('ical-generator');
      *
      *
-     * const cal = ical({domain: 'sebbo.net'});
+     * const cal = ical({name: 'my first iCal'});
      *
      * // is the same as
      *
-     * const cal = ical().domain('sebbo.net');
+     * const cal = ical().name('my first iCal');
      *
      * // is the same as
      *
      * const cal = ical();
-     * cal.domain('sebbo.net');
+     * cal.name('sebbo.net');
      * ```
      *
      * @param data Calendar data
