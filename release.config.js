@@ -19,10 +19,6 @@ configuration.plugins.push(['@semantic-release/commit-analyzer', {
 
 configuration.plugins.push('@semantic-release/release-notes-generator');
 
-configuration.plugins.push(['@semantic-release/exec', {
-    'prepareCmd': './.github/workflows/build.sh'
-}]);
-
 configuration.plugins.push('@semantic-release/changelog');
 
 configuration.plugins.push('semantic-release-license');
@@ -32,6 +28,10 @@ configuration.plugins.push(['@amanda-mitchell/semantic-release-npm-multiple', {
         'github': {},
         'public': {}
     }
+}]);
+
+configuration.plugins.push(['@semantic-release/exec', {
+    'prepareCmd': './.github/workflows/build.sh'
 }]);
 
 configuration.plugins.push(['@semantic-release/github', {
