@@ -60,11 +60,11 @@ http.createServer((req, res) => calendar.serve(res))
 ## 📑 API-Reference
 
 - [Index](https://sebbo2002.github.io/ical-generator/develop/reference/)
-    - [ICalCalendar](https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalcalendar.html)
-    - [ICalEvent](https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalevent.html)
-        - [ICalAlarm](https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalalarm.html)
-        - [ICalAttendee](https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalattendee.html)
-        - [ICalCategory](https://sebbo2002.github.io/ical-generator/develop/reference/classes/icalcategory.html)
+    - [ICalCalendar](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalCalendar.html)
+    - [ICalEvent](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalEvent.html)
+        - [ICalAlarm](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalAlarm.html)
+        - [ICalAttendee](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalAttendee.html)
+        - [ICalCategory](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalCategory.html)
 
 ## 🕒 Date, Time & Timezones
 
