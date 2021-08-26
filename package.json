@@ -33,6 +33,7 @@
     "rrule": "^2.6.8",
     "semantic-release": "^17.4.3",
     "semantic-release-license": "^1.0.2",
+    "source-map-support": "^0.5.19",
     "ts-node": "^10.2.0",
     "typedoc": "^0.21.5",
     "typescript": "^4.3.5"
