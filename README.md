@@ -132,7 +132,7 @@ It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.m
 `ical-generator` supports some third-party libraries such as moment.js or Day.js. To enable Typescript to do something
 with these types, they must of course also be installed. Unfortunately, npm does not install optional `peerDependencies`.
 Because these modules are not necessary for JavaScript users, I have marked these modules as optional. So if you use
-Typescript, you need the following modules to build the code that uses `ical-calendar':
+Typescript, you need the following modules to build the code that uses `ical-calendar`:
 
 ```bash
 npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon
