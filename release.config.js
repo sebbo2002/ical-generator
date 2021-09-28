@@ -29,6 +29,10 @@ configuration.plugins.push(['@semantic-release/exec', {
     'prepareCmd': './.github/workflows/build.sh'
 }]);
 
+configuration.plugins.push(['@semantic-release/exec', {
+    'prepareCmd': './.github/workflows/build.sh'
+}]);
+
 configuration.plugins.push(['@semantic-release/github', {
     'labels': false,
     'assignees': process.env.GH_OWNER
