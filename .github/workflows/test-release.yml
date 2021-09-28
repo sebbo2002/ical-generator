@@ -1,8 +1,9 @@
 name: Test & Release
 on:
   push:
-    branches-ignore:
-      - gh-pages
+    branches:
+      - develop
+      - master
   pull_request: null
 
 jobs:
