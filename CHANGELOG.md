@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.0...v3.0.1) (2021-10-01)
+
+
+### Bug Fixes
+
+* **Event:** Append address to `LOCATION` even without `radius` / `geo` ([09ea62e](https://github.com/sebbo2002/ical-generator/commit/09ea62eb073bd79e66c8905841a93810fcea0634)), closes [#314](https://github.com/sebbo2002/ical-generator/issues/314)
+
 ## [3.0.1-develop.4](https://github.com/sebbo2002/ical-generator/compare/v3.0.1-develop.3...v3.0.1-develop.4) (2021-09-28)
 
 ## [3.0.1-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.0.1-develop.2...v3.0.1-develop.3) (2021-09-20)
