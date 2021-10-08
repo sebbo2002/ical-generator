@@ -397,8 +397,14 @@ export default class ICalEvent {
     timezone(): string | null;
 
     /**
-     * Use this method to set your event's timezone using the TZID property parameter on start and end dates,
-     * as per [date-time form #3 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5).
+     * Sets the time zone to be used for this event. If a time zone has been
+     * defined in both the event and the calendar, the time zone of the event
+     * is used.
+     *
+     * Please note that if the time zone is set, ical-generator assumes
+     * that all times are already in the correct time zone. Alternatively,
+     * a `moment-timezone` or a Luxon object can be passed with `setZone`,
+     * ical-generator will then set the time zone itself.
      *
      * This and the 'floating' flag (see below) are mutually exclusive, and setting a timezone will unset the
      * 'floating' flag.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format

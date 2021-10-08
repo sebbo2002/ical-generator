@@ -303,6 +303,12 @@ export default class ICalCalendar {
     timezone(timezone: string | null): this;
 
     /**
+     * Sets the time zone to be used in this calendar file for all times of all
+     * events. Please note that if the time zone is set, ical-generator assumes
+     * that all times are already in the correct time zone. Alternatively, a
+     * `moment-timezone` or a Luxon object can be passed with `setZone`,
+     * ical-generator will then set the time zone itself.
+     *
      * For the best support of time zones, a VTimezone entry in the calendar is
      * recommended, which informs the client about the corresponding time zones
      * (daylight saving time, deviation from UTC, etc.). `ical-generator` itself
