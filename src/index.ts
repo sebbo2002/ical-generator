@@ -83,7 +83,8 @@ export {
     ICalEventBusyStatus,
     ICalEventTransparency,
     ICalEventData,
-    ICalEventJSONData
+    ICalEventJSONData,
+    ICalEventClass,
 } from './event';
 
 export {

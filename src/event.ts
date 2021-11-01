@@ -47,6 +47,12 @@ export enum ICalEventTransparency {
     OPAQUE = 'OPAQUE'
 }
 
+export enum ICalEventClass {
+    PUBLIC = 'PUBLIC',
+    PRIVATE = 'PRIVATE',
+    CONFIDENTIAL = 'CONFIDENTIAL'
+}
+
 export interface ICalEventData {
     id?: string | number | null,
     sequence?: number,
@@ -72,6 +78,7 @@ export interface ICalEventData {
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
     lastModified?: ICalDateTimeValue | null,
+    class?: ICalEventClass | null;
     x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
@@ -100,6 +107,7 @@ interface ICalEventInternalData {
     transparency: ICalEventTransparency | null,
     created: ICalDateTimeValue | null,
     lastModified: ICalDateTimeValue | null,
+    class: ICalEventClass | null,
     x: [string, string][];
 }
 
@@ -190,6 +198,7 @@ export default class ICalEvent {
             transparency: null,
             created: null,
             lastModified: null,
+            class: null,
             x: []
         };
 
@@ -222,6 +231,7 @@ export default class ICalEvent {
         data.transparency !== undefined && this.transparency(data.transparency);
         data.created !== undefined && this.created(data.created);
         data.lastModified !== undefined && this.lastModified(data.lastModified);
+        data.class !== undefined && this.class(data.class);
         data.x !== undefined && this.x(data.x);
     }
 
@@ -1228,6 +1238,36 @@ export default class ICalEvent {
         return this;
     }
 
+    /**
+     * Get the event's class
+     * @since 2.0.0
+     */
+    class(): ICalEventClass | null;
+
+    /**
+     * Set the event's class
+     *
+     * ```javascript
+     * import ical, { ICalEventClass } from 'ical-generator';
+     * event.class(ICalEventClass.PRIVATE);
+     * ```
+     *
+     * @since 2.0.0
+     */
+    class(class_: ICalEventClass | null): this;
+    class(class_?: ICalEventClass | null): this | ICalEventClass | null {
+        if (class_ === undefined) {
+            return this.data.class;
+        }
+        if (class_ === null) {
+            this.data.class = null;
+            return this;
+        }
+
+        this.data.class = checkEnum(ICalEventClass, class_) as ICalEventClass;
+        return this;
+    }
+
 
     /**
      * Set X-* attributes. Woun't filter double attributes,
@@ -1543,6 +1583,10 @@ export default class ICalEvent {
         // LAST-MODIFIED
         if (this.data.lastModified) {
             g += 'LAST-MODIFIED:' + formatDate(this.calendar.timezone(), this.data.lastModified) + '\r\n';
+        }
+
+        if (this.data.class) {
+            g+= 'CLASS:' + this.data.class.toUpperCase() + '\r\n';
         }
 
         g += 'END:VEVENT\r\n';
