@@ -1,3 +1,10 @@
+## [3.0.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.0.2-develop.1...v3.0.2-develop.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* Remove Blob usage to support modern browsers ([c4e33d3](https://github.com/sebbo2002/ical-generator/commit/c4e33d3405338f42cc299cc927b851a67a88b3ad)), closes [#325](https://github.com/sebbo2002/ical-generator/issues/325)
+
 ## [3.0.2-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.1...v3.0.2-develop.1) (2021-10-08)
 
 ## [3.0.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.0...v3.0.1) (2021-10-01)
