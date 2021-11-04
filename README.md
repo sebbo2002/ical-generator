@@ -140,6 +140,11 @@ npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon
 
 For JavaScript users they are not necessary.
 
+### I get a `ReferenceError: TextEncoder is not defined` error (in some browsers)
+This library uses [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder), which
+is available in node.js ≥ 11.0.0 and [all modern browsers](https://caniuse.com/?search=textencoder).
+Outdated browsers may not have the necessary API and generate this error when generating the calendar.
+
 
 ## 🙆🏼‍♂️ Copyright and license
 
