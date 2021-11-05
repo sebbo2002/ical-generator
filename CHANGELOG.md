@@ -1,3 +1,10 @@
+# [3.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.2-develop.2...v3.1.0-develop.1) (2021-11-05)
+
+
+### Features
+
+* **event:** Add support for event class ([a227aa2](https://github.com/sebbo2002/ical-generator/commit/a227aa27d293305e307861149aad3888caf5eafe))
+
 ## [3.0.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.0.2-develop.1...v3.0.2-develop.2) (2021-11-04)
 
 
