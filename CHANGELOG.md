@@ -1,3 +1,11 @@
+# [3.1.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.1.0-develop.1...v3.1.0-develop.2) (2021-11-08)
+
+
+### Features
+
+* **Calendar:** Handle `timezone('UTC')` correctly ([c0745e5](https://github.com/sebbo2002/ical-generator/commit/c0745e50101d3f29e51ddecce7da4a4e445ccc81)), closes [#328](https://github.com/sebbo2002/ical-generator/issues/328)
+* **Event:** Handle `timezone('UTC')` correctly ([781dc3d](https://github.com/sebbo2002/ical-generator/commit/781dc3d67296cef67652e8a97600f7678d6ac191)), closes [#328](https://github.com/sebbo2002/ical-generator/issues/328)
+
 # [3.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.2-develop.2...v3.1.0-develop.1) (2021-11-05)
 
 
