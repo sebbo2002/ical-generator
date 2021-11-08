@@ -340,6 +340,18 @@ describe('ical-generator Event', function () {
             e.timezone(null);
             assert.strictEqual(e.floating(), true);
         });
+
+        it('setting UTC should reset timezone as UTC is the default', function () {
+            const e = new ICalEvent({
+                start: moment(),
+                timezone: 'Europe/Berlin',
+                summary: 'Example Event'
+            }, new ICalCalendar());
+            assert.strictEqual(e.timezone(), 'Europe/Berlin');
+
+            e.timezone('UTC');
+            assert.strictEqual(e.timezone(), null);
+        });
     });
 
     describe('stamp()', function () {

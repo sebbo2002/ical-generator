@@ -207,6 +207,14 @@ describe('ical-generator Calendar', function () {
             cal.timezone({name: 'Europe/Berlin'});
             assert.strictEqual(cal.timezone(), 'Europe/Berlin');
         });
+
+        it('setting UTC should reset timezone as UTC is the default', function () {
+            const cal = new ICalCalendar().timezone('Europe/Berlin');
+            assert.strictEqual(cal.timezone(), 'Europe/Berlin');
+
+            cal.timezone('UTC');
+            assert.strictEqual(cal.timezone(), null);
+        });
     });
 
     describe('ttl()', function () {
