@@ -427,6 +427,7 @@ export default class ICalEvent {
      * event.timezone('America/New_York');
      * ```
      *
+     * @see https://github.com/sebbo2002/ical-generator#-date-time--timezones
      * @since 0.2.6
      */
     timezone(timezone: string | null): this;
@@ -438,7 +439,7 @@ export default class ICalEvent {
             return this.calendar.timezone();
         }
 
-        this.data.timezone = timezone ? timezone.toString() : null;
+        this.data.timezone = timezone && timezone !== 'UTC' ? timezone.toString() : null;
         if (this.data.timezone) {
             this.data.floating = false;
         }
