@@ -204,6 +204,7 @@ jobs:
           DIGEST: ${{ needs.docker-image.outputs.digest }}
       - name: 🪄 Run semantic-release
         run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
+        concurrency: release
         env:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
