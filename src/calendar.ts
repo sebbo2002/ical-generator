@@ -292,12 +292,14 @@ export default class ICalCalendar {
      * Use this method to set your feed's timezone. Is used
      * to fill `TIMEZONE-ID` and `X-WR-TIMEZONE` in your iCal export.
      * Please not that all date values are treaded differently, if
-     * a timezone was set. See [[`formatDate`]] for details.
+     * a timezone was set. See [[`formatDate`]] for details. If no
+     * time zone is specified, all information is output as UTC.
      *
      * ```javascript
      * cal.timezone('America/New_York');
      * ```
      *
+     * @see https://github.com/sebbo2002/ical-generator#-date-time--timezones
      * @since 0.2.0
      */
     timezone(timezone: string | null): this;
@@ -333,6 +335,7 @@ export default class ICalCalendar {
      * });
      * ```
      *
+     * @see https://github.com/sebbo2002/ical-generator#-date-time--timezones
      * @since 2.0.0
      */
     timezone(timezone: ICalTimezone | string | null): this;
@@ -341,7 +344,10 @@ export default class ICalCalendar {
             return this.data.timezone?.name || null;
         }
 
-        if(typeof timezone === 'string') {
+        if(timezone === 'UTC') {
+            this.data.timezone = null;
+        }
+        else if(typeof timezone === 'string') {
             this.data.timezone = {name: timezone};
         }
         else if(timezone === null) {
