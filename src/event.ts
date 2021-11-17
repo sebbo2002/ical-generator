@@ -47,6 +47,12 @@ export enum ICalEventTransparency {
     OPAQUE = 'OPAQUE'
 }
 
+export enum ICalEventClass {
+    PUBLIC = 'PUBLIC',
+    PRIVATE = 'PRIVATE',
+    CONFIDENTIAL = 'CONFIDENTIAL'
+}
+
 export interface ICalEventData {
     id?: string | number | null,
     sequence?: number,
@@ -72,6 +78,7 @@ export interface ICalEventData {
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
     lastModified?: ICalDateTimeValue | null,
+    class?: ICalEventClass | null;
     x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
@@ -100,6 +107,7 @@ interface ICalEventInternalData {
     transparency: ICalEventTransparency | null,
     created: ICalDateTimeValue | null,
     lastModified: ICalDateTimeValue | null,
+    class: ICalEventClass | null,
     x: [string, string][];
 }
 
@@ -190,6 +198,7 @@ export default class ICalEvent {
             transparency: null,
             created: null,
             lastModified: null,
+            class: null,
             x: []
         };
 
@@ -222,6 +231,7 @@ export default class ICalEvent {
         data.transparency !== undefined && this.transparency(data.transparency);
         data.created !== undefined && this.created(data.created);
         data.lastModified !== undefined && this.lastModified(data.lastModified);
+        data.class !== undefined && this.class(data.class);
         data.x !== undefined && this.x(data.x);
     }
 
@@ -397,8 +407,14 @@ export default class ICalEvent {
     timezone(): string | null;
 
     /**
-     * Use this method to set your event's timezone using the TZID property parameter on start and end dates,
-     * as per [date-time form #3 in section 3.3.5 of RFC 554](https://tools.ietf.org/html/rfc5545#section-3.3.5).
+     * Sets the time zone to be used for this event. If a time zone has been
+     * defined in both the event and the calendar, the time zone of the event
+     * is used.
+     *
+     * Please note that if the time zone is set, ical-generator assumes
+     * that all times are already in the correct time zone. Alternatively,
+     * a `moment-timezone` or a Luxon object can be passed with `setZone`,
+     * ical-generator will then set the time zone itself.
      *
      * This and the 'floating' flag (see below) are mutually exclusive, and setting a timezone will unset the
      * 'floating' flag.  If neither 'timezone' nor 'floating' are set, the date will be output with in UTC format
@@ -411,6 +427,7 @@ export default class ICalEvent {
      * event.timezone('America/New_York');
      * ```
      *
+     * @see https://github.com/sebbo2002/ical-generator#-date-time--timezones
      * @since 0.2.6
      */
     timezone(timezone: string | null): this;
@@ -422,7 +439,7 @@ export default class ICalEvent {
             return this.calendar.timezone();
         }
 
-        this.data.timezone = timezone ? timezone.toString() : null;
+        this.data.timezone = timezone && timezone !== 'UTC' ? timezone.toString() : null;
         if (this.data.timezone) {
             this.data.floating = false;
         }
@@ -1222,6 +1239,36 @@ export default class ICalEvent {
         return this;
     }
 
+    /**
+     * Get the event's class
+     * @since 2.0.0
+     */
+    class(): ICalEventClass | null;
+
+    /**
+     * Set the event's class
+     *
+     * ```javascript
+     * import ical, { ICalEventClass } from 'ical-generator';
+     * event.class(ICalEventClass.PRIVATE);
+     * ```
+     *
+     * @since 2.0.0
+     */
+    class(class_: ICalEventClass | null): this;
+    class(class_?: ICalEventClass | null): this | ICalEventClass | null {
+        if (class_ === undefined) {
+            return this.data.class;
+        }
+        if (class_ === null) {
+            this.data.class = null;
+            return this;
+        }
+
+        this.data.class = checkEnum(ICalEventClass, class_) as ICalEventClass;
+        return this;
+    }
+
 
     /**
      * Set X-* attributes. Woun't filter double attributes,
@@ -1537,6 +1584,10 @@ export default class ICalEvent {
         // LAST-MODIFIED
         if (this.data.lastModified) {
             g += 'LAST-MODIFIED:' + formatDate(this.calendar.timezone(), this.data.lastModified) + '\r\n';
+        }
+
+        if (this.data.class) {
+            g+= 'CLASS:' + this.data.class.toUpperCase() + '\r\n';
         }
 
         g += 'END:VEVENT\r\n';

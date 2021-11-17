@@ -3,7 +3,7 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 import ICalCalendar from '../src/calendar';
-import ICalEvent, {ICalEventBusyStatus, ICalEventData, ICalEventStatus, ICalEventTransparency} from '../src/event';
+import ICalEvent, {ICalEventBusyStatus, ICalEventClass, ICalEventData, ICalEventStatus, ICalEventTransparency} from '../src/event';
 import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
 import ICalAttendee from '../src/attendee';
 import ICalAlarm, {ICalAlarmType} from '../src/alarm';
@@ -39,6 +39,7 @@ describe('ical-generator Event', function () {
                 transparency: ICalEventTransparency.TRANSPARENT,
                 created: new Date().toJSON(),
                 lastModified: new Date().toJSON(),
+                class: null,
                 x: []
             };
             const event = new ICalEvent(data, new ICalCalendar());
@@ -338,6 +339,18 @@ describe('ical-generator Event', function () {
             e.floating(true);
             e.timezone(null);
             assert.strictEqual(e.floating(), true);
+        });
+
+        it('setting UTC should reset timezone as UTC is the default', function () {
+            const e = new ICalEvent({
+                start: moment(),
+                timezone: 'Europe/Berlin',
+                summary: 'Example Event'
+            }, new ICalCalendar());
+            assert.strictEqual(e.timezone(), 'Europe/Berlin');
+
+            e.timezone('UTC');
+            assert.strictEqual(e.timezone(), null);
         });
     });
 
@@ -1634,6 +1647,59 @@ describe('ical-generator Event', function () {
             assert.throws(function () {
                 e.lastModified('hallo');
             }, /`lastModified`/);
+        });
+    });
+
+    describe('class()', function () {
+        it('getter should return value', function () {
+            const event = new ICalEvent({}, new ICalCalendar());
+            assert.strictEqual(event.class(), null);
+
+            event.class(ICalEventClass.PRIVATE);
+            assert.strictEqual(event.class(), 'PRIVATE');
+
+            event.class(null);
+            assert.strictEqual(event.class(), null);
+        });
+
+        it('setter should return this', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            assert.deepStrictEqual(e, e.class(null));
+            assert.deepStrictEqual(e, e.class(ICalEventClass.PRIVATE));
+        });
+
+        it('setter should allow setting null', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            e.class(ICalEventClass.PRIVATE);
+            e.class(null);
+            assert.strictEqual(e.class(), null);
+        });
+
+        it('setter should allow setting valid value', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            e.class(ICalEventClass.PRIVATE);
+            assert.strictEqual(e.class(), 'PRIVATE');
+            assert.strictEqual(e.class(), ICalEventClass.PRIVATE);
+        });
+
+        it('should throw error when method not allowed', function () {
+            const e = new ICalEvent({}, new ICalCalendar());
+            assert.throws(function () {
+                // @ts-ignore
+                e.class('COOKING');
+            }, /Input must be one of the following: PUBLIC, PRIVATE, CONFIDENTIAL/);
+            assert.throws(function () {
+                // @ts-ignore
+                e.class(Infinity);
+            }, /Input must be one of the following: PUBLIC, PRIVATE, CONFIDENTIAL/);
+            assert.throws(function () {
+                // @ts-ignore
+                e.class(NaN);
+            }, /Input must be one of the following: PUBLIC, PRIVATE, CONFIDENTIAL/);
+            assert.throws(function () {
+                // @ts-ignore
+                e.class(-1);
+            }, /Input must be one of the following: PUBLIC, PRIVATE, CONFIDENTIAL/);
         });
     });
 

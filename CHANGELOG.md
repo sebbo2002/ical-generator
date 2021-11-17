@@ -1,3 +1,27 @@
+# [3.1.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.1.0-develop.1...v3.1.0-develop.2) (2021-11-08)
+
+
+### Features
+
+* **Calendar:** Handle `timezone('UTC')` correctly ([c0745e5](https://github.com/sebbo2002/ical-generator/commit/c0745e50101d3f29e51ddecce7da4a4e445ccc81)), closes [#328](https://github.com/sebbo2002/ical-generator/issues/328)
+* **Event:** Handle `timezone('UTC')` correctly ([781dc3d](https://github.com/sebbo2002/ical-generator/commit/781dc3d67296cef67652e8a97600f7678d6ac191)), closes [#328](https://github.com/sebbo2002/ical-generator/issues/328)
+
+# [3.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.2-develop.2...v3.1.0-develop.1) (2021-11-05)
+
+
+### Features
+
+* **event:** Add support for event class ([a227aa2](https://github.com/sebbo2002/ical-generator/commit/a227aa27d293305e307861149aad3888caf5eafe))
+
+## [3.0.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.0.2-develop.1...v3.0.2-develop.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* Remove Blob usage to support modern browsers ([c4e33d3](https://github.com/sebbo2002/ical-generator/commit/c4e33d3405338f42cc299cc927b851a67a88b3ad)), closes [#325](https://github.com/sebbo2002/ical-generator/issues/325)
+
+## [3.0.2-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.1...v3.0.2-develop.1) (2021-10-08)
+
 ## [3.0.1](https://github.com/sebbo2002/ical-generator/compare/v3.0.0...v3.0.1) (2021-10-01)
 
 

@@ -136,7 +136,8 @@ export function foldLines (input: string): string {
                 ch += line.charAt(++i);
             }
 
-            const charsize = Buffer.from(ch).length;
+            // TextEncoder is available in browsers and node.js >= 11.0.0
+            const charsize = new TextEncoder().encode(ch).length;
             c += charsize;
             if (c > 74) {
                 result += '\r\n ';
