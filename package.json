@@ -33,10 +33,10 @@
     "rrule": "^2.6.8",
     "semantic-release": "^18.0.0",
     "semantic-release-license": "^1.0.2",
-    "source-map-support": "^0.5.20",
+    "source-map-support": "^0.5.21",
     "ts-node": "^10.4.0",
     "typedoc": "^0.22.9",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.2"
   },
   "engines": {
     "node": ">=12.0.0"
