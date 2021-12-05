@@ -82,7 +82,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: 🔐 Login to DockerHub
         uses: docker/login-action@v1
-        if: ${{ env.PUSH_TO_DOCKERHUB == true }}
+        if: ${{ env.PUSH_TO_DOCKERHUB == 'true' }}
         with:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -126,7 +126,7 @@ jobs:
             type=registry,ref=ghcr.io/${{ github.repository }}:latest
           cache-to: type=gha,mode=max
       - name: 🔄 Push container to DockerHub
-        if: ${{ env.PUSH_TO_DOCKERHUB == true }}
+        if: ${{ env.PUSH_TO_DOCKERHUB == 'true' }}
         run: |
           docker pull $SOURCE
           docker tag $SOURCE $TARGET
@@ -190,7 +190,7 @@ jobs:
           IMAGE: ghcr.io/${{ github.repository }}
           DIGEST: ${{ needs.docker-image.outputs.digest }}
       - name: ⬇️ Pull Docker Hub Containers
-        if: ${{ env.PUSH_TO_DOCKERHUB == true }}
+        if: ${{ env.PUSH_TO_DOCKERHUB == 'true' }}
         id: dockerhub
         run: |
           docker pull "${IMAGE}@${DIGEST}"
