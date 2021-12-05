@@ -151,6 +151,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    concurrency: release
     env:
       PUSH_TO_DOCKERHUB: ${{ (github.repository != 'sebbo2002/js-template') && (secrets.DOCKERHUB_TOKEN != null) }}
     needs:
@@ -200,7 +201,6 @@ jobs:
           DIGEST: ${{ needs.docker-image.outputs.digest }}
       - name: 🪄 Run semantic-release
         run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
-        concurrency: release
         env:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
