@@ -1,5 +1,5 @@
 {
-  "author": "Sebastian Pekarek <gineeyaingasiajeipat@e.sebbo.net>",
+  "author": "Sebastian Pekarek <mail@sebbo.net>",
   "bugs": {
     "url": "http://github.com/sebbo2002/ical-generator/issues"
   },
@@ -12,13 +12,13 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.2",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^8.0.2",
+    "@semantic-release/npm": "^8.0.3",
     "@touch4it/ical-timezones": "^1.8.1",
     "@types/luxon": "^2.0.7",
     "@types/mocha": "^9.0.0",
-    "@types/node": "^16.11.6",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "@typescript-eslint/parser": "^5.2.0",
+    "@types/node": "^16.11.11",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "dayjs": "^1.10.7",
     "eslint": "^8.2.0",
     "eslint-plugin-jsonc": "^2.0.0",
@@ -27,16 +27,16 @@
     "mocha": "^9.1.3",
     "mochawesome": "^7.0.1",
     "moment": "^2.29.1",
-    "moment-timezone": "^0.5.33",
+    "moment-timezone": "^0.5.34",
     "nyc": "^15.1.0",
     "portfinder": "^1.0.28",
     "rrule": "^2.6.8",
-    "semantic-release": "^18.0.0",
+    "semantic-release": "^18.0.1",
     "semantic-release-license": "^1.0.2",
-    "source-map-support": "^0.5.20",
+    "source-map-support": "^0.5.21",
     "ts-node": "^10.4.0",
-    "typedoc": "^0.22.7",
-    "typescript": "^4.4.4"
+    "typedoc": "^0.22.9",
+    "typescript": "^4.5.2"
   },
   "engines": {
     "node": ">=12.0.0"
