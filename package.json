@@ -20,7 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
     "dayjs": "^1.10.7",
-    "eslint": "^8.2.0",
+    "eslint": "^8.4.1",
     "eslint-plugin-jsonc": "^2.0.0",
     "license-checker": "^25.0.1",
     "luxon": "^2.1.1",
@@ -35,7 +35,7 @@
     "semantic-release-license": "^1.0.2",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.4.0",
-    "typedoc": "^0.22.9",
+    "typedoc": "^0.22.10",
     "typescript": "^4.5.2"
   },
   "engines": {
