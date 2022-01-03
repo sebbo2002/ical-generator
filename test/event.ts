@@ -1564,6 +1564,13 @@ describe('ical-generator Event', function () {
         });
     });
 
+    describe('createAttachment()', function () {
+        it('should return this', function () {
+            const event = new ICalEvent({}, new ICalCalendar());
+            assert.deepStrictEqual(event.createAttachment('https://files.sebbo.net/calendar/attachments/foo'), event);
+        });
+    });
+
     describe('attachments()', function () {
         it('getter should return an array of strings…', function () {
             const event = new ICalEvent({}, new ICalCalendar());
