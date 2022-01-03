@@ -1,3 +1,10 @@
+# [3.2.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.1.1...v3.2.0-develop.1) (2022-01-03)
+
+
+### Features
+
+* **Events:** Add `createAttachment` / `attachments` ([12a382f](https://github.com/sebbo2002/ical-generator/commit/12a382fedb798460891d327bd9c112b1c97c38ee)), closes [#335](https://github.com/sebbo2002/ical-generator/issues/335)
+
 ## [3.1.1](https://github.com/sebbo2002/ical-generator/compare/v3.1.0...v3.1.1) (2021-12-13)
 
 
