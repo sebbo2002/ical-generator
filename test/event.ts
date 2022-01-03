@@ -36,6 +36,9 @@ describe('ical-generator Event', function () {
                 busystatus: ICalEventBusyStatus.BUSY,
                 priority: 5,
                 url: 'https://github.com/sebbo2002/ical-generator',
+                attachments: [
+                    'https://files.sebbo.net/calendar/attachments/foo'
+                ],
                 transparency: ICalEventTransparency.TRANSPARENT,
                 created: new Date().toJSON(),
                 lastModified: new Date().toJSON(),
@@ -1558,6 +1561,28 @@ describe('ical-generator Event', function () {
 
             event.url('http://github.com/sebbo2002/ical-generator');
             assert.strictEqual(event.url(), 'http://github.com/sebbo2002/ical-generator');
+        });
+    });
+
+    describe('attachments()', function () {
+        it('getter should return an array of strings…', function () {
+            const event = new ICalEvent({}, new ICalCalendar());
+            assert.strictEqual(event.attachments().length, 0);
+
+            event.createAttachment('https://files.sebbo.net/calendar/attachments/foo');
+            assert.strictEqual(event.attachments().length, 1);
+            assert.deepStrictEqual(typeof event.attachments()[0], 'string');
+        });
+
+        it('setter should add url and return this', function () {
+            const event = new ICalEvent({}, new ICalCalendar());
+            const foo = event.attachments([
+                'https://files.sebbo.net/calendar/attachments/foo',
+                'https://files.sebbo.net/calendar/attachments/bar'
+            ]);
+
+            assert.strictEqual(event.attachments().length, 2);
+            assert.deepStrictEqual(foo, event);
         });
     });
 
