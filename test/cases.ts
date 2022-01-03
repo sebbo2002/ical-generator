@@ -38,6 +38,7 @@ describe('ical-generator Cases', function () {
             stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
             summary: 'Sample Event',
             location: 'localhost',
+            transparency: ICalEventTransparency.OPAQUE,
             description: {
                 plain: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop',
                 html: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop</p>'
