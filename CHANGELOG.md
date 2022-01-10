@@ -1,3 +1,10 @@
+# [3.2.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.2.0-develop.1...v3.2.0-develop.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* **Attendee:** Print RSVP also if rsvp is set to false ([27e5166](https://github.com/sebbo2002/ical-generator/commit/27e51668710c3f6eff4c3ad4c5e64028444aca05)), closes [#340](https://github.com/sebbo2002/ical-generator/issues/340)
+
 # [3.2.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.1.1...v3.2.0-develop.1) (2022-01-03)
 
 
