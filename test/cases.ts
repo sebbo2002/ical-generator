@@ -1,14 +1,14 @@
 'use strict';
 
 import assert from 'assert';
-import {promises as fs} from 'fs';
-import ical from '../src';
-import {ICalCalendarMethod} from '../src/calendar';
-import {ICalEventStatus} from '../src/event';
-import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
-import {ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
-import {ICalAlarmType} from '../src/alarm';
-import {getVtimezoneComponent} from '@touch4it/ical-timezones';
+import { promises as fs } from 'fs';
+import ical, { ICalEventTransparency } from '../src';
+import { ICalCalendarMethod } from '../src/calendar';
+import { ICalEventStatus } from '../src/event';
+import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types';
+import { ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType } from '../src/attendee';
+import { ICalAlarmType } from '../src/alarm';
+import { getVtimezoneComponent } from '@touch4it/ical-timezones';
 
 describe('ical-generator Cases', function () {
     it('case #1', async function () {
@@ -38,6 +38,7 @@ describe('ical-generator Cases', function () {
             stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
             summary: 'Sample Event',
             location: 'localhost',
+            transparency: ICalEventTransparency.OPAQUE,
             description: {
                 plain: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop',
                 html: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop</p>'
@@ -70,7 +71,10 @@ describe('ical-generator Cases', function () {
             organizer: 'Sebastian Pekarek <mail@sebbo.net>',
             status: ICalEventStatus.CONFIRMED,
             categories: [{name: 'WORK'}],
-            url: 'http://sebbo.net/'
+            url: 'http://sebbo.net/',
+            attachments: [
+                'https://files.sebbo.net/calendar/attachments/foo'
+            ]
         });
 
         const string = cal.toString();

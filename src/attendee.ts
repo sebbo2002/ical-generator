@@ -545,7 +545,7 @@ export default class ICalAttendee {
         }
 
         // RSVP
-        if (this.data.rsvp) {
+        if (this.data.rsvp !== null) {
             g += ';RSVP=' + this.data.rsvp.toString().toUpperCase();
         }
 

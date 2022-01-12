@@ -20,6 +20,7 @@ GEO:52.50363;13.32865
 ORGANIZER;CN="Sebastian Pekarek":mailto:mail@sebbo.net
 CATEGORIES:WORK
 URL;VALUE=URI:http://sebbo.net/
+ATTACH:https://files.sebbo.net/calendar/attachments/foo
 STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR

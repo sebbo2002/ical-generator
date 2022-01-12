@@ -1,3 +1,17 @@
+# [3.2.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.2.0-develop.1...v3.2.0-develop.2) (2022-01-10)
+
+
+### Bug Fixes
+
+* **Attendee:** Print RSVP also if rsvp is set to false ([27e5166](https://github.com/sebbo2002/ical-generator/commit/27e51668710c3f6eff4c3ad4c5e64028444aca05)), closes [#340](https://github.com/sebbo2002/ical-generator/issues/340)
+
+# [3.2.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.1.1...v3.2.0-develop.1) (2022-01-03)
+
+
+### Features
+
+* **Events:** Add `createAttachment` / `attachments` ([12a382f](https://github.com/sebbo2002/ical-generator/commit/12a382fedb798460891d327bd9c112b1c97c38ee)), closes [#335](https://github.com/sebbo2002/ical-generator/issues/335)
+
 ## [3.1.1](https://github.com/sebbo2002/ical-generator/compare/v3.1.0...v3.1.1) (2021-12-13)
 
 

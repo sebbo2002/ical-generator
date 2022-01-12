@@ -75,6 +75,7 @@ export interface ICalEventData {
     busystatus?: ICalEventBusyStatus | null,
     priority?: number | null,
     url?: string | null,
+    attachments?: string[],
     transparency?: ICalEventTransparency | null,
     created?: ICalDateTimeValue | null,
     lastModified?: ICalDateTimeValue | null,
@@ -104,6 +105,7 @@ interface ICalEventInternalData {
     busystatus: ICalEventBusyStatus | null,
     priority: number | null,
     url: string | null,
+    attachments: string[],
     transparency: ICalEventTransparency | null,
     created: ICalDateTimeValue | null,
     lastModified: ICalDateTimeValue | null,
@@ -133,6 +135,7 @@ export interface ICalEventJSONData {
     busystatus: ICalEventBusyStatus | null,
     priority?: number | null,
     url: string | null,
+    attachments: string[],
     transparency: ICalEventTransparency | null,
     created: string | null,
     lastModified: string | null,
@@ -195,6 +198,7 @@ export default class ICalEvent {
             busystatus: null,
             priority: null,
             url: null,
+            attachments: [],
             transparency: null,
             created: null,
             lastModified: null,
@@ -228,6 +232,7 @@ export default class ICalEvent {
         data.busystatus !== undefined && this.busystatus(data.busystatus);
         data.priority !== undefined && this.priority(data.priority);
         data.url !== undefined && this.url(data.url);
+        data.attachments !== undefined && this.attachments(data.attachments);
         data.transparency !== undefined && this.transparency(data.transparency);
         data.created !== undefined && this.created(data.created);
         data.lastModified !== undefined && this.lastModified(data.lastModified);
@@ -1154,6 +1159,59 @@ export default class ICalEvent {
     }
 
     /**
+     * Adds an attachment to the event by adding the file URL to the calendar.
+     *
+     * `ical-generator` only supports external attachments. File attachments that
+     * are directly included in the file are not supported, because otherwise the
+     * calendar file could easily become unfavourably large.
+     *
+     * ```javascript
+     * const cal = ical();
+     * const event = cal.createEvent();
+     * event.createAttachment('https://files.sebbo.net/calendar/attachments/foo');
+     * ```
+     *
+     * @since 3.2.0-develop.1
+     */
+    createAttachment(url: string): this {
+        this.data.attachments.push(url);
+        return this;
+    }
+
+
+    /**
+     * Get all attachment urls
+     * @since 3.2.0-develop.1
+     */
+    attachments(): string[];
+
+    /**
+     * Add one or multiple alarms
+     *
+     * ```javascript
+     * const event = ical().createEvent();
+     *
+     * cal.attachments([
+     *     'https://files.sebbo.net/calendar/attachments/foo',
+     *     'https://files.sebbo.net/calendar/attachments/bar'
+     * ]);
+     *
+     * cal.attachments(); // --> [string, string]
+     ```
+     *
+     * 3.2.0-develop.1
+     */
+    attachments(attachments: string[]): this;
+    attachments(attachments?: string[]): this | string[] {
+        if (!attachments) {
+            return this.data.attachments;
+        }
+
+        attachments.forEach((attachment: string) => this.createAttachment(attachment));
+        return this;
+    }
+
+    /**
      * Get the event's transparency
      * @since 1.7.3
      */
@@ -1556,6 +1614,13 @@ export default class ICalEvent {
         // URL
         if (this.data.url) {
             g += 'URL;VALUE=URI:' + escape(this.data.url) + '\r\n';
+        }
+
+        // ATTACHMENT
+        if (this.data.attachments.length > 0) {
+            this.data.attachments.forEach(url => {
+                g += 'ATTACH:' + escape(url) + '\r\n';
+            });
         }
 
         // STATUS
