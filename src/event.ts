@@ -753,7 +753,7 @@ export default class ICalEvent {
         ) {
             throw new Error(
                 '`location` isn\'t formatted correctly. See https://sebbo2002.github.io/ical-generator/'+
-                'develop/reference/classes/icalevent.html#location'
+                'develop/reference/classes/ICalEvent.html#location'
             );
         }
 
