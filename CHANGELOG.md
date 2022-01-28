@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/sebbo2002/ical-generator/compare/v3.2.0...v3.2.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* Update error URLs ([2628464](https://github.com/sebbo2002/ical-generator/commit/262846466808a043b4b241a17b38503c7949e78f)), closes [#343](https://github.com/sebbo2002/ical-generator/issues/343)
+
 ## [3.2.1-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.2.0...v3.2.1-develop.1) (2022-01-18)
 
 
