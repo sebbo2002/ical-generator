@@ -239,13 +239,13 @@ export function checkNameAndMail (attribute: string, value: string | ICalOrganiz
     if (!result && typeof value === 'string') {
         throw new Error(
             '`' + attribute + '` isn\'t formated correctly. See https://sebbo2002.github.io/ical-generator/develop/'+
-            'reference/interfaces/icalorganizer.html'
+            'reference/interfaces/ICalOrganizer.html'
         );
     }
     else if (!result) {
         throw new Error(
             '`' + attribute + '` needs to be a valid formed string or an object. See https://sebbo2002.github.io/'+
-            'ical-generator/develop/reference/interfaces/icalorganizer.html'
+            'ical-generator/develop/reference/interfaces/ICalOrganizer.html'
         );
     }
 
