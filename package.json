@@ -12,20 +12,20 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^9.0.0",
+    "@semantic-release/npm": "^9.0.1",
     "@touch4it/ical-timezones": "^1.8.1",
     "@types/luxon": "^2.0.9",
     "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.18",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
-    "dayjs": "^1.10.7",
+    "dayjs": "^1.10.8",
     "eslint": "^8.9.0",
     "eslint-plugin-jsonc": "^2.2.1",
     "license-checker": "^25.0.1",
-    "luxon": "^2.3.0",
+    "luxon": "^2.3.1",
     "mocha": "^9.2.1",
-    "mochawesome": "^7.0.1",
+    "mochawesome": "^7.1.1",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.34",
     "nyc": "^15.1.0",
@@ -36,7 +36,7 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.5.0",
     "typedoc": "^0.22.12",
-    "typescript": "^4.5.5"
+    "typescript": "^4.6.2"
   },
   "engines": {
     "node": ">=12.0.0"
