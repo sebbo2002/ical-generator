@@ -1,3 +1,10 @@
+# [3.3.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.2.1...v3.3.0-develop.1) (2022-03-19)
+
+
+### Features
+
+* Add Support for Sent By ([9aac3e0](https://github.com/sebbo2002/ical-generator/commit/9aac3e0e5e0bb54b1400da8ef42e1544f033a72a)), closes [#358](https://github.com/sebbo2002/ical-generator/issues/358)
+
 ## [3.2.1](https://github.com/sebbo2002/ical-generator/compare/v3.2.0...v3.2.1) (2022-01-28)
 
 
