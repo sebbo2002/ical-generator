@@ -3,7 +3,12 @@
 import assert from 'assert';
 import ICalCalendar from '../src/calendar';
 import ICalEvent from '../src/event';
-import ICalAttendee, {ICalAttendeeData, ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType} from '../src/attendee';
+import ICalAttendee, {
+    ICalAttendeeData,
+    ICalAttendeeRole,
+    ICalAttendeeStatus,
+    ICalAttendeeType
+} from '../src/attendee';
 
 describe('ical-generator Attendee', function () {
     describe('constructor()', function () {
@@ -12,6 +17,7 @@ describe('ical-generator Attendee', function () {
                 name: 'John Doe',
                 email: 'john@example.org',
                 mailto: 'john+calendar@example.org',
+                sentBy: null,
                 status: ICalAttendeeStatus.ACCEPTED,
                 role: ICalAttendeeRole.REQ,
                 rsvp: false,
@@ -27,7 +33,7 @@ describe('ical-generator Attendee', function () {
         it('shouldn\'t work without event reference', function () {
             assert.throws(function () {
                 // @ts-ignore
-                new ICalAttendee({email: 'foo@bar.com'});
+                new ICalAttendee({ email: 'foo@bar.com' });
             }, /`event`/);
         });
     });
@@ -70,7 +76,7 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should change something', function () {
-            const a = new ICalAttendee({email: 'mail@example.com'}, new ICalEvent({}, new ICalCalendar()));
+            const a = new ICalAttendee({ email: 'mail@example.com' }, new ICalEvent({}, new ICalCalendar()));
             assert.ok(a.toString().indexOf('mail@example.com') > -1);
         });
     });
@@ -91,12 +97,29 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should change mailto and keep email if present', function () {
-            const a = new ICalAttendee({email: 'mail@example.com'}, new ICalEvent({}, new ICalCalendar()));
+            const a = new ICalAttendee({ email: 'mail@example.com' }, new ICalEvent({}, new ICalCalendar()));
             a.mailto('mail2@example2.com');
             assert.ok(
                 a.toString().indexOf('EMAIL=mail@example.com') > -1 &&
                 a.toString().indexOf('MAILTO:mail2@example2.com') > -1
             );
+        });
+    });
+
+    describe('sentBy()', function () {
+        it('getter should return value', function () {
+            const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar())).sentBy('foo@example.com');
+            assert.strictEqual(a.sentBy(), 'foo@example.com');
+        });
+
+        it('setter should return this', function () {
+            const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar()));
+            assert.deepStrictEqual(a, a.sentBy('foo@example.com'));
+        });
+
+        it('should change something', function () {
+            const a = new ICalAttendee({ email: 'foo@example.com', sentBy: 'bar@example.com' }, new ICalEvent({}, new ICalCalendar()));
+            assert.ok(a.toString().includes('bar@example.com'));
         });
     });
 
@@ -136,8 +159,8 @@ describe('ical-generator Attendee', function () {
         });
     });
 
-    describe('rsvp()', function() {
-        it('setter should return this', function() {
+    describe('rsvp()', function () {
+        it('setter should return this', function () {
             const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar()));
             assert.deepStrictEqual(a, a.rsvp(null));
             assert.deepStrictEqual(a, a.rsvp(true));
@@ -153,7 +176,7 @@ describe('ical-generator Attendee', function () {
             assert.strictEqual(a.rsvp(), false);
         });
 
-        it('getter should return value', function() {
+        it('getter should return value', function () {
             const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar()));
             assert.strictEqual(a.rsvp(), null);
             a.rsvp(false);
@@ -162,8 +185,11 @@ describe('ical-generator Attendee', function () {
             assert.strictEqual(a.rsvp(), null);
         });
 
-        it('should change something', function() {
-            const a = new ICalAttendee({email: 'mail@example.com', rsvp: true}, new ICalEvent({}, new ICalCalendar()));
+        it('should change something', function () {
+            const a = new ICalAttendee({
+                email: 'mail@example.com',
+                rsvp: true
+            }, new ICalEvent({}, new ICalCalendar()));
             assert.ok(a.toString().indexOf(';RSVP=TRUE') > -1);
         });
     });
@@ -196,7 +222,7 @@ describe('ical-generator Attendee', function () {
 
         it('should change something', function () {
             const a = new ICalAttendee(
-                {email: 'mail@example.com', status: ICalAttendeeStatus.DECLINED},
+                { email: 'mail@example.com', status: ICalAttendeeStatus.DECLINED },
                 new ICalEvent({}, new ICalCalendar())
             );
             assert.ok(a.toString().indexOf('DECLINED') > -1);
@@ -204,7 +230,7 @@ describe('ical-generator Attendee', function () {
 
         it('should change something too', function () {
             const a = new ICalAttendee(
-                {email: 'mail@example.com', status: ICalAttendeeStatus.NEEDSACTION},
+                { email: 'mail@example.com', status: ICalAttendeeStatus.NEEDSACTION },
                 new ICalEvent({}, new ICalCalendar())
             );
             assert.ok(a.toString().indexOf('NEEDS-ACTION') > -1);
@@ -294,7 +320,10 @@ describe('ical-generator Attendee', function () {
         });
 
         it('should change something', function () {
-            const a = new ICalAttendee({email: 'mail@example.com', delegatedFrom: 'foo@example.com'}, new ICalEvent({}, new ICalCalendar()));
+            const a = new ICalAttendee({
+                email: 'mail@example.com',
+                delegatedFrom: 'foo@example.com'
+            }, new ICalEvent({}, new ICalCalendar()));
             assert.ok(a.toString().indexOf('foo@example.com') > -1);
         });
     });
@@ -307,14 +336,14 @@ describe('ical-generator Attendee', function () {
 
         it('should reuse the same ICalAttendee instance if passed', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const attendee = new ICalAttendee({name: 'Muh'}, event);
+            const attendee = new ICalAttendee({ name: 'Muh' }, event);
 
             assert.deepStrictEqual(new ICalAttendee({}, event).delegatesTo(attendee), attendee);
         });
 
         it('should pass data to instance', function () {
-            const attendee = new ICalAttendee({name: 'Zac'}, new ICalEvent({}, new ICalCalendar()))
-                .delegatesTo({name: 'Cody'});
+            const attendee = new ICalAttendee({ name: 'Zac' }, new ICalEvent({}, new ICalCalendar()))
+                .delegatesTo({ name: 'Cody' });
 
             assert.strictEqual(attendee.name(), 'Cody');
         });
@@ -328,27 +357,27 @@ describe('ical-generator Attendee', function () {
 
         it('should reuse the same ICalAttendee instance if passed', function () {
             const event = new ICalEvent({}, new ICalCalendar());
-            const attendee = new ICalAttendee({name: 'Muh'}, event);
+            const attendee = new ICalAttendee({ name: 'Muh' }, event);
 
             assert.deepStrictEqual(new ICalAttendee({}, event).delegatesFrom(attendee), attendee);
         });
 
         it('should pass data to instance', function () {
-            const a = new ICalAttendee({name: 'Zac'}, new ICalEvent({}, new ICalCalendar())).delegatesFrom({name: 'Cody'});
+            const a = new ICalAttendee({ name: 'Zac' }, new ICalEvent({}, new ICalCalendar())).delegatesFrom({ name: 'Cody' });
             assert.strictEqual(a.name(), 'Cody');
         });
     });
 
     describe('x()', function () {
         it('works as expected', function () {
-            const a = new ICalAttendee({email: 'foo@example.org'}, new ICalEvent({}, new ICalCalendar()));
+            const a = new ICalAttendee({ email: 'foo@example.org' }, new ICalEvent({}, new ICalCalendar()));
             assert.deepStrictEqual(a, a.x('X-NUM-GUESTS', '5'));
             assert.ok(a.toString().includes('ATTENDEE;ROLE=REQ-PARTICIPANT;X-NUM-GUESTS=5:MAILTO:foo@example.org'));
         });
     });
 
     describe('toJSON()', function () {
-        it('should work', function() {
+        it('should work', function () {
             const a = new ICalAttendee({}, new ICalEvent({}, new ICalCalendar()));
             a.name('Max Mustermann');
             a.delegatesTo('Moritz <moritz@example.com>');
@@ -358,6 +387,7 @@ describe('ical-generator Attendee', function () {
                 delegatedTo: 'moritz@example.com',
                 email: null,
                 mailto: null,
+                sentBy: null,
                 name: 'Max Mustermann',
                 role: 'REQ-PARTICIPANT',
                 rsvp: null,
@@ -375,7 +405,7 @@ describe('ical-generator Attendee', function () {
 
     describe('generate()', function () {
         it('should throw an error without email', function () {
-            const a = new ICalAttendee({name: 'Testuser'}, new ICalEvent({}, new ICalCalendar()));
+            const a = new ICalAttendee({ name: 'Testuser' }, new ICalEvent({}, new ICalCalendar()));
             assert.throws(function () {
                 a.toString();
             }, /`email`/);

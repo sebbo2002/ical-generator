@@ -232,7 +232,8 @@ export function checkNameAndMail (attribute: string, value: string | ICalOrganiz
         result = {
             name: value.name,
             email: value.email,
-            mailto: value.mailto
+            mailto: value.mailto,
+            sentBy: value.sentBy
         };
     }
 

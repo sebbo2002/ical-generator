@@ -823,13 +823,14 @@ export default class ICalEvent {
      * event.organizer('Organizer\'s Name <organizer@example.com>');
      * ```
      *
-     * You can also add an explicit `mailto` email address.
+     * You can also add an explicit `mailto` email address or or the sentBy address.
      *
      * ```javascript
      *     event.organizer({
      *    name: 'Organizer\'s Name',
      *    email: 'organizer@example.com',
-     *    mailto: 'explicit@mailto.com'
+     *    mailto: 'explicit@mailto.com',
+     *    sentBy: 'substitute@example.com'
      * })
      * ```
      *
@@ -1585,6 +1586,9 @@ export default class ICalEvent {
         if (this.data.organizer) {
             g += 'ORGANIZER;CN="' + escape(this.data.organizer.name) + '"';
 
+            if (this.data.organizer.sentBy) {
+                g += ';SENT-BY="mailto:' + escape(this.data.organizer.sentBy) + '"';
+            }
             if (this.data.organizer.email && this.data.organizer.mailto) {
                 g += ';EMAIL=' + escape(this.data.organizer.email);
             }
