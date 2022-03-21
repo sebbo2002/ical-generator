@@ -41,6 +41,7 @@ export interface ICalOrganizer {
     name: string;
     email?: string;
     mailto?: string;
+    sentBy?: string;
 }
 
 export interface ICalDescription {

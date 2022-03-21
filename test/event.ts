@@ -1209,14 +1209,31 @@ describe('ical-generator Event', function () {
             assert.deepStrictEqual(event.organizer(), {
                 name: 'Sebastian Pekarek',
                 email: 'mail@example.com',
-                mailto: undefined
+                mailto: undefined,
+                sentBy: undefined
             });
 
             event.organizer({name: 'Sebastian Pekarek', email: 'mail@example.com', mailto: 'mail2@example2.com'});
             assert.deepStrictEqual(event.organizer(), {
                 name: 'Sebastian Pekarek',
                 email: 'mail@example.com',
-                mailto: 'mail2@example2.com'
+                mailto: 'mail2@example2.com',
+                sentBy: undefined
+            });
+        });
+
+        it('should support sent by when using object', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event'
+            }, new ICalCalendar());
+
+            event.organizer({name: 'Sebastian Pekarek', email: 'mail@example.com', sentBy: 'bot@example.com'});
+            assert.deepStrictEqual(event.organizer(), {
+                name: 'Sebastian Pekarek',
+                email: 'mail@example.com',
+                mailto: undefined,
+                sentBy: 'bot@example.com'
             });
         });
 
@@ -1267,7 +1284,8 @@ describe('ical-generator Event', function () {
             assert.deepStrictEqual(event.organizer(), {
                 name: 'Sebastian Pekarek',
                 email: undefined,
-                mailto: undefined
+                mailto: undefined,
+                sentBy: undefined
             });
         });
     });
