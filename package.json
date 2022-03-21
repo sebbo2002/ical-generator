@@ -60,6 +60,7 @@
   ],
   "license": "MIT",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "name": "ical-generator",
   "peerDependencies": {
     "@touch4it/ical-timezones": ">=1.6.0",
