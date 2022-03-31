@@ -12,6 +12,8 @@ const configuration = {
 
 configuration.plugins.push(['@semantic-release/commit-analyzer', {
     'releaseRules': [
+        {'type': 'chore', 'scope': 'deps', 'release': 'patch'},
+        {'type': 'chore', 'scope': 'package', 'release': 'patch'},
         {'type': 'build', 'scope': 'deps', 'release': 'patch'},
         {'type': 'docs', 'release': 'patch'}
     ]
