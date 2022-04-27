@@ -1545,55 +1545,58 @@ export default class ICalEvent {
         }
 
         // SUMMARY
-        g += 'SUMMARY:' + escape(this.data.summary) + '\r\n';
+        g += 'SUMMARY:' + escape(this.data.summary, false) + '\r\n';
 
         // TRANSPARENCY
         if (this.data.transparency) {
-            g += 'TRANSP:' + escape(this.data.transparency) + '\r\n';
+            g += 'TRANSP:' + escape(this.data.transparency, false) + '\r\n';
         }
 
         // LOCATION
         if (this.data.location?.title) {
             g += 'LOCATION:' + escape(
                 this.data.location.title +
-                (this.data.location.address ? '\n' + this.data.location.address : '')
+                (this.data.location.address ? '\n' + this.data.location.address : ''),
+                false
             ) + '\r\n';
 
             if (this.data.location.radius && this.data.location.geo) {
                 g += 'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;' +
-                    (this.data.location.address ? 'X-ADDRESS=' + escape(this.data.location.address) + ';' : '') +
-                    'X-APPLE-RADIUS=' + escape(this.data.location.radius) + ';' +
-                    'X-TITLE=' + escape(this.data.location.title) +
-                    ':geo:' + escape(this.data.location.geo?.lat) + ',' + escape(this.data.location.geo?.lon) + '\r\n';
+                    (this.data.location.address ? 'X-ADDRESS=' + escape(this.data.location.address, false) + ';' : '') +
+                    'X-APPLE-RADIUS=' + escape(this.data.location.radius, false) + ';' +
+                    'X-TITLE=' + escape(this.data.location.title, false) +
+                    ':geo:' + escape(this.data.location.geo?.lat, false) + ',' +
+                    escape(this.data.location.geo?.lon, false) + '\r\n';
             }
 
             if (this.data.location.geo) {
-                g += 'GEO:' + escape(this.data.location.geo?.lat) + ';' + escape(this.data.location.geo?.lon) + '\r\n';
+                g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
+                    escape(this.data.location.geo?.lon, false) + '\r\n';
             }
         }
 
         // DESCRIPTION
         if (this.data.description) {
-            g += 'DESCRIPTION:' + escape(this.data.description.plain) + '\r\n';
+            g += 'DESCRIPTION:' + escape(this.data.description.plain, false) + '\r\n';
 
             // HTML DESCRIPTION
             if (this.data.description.html) {
-                g += 'X-ALT-DESC;FMTTYPE=text/html:' + escape(this.data.description.html) + '\r\n';
+                g += 'X-ALT-DESC;FMTTYPE=text/html:' + escape(this.data.description.html, false) + '\r\n';
             }
         }
 
         // ORGANIZER
         if (this.data.organizer) {
-            g += 'ORGANIZER;CN="' + escape(this.data.organizer.name) + '"';
+            g += 'ORGANIZER;CN="' + escape(this.data.organizer.name, true) + '"';
 
             if (this.data.organizer.sentBy) {
-                g += ';SENT-BY="mailto:' + escape(this.data.organizer.sentBy) + '"';
+                g += ';SENT-BY="mailto:' + escape(this.data.organizer.sentBy, true) + '"';
             }
             if (this.data.organizer.email && this.data.organizer.mailto) {
-                g += ';EMAIL=' + escape(this.data.organizer.email);
+                g += ';EMAIL=' + escape(this.data.organizer.email, false);
             }
             if(this.data.organizer.email) {
-                g += ':mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email);
+                g += ':mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email, false);
             }
             g += '\r\n';
         }
@@ -1617,13 +1620,13 @@ export default class ICalEvent {
 
         // URL
         if (this.data.url) {
-            g += 'URL;VALUE=URI:' + escape(this.data.url) + '\r\n';
+            g += 'URL;VALUE=URI:' + escape(this.data.url, false) + '\r\n';
         }
 
         // ATTACHMENT
         if (this.data.attachments.length > 0) {
             this.data.attachments.forEach(url => {
-                g += 'ATTACH:' + escape(url) + '\r\n';
+                g += 'ATTACH:' + escape(url, false) + '\r\n';
             });
         }
 
