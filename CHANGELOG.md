@@ -1,3 +1,10 @@
+## [3.4.2](https://github.com/sebbo2002/ical-generator/compare/v3.4.1...v3.4.2) (2022-04-28)
+
+
+### Bug Fixes
+
+* Do not escape quotes when not required ([08a4d62](https://github.com/sebbo2002/ical-generator/commit/08a4d626045c586302792b112c35496dd676af1d)), closes [#377](https://github.com/sebbo2002/ical-generator/issues/377)
+
 ## [3.4.2-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.4.2-develop.2...v3.4.2-develop.3) (2022-04-28)
 
 ## [3.4.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.4.2-develop.1...v3.4.2-develop.2) (2022-04-27)
