@@ -181,4 +181,33 @@ describe('Issues', function () {
             ].join('\r\n'));
         });
     });
+
+    describe('Issue #377', function () {
+        it('should not escape quotes in summary', function () {
+            const calendar = ical({
+                events: [
+                    {
+                        id: 'foo',
+                        start: new Date('2020-08-13T00:00:00-05:00'),
+                        stamp: new Date('2020-08-13T00:00:00-05:00'),
+                        summary:'My "quoted" string'
+                    }
+                ]
+            });
+
+            assert.strictEqual(calendar.toString(), [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//sebbo.net//ical-generator//EN',
+                'BEGIN:VEVENT',
+                'UID:foo',
+                'SEQUENCE:0',
+                'DTSTAMP:20200813T050000Z',
+                'DTSTART:20200813T050000Z',
+                'SUMMARY:My "quoted" string',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n'));
+        });
+    });
 });

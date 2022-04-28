@@ -592,22 +592,22 @@ export default class ICalAttendee {
 
         // CN / Name
         if (this.data.name) {
-            g += ';CN="' + escape(this.data.name) + '"';
+            g += ';CN="' + escape(this.data.name, true) + '"';
         }
 
         // EMAIL
         if (this.data.email && this.data.mailto) {
-            g += ';EMAIL=' + escape(this.data.email);
+            g += ';EMAIL=' + escape(this.data.email, false);
         }
 
         // CUSTOM X ATTRIBUTES
         if(this.data.x.length) {
             g += ';' + this.data.x
-                .map(([key, value]) => key.toUpperCase() + '=' + escape(value))
+                .map(([key, value]) => key.toUpperCase() + '=' + escape(value, false))
                 .join(';');
         }
 
-        g += ':MAILTO:' + escape(this.data.mailto || this.data.email) + '\r\n';
+        g += ':MAILTO:' + escape(this.data.mailto || this.data.email, false) + '\r\n';
 
         return g;
     }

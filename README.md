@@ -38,13 +38,16 @@ to generate subscriptionable calendar feeds.
 ## ⚡️ Quick Start
 
 ```javascript
-import ical from 'ical-generator';
-import http from 'http';
+const ical = require('ical-generator');
+const http = require('http');
 
 const calendar = ical({name: 'my first iCal'});
+const startTime = new Date();
+const endTime = new Date();
+endTime.setHours(startTime.getHours()+1);
 calendar.createEvent({
-    start: moment(),
-    end: moment().add(1, 'hour'),
+    start: startTime,
+    end: endTime,
     summary: 'Example Event',
     description: 'It works ;)',
     location: 'my room',
@@ -56,6 +59,7 @@ http.createServer((req, res) => calendar.serve(res))
         console.log('Server running at http://127.0.0.1:3000/');
     });
 ```
+See the [examples](./examples) folder for more examples.
 
 ## 📑 API-Reference
 
@@ -69,8 +73,8 @@ http.createServer((req, res) => calendar.serve(res))
 ## 🕒 Date, Time & Timezones
 
 ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
-[moment.js](https://momentjs.com/) (and [moment-timezone](https://momentjs.com/timezone/), [Day.js](https://day.js.org/en/) and
-[Luxon's](https://moment.github.io/luxon/) [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
+[Day.js](https://day.js.org/en/), [Luxon's](https://moment.github.io/luxon/) [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
+and the older [moment.js](https://momentjs.com/) and [moment-timezone](https://momentjs.com/timezone/)
 objects. You can also pass a string which is then passed to javascript's `Date` internally.
 
 It is recommended to use UTC time as far as possible. `ical-generator` will output all time information as UTC time as

@@ -115,8 +115,8 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
 /**
  * Escapes special characters in the given string
  */
-export function escape (str: string | unknown): string {
-    return String(str).replace(/[\\;,"]/g, function (match) {
+export function escape (str: string | unknown, inQuotes: boolean): string {
+    return String(str).replace(inQuotes ? /[\\;,"]/g : /[\\;,]/g, function (match) {
         return '\\' + match;
     }).replace(/(?:\r\n|\r|\n)/g, '\\n');
 }
@@ -198,7 +198,7 @@ export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrAr
 
 export function generateCustomAttributes (data: {x: [string, string][]}): string {
     const str = data.x
-        .map(([key, value]) => key.toUpperCase() + ':' + escape(value))
+        .map(([key, value]) => key.toUpperCase() + ':' + escape(value, false))
         .join('\r\n');
     return str.length ? str + '\r\n' : '';
 }

@@ -93,6 +93,6 @@ export default class ICalCategory {
             throw new Error('No value for `name` in ICalCategory given!');
         }
 
-        return escape(this.data.name);
+        return escape(this.data.name, false);
     }
 }

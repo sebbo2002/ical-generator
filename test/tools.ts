@@ -162,38 +162,50 @@ describe('ICalTools', function () {
     describe('escape()', function () {
         it('should escape \\', function () {
             assert.strictEqual(
-                escape('Lorem \\ipsum'),
+                escape('Lorem \\ipsum', false),
                 'Lorem \\\\ipsum'
             );
         });
         it('should escape ;', function () {
             assert.strictEqual(
-                escape('Lorem ;ipsum'),
+                escape('Lorem ;ipsum', false),
                 'Lorem \\;ipsum'
             );
         });
         it('should escape ,', function () {
             assert.strictEqual(
-                escape('Lorem, ipsum'),
+                escape('Lorem, ipsum', false),
                 'Lorem\\, ipsum'
             );
         });
         it('should escape \\r', function () {
             assert.strictEqual(
-                escape('Lorem \ripsum'),
+                escape('Lorem \ripsum', false),
                 'Lorem \\nipsum'
             );
         });
         it('should escape \\n', function () {
             assert.strictEqual(
-                escape('Lorem \nipsum'),
+                escape('Lorem \nipsum', false),
                 'Lorem \\nipsum'
             );
         });
         it('should escape \\r\\n', function () {
             assert.strictEqual(
-                escape('Lorem \r\nipsum'),
+                escape('Lorem \r\nipsum', false),
                 'Lorem \\nipsum'
+            );
+        });
+        it('should escape " in text when inQuotes = true', function () {
+            assert.strictEqual(
+                escape('Lorem "ipsum', true),
+                'Lorem \\"ipsum'
+            );
+        });
+        it('should not escape " in text when inQuotes = false', function () {
+            assert.strictEqual(
+                escape('Lorem "ipsum', false),
+                'Lorem "ipsum'
             );
         });
     });
