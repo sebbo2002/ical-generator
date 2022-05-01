@@ -1,0 +1,12 @@
+name: is-semantic-pr
+on:
+  - pull_request
+
+jobs:
+  is-semantic-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🤖 is-semantic-release
+        uses: sebbo2002/action-is-semantic-pr@develop
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
