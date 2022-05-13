@@ -5,7 +5,7 @@ on:
     - cron: '15 8 * * 3'
 
 jobs:
-  release-bot:
+  TemplateUpdater:
     runs-on: ubuntu-latest
     if: ${{ github.repository != 'sebbo2002/js-template' }}
     steps:

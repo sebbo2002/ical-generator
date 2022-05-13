@@ -220,9 +220,17 @@ jobs:
           cache-to: type=gha,mode=max
       - name: 🪄 Build and push (2/2; Summary)
         if: always()
+        id: docker-build-2
         run: |
-          if ${{ steps.docker-build-2-1.outcome=='success' || steps.docker-build-2-2.outcome=='success' || steps.docker-build-2-3.outcome=='success' }}; then
-             echo "🎉 Whoop whoop, that worked…"
+          if ${{ steps.docker-build-2-1.outcome=='success' }}; then
+             echo "🎉 Whoop whoop, that worked (first try)"
+             echo "::set-output name=digest::${{ steps.docker-build-2-1.outputs.digest=='success' }}"
+          elif ${{ steps.docker-build-2-2.outcome=='success' }}; then
+             echo "🎉 Whoop whoop, that worked (second try)"
+             echo "::set-output name=digest::${{ steps.docker-build-2-2.outputs.digest=='success' }}"
+          elif ${{ steps.docker-build-2-3.outcome=='success' }}; then
+             echo "🎉 Whoop whoop, that worked (third try)"
+             echo "::set-output name=digest::${{ steps.docker-build-2-3.outputs.digest=='success' }}"
           else
              exit 1
           fi
@@ -247,7 +255,7 @@ jobs:
         env:
           IMAGE: ghcr.io/${{ github.repository }}:${{ github.sha }}
     outputs:
-      digest: ${{ steps.docker-build-2-1.outputs.digest || steps.docker-build-2-2.outputs.digest || steps.docker-build-2-3.outputs.digest }}
+      digest: ${{ steps.docker-build-2.outputs.digest }}
 
   release:
     name: Release
