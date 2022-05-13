@@ -224,13 +224,13 @@ jobs:
         run: |
           if ${{ steps.docker-build-2-1.outcome=='success' }}; then
              echo "🎉 Whoop whoop, that worked (first try)"
-             echo "::set-output name=digest::${{ steps.docker-build-2-1.outputs.digest=='success' }}"
+             echo "::set-output name=digest::${{ steps.docker-build-2-1.outputs.digest }}"
           elif ${{ steps.docker-build-2-2.outcome=='success' }}; then
              echo "🎉 Whoop whoop, that worked (second try)"
-             echo "::set-output name=digest::${{ steps.docker-build-2-2.outputs.digest=='success' }}"
+             echo "::set-output name=digest::${{ steps.docker-build-2-2.outputs.digest }}"
           elif ${{ steps.docker-build-2-3.outcome=='success' }}; then
              echo "🎉 Whoop whoop, that worked (third try)"
-             echo "::set-output name=digest::${{ steps.docker-build-2-3.outputs.digest=='success' }}"
+             echo "::set-output name=digest::${{ steps.docker-build-2-3.outputs.digest }}"
           else
              exit 1
           fi
