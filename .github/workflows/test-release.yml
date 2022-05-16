@@ -70,6 +70,11 @@ jobs:
       - tests
       - license-checker
     if: ${{ github.repository != 'sebbo2002/js-template' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      packages: write
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v3
@@ -85,7 +90,7 @@ jobs:
         run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
         env:
           GH_REPO: ${{ github.repository }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_OWNER: ${{ github.repository_owner }}
           PUBLIC_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
           NPM_USERNAME: ${{ github.repository_owner }}
