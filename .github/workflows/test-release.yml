@@ -75,6 +75,7 @@ jobs:
       issues: write
       pull-requests: write
       packages: write
+      pages: write
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v3
