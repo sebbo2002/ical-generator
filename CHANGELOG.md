@@ -1,3 +1,10 @@
+## [3.4.4-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.1...v3.4.4-develop.2) (2022-05-19)
+
+
+### Reverts
+
+* Revert "ci: Remove GH_TOKEN and use GITHUB_TOKEN" ([b5c2eb6](https://github.com/sebbo2002/ical-generator/commit/b5c2eb66170b38bda1e49ad5bb5cf02bd13eb8e4))
+
 ## [3.4.4-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.4.3...v3.4.4-develop.1) (2022-05-19)
 
 ## [3.4.3](https://github.com/sebbo2002/ical-generator/compare/v3.4.2...v3.4.3) (2022-05-14)
