@@ -70,12 +70,6 @@ jobs:
       - tests
       - license-checker
     if: ${{ github.repository != 'sebbo2002/js-template' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
-      packages: write
-      pages: write
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v3
@@ -91,7 +85,7 @@ jobs:
         run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
         env:
           GH_REPO: ${{ github.repository }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_OWNER: ${{ github.repository_owner }}
           PUBLIC_NPM_CONFIG_REGISTRY: https://registry.npmjs.org
           NPM_USERNAME: ${{ github.repository_owner }}
@@ -100,7 +94,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: everlytic/branch-merge@1.1.2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           source_ref: 'main'
           target_branch: 'develop'
           commit_message_template: 'Merge branch {source_ref} into {target_branch} [skip ci]'
