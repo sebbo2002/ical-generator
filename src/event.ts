@@ -932,11 +932,11 @@ export default class ICalEvent {
      * ```javascript
      * const cal = ical();
      * const event = cal.createEvent();
-     * const alarm = event.createAlarm({type: 'display', trigger: 300});
+     * const alarm = event.createAlarm({type: ICalAlarmType.display, trigger: 300});
      *
      * // add another alarm
      * event.createAlarm({
-     *     type: 'audio',
+     *     type: ICalAlarmType.audio,
      *     trigger: 300, // 5min before event
      * });
      * ```
@@ -963,8 +963,8 @@ export default class ICalEvent {
      * const event = ical().createEvent();
      *
      * cal.alarms([
-     *     {type: 'display', trigger: 600},
-     *     {type: 'audio', trigger: 300}
+     *     {type: ICalAlarmType.display, trigger: 600},
+     *     {type: ICalAlarmType.audio, trigger: 300}
      * ]);
      *
      * cal.alarms(); // --> [ICalAlarm, ICalAlarm]
