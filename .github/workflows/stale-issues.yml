@@ -6,11 +6,14 @@ on:
 jobs:
   stale:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
     steps:
       - name: 🧹 Cleanup issues & pull requests
         uses: actions/stale@v5
         with:
-          repo-token: ${{ secrets.GH_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-issue-message: |
             This issue has been automatically marked as stale because it has not had recent activity :sleeping:
             It will be closed in 14 days if no further activity occurs. To unstale this issue, add a comment with detailed explanation.
