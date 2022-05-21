@@ -13,7 +13,7 @@ jobs:
     if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main'
     strategy:
       matrix:
-        node: [12.x, 14.x, 16.x]
+        node: [14.x, 16.x, 18.x]
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v3
