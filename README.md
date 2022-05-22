@@ -12,9 +12,8 @@
         <img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" />
     </a>
     <a href="https://github.com/sebbo2002/ical-generator/actions">
-        <img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square" alt="CI Status" />
+        <img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Test%20%26%20Release?style=flat-square" alt="CI Status" />
     </a>
-    <img src="https://img.shields.io/david/sebbo2002/ical-generator?style=flat-square" alt="Dependency Status" />
 </p>
 
 <br />
