@@ -1,6 +1,8 @@
 name: is-semantic-pr
 on:
-  - pull_request
+  pull_request:
+    branches-ignore:
+      - depfu/batch_dev/**
 
 jobs:
   is-semantic-release:
