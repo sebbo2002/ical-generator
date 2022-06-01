@@ -1,12 +1,11 @@
 name: is-semantic-pr
 on:
-  pull_request:
-    branches-ignore:
-      - depfu/batch_dev/**
+  pull_request: null
 
 jobs:
   is-semantic-release:
     runs-on: ubuntu-latest
+    if: ${{ startsWith(github.head_ref, 'depfu/batch_dev/') != true }}
     steps:
       - name: 🤖 is-semantic-release
         uses: sebbo2002/action-is-semantic-pr@develop
