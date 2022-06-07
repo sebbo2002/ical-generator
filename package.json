@@ -20,8 +20,8 @@
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "dayjs": "^1.11.2",
-    "eslint": "^8.15.0",
-    "eslint-plugin-jsonc": "^2.2.1",
+    "eslint": "^8.16.0",
+    "eslint-plugin-jsonc": "^2.3.0",
     "license-checker": "^25.0.1",
     "luxon": "^2.4.0",
     "mocha": "^10.0.0",
@@ -35,8 +35,8 @@
     "semantic-release-license": "^1.0.2",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.8.0",
-    "typedoc": "^0.22.15",
-    "typescript": "^4.6.4"
+    "typedoc": "^0.22.17",
+    "typescript": "^4.7.2"
   },
   "engines": {
     "node": ">=12.0.0"
