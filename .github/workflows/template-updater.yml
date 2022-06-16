@@ -13,5 +13,6 @@ jobs:
         uses: sebbo2002/action-template-updater@develop
         with:
           token: ${{ secrets.GH_TOKEN }}
+          bot-token: ${{ secrets.GITHUB_TOKEN }}
           template: sebbo2002/js-template/typescript
           assignees: sebbo2002
