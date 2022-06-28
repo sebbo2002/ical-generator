@@ -7,32 +7,32 @@
     "url": "https://github.com/sebbo2002/js-template/issues"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.18.1"
   },
   "description": "A template that I use to start new projects and services.",
   "devDependencies": {
-    "@amanda-mitchell/semantic-release-npm-multiple": "^2.15.0",
-    "@qiwi/semantic-release-gh-pages-plugin": "^5.2.0",
+    "@amanda-mitchell/semantic-release-npm-multiple": "^3.5.0",
+    "@qiwi/semantic-release-gh-pages-plugin": "^5.2.3",
     "@semantic-release/changelog": "^6.0.1",
-    "@semantic-release/exec": "^6.0.2",
+    "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/express": "^4.17.13",
-    "@types/mocha": "^9.0.0",
-    "@types/node": "^16.11.10",
-    "@typescript-eslint/eslint-plugin": "^5.4.0",
-    "@typescript-eslint/parser": "^5.4.0",
-    "eslint": "^8.3.0",
-    "eslint-plugin-jsonc": "^2.0.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^8.18.0",
+    "eslint-plugin-jsonc": "^2.3.0",
     "esm": "^3.2.25",
     "license-checker": "^25.0.1",
-    "mocha": "^9.1.3",
-    "mochawesome": "^7.0.1",
+    "mocha": "^10.0.0",
+    "mochawesome": "^7.1.3",
     "nyc": "^15.1.0",
     "semantic-release-license": "^1.0.3",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.8.1",
-    "typedoc": "^0.22.10",
-    "typescript": "^4.5.2"
+    "typedoc": "^0.23.2",
+    "typescript": "^4.7.4"
   },
   "engines": {
     "node": "^12.20.0 || >=14.13.1"
