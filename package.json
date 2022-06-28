@@ -23,25 +23,26 @@
     "@typescript-eslint/parser": "^5.4.0",
     "eslint": "^8.3.0",
     "eslint-plugin-jsonc": "^2.0.0",
+    "esm": "^3.2.25",
     "license-checker": "^25.0.1",
     "mocha": "^9.1.3",
     "mochawesome": "^7.0.1",
     "nyc": "^15.1.0",
     "semantic-release-license": "^1.0.3",
     "source-map-support": "^0.5.21",
-    "ts-node": "^10.4.0",
+    "ts-node": "^10.8.1",
     "typedoc": "^0.22.10",
     "typescript": "^4.5.2"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": "^12.20.0 || >=14.13.1"
   },
+  "exports": "./dist/index.js",
   "files": [
     "/dist"
   ],
   "homepage": "https://github.com/sebbo2002/js-template#readme",
   "license": "MIT",
-  "main": "dist/index.js",
   "name": "@sebbo2002/js-template-test",
   "repository": {
     "type": "git",
@@ -57,5 +58,6 @@
     "start": "node ./dist/bin/start.js",
     "test": "mocha"
   },
+  "type": "module",
   "version": "1.0.0"
 }
