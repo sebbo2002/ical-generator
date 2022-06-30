@@ -1,9 +1,6 @@
 name: Test & Release
 on:
-  push:
-    branches:
-      - develop
-      - main
+  push: null
   pull_request: null
 
 jobs:
