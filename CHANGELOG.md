@@ -1,3 +1,5 @@
+## [3.4.4-develop.8](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.7...v3.4.4-develop.8) (2022-07-06)
+
 ## [3.4.4-develop.7](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.6...v3.4.4-develop.7) (2022-06-10)
 
 ## [3.4.4-develop.6](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.5...v3.4.4-develop.6) (2022-06-09)
