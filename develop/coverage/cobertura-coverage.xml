@@ -1,11 +1,11 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1044" lines-covered="1026" line-rate="0.9828" branches-valid="995" branches-covered="966" branch-rate="0.9709" timestamp="1654820116118" complexity="0" version="0.1">
+<coverage lines-valid="1044" lines-covered="1026" line-rate="0.9828" branches-valid="995" branches-covered="966" branch-rate="0.9709" timestamp="1657139001155" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
   <packages>
-    <class name="alarm.ts" filename="src/alarm.ts" line-rate="0.9922" branch-rate="0.9926">
+    <class name="alarm.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/alarm.ts" line-rate="0.9922" branch-rate="0.9926">
       <methods>
         <method name="(anonymous_0)" hits="1" signature="()V">
           <lines>
@@ -205,7 +205,7 @@
         <line number="621" hits="18" branch="false"/>
       </lines>
     </class>
-    <class name="attendee.ts" filename="src/attendee.ts" line-rate="0.9790000000000001" branch-rate="0.9523999999999999">
+    <class name="attendee.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/attendee.ts" line-rate="0.9790000000000001" branch-rate="0.9523999999999999">
       <methods>
         <method name="(anonymous_0)" hits="1" signature="()V">
           <lines>
@@ -454,7 +454,7 @@
         <line number="612" hits="20" branch="false"/>
       </lines>
     </class>
-    <class name="calendar.ts" filename="src/calendar.ts" line-rate="0.9747" branch-rate="0.971">
+    <class name="calendar.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/calendar.ts" line-rate="0.9747" branch-rate="0.971">
       <methods>
         <method name="(anonymous_1)" hits="1" signature="()V">
           <lines>
@@ -763,7 +763,7 @@
         <line number="864" hits="55" branch="false"/>
       </lines>
     </class>
-    <class name="category.ts" filename="src/category.ts" line-rate="1" branch-rate="1">
+    <class name="category.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/category.ts" line-rate="1" branch-rate="1">
       <methods>
         <method name="(anonymous_0)" hits="12" signature="()V">
           <lines>
@@ -801,7 +801,7 @@
         <line number="96" hits="3" branch="false"/>
       </lines>
     </class>
-    <class name="event.ts" filename="src/event.ts" line-rate="0.9848" branch-rate="0.9695">
+    <class name="event.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/event.ts" line-rate="0.9848" branch-rate="0.9695">
       <methods>
         <method name="(anonymous_1)" hits="1" signature="()V">
           <lines>
@@ -1486,7 +1486,7 @@
         <line number="1666" hits="58" branch="false"/>
       </lines>
     </class>
-    <class name="index.ts" filename="src/index.ts" line-rate="1" branch-rate="1">
+    <class name="index.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/index.ts" line-rate="1" branch-rate="1">
       <methods>
         <method name="ical" hits="30" signature="()V">
           <lines>
@@ -1629,7 +1629,7 @@
         <line number="111" hits="1" branch="false"/>
       </lines>
     </class>
-    <class name="tools.ts" filename="src/tools.ts" line-rate="0.975" branch-rate="0.9684">
+    <class name="tools.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/tools.ts" line-rate="0.975" branch-rate="0.9684">
       <methods>
         <method name="formatDate" hits="198" signature="()V">
           <lines>
@@ -1915,7 +1915,7 @@
         <line number="402" hits="21" branch="false"/>
       </lines>
     </class>
-    <class name="types.ts" filename="src/types.ts" line-rate="1" branch-rate="1">
+    <class name="types.ts" filename="src/file:/home/runner/work/ical-generator/ical-generator/src/types.ts" line-rate="1" branch-rate="1">
       <methods>
         <method name="(anonymous_0)" hits="1" signature="()V">
           <lines>
