@@ -1,6 +1,5 @@
 'use strict';
 
-import type {Duration} from 'moment-timezone';
 import {
     addOrGetCustomAttributes,
     checkEnum,
@@ -10,10 +9,9 @@ import {
     toDurationString
 } from './tools';
 import ICalEvent, {ICalEventData, ICalEventJSONData} from './event';
-import {writeFile, writeFileSync} from 'fs';
-import {promises as fsPromises} from 'fs';
+import {writeFile, writeFileSync, promises as fsPromises} from 'fs';
 import {ServerResponse} from 'http';
-import {ICalTimezone} from './types';
+import { ICalMomentDurationStub, ICalTimezone } from './types';
 
 
 export interface ICalCalendarData {
@@ -25,7 +23,7 @@ export interface ICalCalendarData {
     source?: string | null;
     url?: string | null;
     scale?: string | null;
-    ttl?: number | Duration | null;
+    ttl?: number | ICalMomentDurationStub | null;
     events?: (ICalEvent | ICalEventData)[];
     x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
@@ -472,8 +470,8 @@ export default class ICalCalendar {
      *
      * @since 0.2.5
      */
-    ttl(ttl: number | Duration | null): this;
-    ttl(ttl?: number | Duration | null): this | number | null {
+    ttl(ttl: number | ICalMomentDurationStub | null): this;
+    ttl(ttl?: number | ICalMomentDurationStub | null): this | number | null {
         if (ttl === undefined) {
             return this.data.ttl;
         }

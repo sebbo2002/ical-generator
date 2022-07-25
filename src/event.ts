@@ -1,6 +1,5 @@
 'use strict';
 
-import type {RRule} from 'rrule';
 import uuid from 'uuid-random';
 import {
     addOrGetCustomAttributes,
@@ -10,7 +9,8 @@ import {
     escape,
     formatDate,
     formatDateTZ,
-    generateCustomAttributes, isRRule,
+    generateCustomAttributes,
+    isRRule,
     toDate,
     toJSON
 } from './tools';
@@ -25,6 +25,7 @@ import {
     ICalLocation,
     ICalOrganizer,
     ICalRepeatingOptions,
+    ICalRRuleStub,
     ICalWeekday
 } from './types';
 
@@ -63,7 +64,7 @@ export interface ICalEventData {
     stamp?: ICalDateTimeValue,
     allDay?: boolean,
     floating?: boolean,
-    repeating?: ICalRepeatingOptions | RRule | string | null,
+    repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null,
     summary?: string,
     location?: ICalLocation | string | null,
     description?: ICalDescription | string | null,
@@ -93,7 +94,7 @@ interface ICalEventInternalData {
     stamp: ICalDateTimeValue,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | RRule | string | null,
+    repeating: ICalEventInternalRepeatingData | ICalRRuleStub | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -555,7 +556,7 @@ export default class ICalEvent {
      * Get the event's repeating options
      * @since 0.2.0
      */
-    repeating(): ICalEventInternalRepeatingData | RRule | string | null;
+    repeating(): ICalEventInternalRepeatingData | ICalRRuleStub | string | null;
 
     /**
      * Set the event's repeating options by passing an [[`ICalRepeatingOptions`]] object.
@@ -584,7 +585,7 @@ export default class ICalEvent {
      * Set the event's repeating options by passing an [RRule object](https://github.com/jakubroztocil/rrule).
      * @since 2.0.0-develop.5
      */
-    repeating(repeating: RRule | null): this;
+    repeating(repeating: ICalRRuleStub | null): this;
 
     /**
      * Set the events repeating options by passing a string which is inserted in the ical file.
@@ -595,8 +596,8 @@ export default class ICalEvent {
     /**
      * @internal
      */
-    repeating(repeating: ICalRepeatingOptions | RRule | string | null): this;
-    repeating(repeating?: ICalRepeatingOptions | RRule | string | null): this | ICalEventInternalRepeatingData | RRule | string | null {
+    repeating(repeating: ICalRepeatingOptions | ICalRRuleStub | string | null): this;
+    repeating(repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null): this | ICalEventInternalRepeatingData | ICalRRuleStub | string | null {
         if (repeating === undefined) {
             return this.data.repeating;
         }
