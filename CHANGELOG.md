@@ -1,3 +1,10 @@
+# [3.5.0](https://github.com/sebbo2002/ical-generator/compare/v3.4.3...v3.5.0) (2022-07-27)
+
+
+### Features
+
+* Replace external types with stub types ([56cffc7](https://github.com/sebbo2002/ical-generator/commit/56cffc7a4e9f741e779d445bfaf749b6885a4504)), closes [#405](https://github.com/sebbo2002/ical-generator/issues/405)
+
 # [3.5.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.8...v3.5.0-develop.1) (2022-07-25)
 
 
