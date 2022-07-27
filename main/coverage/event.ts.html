@@ -1725,27 +1725,29 @@
 <a name='L1666'></a><a href='#L1666'>1666</a>
 <a name='L1667'></a><a href='#L1667'>1667</a>
 <a name='L1668'></a><a href='#L1668'>1668</a>
-<a name='L1669'></a><a href='#L1669'>1669</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L1669'></a><a href='#L1669'>1669</a>
+<a name='L1670'></a><a href='#L1670'>1670</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -3395,7 +3397,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
 &nbsp;
-import type {RRule} from 'rrule';
 import uuid from 'uuid-random';
 import {
     addOrGetCustomAttributes,
@@ -3405,7 +3406,8 @@ import {
     escape,
     formatDate,
     formatDateTZ,
-    generateCustomAttributes, isRRule,
+    generateCustomAttributes,
+    isRRule,
     toDate,
     toJSON
 } from './tools';
@@ -3420,6 +3422,7 @@ import {
     ICalLocation,
     ICalOrganizer,
     ICalRepeatingOptions,
+    ICalRRuleStub,
     ICalWeekday
 } from './types';
 &nbsp;
@@ -3458,7 +3461,7 @@ export interface ICalEventData {
     stamp?: ICalDateTimeValue,
     allDay?: boolean,
     floating?: boolean,
-    repeating?: ICalRepeatingOptions | RRule | string | null,
+    repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null,
     summary?: string,
     location?: ICalLocation | string | null,
     description?: ICalDescription | string | null,
@@ -3488,7 +3491,7 @@ interface ICalEventInternalData {
     stamp: ICalDateTimeValue,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | RRule | string | null,
+    repeating: ICalEventInternalRepeatingData | ICalRRuleStub | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -3950,7 +3953,7 @@ export default class ICalEvent {
      * Get the event's repeating options
      * @since 0.2.0
      */
-    repeating(): ICalEventInternalRepeatingData | RRule | string | null;
+    repeating(): ICalEventInternalRepeatingData | ICalRRuleStub | string | null;
 &nbsp;
     /**
      * Set the event's repeating options by passing an [[`ICalRepeatingOptions`]] object.
@@ -3979,7 +3982,7 @@ export default class ICalEvent {
      * Set the event's repeating options by passing an [RRule object](https://github.com/jakubroztocil/rrule).
      * @since 2.0.0-develop.5
      */
-    repeating(repeating: RRule | null): this;
+    repeating(repeating: ICalRRuleStub | null): this;
 &nbsp;
     /**
      * Set the events repeating options by passing a string which is inserted in the ical file.
@@ -3990,8 +3993,8 @@ export default class ICalEvent {
     /**
      * @internal
      */
-    repeating(repeating: ICalRepeatingOptions | RRule | string | null): this;
-    repeating(repeating?: ICalRepeatingOptions | RRule | string | null): this | ICalEventInternalRepeatingData | RRule | string | null {
+    repeating(repeating: ICalRepeatingOptions | ICalRRuleStub | string | null): this;
+    repeating(repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null): this | ICalEventInternalRepeatingData | ICalRRuleStub | string | null {
         if (repeating === undefined) {
             return this.data.repeating;
         }
@@ -4327,11 +4330,11 @@ export default class ICalEvent {
      * ```javascript
      * const cal = ical();
      * const event = cal.createEvent();
-     * const alarm = event.createAlarm({type: 'display', trigger: 300});
+     * const alarm = event.createAlarm({type: ICalAlarmType.display, trigger: 300});
      *
      * // add another alarm
      * event.createAlarm({
-     *     type: 'audio',
+     *     type: ICalAlarmType.audio,
      *     trigger: 300, // 5min before event
      * });
      * ```
@@ -4358,8 +4361,8 @@ export default class ICalEvent {
      * const event = ical().createEvent();
      *
      * cal.alarms([
-     *     {type: 'display', trigger: 600},
-     *     {type: 'audio', trigger: 300}
+     *     {type: ICalAlarmType.display, trigger: 600},
+     *     {type: ICalAlarmType.audio, trigger: 300}
      * ]);
      *
      * cal.alarms(); // --&gt; [ICalAlarm, ICalAlarm]
@@ -5068,7 +5071,7 @@ export default class ICalEvent {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat May 14 2022 18:35:27 GMT+0000 (Coordinated Universal Time)
+                at Wed Jul 27 2022 12:15:36 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="prettify.js"></script>
