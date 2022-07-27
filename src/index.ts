@@ -96,7 +96,13 @@ export {
     ICalDescription,
     ICalEventRepeatingFreq,
     ICalWeekday,
-    ICalTimezone
+    ICalTimezone,
+    ICalMomentStub,
+    ICalMomentTimezoneStub,
+    ICalMomentDurationStub,
+    ICalLuxonDateTimeStub,
+    ICalDayJsStub,
+    ICalRRuleStub
 } from './types';
 
 export {

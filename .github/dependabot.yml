@@ -9,13 +9,3 @@ updates:
       include: scope
     schedule:
       interval: weekly
-  - package-ecosystem: docker
-    directory: /
-    assignees:
-      - sebbo2002
-    commit-message:
-      prefix: "build"
-      include: scope
-    schedule:
-      interval: weekly
-

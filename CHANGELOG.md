@@ -1,3 +1,31 @@
+# [3.5.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.8...v3.5.0-develop.1) (2022-07-25)
+
+
+### Features
+
+* Replace external types with stub types ([56cffc7](https://github.com/sebbo2002/ical-generator/commit/56cffc7a4e9f741e779d445bfaf749b6885a4504)), closes [#405](https://github.com/sebbo2002/ical-generator/issues/405)
+
+## [3.4.4-develop.8](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.7...v3.4.4-develop.8) (2022-07-06)
+
+## [3.4.4-develop.7](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.6...v3.4.4-develop.7) (2022-06-10)
+
+## [3.4.4-develop.6](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.5...v3.4.4-develop.6) (2022-06-09)
+
+## [3.4.4-develop.5](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.4...v3.4.4-develop.5) (2022-06-07)
+
+## [3.4.4-develop.4](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.3...v3.4.4-develop.4) (2022-06-03)
+
+## [3.4.4-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.2...v3.4.4-develop.3) (2022-05-22)
+
+## [3.4.4-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.4.4-develop.1...v3.4.4-develop.2) (2022-05-19)
+
+
+### Reverts
+
+* Revert "ci: Remove GH_TOKEN and use GITHUB_TOKEN" ([b5c2eb6](https://github.com/sebbo2002/ical-generator/commit/b5c2eb66170b38bda1e49ad5bb5cf02bd13eb8e4))
+
+## [3.4.4-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.4.3...v3.4.4-develop.1) (2022-05-19)
+
 ## [3.4.3](https://github.com/sebbo2002/ical-generator/compare/v3.4.2...v3.4.3) (2022-05-14)
 
 ## [3.4.3-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.4.3-develop.1...v3.4.3-develop.2) (2022-05-13)

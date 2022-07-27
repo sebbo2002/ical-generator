@@ -1,13 +1,12 @@
 'use strict';
 
-
-import type {Moment, Duration} from 'moment';
-import type {Moment as MomentTZ} from 'moment-timezone';
-import type {Dayjs} from 'dayjs';
-import type {DateTime as LuxonDateTime} from 'luxon';
-import type { RRule } from 'rrule';
-
-import {ICalDateTimeValue, ICalOrganizer} from './types';
+import {
+    ICalDateTimeValue, ICalDayJsStub, ICalLuxonDateTimeStub,
+    ICalMomentDurationStub,
+    ICalMomentStub,
+    ICalMomentTimezoneStub,
+    ICalOrganizer, ICalRRuleStub
+} from './types';
 
 /**
  * Converts a valid date/time object supported by this library to a string.
@@ -315,32 +314,32 @@ export function toDate(value: ICalDateTimeValue): Date {
     return value.toDate();
 }
 
-export function isMoment(value: ICalDateTimeValue): value is Moment {
+export function isMoment(value: ICalDateTimeValue): value is ICalMomentStub {
 
     // @ts-ignore
     return value != null && value._isAMomentObject != null;
 }
-export function isMomentTZ(value: ICalDateTimeValue): value is MomentTZ {
-    return isMoment(value) && typeof value.tz === 'function';
+export function isMomentTZ(value: ICalDateTimeValue): value is ICalMomentTimezoneStub {
+    return isMoment(value) && 'tz' in value && typeof value.tz === 'function';
 }
-export function isDayjs(value: ICalDateTimeValue): value is Dayjs {
+export function isDayjs(value: ICalDateTimeValue): value is ICalDayJsStub {
     return typeof value === 'object' &&
         value !== null &&
         !(value instanceof Date) &&
         !isMoment(value) &&
         !isLuxonDate(value);
 }
-export function isLuxonDate(value: ICalDateTimeValue): value is LuxonDateTime {
-    return typeof value === 'object' && value !== null && typeof (value as LuxonDateTime).toJSDate === 'function';
+export function isLuxonDate(value: ICalDateTimeValue): value is ICalLuxonDateTimeStub {
+    return typeof value === 'object' && value !== null && 'toJSDate' in value && typeof value.toJSDate === 'function';
 }
 
-export function isMomentDuration(value: unknown): value is Duration {
+export function isMomentDuration(value: unknown): value is ICalMomentDurationStub {
 
     // @ts-ignore
     return value !== null && typeof value === 'object' && typeof value.asSeconds === 'function';
 }
 
-export function isRRule(value: unknown): value is RRule {
+export function isRRule(value: unknown): value is ICalRRuleStub {
 
     // @ts-ignore
     return value !== null && typeof value === 'object' && typeof value.between === 'function' && typeof value.toString === 'function';

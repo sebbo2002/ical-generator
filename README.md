@@ -12,9 +12,8 @@
         <img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" />
     </a>
     <a href="https://github.com/sebbo2002/ical-generator/actions">
-        <img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Tests?style=flat-square" alt="CI Status" />
+        <img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Test%20%26%20Release?style=flat-square" alt="CI Status" />
     </a>
-    <img src="https://img.shields.io/david/sebbo2002/ical-generator?style=flat-square" alt="Dependency Status" />
 </p>
 
 <br />
@@ -131,18 +130,6 @@ npm run browser-test
 ### Where's the changelog?
 It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md). If you need the changelog for
 `ical-generator` 1.x.x and older, you'll find it [here](https://github.com/sebbo2002/ical-generator/blob/25338b8bf98f9afd3c88849e735fa33fa45fb766/CHANGELOG.md).
-
-### I use Typescript and get `TS2307: Cannot find module` errors
-`ical-generator` supports some third-party libraries such as moment.js or Day.js. To enable Typescript to do something
-with these types, they must of course also be installed. Unfortunately, npm does not install optional `peerDependencies`.
-Because these modules are not necessary for JavaScript users, I have marked these modules as optional. So if you use
-Typescript, you need the following modules to build the code that uses `ical-calendar`:
-
-```bash
-npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon
-```
-
-For JavaScript users they are not necessary.
 
 ### I get a `ReferenceError: TextEncoder is not defined` error (in some browsers)
 This library uses [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder), which

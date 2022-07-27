@@ -13,7 +13,7 @@ jobs:
     if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main'
     strategy:
       matrix:
-        node: [12.x, 14.x, 16.x]
+        node: [14.x, 16.x, 18.x]
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v3
@@ -94,7 +94,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: everlytic/branch-merge@1.1.2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           source_ref: 'main'
           target_branch: 'develop'
           commit_message_template: 'Merge branch {source_ref} into {target_branch} [skip ci]'
