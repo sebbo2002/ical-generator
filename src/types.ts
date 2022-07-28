@@ -49,7 +49,6 @@ export interface ICalTimezone {
 }
 
 export interface ICalMomentStub {
-    _isAMomentObject: true;
     format(format?: string): string;
     clone(): ICalMomentStub;
     utc(): ICalMomentStub;

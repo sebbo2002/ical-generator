@@ -1,3 +1,10 @@
+## [3.5.1-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.5.0...v3.5.1-develop.1) (2022-07-28)
+
+
+### Bug Fixes
+
+* Remove private property from moment stub ([792adb6](https://github.com/sebbo2002/ical-generator/commit/792adb6985b88b69756916343d4c5c7929f5a82d)), closes [#411](https://github.com/sebbo2002/ical-generator/issues/411)
+
 # [3.5.0](https://github.com/sebbo2002/ical-generator/compare/v3.4.3...v3.5.0) (2022-07-27)
 
 
