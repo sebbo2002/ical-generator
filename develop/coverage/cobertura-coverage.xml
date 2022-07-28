@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1043" lines-covered="1025" line-rate="0.9826999999999999" branches-valid="997" branches-covered="968" branch-rate="0.9709" timestamp="1658757937930" complexity="0" version="0.1">
+<coverage lines-valid="1043" lines-covered="1025" line-rate="0.9826999999999999" branches-valid="997" branches-covered="968" branch-rate="0.9709" timestamp="1659021078969" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
@@ -1630,9 +1630,9 @@
     </class>
     <class name="tools.ts" filename="src/tools.ts" line-rate="0.975" branch-rate="0.9688">
       <methods>
-        <method name="formatDate" hits="198" signature="()V">
+        <method name="formatDate" hits="201" signature="()V">
           <lines>
-            <line number="14" hits="198"/>
+            <line number="14" hits="201"/>
           </lines>
         </method>
         <method name="formatDateTZ" hits="90" signature="()V">
@@ -1705,19 +1705,19 @@
             <line number="278" hits="295"/>
           </lines>
         </method>
-        <method name="toDate" hits="101" signature="()V">
+        <method name="toDate" hits="102" signature="()V">
           <lines>
-            <line number="304" hits="101"/>
+            <line number="304" hits="102"/>
           </lines>
         </method>
-        <method name="isMoment" hits="184" signature="()V">
+        <method name="isMoment" hits="188" signature="()V">
           <lines>
-            <line number="317" hits="184"/>
+            <line number="317" hits="188"/>
           </lines>
         </method>
-        <method name="isMomentTZ" hits="17" signature="()V">
+        <method name="isMomentTZ" hits="18" signature="()V">
           <lines>
-            <line number="322" hits="17"/>
+            <line number="322" hits="18"/>
           </lines>
         </method>
         <method name="isDayjs" hits="24" signature="()V">
@@ -1725,9 +1725,9 @@
             <line number="325" hits="24"/>
           </lines>
         </method>
-        <method name="isLuxonDate" hits="173" signature="()V">
+        <method name="isLuxonDate" hits="174" signature="()V">
           <lines>
-            <line number="332" hits="173"/>
+            <line number="332" hits="174"/>
           </lines>
         </method>
         <method name="isMomentDuration" hits="17" signature="()V">
@@ -1753,9 +1753,9 @@
       </methods>
       <lines>
         <line number="14" hits="1" branch="false"/>
-        <line number="15" hits="198" branch="true" condition-coverage="83.33333333333334% (5/6)"/>
+        <line number="15" hits="201" branch="true" condition-coverage="83.33333333333334% (5/6)"/>
         <line number="16" hits="0" branch="false"/>
-        <line number="19" hits="198" branch="true" condition-coverage="100% (4/4)"/>
+        <line number="19" hits="201" branch="true" condition-coverage="100% (4/4)"/>
         <line number="20" hits="157" branch="false"/>
         <line number="23" hits="157" branch="false"/>
         <line number="28" hits="157" branch="true" condition-coverage="100% (2/2)"/>
@@ -1767,9 +1767,9 @@
         <line number="43" hits="21" branch="false"/>
         <line number="46" hits="126" branch="false"/>
         <line number="51" hits="126" branch="false"/>
-        <line number="53" hits="41" branch="true" condition-coverage="100% (2/2)"/>
-        <line number="55" hits="33" branch="true" condition-coverage="87.5% (7/8)"/>
-        <line number="56" hits="33" branch="false"/>
+        <line number="53" hits="44" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="55" hits="36" branch="true" condition-coverage="87.5% (7/8)"/>
+        <line number="56" hits="36" branch="false"/>
         <line number="60" hits="8" branch="true" condition-coverage="100% (2/2)"/>
         <line number="61" hits="4" branch="true" condition-coverage="100% (4/4)"/>
         <line number="62" hits="4" branch="false"/>
@@ -1866,19 +1866,19 @@
         <line number="298" hits="99" branch="false"/>
         <line number="301" hits="24" branch="false"/>
         <line number="304" hits="1" branch="false"/>
-        <line number="305" hits="101" branch="true" condition-coverage="100% (4/4)"/>
+        <line number="305" hits="102" branch="true" condition-coverage="100% (4/4)"/>
         <line number="306" hits="63" branch="false"/>
-        <line number="310" hits="38" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="310" hits="39" branch="true" condition-coverage="100% (2/2)"/>
         <line number="311" hits="1" branch="false"/>
-        <line number="314" hits="37" branch="false"/>
+        <line number="314" hits="38" branch="false"/>
         <line number="317" hits="1" branch="false"/>
-        <line number="320" hits="184" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="320" hits="188" branch="true" condition-coverage="100% (2/2)"/>
         <line number="322" hits="1" branch="false"/>
-        <line number="323" hits="17" branch="true" condition-coverage="100% (3/3)"/>
+        <line number="323" hits="18" branch="true" condition-coverage="100% (3/3)"/>
         <line number="325" hits="1" branch="false"/>
         <line number="326" hits="24" branch="true" condition-coverage="100% (5/5)"/>
         <line number="332" hits="1" branch="false"/>
-        <line number="333" hits="173" branch="true" condition-coverage="100% (4/4)"/>
+        <line number="333" hits="174" branch="true" condition-coverage="100% (4/4)"/>
         <line number="336" hits="1" branch="false"/>
         <line number="339" hits="17" branch="true" condition-coverage="100% (3/3)"/>
         <line number="342" hits="1" branch="false"/>
@@ -1918,32 +1918,32 @@
       <methods>
         <method name="(anonymous_0)" hits="1" signature="()V">
           <lines>
-            <line number="94" hits="1"/>
+            <line number="93" hits="1"/>
           </lines>
         </method>
         <method name="(anonymous_1)" hits="1" signature="()V">
           <lines>
-            <line number="104" hits="1"/>
+            <line number="103" hits="1"/>
           </lines>
         </method>
       </methods>
       <lines>
-        <line number="94" hits="1" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="93" hits="1" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="94" hits="1" branch="false"/>
         <line number="95" hits="1" branch="false"/>
         <line number="96" hits="1" branch="false"/>
         <line number="97" hits="1" branch="false"/>
         <line number="98" hits="1" branch="false"/>
         <line number="99" hits="1" branch="false"/>
         <line number="100" hits="1" branch="false"/>
-        <line number="101" hits="1" branch="false"/>
-        <line number="104" hits="1" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="103" hits="1" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="104" hits="1" branch="false"/>
         <line number="105" hits="1" branch="false"/>
         <line number="106" hits="1" branch="false"/>
         <line number="107" hits="1" branch="false"/>
         <line number="108" hits="1" branch="false"/>
         <line number="109" hits="1" branch="false"/>
         <line number="110" hits="1" branch="false"/>
-        <line number="111" hits="1" branch="false"/>
       </lines>
     </class>
   </packages>
