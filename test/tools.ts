@@ -1,7 +1,8 @@
 'use strict';
 
 import assert from 'assert';
-import moment from 'moment-timezone';
+import moment from 'moment';
+import momentTz from 'moment-timezone';
 import {DateTime} from 'luxon';
 import dayjs from 'dayjs';
 import dayJsUTCPlugin from 'dayjs/plugin/utc';
@@ -79,6 +80,26 @@ describe('ICalTools', function () {
             it('should work with floating flag', function () {
                 assert.strictEqual(
                     formatDate(null, moment('2018-07-05T18:24:00.052'), false, true),
+                    '20180705T182400'
+                );
+            });
+        });
+        describe('moment-timezone.js', function () {
+            it('should work without setting a timezone', function () {
+                assert.strictEqual(
+                    formatDate(null, momentTz('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T182400Z'
+                );
+            });
+            it('should work with timezone in event / calendar (with moment-timezone)', function () {
+                assert.strictEqual(
+                    formatDate('Canada/Saskatchewan', momentTz('2018-07-05T18:24:00.052Z'), false, false),
+                    '20180705T122400'
+                );
+            });
+            it('should work with floating flag', function () {
+                assert.strictEqual(
+                    formatDate(null, momentTz('2018-07-05T18:24:00.052'), false, true),
                     '20180705T182400'
                 );
             });
@@ -300,6 +321,10 @@ describe('ICalTools', function () {
         it('should work with moment object', function () {
             const date = new Date();
             assert.deepStrictEqual(toDate(moment(date)), date);
+        });
+        it('should work with moment-timezone object', function () {
+            const date = new Date();
+            assert.deepStrictEqual(toDate(momentTz(date)), date);
         });
         it('should work with Day.js object', function () {
             const date = new Date();
