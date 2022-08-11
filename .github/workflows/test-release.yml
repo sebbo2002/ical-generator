@@ -1,6 +1,10 @@
 name: Test & Release
 on:
-  push: null
+  push:
+    branches-ignore:
+      - 'depfu/**'
+      - 'dependabot/**'
+      - 'template-updater/**'
   pull_request: null
 
 jobs:
