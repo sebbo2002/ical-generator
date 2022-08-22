@@ -2,6 +2,7 @@ name: Test & Release
 on:
   push:
     branches-ignore:
+      - 'gh-pages'
       - 'depfu/**'
       - 'dependabot/**'
       - 'template-updater/**'
