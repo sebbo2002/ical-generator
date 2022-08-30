@@ -1,3 +1,5 @@
+## [3.5.2-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.5.1...v3.5.2-develop.1) (2022-08-30)
+
 ## [3.5.1](https://github.com/sebbo2002/ical-generator/compare/v3.5.0...v3.5.1) (2022-07-28)
 
 
