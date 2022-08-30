@@ -27,7 +27,7 @@
     "mocha": "^10.0.0",
     "mochawesome": "^7.1.3",
     "moment": "^2.29.4",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.37",
     "nyc": "^15.1.0",
     "portfinder": "^1.0.32",
     "rrule": "^2.7.1",
