@@ -14,11 +14,11 @@
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^9.0.1",
     "@touch4it/ical-timezones": "^1.8.1",
-    "@types/luxon": "^3.0.0",
+    "@types/luxon": "^3.0.1",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^18.7.14",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
+    "@types/node": "^18.7.16",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
     "dayjs": "^1.11.5",
     "eslint": "^8.23.0",
     "eslint-plugin-jsonc": "^2.4.0",
@@ -35,8 +35,8 @@
     "semantic-release-license": "^1.0.2",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.10",
-    "typescript": "^4.8.2"
+    "typedoc": "^0.23.14",
+    "typescript": "^4.8.3"
   },
   "engines": {
     "node": ">=12.0.0"
