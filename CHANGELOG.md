@@ -1,3 +1,10 @@
+## [3.5.2](https://github.com/sebbo2002/ical-generator/compare/v3.5.1...v3.5.2) (2022-09-24)
+
+
+### Bug Fixes
+
+* Include source files in npm module to allow sourcemap resolving ([2760b75](https://github.com/sebbo2002/ical-generator/commit/2760b75e67c2eb224ae1c38e8de94b4056cda7c2)), closes [#426](https://github.com/sebbo2002/ical-generator/issues/426)
+
 ## [3.5.2-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.5.2-develop.2...v3.5.2-develop.3) (2022-09-24)
 
 ## [3.5.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.5.2-develop.1...v3.5.2-develop.2) (2022-09-24)
