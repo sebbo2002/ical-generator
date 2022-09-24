@@ -1,24 +1,24 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ICalCalendar | ical-generator - v3.5.2-develop.1</title><meta name="description" content="Documentation for ical-generator - v3.5.2-develop.1"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ICalCalendar | ical-generator - v3.5.2-develop.2</title><meta name="description" content="Documentation for ical-generator - v3.5.2-develop.2"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script async src="../assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
 <ul class="results">
 <li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">ical-generator - v3.5.2-develop.1</a></div>
+<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">ical-generator - v3.5.2-develop.2</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
 <div class="container container-main">
 <div class="col-8 col-content">
 <div class="tsd-page-title">
 <ul class="tsd-breadcrumb">
-<li><a href="../modules.html">ical-generator - v3.5.2-develop.1</a></li>
+<li><a href="../modules.html">ical-generator - v3.5.2-develop.2</a></li>
 <li><a href="ICalCalendar.html">ICalCalendar</a></li></ul>
 <h1>Class ICalCalendar</h1></div>
 <section class="tsd-panel tsd-comment">
 <div class="tsd-comment tsd-typography"><p>Usually you get an <code>ICalCalendar</code> object like this:</p>
-<pre><code class="language-javascript"><span class="hl-8">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">calendar</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span>
+<pre><code class="language-javascript"><span class="hl-7">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">calendar</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span>
 </code></pre>
 <p>But you can also use the constructor directly like this:</p>
-<pre><code class="language-javascript"><span class="hl-8">import</span><span class="hl-1"> {</span><span class="hl-0">ICalCalendar</span><span class="hl-1">} </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">calendar</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">ICalCalendar</span><span class="hl-1">();</span>
+<pre><code class="language-javascript"><span class="hl-7">import</span><span class="hl-1"> {</span><span class="hl-0">ICalCalendar</span><span class="hl-1">} </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">calendar</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">ICalCalendar</span><span class="hl-1">();</span>
 </code></pre>
 </div></section>
 <section class="tsd-panel tsd-hierarchy">
@@ -26,7 +26,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">ICalCalendar</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L90">calendar.ts:90</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L90">calendar.ts:90</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -68,7 +68,7 @@
 <li class="tsd-signature tsd-anchor-link" id="constructor.new_ICalCalendar">new ICal<wbr/>Calendar<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">?: </span><a href="../interfaces/ICalCalendarData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCalendarData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#constructor.new_ICalCalendar" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>You can pass options to setup your calendar or use setters to do this.</p>
-<pre><code class="language-javascript"><span class="hl-1"> * </span><span class="hl-8">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-10">// or use require:</span><br/><span class="hl-10">// const ical = require(&#39;ical-generator&#39;);</span><br/><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">({</span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;my first iCal&#39;</span><span class="hl-1">});</span><br/><br/><span class="hl-10">// is the same as</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">().</span><span class="hl-5">name</span><span class="hl-1">(</span><span class="hl-2">&#39;my first iCal&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-10">// is the same as</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">name</span><span class="hl-1">(</span><span class="hl-2">&#39;sebbo.net&#39;</span><span class="hl-1">);</span>
+<pre><code class="language-javascript"><span class="hl-1"> * </span><span class="hl-7">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-9">// or use require:</span><br/><span class="hl-9">// const ical = require(&#39;ical-generator&#39;);</span><br/><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">({</span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;my first iCal&#39;</span><span class="hl-1">});</span><br/><br/><span class="hl-9">// is the same as</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">().</span><span class="hl-5">name</span><span class="hl-1">(</span><span class="hl-2">&#39;my first iCal&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-9">// is the same as</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">name</span><span class="hl-1">(</span><span class="hl-2">&#39;sebbo.net&#39;</span><span class="hl-1">);</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
@@ -80,7 +80,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L117">calendar.ts:117</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L117">calendar.ts:117</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="clear" class="tsd-anchor"></a>
@@ -95,7 +95,7 @@ touching any other data like name or prodId.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L580">calendar.ts:580</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L580">calendar.ts:580</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="createEvent" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>create<wbr/>Event</span><a href="#createEvent" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -103,7 +103,7 @@ touching any other data like name or prodId.</p>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Creates a new [[<code>ICalEvent</code>]] and returns it. Use options to prefill the event&#39;s attributes.
 Calling this method without options will create an empty event.</p>
-<pre><code class="language-javascript"><span class="hl-8">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-10">// or use require:</span><br/><span class="hl-10">// const ical = require(&#39;ical-generator&#39;);</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">createEvent</span><span class="hl-1">({</span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;My Event&#39;</span><span class="hl-1">});</span><br/><br/><span class="hl-10">// overwrite event summary</span><br/><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-5">summary</span><span class="hl-1">(</span><span class="hl-2">&#39;Your Event&#39;</span><span class="hl-1">);</span>
+<pre><code class="language-javascript"><span class="hl-7">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-9">// or use require:</span><br/><span class="hl-9">// const ical = require(&#39;ical-generator&#39;);</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">createEvent</span><span class="hl-1">({</span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;My Event&#39;</span><span class="hl-1">});</span><br/><br/><span class="hl-9">// overwrite event summary</span><br/><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-5">summary</span><span class="hl-1">(</span><span class="hl-2">&#39;Your Event&#39;</span><span class="hl-1">);</span>
 </code></pre>
 
 <h3>Since</h3><p>0.2.0</p>
@@ -115,7 +115,7 @@ Calling this method without options will create an empty event.</p>
 <h5>data: <a href="ICalEvent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalEventData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalEventData</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalEvent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L512">calendar.ts:512</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L512">calendar.ts:512</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="description" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>description</span><a href="#description" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -127,7 +127,7 @@ Calling this method without options will create an empty event.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L266">calendar.ts:266</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L266">calendar.ts:266</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="description.description-2">description<span class="tsd-signature-symbol">(</span>description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#description.description-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set your feed&#39;s description</p>
@@ -141,25 +141,25 @@ Calling this method without options will create an empty event.</p>
 <h5>description: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L272">calendar.ts:272</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L272">calendar.ts:272</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="events" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>events</span><a href="#events" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="events.events-1">events<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalEvent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a><span class="tsd-signature-symbol">[]</span><a href="#events.events-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Returns all events of this calendar.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">([</span><br/><span class="hl-1">    {</span><br/><span class="hl-1">       </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">       </span><span class="hl-0">end:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">().</span><span class="hl-5">getTime</span><span class="hl-1">() + </span><span class="hl-7">3600000</span><span class="hl-1">),</span><br/><span class="hl-1">       </span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;Example Event&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">description:</span><span class="hl-1"> </span><span class="hl-2">&#39;It works ;)&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">url:</span><span class="hl-1"> </span><span class="hl-2">&#39;http://sebbo.net/&#39;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">]);</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">(); </span><span class="hl-10">// --&gt; [ICalEvent]</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">([</span><br/><span class="hl-1">    {</span><br/><span class="hl-1">       </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">       </span><span class="hl-0">end:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">().</span><span class="hl-5">getTime</span><span class="hl-1">() + </span><span class="hl-6">3600000</span><span class="hl-1">),</span><br/><span class="hl-1">       </span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;Example Event&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">description:</span><span class="hl-1"> </span><span class="hl-2">&#39;It works ;)&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">url:</span><span class="hl-1"> </span><span class="hl-2">&#39;http://sebbo.net/&#39;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">]);</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">(); </span><span class="hl-9">// --&gt; [ICalEvent]</span>
 </code></pre>
 
 <h3>Since</h3><p>0.2.0</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="ICalEvent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L540">calendar.ts:540</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L540">calendar.ts:540</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="events.events-2">events<span class="tsd-signature-symbol">(</span>events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><a href="ICalEvent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalEventData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalEventData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#events.events-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Add multiple events to your calendar.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">([</span><br/><span class="hl-1">    {</span><br/><span class="hl-1">       </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">       </span><span class="hl-0">end:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">().</span><span class="hl-5">getTime</span><span class="hl-1">() + </span><span class="hl-7">3600000</span><span class="hl-1">),</span><br/><span class="hl-1">       </span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;Example Event&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">description:</span><span class="hl-1"> </span><span class="hl-2">&#39;It works ;)&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">url:</span><span class="hl-1"> </span><span class="hl-2">&#39;http://sebbo.net/&#39;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">]);</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">(); </span><span class="hl-10">// --&gt; [ICalEvent]</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">([</span><br/><span class="hl-1">    {</span><br/><span class="hl-1">       </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">       </span><span class="hl-0">end:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">().</span><span class="hl-5">getTime</span><span class="hl-1">() + </span><span class="hl-6">3600000</span><span class="hl-1">),</span><br/><span class="hl-1">       </span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;Example Event&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">description:</span><span class="hl-1"> </span><span class="hl-2">&#39;It works ;)&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">       </span><span class="hl-0">url:</span><span class="hl-1"> </span><span class="hl-2">&#39;http://sebbo.net/&#39;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">]);</span><br/><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">events</span><span class="hl-1">(); </span><span class="hl-9">// --&gt; [ICalEvent]</span>
 </code></pre>
 
 <h3>Since</h3><p>0.2.0</p>
@@ -171,7 +171,7 @@ Calling this method without options will create an empty event.</p>
 <h5>events: <span class="tsd-signature-symbol">(</span><a href="ICalEvent.html" class="tsd-signature-type" data-tsd-kind="Class">ICalEvent</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalEventData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalEventData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L563">calendar.ts:563</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L563">calendar.ts:563</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="length" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>length</span><a href="#length" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -181,7 +181,7 @@ Calling this method without options will create an empty event.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L768">calendar.ts:768</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L768">calendar.ts:768</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="method" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>method</span><a href="#method" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -194,7 +194,7 @@ See [[<code>ICalCalendarMethod</code>]] for possible results.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/ICalCalendarMethod.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalCalendarMethod</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L210">calendar.ts:210</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L210">calendar.ts:210</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="method.method-2">method<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/ICalCalendarMethod.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalCalendarMethod</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#method.method-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set the feed method attribute.
@@ -203,7 +203,7 @@ See [[<code>ICalCalendarMethod</code>]] for available options.</p>
 <a href="#typescript-example" id="typescript-example" style="color: inherit; text-decoration: none;">
   <h4>Typescript Example</h4>
 </a>
-<pre><code class="language-typescript"><span class="hl-8">import</span><span class="hl-1"> {</span><span class="hl-0">ICalCalendarMethod</span><span class="hl-1">} </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-0">calendar</span><span class="hl-1">.</span><span class="hl-5">method</span><span class="hl-1">(</span><span class="hl-0">ICalCalendarMethod</span><span class="hl-1">.</span><span class="hl-3">PUBLISH</span><span class="hl-1">);</span>
+<pre><code class="language-typescript"><span class="hl-7">import</span><span class="hl-1"> {</span><span class="hl-0">ICalCalendarMethod</span><span class="hl-1">} </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-0">calendar</span><span class="hl-1">.</span><span class="hl-5">method</span><span class="hl-1">(</span><span class="hl-0">ICalCalendarMethod</span><span class="hl-1">.</span><span class="hl-3">PUBLISH</span><span class="hl-1">);</span>
 </code></pre>
 
 <h3>Since</h3><p>0.2.8</p>
@@ -215,7 +215,7 @@ See [[<code>ICalCalendarMethod</code>]] for available options.</p>
 <h5>method: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><a href="../enums/ICalCalendarMethod.html" class="tsd-signature-type" data-tsd-kind="Enumeration">ICalCalendarMethod</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L224">calendar.ts:224</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L224">calendar.ts:224</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="name" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -227,7 +227,7 @@ See [[<code>ICalCalendarMethod</code>]] for available options.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L243">calendar.ts:243</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L243">calendar.ts:243</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="name.name-2">name<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#name.name-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set your feed&#39;s name. Is used to fill <code>NAME</code>
@@ -242,7 +242,7 @@ and <code>X-WR-CALNAME</code> in your iCal file.</p>
 <h5>name: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L251">calendar.ts:251</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L251">calendar.ts:251</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="prodId" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>prod<wbr/>Id</span><a href="#prodId" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -254,14 +254,14 @@ and <code>X-WR-CALNAME</code> in your iCal file.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L150">calendar.ts:150</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L150">calendar.ts:150</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="prodId.prodId-2">prod<wbr/>Id<span class="tsd-signature-symbol">(</span>prodId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalCalendarProdIdData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCalendarProdIdData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#prodId.prodId-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set your feed&#39;s prodid. <code>prodid</code> can be either a
 string like <code>//sebbo.net//ical-generator//EN</code> or a
 valid [[<code>ICalCalendarProdIdData</code>]] object. <code>language</code>
 is optional and defaults to <code>EN</code>.</p>
-<pre><code class="language-javascript"><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">prodId</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">company:</span><span class="hl-1"> </span><span class="hl-2">&#39;My Company&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">product:</span><span class="hl-1"> </span><span class="hl-2">&#39;My Product&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">language:</span><span class="hl-1"> </span><span class="hl-2">&#39;EN&#39;</span><span class="hl-1"> </span><span class="hl-10">// optional, defaults to EN</span><br/><span class="hl-1">});</span>
+<pre><code class="language-javascript"><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">prodId</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">company:</span><span class="hl-1"> </span><span class="hl-2">&#39;My Company&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">product:</span><span class="hl-1"> </span><span class="hl-2">&#39;My Product&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">language:</span><span class="hl-1"> </span><span class="hl-2">&#39;EN&#39;</span><span class="hl-1"> </span><span class="hl-9">// optional, defaults to EN</span><br/><span class="hl-1">});</span>
 </code></pre>
 
 <h3>Since</h3><p>0.2.0</p>
@@ -273,7 +273,7 @@ is optional and defaults to <code>EN</code>.</p>
 <h5>prodId: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalCalendarProdIdData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCalendarProdIdData</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L168">calendar.ts:168</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L168">calendar.ts:168</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="save" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>save</span><a href="#save" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -281,7 +281,7 @@ is optional and defaults to <code>EN</code>.</p>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Save ical file using <a href="https://nodejs.org/api/fs.html#fs_fspromises_writefile_file_data_options"><code>fs/promises</code></a>.
 Only works in node.js environments.</p>
-<pre><code class="language-javascript"><span class="hl-8">await</span><span class="hl-1"> </span><span class="hl-0">calendar</span><span class="hl-1">.</span><span class="hl-5">save</span><span class="hl-1">(</span><span class="hl-2">&#39;./calendar.ical&#39;</span><span class="hl-1">);</span>
+<pre><code class="language-javascript"><span class="hl-7">await</span><span class="hl-1"> </span><span class="hl-0">calendar</span><span class="hl-1">.</span><span class="hl-5">save</span><span class="hl-1">(</span><span class="hl-2">&#39;./calendar.ical&#39;</span><span class="hl-1">);</span>
 </code></pre>
 </div>
 <div class="tsd-parameters">
@@ -291,7 +291,7 @@ Only works in node.js environments.</p>
 <h5>path: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L594">calendar.ts:594</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L594">calendar.ts:594</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="save.save-2">save<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, cb<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ErrnoException</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#save.save-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Save ical file with <a href="http://nodejs.org/api/fs.html#fs_fs_writefile_filename_data_options_callback"><code>fs.writeFile</code></a>.
@@ -319,7 +319,7 @@ Only works in node.js environments.</p>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L606">calendar.ts:606</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L606">calendar.ts:606</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="saveSync" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>save<wbr/>Sync</span><a href="#saveSync" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -338,7 +338,7 @@ Only works in node.js environments.</p>
 <h5>path: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L626">calendar.ts:626</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L626">calendar.ts:626</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="scale" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>scale</span><a href="#scale" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -352,7 +352,7 @@ specifies this as <code>GREGORIAN</code> if no value is present.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L422">calendar.ts:422</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L422">calendar.ts:422</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="scale.scale-2">scale<span class="tsd-signature-symbol">(</span>scale<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#scale.scale-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set your feed&#39;s <code>CALSCALE</code> attribute. There is no
@@ -371,11 +371,11 @@ no value is present.</p>
 <h5>scale: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L436">calendar.ts:436</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L436">calendar.ts:436</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="serve" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>serve</span><a href="#serve" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="serve.serve-1">serve<span class="tsd-signature-symbol">(</span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ServerResponse</span>, filename<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#serve.serve-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="serve.serve-1">serve<span class="tsd-signature-symbol">(</span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ServerResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">IncomingMessage</span><span class="tsd-signature-symbol">&gt;</span>, filename<span class="tsd-signature-symbol">??: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#serve.serve-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Send calendar to the user when using HTTP using the passed <code>ServerResponse</code> object.
 Use second parameter <code>filename</code> to change the filename, which defaults to <code>&#39;calendar.ics&#39;</code>.</p>
@@ -384,14 +384,14 @@ Use second parameter <code>filename</code> to change the filename, which default
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>response: <span class="tsd-signature-type">ServerResponse</span></h5>
+<h5>response: <span class="tsd-signature-type">ServerResponse</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">IncomingMessage</span><span class="tsd-signature-symbol">&gt;</span></h5>
 <div class="tsd-comment tsd-typography"><p>HTTP Response object which is used to send the calendar</p>
 </div></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> filename: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#39;calendar.ics&#39;</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L639">calendar.ts:639</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L639">calendar.ts:639</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="source" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>source</span><a href="#source" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -403,7 +403,7 @@ Use second parameter <code>filename</code> to change the filename, which default
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L366">calendar.ts:366</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L366">calendar.ts:366</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="source.source-2">source<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#source.source-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set your feed&#39;s <code>SOURCE</code> attribute.
@@ -420,7 +420,7 @@ This tells the client where to refresh your feed.</p>
 <h5>source: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L378">calendar.ts:378</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L378">calendar.ts:378</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="timezone" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>timezone</span><a href="#timezone" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -432,7 +432,7 @@ This tells the client where to refresh your feed.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L287">calendar.ts:287</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L287">calendar.ts:287</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="timezone.timezone-2">timezone<span class="tsd-signature-symbol">(</span>timezone<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#timezone.timezone-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set your feed&#39;s timezone. Is used
@@ -454,7 +454,7 @@ time zone is specified, all information is output as UTC.</p>
 <h5>timezone: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L303">calendar.ts:303</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L303">calendar.ts:303</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="timezone.timezone-3">timezone<span class="tsd-signature-symbol">(</span>timezone<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalTimezone.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalTimezone</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#timezone.timezone-3" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Sets the time zone to be used in this calendar file for all times of all
@@ -469,7 +469,7 @@ does not have a time zone database, so an external generator is needed here.</p>
 <p>A VTimezone generator is a function that takes a time zone as a string and
 returns a VTimezone component according to the ical standard. For example,
 ical-timezones can be used for this:</p>
-<pre><code class="language-typescript"><span class="hl-8">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-8">import</span><span class="hl-1"> {</span><span class="hl-0">getVtimezoneComponent</span><span class="hl-1">} </span><span class="hl-8">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@touch4it/ical-timezones&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">ICalCalendar</span><span class="hl-1">();</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">timezone</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;FOO&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">generator:</span><span class="hl-1"> </span><span class="hl-0">getVtimezoneComponent</span><br/><span class="hl-1">});</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">createEvent</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">    </span><span class="hl-0">timezone:</span><span class="hl-1"> </span><span class="hl-2">&#39;Europe/London&#39;</span><br/><span class="hl-1">});</span>
+<pre><code class="language-typescript"><span class="hl-7">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-7">import</span><span class="hl-1"> {</span><span class="hl-0">getVtimezoneComponent</span><span class="hl-1">} </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@touch4it/ical-timezones&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">ICalCalendar</span><span class="hl-1">();</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">timezone</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;FOO&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">generator:</span><span class="hl-1"> </span><span class="hl-0">getVtimezoneComponent</span><br/><span class="hl-1">});</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">createEvent</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">    </span><span class="hl-0">timezone:</span><span class="hl-1"> </span><span class="hl-2">&#39;Europe/London&#39;</span><br/><span class="hl-1">});</span>
 </code></pre>
 
 <h3>See</h3><p><a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">https://github.com/sebbo2002/ical-generator#-date-time--timezones</a></p>
@@ -483,7 +483,7 @@ ical-timezones can be used for this:</p>
 <h5>timezone: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalTimezone.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalTimezone</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L339">calendar.ts:339</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L339">calendar.ts:339</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toBlob" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>Blob</span><a href="#toBlob" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -498,7 +498,7 @@ instead), this method is currently untested. Sorry Dave…</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Blob</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L659">calendar.ts:659</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L659">calendar.ts:659</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toJSON" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>toJSON</span><a href="#toJSON" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -507,26 +507,26 @@ instead), this method is currently untested. Sorry Dave…</p>
 <div class="tsd-comment tsd-typography"><p>Return a shallow copy of the calendar&#39;s options for JSON stringification.
 Third party objects like moment.js values or RRule objects are stringified
 as well. Can be used for persistence.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">json</span><span class="hl-1"> = </span><span class="hl-6">JSON</span><span class="hl-1">.</span><span class="hl-5">stringify</span><span class="hl-1">(</span><span class="hl-0">cal</span><span class="hl-1">);</span><br/><br/><span class="hl-10">// later: restore calendar data</span><br/><span class="hl-0">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">(</span><span class="hl-6">JSON</span><span class="hl-1">.</span><span class="hl-5">parse</span><span class="hl-1">(</span><span class="hl-0">json</span><span class="hl-1">));</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">json</span><span class="hl-1"> = </span><span class="hl-3">JSON</span><span class="hl-1">.</span><span class="hl-5">stringify</span><span class="hl-1">(</span><span class="hl-0">cal</span><span class="hl-1">);</span><br/><br/><span class="hl-9">// later: restore calendar data</span><br/><span class="hl-0">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">(</span><span class="hl-3">JSON</span><span class="hl-1">.</span><span class="hl-5">parse</span><span class="hl-1">(</span><span class="hl-0">json</span><span class="hl-1">));</span>
 </code></pre>
 
 <h3>Since</h3><p>0.2.4</p>
 </div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/ICalCalendarJSONData.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalCalendarJSONData</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L756">calendar.ts:756</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L756">calendar.ts:756</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toString" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>String</span><a href="#toString" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 <li class="tsd-signature tsd-anchor-link" id="toString.toString-1">to<wbr/>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#toString.toString-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Return generated calendar as a string.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-5">log</span><span class="hl-1">(</span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">toString</span><span class="hl-1">()); </span><span class="hl-10">// → BEGIN:VCALENDAR…</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">();</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-5">log</span><span class="hl-1">(</span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">toString</span><span class="hl-1">()); </span><span class="hl-9">// → BEGIN:VCALENDAR…</span>
 </code></pre>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L781">calendar.ts:781</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L781">calendar.ts:781</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="toURL" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>toURL</span><a href="#toURL" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -541,7 +541,7 @@ instead), this can&#39;t be tested right now. Sorry Dave…</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L673">calendar.ts:673</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L673">calendar.ts:673</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="ttl" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>ttl</span><a href="#ttl" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -553,13 +553,13 @@ instead), this can&#39;t be tested right now. Sorry Dave…</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L457">calendar.ts:457</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L457">calendar.ts:457</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="ttl.ttl-2">ttl<span class="tsd-signature-symbol">(</span>ttl<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalMomentDurationStub.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalMomentDurationStub</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#ttl.ttl-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set your feed&#39;s time to live
 (in seconds). Is used to fill <code>REFRESH-INTERVAL</code> and
 <code>X-PUBLISHED-TTL</code> in your iCal.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">().</span><span class="hl-5">ttl</span><span class="hl-1">(</span><span class="hl-7">60</span><span class="hl-1"> * </span><span class="hl-7">60</span><span class="hl-1"> * </span><span class="hl-7">24</span><span class="hl-1">); </span><span class="hl-10">// 1 day</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">().</span><span class="hl-5">ttl</span><span class="hl-1">(</span><span class="hl-6">60</span><span class="hl-1"> * </span><span class="hl-6">60</span><span class="hl-1"> * </span><span class="hl-6">24</span><span class="hl-1">); </span><span class="hl-9">// 1 day</span>
 </code></pre>
 <p>You can also pass a moment.js duration object. Zero, null
 or negative numbers will reset the <code>ttl</code> attribute.</p>
@@ -573,7 +573,7 @@ or negative numbers will reset the <code>ttl</code> attribute.</p>
 <h5>ttl: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/ICalMomentDurationStub.html" class="tsd-signature-type" data-tsd-kind="Interface">ICalMomentDurationStub</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L473">calendar.ts:473</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L473">calendar.ts:473</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="url" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>url</span><a href="#url" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -585,7 +585,7 @@ or negative numbers will reset the <code>ttl</code> attribute.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L393">calendar.ts:393</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L393">calendar.ts:393</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="url.url-2">url<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#url.url-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set your feed&#39;s URL</p>
@@ -601,7 +601,7 @@ or negative numbers will reset the <code>ttl</code> attribute.</p>
 <h5>url: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L404">calendar.ts:404</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L404">calendar.ts:404</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="x" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>x</span><a href="#x" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -622,7 +622,7 @@ so these attributes may be inserted twice.</p>
 <h5>keyOrArray: <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L702">calendar.ts:702</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L702">calendar.ts:702</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="x.x-2">x<span class="tsd-signature-symbol">(</span>keyOrArray<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a><a href="#x.x-2" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set a X-* attribute. Woun&#39;t filter double attributes,
@@ -642,7 +642,7 @@ so these attributes may be inserted twice.</p>
 <h5>value: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="ICalCalendar.html" class="tsd-signature-type" data-tsd-kind="Class">ICalCalendar</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L715">calendar.ts:715</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L715">calendar.ts:715</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="x.x-3">x<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><a href="#x.x-3" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Get all custom X-* attributes.</p>
@@ -651,7 +651,7 @@ so these attributes may be inserted twice.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/6c776c8/src/calendar.ts#L721">calendar.ts:721</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/2760b75/src/calendar.ts#L721">calendar.ts:721</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -669,7 +669,7 @@ so these attributes may be inserted twice.</p>
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
-<li><a href="../modules.html">ical-<wbr/>generator -<wbr/> v3.5.2-<wbr/>develop.1</a>
+<li><a href="../modules.html">ical-<wbr/>generator -<wbr/> v3.5.2-<wbr/>develop.2</a>
 <ul></ul></li></ul></div></details></nav>
 <nav class="tsd-navigation secondary menu-sticky">
 <ul>
