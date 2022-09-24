@@ -1,15 +1,15 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ical-generator - v3.5.1</title><meta name="description" content="Documentation for ical-generator - v3.5.1"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ical-generator - v3.5.2</title><meta name="description" content="Documentation for ical-generator - v3.5.2"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base=".">
 <div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
 <ul class="results">
 <li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">ical-generator - v3.5.1</a></div>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">ical-generator - v3.5.2</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
 <div class="container container-main">
 <div class="col-8 col-content">
 <div class="tsd-page-title">
-<h2>ical-generator - v3.5.1</h2></div>
+<h2>ical-generator - v3.5.2</h2></div>
 <div class="tsd-panel tsd-typography"><br />
 <br />
 
@@ -40,8 +40,83 @@ to generate subscriptionable calendar feeds.</p>
 <a href="#📦-installation" id="📦-installation" style="color: inherit; text-decoration: none;">
   <h2>📦 Installation</h2>
 </a>
-<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">install</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1">-</span><span class="hl-0">generator</span><br/><br/><span class="hl-1"># </span><span class="hl-0">For</span><span class="hl-1"> </span><span class="hl-0">TypeScript</span><span class="hl-1"> </span><span class="hl-0">Users</span><br/><span class="hl-1"># (</span><span class="hl-0">see</span><span class="hl-1"> </span><span class="hl-2">&quot;I use Typescript and get TS2307: Cannot find module errors&quot;</span><span class="hl-1"> </span><span class="hl-0">section</span><span class="hl-1"> </span><span class="hl-0">below</span><span class="hl-1">)</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">i</span><span class="hl-1"> -</span><span class="hl-3">D</span>
+<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">install</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1">-</span><span class="hl-0">generator</span><br/><br/><span class="hl-1"># </span><span class="hl-0">For</span><span class="hl-1"> </span><span class="hl-0">TypeScript</span><span class="hl-1"> </span><span class="hl-0">Users</span><br/><span class="hl-1"># (</span><span class="hl-0">see</span><span class="hl-1"> </span><span class="hl-2">&quot;I use Typescript and get TS2307: Cannot find module errors&quot;</span><span class="hl-1"> </span><span class="hl-0">section</span><span class="hl-1"> </span><span class="hl-0">below</span><span class="hl-1">)</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">i</span><span class="hl-1"> -</span><span class="hl-3">D</span><span class="hl-1"> @</span><span class="hl-0">types</span><span class="hl-1">/</span><span class="hl-0">node</span><span class="hl-1"> </span><span class="hl-0">rrule</span><span class="hl-1"> </span><span class="hl-0">moment</span><span class="hl-1">-</span><span class="hl-0">timezone</span><span class="hl-1"> </span><span class="hl-0">moment</span><span class="hl-1"> </span><span class="hl-0">dayjs</span><span class="hl-1"> @</span><span class="hl-0">types</span><span class="hl-1">/</span><span class="hl-0">luxon</span>
 </code></pre>
+
+<a href="#⚡️-quick-start" id="⚡️-quick-start" style="color: inherit; text-decoration: none;">
+  <h2>⚡️ Quick Start</h2>
+</a>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">ical</span><span class="hl-1"> = </span><span class="hl-5">require</span><span class="hl-1">(</span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">);</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">http</span><span class="hl-1"> = </span><span class="hl-5">require</span><span class="hl-1">(</span><span class="hl-2">&#39;http&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">calendar</span><span class="hl-1"> = </span><span class="hl-5">ical</span><span class="hl-1">({</span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;my first iCal&#39;</span><span class="hl-1">});</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">startTime</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">endTime</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">();</span><br/><span class="hl-0">endTime</span><span class="hl-1">.</span><span class="hl-5">setHours</span><span class="hl-1">(</span><span class="hl-0">startTime</span><span class="hl-1">.</span><span class="hl-5">getHours</span><span class="hl-1">()+</span><span class="hl-6">1</span><span class="hl-1">);</span><br/><span class="hl-0">calendar</span><span class="hl-1">.</span><span class="hl-5">createEvent</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-0">startTime</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">end:</span><span class="hl-1"> </span><span class="hl-0">endTime</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">summary:</span><span class="hl-1"> </span><span class="hl-2">&#39;Example Event&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">description:</span><span class="hl-1"> </span><span class="hl-2">&#39;It works ;)&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">location:</span><span class="hl-1"> </span><span class="hl-2">&#39;my room&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">url:</span><span class="hl-1"> </span><span class="hl-2">&#39;http://sebbo.net/&#39;</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-0">http</span><span class="hl-1">.</span><span class="hl-5">createServer</span><span class="hl-1">((</span><span class="hl-0">req</span><span class="hl-1">, </span><span class="hl-0">res</span><span class="hl-1">) </span><span class="hl-4">=&gt;</span><span class="hl-1"> </span><span class="hl-0">calendar</span><span class="hl-1">.</span><span class="hl-5">serve</span><span class="hl-1">(</span><span class="hl-0">res</span><span class="hl-1">))</span><br/><span class="hl-1">    .</span><span class="hl-5">listen</span><span class="hl-1">(</span><span class="hl-6">3000</span><span class="hl-1">, </span><span class="hl-2">&#39;127.0.0.1&#39;</span><span class="hl-1">, () </span><span class="hl-4">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-5">log</span><span class="hl-1">(</span><span class="hl-2">&#39;Server running at http://127.0.0.1:3000/&#39;</span><span class="hl-1">);</span><br/><span class="hl-1">    });</span>
+</code></pre>
+<p>See the <a href="./examples">examples</a> folder for more examples.</p>
+
+<a href="#📑-api-reference" id="📑-api-reference" style="color: inherit; text-decoration: none;">
+  <h2>📑 API-Reference</h2>
+</a>
+<ul>
+<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/">Index</a><ul>
+<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalCalendar.html">ICalCalendar</a></li>
+<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalEvent.html">ICalEvent</a><ul>
+<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalAlarm.html">ICalAlarm</a></li>
+<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalAttendee.html">ICalAttendee</a></li>
+<li><a href="https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalCategory.html">ICalCategory</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<a href="#🕒-date-time-amp-timezones" id="🕒-date-time-amp-timezones" style="color: inherit; text-decoration: none;">
+  <h2>🕒 Date, Time &amp; Timezones</h2>
+</a>
+<p>ical-generator supports <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">native Date</a>,
+<a href="https://day.js.org/en/">Day.js</a>, <a href="https://moment.github.io/luxon/">Luxon&#39;s</a> <a href="https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html">DateTime</a>
+and the older <a href="https://momentjs.com/">moment.js</a> and <a href="https://momentjs.com/timezone/">moment-timezone</a>
+objects. You can also pass a string which is then passed to javascript&#39;s <code>Date</code> internally.</p>
+<p>It is recommended to use UTC time as far as possible. <code>ical-generator</code> will output all time information as UTC time as
+long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
+set, <code>ical-generator</code> assumes that the given time matches the time zone. If a time zone is used, it is also recommended
+to use a VTimezone generator. Such a function generates a VTimezone entry and returns it. For example, ical-timezones can
+be used for this:</p>
+<pre><code class="language-typescript"><span class="hl-7">import</span><span class="hl-1"> </span><span class="hl-0">ical</span><span class="hl-1"> </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;ical-generator&#39;</span><span class="hl-1">;</span><br/><span class="hl-7">import</span><span class="hl-1"> {</span><span class="hl-0">getVtimezoneComponent</span><span class="hl-1">} </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@touch4it/ical-timezones&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">cal</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">ICalCalendar</span><span class="hl-1">();</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">timezone</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">name:</span><span class="hl-1"> </span><span class="hl-2">&#39;FOO&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-0">generator:</span><span class="hl-1"> </span><span class="hl-0">getVtimezoneComponent</span><br/><span class="hl-1">});</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-5">createEvent</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">start:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-5">Date</span><span class="hl-1">(),</span><br/><span class="hl-1">    </span><span class="hl-0">timezone:</span><span class="hl-1"> </span><span class="hl-2">&#39;Europe/London&#39;</span><br/><span class="hl-1">});</span>
+</code></pre>
+<p>If a <code>moment-timezone</code> object or Luxon&#39;s <code>setZone</code> method works, <code>ical-generator</code> sets it according to the time zone set
+in the calendar/event.</p>
+
+<a href="#🚦-tests" id="🚦-tests" style="color: inherit; text-decoration: none;">
+  <h2>🚦 Tests</h2>
+</a>
+<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">test</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">run</span><span class="hl-1"> </span><span class="hl-0">coverage</span><br/><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">run</span><span class="hl-1"> </span><span class="hl-0">browser</span><span class="hl-1">-</span><span class="hl-0">test</span>
+</code></pre>
+
+<a href="#🙋-faq" id="🙋-faq" style="color: inherit; text-decoration: none;">
+  <h2>🙋 FAQ</h2>
+</a>
+
+<a href="#what39s-error-can39t-resolve-39fs39" id="what39s-error-can39t-resolve-39fs39" style="color: inherit; text-decoration: none;">
+  <h3>What&#39;s <code>Error: Can&#39;t resolve &#39;fs&#39;</code>?</h3>
+</a>
+<p><code>ical-generator</code> uses the node.js <code>fs</code> module to save your calendar on the filesystem. In browser environments, you usually don&#39;t need this, so if you pass <code>null</code> for fs in your bundler. In webpack this looks like this:</p>
+<pre><code class="language-json"><span class="hl-1">{</span><br/><span class="hl-1">  </span><span class="hl-8">&quot;resolve&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">    </span><span class="hl-8">&quot;fallback&quot;</span><span class="hl-1">: {</span><br/><span class="hl-1">      </span><span class="hl-8">&quot;fs&quot;</span><span class="hl-1">: </span><span class="hl-4">false</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">}</span>
+</code></pre>
+
+<a href="#where39s-the-changelog" id="where39s-the-changelog" style="color: inherit; text-decoration: none;">
+  <h3>Where&#39;s the changelog?</h3>
+</a>
+<p>It&#39;s <a href="https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md">here</a>. If you need the changelog for
+<code>ical-generator</code> 1.x.x and older, you&#39;ll find it <a href="https://github.com/sebbo2002/ical-generator/blob/25338b8bf98f9afd3c88849e735fa33fa45fb766/CHANGELOG.md">here</a>.</p>
+
+<a href="#i-get-a-referenceerror-textencoder-is-not-defined-error-in-some-browsers" id="i-get-a-referenceerror-textencoder-is-not-defined-error-in-some-browsers" style="color: inherit; text-decoration: none;">
+  <h3>I get a <code>ReferenceError: TextEncoder is not defined</code> error (in some browsers)</h3>
+</a>
+<p>This library uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder"><code>TextEncoder</code></a>, which
+is available in node.js ≥ 11.0.0 and <a href="https://caniuse.com/?search=textencoder">all modern browsers</a>.
+Outdated browsers may not have the necessary API and generate this error when generating the calendar.</p>
+
+<a href="#🙆🏼♂️-copyright-and-license" id="🙆🏼♂️-copyright-and-license" style="color: inherit; text-decoration: none;">
+  <h2>🙆🏼‍♂️ Copyright and license</h2>
+</a>
+<p>Copyright (c) Sebastian Pekarek under the <a href="LICENSE">MIT license</a>.</p>
 </div></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
@@ -60,7 +135,7 @@ to generate subscriptionable calendar feeds.</p>
 <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
 <div class="tsd-accordion-details">
 <ul>
-<li class="current selected"><a href="modules.html">ical-<wbr/>generator -<wbr/> v3.5.1</a>
+<li class="current selected"><a href="modules.html">ical-<wbr/>generator -<wbr/> v3.5.2</a>
 <ul></ul></li></ul></div></details></nav>
 <nav class="tsd-navigation secondary menu-sticky">
 <ul>
