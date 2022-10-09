@@ -151,7 +151,7 @@ interface ICalEventInternalRepeatingData {
     byDay?: ICalWeekday[];
     byMonth?: number[];
     byMonthDay?: number[];
-    bySetPos?: number;
+    bySetPos?: number[];
     exclude?: ICalDateTimeValue[];
     startOfWeek?: ICalWeekday;
 }
@@ -669,11 +669,11 @@ export default class ICalEvent {
             }
             const bySetPosArray = Array.isArray(repeating.bySetPos) ? repeating.bySetPos : [repeating.bySetPos];
             this.data.repeating.bySetPos = bySetPosArray.map(bySetPos => {
-              if (typeof bySetPos !== 'number' || bySetPos < -366 || bySetPos > 366 || bySetPos === 0) {
-                  throw '`repeating.bySetPos` contains invalid value `' + bySetPos + '`!';
-              }
-              return bySetPos;
-            })
+                if (typeof bySetPos !== 'number' || bySetPos < -366 || bySetPos > 366 || bySetPos === 0) {
+                    throw '`repeating.bySetPos` contains invalid value `' + bySetPos + '`!';
+                }
+                return bySetPos;
+            });
         }
 
         if (repeating.exclude) {

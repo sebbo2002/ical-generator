@@ -60,7 +60,7 @@ describe('Issues', function () {
             assert.ok(str.indexOf('RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1;BYDAY=SU;BYSETPOS=3') > -1);
         });
 
-        it('should work with repeating bySetPos by taking the first elemnt of the byDay array', function () {
+        it('should work with repeating bySetPos by taking all elements of the byDay array', function () {
             const calendar = ical({
                 prodId: '//superman-industries.com//ical-generator//EN',
                 events: [{
@@ -79,7 +79,7 @@ describe('Issues', function () {
             });
 
             const str = calendar.toString();
-            assert.ok(str.indexOf('RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1;BYDAY=MO;BYSETPOS=3') > -1);
+            assert.ok(str.indexOf('RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1;BYDAY=MO,FR;BYSETPOS=3') > -1);
         });
     });
 
