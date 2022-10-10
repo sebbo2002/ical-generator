@@ -14,7 +14,7 @@ export interface ICalRepeatingOptions {
     byDay?: ICalWeekday[] | ICalWeekday;
     byMonth?: number[] | number;
     byMonthDay?: number[] | number;
-    bySetPos?: number;
+    bySetPos?: number[] | number;
     exclude?: ICalDateTimeValue[] | ICalDateTimeValue;
     startOfWeek?: ICalWeekday;
 }
