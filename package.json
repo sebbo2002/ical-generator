@@ -15,7 +15,7 @@
     "@semantic-release/npm": "^9.0.1",
     "@touch4it/ical-timezones": "^1.8.1",
     "@types/luxon": "^3.0.1",
-    "@types/mocha": "^9.1.1",
+    "@types/mocha": "^10.0.0",
     "@types/node": "^18.7.20",
     "@typescript-eslint/eslint-plugin": "^5.38.0",
     "@typescript-eslint/parser": "^5.38.0",
@@ -36,7 +36,7 @@
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
     "typedoc": "^0.23.15",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.4"
   },
   "engines": {
     "node": ">=12.0.0"
