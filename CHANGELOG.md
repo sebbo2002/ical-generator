@@ -1,3 +1,10 @@
+# [3.6.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.5.2...v3.6.0-develop.1) (2022-10-10)
+
+
+### Features
+
+* **Event:** Update `bySetPos` and `byMonthDay` ([b19e94b](https://github.com/sebbo2002/ical-generator/commit/b19e94bdc9408acfb6e64d93de614ad25edb4ad0)), closes [#430](https://github.com/sebbo2002/ical-generator/issues/430)
+
 ## [3.5.2](https://github.com/sebbo2002/ical-generator/compare/v3.5.1...v3.5.2) (2022-09-24)
 
 

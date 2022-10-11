@@ -835,10 +835,36 @@ describe('ical-generator Event', function () {
                     repeating: {
                         freq: ICalEventRepeatingFreq.DAILY,
                         interval: 2,
-                        byMonthDay: [1, 32, 15]
+                        byMonthDay: [1, 32, -15]
                     }
                 }, new ICalCalendar());
             }, /`repeating\.byMonthDay` contains invalid value `32`/);
+
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.DAILY,
+                        interval: 2,
+                        byMonthDay: [-1, -32, 15]
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.byMonthDay` contains invalid value `-32`/);
+
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.DAILY,
+                        interval: 2,
+                        byMonthDay: [1, 0, 15]
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.byMonthDay` contains invalid value `0`/);
         });
 
         it('setter should update repeating.byMonthDay', function () {
@@ -861,10 +887,38 @@ describe('ical-generator Event', function () {
                         freq: ICalEventRepeatingFreq.MONTHLY,
                         interval: 2,
                         byDay: [ICalWeekday.SU],
-                        bySetPos: 6
+                        bySetPos: [367]
                     }
                 }, new ICalCalendar());
-            }, /`repeating\.bySetPos` contains invalid value `6`/);
+            }, /`repeating\.bySetPos` contains invalid value `367`/);
+
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.MONTHLY,
+                        interval: 2,
+                        byDay: [ICalWeekday.SU],
+                        bySetPos: [-367]
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.bySetPos` contains invalid value `-367`/);
+
+            assert.throws(function () {
+                new ICalEvent({
+                    start: moment(),
+                    end: moment(),
+                    summary: 'test',
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.MONTHLY,
+                        interval: 2,
+                        byDay: [ICalWeekday.SU],
+                        bySetPos: [0]
+                    }
+                }, new ICalCalendar());
+            }, /`repeating\.bySetPos` contains invalid value `0`/);
 
             assert.throws(function () {
                 new ICalEvent({
@@ -876,7 +930,7 @@ describe('ical-generator Event', function () {
                         interval: 2,
                         byDay: [ICalWeekday.SU],
                         // @ts-ignore
-                        bySetPos: 'FOO'
+                        bySetPos: ['FOO']
                     }
                 }, new ICalCalendar());
             }, /`repeating\.bySetPos` contains invalid value `FOO`/);
@@ -903,13 +957,13 @@ describe('ical-generator Event', function () {
             e.repeating({
                 freq: ICalEventRepeatingFreq.MONTHLY,
                 byDay: [ICalWeekday.SU],
-                bySetPos: 2
+                bySetPos: [2]
             });
 
             const result = e.repeating();
             assert.ok(result && !isRRule(result) && typeof result !== 'string');
             assert.strictEqual(result.byDay?.length, 1);
-            assert.strictEqual(result.bySetPos, 2);
+            assert.strictEqual(result.bySetPos?.length, 1);
         });
 
         it('should throw error when repeating.exclude is not valid', function () {
