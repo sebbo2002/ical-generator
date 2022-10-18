@@ -17,10 +17,10 @@
     "@types/luxon": "^3.0.1",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.7.20",
-    "@typescript-eslint/eslint-plugin": "^5.38.0",
-    "@typescript-eslint/parser": "^5.38.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
     "dayjs": "^1.11.5",
-    "eslint": "^8.24.0",
+    "eslint": "^8.25.0",
     "eslint-plugin-jsonc": "^2.4.0",
     "license-checker": "^25.0.1",
     "luxon": "^3.0.4",
@@ -35,7 +35,7 @@
     "semantic-release-license": "^1.0.2",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.15",
+    "typedoc": "^0.23.16",
     "typescript": "^4.8.4"
   },
   "engines": {
