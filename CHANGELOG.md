@@ -1,3 +1,10 @@
+## [3.6.1-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.6.1-develop.2...v3.6.1-develop.3) (2022-12-20)
+
+
+### Bug Fixes
+
+* **Event:** Return floating repeating until/excluded dates if floating ([011123e](https://github.com/sebbo2002/ical-generator/commit/011123ee284f8355203f2a2f2f2dc06b22e478af)), closes [#442](https://github.com/sebbo2002/ical-generator/issues/442)
+
 ## [3.6.1-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.6.1-develop.1...v3.6.1-develop.2) (2022-12-11)
 
 ## [3.6.1-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.6.0...v3.6.1-develop.1) (2022-12-04)
