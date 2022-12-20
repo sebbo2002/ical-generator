@@ -1491,7 +1491,7 @@ export default class ICalEvent {
             }
 
             if (this.data.repeating.until) {
-                g += ';UNTIL=' + formatDate(this.calendar.timezone(), this.data.repeating.until);
+                g += ';UNTIL=' + formatDate(this.calendar.timezone(), this.data.repeating.until, false, this.floating());
             }
 
             if (this.data.repeating.byDay) {
@@ -1534,7 +1534,7 @@ export default class ICalEvent {
                     }
                     else {
                         g += ':' + this.data.repeating.exclude.map(excludedDate => {
-                            return formatDate(this.timezone(), excludedDate);
+                            return formatDate(this.timezone(), excludedDate, false, this.floating());
                         }).join(',') + '\r\n';
                     }
                 }

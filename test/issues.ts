@@ -210,4 +210,9 @@ describe('Issues', function () {
             ].join('\r\n'));
         });
     });
+
+    describe('Issue #442', function () {
+        it('should generate floating repeat until value if event is a floating event');
+        it('should generate floating repeat exclusion dates if event is a floating event');
+    });
 });
