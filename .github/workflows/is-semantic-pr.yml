@@ -8,6 +8,6 @@ jobs:
     if: ${{ startsWith(github.head_ref, 'depfu/batch_dev/') != true }}
     steps:
       - name: 🤖 is-semantic-release
-        uses: sebbo2002/action-is-semantic-pr
+        uses: sebbo2002/action-is-semantic-pr@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
