@@ -1472,12 +1472,18 @@ export default class ICalEvent {
 
         // REPEATING
         if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
-            g += this.data.repeating
+            let repeating = this.data.repeating
                 .toString()
                 .replace(/\r\n/g, '\n')
                 .split('\n')
                 .filter(l => l && !l.startsWith('DTSTART:'))
-                .join('\r\n') + '\r\n';
+                .join('\r\n');
+
+            if(!repeating.includes('\r\n') && !repeating.startsWith('RRULE:')) {
+                repeating = 'RRULE:' + repeating;
+            }
+
+            g += repeating.trim() + '\r\n';
         }
         else if (this.data.repeating) {
             g += 'RRULE:FREQ=' + this.data.repeating.freq;

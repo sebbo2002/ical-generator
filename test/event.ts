@@ -1093,6 +1093,15 @@ describe('ical-generator Event', function () {
             assert.deepStrictEqual(result, rule);
             assert.ok(e.toString().includes('RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z'));
         });
+        it('should add RRULE: prefix for single line string if not already there', function () {
+            const e = new ICalEvent({start: new Date()}, new ICalCalendar());
+            const rule = 'FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z';
+            e.repeating(rule);
+
+            const result = e.repeating();
+            assert.deepStrictEqual(result, rule);
+            assert.ok(e.toString().includes('RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z'));
+        });
     });
 
     describe('summary()', function () {
