@@ -1,3 +1,10 @@
+## [3.6.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.1...v3.6.2-develop.2) (2023-02-05)
+
+
+### Bug Fixes
+
+* **Event:** Add `RRULE:` prefix in event.repeating() if it's not already there ([92c2034](https://github.com/sebbo2002/ical-generator/commit/92c2034cae51c0e8199b6cf1746adfe7bdc85a60)), closes [#459](https://github.com/sebbo2002/ical-generator/issues/459)
+
 ## [3.6.2-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.6.1...v3.6.2-develop.1) (2023-01-03)
 
 ## [3.6.1](https://github.com/sebbo2002/ical-generator/compare/v3.6.0...v3.6.1) (2022-12-27)
