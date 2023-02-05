@@ -11,11 +11,11 @@
   },
   "description": "A template that I use to start new projects and services.",
   "devDependencies": {
-    "@amanda-mitchell/semantic-release-npm-multiple": "^3.5.0",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.3",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^9.0.2",
     "@types/express": "^4.17.13",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.0",
