@@ -77,6 +77,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           cache: 'npm'
+          node-version: 18
       - name: 📦 Install dependencies
         run: npm ci
       - name: 📂 Create docs folder
