@@ -1,3 +1,10 @@
+## [3.6.2-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.2...v3.6.2-develop.3) (2023-02-10)
+
+
+### Bug Fixes
+
+* Update escaping for quoted values ([faf5c70](https://github.com/sebbo2002/ical-generator/commit/faf5c70771fb62284cd9db936b0f5812e8353730)), closes [#463](https://github.com/sebbo2002/ical-generator/issues/463)
+
 ## [3.6.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.1...v3.6.2-develop.2) (2023-02-05)
 
 
