@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1047" lines-covered="1029" line-rate="0.9828" branches-valid="1005" branches-covered="976" branch-rate="0.9711" timestamp="1675618280507" complexity="0" version="0.1">
+<coverage lines-valid="1047" lines-covered="1029" line-rate="0.9828" branches-valid="1005" branches-covered="976" branch-rate="0.9711" timestamp="1676040538255" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
@@ -1654,9 +1654,9 @@
             <line number="117" hits="171"/>
           </lines>
         </method>
-        <method name="(anonymous_3)" hits="40" signature="()V">
+        <method name="(anonymous_3)" hits="44" signature="()V">
           <lines>
-            <line number="118" hits="40"/>
+            <line number="118" hits="44"/>
           </lines>
         </method>
         <method name="foldLines" hits="59" signature="()V">
@@ -1799,21 +1799,21 @@
         <line number="111" hits="93" branch="false"/>
         <line number="117" hits="1" branch="false"/>
         <line number="118" hits="171" branch="true" condition-coverage="100% (2/2)"/>
-        <line number="119" hits="40" branch="false"/>
+        <line number="119" hits="44" branch="false"/>
         <line number="126" hits="1" branch="false"/>
         <line number="127" hits="59" branch="false"/>
         <line number="128" hits="915" branch="false"/>
         <line number="129" hits="915" branch="false"/>
         <line number="130" hits="915" branch="false"/>
-        <line number="131" hits="21124" branch="false"/>
-        <line number="134" hits="21124" branch="true" condition-coverage="100% (4/4)"/>
+        <line number="131" hits="21164" branch="false"/>
+        <line number="134" hits="21164" branch="true" condition-coverage="100% (4/4)"/>
         <line number="135" hits="2" branch="false"/>
-        <line number="139" hits="21124" branch="false"/>
-        <line number="140" hits="21124" branch="false"/>
-        <line number="141" hits="21124" branch="true" condition-coverage="100% (2/2)"/>
+        <line number="139" hits="21164" branch="false"/>
+        <line number="140" hits="21164" branch="false"/>
+        <line number="141" hits="21164" branch="true" condition-coverage="100% (2/2)"/>
         <line number="142" hits="27" branch="false"/>
         <line number="143" hits="27" branch="false"/>
-        <line number="146" hits="21124" branch="false"/>
+        <line number="146" hits="21164" branch="false"/>
         <line number="148" hits="915" branch="false"/>
         <line number="155" hits="1" branch="false"/>
         <line number="156" hits="102" branch="true" condition-coverage="100% (2/2)"/>
