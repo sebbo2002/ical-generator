@@ -115,7 +115,7 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
  * Escapes special characters in the given string
  */
 export function escape (str: string | unknown, inQuotes: boolean): string {
-    return String(str).replace(inQuotes ? /[\\;,"]/g : /[\\;,]/g, function (match) {
+    return String(str).replace(inQuotes ? /[\\"]/g : /[\\;,]/g, function (match) {
         return '\\' + match;
     }).replace(/(?:\r\n|\r|\n)/g, '\\n');
 }

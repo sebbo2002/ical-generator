@@ -159,7 +159,7 @@ describe('ical-generator Cases', function () {
             organizer: 'Sebastian Pekarek <mail@sebbo.net>',
             attendees: [
                 {
-                    name: 'Matt',
+                    name: 'Smith, Matt; ("Sales")',
                     email: 'matt@example.com',
                     delegatesTo: {
                         name: 'John',
