@@ -3,7 +3,7 @@
         "declaration": true,
         "esModuleInterop": true,
         "module": "es2020",
-        "moduleResolution": "node",
+        "moduleResolution": "node16",
         "outDir": "./dist",
         "sourceMap": true,
         "strict": true,
