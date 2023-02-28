@@ -8,7 +8,7 @@
   },
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "devDependencies": {
-    "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
+    "@qiwi/semantic-release-gh-pages-plugin": "^5.2.5",
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
