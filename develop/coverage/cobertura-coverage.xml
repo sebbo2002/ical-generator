@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="1047" lines-covered="1029" line-rate="0.9828" branches-valid="1005" branches-covered="976" branch-rate="0.9711" timestamp="1676819433936" complexity="0" version="0.1">
+<coverage lines-valid="1045" lines-covered="1027" line-rate="0.9828" branches-valid="1006" branches-covered="977" branch-rate="0.9712000000000001" timestamp="1679091149959" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
@@ -800,7 +800,7 @@
         <line number="96" hits="3" branch="false"/>
       </lines>
     </class>
-    <class name="event.ts" filename="src/event.ts" line-rate="0.9849" branch-rate="0.9701000000000001">
+    <class name="event.ts" filename="src/event.ts" line-rate="0.9849" branch-rate="0.9702">
       <methods>
         <method name="(anonymous_1)" hits="1" signature="()V">
           <lines>
@@ -1531,9 +1531,9 @@
             <line number="63" hits="1"/>
           </lines>
         </method>
-        <method name="(anonymous_8)" hits="1" signature="()V">
+        <method name="(anonymous_8)" hits="2" signature="()V">
           <lines>
-            <line number="68" hits="1"/>
+            <line number="68" hits="2"/>
           </lines>
         </method>
         <method name="(anonymous_9)" hits="1" signature="()V">
@@ -1561,14 +1561,14 @@
             <line number="83" hits="1"/>
           </lines>
         </method>
-        <method name="(anonymous_14)" hits="1" signature="()V">
+        <method name="(anonymous_14)" hits="2" signature="()V">
           <lines>
-            <line number="84" hits="1"/>
+            <line number="84" hits="2"/>
           </lines>
         </method>
-        <method name="(anonymous_15)" hits="1" signature="()V">
+        <method name="(anonymous_15)" hits="0" signature="()V">
           <lines>
-            <line number="87" hits="1"/>
+            <line number="87" hits="0"/>
           </lines>
         </method>
         <method name="(anonymous_16)" hits="1" signature="()V">
@@ -1615,7 +1615,7 @@
         <line number="62" hits="2" branch="false"/>
         <line number="63" hits="2" branch="false"/>
         <line number="67" hits="1" branch="false"/>
-        <line number="68" hits="2" branch="false"/>
+        <line number="68" hits="3" branch="false"/>
         <line number="71" hits="2" branch="false"/>
         <line number="75" hits="1" branch="false"/>
         <line number="76" hits="2" branch="false"/>
@@ -1623,8 +1623,8 @@
         <line number="81" hits="2" branch="false"/>
         <line number="82" hits="2" branch="false"/>
         <line number="83" hits="2" branch="false"/>
-        <line number="84" hits="2" branch="false"/>
-        <line number="87" hits="2" branch="false"/>
+        <line number="84" hits="3" branch="false"/>
+        <line number="87" hits="1" branch="false"/>
         <line number="90" hits="1" branch="false"/>
         <line number="97" hits="2" branch="false"/>
         <line number="98" hits="2" branch="false"/>
@@ -1633,8 +1633,6 @@
         <line number="110" hits="2" branch="false"/>
         <line number="111" hits="2" branch="false"/>
         <line number="112" hits="2" branch="false"/>
-        <line number="116" hits="1" branch="true" condition-coverage="100% (1/1)"/>
-        <line number="117" hits="1" branch="false"/>
       </lines>
     </class>
     <class name="tools.ts" filename="src/tools.ts" line-rate="0.975" branch-rate="0.9688">
