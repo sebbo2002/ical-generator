@@ -97,7 +97,7 @@ export default class ICalCalendar {
      *  * import ical from 'ical-generator';
      *
      * // or use require:
-     * // const ical = require('ical-generator');
+     * // const { default: ical } = require('ical-generator');
      *
      *
      * const cal = ical({name: 'my first iCal'});
@@ -498,7 +498,7 @@ export default class ICalCalendar {
      * import ical from 'ical-generator';
      *
      * // or use require:
-     * // const ical = require('ical-generator');
+     * // const { default: ical } = require('ical-generator');
      *
      * const cal = ical();
      * const event = cal.createEvent({summary: 'My Event'});

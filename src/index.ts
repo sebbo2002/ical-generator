@@ -14,7 +14,7 @@ import ICalCalendar, {ICalCalendarData} from './calendar';
  * import ical from 'ical-generator';
  *
  * // or use require:
- * // const ical = require('ical-generator');
+ * // const { default: ical } = require('ical-generator');
  *
  * const cal = ical();
  * ```
@@ -25,7 +25,7 @@ import ICalCalendar, {ICalCalendarData} from './calendar';
  * import ical from 'ical-generator';
  *
  * // or use require:
- * // const ical = require('ical-generator');
+ * // const { default: ical } = require('ical-generator');
  * const cal = ical({domain: 'sebbo.net'});
  *
  * // is the same as

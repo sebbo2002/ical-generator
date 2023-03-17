@@ -1,5 +1,5 @@
-const ical = require('ical-generator');
-const http = require('http');
+import ical from 'ical-generator';
+import http from 'node:http';
 
 const calendar = ical({name: 'my first iCal'});
 const startTime = new Date();
