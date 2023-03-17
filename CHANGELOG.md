@@ -1,3 +1,15 @@
+# [4.0.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.4...v4.0.0-develop.1) (2023-03-17)
+
+
+### Features
+
+* ESM Module ([7e1f07a](https://github.com/sebbo2002/ical-generator/commit/7e1f07afe6ff60100df61887e6a063b382f75340))
+
+
+### BREAKING CHANGES
+
+* Importing the generator with `const ical = require('ical-generator');` (introduced with 2.1.0 / #253) will not work anymore, please use `const { default: ical } = require('ical-generator');` or move to fancy ESM imports (`import ical from 'ical-generator' ;`).
+
 ## [3.6.2-develop.4](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.3...v3.6.2-develop.4) (2023-02-19)
 
 ## [3.6.2-develop.3](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.2...v3.6.2-develop.3) (2023-02-10)
