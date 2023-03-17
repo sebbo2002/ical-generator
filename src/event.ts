@@ -1413,7 +1413,7 @@ export default class ICalEvent {
         }
         else if(this.data.repeating) {
             repeating = Object.assign({}, this.data.repeating, {
-                until: toJSON(this.data.repeating.until),
+                until: toJSON(this.data.repeating.until) || undefined,
                 exclude: this.data.repeating.exclude?.map(d => toJSON(d)),
             });
         }

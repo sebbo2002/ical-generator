@@ -347,7 +347,7 @@ export function isRRule(value: unknown): value is ICalRRuleStub {
 
 export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {
     if(!value) {
-        return value;
+        return null;
     }
     if(typeof value === 'string') {
         return value;

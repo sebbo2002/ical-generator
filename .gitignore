@@ -20,3 +20,4 @@
 .idea/**/dbnavigator.xml
 .idea/httpRequests
 *.iws
+mochawesome-report

@@ -111,8 +111,3 @@ export {
     escape,
     foldLines
 } from './tools';
-
-/* istanbul ignore else */
-if (typeof module !== 'undefined') {
-    module.exports = Object.assign(ical, module.exports);
-}

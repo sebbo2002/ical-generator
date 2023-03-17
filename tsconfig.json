@@ -2,11 +2,9 @@
     "compilerOptions": {
         "declaration": true,
         "esModuleInterop": true,
-        "module": "none",
         "moduleResolution": "node",
         "outDir": "./dist",
         "sourceMap": true,
-        "strict": true,
         "target": "es6"
     },
     "exclude": [
