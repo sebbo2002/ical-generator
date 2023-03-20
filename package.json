@@ -31,13 +31,18 @@
     "semantic-release-license": "^1.0.3",
     "source-map-support": "^0.5.21",
     "ts-node": "^10.8.1",
+    "tsup": "^6.7.0",
     "typedoc": "^0.23.2",
     "typescript": "^4.7.4"
   },
   "engines": {
-    "node": "^14.8.0 || >=16.0.0"
+    "node": ">=16.0.0"
   },
-  "exports": "./dist/index.js",
+  "exports": {
+    "types": "./dist/lib/index.d.ts",
+    "import": "./dist/lib/index.mjs",
+    "require": "./dist/lib/index.js"
+  },
   "files": [
     "/dist"
   ],
@@ -49,7 +54,7 @@
     "url": "git+https://github.com/sebbo2002/js-template.git"
   },
   "scripts": {
-    "build": "tsc && chmod +x ./dist/bin/*.js",
+    "build": "tsup",
     "build-all": "./.github/workflows/build.sh",
     "coverage": "c8 mocha",
     "develop": "ts-node ./src/bin/start.ts",
@@ -58,6 +63,6 @@
     "start": "node ./dist/bin/start.js",
     "test": "mocha"
   },
-  "type": "module",
+  "types": "./dist/lib/index.d.ts",
   "version": "1.0.0"
 }
