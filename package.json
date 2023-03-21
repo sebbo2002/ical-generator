@@ -36,19 +36,23 @@
     "typescript": "^4.7.4"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": "^14.8.0 || >=16.0.0"
   },
   "exports": {
     "types": "./dist/lib/index.d.ts",
     "import": "./dist/lib/index.mjs",
     "require": "./dist/lib/index.js"
   },
+  "module": "./dist/lib/index.mjs",
   "files": [
     "/dist"
   ],
   "homepage": "https://github.com/sebbo2002/js-template#readme",
   "license": "MIT",
   "name": "@sebbo2002/js-template-test",
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "typings": "./dist/lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebbo2002/js-template.git"
@@ -63,6 +67,5 @@
     "start": "node ./dist/bin/start.js",
     "test": "mocha"
   },
-  "types": "./dist/lib/index.d.ts",
   "version": "1.0.0"
 }

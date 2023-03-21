@@ -1,6 +1,6 @@
 'use strict';
 
-import Magic from '../../src/lib/index.js';
+import Magic from '../../src/lib';
 import assert from 'assert';
 
 describe('Example', function () {
