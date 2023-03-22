@@ -311,9 +311,18 @@ describe('ical-generator Attendee', function () {
             assert.strictEqual(a.delegatedFrom(), null);
 
             a.delegatedFrom('foo@example.com');
-            const result = a.delegatedFrom();
+            let result = a.delegatedFrom();
             assert.ok(result);
             assert.strictEqual(result.email(), 'foo@example.com');
+
+            a.delegatedFrom({
+                name: 'Max Mustermann',
+                email: 'max.mustermann@example.com'
+            });
+            result = a.delegatedFrom();
+            assert.ok(result);
+            assert.strictEqual(result.name(), 'Max Mustermann');
+            assert.strictEqual(result.email(), 'max.mustermann@example.com');
 
             a.delegatedFrom(null);
             assert.strictEqual(a.delegatedFrom(), null);
