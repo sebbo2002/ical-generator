@@ -1,3 +1,17 @@
+# [4.0.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v4.0.0-develop.1...v4.0.0-develop.2) (2023-03-22)
+
+
+### Build System
+
+* Deprecate node.js 12 ([426588b](https://github.com/sebbo2002/ical-generator/commit/426588b4bb7bde2924bbc92006ca839e960872e1))
+* Native ESM support ([7b86a4f](https://github.com/sebbo2002/ical-generator/commit/7b86a4f1187c387a3a5792e1fb72d822b04e3631))
+
+
+### BREAKING CHANGES
+
+* From now on, only node.js ^14.8.0 || >=16.0.0 are supported
+* Only Support for node.js ^12.20.0 || >=14.13.1
+
 # [4.0.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v3.6.2-develop.4...v4.0.0-develop.1) (2023-03-17)
 
 
