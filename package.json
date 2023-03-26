@@ -42,14 +42,14 @@
     "import": "./dist/lib/index.mjs",
     "require": "./dist/lib/index.js"
   },
-  "module": "./dist/lib/index.mjs",
   "files": [
     "/dist"
   ],
   "homepage": "https://github.com/sebbo2002/js-template#readme",
   "license": "MIT",
-  "name": "@sebbo2002/js-template-test",
   "main": "./dist/lib/index.js",
+  "module": "./dist/lib/index.mjs",
+  "name": "@sebbo2002/js-template-test",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebbo2002/js-template.git"
