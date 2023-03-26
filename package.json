@@ -48,7 +48,6 @@
     "import": "./dist/index.mjs",
     "require": "./dist/index.js"
   },
-  "module": "./dist/index.mjs",
   "files": [
     "/src",
     "/dist"
@@ -69,8 +68,7 @@
   ],
   "license": "MIT",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "typings": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
   "name": "ical-generator",
   "peerDependencies": {
     "@touch4it/ical-timezones": ">=1.6.0",
