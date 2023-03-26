@@ -39,7 +39,6 @@
     "node": "^14.8.0 || >=16.0.0"
   },
   "exports": {
-    "types": "./dist/lib/index.d.ts",
     "import": "./dist/lib/index.mjs",
     "require": "./dist/lib/index.js"
   },
@@ -51,14 +50,12 @@
   "license": "MIT",
   "name": "@sebbo2002/js-template-test",
   "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
-  "typings": "./dist/lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebbo2002/js-template.git"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp ./dist/lib/index.d.ts ./dist/lib/index.d.mts",
     "build-all": "./.github/workflows/build.sh",
     "coverage": "c8 mocha",
     "develop": "ts-node ./src/bin/start.ts",
