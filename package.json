@@ -39,23 +39,23 @@
     "node": "^14.8.0 || >=16.0.0"
   },
   "exports": {
-    "import": "./dist/lib/index.mjs",
-    "require": "./dist/lib/index.js"
+    "import": "./dist/lib/index.js",
+    "require": "./dist/lib/index.cjs"
   },
   "files": [
     "/dist"
   ],
   "homepage": "https://github.com/sebbo2002/js-template#readme",
   "license": "MIT",
-  "main": "./dist/lib/index.js",
-  "module": "./dist/lib/index.mjs",
+  "main": "./dist/lib/index.cjs",
+  "module": "./dist/lib/index.js",
   "name": "@sebbo2002/js-template-test",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sebbo2002/js-template.git"
   },
   "scripts": {
-    "build": "tsup && cp ./dist/lib/index.d.ts ./dist/lib/index.d.mts",
+    "build": "tsup && cp ./dist/lib/index.d.ts ./dist/lib/index.d.cts",
     "build-all": "./.github/workflows/build.sh",
     "coverage": "c8 mocha",
     "develop": "ts-node ./src/bin/start.ts",
@@ -64,5 +64,6 @@
     "start": "node ./dist/bin/start.js",
     "test": "mocha"
   },
+  "type": "module",
   "version": "1.0.0"
 }
