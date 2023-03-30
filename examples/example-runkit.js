@@ -1,4 +1,4 @@
-const ical = require('ical-generator');
+import ical from 'ical-generator';
 const cal = ical();
 
 const event = cal.createEvent({

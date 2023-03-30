@@ -12,7 +12,7 @@
         <img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" />
     </a>
     <a href="https://github.com/sebbo2002/ical-generator/actions">
-        <img src="https://img.shields.io/github/workflow/status/sebbo2002/ical-generator/Test%20%26%20Release?style=flat-square" alt="CI Status" />
+        <img src="https://img.shields.io/github/actions/workflow/status/sebbo2002/ical-generator/test-release.yml?style=flat-square" alt="CI Status" />
     </a>
 </p>
 
@@ -37,8 +37,8 @@ to generate subscriptionable calendar feeds.
 ## ⚡️ Quick Start
 
 ```javascript
-const ical = require('ical-generator');
-const http = require('http');
+import ical from 'ical-generator';
+import http from 'node:http';
 
 const calendar = ical({name: 'my first iCal'});
 const startTime = new Date();

@@ -14,7 +14,7 @@ ORGANIZER;CN="Sebastian Pekarek":mailto:mail@sebbo.net
 ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;DELEGATED-FROM="matt@examp
  le.com";CN="John":MAILTO:john@example.com
 ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=DELEGATED;DELEGATED-TO="john@exampl
- e.com";CN="Matt":MAILTO:matt@example.com
+ e.com";CN="Smith, Matt; (\"Sales\")":MAILTO:matt@example.com
 BEGIN:VALARM
 ACTION:DISPLAY
 TRIGGER:-PT10M

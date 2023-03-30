@@ -2,8 +2,8 @@
 
 import assert from 'assert';
 import moment from 'moment-timezone';
-import ical from '../src';
-import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
+import ical from '../src/index.js';
+import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types.js';
 
 describe('Issues', function () {
     describe('Issue #38', function () {
@@ -214,5 +214,60 @@ describe('Issues', function () {
     describe('Issue #442', function () {
         it('should generate floating repeat until value if event is a floating event');
         it('should generate floating repeat exclusion dates if event is a floating event');
+    });
+
+    describe('Issue #459', function () {
+        it('event.repeating should work with `RRULE:` prefix', function () {
+            const calendar = ical({
+                events: [{
+                    id: 'foo',
+                    start: new Date('2020-08-13T00:00:00-05:00'),
+                    stamp: new Date('2020-08-13T00:00:00-05:00'),
+                    summary: 'Example Event',
+                    repeating: 'RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1'
+                }]
+            });
+
+            assert.strictEqual(calendar.toString(), [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//sebbo.net//ical-generator//EN',
+                'BEGIN:VEVENT',
+                'UID:foo',
+                'SEQUENCE:0',
+                'DTSTAMP:20200813T050000Z',
+                'DTSTART:20200813T050000Z',
+                'RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1',
+                'SUMMARY:Example Event',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n'));
+        });
+        it('event.repeating should work without `RRULE:` prefix', function () {
+            const calendar = ical({
+                events: [{
+                    id: 'foo',
+                    start: new Date('2020-08-13T00:00:00-05:00'),
+                    stamp: new Date('2020-08-13T00:00:00-05:00'),
+                    summary: 'Example Event',
+                    repeating: 'FREQ=MONTHLY;COUNT=3;INTERVAL=1'
+                }]
+            });
+
+            assert.strictEqual(calendar.toString(), [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//sebbo.net//ical-generator//EN',
+                'BEGIN:VEVENT',
+                'UID:foo',
+                'SEQUENCE:0',
+                'DTSTAMP:20200813T050000Z',
+                'DTSTART:20200813T050000Z',
+                'RRULE:FREQ=MONTHLY;COUNT=3;INTERVAL=1',
+                'SUMMARY:Example Event',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n'));
+        });
     });
 });

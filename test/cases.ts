@@ -1,16 +1,19 @@
 'use strict';
 
 import assert from 'assert';
-import { promises as fs } from 'fs';
-import ical, { ICalEventTransparency } from '../src';
-import { ICalCalendarMethod } from '../src/calendar';
-import { ICalEventStatus } from '../src/event';
-import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types';
-import { ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType } from '../src/attendee';
-import { ICalAlarmType } from '../src/alarm';
+import { join, dirname } from 'node:path';
+import { promises as fs } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import ical, { ICalEventTransparency } from '../src/index.js';
+import { ICalCalendarMethod } from '../src/calendar.js';
+import { ICalEventStatus } from '../src/event.js';
+import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types.js';
+import { ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType } from '../src/attendee.js';
+import { ICalAlarmType } from '../src/alarm.js';
 import { getVtimezoneComponent } from '@touch4it/ical-timezones';
 
 describe('ical-generator Cases', function () {
+    const resultDir = join(dirname(fileURLToPath(import.meta.url)), 'results');
     it('case #1', async function () {
         const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
         cal.createEvent({
@@ -24,7 +27,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_01.ics', 'utf8'));
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_01.ics', 'utf8'));
 
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
@@ -46,7 +49,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_02.ics', 'utf8'));
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_02.ics', 'utf8'));
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
@@ -78,7 +81,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_03.ics', 'utf8'), 'toString');
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_03.ics', 'utf8'), 'toString');
         assert.strictEqual(ical(cal.toJSON()).toString(), string, 'toJSON / toString()');
     });
 
@@ -123,7 +126,7 @@ describe('ical-generator Cases', function () {
             }
         ]);
 
-        assert.strictEqual(cal.toString(), await fs.readFile(__dirname + '/results/generate_04.ics', 'utf8'), 'first check');
+        assert.strictEqual(cal.toString(), await fs.readFile(resultDir + '/generate_04.ics', 'utf8'), 'first check');
 
         // Wount be same, as reference to VTimezone generator is not exported
         // assert.strictEqual(ical(cal.toJSON()).toString(), string);
@@ -144,7 +147,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_05.ics', 'utf8'));
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_05.ics', 'utf8'));
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
@@ -159,7 +162,7 @@ describe('ical-generator Cases', function () {
             organizer: 'Sebastian Pekarek <mail@sebbo.net>',
             attendees: [
                 {
-                    name: 'Matt',
+                    name: 'Smith, Matt; ("Sales")',
                     email: 'matt@example.com',
                     delegatesTo: {
                         name: 'John',
@@ -186,7 +189,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_06.ics', 'utf8'));
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_06.ics', 'utf8'));
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
@@ -230,7 +233,7 @@ describe('ical-generator Cases', function () {
         ]);
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_07.ics', 'utf8'));
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_07.ics', 'utf8'));
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
@@ -254,7 +257,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_08.ics', 'utf8'));
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_08.ics', 'utf8'));
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
@@ -281,7 +284,7 @@ describe('ical-generator Cases', function () {
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(__dirname + '/results/generate_09.ics', 'utf8'), 'toString');
+        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_09.ics', 'utf8'), 'toString');
         assert.strictEqual(ical(cal.toJSON()).toString(), string, 'toJSON / toString()');
     });
 });

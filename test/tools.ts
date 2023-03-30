@@ -5,9 +5,9 @@ import moment from 'moment';
 import momentTz from 'moment-timezone';
 import {DateTime} from 'luxon';
 import dayjs from 'dayjs';
-import dayJsUTCPlugin from 'dayjs/plugin/utc';
-import dayJsTimezonePlugin from 'dayjs/plugin/timezone';
-import {formatDate, formatDateTZ, foldLines, escape, checkDate, toDate} from '../src/tools';
+import dayJsUTCPlugin from 'dayjs/plugin/utc.js';
+import dayJsTimezonePlugin from 'dayjs/plugin/timezone.js';
+import {formatDate, formatDateTZ, foldLines, escape, checkDate, toDate} from '../src/tools.js';
 
 dayjs.extend(dayJsUTCPlugin);
 dayjs.extend(dayJsTimezonePlugin);

@@ -7,11 +7,11 @@ import {
     generateCustomAttributes,
     isMomentDuration,
     toDurationString
-} from './tools';
-import ICalEvent, {ICalEventData, ICalEventJSONData} from './event';
+} from './tools.js';
+import ICalEvent, {ICalEventData, ICalEventJSONData} from './event.js';
 import {writeFile, writeFileSync, promises as fsPromises} from 'fs';
 import {ServerResponse} from 'http';
-import { ICalMomentDurationStub, ICalTimezone } from './types';
+import { ICalMomentDurationStub, ICalTimezone } from './types.js';
 
 
 export interface ICalCalendarData {
@@ -97,7 +97,7 @@ export default class ICalCalendar {
      *  * import ical from 'ical-generator';
      *
      * // or use require:
-     * // const ical = require('ical-generator');
+     * // const { default: ical } = require('ical-generator');
      *
      *
      * const cal = ical({name: 'my first iCal'});
@@ -498,7 +498,7 @@ export default class ICalCalendar {
      * import ical from 'ical-generator';
      *
      * // or use require:
-     * // const ical = require('ical-generator');
+     * // const { default: ical } = require('ical-generator');
      *
      * const cal = ical();
      * const event = cal.createEvent({summary: 'My Event'});
@@ -651,9 +651,6 @@ export default class ICalCalendar {
      * Generates a blob to use for downloads or to generate a download URL.
      * Only supported in browsers supporting the Blob API.
      *
-     * Unfortunately, because node.js has no Blob implementation (they have Buffer
-     * instead), this method is currently untested. Sorry Dave…
-     *
      * @since 1.9.0
      */
     toBlob(): Blob {
@@ -664,9 +661,6 @@ export default class ICalCalendar {
     /**
      * Returns a URL to download the ical file. Uses the Blob object internally,
      * so it's only supported in browsers supporting the Blob API.
-     *
-     * Unfortunately, because node.js has no Blob implementation (they have Buffer
-     * instead), this can't be tested right now. Sorry Dave…
      *
      * @since 1.9.0
      */

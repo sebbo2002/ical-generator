@@ -1,7 +1,7 @@
 'use strict';
 
-const ical = require('ical-generator');
-const moment = require('moment');
+import ical from 'ical-generator';
+import moment from 'moment';
 
 const cal = ical({
     prodId: '//superman-industries.com//ical-generator//EN',

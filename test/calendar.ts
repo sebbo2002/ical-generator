@@ -5,10 +5,14 @@ import {existsSync, unlinkSync} from 'fs';
 import * as http from 'http';
 import moment from 'moment';
 import {join} from 'path';
+import { versions } from 'node:process';
+import { tmpdir } from 'node:os';
 import {getPortPromise} from 'portfinder';
-import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar';
-import ICalEvent from '../src/event';
+import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar.js';
+import ICalEvent from '../src/event.js';
 import {getVtimezoneComponent} from '@touch4it/ical-timezones';
+
+const supportsBlob = parseInt(versions.node) >= 18;
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
@@ -363,7 +367,7 @@ describe('ical-generator Calendar', function () {
 
     describe('save()', function () {
         it('should return all public methods and save it', function (done) {
-            const file = join(__dirname, 'save.ical');
+            const file = join(tmpdir(), 'save.ical');
             const cal = new ICalCalendar();
 
             assert.deepStrictEqual(cal, cal.save(file, function () {
@@ -379,7 +383,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should be usable with promises', async function () {
-            const file = join(__dirname, 'save.ical');
+            const file = join(tmpdir(), 'save.ical');
             const cal = new ICalCalendar();
             await cal.save(file);
 
@@ -388,7 +392,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when event invalid', function () {
-            const file = join(__dirname, 'save.ical');
+            const file = join(tmpdir(), 'save.ical');
             const cal = new ICalCalendar();
 
             cal.createEvent({});
@@ -401,7 +405,7 @@ describe('ical-generator Calendar', function () {
 
     describe('saveSync()', function () {
         it('should save it', function () {
-            const file = join(__dirname, 'save_sync.ical');
+            const file = join(tmpdir(), 'save_sync.ical');
             const cal = new ICalCalendar();
 
             cal.saveSync(file);
@@ -414,7 +418,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when event invalid', function () {
-            const file = join(__dirname, 'save_sync.ical');
+            const file = join(tmpdir(), 'save_sync.ical');
             const cal = new ICalCalendar();
 
             cal.createEvent({});
@@ -481,6 +485,44 @@ describe('ical-generator Calendar', function () {
                 });
             });
         });
+    });
+
+    describe('toBlob()', function () {
+        it('should work', supportsBlob ? async function () {
+            const cal = new ICalCalendar({
+                events: [
+                    {
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + (1000 * 60 * 60)),
+                        summary: 'Blob Calendar Event'
+                    }
+                ]
+            });
+
+            const blob = cal.toBlob();
+            assert.ok(blob instanceof Blob, 'instanceof Blob');
+            assert.ok(blob.size > 0, 'blob is filled');
+            assert.strictEqual(blob.type, 'text/calendar');
+        } : undefined);
+    });
+
+    describe('toURL()', function () {
+        it('should work', supportsBlob ? async function () {
+            const cal = new ICalCalendar({
+                events: [
+                    {
+                        start: new Date(),
+                        end: new Date(new Date().getTime() + (1000 * 60 * 60)),
+                        summary: 'Calendar URL Event'
+                    }
+                ]
+            });
+
+            const url = cal.toURL();
+            console.log(url);
+            assert.strictEqual(typeof url, 'string');
+            assert.ok(url.length > 0, 'url is not empty');
+        } : undefined);
     });
 
     describe('x()', function () {

@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import ICalCategory from '../src/category';
+import ICalCategory from '../src/category.js';
 
 describe('ical-generator Category', function () {
     describe('constructor()', function () {

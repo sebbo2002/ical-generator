@@ -1,7 +1,7 @@
 'use strict';
 
-const ical = require('../src/index');
-const moment = require('moment');
+import ical from 'ical-generator';
+import moment from 'moment';
 const cal = ical();
 
 cal.createEvent({

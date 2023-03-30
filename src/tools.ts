@@ -6,7 +6,7 @@ import {
     ICalMomentStub,
     ICalMomentTimezoneStub,
     ICalOrganizer, ICalRRuleStub
-} from './types';
+} from './types.js';
 
 /**
  * Converts a valid date/time object supported by this library to a string.
@@ -115,7 +115,7 @@ export function formatDateTZ (timezone: string | null, property: string, date: I
  * Escapes special characters in the given string
  */
 export function escape (str: string | unknown, inQuotes: boolean): string {
-    return String(str).replace(inQuotes ? /[\\;,"]/g : /[\\;,]/g, function (match) {
+    return String(str).replace(inQuotes ? /[\\"]/g : /[\\;,]/g, function (match) {
         return '\\' + match;
     }).replace(/(?:\r\n|\r|\n)/g, '\\n');
 }
@@ -347,7 +347,7 @@ export function isRRule(value: unknown): value is ICalRRuleStub {
 
 export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {
     if(!value) {
-        return value;
+        return null;
     }
     if(typeof value === 'string') {
         return value;

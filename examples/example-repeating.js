@@ -1,6 +1,6 @@
 'use strict';
 
-const ical = require('ical-generator');
+import ical from 'ical-generator';
 const cal = ical();
 
 cal.createEvent({

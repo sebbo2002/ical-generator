@@ -1,7 +1,7 @@
 'use strict';
 
 
-import {escape} from './tools';
+import {escape} from './tools.js';
 
 
 export interface ICalCategoryData {

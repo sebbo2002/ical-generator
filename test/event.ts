@@ -2,14 +2,14 @@
 
 import assert from 'assert';
 import moment from 'moment-timezone';
-import ICalCalendar from '../src/calendar';
-import ICalEvent, {ICalEventBusyStatus, ICalEventClass, ICalEventData, ICalEventStatus, ICalEventTransparency} from '../src/event';
-import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
-import ICalAttendee from '../src/attendee';
-import ICalAlarm, {ICalAlarmType} from '../src/alarm';
-import ICalCategory from '../src/category';
-import {isRRule} from '../src/tools';
-import {RRule} from 'rrule';
+import ICalCalendar from '../src/calendar.js';
+import ICalEvent, {ICalEventBusyStatus, ICalEventClass, ICalEventData, ICalEventStatus, ICalEventTransparency} from '../src/event.js';
+import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types.js';
+import ICalAttendee from '../src/attendee.js';
+import ICalAlarm, {ICalAlarmType} from '../src/alarm.js';
+import ICalCategory from '../src/category.js';
+import {isRRule} from '../src/tools.js';
+import rrule from 'rrule';
 
 describe('ical-generator Event', function () {
     describe('constructor()', function () {
@@ -1069,10 +1069,10 @@ describe('ical-generator Event', function () {
         it('should support RRules', function () {
             const start = new Date(Date.UTC(2012, 1, 1, 10, 30));
             const e = new ICalEvent({start}, new ICalCalendar());
-            const rule = new RRule({
-                freq: RRule.WEEKLY,
+            const rule = new rrule.RRule({
+                freq: rrule.RRule.WEEKLY,
                 interval: 5,
-                byweekday: [RRule.MO, RRule.FR],
+                byweekday: [rrule.RRule.MO, rrule.RRule.FR],
                 dtstart: start,
                 until: new Date(Date.UTC(2012, 12, 31))
             });
@@ -1087,6 +1087,15 @@ describe('ical-generator Event', function () {
         it('should support strings', function () {
             const e = new ICalEvent({start: new Date()}, new ICalCalendar());
             const rule = 'RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z';
+            e.repeating(rule);
+
+            const result = e.repeating();
+            assert.deepStrictEqual(result, rule);
+            assert.ok(e.toString().includes('RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z'));
+        });
+        it('should add RRULE: prefix for single line string if not already there', function () {
+            const e = new ICalEvent({start: new Date()}, new ICalCalendar());
+            const rule = 'FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20130131T000000Z';
             e.repeating(rule);
 
             const result = e.repeating();
@@ -1826,10 +1835,10 @@ describe('ical-generator Event', function () {
 
         it('should stringify RRule objects', function() {
             const date = new Date();
-            const rule = new RRule({
-                freq: RRule.WEEKLY,
+            const rule = new rrule.RRule({
+                freq: rrule.RRule.WEEKLY,
                 interval: 5,
-                byweekday: [RRule.MO, RRule.FR],
+                byweekday: [rrule.RRule.MO, rrule.RRule.FR],
                 dtstart: date,
                 until: new Date(Date.UTC(2012, 12, 31))
             });

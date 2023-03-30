@@ -13,11 +13,11 @@ import {
     isRRule,
     toDate,
     toJSON
-} from './tools';
-import ICalAttendee, {ICalAttendeeData} from './attendee';
-import ICalAlarm, {ICalAlarmData} from './alarm';
-import ICalCategory, {ICalCategoryData} from './category';
-import ICalCalendar from './calendar';
+} from './tools.js';
+import ICalAttendee, {ICalAttendeeData} from './attendee.js';
+import ICalAlarm, {ICalAlarmData} from './alarm.js';
+import ICalCategory, {ICalCategoryData} from './category.js';
+import ICalCalendar from './calendar.js';
 import {
     ICalDateTimeValue,
     ICalDescription,
@@ -27,7 +27,7 @@ import {
     ICalRepeatingOptions,
     ICalRRuleStub,
     ICalWeekday
-} from './types';
+} from './types.js';
 
 
 export enum ICalEventStatus {
@@ -1413,7 +1413,7 @@ export default class ICalEvent {
         }
         else if(this.data.repeating) {
             repeating = Object.assign({}, this.data.repeating, {
-                until: toJSON(this.data.repeating.until),
+                until: toJSON(this.data.repeating.until) || undefined,
                 exclude: this.data.repeating.exclude?.map(d => toJSON(d)),
             });
         }
@@ -1472,12 +1472,18 @@ export default class ICalEvent {
 
         // REPEATING
         if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
-            g += this.data.repeating
+            let repeating = this.data.repeating
                 .toString()
                 .replace(/\r\n/g, '\n')
                 .split('\n')
                 .filter(l => l && !l.startsWith('DTSTART:'))
-                .join('\r\n') + '\r\n';
+                .join('\r\n');
+
+            if(!repeating.includes('\r\n') && !repeating.startsWith('RRULE:')) {
+                repeating = 'RRULE:' + repeating;
+            }
+
+            g += repeating.trim() + '\r\n';
         }
         else if (this.data.repeating) {
             g += 'RRULE:FREQ=' + this.data.repeating.freq;
