@@ -1,3 +1,29 @@
+# [4.0.0](https://github.com/sebbo2002/ical-generator/compare/v3.6.1...v4.0.0) (2023-03-30)
+
+
+### Bug Fixes
+
+* **Event:** Add `RRULE:` prefix in event.repeating() if it's not already there ([92c2034](https://github.com/sebbo2002/ical-generator/commit/92c2034cae51c0e8199b6cf1746adfe7bdc85a60)), closes [#459](https://github.com/sebbo2002/ical-generator/issues/459)
+* Update escaping for quoted values ([faf5c70](https://github.com/sebbo2002/ical-generator/commit/faf5c70771fb62284cd9db936b0f5812e8353730)), closes [#463](https://github.com/sebbo2002/ical-generator/issues/463)
+
+
+### Build System
+
+* Deprecate node.js 12 ([426588b](https://github.com/sebbo2002/ical-generator/commit/426588b4bb7bde2924bbc92006ca839e960872e1))
+* Native ESM support ([7b86a4f](https://github.com/sebbo2002/ical-generator/commit/7b86a4f1187c387a3a5792e1fb72d822b04e3631))
+
+
+### Features
+
+* ESM Module ([7e1f07a](https://github.com/sebbo2002/ical-generator/commit/7e1f07afe6ff60100df61887e6a063b382f75340))
+
+
+### BREAKING CHANGES
+
+* Importing the generator with `const ical = require('ical-generator');` (introduced with 2.1.0 / #253) will not work anymore, please use `const { default: ical } = require('ical-generator');` or move to fancy ESM imports (`import ical from 'ical-generator' ;`).
+* From now on, only node.js ^14.8.0 || >=16.0.0 are supported
+* Only Support for node.js ^12.20.0 || >=14.13.1
+
 # [4.0.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v4.0.0-develop.1...v4.0.0-develop.2) (2023-03-22)
 
 
