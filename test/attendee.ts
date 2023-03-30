@@ -1,14 +1,14 @@
 'use strict';
 
 import assert from 'assert';
-import ICalCalendar from '../src/calendar';
-import ICalEvent from '../src/event';
+import ICalCalendar from '../src/calendar.js';
+import ICalEvent from '../src/event.js';
 import ICalAttendee, {
     ICalAttendeeData,
     ICalAttendeeRole,
     ICalAttendeeStatus,
     ICalAttendeeType
-} from '../src/attendee';
+} from '../src/attendee.js';
 
 describe('ical-generator Attendee', function () {
     describe('constructor()', function () {

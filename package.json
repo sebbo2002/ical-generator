@@ -45,8 +45,8 @@
     "node": "^14.8.0 || >=16.0.0"
   },
   "exports": {
-    "import": "./dist/lib/index.js",
-    "require": "./dist/lib/index.cjs"
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
   },
   "files": [
     "/src",
@@ -67,8 +67,8 @@
     "alarms"
   ],
   "license": "MIT",
-  "main": "./dist/lib/index.cjs",
-  "module": "./dist/lib/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "name": "ical-generator",
   "peerDependencies": {
     "@touch4it/ical-timezones": ">=1.6.0",
@@ -117,7 +117,7 @@
   },
   "runkitExampleFilename": "examples/example-runkit.js",
   "scripts": {
-    "build": "tsup && cp ./dist/lib/index.d.ts ./dist/lib/index.d.cts",
+    "build": "tsup && cp ./dist/index.d.ts ./dist/index.d.cts",
     "build-all": "./.github/workflows/build.sh",
     "coverage": "c8 mocha",
     "develop": "ts-node ./src/bin/start.ts",

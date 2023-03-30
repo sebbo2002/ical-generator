@@ -3,9 +3,9 @@
 import assert from 'assert';
 import moment from 'moment-timezone';
 
-import ICalCalendar from '../src/calendar';
-import ICalEvent from '../src/event';
-import ICalAlarm, {ICalAlarmType} from '../src/alarm';
+import ICalCalendar from '../src/calendar.js';
+import ICalEvent from '../src/event.js';
+import ICalAlarm, {ICalAlarmType} from '../src/alarm.js';
 
 
 describe('ical-generator Alarm', function () {

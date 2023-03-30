@@ -2,8 +2,8 @@
 
 import assert from 'assert';
 import moment from 'moment-timezone';
-import ical from '../src';
-import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types';
+import ical from '../src/index.js';
+import {ICalEventRepeatingFreq, ICalWeekday} from '../src/types.js';
 
 describe('Issues', function () {
     describe('Issue #38', function () {

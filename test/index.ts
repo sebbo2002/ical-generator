@@ -21,7 +21,7 @@ import ical, {
     formatDateTZ,
     escape,
     foldLines
-} from '../src';
+} from '../src/index.js';
 
 describe('ical-generator Index', function() {
     describe('default', function () {

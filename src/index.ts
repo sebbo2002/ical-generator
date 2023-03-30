@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ICalCalendar, {ICalCalendarData} from './calendar';
+import ICalCalendar, {ICalCalendarData} from './calendar.js';
 
 
 /**
@@ -53,7 +53,7 @@ export {
     ICalAlarmTypeValue,
     ICalAlarmJSONData,
     ICalAttachment
-} from './alarm';
+} from './alarm.js';
 
 export {
     default as ICalAttendee,
@@ -62,7 +62,7 @@ export {
     ICalAttendeeRole,
     ICalAttendeeStatus,
     ICalAttendeeJSONData
-} from './attendee';
+} from './attendee.js';
 
 export {
     default as ICalCalendar,
@@ -70,12 +70,12 @@ export {
     ICalCalendarProdIdData,
     ICalCalendarMethod,
     ICalCalendarJSONData
-} from './calendar';
+} from './calendar.js';
 
 export {
     default as ICalCategory,
     ICalCategoryData
-} from './category';
+} from './category.js';
 
 export {
     default as ICalEvent,
@@ -85,7 +85,7 @@ export {
     ICalEventData,
     ICalEventJSONData,
     ICalEventClass,
-} from './event';
+} from './event.js';
 
 export {
     ICalDateTimeValue,
@@ -103,11 +103,11 @@ export {
     ICalLuxonDateTimeStub,
     ICalDayJsStub,
     ICalRRuleStub
-} from './types';
+} from './types.js';
 
 export {
     formatDate,
     formatDateTZ,
     escape,
     foldLines
-} from './tools';
+} from './tools.js';

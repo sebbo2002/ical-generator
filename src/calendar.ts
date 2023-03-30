@@ -7,11 +7,11 @@ import {
     generateCustomAttributes,
     isMomentDuration,
     toDurationString
-} from './tools';
-import ICalEvent, {ICalEventData, ICalEventJSONData} from './event';
+} from './tools.js';
+import ICalEvent, {ICalEventData, ICalEventJSONData} from './event.js';
 import {writeFile, writeFileSync, promises as fsPromises} from 'fs';
 import {ServerResponse} from 'http';
-import { ICalMomentDurationStub, ICalTimezone } from './types';
+import { ICalMomentDurationStub, ICalTimezone } from './types.js';
 
 
 export interface ICalCalendarData {

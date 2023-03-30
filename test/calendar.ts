@@ -6,9 +6,10 @@ import * as http from 'http';
 import moment from 'moment';
 import {join} from 'path';
 import { versions } from 'node:process';
+import { tmpdir } from 'node:os';
 import {getPortPromise} from 'portfinder';
-import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar';
-import ICalEvent from '../src/event';
+import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar.js';
+import ICalEvent from '../src/event.js';
 import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 
 const supportsBlob = parseInt(versions.node) >= 18;
@@ -366,7 +367,7 @@ describe('ical-generator Calendar', function () {
 
     describe('save()', function () {
         it('should return all public methods and save it', function (done) {
-            const file = join(__dirname, 'save.ical');
+            const file = join(tmpdir(), 'save.ical');
             const cal = new ICalCalendar();
 
             assert.deepStrictEqual(cal, cal.save(file, function () {
@@ -382,7 +383,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should be usable with promises', async function () {
-            const file = join(__dirname, 'save.ical');
+            const file = join(tmpdir(), 'save.ical');
             const cal = new ICalCalendar();
             await cal.save(file);
 
@@ -391,7 +392,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when event invalid', function () {
-            const file = join(__dirname, 'save.ical');
+            const file = join(tmpdir(), 'save.ical');
             const cal = new ICalCalendar();
 
             cal.createEvent({});
@@ -404,7 +405,7 @@ describe('ical-generator Calendar', function () {
 
     describe('saveSync()', function () {
         it('should save it', function () {
-            const file = join(__dirname, 'save_sync.ical');
+            const file = join(tmpdir(), 'save_sync.ical');
             const cal = new ICalCalendar();
 
             cal.saveSync(file);
@@ -417,7 +418,7 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should throw error when event invalid', function () {
-            const file = join(__dirname, 'save_sync.ical');
+            const file = join(tmpdir(), 'save_sync.ical');
             const cal = new ICalCalendar();
 
             cal.createEvent({});
