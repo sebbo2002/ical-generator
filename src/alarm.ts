@@ -19,8 +19,8 @@ export enum ICalAlarmType {
 }
 
 export const ICalAlarmRelatesTo = {
-    end: "END",
-    start: "START"
+    end: 'END',
+    start: 'START'
 } as const;
 
 export type ICalAlarmRelatesTo = typeof ICalAlarmRelatesTo[keyof typeof ICalAlarmRelatesTo];
@@ -218,7 +218,6 @@ export default class ICalAlarm {
 
     /**
      * Get to which time alarm trigger relates to.
-     * Works only if trigger is a `number`
      * Can be either `START` or `END`. If the value is
      * `START` the alarm is triggerd relative to the event start time.
      * If the value is `END` the alarm is triggerd relative to the event end time
@@ -229,6 +228,7 @@ export default class ICalAlarm {
 
     /**
      * Use this method to set to which time alarm trigger relates to.
+     * Works only if trigger is a `number`
      * 
      * ```javascript
      * const cal = ical();
@@ -245,7 +245,7 @@ export default class ICalAlarm {
      * alarm.relatesTo('START'); // -> 10 minutes after event starts
      * alarm.relatesTo('END'); // -> 10 minutes before event ends
      * ```
-     * @param relatesTo 
+     * @since 3.6.2
      */
     relatesTo(relatesTo: ICalAlarmRelatesTo | null): this;
     relatesTo(relatesTo?: ICalAlarmRelatesTo | null): this | ICalAlarmRelatesTo | null {
