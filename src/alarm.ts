@@ -238,12 +238,12 @@ export default class ICalAlarm {
      * alarm.trigger(600); // -> 10 minutes before event starts
      * 
      * alarm.relatesTo('START'); // -> 10 minutes before event starts
-     * alarm.relatesTo('END'); // -> 10 minutes after event ends
+     * alarm.relatesTo('END'); // -> 10 minutes before event ends
      * 
      * alarm.trigger(-600); // -> 10 minutes after event starts
      * 
      * alarm.relatesTo('START'); // -> 10 minutes after event starts
-     * alarm.relatesTo('END'); // -> 10 minutes before event ends
+     * alarm.relatesTo('END'); // -> 10 minutes after event ends
      * ```
      * @since 4.0.1
      */
