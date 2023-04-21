@@ -222,7 +222,7 @@ export default class ICalAlarm {
      * `START` the alarm is triggerd relative to the event start time.
      * If the value is `END` the alarm is triggerd relative to the event end time
      * 
-     * @since 3.6.2
+     * @since 4.0.1
      */
     relatesTo(): ICalAlarmRelatesTo | null;
 
@@ -245,7 +245,7 @@ export default class ICalAlarm {
      * alarm.relatesTo('START'); // -> 10 minutes after event starts
      * alarm.relatesTo('END'); // -> 10 minutes before event ends
      * ```
-     * @since 3.6.2
+     * @since 4.0.1
      */
     relatesTo(relatesTo: ICalAlarmRelatesTo | null): this;
     relatesTo(relatesTo?: ICalAlarmRelatesTo | null): this | ICalAlarmRelatesTo | null {
