@@ -1,3 +1,10 @@
+# [4.1.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v4.1.0-develop.2...v4.1.0-develop.3) (2023-05-02)
+
+
+### Bug Fixes
+
+* Allow `null` return value for Luxon 3.3's DateTime.toJSON() ([bee19a8](https://github.com/sebbo2002/ical-generator/commit/bee19a8e70bc690b93175c2da2a35240c55032bd)), closes [#482](https://github.com/sebbo2002/ical-generator/issues/482) [#485](https://github.com/sebbo2002/ical-generator/issues/485)
+
 # [4.1.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v4.1.0-develop.1...v4.1.0-develop.2) (2023-04-29)
 
 # [4.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v4.0.0...v4.1.0-develop.1) (2023-04-24)
