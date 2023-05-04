@@ -18,6 +18,13 @@ export enum ICalAlarmType {
     audio = 'audio'
 }
 
+export const ICalAlarmRelatesTo = {
+    end: 'END',
+    start: 'START'
+} as const;
+
+export type ICalAlarmRelatesTo = typeof ICalAlarmRelatesTo[keyof typeof ICalAlarmRelatesTo];
+
 export type ICalAlarmTypeValue = keyof ICalAlarmType;
 
 export interface ICalAttachment {
@@ -28,6 +35,7 @@ export interface ICalAttachment {
 export interface ICalAlarmData {
     type?: ICalAlarmType | null;
     trigger?: number | ICalDateTimeValue | null;
+    relatesTo?: ICalAlarmRelatesTo | null;
     triggerBefore?: number | ICalDateTimeValue | null;
     triggerAfter?: number | ICalDateTimeValue | null;
     repeat?: number | null;
@@ -40,6 +48,7 @@ export interface ICalAlarmData {
 interface ICalInternalAlarmData {
     type: ICalAlarmType | null;
     trigger: ICalDateTimeValue | number | null;
+    relatesTo: ICalAlarmRelatesTo | null;
     repeat: number | null;
     interval: number | null;
     attach: ICalAttachment | null;
@@ -50,6 +59,7 @@ interface ICalInternalAlarmData {
 export interface ICalAlarmJSONData {
     type: ICalAlarmType | null;
     trigger: string | number | null;
+    relatesTo: ICalAlarmRelatesTo | null;
     repeat: number | null;
     interval: number | null;
     attach: ICalAttachment | null;
@@ -91,6 +101,7 @@ export default class ICalAlarm {
         this.data = {
             type: null,
             trigger: null,
+            relatesTo: null,
             repeat: null,
             interval: null,
             attach: null,
@@ -202,6 +213,55 @@ export default class ICalAlarm {
             this.data.trigger = checkDate(trigger, 'trigger');
         }
 
+        return this;
+    }
+
+    /**
+     * Get to which time alarm trigger relates to.
+     * Can be either `START` or `END`. If the value is
+     * `START` the alarm is triggerd relative to the event start time.
+     * If the value is `END` the alarm is triggerd relative to the event end time
+     * 
+     * @since 4.0.1
+     */
+    relatesTo(): ICalAlarmRelatesTo | null;
+
+    /**
+     * Use this method to set to which time alarm trigger relates to.
+     * Works only if trigger is a `number`
+     * 
+     * ```javascript
+     * const cal = ical();
+     * const event = cal.createEvent();
+     * const alarm = cal.createAlarm();
+     *
+     * alarm.trigger(600); // -> 10 minutes before event starts
+     * 
+     * alarm.relatesTo('START'); // -> 10 minutes before event starts
+     * alarm.relatesTo('END'); // -> 10 minutes before event ends
+     * 
+     * alarm.trigger(-600); // -> 10 minutes after event starts
+     * 
+     * alarm.relatesTo('START'); // -> 10 minutes after event starts
+     * alarm.relatesTo('END'); // -> 10 minutes after event ends
+     * ```
+     * @since 4.0.1
+     */
+    relatesTo(relatesTo: ICalAlarmRelatesTo | null): this;
+    relatesTo(relatesTo?: ICalAlarmRelatesTo | null): this | ICalAlarmRelatesTo | null {
+        if (relatesTo === undefined) {
+            return this.data.relatesTo;
+        }
+        if (!relatesTo) {
+            this.data.relatesTo = null;
+            return this;
+        }
+
+        if (!Object.values(ICalAlarmRelatesTo).includes(relatesTo)) {
+            throw new Error('`relatesTo` is not correct, must be either `START` or `END`!');
+        }
+
+        this.data.relatesTo = relatesTo;
         return this;
     }
 
@@ -569,11 +629,16 @@ export default class ICalAlarm {
         // ACTION
         g += 'ACTION:' + this.data.type.toUpperCase() + '\r\n';
 
-        if (typeof this.data.trigger === 'number' && this.data.trigger > 0) {
-            g += 'TRIGGER;RELATED=END:' + toDurationString(this.data.trigger) + '\r\n';
-        }
+        if (typeof this.data.trigger === 'number' && this.data.relatesTo === null) {
+            if (this.data.trigger > 0) {
+                g += 'TRIGGER;RELATED=END:' + toDurationString(this.data.trigger) + '\r\n';
+            }
+            else {
+                g += 'TRIGGER:' + toDurationString(this.data.trigger) + '\r\n';
+            }
+        } 
         else if (typeof this.data.trigger === 'number') {
-            g += 'TRIGGER:' + toDurationString(this.data.trigger) + '\r\n';
+            g += 'TRIGGER;RELATED=' + this.data.relatesTo.toUpperCase() + ':' + toDurationString(this.data.trigger) + '\r\n';
         }
         else {
             g += 'TRIGGER;VALUE=DATE-TIME:' + formatDate(this.event.timezone(), this.data.trigger) + '\r\n';

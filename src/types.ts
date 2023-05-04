@@ -73,7 +73,7 @@ export interface ICalLuxonDateTimeStub {
     toFormat(fmt: string): string;
     toJSDate(): Date;
     get isValid(): boolean;
-    toJSON(): string;
+    toJSON(): string | null;
 }
 
 export interface ICalDayJsStub {

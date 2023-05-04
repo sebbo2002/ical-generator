@@ -1086,7 +1086,7 @@ export default class ICalEvent {
      *
      * ```javascript
      * import ical, {ICalEventBusyStatus} from 'ical-generator';
-     * event.busystatus(ICalEventStatus.BUSY);
+     * event.busystatus(ICalEventBusyStatus.BUSY);
      * ```
      *
      * @since 1.0.2

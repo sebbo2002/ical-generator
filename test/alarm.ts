@@ -5,7 +5,7 @@ import moment from 'moment-timezone';
 
 import ICalCalendar from '../src/calendar.js';
 import ICalEvent from '../src/event.js';
-import ICalAlarm, {ICalAlarmType} from '../src/alarm.js';
+import ICalAlarm, {ICalAlarmRelatesTo, ICalAlarmType} from '../src/alarm.js';
 
 
 describe('ical-generator Alarm', function () {
@@ -274,6 +274,53 @@ describe('ical-generator Alarm', function () {
         });
     });
 
+    describe('relatesTo()', function () {
+        it('setter should return this', function () {
+            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
+            assert.deepStrictEqual(a, a.relatesTo(null));
+            assert.deepStrictEqual(a, a.relatesTo(ICalAlarmRelatesTo.end));
+        });
+
+        it('getter should return value', function () {
+            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
+            assert.strictEqual(a.relatesTo(), null);
+            a.relatesTo(ICalAlarmRelatesTo.end);
+            assert.strictEqual(a.relatesTo(), ICalAlarmRelatesTo.end);
+            a.relatesTo(null);
+            assert.strictEqual(a.relatesTo(), null);
+        });
+
+        it('should throw if value is not `null`, "START" or "END"', function () {
+            const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
+            assert.throws(function () {
+                // @ts-ignore
+                a.relatesTo('hi');
+            }, /`relatesTo`/);
+            assert.throws(function () {
+                // @ts-ignore
+                a.relatesTo(true);
+            }, /`relatesTo`/);
+            assert.throws(function () {
+                // @ts-ignore
+                a.relatesTo(Infinity);
+            }, /`relatesTo`/);
+        });
+
+        it('should change RELATED', function () {
+            const a = new ICalAlarm(
+                {type: ICalAlarmType.display, triggerBefore: 60 * 10},
+                new ICalEvent({}, new ICalCalendar())
+            );
+            assert.ok(a.toString().indexOf('RELATED=START') === -1);
+            
+            a.relatesTo(ICalAlarmRelatesTo.start);
+            assert.ok(a.toString().indexOf('RELATED=START') > -1);
+
+            a.relatesTo(ICalAlarmRelatesTo.end);
+            assert.ok(a.toString().indexOf('RELATED=END') > -1);
+        });
+    });
+
     describe('repeat()', function () {
         it('setter should return this', function () {
             const a = new ICalAlarm({}, new ICalEvent({}, new ICalCalendar()));
@@ -479,6 +526,7 @@ describe('ical-generator Alarm', function () {
             assert.deepStrictEqual(a.toJSON(), {
                 attach: null,
                 description: null,
+                relatesTo: null,
                 interval: null,
                 repeat: null,
                 trigger: 120,

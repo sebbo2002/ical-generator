@@ -1,3 +1,25 @@
+# [4.1.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v4.1.0-develop.2...v4.1.0-develop.3) (2023-05-02)
+
+
+### Bug Fixes
+
+* Allow `null` return value for Luxon 3.3's DateTime.toJSON() ([bee19a8](https://github.com/sebbo2002/ical-generator/commit/bee19a8e70bc690b93175c2da2a35240c55032bd)), closes [#482](https://github.com/sebbo2002/ical-generator/issues/482) [#485](https://github.com/sebbo2002/ical-generator/issues/485)
+
+# [4.1.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v4.1.0-develop.1...v4.1.0-develop.2) (2023-04-29)
+
+# [4.1.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v4.0.0...v4.1.0-develop.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* revent changes to package.json version ([916e460](https://github.com/sebbo2002/ical-generator/commit/916e460af591ff1ebb1c757dfc9762667331f598))
+* revert package-lock.json ([a8d8f2d](https://github.com/sebbo2002/ical-generator/commit/a8d8f2d45b039e80689e3cf9ac774645d6b3ccc9))
+
+
+### Features
+
+* Support trigger related behavior ([54743df](https://github.com/sebbo2002/ical-generator/commit/54743df1cce615f3df2c155c51928674afc2e3d7))
+
 # [4.0.0](https://github.com/sebbo2002/ical-generator/compare/v3.6.1...v4.0.0) (2023-03-30)
 
 
