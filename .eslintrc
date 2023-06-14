@@ -35,7 +35,8 @@
     "overrides": [
         {
             "files": [
-                "test/**/*.ts"
+                "test/**/*.ts",
+                "src/tools.ts"
             ],
             "rules": {
                 "@typescript-eslint/ban-ts-ignore": "off",
