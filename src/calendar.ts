@@ -9,8 +9,8 @@ import {
     toDurationString
 } from './tools.js';
 import ICalEvent, {ICalEventData, ICalEventJSONData} from './event.js';
-import {writeFile, writeFileSync, promises as fsPromises} from 'fs';
-import {ServerResponse} from 'http';
+import {writeFile, writeFileSync, promises as fsPromises} from 'node:fs';
+import {ServerResponse} from 'node:http';
 import { ICalMomentDurationStub, ICalTimezone } from './types.js';
 
 
