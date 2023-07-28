@@ -123,7 +123,7 @@
     "develop": "ts-node ./src/bin/start.ts",
     "example": "node ./dist/examples/push.js",
     "license-check": "license-checker --production --summary",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .ts,.js,.json",
     "start": "node ./dist/bin/start.js",
     "test": "mocha"
   },
