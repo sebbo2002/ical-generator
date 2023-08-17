@@ -1,3 +1,11 @@
+## [5.0.1-develop.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.0...v5.0.1-develop.1) (2023-07-30)
+
+
+### Bug Fixes
+
+* double-quotes and missing filename variable ([30fcccd](https://github.com/sebbo2002/ical-generator/commit/30fcccdfb1253c37f9211833a6d74ecbf953b892))
+* indentation, semicolons and quoting ([2dd4d24](https://github.com/sebbo2002/ical-generator/commit/2dd4d2494d18af843a22005a61627a3461ec29e2))
+
 # [5.0.0](https://github.com/sebbo2002/ical-generator/compare/v4.1.0...v5.0.0) (2023-06-14)
 
 
