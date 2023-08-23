@@ -1,3 +1,10 @@
+## [5.0.2-develop.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.1...v5.0.2-develop.1) (2023-08-23)
+
+
+### Reverts
+
+* Revert "ci: Downgrade is-semantic-release till it's fixed" ([91c2ab5](https://github.com/sebbo2002/ical-generator/commit/91c2ab59d0559a060c11d07973382c465dd3345d))
+
 ## [5.0.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.0...v5.0.1) (2023-08-17)
 
 
