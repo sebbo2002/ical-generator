@@ -1,3 +1,10 @@
+## [5.0.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v5.0.2-develop.1...v5.0.2-develop.2) (2023-09-20)
+
+
+### Bug Fixes
+
+* add `browser` field to `package.json` ([7db4e32](https://github.com/sebbo2002/ical-generator/commit/7db4e32ad03b25b5cbe2cc4ce459541ee5639f15))
+
 ## [5.0.2-develop.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.1...v5.0.2-develop.1) (2023-08-23)
 
 
