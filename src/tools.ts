@@ -1,7 +1,9 @@
 'use strict';
 
 import {
-    ICalDateTimeValue, ICalDayJsStub, ICalLuxonDateTimeStub,
+    ICalDateTimeValue,
+    ICalDayJsStub,
+    ICalLuxonDateTimeStub,
     ICalMomentDurationStub,
     ICalMomentStub,
     ICalMomentTimezoneStub,

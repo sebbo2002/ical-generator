@@ -20,7 +20,12 @@ const cal = ical({
 const app = express();
 
 app.get('/calendar', (req, res) => {
-    cal.serve(res);
+    res.writeHead(200, {
+        'Content-Type': 'text/calendar; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="calendar.ics"'
+    });
+
+    res.end(cal.toString());
 });
 
 app.listen(3000);

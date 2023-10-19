@@ -20,9 +20,13 @@ const cal = ical({
 const app = new Koa();
 
 app.use(ctx => {
-    ctx.status = 200; // Koa defaults to 404 when it sees that status is unset
-    ctx.respond = false; // mark request as handled for Koa
-    cal.serve(ctx.res);
+    ctx.status = 200;
+    ctx.respond = false;
+
+    ctx.set('Content-Type', 'text/calendar; charset=utf-8');
+    ctx.set('Content-Disposition', 'attachment; filename="calendar.ics"');
+
+    ctx.body = cal.toString();
 });
 
 app.listen(3000);

@@ -175,8 +175,10 @@ describe('ical-generator Cases', function () {
                 {
                     type: ICalAlarmType.display,
                     trigger: 60 * 10,
-                    repeat: 2,
-                    interval: 60
+                    repeat: {
+                        times: 2,
+                        interval: 60
+                    }
                 },
                 {
                     type: ICalAlarmType.display,

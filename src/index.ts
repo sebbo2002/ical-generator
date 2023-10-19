@@ -49,6 +49,7 @@ export default ical;
 export {
     default as ICalAlarm,
     ICalAlarmData,
+    ICalAlarmRepeatData,
     ICalAlarmType,
     ICalAlarmTypeValue,
     ICalAlarmJSONData,
@@ -74,7 +75,8 @@ export {
 
 export {
     default as ICalCategory,
-    ICalCategoryData
+    ICalCategoryData,
+    ICalCategoryJSONData
 } from './category.js';
 
 export {
