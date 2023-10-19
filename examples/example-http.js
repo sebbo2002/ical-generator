@@ -18,7 +18,12 @@ const cal = ical({
 });
 
 http.createServer(function (req, res) {
-    cal.serve(res);
+    res.writeHead(200, {
+        'Content-Type': 'text/calendar; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="calendar.ics"'
+    });
+
+    res.end(cal.toString());
 }).listen(3000, '127.0.0.1', function () {
     console.log('Server running at http://127.0.0.1:3000/');
 });

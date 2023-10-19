@@ -18,7 +18,12 @@ const cal = ical({
 
 // start with $ micro example/example-micro.js
 module.exports = (req, res) => {
-    cal.serve(res);
+    res.writeHead(200, {
+        'Content-Type': 'text/calendar; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="calendar.ics"'
+    });
+
+    res.end(cal.toString());
 };
 
 

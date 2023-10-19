@@ -81,14 +81,14 @@ export enum ICalAttendeeType {
  * import ical from 'ical-generator';
  * const calendar = ical();
  * const event = calendar.createEvent();
- * const attendee = event.createAttendee();
+ * const attendee = event.createAttendee({ email: 'mail@example.com' });
  * ```
  *
  * You can also use the [[`ICalAttendee`]] object directly:
  *
  * ```javascript
  * import ical, {ICalAttendee} from 'ical-generator';
- * const attendee = new ICalAttendee();
+ * const attendee = new ICalAttendee({ email: 'mail@example.com' });
  * event.attendees([attendee]);
  * ```
  */

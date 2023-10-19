@@ -25,13 +25,14 @@ to generate subscriptionable calendar feeds.
 <br />
 <br />
 
+## ⚠️ Migration to v6
+In version 6 some breaking changes were made to make `ical-generator` even better. A short list of 
+these breaking changes and how you can adapt your code can be found in our
+[Migration Guide](https://github.com/sebbo2002/ical-generator/wiki/Migration-Guide:-v5-%E2%86%92-v6).
+
 ## 📦 Installation
 
 	npm install ical-generator
-
-    # For TypeScript Users
-    # (see "I use Typescript and get TS2307: Cannot find module errors" section below)
-    npm i -D @types/node rrule moment-timezone moment dayjs @types/luxon
 
 
 ## ⚡️ Quick Start
@@ -53,10 +54,16 @@ calendar.createEvent({
     url: 'http://sebbo.net/'
 });
 
-http.createServer((req, res) => calendar.serve(res))
-    .listen(3000, '127.0.0.1', () => {
-        console.log('Server running at http://127.0.0.1:3000/');
+http.createServer((req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/calendar; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="calendar.ics"'
     });
+
+    res.end(calendar.toString());
+}).listen(3000, '127.0.0.1', () => {
+    console.log('Server running at http://127.0.0.1:3000/');
+});
 ```
 See the [examples](./examples) folder for more examples.
 
@@ -113,19 +120,6 @@ npm run browser-test
 
 
 ## 🙋 FAQ
-
-### What's `Error: Can't resolve 'fs'`?
-`ical-generator` uses the node.js `fs` module to save your calendar on the filesystem. In browser environments, you usually don't need this, so if you pass `null` for fs in your bundler. In webpack this looks like this:
-
-```json
-{
-  "resolve": {
-    "fallback": {
-      "fs": false
-    }
-  }
-}
-```
 
 ### Where's the changelog?
 It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md). If you need the changelog for
