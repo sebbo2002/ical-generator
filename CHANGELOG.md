@@ -1,3 +1,5 @@
+# [6.0.0-develop.2](https://github.com/sebbo2002/ical-generator/compare/v6.0.0-develop.1...v6.0.0-develop.2) (2023-10-19)
+
 # [6.0.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.2-develop.2...v6.0.0-develop.1) (2023-10-19)
 
 
