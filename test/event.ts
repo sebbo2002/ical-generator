@@ -187,7 +187,7 @@ describe('ical-generator Event', function () {
     describe('end()', function () {
         it('getter should return value', function () {
             const now = moment();
-            const event = new ICalEvent({ start: new Date() }, new ICalCalendar());
+            const event = new ICalEvent({ start: moment().subtract({ minute: 1 }) }, new ICalCalendar());
             event.end(now);
             assert.deepStrictEqual(event.end(), now);
         });
