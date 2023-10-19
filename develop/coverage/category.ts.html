@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>98/98</span>
+                <span class='fraction'>100/100</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>98/98</span>
+                <span class='fraction'>100/100</span>
             </div>
         
             
@@ -161,7 +161,11 @@
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
 <a name='L98'></a><a href='#L98'>98</a>
-<a name='L99'></a><a href='#L99'>99</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -207,7 +211,11 @@
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -222,13 +230,13 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">10x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
-<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
+<span class="cline-any cline-yes">13x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -250,11 +258,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -266,12 +270,14 @@ import {escape} from './tools.js';
 &nbsp;
 &nbsp;
 export interface ICalCategoryData {
-    name?: string | null
+    name: string;
 }
 &nbsp;
 export interface ICalCategoryInternalData {
-    name: string | null
+    name: string;
 }
+&nbsp;
+export type ICalCategoryJSONData = ICalCategoryInternalData;
 &nbsp;
 &nbsp;
 /**
@@ -301,10 +307,14 @@ export default class ICalCategory {
      */
     constructor(data: ICalCategoryData) {
         this.data = {
-            name: null
+            name: ''
         };
 &nbsp;
-        data.name !== undefined &amp;&amp; this.name(data.name);
+        if(!data.name) {
+            throw new Error('No value for `name` in ICalCategory given!');
+        }
+&nbsp;
+        this.name(data.name);
     }
 &nbsp;
 &nbsp;
@@ -312,19 +322,19 @@ export default class ICalCategory {
      * Get the category name
      * @since 0.3.0
      */
-    name(): string | null;
+    name(): string;
 &nbsp;
     /**
      * Set the category name
      * @since 0.3.0
      */
-    name(name: string | null): this;
-    name(name?: string | null): this | string | null {
+    name(name: string): this;
+    name(name?: string): this | string {
         if (name === undefined) {
             return this.data.name;
         }
 &nbsp;
-        this.data.name = name || null;
+        this.data.name = name;
         return this;
     }
 &nbsp;
@@ -350,10 +360,6 @@ export default class ICalCategory {
     toString(): string {
 &nbsp;
         // CN / Name
-        if (!this.data.name) {
-            throw new Error('No value for `name` in ICalCategory given!');
-        }
-&nbsp;
         return escape(this.data.name, false);
     }
 }
@@ -364,7 +370,7 @@ export default class ICalCategory {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-09-20T04:42:32.554Z
+                at 2023-10-19T16:30:49.621Z
             </div>
         <script src="prettify.js"></script>
         <script>
