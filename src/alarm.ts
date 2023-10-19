@@ -368,7 +368,7 @@ export default class ICalAlarm {
      *
      * @since 0.2.1
      */
-    repeat(repeat: ICalAlarmRepeatData): this;
+    repeat(repeat: ICalAlarmRepeatData | null): this;
     repeat (repeat?: ICalAlarmRepeatData | null): this | ICalAlarmRepeatData | null {
         if (repeat === undefined) {
             return this.data.repeat;

@@ -285,12 +285,11 @@ describe('ical-generator Alarm', function () {
         });
 
         it('setter should work with moment instance', function () {
-            const a = new ICalAlarm({}, new ICalEvent(
+            const a = new ICalAlarm({ triggerBefore: moment() }, new ICalEvent(
                 { start: new Date() },
                 new ICalCalendar()
             ));
 
-            a.triggerBefore(moment());
             assert.ok(moment.isMoment(a.trigger()));
         });
 
@@ -458,8 +457,12 @@ describe('ical-generator Alarm', function () {
                     interval: 90
                 }
             }, new ICalEvent({ start: new Date() }, new ICalCalendar()));
-            assert.ok(a.toString().indexOf('REPEAT:42') > -1);
-            assert.ok(a.toString().indexOf('DURATION:PT1M30S') > -1);
+            assert.ok(a.toString().includes('REPEAT:42'));
+            assert.ok(a.toString().includes('DURATION:PT1M30S'));
+
+            a.repeat(null);
+            assert.ok(!a.toString().includes('REPEAT:42'));
+            assert.ok(!a.toString().includes('DURATION:PT1M30S'));
         });
 
         it('should throw an error if repeat is set but interval isn\'t', function () {
@@ -489,6 +492,16 @@ describe('ical-generator Alarm', function () {
                     }
                 }, new ICalEvent({ start: new Date() }, new ICalCalendar()));
             }, /`repeat.times`/);
+        });
+
+        it('should throw an error if interval is of wrong type', function () {
+            assert.throws(function () {
+                new ICalAlarm({
+                    trigger: 300,
+                    // @ts-ignore
+                    repeat: true
+                }, new ICalEvent({ start: new Date() }, new ICalCalendar()));
+            }, /`repeat` is not correct, must be an object!/);
         });
     });
 

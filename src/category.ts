@@ -49,7 +49,7 @@ export default class ICalCategory {
             throw new Error('No value for `name` in ICalCategory given!');
         }
 
-        data.name !== undefined && this.name(data.name);
+        this.name(data.name);
     }
 
 
@@ -95,10 +95,6 @@ export default class ICalCategory {
     toString(): string {
 
         // CN / Name
-        if (!this.data.name) {
-            throw new Error('No value for `name` in ICalCategory given!');
-        }
-
         return escape(this.data.name, false);
     }
 }

@@ -500,6 +500,16 @@ describe('ical-generator Attendee', function () {
                 new ICalEvent({ start: new Date() }, new ICalCalendar())
             ).delegatesFrom({ name: 'Cody', email: 'cody@example.com' });
             assert.strictEqual(a.name(), 'Cody');
+
+            const b = new ICalAttendee(
+                {
+                    name: 'Zac',
+                    email: 'zac@example.com',
+                    delegatesFrom: { name: 'Cody', email: 'cody@example.com' }
+                },
+                new ICalEvent({ start: new Date() }, new ICalCalendar())
+            );
+            assert.strictEqual(b.name(), 'Zac');
         });
     });
 
