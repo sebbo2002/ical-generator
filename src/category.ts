@@ -5,11 +5,11 @@ import {escape} from './tools.js';
 
 
 export interface ICalCategoryData {
-    name?: string | null
+    name: string;
 }
 
 export interface ICalCategoryInternalData {
-    name: string | null
+    name: string;
 }
 
 
@@ -40,8 +40,12 @@ export default class ICalCategory {
      */
     constructor(data: ICalCategoryData) {
         this.data = {
-            name: null
+            name: ''
         };
+
+        if(!data.name) {
+            throw new Error('No value for `name` in ICalCategory given!');
+        }
 
         data.name !== undefined && this.name(data.name);
     }
@@ -51,19 +55,19 @@ export default class ICalCategory {
      * Get the category name
      * @since 0.3.0
      */
-    name(): string | null;
+    name(): string;
 
     /**
      * Set the category name
      * @since 0.3.0
      */
-    name(name: string | null): this;
-    name(name?: string | null): this | string | null {
+    name(name: string): this;
+    name(name?: string): this | string {
         if (name === undefined) {
             return this.data.name;
         }
 
-        this.data.name = name || null;
+        this.data.name = name;
         return this;
     }
 

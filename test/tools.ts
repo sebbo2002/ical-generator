@@ -289,7 +289,7 @@ describe('ICalTools', function () {
                 assert.equal(checkDate(date, 'foo'), date);
             });
             it('should throw error for invalid Moment', function () {
-                const date = moment('foo');
+                const date = moment('foo', 'MM/DD/YYYY', true);
                 assert.throws(() => {
                     checkDate(date, 'foo');
                 }, /`foo` has to be a valid date!/);

@@ -14,18 +14,24 @@ describe('ical-generator Category', function () {
 
             assert.strictEqual(a.name(), 'FOO');
         });
+
+        it('shoult throw an error without name', function () {
+            assert.throws(function () {
+                // @ts-ignore
+                new ICalCategory({});
+            }, /`name`/);
+        });
     });
 
     describe('name()', function () {
         it('setter should return this', function () {
-            const c = new ICalCategory({});
+            const c = new ICalCategory({ name: 'foo' });
             assert.deepStrictEqual(c, c.name('FOO'));
-            assert.deepStrictEqual(c, c.name(null));
         });
 
         it('getter should return value', function () {
-            const c = new ICalCategory({});
-            assert.strictEqual(c.name(), null);
+            const c = new ICalCategory({ name: 'foo' });
+            assert.strictEqual(c.name(), 'foo');
 
             c.name('HELLO-WORLD');
             assert.strictEqual(c.name(), 'HELLO-WORLD');
@@ -33,7 +39,7 @@ describe('ical-generator Category', function () {
 
         it('should change something', function () {
             const c = new ICalCategory({name: 'BANANA'});
-            assert.ok(c.toString().indexOf('BANANA') > -1);
+            assert.ok(c.toString().includes('BANANA'));
         });
     });
 
@@ -41,15 +47,6 @@ describe('ical-generator Category', function () {
         it('should contain valued previously set', function () {
             const c = new ICalCategory({name: 'FOOBAR'});
             assert.deepStrictEqual(c.toJSON(), {name: 'FOOBAR'});
-        });
-    });
-
-    describe('toString()', function () {
-        it('shoult throw an error without name', function () {
-            const c = new ICalCategory({});
-            assert.throws(function () {
-                c.toString();
-            }, /`name`/);
         });
     });
 });

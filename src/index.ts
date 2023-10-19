@@ -49,6 +49,7 @@ export default ical;
 export {
     default as ICalAlarm,
     ICalAlarmData,
+    ICalAlarmRepeatData,
     ICalAlarmType,
     ICalAlarmTypeValue,
     ICalAlarmJSONData,

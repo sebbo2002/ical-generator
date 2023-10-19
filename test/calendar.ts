@@ -307,12 +307,15 @@ describe('ical-generator Calendar', function () {
     describe('createEvent()', function () {
         it('should return a ICalEvent instance', function () {
             const cal = new ICalCalendar();
-            assert.ok(cal.createEvent({}) instanceof ICalEvent);
+            assert.ok(cal.createEvent({ start: new Date() }) instanceof ICalEvent);
         });
 
         it('should pass data to instance', function () {
             const cal = new ICalCalendar();
-            const event = cal.createEvent({summary: 'Patch-Day'});
+            const event = cal.createEvent({
+                start: new Date(),
+                summary: 'Patch-Day'
+            });
 
             assert.strictEqual(event.summary(), 'Patch-Day');
         });
@@ -332,7 +335,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.strictEqual(cal.events().length, 0);
 
-            const event = cal.createEvent({});
+            const event = cal.createEvent({ start: new Date() });
             assert.strictEqual(cal.events().length, 1);
             assert.deepStrictEqual(cal.events()[0], event);
         });
@@ -341,7 +344,11 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.strictEqual(cal.length(), 0);
 
-            const cal2 = cal.events([{summary: 'Event A'}, {summary: 'Event B'}]);
+            const cal2 = cal.events([
+                { start: new Date(), summary: 'Event A'},
+                { start: new Date(), summary: 'Event B'}
+            ]);
+
             assert.strictEqual(cal.length(), 2);
             assert.deepStrictEqual(cal2, cal);
         });
@@ -350,7 +357,7 @@ describe('ical-generator Calendar', function () {
     describe('clear()', function () {
         it('should do the job', function () {
             const cal = new ICalCalendar();
-            cal.createEvent({});
+            cal.createEvent({ start: new Date() });
             assert.strictEqual(cal.events().length, 1);
             assert.deepStrictEqual(cal.clear(), cal);
             assert.strictEqual(cal.events().length, 0);
