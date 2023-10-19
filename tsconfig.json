@@ -5,8 +5,8 @@
         "module": "nodenext",
         "moduleResolution": "nodenext",
         "outDir": "./dist",
-        "strict": true,
         "sourceMap": true,
+        "strict": true,
         "target": "es6"
     },
     "exclude": [
