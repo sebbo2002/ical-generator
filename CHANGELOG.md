@@ -1,3 +1,17 @@
+# [6.0.0-develop.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.2-develop.2...v6.0.0-develop.1) (2023-10-19)
+
+
+### Features
+
+* Ensure Calendar is renderable all the time ([f1328a3](https://github.com/sebbo2002/ical-generator/commit/f1328a3b790507037efeb39431044c0970117cac)), closes [#344](https://github.com/sebbo2002/ical-generator/issues/344)
+* Remove `save()`, `saveSync()`, `serve()`, `toBlob()`, `toURL()` ([b6bea66](https://github.com/sebbo2002/ical-generator/commit/b6bea665837c85e066ad7a32234336b01e6244f1)), closes [#478](https://github.com/sebbo2002/ical-generator/issues/478)
+
+
+### BREAKING CHANGES
+
+* `Alarm.trigger` now defaults to 10min before event, `Alarm.type` now defaults to `display`, `Alarm.interval()` got removed, use `Alarm.repeat()` instead, `Alarm.repeat()` now gives/takes an object instead of a number, `Attendee.email` can’t be `null | undefined`, `Category.name` can’t be `null | undefined`, `Event.start` now defaults to now (`new Date()`). For details and examples checkout the migration guide at https://github.com/sebbo2002/ical-generator/wiki/Migration-Guide:-v5-%E2%86%92-v6
+* The `save()`, `saveSync()`, `serve()`, `toBlob()` and `toURL()` methods of the ICalCalendar class have been removed. Please use the `toString()` method to generate the ical string and proceed from there.
+
 ## [5.0.2-develop.2](https://github.com/sebbo2002/ical-generator/compare/v5.0.2-develop.1...v5.0.2-develop.2) (2023-09-20)
 
 
