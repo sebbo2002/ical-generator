@@ -75,7 +75,8 @@ export {
 
 export {
     default as ICalCategory,
-    ICalCategoryData
+    ICalCategoryData,
+    ICalCategoryJSONData
 } from './category.js';
 
 export {

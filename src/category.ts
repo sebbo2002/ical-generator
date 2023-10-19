@@ -12,6 +12,8 @@ export interface ICalCategoryInternalData {
     name: string;
 }
 
+export type ICalCategoryJSONData = ICalCategoryInternalData;
+
 
 /**
  * Usually you get an `ICalCategory` object like this:
