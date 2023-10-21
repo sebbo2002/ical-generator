@@ -68,7 +68,9 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: release
     permissions:
-      contents: read
+      contents: write
+      issues: write
+      pull-requests: write
       id-token: write
     needs:
       - coverage
