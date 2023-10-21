@@ -1,3 +1,10 @@
+# [6.0.0-develop.4](https://github.com/sebbo2002/ical-generator/compare/v6.0.0-develop.3...v6.0.0-develop.4) (2023-10-21)
+
+
+### Features
+
+* Enable npm provenance ([87d173a](https://github.com/sebbo2002/ical-generator/commit/87d173a17133207492bd5c5ad2eeb70d8ecbe082))
+
 # [6.0.0-develop.3](https://github.com/sebbo2002/ical-generator/compare/v6.0.0-develop.2...v6.0.0-develop.3) (2023-10-21)
 
 
