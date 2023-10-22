@@ -21,7 +21,9 @@ configuration.plugins.push(['@semantic-release/commit-analyzer', {
 
 configuration.plugins.push('@semantic-release/release-notes-generator');
 
-configuration.plugins.push('@semantic-release/changelog');
+if (process.env.BRANCH === 'main') {
+    configuration.plugins.push('@semantic-release/changelog');
+}
 
 configuration.plugins.push('semantic-release-license');
 
