@@ -1,3 +1,29 @@
+# [6.0.0](https://github.com/sebbo2002/ical-generator/compare/v5.0.1...v6.0.0) (2023-10-25)
+
+
+### Bug Fixes
+
+* add `browser` field to `package.json` ([7db4e32](https://github.com/sebbo2002/ical-generator/commit/7db4e32ad03b25b5cbe2cc4ce459541ee5639f15))
+
+
+### Features
+
+* Enable npm provenance ([87d173a](https://github.com/sebbo2002/ical-generator/commit/87d173a17133207492bd5c5ad2eeb70d8ecbe082))
+* Enable npm provenance ([ccba971](https://github.com/sebbo2002/ical-generator/commit/ccba971b065542500d0f3fa1475eea9f849b03f0))
+* Ensure Calendar is renderable all the time ([f1328a3](https://github.com/sebbo2002/ical-generator/commit/f1328a3b790507037efeb39431044c0970117cac)), closes [#344](https://github.com/sebbo2002/ical-generator/issues/344)
+* Remove `save()`, `saveSync()`, `serve()`, `toBlob()`, `toURL()` ([b6bea66](https://github.com/sebbo2002/ical-generator/commit/b6bea665837c85e066ad7a32234336b01e6244f1)), closes [#478](https://github.com/sebbo2002/ical-generator/issues/478)
+
+
+### Reverts
+
+* Revert "ci: Downgrade is-semantic-release till it's fixed" ([91c2ab5](https://github.com/sebbo2002/ical-generator/commit/91c2ab59d0559a060c11d07973382c465dd3345d))
+
+
+### BREAKING CHANGES
+
+* `Alarm.trigger` now defaults to 10min before event, `Alarm.type` now defaults to `display`, `Alarm.interval()` got removed, use `Alarm.repeat()` instead, `Alarm.repeat()` now gives/takes an object instead of a number, `Attendee.email` can’t be `null | undefined`, `Category.name` can’t be `null | undefined`, `Event.start` now defaults to now (`new Date()`). For details and examples checkout the migration guide at https://github.com/sebbo2002/ical-generator/wiki/Migration-Guide:-v5-%E2%86%92-v6
+* The `save()`, `saveSync()`, `serve()`, `toBlob()` and `toURL()` methods of the ICalCalendar class have been removed. Please use the `toString()` method to generate the ical string and proceed from there.
+
 ## [5.0.1](https://github.com/sebbo2002/ical-generator/compare/v5.0.0...v5.0.1) (2023-08-17)
 
 
