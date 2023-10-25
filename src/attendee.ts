@@ -7,7 +7,7 @@ import ICalEvent from './event.js';
 
 interface ICalInternalAttendeeData {
     name: string | null;
-    email: string | null;
+    email: string;
     mailto: string | null;
     sentBy: string | null;
     status: ICalAttendeeStatus | null;
@@ -21,7 +21,7 @@ interface ICalInternalAttendeeData {
 
 export interface ICalAttendeeData {
     name?: string | null;
-    email?: string | null;
+    email: string;
     mailto?: string | null;
     sentBy?: string | null;
     status?: ICalAttendeeStatus | null;
@@ -37,7 +37,7 @@ export interface ICalAttendeeData {
 
 export interface ICalAttendeeJSONData {
     name: string | null;
-    email: string | null;
+    email: string;
     mailto: string | null;
     sentBy: string | null;
     status: ICalAttendeeStatus | null;
@@ -81,14 +81,14 @@ export enum ICalAttendeeType {
  * import ical from 'ical-generator';
  * const calendar = ical();
  * const event = calendar.createEvent();
- * const attendee = event.createAttendee();
+ * const attendee = event.createAttendee({ email: 'mail@example.com' });
  * ```
  *
  * You can also use the [[`ICalAttendee`]] object directly:
  *
  * ```javascript
  * import ical, {ICalAttendee} from 'ical-generator';
- * const attendee = new ICalAttendee();
+ * const attendee = new ICalAttendee({ email: 'mail@example.com' });
  * event.attendees([attendee]);
  * ```
  */
@@ -106,7 +106,7 @@ export default class ICalAttendee {
     constructor(data: ICalAttendeeData, event: ICalEvent) {
         this.data = {
             name: null,
-            email: null,
+            email: '',
             mailto: null,
             sentBy: null,
             status: null,
@@ -120,6 +120,9 @@ export default class ICalAttendee {
         this.event = event;
         if (!this.event) {
             throw new Error('`event` option required!');
+        }
+        if (!data.email) {
+            throw new Error('No value for `email` in ICalAttendee given!');
         }
 
         data.name !== undefined && this.name(data.name);
@@ -163,14 +166,14 @@ export default class ICalAttendee {
      * Get the attendee's email address
      * @since 0.2.0
      */
-    email(): string | null;
+    email(): string;
 
     /**
      * Set the attendee's email address
      * @since 0.2.0
      */
-    email(email: string | null): this;
-    email(email?: string | null): this | string | null {
+    email(email: string): this;
+    email(email?: string): this | string {
         if (!email) {
             return this.data.email;
         }
@@ -363,7 +366,7 @@ export default class ICalAttendee {
 
         if(typeof delegatedTo === 'string') {
             this.data.delegatedTo = new ICalAttendee(
-                checkNameAndMail('delegatedTo', delegatedTo),
+                { email: delegatedTo, ...checkNameAndMail('delegatedTo', delegatedTo) },
                 this.event,
             );
         }
@@ -405,7 +408,7 @@ export default class ICalAttendee {
         }
         else if(typeof delegatedFrom === 'string') {
             this.data.delegatedFrom = new ICalAttendee(
-                checkNameAndMail('delegatedFrom', delegatedFrom),
+                { email: delegatedFrom, ...checkNameAndMail('delegatedFrom', delegatedFrom) },
                 this.event,
             );
         }

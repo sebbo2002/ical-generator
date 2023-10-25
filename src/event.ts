@@ -57,7 +57,7 @@ export enum ICalEventClass {
 export interface ICalEventData {
     id?: string | number | null,
     sequence?: number,
-    start?: ICalDateTimeValue | null,
+    start: ICalDateTimeValue,
     end?: ICalDateTimeValue | null,
     recurrenceId?: ICalDateTimeValue | null,
     timezone?: string | null,
@@ -87,7 +87,7 @@ export interface ICalEventData {
 interface ICalEventInternalData {
     id: string,
     sequence: number,
-    start: ICalDateTimeValue | null,
+    start: ICalDateTimeValue,
     end: ICalDateTimeValue | null,
     recurrenceId: ICalDateTimeValue | null,
     timezone: string | null,
@@ -117,7 +117,7 @@ interface ICalEventInternalData {
 export interface ICalEventJSONData {
     id: string,
     sequence: number,
-    start: string | null,
+    start: string,
     end: string | null,
     recurrenceId: string | null,
     timezone: string | null,
@@ -180,7 +180,7 @@ export default class ICalEvent {
         this.data = {
             id: uuid(),
             sequence: 0,
-            start: null,
+            start: new Date(),
             end: null,
             recurrenceId: null,
             timezone: null,
@@ -318,7 +318,7 @@ export default class ICalEvent {
      *
      * @since 0.2.0
      */
-    start(): ICalDateTimeValue | null;
+    start(): ICalDateTimeValue;
 
     /**
      * Set the appointment date of beginning, which is required for all events.
@@ -329,7 +329,7 @@ export default class ICalEvent {
      * @since 0.2.0
      */
     start(start: ICalDateTimeValue): this;
-    start(start?: ICalDateTimeValue): this | ICalDateTimeValue | null {
+    start(start?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (start === undefined) {
             return this.data.start;
         }
@@ -878,13 +878,13 @@ export default class ICalEvent {
      *
      * @since 0.2.0
      */
-    createAttendee(data: ICalAttendee | ICalAttendeeData | string = {}): ICalAttendee {
+    createAttendee(data: ICalAttendee | ICalAttendeeData | string): ICalAttendee {
         if (data instanceof ICalAttendee) {
             this.data.attendees.push(data);
             return data;
         }
         if (typeof data === 'string') {
-            data = checkNameAndMail('data', data);
+            data = { email: data, ...checkNameAndMail('data', data) };
         }
 
         const attendee = new ICalAttendee(data, this);
@@ -945,7 +945,7 @@ export default class ICalEvent {
      *
      * @since 0.2.1
      */
-    createAlarm(data: ICalAlarm | ICalAlarmData = {}): ICalAlarm {
+    createAlarm(data: ICalAlarm | ICalAlarmData): ICalAlarm {
         const alarm = data instanceof ICalAlarm ? data : new ICalAlarm(data, this);
         this.data.alarms.push(alarm);
         return alarm;
@@ -1002,7 +1002,7 @@ export default class ICalEvent {
      *
      * @since 0.3.0
      */
-    createCategory(data: ICalCategory | ICalCategoryData = {}): ICalCategory {
+    createCategory(data: ICalCategory | ICalCategoryData): ICalCategory {
         const category = data instanceof ICalCategory ? data : new ICalCategory(data);
         this.data.categories.push(category);
         return category;
@@ -1442,10 +1442,6 @@ export default class ICalEvent {
     toString(): string {
         let g = '';
 
-        if (!this.data.start) {
-            throw new Error('No value for `start` in ICalEvent #' + this.data.id + ' given!');
-        }
-
         // DATE & TIME
         g += 'BEGIN:VEVENT\r\n';
         g += 'UID:' + this.data.id + '\r\n';
@@ -1621,9 +1617,9 @@ export default class ICalEvent {
 
         // CATEGORIES
         if (this.data.categories.length > 0) {
-            g += 'CATEGORIES:' + this.data.categories.map(function (category) {
-                return category.toString();
-            }).join() + '\r\n';
+            g += 'CATEGORIES:' + this.data.categories
+                .map(category => category.toString())
+                .join() + '\r\n';
         }
 
         // URL
