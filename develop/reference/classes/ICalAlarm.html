@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ICalAlarm | ical-generator - v6.0.0-develop.4</title><meta name="description" content="Documentation for ical-generator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ICalAlarm | ical-generator - v6.0.1-develop.1</title><meta name="description" content="Documentation for ical-generator"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
 <div class="tsd-toolbar-contents container">
 <div class="table-cell" id="tsd-search" data-base="..">
 <div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-search"></use></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
@@ -6,7 +6,7 @@
 <div id="tsd-toolbar-links"></div></div>
 <ul class="results">
 <li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">ical-generator - v6.0.0-develop.4</a></div>
+<li class="state failure">The search index is not available</li></ul><a href="../index.html" class="title">ical-generator - v6.0.1-develop.1</a></div>
 <div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><use href="#icon-menu"></use></svg></a></div></div></header>
 <div class="container container-main">
 <div class="col-content">
@@ -29,7 +29,7 @@
 <ul class="tsd-hierarchy">
 <li><span class="target">ICalAlarm</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L99">alarm.ts:99</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L99">alarm.ts:99</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -76,7 +76,7 @@ to query the calendar&#39;s timezone and summary when required.</p>
 <h4 class="tsd-returns-title">Returns <a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L110">alarm.ts:110</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L110">alarm.ts:110</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member"><a id="attach" class="tsd-anchor"></a>
@@ -91,12 +91,12 @@ to query the calendar&#39;s timezone and summary when required.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L400">alarm.ts:400</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L400">alarm.ts:400</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="attach.attach-2"><span class="tsd-kind-call-signature">attach</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">attachment</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#attach.attach-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set Alarm attachment. Used to set the alarm sound
 if alarm type is audio. Defaults to &quot;Basso&quot;.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><br/><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">attach:</span><span class="hl-1"> </span><span class="hl-3">&#39;https://example.com/notification.aud&#39;</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-8">// OR</span><br/><br/><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">attach:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">uri:</span><span class="hl-1"> </span><span class="hl-3">&#39;https://example.com/notification.aud&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">mime:</span><span class="hl-1"> </span><span class="hl-3">&#39;audio/basic&#39;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">});</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><br/><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">attach:</span><span class="hl-1"> </span><span class="hl-3">&#39;https://example.com/notification.aud&#39;</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-7">// OR</span><br/><br/><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">attach:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">uri:</span><span class="hl-1"> </span><span class="hl-3">&#39;https://example.com/notification.aud&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">mime:</span><span class="hl-1"> </span><span class="hl-3">&#39;audio/basic&#39;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">});</span>
 </code><button>Copy</button></pre>
 </div>
 <div class="tsd-parameters">
@@ -109,7 +109,7 @@ if alarm type is audio. Defaults to &quot;Basso&quot;.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L426">alarm.ts:426</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L426">alarm.ts:426</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="description" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>description</span><a href="#description" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -123,7 +123,7 @@ if alarm type is display. Defaults to the event&#39;s summary.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L474">alarm.ts:474</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L474">alarm.ts:474</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="description.description-2"><span class="tsd-kind-call-signature">description</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">description</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#description.description-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set the alarm description. Used to set the alarm message
@@ -139,7 +139,7 @@ if alarm type is display. Defaults to the event&#39;s summary.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L482">alarm.ts:482</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L482">alarm.ts:482</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="relatesTo" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>relates<wbr/>To</span><a href="#relatesTo" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -155,12 +155,12 @@ If the value is <code>END</code> the alarm is triggerd relative to the event end
 <h4>Since</h4><p>4.0.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L225">alarm.ts:225</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L225">alarm.ts:225</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="relatesTo.relatesTo-2"><span class="tsd-kind-call-signature">relates<wbr/>To</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">relatesTo</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#relatesTo.relatesTo-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set to which time alarm trigger relates to.
 Works only if trigger is a <code>number</code></p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-7">600</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes before event starts</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;START&#39;</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes before event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;END&#39;</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes before event ends</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(-</span><span class="hl-7">600</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes after event starts</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;START&#39;</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes after event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;END&#39;</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes after event ends</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-8">600</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes before event starts</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;START&#39;</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes before event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;END&#39;</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes before event ends</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(-</span><span class="hl-8">600</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes after event starts</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;START&#39;</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes after event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">relatesTo</span><span class="hl-1">(</span><span class="hl-3">&#39;END&#39;</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes after event ends</span>
 </code><button>Copy</button></pre>
 </div>
 <div class="tsd-parameters">
@@ -173,7 +173,7 @@ Works only if trigger is a <code>number</code></p>
 <h4>Since</h4><p>4.0.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L248">alarm.ts:248</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L248">alarm.ts:248</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="repeat" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>repeat</span><a href="#repeat" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -186,11 +186,11 @@ Works only if trigger is a <code>number</code></p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L351">alarm.ts:351</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L351">alarm.ts:351</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="repeat.repeat-2"><span class="tsd-kind-call-signature">repeat</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">repeat</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#repeat.repeat-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set Alarm Repetitions. Use this to repeat the alarm.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><br/><span class="hl-8">// repeat the alarm 4 times every 5 minutes…</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">repeat:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">times:</span><span class="hl-1"> </span><span class="hl-7">4</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">interval:</span><span class="hl-1"> </span><span class="hl-7">300</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">});</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><br/><span class="hl-7">// repeat the alarm 4 times every 5 minutes…</span><br/><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-0">repeat:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-0">times:</span><span class="hl-1"> </span><span class="hl-8">4</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-0">interval:</span><span class="hl-1"> </span><span class="hl-8">300</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">});</span>
 </code><button>Copy</button></pre>
 </div>
 <div class="tsd-parameters">
@@ -203,7 +203,7 @@ Works only if trigger is a <code>number</code></p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L371">alarm.ts:371</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L371">alarm.ts:371</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="toJSON" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>toJSON</span><a href="#toJSON" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -218,20 +218,20 @@ be used for persistence.</p>
 <h4>Since</h4><p>0.2.4</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L567">alarm.ts:567</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L567">alarm.ts:567</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="toString" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>to<wbr/>String</span><a href="#toString" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="tsd-signature tsd-anchor-link" id="toString.toString-1"><span class="tsd-kind-call-signature">to<wbr/>String</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#toString.toString-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Return generated event as a string.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-6">log</span><span class="hl-1">(</span><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">toString</span><span class="hl-1">()); </span><span class="hl-8">// → BEGIN:VALARM…</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">event</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-6">log</span><span class="hl-1">(</span><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">toString</span><span class="hl-1">()); </span><span class="hl-7">// → BEGIN:VALARM…</span>
 </code><button>Copy</button></pre>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 <div class="tsd-comment tsd-typography"></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L584">alarm.ts:584</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L584">alarm.ts:584</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="trigger" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>trigger</span><a href="#trigger" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -248,11 +248,11 @@ alarm is triggered after the event started.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L172">alarm.ts:172</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L172">alarm.ts:172</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="trigger.trigger-2"><span class="tsd-kind-call-signature">trigger</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">trigger</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#trigger.trigger-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set the alarm time.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-7">600</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes before event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">()); </span><span class="hl-8">// -&gt; now</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-8">600</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes before event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">()); </span><span class="hl-7">// -&gt; now</span>
 </code><button>Copy</button></pre>
 <p>You can use any supported date object, see
 <a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
@@ -268,7 +268,7 @@ for details about supported values and timezone handling.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L192">alarm.ts:192</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L192">alarm.ts:192</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="triggerAfter" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>trigger<wbr/>After</span><a href="#triggerAfter" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -285,12 +285,12 @@ alarm is triggered before the event started.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L276">alarm.ts:276</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L276">alarm.ts:276</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="triggerAfter.triggerAfter-2"><span class="tsd-kind-call-signature">trigger<wbr/>After</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">trigger</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#triggerAfter.triggerAfter-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set the alarm time. Unlike <code>trigger</code>, this time
 the alarm takes place after the event has started.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-7">600</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes after event starts</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-8">600</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes after event starts</span>
 </code><button>Copy</button></pre>
 <p>You can use any supported date object, see
 <a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
@@ -306,7 +306,7 @@ for details about supported values and timezone handling.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L296">alarm.ts:296</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L296">alarm.ts:296</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="triggerBefore" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>trigger<wbr/>Before</span><a href="#triggerBefore" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -330,11 +330,11 @@ alarm is triggered after the event started.</p>
 <h4>Alias</h4><p>trigger</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L316">alarm.ts:316</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L316">alarm.ts:316</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="triggerBefore.triggerBefore-2"><span class="tsd-kind-call-signature">trigger<wbr/>Before</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><a href="../types/ICalDateTimeValue.html" class="tsd-signature-type tsd-kind-type-alias">ICalDateTimeValue</a><a href="#triggerBefore.triggerBefore-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Use this method to set the alarm time.</p>
-<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-7">600</span><span class="hl-1">); </span><span class="hl-8">// -&gt; 10 minutes before event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">()); </span><span class="hl-8">// -&gt; now</span>
+<pre><code class="language-javascript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">cal</span><span class="hl-1"> = </span><span class="hl-6">ical</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">event</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createEvent</span><span class="hl-1">();</span><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">alarm</span><span class="hl-1"> = </span><span class="hl-0">cal</span><span class="hl-1">.</span><span class="hl-6">createAlarm</span><span class="hl-1">();</span><br/><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-8">600</span><span class="hl-1">); </span><span class="hl-7">// -&gt; 10 minutes before event starts</span><br/><span class="hl-0">alarm</span><span class="hl-1">.</span><span class="hl-6">trigger</span><span class="hl-1">(</span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Date</span><span class="hl-1">()); </span><span class="hl-7">// -&gt; now</span>
 </code><button>Copy</button></pre>
 <p>You can use any supported date object, see
 <a href="https://github.com/sebbo2002/ical-generator#-date-time--timezones">readme</a>
@@ -347,7 +347,7 @@ for details about supported values and timezone handling.</p>
 <h4>Alias</h4><p>trigger</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L337">alarm.ts:337</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L337">alarm.ts:337</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="type" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>type</span><a href="#type" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -365,7 +365,7 @@ for details about supported values and timezone handling.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L142">alarm.ts:142</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L142">alarm.ts:142</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="type.type-2"><span class="tsd-kind-call-signature">type</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/ICalAlarmType.html" class="tsd-signature-type tsd-kind-enum">ICalAlarmType</a><a href="#type.type-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set the alarm type. See [[<code>ICalAlarmType</code>]]
@@ -376,7 +376,7 @@ for available status options.</p>
 <h4>Since</h4><p>0.2.1</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L149">alarm.ts:149</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L149">alarm.ts:149</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="x" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>x</span><a href="#x" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -398,7 +398,7 @@ so these attributes may be inserted twice.</p>
 <h4>Since</h4><p>1.9.0</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L521">alarm.ts:521</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L521">alarm.ts:521</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="x.x-2"><span class="tsd-kind-call-signature">x</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">keyOrArray</span>, <span class="tsd-kind-parameter">value</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="ICalAlarm.html" class="tsd-signature-type tsd-kind-class">ICalAlarm</a><a href="#x.x-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Set a X-* attribute. Woun&#39;t filter double attributes,
@@ -419,7 +419,7 @@ so these attributes may be inserted twice.</p>
 <h4>Since</h4><p>1.9.0</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L534">alarm.ts:534</a></li></ul></aside></li>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L534">alarm.ts:534</a></li></ul></aside></li>
 <li class="tsd-signature tsd-anchor-link" id="x.x-3"><span class="tsd-kind-call-signature">x</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">key</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">value</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">[]</span><a href="#x.x-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Get all custom X-* attributes.</p>
@@ -429,7 +429,7 @@ so these attributes may be inserted twice.</p>
 <h4>Since</h4><p>1.9.0</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/32ca261/src/alarm.ts#L540">alarm.ts:540</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/sebbo2002/ical-generator/blob/f536105/src/alarm.ts#L540">alarm.ts:540</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -460,7 +460,7 @@ so these attributes may be inserted twice.</p>
 <li><a href="#type" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>type</span></a></li>
 <li><a href="#x" class=""><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>x</span></a></li></ul></div></details></div>
 <div class="site-menu">
-<nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>ical-generator - v6.0.0-develop.4</span></a>
+<nav class="tsd-navigation"><a href="../modules.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1"></use></svg><span>ical-generator - v6.0.1-develop.1</span></a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container" data-base="..">
 <li><a href="../enums/ICalAlarmType.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg>ICalAlarmType</a></li>
 <li><a href="../enums/ICalAttendeeRole.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-8"></use></svg>ICalAttendeeRole</a></li>
