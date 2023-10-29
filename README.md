@@ -43,7 +43,7 @@ import http from 'node:http';
 
 const calendar = ical({name: 'my first iCal'});
 
-// A method is required for outlook to display the invitation properly
+// A method is required for outlook to display event as an invitation
 calendar.method(ICalCalendarMethod.REQUEST);
 
 const startTime = new Date();
