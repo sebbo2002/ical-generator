@@ -94,7 +94,7 @@ to use a VTimezone generator. Such a function generates a VTimezone entry and re
 be used for this:
 
 ```typescript
-import ical from 'ical-generator';
+import {ICalCalendar} from 'ical-generator';
 import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 
 const cal = new ICalCalendar();
