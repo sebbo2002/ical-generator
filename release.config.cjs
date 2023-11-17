@@ -16,7 +16,13 @@ configuration.plugins.push(['@semantic-release/commit-analyzer', {
         {'type': 'chore', 'scope': 'package', 'release': 'patch'},
         {'type': 'build', 'scope': 'deps', 'release': 'patch'},
         {'type': 'docs', 'release': 'patch'}
-    ]
+    ],
+    'parserOpts': {
+        'noteKeywords': [
+            'BREAKING CHANGE',
+            'BREAKING CHANGES'
+        ]
+    }
 }]);
 
 configuration.plugins.push('@semantic-release/release-notes-generator');
