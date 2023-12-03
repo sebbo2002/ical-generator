@@ -17,8 +17,8 @@
     ],
     "ts-node": {
         "esm": true,
-        "transpileOnly": true,
+        "experimentalResolver": true,
         "files": true,
-        "experimentalResolver": true
+        "transpileOnly": true
     }
 }
