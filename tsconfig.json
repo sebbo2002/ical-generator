@@ -6,6 +6,7 @@
         "moduleResolution": "nodenext",
         "outDir": "./dist",
         "sourceMap": true,
+        "strict": true,
         "target": "es6"
     },
     "exclude": [
