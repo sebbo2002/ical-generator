@@ -18,7 +18,6 @@
     "ts-node": {
         "esm": true,
         "experimentalResolver": true,
-        "files": true,
-        "transpileOnly": true
+        "files": true
     }
 }
