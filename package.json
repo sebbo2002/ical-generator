@@ -21,7 +21,7 @@
     "c8": "^8.0.1",
     "dayjs": "^1.11.10",
     "eslint": "^8.55.0",
-    "eslint-plugin-jsonc": "^2.10.0",
+    "eslint-plugin-jsonc": "^2.11.2",
     "esm": "^3.2.25",
     "license-checker": "^25.0.1",
     "luxon": "^3.4.4",
