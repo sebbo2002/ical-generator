@@ -158,7 +158,7 @@ interface ICalEventInternalRepeatingData {
 
 
 /**
- * Usually you get an `ICalCalendar` object like this:
+ * Usually you get an `ICalEvent` object like this:
  * ```javascript
  * import ical from 'ical-generator';
  * const calendar = ical();
