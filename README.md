@@ -38,7 +38,7 @@ these breaking changes and how you can adapt your code can be found in our
 ## ⚡️ Quick Start
 
 ```javascript
-import ical from 'ical-generator';
+import ical, {ICalCalendarMethod} from 'ical-generator';
 import http from 'node:http';
 
 const calendar = ical({name: 'my first iCal'});
