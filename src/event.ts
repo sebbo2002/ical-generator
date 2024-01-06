@@ -158,7 +158,7 @@ interface ICalEventInternalRepeatingData {
 
 
 /**
- * Usually you get an `ICalCalendar` object like this:
+ * Usually you get an `ICalEvent` object like this:
  * ```javascript
  * import ical from 'ical-generator';
  * const calendar = ical();
@@ -986,7 +986,7 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalCategory`]] and returns it. Use options to prefill the categories' attributes.
+     * Creates a new [[`ICalCategory`]] and returns it. Use options to prefill the category's attributes.
      * Calling this method without options will create an empty category.
      *
      * ```javascript
@@ -994,7 +994,7 @@ export default class ICalEvent {
      * const event = cal.createEvent();
      * const category = event.createCategory({name: 'APPOINTMENT'});
      *
-     * // add another alarm
+     * // add another category
      * event.createCategory({
      *     name: 'MEETING'
      * });
