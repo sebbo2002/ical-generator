@@ -1,3 +1,10 @@
+## [6.0.1](https://github.com/sebbo2002/ical-generator/compare/v6.0.0...v6.0.1) (2024-01-07)
+
+
+### Bug Fixes
+
+* **Calendar:** Remove `prodId()` string validation ([a5caeaa](https://github.com/sebbo2002/ical-generator/commit/a5caeaac5187557044af652fed109fb45e5f14a5)), closes [/www.rfc-editor.org/rfc/rfc5545#section-3](https://github.com//www.rfc-editor.org/rfc/rfc5545/issues/section-3) [#555](https://github.com/sebbo2002/ical-generator/issues/555)
+
 # [6.0.0](https://github.com/sebbo2002/ical-generator/compare/v5.0.1...v6.0.0) (2023-10-25)
 
 
