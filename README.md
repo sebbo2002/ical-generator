@@ -38,10 +38,14 @@ these breaking changes and how you can adapt your code can be found in our
 ## ⚡️ Quick Start
 
 ```javascript
-import ical from 'ical-generator';
+import ical, {ICalCalendarMethod} from 'ical-generator';
 import http from 'node:http';
 
 const calendar = ical({name: 'my first iCal'});
+
+// A method is required for outlook to display event as an invitation
+calendar.method(ICalCalendarMethod.REQUEST);
+
 const startTime = new Date();
 const endTime = new Date();
 endTime.setHours(startTime.getHours()+1);
@@ -90,7 +94,7 @@ to use a VTimezone generator. Such a function generates a VTimezone entry and re
 be used for this:
 
 ```typescript
-import ical from 'ical-generator';
+import {ICalCalendar} from 'ical-generator';
 import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 
 const cal = new ICalCalendar();

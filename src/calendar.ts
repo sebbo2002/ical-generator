@@ -169,21 +169,13 @@ export default class ICalCalendar {
             return this.data.prodId;
         }
 
-        const prodIdRegEx = /^\/\/(.+)\/\/(.+)\/\/([A-Z]{1,4})$/;
-
-        if (typeof prodId === 'string' && prodIdRegEx.test(prodId)) {
+        if (typeof prodId === 'string') {
             this.data.prodId = prodId;
             return this;
         }
-        if (typeof prodId === 'string') {
-            throw new Error(
-                '`prodId` isn\'t formated correctly. See https://sebbo2002.github.io/ical-generator/develop/reference/'+
-                'classes/ICalCalendar.html#prodId'
-            );
-        }
 
         if (typeof prodId !== 'object') {
-            throw new Error('`prodid` needs to be a valid formed string or an object!');
+            throw new Error('`prodid` needs to be a string or an object!');
         }
 
         if (!prodId.company) {

@@ -39,13 +39,6 @@ describe('ical-generator Calendar', function () {
             assert.deepStrictEqual(cal, cal.prodId('//loremipsum.de//ical-tests//EN'));
         });
 
-        it('should throw error when string misformed', function () {
-            const cal = new ICalCalendar();
-            assert.throws(function () {
-                cal.prodId('enemenemuh!');
-            }, /`prodId`/);
-        });
-
         it('should throw error when not string/object', function () {
             const cal = new ICalCalendar();
             assert.throws(function () {
