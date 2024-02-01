@@ -170,7 +170,7 @@ export function addOrGetCustomAttributes (data: {x: [string, string][]}, keyOrAr
             return [o.key, o.value] as [string, string];
         });
     }
-    else if (typeof keyOrArray === 'object') {
+    else if (typeof keyOrArray === 'object' && keyOrArray !== null) {
         data.x = Object.entries(keyOrArray).map(([key, value]) => {
             if (typeof key !== 'string' || typeof value !== 'string') {
                 throw new Error('Either key or value is not a string!');
