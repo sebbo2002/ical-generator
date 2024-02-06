@@ -49,7 +49,7 @@ configuration.plugins.push(['@semantic-release/github', {
 }]);
 
 configuration.plugins.push(['@semantic-release/git', {
-    'assets': ['CHANGELOG.md', 'LICENSE'],
+    'assets': ['CHANGELOG.md', 'LICENSE', 'package-lock.json', 'package.json'],
     'message': 'chore(release): :bookmark: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
 }]);
 
