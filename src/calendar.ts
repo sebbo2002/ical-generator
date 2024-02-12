@@ -89,7 +89,7 @@ export default class ICalCalendar {
     private readonly data: ICalCalendarInternalData;
 
     /**
-     * You can pass options to setup your calendar or use setters to do this.
+     * You can pass options to set up your calendar or use setters to do this.
      *
      * ```javascript
      *  * import ical from 'ical-generator';
@@ -108,6 +108,16 @@ export default class ICalCalendar {
      *
      * const cal = ical();
      * cal.name('sebbo.net');
+     * ```
+     *
+     * `cal.toString()` would then produce the following string:
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * NAME:sebbo.net
+     * X-WR-CALNAME:sebbo.net
+     * END:VCALENDAR
      * ```
      *
      * @param data Calendar data
@@ -161,6 +171,11 @@ export default class ICalCalendar {
      * });
      * ```
      *
+     * `cal.toString()` would then produce the following string:
+     * ```text
+     * PRODID:-//My Company//My Product//EN
+     * ```
+     *
      * @since 0.2.0
      */
     prodId(prodId: ICalCalendarProdIdData | string): this;
@@ -206,6 +221,8 @@ export default class ICalCalendar {
      * #### Typescript Example
      * ```typescript
      * import {ICalCalendarMethod} from 'ical-generator';
+     *
+     * // METHOD:PUBLISH
      * calendar.method(ICalCalendarMethod.PUBLISH);
      * ```
      *
@@ -235,6 +252,24 @@ export default class ICalCalendar {
     /**
      * Set your feed's name. Is used to fill `NAME`
      * and `X-WR-CALNAME` in your iCal file.
+     *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     * cal.name('Next Arrivals');
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * NAME:Next Arrivals
+     * X-WR-CALNAME:Next Arrivals
+     * END:VCALENDAR
+     * ```
      *
      * @since 0.2.0
      */
@@ -312,7 +347,7 @@ export default class ICalCalendar {
      * import ical from 'ical-generator';
      * import {getVtimezoneComponent} from '@touch4it/ical-timezones';
      *
-     * const cal = new ICalCalendar();
+     * const cal = ical();
      * cal.timezone({
      *     name: 'FOO',
      *     generator: getVtimezoneComponent
@@ -361,6 +396,10 @@ export default class ICalCalendar {
      *
      * ```javascript
      * cal.source('http://example.com/my/original_source.ical');
+     * ```
+     *
+     * ```text
+     * SOURCE;VALUE=URI:http://example.com/my/original_source.ical
      * ```
      *
      * @since 2.2.0-develop.1
@@ -595,6 +634,14 @@ export default class ICalCalendar {
      * });
      * ```
      *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * X-MY-CUSTOM-ATTR:1337!
+     * END:VCALENDAR
+     * ```
+     *
      * @since 1.9.0
      */
     x (keyOrArray: {key: string, value: string}[] | [string, string][] | Record<string, string>): this;
@@ -606,6 +653,14 @@ export default class ICalCalendar {
      *
      * ```javascript
      * calendar.x("X-MY-CUSTOM-ATTR", "1337!");
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * X-MY-CUSTOM-ATTR:1337!
+     * END:VCALENDAR
      * ```
      *
      * @since 1.9.0

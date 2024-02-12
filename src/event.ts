@@ -326,6 +326,35 @@ export default class ICalEvent {
      * [Readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
      * for details about supported values and timezone handling.
      *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   start: new Date('2020-01-01')
+     * });
+     *
+     * // overwrites old start date
+     * event.start(new Date('2024-02-01'));
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:7e2aee64-b07a-4256-9b3e-e9eaa452bac8
+     * SEQUENCE:0
+     * DTSTAMP:20240212T190915Z
+     * DTSTART:20240201T000000Z
+     * SUMMARY:
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     start(start: ICalDateTimeValue): this;
@@ -513,6 +542,36 @@ export default class ICalEvent {
      * event.allDay(true); // → appointment is for the whole day
      * ```
      *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * cal.createEvent({
+     *   start: new Date('2020-01-01'),
+     *   summary: 'Very Important Day',
+     *   allDay: true
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:1964fe8d-32c5-4f2a-bd62-7d9d7de5992b
+     * SEQUENCE:0
+     * DTSTAMP:20240212T191956Z
+     * DTSTART;VALUE=DATE:20200101
+     * X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
+     * X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE
+     * SUMMARY:Very Important Day
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     allDay(allDay: boolean): this;
@@ -536,6 +595,34 @@ export default class ICalEvent {
      * Set the event's floating flag. This unsets the event's timezone.
      * Events whose floating flag is set to true always take place at the
      * same time, regardless of the time zone.
+     *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * cal.createEvent({
+     *   start: new Date('2020-01-01T20:00:00Z'),
+     *   summary: 'Always at 20:00 in every <Timezone',
+     *   floating: true
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:5d7278f9-ada3-40ef-83d1-23c29ce0a763
+     * SEQUENCE:0
+     * DTSTAMP:20240212T192214Z
+     * DTSTART:20200101T200000
+     * SUMMARY:Always at 20:00 in every <Timezone
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
      *
      * @since 0.2.0
      */
@@ -577,6 +664,40 @@ export default class ICalEvent {
      * });
      * ```
      *
+     * **Example:**
+     *
+     *```typescript
+     * import ical, { ICalEventRepeatingFreq } from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   start: new Date('2020-01-01T20:00:00Z'),
+     *   summary: 'Repeating Event'
+     * });
+     * event.repeating({
+     *   freq: ICalEventRepeatingFreq.WEEKLY,
+     *   count: 4
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:b80e6a68-c2cd-48f5-b94d-cecc7ce83871
+     * SEQUENCE:0
+     * DTSTAMP:20240212T193646Z
+     * DTSTART:20200101T200000Z
+     * RRULE:FREQ=WEEKLY;COUNT=4
+     * SUMMARY:Repeating Event
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     repeating(repeating: ICalRepeatingOptions | null): this;
@@ -584,6 +705,44 @@ export default class ICalEvent {
     /**
      * Set the event's repeating options by passing an [RRule object](https://github.com/jakubroztocil/rrule).
      * @since 2.0.0-develop.5
+     *
+     * ```typescript
+     * import ical from 'ical-generator';
+     * import { datetime, RRule } from 'rrule';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   start: new Date('2020-01-01T20:00:00Z'),
+     *   summary: 'Repeating Event'
+     * });
+     *
+     * const rule = new RRule({
+     *   freq: RRule.WEEKLY,
+     *   interval: 5,
+     *   byweekday: [RRule.MO, RRule.FR],
+     *   dtstart: datetime(2012, 2, 1, 10, 30),
+     *   until: datetime(2012, 12, 31)
+     * })
+     * event.repeating(rule);
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:36585e40-8fa8-460d-af0c-88b6f434030b
+     * SEQUENCE:0
+     * DTSTAMP:20240212T193827Z
+     * DTSTART:20200101T200000Z
+     * RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20121231T000000Z
+     * SUMMARY:Repeating Event
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
      */
     repeating(repeating: ICalRRuleStub | null): this;
 
@@ -736,6 +895,15 @@ export default class ICalEvent {
      * });
      * ```
      *
+     * ```text
+     * LOCATION:Apple Store Kurfürstendamm\nKurfürstendamm 26\, 10719 Berlin\,
+     *  Deutschland
+     * X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Kurfürstendamm 26\, 10719
+     *   Berlin\, Deutschland;X-APPLE-RADIUS=141.1751386318387;X-TITLE=Apple Store
+     *   Kurfürstendamm:geo:52.50363,13.32865
+     * GEO:52.50363;13.32865
+     * ```
+     *
      * @since 0.2.0
      */
     location(location: ICalLocation | string | null): this;
@@ -778,9 +946,14 @@ export default class ICalEvent {
      *
      * ```javascript
      * event.description({
-     *     plain: 'Hello World!';
-     *     html: '<p>Hello World!</p>';
+     *     plain: 'Hello World!',
+     *     html: '<p>Hello World!</p>'
      * });
+     * ```
+     *
+     * ```text
+     * DESCRIPTION:Hello World!
+     * X-ALT-DESC;FMTTYPE=text/html:<p>Hello World!</p>
      * ```
      *
      * @since 0.2.0
@@ -859,12 +1032,33 @@ export default class ICalEvent {
      * an empty attendee.
      *
      * ```javascript
+     * import ical from 'ical-generator';
+     *
      * const cal = ical();
-     * const event = cal.createEvent();
-     * const attendee = event.createAttendee({email: 'hui@example.com', name: 'Hui'});
+     * const event = cal.createEvent({
+     *   start: new Date()
+     * });
+     *
+     * event.createAttendee({email: 'hui@example.com', name: 'Hui'});
      *
      * // add another attendee
      * event.createAttendee('Buh <buh@example.net>');
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:b4944f07-98e4-4581-ac80-2589bb20273d
+     * SEQUENCE:0
+     * DTSTAMP:20240212T194232Z
+     * DTSTART:20240212T194232Z
+     * SUMMARY:
+     * ATTENDEE;ROLE=REQ-PARTICIPANT;CN="Hui":MAILTO:hui@example.com
+     * ATTENDEE;ROLE=REQ-PARTICIPANT;CN="Buh":MAILTO:buh@example.net
+     * END:VEVENT
+     * END:VCALENDAR
      * ```
      *
      * As with the organizer, you can also add an explicit `mailto` address.
