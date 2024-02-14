@@ -1596,10 +1596,10 @@ export default class ICalEvent {
             if (this.data.organizer.sentBy) {
                 g += ';SENT-BY="mailto:' + escape(this.data.organizer.sentBy, true) + '"';
             }
-            if (this.data.organizer.email && this.data.organizer.mailto) {
+            if (this.data.organizer.email) {
                 g += ';EMAIL=' + escape(this.data.organizer.email, false);
             }
-            if(this.data.organizer.email) {
+            if (this.data.organizer.mailto || this.data.organizer.email) {
                 g += ':mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email, false);
             }
             g += '\r\n';
