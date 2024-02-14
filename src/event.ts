@@ -918,7 +918,7 @@ export default class ICalEvent {
             return this;
         }
         if (
-            (!location?.title &&& !location?.geo) ||
+            (!location?.title && !location?.geo) ||
             (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon)))
         ) {
             throw new Error(
