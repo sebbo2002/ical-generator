@@ -918,7 +918,7 @@ export default class ICalEvent {
             return this;
         }
         if (
-            (location && !location.title) ||
+            (!location?.title &&& !location?.geo) ||
             (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon)))
         ) {
             throw new Error(
@@ -1766,13 +1766,14 @@ export default class ICalEvent {
                     ':geo:' + escape(this.data.location.geo?.lat, false) + ',' +
                     escape(this.data.location.geo?.lon, false) + '\r\n';
             }
-
-            if (this.data.location.geo) {
-                g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
-                    escape(this.data.location.geo?.lon, false) + '\r\n';
-            }
         }
 
+        // GEO
+        if (this.data.location.geo) {
+            g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
+                escape(this.data.location.geo?.lon, false) + '\r\n';
+        }
+        
         // DESCRIPTION
         if (this.data.description) {
             g += 'DESCRIPTION:' + escape(this.data.description.plain, false) + '\r\n';
