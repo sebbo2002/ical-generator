@@ -37,11 +37,11 @@ export type ICalAlarmData = ICalAlarmBaseData |
     ICalAlarmTriggerAfterData |
     ICalAlarmTriggerBeforeData;
 
-type ICalAlarmTriggerData = ICalAlarmBaseData & { trigger: number | ICalDateTimeValue };
-type ICalAlarmTriggerAfterData = ICalAlarmBaseData & { triggerAfter: number | ICalDateTimeValue };
-type ICalAlarmTriggerBeforeData = ICalAlarmBaseData & { triggerBefore: number | ICalDateTimeValue };
+export type ICalAlarmTriggerData = ICalAlarmBaseData & { trigger: number | ICalDateTimeValue };
+export type ICalAlarmTriggerAfterData = ICalAlarmBaseData & { triggerAfter: number | ICalDateTimeValue };
+export type ICalAlarmTriggerBeforeData = ICalAlarmBaseData & { triggerBefore: number | ICalDateTimeValue };
 
-interface ICalAlarmBaseData {
+export interface ICalAlarmBaseData {
     type?: ICalAlarmType;
     relatesTo?: ICalAlarmRelatesTo | null;
     repeat?: ICalAlarmRepeatData | null;
@@ -79,7 +79,7 @@ export interface ICalAlarmJSONData {
 
 
 /**
- * Usually you get an `ICalAlarm` object like this:
+ * Usually you get an {@link ICalAlarm} object like this:
  *
  * ```javascript
  * import ical from 'ical-generator';
@@ -88,7 +88,7 @@ export interface ICalAlarmJSONData {
  * const alarm = event.createAlarm();
  * ```
  *
- * You can also use the [[`ICalAlarm`]] object directly:
+ * You can also use the {@link ICalAlarm} object directly:
  *
  * ```javascript
  * import ical, {ICalAlarm} from 'ical-generator';
@@ -101,11 +101,11 @@ export default class ICalAlarm {
     private readonly event: ICalEvent;
 
     /**
-     * Constructor of [[`ICalAttendee`]]. The event reference is required
+     * Constructor of {@link ICalAttendee}. The event reference is required
      * to query the calendar's timezone and summary when required.
      *
      * @param data Alarm Data
-     * @param calendar Reference to ICalEvent object
+     * @param event Reference to ICalEvent object
      */
     constructor (data: ICalAlarmData, event: ICalEvent) {
         this.data = {
@@ -142,7 +142,7 @@ export default class ICalAlarm {
     type (type: ICalAlarmType): this;
 
     /**
-     * Set the alarm type. See [[`ICalAlarmType`]]
+     * Set the alarm type. See {@link ICalAlarmType}
      * for available status options.
      * @since 0.2.1
      */
@@ -162,7 +162,7 @@ export default class ICalAlarm {
 
     /**
      * Get the trigger time for the alarm. Can either
-     * be a date and time value ([[`ICalDateTimeValue`]]) or
+     * be a date and time value ({@link ICalDateTimeValue}) or
      * a number, which will represent the seconds between
      * alarm and event start. The number is negative, if the
      * alarm is triggered after the event started.
@@ -266,7 +266,7 @@ export default class ICalAlarm {
 
     /**
      * Get the trigger time for the alarm. Can either
-     * be a date and time value ([[`ICalDateTimeValue`]]) or
+     * be a date and time value ({@link ICalDateTimeValue}) or
      * a number, which will represent the seconds between
      * alarm and event start. The number is negative, if the
      * alarm is triggered before the event started.
@@ -305,7 +305,7 @@ export default class ICalAlarm {
 
     /**
      * Get the trigger time for the alarm. Can either
-     * be a date and time value ([[`ICalDateTimeValue`]]) or
+     * be a date and time value ({@link ICalDateTimeValue}) or
      * a number, which will represent the seconds between
      * alarm and event start. The number is negative, if the
      * alarm is triggered after the event started.

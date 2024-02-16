@@ -73,7 +73,7 @@ export enum ICalCalendarMethod {
 
 
 /**
- * Usually you get an `ICalCalendar` object like this:
+ * Usually you get an {@link ICalCalendar} object like this:
  * ```javascript
  * import ical from 'ical-generator';
  * const calendar = ical();
@@ -160,7 +160,7 @@ export default class ICalCalendar {
     /**
      * Set your feed's prodid. `prodid` can be either a
      * string like `//sebbo.net//ical-generator//EN` or a
-     * valid [[`ICalCalendarProdIdData`]] object. `language`
+     * valid {@link ICalCalendarProdIdData} object. `language`
      * is optional and defaults to `EN`.
      *
      * ```javascript
@@ -208,7 +208,7 @@ export default class ICalCalendar {
 
     /**
      * Get the feed method attribute.
-     * See [[`ICalCalendarMethod`]] for possible results.
+     * See {@link ICalCalendarMethod} for possible results.
      *
      * @since 0.2.8
      */
@@ -216,7 +216,7 @@ export default class ICalCalendar {
 
     /**
      * Set the feed method attribute.
-     * See [[`ICalCalendarMethod`]] for available options.
+     * See {@link ICalCalendarMethod} for available options.
      *
      * #### Typescript Example
      * ```typescript
@@ -315,7 +315,7 @@ export default class ICalCalendar {
      * Use this method to set your feed's timezone. Is used
      * to fill `TIMEZONE-ID` and `X-WR-TIMEZONE` in your iCal export.
      * Please not that all date values are treaded differently, if
-     * a timezone was set. See [[`formatDate`]] for details. If no
+     * a timezone was set. See {@link formatDate} for details. If no
      * time zone is specified, all information is output as UTC.
      *
      * ```javascript
@@ -520,7 +520,7 @@ export default class ICalCalendar {
 
 
     /**
-     * Creates a new [[`ICalEvent`]] and returns it. Use options to prefill the event's attributes.
+     * Creates a new {@link ICalEvent} and returns it. Use options to prefill the event's attributes.
      * Calling this method without options will create an empty event.
      *
      * ```javascript
