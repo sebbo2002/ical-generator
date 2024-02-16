@@ -94,7 +94,7 @@ interface ICalEventInternalData {
     stamp: ICalDateTimeValue,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | ICalRRuleStub | string | null,
+    repeating: ICalEventJSONRepeatingData | ICalRRuleStub | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -124,7 +124,7 @@ export interface ICalEventJSONData {
     stamp: string,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | string | null,
+    repeating: ICalEventJSONRepeatingData | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -143,7 +143,7 @@ export interface ICalEventJSONData {
     x: {key: string, value: string}[];
 }
 
-interface ICalEventInternalRepeatingData {
+export interface ICalEventJSONRepeatingData {
     freq: ICalEventRepeatingFreq;
     count?: number;
     interval?: number;
@@ -158,7 +158,7 @@ interface ICalEventInternalRepeatingData {
 
 
 /**
- * Usually you get an `ICalEvent` object like this:
+ * Usually you get an {@link ICalEvent} object like this:
  * ```javascript
  * import ical from 'ical-generator';
  * const calendar = ical();
@@ -643,10 +643,10 @@ export default class ICalEvent {
      * Get the event's repeating options
      * @since 0.2.0
      */
-    repeating(): ICalEventInternalRepeatingData | ICalRRuleStub | string | null;
+    repeating(): ICalEventJSONRepeatingData | ICalRRuleStub | string | null;
 
     /**
-     * Set the event's repeating options by passing an [[`ICalRepeatingOptions`]] object.
+     * Set the event's repeating options by passing an {@link ICalRepeatingOptions} object.
      *
      * ```javascript
      * event.repeating({
@@ -756,7 +756,7 @@ export default class ICalEvent {
      * @internal
      */
     repeating(repeating: ICalRepeatingOptions | ICalRRuleStub | string | null): this;
-    repeating(repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null): this | ICalEventInternalRepeatingData | ICalRRuleStub | string | null {
+    repeating(repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null): this | ICalEventJSONRepeatingData | ICalRRuleStub | string | null {
         if (repeating === undefined) {
             return this.data.repeating;
         }
@@ -880,7 +880,7 @@ export default class ICalEvent {
 
     /**
      * Set the event's location by passing a string (minimum) or
-     * an [[`ICalLocation`]] object which will also fill the iCal
+     * an {@link ICalLocation} object which will also fill the iCal
      * `GEO` attribute and Apple's `X-APPLE-STRUCTURED-LOCATION`.
      *
      * ```javascript
@@ -933,7 +933,7 @@ export default class ICalEvent {
 
 
     /**
-     * Get the event's description as an [[`ICalDescription`]] object.
+     * Get the event's description as an {@link ICalDescription} object.
      * @since 0.2.0
      */
     description(): ICalDescription | null;
@@ -1027,7 +1027,7 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalAttendee`]] and returns it. Use options to prefill
+     * Creates a new {@link ICalAttendee} and returns it. Use options to prefill
      * the attendee's attributes. Calling this method without options will create
      * an empty attendee.
      *
@@ -1121,7 +1121,7 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalAlarm`]] and returns it. Use options to prefill
+     * Creates a new {@link ICalAlarm} and returns it. Use options to prefill
      * the alarm's attributes. Calling this method without options will create
      * an empty alarm.
      *
@@ -1180,7 +1180,7 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalCategory`]] and returns it. Use options to prefill the category's attributes.
+     * Creates a new {@link ICalCategory} and returns it. Use options to prefill the category's attributes.
      * Calling this method without options will create an empty category.
      *
      * ```javascript
@@ -1601,7 +1601,7 @@ export default class ICalEvent {
      * @since 0.2.4
      */
     toJSON(): ICalEventJSONData {
-        let repeating: ICalEventInternalRepeatingData | string | null = null;
+        let repeating: ICalEventJSONRepeatingData | string | null = null;
         if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
             repeating = this.data.repeating.toString();
         }

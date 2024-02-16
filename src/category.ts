@@ -8,15 +8,16 @@ export interface ICalCategoryData {
     name: string;
 }
 
-export interface ICalCategoryInternalData {
+
+export interface ICalCategoryJSONData {
     name: string;
 }
 
-export type ICalCategoryJSONData = ICalCategoryInternalData;
+export type ICalCategoryInternalData = ICalCategoryJSONData;
 
 
 /**
- * Usually you get an `ICalCategory` object like this:
+ * Usually you get an {@link ICalCategory} object like this:
  *
  * ```javascript
  * import ical from 'ical-generator';
@@ -25,7 +26,7 @@ export type ICalCategoryJSONData = ICalCategoryInternalData;
  * const category = event.createCategory();
  * ```
  *
- * You can also use the [[`ICalCategory`]] object directly:
+ * You can also use the {@link ICalCategory} object directly:
  *
  * ```javascript
  * import ical, {ICalCategory} from 'ical-generator';
@@ -37,7 +38,7 @@ export default class ICalCategory {
     private readonly data: ICalCategoryInternalData;
 
     /**
-     * Constructor of [[`ICalCategory`]].
+     * Constructor of {@link ICalCategory}.
      * @param data Category Data
      */
     constructor(data: ICalCategoryData) {

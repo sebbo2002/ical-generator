@@ -75,7 +75,7 @@ export enum ICalAttendeeType {
 
 
 /**
- * Usually you get an `ICalAttendee` object like this:
+ * Usually you get an {@link ICalAttendee} object like this:
  *
  * ```javascript
  * import ical from 'ical-generator';
@@ -84,7 +84,7 @@ export enum ICalAttendeeType {
  * const attendee = event.createAttendee({ email: 'mail@example.com' });
  * ```
  *
- * You can also use the [[`ICalAttendee`]] object directly:
+ * You can also use the {@link ICalAttendee} object directly:
  *
  * ```javascript
  * import ical, {ICalAttendee} from 'ical-generator';
@@ -97,11 +97,11 @@ export default class ICalAttendee {
     private readonly event: ICalEvent;
 
     /**
-     * Constructor of [[`ICalAttendee`]]. The event reference is
+     * Constructor of {@link ICalAttendee}. The event reference is
      * required to query the calendar's timezone when required.
      *
      * @param data Attendee Data
-     * @param calendar Reference to ICalEvent object
+     * @param event Reference to ICalEvent object
      */
     constructor(data: ICalAttendeeData, event: ICalEvent) {
         this.data = {
@@ -232,7 +232,7 @@ export default class ICalAttendee {
 
     /**
      * Set the attendee's role, defaults to `REQ` / `REQ-PARTICIPANT`.
-     * Checkout [[`ICalAttendeeRole`]] for available roles.
+     * Checkout {@link ICalAttendeeRole} for available roles.
      *
      * @since 0.2.0
      */
@@ -279,7 +279,7 @@ export default class ICalAttendee {
     status(): ICalAttendeeStatus | null;
 
     /**
-     * Set the attendee's status. See [[`ICalAttendeeStatus`]]
+     * Set the attendee's status. See {@link ICalAttendeeStatus}
      * for available status options.
      *
      * @since 0.2.0
@@ -307,7 +307,7 @@ export default class ICalAttendee {
 
     /**
      * Set attendee's type (a.k.a. CUTYPE).
-     * See [[`ICalAttendeeType`]] for available status options.
+     * See {@link ICalAttendeeType} for available status options.
      *
      * @since 0.2.3
      */
@@ -336,7 +336,7 @@ export default class ICalAttendee {
      * Set the attendee's delegated-to field.
      *
      * Creates a new Attendee if the passed object is not already a
-     * [[`ICalAttendee`]] object. Will set the `delegatedTo` and
+     * {@link ICalAttendee} object. Will set the `delegatedTo` and
      * `delegatedFrom` attributes.
      *
      * Will also set the `status` to `DELEGATED`, if attribute is set.
@@ -392,7 +392,7 @@ export default class ICalAttendee {
      * Set the attendee's delegated-from field
      *
      * Creates a new Attendee if the passed object is not already a
-     * [[`ICalAttendee`]] object. Will set the `delegatedTo` and
+     * {@link ICalAttendee} object. Will set the `delegatedTo` and
      * `delegatedFrom` attributes.
      *
      * @param delegatedFrom
@@ -426,7 +426,7 @@ export default class ICalAttendee {
     /**
      * Create a new attendee this attendee delegates to and returns
      * this new attendee. Creates a new attendee if the passed object
-     * is not already an [[`ICalAttendee`]].
+     * is not already an {@link ICalAttendee}.
      *
      * ```javascript
      * const cal = ical();
@@ -449,7 +449,7 @@ export default class ICalAttendee {
     /**
      * Create a new attendee this attendee delegates from and returns
      * this new attendee. Creates a new attendee if the passed object
-     * is not already an [[`ICalAttendee`]].
+     * is not already an {@link ICalAttendee}.
      *
      * ```javascript
      * const cal = ical();
