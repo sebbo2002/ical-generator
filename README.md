@@ -3,10 +3,10 @@
 
 <p align="center">
   <a href="https://github.com/sebbo2002/ical-generator#gh-light-mode-only">
-    <img src="https://static.sebbo.net/ical-generator/logo-dark.svg" width="318px" alt="ical-generator logo" />
+    <img src="https://static.sebbo.net/ical-generator/logo-light.svg" width="318px" alt="ical-generator logo" />
   </a>
   <a href="https://github.com/sebbo2002/ical-generator#gh-dark-mode-only">
-    <img src="https://static.sebbo.net/ical-generator/logo-light.svg" width="318px" alt="ical-generator logo" />
+    <img src="https://static.sebbo.net/ical-generator/logo-dark.svg" width="318px" alt="ical-generator logo" />
   </a>
 </p>
 <p align="center">
