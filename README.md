@@ -2,7 +2,8 @@
 <br />
 
 <p align="center">
-    <img src="https://d.sebbo.net/ical-generator-logo-w-dark-2IyGhq7rHoLzQwaNbK7MvxoNpe0bivGDzbjrai56R5YTfQuvfI8DtDfbfnNeRborwoj2y0gS5urh7OKdd4wik9F5PT4LxRnReyXA.svg" alt="ical-generator" />
+    <img src="https://static.sebbo.net/ical-generator/logo-dark.svg#gh-dark-mode-only" alt="ical-generator" />
+    <img src="https://static.sebbo.net/ical-generator/logo-light.svg#gh-light-mode-only" alt="ical-generator" />
 </p>
 <p align="center">
     <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" /></a>

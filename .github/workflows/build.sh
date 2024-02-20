@@ -20,6 +20,8 @@ fi;
 mkdir -p ./docs/
 rm -rf ./docs/coverage/ ./docs/reference/ ./docs/tests/
 
+# Remove Dark Mode Logo
+sed -i '/<img .*#gh-dark-mode-only.*>/d' "./README.md"
 
 # TypeDoc in ./docs/referece
 npx typedoc
