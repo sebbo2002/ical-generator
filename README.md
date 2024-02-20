@@ -5,15 +5,10 @@
     <img src="https://d.sebbo.net/ical-generator-logo-w-dark-2IyGhq7rHoLzQwaNbK7MvxoNpe0bivGDzbjrai56R5YTfQuvfI8DtDfbfnNeRborwoj2y0gS5urh7OKdd4wik9F5PT4LxRnReyXA.svg" alt="ical-generator" />
 </p>
 <p align="center">
-    <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" />
-    </a>
-    <a href="https://bundlephobia.com/package/ical-generator">
-        <img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" />
-    </a>
-    <a href="https://github.com/sebbo2002/ical-generator/actions">
-        <img src="https://img.shields.io/github/actions/workflow/status/sebbo2002/ical-generator/test-release.yml?style=flat-square" alt="CI Status" />
-    </a>
+    <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" /></a>
+    <a href="https://bundlephobia.com/package/ical-generator"><img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" /></a>
+    <img src="https://img.shields.io/depfu/dependencies/github/sebbo2002%2Fical-generator?style=flat-square" alt="Dependency Status" />
+    <a href="https://github.com/sebbo2002/ical-generator/actions/workflows/test-release.yml?query=branch%3Adevelop"><img src="https://img.shields.io/github/actions/workflow/status/sebbo2002/ical-generator/test-release.yml?style=flat-square" alt="CI Status" /></a>
 </p>
 
 <br />
