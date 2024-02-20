@@ -2,8 +2,12 @@
 <br />
 
 <p align="center">
-    <img src="https://static.sebbo.net/ical-generator/logo-dark.svg#gh-dark-mode-only" alt="ical-generator" />
-    <img src="https://static.sebbo.net/ical-generator/logo-light.svg#gh-light-mode-only" alt="ical-generator" />
+  <a href="https://github.com/sebbo2002/ical-generator#gh-light-mode-only">
+    <img src="https://static.sebbo.net/ical-generator/logo-dark.svg" width="318px" alt="ical-generator logo" />
+  </a>
+  <a href="https://github.com/sebbo2002/ical-generator#gh-dark-mode-only">
+    <img src="https://static.sebbo.net/ical-generator/logo-light.svg" width="318px" alt="ical-generator logo" />
+  </a>
 </p>
 <p align="center">
     <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" /></a>
