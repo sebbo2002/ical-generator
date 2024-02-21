@@ -14,6 +14,7 @@
     <a href="https://bundlephobia.com/package/ical-generator"><img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" /></a>
     <img src="https://img.shields.io/depfu/dependencies/github/sebbo2002%2Fical-generator?style=flat-square" alt="Dependency Status" />
     <a href="https://github.com/sebbo2002/ical-generator/actions/workflows/test-release.yml?query=branch%3Adevelop"><img src="https://img.shields.io/github/actions/workflow/status/sebbo2002/ical-generator/test-release.yml?style=flat-square" alt="CI Status" /></a>
+    <a href="https://sebbo2002.github.io/ical-generator/develop/coverage/"><img alt="Code Coverage Badge" src="https://img.shields.io/nycrc/sebbo2002/ical-generator?style=flat-square"></a>
 </p>
 
 <br />
@@ -119,7 +120,6 @@ in the calendar/event.
 ```
 npm test
 npm run coverage
-npm run browser-test
 ```
 
 
