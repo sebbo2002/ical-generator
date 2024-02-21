@@ -21,7 +21,8 @@ mkdir -p ./docs/
 rm -rf ./docs/coverage/ ./docs/reference/ ./docs/tests/
 
 # Remove Dark Mode Logo
-sed -i '/<img .*#gh-dark-mode-only.*>/d' "./README.md"
+git checkout -- ./README.md
+awk 'NR < 8 || NR > 10' ./README.md > temp && mv -f temp ./README.md
 
 # TypeDoc in ./docs/referece
 npx typedoc
