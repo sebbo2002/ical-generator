@@ -1225,8 +1225,12 @@ describe('ical-generator Event', function () {
                 title: 'Foo',
                 geo: {lat: 44.5, lon: -3.4}
             });
-            assert.deepStrictEqual(e.location()?.title, 'Foo');
-            assert.deepStrictEqual(e.location()?.geo, {lat: 44.5, lon: -3.4});
+
+            const location = e.location();
+            assert.ok(location);
+            assert.ok('title' in location);
+            assert.deepStrictEqual(location?.title, 'Foo');
+            assert.deepStrictEqual(location?.geo, {lat: 44.5, lon: -3.4});
 
             e.location(null);
             assert.strictEqual(e.location(), null);
@@ -1245,7 +1249,11 @@ describe('ical-generator Event', function () {
             }, new ICalCalendar());
 
             event.location('Europa-Park');
-            assert.strictEqual(event.location()?.title, 'Europa-Park');
+
+            const location = event.location();
+            assert.ok(location);
+            assert.ok('title' in location);
+            assert.strictEqual(location?.title, 'Europa-Park');
         });
 
         it('should throw error when location is not valid', function () {

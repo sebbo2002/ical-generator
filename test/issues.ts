@@ -270,4 +270,36 @@ describe('Issues', function () {
             ].join('\r\n'));
         });
     });
+
+    describe('Issue #569 / 570', function () {
+        it('event.location should work with `geo` only', function () {
+            const event = ical().createEvent({
+                id: '12345',
+                summary: 'Hello',
+                start: new Date('2020-06-15T00:00:00Z'),
+                end: new Date('2020-06-15T01:00:00Z'),
+                stamp: new Date('2020-06-15T00:00:00Z')
+            });
+
+            event.location({
+                geo: {
+                    lat: 52.51147570081018,
+                    lon: 13.342200696373846
+                }
+            });
+
+            assert.strictEqual(event.toString(), [
+                'BEGIN:VEVENT',
+                'UID:12345',
+                'SEQUENCE:0',
+                'DTSTAMP:20200615T000000Z',
+                'DTSTART:20200615T000000Z',
+                'DTEND:20200615T010000Z',
+                'SUMMARY:Hello',
+                'GEO:52.51147570081018;13.342200696373846',
+                'END:VEVENT',
+                ''
+            ].join('\r\n'));
+        });
+    });
 });

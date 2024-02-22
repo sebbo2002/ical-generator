@@ -880,7 +880,7 @@ export default class ICalEvent {
 
     /**
      * Set the event's location by passing a string (minimum) or
-     * an {@link ICalLocation} object which will also fill the iCal
+     * an {@link ICalLocationWithTitle} object which will also fill the iCal
      * `GEO` attribute and Apple's `X-APPLE-STRUCTURED-LOCATION`.
      *
      * ```javascript
@@ -904,6 +904,22 @@ export default class ICalEvent {
      * GEO:52.50363;13.32865
      * ```
      *
+     * Since v6.1.0 you can also pass a {@link ICalLocationWithoutTitle} object to pass
+     * the geolocation only. This will only fill the iCal `GEO` attribute.
+     *
+     * ```javascript
+     * event.location({
+     *    geo: {
+     *        lat: 52.503630,
+     *        lon: 13.328650
+     *    }
+     * });
+     * ```
+     *
+     * ```text
+     * GEO:52.50363;13.32865
+     * ```
+     *
      * @since 0.2.0
      */
     location(location: ICalLocation | string | null): this;
@@ -917,10 +933,11 @@ export default class ICalEvent {
             };
             return this;
         }
-        if (
-            (location && !location.title) ||
-            (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon)))
-        ) {
+        if (location && (
+            ('title' in location && !location.title) ||
+            (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon))) ||
+            (!('title' in location) && !location?.geo)
+        )) {
             throw new Error(
                 '`location` isn\'t formatted correctly. See https://sebbo2002.github.io/ical-generator/'+
                 'develop/reference/classes/ICalEvent.html#location'
@@ -1751,7 +1768,7 @@ export default class ICalEvent {
         }
 
         // LOCATION
-        if (this.data.location?.title) {
+        if (this.data.location && 'title' in this.data.location && this.data.location.title) {
             g += 'LOCATION:' + escape(
                 this.data.location.title +
                 (this.data.location.address ? '\n' + this.data.location.address : ''),
@@ -1766,13 +1783,14 @@ export default class ICalEvent {
                     ':geo:' + escape(this.data.location.geo?.lat, false) + ',' +
                     escape(this.data.location.geo?.lon, false) + '\r\n';
             }
-
-            if (this.data.location.geo) {
-                g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
-                    escape(this.data.location.geo?.lon, false) + '\r\n';
-            }
         }
 
+        // GEO
+        if (this.data.location && 'geo' in this.data.location && this.data.location.geo) {
+            g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
+                escape(this.data.location.geo?.lon, false) + '\r\n';
+        }
+        
         // DESCRIPTION
         if (this.data.description) {
             g += 'DESCRIPTION:' + escape(this.data.description.plain, false) + '\r\n';

@@ -99,6 +99,8 @@ export {
     ICalDateTimeValue,
     ICalRepeatingOptions,
     ICalLocation,
+    ICalLocationWithTitle,
+    ICalLocationWithoutTitle,
     ICalGeo,
     ICalOrganizer,
     ICalDescription,

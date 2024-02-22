@@ -19,11 +19,17 @@ export interface ICalRepeatingOptions {
     startOfWeek?: ICalWeekday;
 }
 
-export interface ICalLocation {
+export type ICalLocation = ICalLocationWithTitle | ICalLocationWithoutTitle;
+
+export interface ICalLocationWithTitle {
     title: string;
     address?: string;
     radius?: number;
     geo?: ICalGeo;
+}
+
+export interface ICalLocationWithoutTitle {
+    geo: ICalGeo;
 }
 
 export interface ICalGeo {
