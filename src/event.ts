@@ -360,16 +360,11 @@ export default class ICalEvent {
     start(start: ICalDateTimeValue): this;
     start(start?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (start === undefined) {
+            this.swapStartAndEndIfRequired();
             return this.data.start;
         }
 
         this.data.start = checkDate(start, 'start');
-        if (this.data.start && this.data.end && toDate(this.data.start).getTime() > toDate(this.data.end).getTime()) {
-            const t = this.data.start;
-            this.data.start = this.data.end;
-            this.data.end = t;
-        }
-
         return this;
     }
 
@@ -391,6 +386,7 @@ export default class ICalEvent {
     end(end: ICalDateTimeValue | null): this;
     end(end?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (end === undefined) {
+            this.swapStartAndEndIfRequired();
             return this.data.end;
         }
         if (end === null) {
@@ -399,13 +395,19 @@ export default class ICalEvent {
         }
 
         this.data.end = checkDate(end, 'end');
+        return this;
+    }
+
+    /**
+     * Checks if the start date is after the end date and swaps them if necessary.
+     * @private
+     */
+    private swapStartAndEndIfRequired(): void {
         if (this.data.start && this.data.end && toDate(this.data.start).getTime() > toDate(this.data.end).getTime()) {
             const t = this.data.start;
             this.data.start = this.data.end;
             this.data.end = t;
         }
-
-        return this;
     }
 
     /**
@@ -1629,6 +1631,7 @@ export default class ICalEvent {
             });
         }
 
+        this.swapStartAndEndIfRequired();
         return Object.assign({}, this.data, {
             start: toJSON(this.data.start) || null,
             end: toJSON(this.data.end) || null,
@@ -1660,6 +1663,7 @@ export default class ICalEvent {
         // SEQUENCE
         g += 'SEQUENCE:' + this.data.sequence + '\r\n';
 
+        this.swapStartAndEndIfRequired();
         g += 'DTSTAMP:' + formatDate(this.calendar.timezone(), this.data.stamp) + '\r\n';
         if (this.data.allDay) {
             g += 'DTSTART;VALUE=DATE:' + formatDate(this.calendar.timezone(), this.data.start, true) + '\r\n';

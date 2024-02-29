@@ -302,4 +302,26 @@ describe('Issues', function () {
             ].join('\r\n'));
         });
     });
+
+    describe('Issue #581', function () {
+        it('event.start and event.end should be swappable', function () {
+            const calendar = ical();
+            const event = calendar.createEvent({
+                summary: 'Test Event',
+                start: '2024-02-29T17:00:00.000Z',
+                end: '2024-02-29T17:20:00.000Z'
+            });
+
+            event.start('2024-02-29T19:00:00.000Z');
+            event.end('2024-02-29T19:20:00.000Z');
+
+            const start = event.start();
+            assert.ok(typeof start === 'string');
+            assert.strictEqual(start, '2024-02-29T19:00:00.000Z');
+
+            const end = event.end();
+            assert.ok(typeof end === 'string');
+            assert.strictEqual(end, '2024-02-29T19:20:00.000Z');
+        });
+    });
 });
