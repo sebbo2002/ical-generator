@@ -3,6 +3,7 @@
 
 import {addOrGetCustomAttributes, checkEnum, checkNameAndMail, escape} from './tools.js';
 import ICalEvent from './event.js';
+import ICalAlarm from './alarm.js';
 
 
 interface ICalInternalAttendeeData {
@@ -94,16 +95,16 @@ export enum ICalAttendeeType {
  */
 export default class ICalAttendee {
     private readonly data: ICalInternalAttendeeData;
-    private readonly event: ICalEvent;
+    private readonly parent: ICalEvent | ICalAlarm;
 
     /**
      * Constructor of {@link ICalAttendee}. The event reference is
      * required to query the calendar's timezone when required.
      *
      * @param data Attendee Data
-     * @param event Reference to ICalEvent object
+     * @param parent Reference to ICalEvent object
      */
-    constructor(data: ICalAttendeeData, event: ICalEvent) {
+    constructor(data: ICalAttendeeData, parent: ICalEvent | ICalAlarm) {
         this.data = {
             name: null,
             email: '',
@@ -117,8 +118,8 @@ export default class ICalAttendee {
             delegatedFrom: null,
             x: []
         };
-        this.event = event;
-        if (!this.event) {
+        this.parent = parent;
+        if (!this.parent) {
             throw new Error('`event` option required!');
         }
         if (!data.email) {
@@ -367,14 +368,14 @@ export default class ICalAttendee {
         if(typeof delegatedTo === 'string') {
             this.data.delegatedTo = new ICalAttendee(
                 { email: delegatedTo, ...checkNameAndMail('delegatedTo', delegatedTo) },
-                this.event,
+                this.parent,
             );
         }
         else if(delegatedTo instanceof ICalAttendee) {
             this.data.delegatedTo = delegatedTo;
         }
         else {
-            this.data.delegatedTo = new ICalAttendee(delegatedTo, this.event);
+            this.data.delegatedTo = new ICalAttendee(delegatedTo, this.parent);
         }
 
         this.data.status = ICalAttendeeStatus.DELEGATED;
@@ -409,14 +410,14 @@ export default class ICalAttendee {
         else if(typeof delegatedFrom === 'string') {
             this.data.delegatedFrom = new ICalAttendee(
                 { email: delegatedFrom, ...checkNameAndMail('delegatedFrom', delegatedFrom) },
-                this.event,
+                this.parent,
             );
         }
         else if(delegatedFrom instanceof ICalAttendee) {
             this.data.delegatedFrom = delegatedFrom;
         }
         else {
-            this.data.delegatedFrom = new ICalAttendee(delegatedFrom, this.event);
+            this.data.delegatedFrom = new ICalAttendee(delegatedFrom, this.parent);
         }
 
         return this;
@@ -439,7 +440,7 @@ export default class ICalAttendee {
      * @since 0.2.0
      */
     delegatesTo (options: ICalAttendee | ICalAttendeeData | string): ICalAttendee {
-        const a = options instanceof ICalAttendee ? options : this.event.createAttendee(options);
+        const a = options instanceof ICalAttendee ? options : this.parent.createAttendee(options);
         this.delegatedTo(a);
         a.delegatedFrom(this);
         return a;
@@ -462,7 +463,7 @@ export default class ICalAttendee {
      * @since 0.2.0
      */
     delegatesFrom (options: ICalAttendee | ICalAttendeeData | string): ICalAttendee {
-        const a = options instanceof ICalAttendee ? options : this.event.createAttendee(options);
+        const a = options instanceof ICalAttendee ? options : this.parent.createAttendee(options);
         this.delegatedFrom(a);
         a.delegatedTo(this);
         return a;

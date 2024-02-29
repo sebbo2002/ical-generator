@@ -6,6 +6,7 @@ import moment from 'moment-timezone';
 import ICalCalendar from '../src/calendar.js';
 import ICalEvent from '../src/event.js';
 import ICalAlarm, { ICalAlarmRelatesTo, ICalAlarmType } from '../src/alarm.js';
+import ICalAttendee from '../src/attendee.js';
 
 
 describe('ical-generator Alarm', function () {
@@ -630,6 +631,127 @@ describe('ical-generator Alarm', function () {
         });
     });
 
+    describe('summary()', function () {
+        it('setter should return this', function () {
+            const a = new ICalAlarm({}, new ICalEvent(
+                { start: new Date() },
+                new ICalCalendar()
+            ));
+
+            assert.deepStrictEqual(a, a.summary(null));
+            assert.deepStrictEqual(a, a.summary('Hey Ho!'));
+        });
+
+        it('getter should return value', function () {
+            const a = new ICalAlarm({}, new ICalEvent(
+                { start: new Date() },
+                new ICalCalendar()
+            ));
+
+            assert.deepStrictEqual(a.summary(), null);
+            a.summary('blablabla');
+            assert.deepStrictEqual(a.summary(), 'blablabla');
+            a.summary(null);
+            assert.deepStrictEqual(a.summary(), null);
+        });
+
+        it('should change something', function () {
+            const a = new ICalAlarm({
+                type: ICalAlarmType.email,
+                summary: 'Huibuh!'
+            }, new ICalEvent({ start: new Date() }, new ICalCalendar()));
+            assert.ok(a.toString().indexOf('\r\nSUMMARY:Huibuh') > -1);
+        });
+
+        it('should fallback to event summary', function () {
+            const a = new ICalAlarm(
+                { type: ICalAlarmType.email },
+                new ICalEvent({ start: new Date(), summary: 'Example Event' }, new ICalCalendar())
+            );
+
+            assert.ok(a.toString().indexOf('\r\nSUMMARY:Example Event') > -1);
+        });
+    });
+
+    describe('createAttendee()', function () {
+        it('if Attendee passed, it should add and return it', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });
+
+            const attendee = new ICalAttendee({ email: 'mail@example.com' }, alarm);
+            assert.strictEqual(alarm.createAttendee(attendee), attendee, 'createAttendee returns attendee');
+            assert.deepStrictEqual(alarm.attendees()[0], attendee, 'attendee pushed');
+        });
+
+        it('should return a ICalAttendee instance', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });;
+
+            assert.ok(alarm.createAttendee({ email: 'mail@example.com' }) instanceof ICalAttendee);
+            assert.strictEqual(alarm.attendees.length, 1, 'attendee pushed');
+        });
+
+        it('should accept string', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });;
+            const attendee = alarm.createAttendee('Zac <zac@example.com>');
+
+            assert.strictEqual(attendee.name(), 'Zac');
+            assert.strictEqual(attendee.email(), 'zac@example.com');
+            assert.strictEqual(alarm.attendees().length, 1, 'attendee pushed');
+        });
+
+        it('should throw error when string misformated', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });;
+            assert.throws(function () {
+                alarm.createAttendee('foo bar');
+            }, /isn't formated correctly/);
+        });
+
+        it('should accept object', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });
+            const attendee = alarm.createAttendee({name: 'Zac', email: 'zac@example.com'});
+
+            assert.strictEqual(attendee.name(), 'Zac');
+            assert.strictEqual(attendee.email(), 'zac@example.com');
+            assert.strictEqual(alarm.attendees().length, 1, 'attendee pushed');
+            assert.ok(alarm.toString().includes('ATTENDEE;ROLE=REQ-PARTICIPANT;CN="Zac":MAILTO:zac@example.com'));
+        });
+    });
+
+    describe('attendees()', function () {
+        it('getter should return an array of attendees…', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });
+            assert.strictEqual(alarm.attendees().length, 0);
+
+            const attendee = alarm.createAttendee({ email: 'mail@example.com' });
+            assert.strictEqual(alarm.attendees().length, 1);
+            assert.deepStrictEqual(alarm.attendees()[0], attendee);
+        });
+
+        it('setter should add attendees and return this', function () {
+            const alarm = new ICalEvent({ start: new Date() }, new ICalCalendar()).createAlarm({
+                type: ICalAlarmType.email
+            });
+            const foo = alarm.attendees([
+                { name: 'Person A', email: 'a@example.com' },
+                { name: 'Person B', email: 'b@example.com' }
+            ]);
+
+            assert.strictEqual(alarm.attendees().length, 2);
+            assert.deepStrictEqual(foo, alarm);
+        });
+    });
+
     describe('x()', function () {
         it('is there', function () {
             const a = new ICalAlarm({}, new ICalEvent(
@@ -653,10 +775,12 @@ describe('ical-generator Alarm', function () {
 
             assert.deepStrictEqual(a.toJSON(), {
                 attach: null,
+                attendees: [],
                 description: null,
                 relatesTo: null,
                 interval: null,
                 repeat: null,
+                summary: null,
                 trigger: 120,
                 type: 'display',
                 x: []
