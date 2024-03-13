@@ -12,7 +12,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/npm": "^11.0.3",
     "@touch4it/ical-timezones": "^1.9.0",
     "@types/luxon": "^3.4.2",
     "@types/mocha": "^10.0.6",
