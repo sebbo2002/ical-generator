@@ -23,13 +23,7 @@
 `ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
 to generate subscriptionable calendar feeds.
 
-<br />
-<br />
 
-## ⚠️ Migration to v6
-In version 6 some breaking changes were made to make `ical-generator` even better. A short list of 
-these breaking changes and how you can adapt your code can be found in our
-[Migration Guide](https://github.com/sebbo2002/ical-generator/wiki/Migration-Guide:-v5-%E2%86%92-v6).
 
 ## 📦 Installation
 
