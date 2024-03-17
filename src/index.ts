@@ -49,11 +49,16 @@ export default ical;
 export {
     default as ICalAlarm,
     ICalAlarmData,
+    ICalAlarmBaseData,
+    ICalAlarmJSONData,
+    ICalAlarmRelatesTo,
     ICalAlarmRepeatData,
+    ICalAlarmTriggerData,
+    ICalAlarmTriggerAfterData,
+    ICalAlarmTriggerBeforeData,
     ICalAlarmType,
     ICalAlarmTypeValue,
-    ICalAlarmJSONData,
-    ICalAttachment
+    ICalAttachment,
 } from './alarm.js';
 
 export {
@@ -86,6 +91,7 @@ export {
     ICalEventTransparency,
     ICalEventData,
     ICalEventJSONData,
+    ICalEventJSONRepeatingData,
     ICalEventClass,
 } from './event.js';
 
@@ -93,6 +99,8 @@ export {
     ICalDateTimeValue,
     ICalRepeatingOptions,
     ICalLocation,
+    ICalLocationWithTitle,
+    ICalLocationWithoutTitle,
     ICalGeo,
     ICalOrganizer,
     ICalDescription,

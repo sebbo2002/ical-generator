@@ -3,6 +3,7 @@
 
 import {addOrGetCustomAttributes, checkEnum, checkNameAndMail, escape} from './tools.js';
 import ICalEvent from './event.js';
+import ICalAlarm from './alarm.js';
 
 
 interface ICalInternalAttendeeData {
@@ -75,7 +76,7 @@ export enum ICalAttendeeType {
 
 
 /**
- * Usually you get an `ICalAttendee` object like this:
+ * Usually you get an {@link ICalAttendee} object like this:
  *
  * ```javascript
  * import ical from 'ical-generator';
@@ -84,7 +85,7 @@ export enum ICalAttendeeType {
  * const attendee = event.createAttendee({ email: 'mail@example.com' });
  * ```
  *
- * You can also use the [[`ICalAttendee`]] object directly:
+ * You can also use the {@link ICalAttendee} object directly:
  *
  * ```javascript
  * import ical, {ICalAttendee} from 'ical-generator';
@@ -94,16 +95,16 @@ export enum ICalAttendeeType {
  */
 export default class ICalAttendee {
     private readonly data: ICalInternalAttendeeData;
-    private readonly event: ICalEvent;
+    private readonly parent: ICalEvent | ICalAlarm;
 
     /**
-     * Constructor of [[`ICalAttendee`]]. The event reference is
+     * Constructor of {@link ICalAttendee}. The event reference is
      * required to query the calendar's timezone when required.
      *
      * @param data Attendee Data
-     * @param calendar Reference to ICalEvent object
+     * @param parent Reference to ICalEvent object
      */
-    constructor(data: ICalAttendeeData, event: ICalEvent) {
+    constructor(data: ICalAttendeeData, parent: ICalEvent | ICalAlarm) {
         this.data = {
             name: null,
             email: '',
@@ -117,8 +118,8 @@ export default class ICalAttendee {
             delegatedFrom: null,
             x: []
         };
-        this.event = event;
-        if (!this.event) {
+        this.parent = parent;
+        if (!this.parent) {
             throw new Error('`event` option required!');
         }
         if (!data.email) {
@@ -232,7 +233,7 @@ export default class ICalAttendee {
 
     /**
      * Set the attendee's role, defaults to `REQ` / `REQ-PARTICIPANT`.
-     * Checkout [[`ICalAttendeeRole`]] for available roles.
+     * Checkout {@link ICalAttendeeRole} for available roles.
      *
      * @since 0.2.0
      */
@@ -279,7 +280,7 @@ export default class ICalAttendee {
     status(): ICalAttendeeStatus | null;
 
     /**
-     * Set the attendee's status. See [[`ICalAttendeeStatus`]]
+     * Set the attendee's status. See {@link ICalAttendeeStatus}
      * for available status options.
      *
      * @since 0.2.0
@@ -307,7 +308,7 @@ export default class ICalAttendee {
 
     /**
      * Set attendee's type (a.k.a. CUTYPE).
-     * See [[`ICalAttendeeType`]] for available status options.
+     * See {@link ICalAttendeeType} for available status options.
      *
      * @since 0.2.3
      */
@@ -336,7 +337,7 @@ export default class ICalAttendee {
      * Set the attendee's delegated-to field.
      *
      * Creates a new Attendee if the passed object is not already a
-     * [[`ICalAttendee`]] object. Will set the `delegatedTo` and
+     * {@link ICalAttendee} object. Will set the `delegatedTo` and
      * `delegatedFrom` attributes.
      *
      * Will also set the `status` to `DELEGATED`, if attribute is set.
@@ -367,14 +368,14 @@ export default class ICalAttendee {
         if(typeof delegatedTo === 'string') {
             this.data.delegatedTo = new ICalAttendee(
                 { email: delegatedTo, ...checkNameAndMail('delegatedTo', delegatedTo) },
-                this.event,
+                this.parent,
             );
         }
         else if(delegatedTo instanceof ICalAttendee) {
             this.data.delegatedTo = delegatedTo;
         }
         else {
-            this.data.delegatedTo = new ICalAttendee(delegatedTo, this.event);
+            this.data.delegatedTo = new ICalAttendee(delegatedTo, this.parent);
         }
 
         this.data.status = ICalAttendeeStatus.DELEGATED;
@@ -392,7 +393,7 @@ export default class ICalAttendee {
      * Set the attendee's delegated-from field
      *
      * Creates a new Attendee if the passed object is not already a
-     * [[`ICalAttendee`]] object. Will set the `delegatedTo` and
+     * {@link ICalAttendee} object. Will set the `delegatedTo` and
      * `delegatedFrom` attributes.
      *
      * @param delegatedFrom
@@ -409,14 +410,14 @@ export default class ICalAttendee {
         else if(typeof delegatedFrom === 'string') {
             this.data.delegatedFrom = new ICalAttendee(
                 { email: delegatedFrom, ...checkNameAndMail('delegatedFrom', delegatedFrom) },
-                this.event,
+                this.parent,
             );
         }
         else if(delegatedFrom instanceof ICalAttendee) {
             this.data.delegatedFrom = delegatedFrom;
         }
         else {
-            this.data.delegatedFrom = new ICalAttendee(delegatedFrom, this.event);
+            this.data.delegatedFrom = new ICalAttendee(delegatedFrom, this.parent);
         }
 
         return this;
@@ -426,7 +427,7 @@ export default class ICalAttendee {
     /**
      * Create a new attendee this attendee delegates to and returns
      * this new attendee. Creates a new attendee if the passed object
-     * is not already an [[`ICalAttendee`]].
+     * is not already an {@link ICalAttendee}.
      *
      * ```javascript
      * const cal = ical();
@@ -439,7 +440,7 @@ export default class ICalAttendee {
      * @since 0.2.0
      */
     delegatesTo (options: ICalAttendee | ICalAttendeeData | string): ICalAttendee {
-        const a = options instanceof ICalAttendee ? options : this.event.createAttendee(options);
+        const a = options instanceof ICalAttendee ? options : this.parent.createAttendee(options);
         this.delegatedTo(a);
         a.delegatedFrom(this);
         return a;
@@ -449,7 +450,7 @@ export default class ICalAttendee {
     /**
      * Create a new attendee this attendee delegates from and returns
      * this new attendee. Creates a new attendee if the passed object
-     * is not already an [[`ICalAttendee`]].
+     * is not already an {@link ICalAttendee}.
      *
      * ```javascript
      * const cal = ical();
@@ -462,7 +463,7 @@ export default class ICalAttendee {
      * @since 0.2.0
      */
     delegatesFrom (options: ICalAttendee | ICalAttendeeData | string): ICalAttendee {
-        const a = options instanceof ICalAttendee ? options : this.event.createAttendee(options);
+        const a = options instanceof ICalAttendee ? options : this.parent.createAttendee(options);
         this.delegatedFrom(a);
         a.delegatedTo(this);
         return a;

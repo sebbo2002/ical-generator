@@ -270,4 +270,58 @@ describe('Issues', function () {
             ].join('\r\n'));
         });
     });
+
+    describe('Issue #569 / 570', function () {
+        it('event.location should work with `geo` only', function () {
+            const event = ical().createEvent({
+                id: '12345',
+                summary: 'Hello',
+                start: new Date('2020-06-15T00:00:00Z'),
+                end: new Date('2020-06-15T01:00:00Z'),
+                stamp: new Date('2020-06-15T00:00:00Z')
+            });
+
+            event.location({
+                geo: {
+                    lat: 52.51147570081018,
+                    lon: 13.342200696373846
+                }
+            });
+
+            assert.strictEqual(event.toString(), [
+                'BEGIN:VEVENT',
+                'UID:12345',
+                'SEQUENCE:0',
+                'DTSTAMP:20200615T000000Z',
+                'DTSTART:20200615T000000Z',
+                'DTEND:20200615T010000Z',
+                'SUMMARY:Hello',
+                'GEO:52.51147570081018;13.342200696373846',
+                'END:VEVENT',
+                ''
+            ].join('\r\n'));
+        });
+    });
+
+    describe('Issue #581', function () {
+        it('event.start and event.end should be swappable', function () {
+            const calendar = ical();
+            const event = calendar.createEvent({
+                summary: 'Test Event',
+                start: '2024-02-29T17:00:00.000Z',
+                end: '2024-02-29T17:20:00.000Z'
+            });
+
+            event.start('2024-02-29T19:00:00.000Z');
+            event.end('2024-02-29T19:20:00.000Z');
+
+            const start = event.start();
+            assert.ok(typeof start === 'string');
+            assert.strictEqual(start, '2024-02-29T19:00:00.000Z');
+
+            const end = event.end();
+            assert.ok(typeof end === 'string');
+            assert.strictEqual(end, '2024-02-29T19:20:00.000Z');
+        });
+    });
 });

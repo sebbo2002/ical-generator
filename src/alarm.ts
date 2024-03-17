@@ -8,14 +8,17 @@ import {
     generateCustomAttributes,
     checkDate,
     toDurationString,
-    toJSON
+    toJSON,
+    checkNameAndMail
 } from './tools.js';
 import {ICalDateTimeValue} from './types.js';
+import ICalAttendee, { ICalAttendeeData } from './attendee.js';
 
 
 export enum ICalAlarmType {
     display = 'display',
-    audio = 'audio'
+    audio = 'audio',
+    email = 'email'
 }
 
 export const ICalAlarmRelatesTo = {
@@ -37,16 +40,18 @@ export type ICalAlarmData = ICalAlarmBaseData |
     ICalAlarmTriggerAfterData |
     ICalAlarmTriggerBeforeData;
 
-type ICalAlarmTriggerData = ICalAlarmBaseData & { trigger: number | ICalDateTimeValue };
-type ICalAlarmTriggerAfterData = ICalAlarmBaseData & { triggerAfter: number | ICalDateTimeValue };
-type ICalAlarmTriggerBeforeData = ICalAlarmBaseData & { triggerBefore: number | ICalDateTimeValue };
+export type ICalAlarmTriggerData = ICalAlarmBaseData & { trigger: number | ICalDateTimeValue };
+export type ICalAlarmTriggerAfterData = ICalAlarmBaseData & { triggerAfter: number | ICalDateTimeValue };
+export type ICalAlarmTriggerBeforeData = ICalAlarmBaseData & { triggerBefore: number | ICalDateTimeValue };
 
-interface ICalAlarmBaseData {
+export interface ICalAlarmBaseData {
     type?: ICalAlarmType;
     relatesTo?: ICalAlarmRelatesTo | null;
     repeat?: ICalAlarmRepeatData | null;
     attach?: string | ICalAttachment | null;
     description?: string | null;
+    summary?: string | null;
+    attendees?: ICalAttendee[] | ICalAttendeeData[];
     x?: {key: string, value: string}[] | [string, string][] | Record<string, string>;
 }
 
@@ -63,6 +68,8 @@ interface ICalInternalAlarmData {
     interval: number | null;
     attach: ICalAttachment | null;
     description: string | null;
+    summary: string | null;
+    attendees: ICalAttendee[];
     x: [string, string][];
 }
 
@@ -74,12 +81,14 @@ export interface ICalAlarmJSONData {
     interval: number | null;
     attach: ICalAttachment | null;
     description: string | null;
+    summary: string | null;
+    attendees: ICalAttendee[];
     x: {key: string, value: string}[];
 }
 
 
 /**
- * Usually you get an `ICalAlarm` object like this:
+ * Usually you get an {@link ICalAlarm} object like this:
  *
  * ```javascript
  * import ical from 'ical-generator';
@@ -88,7 +97,7 @@ export interface ICalAlarmJSONData {
  * const alarm = event.createAlarm();
  * ```
  *
- * You can also use the [[`ICalAlarm`]] object directly:
+ * You can also use the {@link ICalAlarm} object directly:
  *
  * ```javascript
  * import ical, {ICalAlarm} from 'ical-generator';
@@ -101,11 +110,11 @@ export default class ICalAlarm {
     private readonly event: ICalEvent;
 
     /**
-     * Constructor of [[`ICalAttendee`]]. The event reference is required
+     * Constructor of {@link ICalAttendee}. The event reference is required
      * to query the calendar's timezone and summary when required.
      *
      * @param data Alarm Data
-     * @param calendar Reference to ICalEvent object
+     * @param event Reference to ICalEvent object
      */
     constructor (data: ICalAlarmData, event: ICalEvent) {
         this.data = {
@@ -116,6 +125,8 @@ export default class ICalAlarm {
             interval: null,
             attach: null,
             description: null,
+            summary: null,
+            attendees: [],
             x: []
         };
 
@@ -131,6 +142,8 @@ export default class ICalAlarm {
         data.repeat && this.repeat(data.repeat);
         data.attach !== undefined && this.attach(data.attach);
         data.description !== undefined && this.description(data.description);
+        data.summary !== undefined && this.summary(data.summary);
+        data.attendees !== undefined && this.attendees(data.attendees);
         data.x !== undefined && this.x(data.x);
     }
 
@@ -142,7 +155,7 @@ export default class ICalAlarm {
     type (type: ICalAlarmType): this;
 
     /**
-     * Set the alarm type. See [[`ICalAlarmType`]]
+     * Set the alarm type. See {@link ICalAlarmType}
      * for available status options.
      * @since 0.2.1
      */
@@ -162,7 +175,7 @@ export default class ICalAlarm {
 
     /**
      * Get the trigger time for the alarm. Can either
-     * be a date and time value ([[`ICalDateTimeValue`]]) or
+     * be a date and time value ({@link ICalDateTimeValue}) or
      * a number, which will represent the seconds between
      * alarm and event start. The number is negative, if the
      * alarm is triggered after the event started.
@@ -266,7 +279,7 @@ export default class ICalAlarm {
 
     /**
      * Get the trigger time for the alarm. Can either
-     * be a date and time value ([[`ICalDateTimeValue`]]) or
+     * be a date and time value ({@link ICalDateTimeValue}) or
      * a number, which will represent the seconds between
      * alarm and event start. The number is negative, if the
      * alarm is triggered before the event started.
@@ -305,7 +318,7 @@ export default class ICalAlarm {
 
     /**
      * Get the trigger time for the alarm. Can either
-     * be a date and time value ([[`ICalDateTimeValue`]]) or
+     * be a date and time value ({@link ICalDateTimeValue}) or
      * a number, which will represent the seconds between
      * alarm and event start. The number is negative, if the
      * alarm is triggered after the event started.
@@ -467,7 +480,8 @@ export default class ICalAlarm {
 
     /**
      * Get the alarm description. Used to set the alarm message
-     * if alarm type is display. Defaults to the event's summary.
+     * if alarm type is `display`. If the alarm type is `email`, it's
+     * used to set the email body. Defaults to the event's summary.
      *
      * @since 0.2.1
      */
@@ -475,7 +489,8 @@ export default class ICalAlarm {
 
     /**
      * Set the alarm description. Used to set the alarm message
-     * if alarm type is display. Defaults to the event's summary.
+     * if alarm type is `display`. If the alarm type is `email`, it's
+     * used to set the email body. Defaults to the event's summary.
      *
      * @since 0.2.1
      */
@@ -490,6 +505,79 @@ export default class ICalAlarm {
         }
 
         this.data.description = description;
+        return this;
+    }
+
+
+    /**
+     * Get the alarm summary. Used to set the email subject
+     * if alarm type is `email`. Defaults to the event's summary.
+     *
+     * @since 7.0.0
+     */
+    summary (): string | null;
+
+    /**
+     * Set the alarm summary. Used to set the email subject
+     * if alarm type is display. Defaults to the event's summary.
+     *
+     * @since 0.2.1
+     */
+    summary (summary: string | null): this;
+    summary (summary?: string | null): this | string | null {
+        if (summary === undefined) {
+            return this.data.summary;
+        }
+        if (!summary) {
+            this.data.summary = null;
+            return this;
+        }
+
+        this.data.summary = summary;
+        return this;
+    }
+
+
+    /**
+     * Creates a new {@link ICalAttendee} and returns it. Use options to prefill
+     * the attendee's attributes. Calling this method without options will create
+     * an empty attendee.
+     *
+     * @since 7.0.0
+     */
+    createAttendee(data: ICalAttendee | ICalAttendeeData | string): ICalAttendee {
+        if (data instanceof ICalAttendee) {
+            this.data.attendees.push(data);
+            return data;
+        }
+        if (typeof data === 'string') {
+            data = { email: data, ...checkNameAndMail('data', data) };
+        }
+
+        const attendee = new ICalAttendee(data, this);
+        this.data.attendees.push(attendee);
+        return attendee;
+    }
+
+
+    /**
+     * Get all attendees
+     * @since 7.0.0
+     */
+    attendees(): ICalAttendee[];
+
+    /**
+     * Add multiple attendees to your event
+     *
+     * @since 7.0.0
+     */
+    attendees(attendees: (ICalAttendee | ICalAttendeeData | string)[]): this;
+    attendees(attendees?: (ICalAttendee | ICalAttendeeData | string)[]): this | ICalAttendee[] {
+        if (!attendees) {
+            return this.data.attendees;
+        }
+
+        attendees.forEach(attendee => this.createAttendee(attendee));
         return this;
     }
 
@@ -627,11 +715,26 @@ export default class ICalAlarm {
         }
 
         // DESCRIPTION
-        if (this.data.type === 'display' && this.data.description) {
+        if (this.data.type !== 'audio' && this.data.description) {
             g += 'DESCRIPTION:' + escape(this.data.description, false) + '\r\n';
         }
-        else if (this.data.type === 'display') {
+        else if (this.data.type !== 'audio') {
             g += 'DESCRIPTION:' + escape(this.event.summary(), false) + '\r\n';
+        }
+
+        // SUMMARY
+        if (this.data.type === 'email' && this.data.summary) {
+            g += 'SUMMARY:' + escape(this.data.summary, false) + '\r\n';
+        }
+        else if (this.data.type === 'email') {
+            g += 'SUMMARY:' + escape(this.event.summary(), false) + '\r\n';
+        }
+
+        // ATTENDEES
+        if (this.data.type === 'email') {
+            this.data.attendees.forEach(attendee => {
+                g += attendee.toString();
+            });
         }
 
         // CUSTOM X ATTRIBUTES

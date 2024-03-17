@@ -94,7 +94,7 @@ interface ICalEventInternalData {
     stamp: ICalDateTimeValue,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | ICalRRuleStub | string | null,
+    repeating: ICalEventJSONRepeatingData | ICalRRuleStub | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -124,7 +124,7 @@ export interface ICalEventJSONData {
     stamp: string,
     allDay: boolean,
     floating: boolean,
-    repeating: ICalEventInternalRepeatingData | string | null,
+    repeating: ICalEventJSONRepeatingData | string | null,
     summary: string,
     location: ICalLocation | null,
     description: ICalDescription | null,
@@ -143,7 +143,7 @@ export interface ICalEventJSONData {
     x: {key: string, value: string}[];
 }
 
-interface ICalEventInternalRepeatingData {
+export interface ICalEventJSONRepeatingData {
     freq: ICalEventRepeatingFreq;
     count?: number;
     interval?: number;
@@ -158,7 +158,7 @@ interface ICalEventInternalRepeatingData {
 
 
 /**
- * Usually you get an `ICalEvent` object like this:
+ * Usually you get an {@link ICalEvent} object like this:
  * ```javascript
  * import ical from 'ical-generator';
  * const calendar = ical();
@@ -326,21 +326,45 @@ export default class ICalEvent {
      * [Readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
      * for details about supported values and timezone handling.
      *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   start: new Date('2020-01-01')
+     * });
+     *
+     * // overwrites old start date
+     * event.start(new Date('2024-02-01'));
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:7e2aee64-b07a-4256-9b3e-e9eaa452bac8
+     * SEQUENCE:0
+     * DTSTAMP:20240212T190915Z
+     * DTSTART:20240201T000000Z
+     * SUMMARY:
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     start(start: ICalDateTimeValue): this;
     start(start?: ICalDateTimeValue): this | ICalDateTimeValue {
         if (start === undefined) {
+            this.swapStartAndEndIfRequired();
             return this.data.start;
         }
 
         this.data.start = checkDate(start, 'start');
-        if (this.data.start && this.data.end && toDate(this.data.start).getTime() > toDate(this.data.end).getTime()) {
-            const t = this.data.start;
-            this.data.start = this.data.end;
-            this.data.end = t;
-        }
-
         return this;
     }
 
@@ -362,6 +386,7 @@ export default class ICalEvent {
     end(end: ICalDateTimeValue | null): this;
     end(end?: ICalDateTimeValue | null): this | ICalDateTimeValue | null {
         if (end === undefined) {
+            this.swapStartAndEndIfRequired();
             return this.data.end;
         }
         if (end === null) {
@@ -370,13 +395,19 @@ export default class ICalEvent {
         }
 
         this.data.end = checkDate(end, 'end');
+        return this;
+    }
+
+    /**
+     * Checks if the start date is after the end date and swaps them if necessary.
+     * @private
+     */
+    private swapStartAndEndIfRequired(): void {
         if (this.data.start && this.data.end && toDate(this.data.start).getTime() > toDate(this.data.end).getTime()) {
             const t = this.data.start;
             this.data.start = this.data.end;
             this.data.end = t;
         }
-
-        return this;
     }
 
     /**
@@ -513,6 +544,36 @@ export default class ICalEvent {
      * event.allDay(true); // → appointment is for the whole day
      * ```
      *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * cal.createEvent({
+     *   start: new Date('2020-01-01'),
+     *   summary: 'Very Important Day',
+     *   allDay: true
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:1964fe8d-32c5-4f2a-bd62-7d9d7de5992b
+     * SEQUENCE:0
+     * DTSTAMP:20240212T191956Z
+     * DTSTART;VALUE=DATE:20200101
+     * X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
+     * X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE
+     * SUMMARY:Very Important Day
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     allDay(allDay: boolean): this;
@@ -537,6 +598,34 @@ export default class ICalEvent {
      * Events whose floating flag is set to true always take place at the
      * same time, regardless of the time zone.
      *
+     * ```typescript
+     * import ical from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * cal.createEvent({
+     *   start: new Date('2020-01-01T20:00:00Z'),
+     *   summary: 'Always at 20:00 in every <Timezone',
+     *   floating: true
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:5d7278f9-ada3-40ef-83d1-23c29ce0a763
+     * SEQUENCE:0
+     * DTSTAMP:20240212T192214Z
+     * DTSTART:20200101T200000
+     * SUMMARY:Always at 20:00 in every <Timezone
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     floating(floating?: boolean): this | boolean {
@@ -556,10 +645,10 @@ export default class ICalEvent {
      * Get the event's repeating options
      * @since 0.2.0
      */
-    repeating(): ICalEventInternalRepeatingData | ICalRRuleStub | string | null;
+    repeating(): ICalEventJSONRepeatingData | ICalRRuleStub | string | null;
 
     /**
-     * Set the event's repeating options by passing an [[`ICalRepeatingOptions`]] object.
+     * Set the event's repeating options by passing an {@link ICalRepeatingOptions} object.
      *
      * ```javascript
      * event.repeating({
@@ -577,6 +666,40 @@ export default class ICalEvent {
      * });
      * ```
      *
+     * **Example:**
+     *
+     *```typescript
+     * import ical, { ICalEventRepeatingFreq } from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   start: new Date('2020-01-01T20:00:00Z'),
+     *   summary: 'Repeating Event'
+     * });
+     * event.repeating({
+     *   freq: ICalEventRepeatingFreq.WEEKLY,
+     *   count: 4
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:b80e6a68-c2cd-48f5-b94d-cecc7ce83871
+     * SEQUENCE:0
+     * DTSTAMP:20240212T193646Z
+     * DTSTART:20200101T200000Z
+     * RRULE:FREQ=WEEKLY;COUNT=4
+     * SUMMARY:Repeating Event
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
      * @since 0.2.0
      */
     repeating(repeating: ICalRepeatingOptions | null): this;
@@ -584,6 +707,44 @@ export default class ICalEvent {
     /**
      * Set the event's repeating options by passing an [RRule object](https://github.com/jakubroztocil/rrule).
      * @since 2.0.0-develop.5
+     *
+     * ```typescript
+     * import ical from 'ical-generator';
+     * import { datetime, RRule } from 'rrule';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   start: new Date('2020-01-01T20:00:00Z'),
+     *   summary: 'Repeating Event'
+     * });
+     *
+     * const rule = new RRule({
+     *   freq: RRule.WEEKLY,
+     *   interval: 5,
+     *   byweekday: [RRule.MO, RRule.FR],
+     *   dtstart: datetime(2012, 2, 1, 10, 30),
+     *   until: datetime(2012, 12, 31)
+     * })
+     * event.repeating(rule);
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:36585e40-8fa8-460d-af0c-88b6f434030b
+     * SEQUENCE:0
+     * DTSTAMP:20240212T193827Z
+     * DTSTART:20200101T200000Z
+     * RRULE:FREQ=WEEKLY;INTERVAL=5;BYDAY=MO,FR;UNTIL=20121231T000000Z
+     * SUMMARY:Repeating Event
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
      */
     repeating(repeating: ICalRRuleStub | null): this;
 
@@ -597,7 +758,7 @@ export default class ICalEvent {
      * @internal
      */
     repeating(repeating: ICalRepeatingOptions | ICalRRuleStub | string | null): this;
-    repeating(repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null): this | ICalEventInternalRepeatingData | ICalRRuleStub | string | null {
+    repeating(repeating?: ICalRepeatingOptions | ICalRRuleStub | string | null): this | ICalEventJSONRepeatingData | ICalRRuleStub | string | null {
         if (repeating === undefined) {
             return this.data.repeating;
         }
@@ -721,7 +882,7 @@ export default class ICalEvent {
 
     /**
      * Set the event's location by passing a string (minimum) or
-     * an [[`ICalLocation`]] object which will also fill the iCal
+     * an {@link ICalLocationWithTitle} object which will also fill the iCal
      * `GEO` attribute and Apple's `X-APPLE-STRUCTURED-LOCATION`.
      *
      * ```javascript
@@ -734,6 +895,31 @@ export default class ICalEvent {
      *        lon: 13.328650
      *    }
      * });
+     * ```
+     *
+     * ```text
+     * LOCATION:Apple Store Kurfürstendamm\nKurfürstendamm 26\, 10719 Berlin\,
+     *  Deutschland
+     * X-APPLE-STRUCTURED-LOCATION;VALUE=URI;X-ADDRESS=Kurfürstendamm 26\, 10719
+     *   Berlin\, Deutschland;X-APPLE-RADIUS=141.1751386318387;X-TITLE=Apple Store
+     *   Kurfürstendamm:geo:52.50363,13.32865
+     * GEO:52.50363;13.32865
+     * ```
+     *
+     * Since v6.1.0 you can also pass a {@link ICalLocationWithoutTitle} object to pass
+     * the geolocation only. This will only fill the iCal `GEO` attribute.
+     *
+     * ```javascript
+     * event.location({
+     *    geo: {
+     *        lat: 52.503630,
+     *        lon: 13.328650
+     *    }
+     * });
+     * ```
+     *
+     * ```text
+     * GEO:52.50363;13.32865
      * ```
      *
      * @since 0.2.0
@@ -749,10 +935,11 @@ export default class ICalEvent {
             };
             return this;
         }
-        if (
-            (location && !location.title) ||
-            (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon)))
-        ) {
+        if (location && (
+            ('title' in location && !location.title) ||
+            (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon))) ||
+            (!('title' in location) && !location?.geo)
+        )) {
             throw new Error(
                 '`location` isn\'t formatted correctly. See https://sebbo2002.github.io/ical-generator/'+
                 'develop/reference/classes/ICalEvent.html#location'
@@ -765,7 +952,7 @@ export default class ICalEvent {
 
 
     /**
-     * Get the event's description as an [[`ICalDescription`]] object.
+     * Get the event's description as an {@link ICalDescription} object.
      * @since 0.2.0
      */
     description(): ICalDescription | null;
@@ -778,9 +965,14 @@ export default class ICalEvent {
      *
      * ```javascript
      * event.description({
-     *     plain: 'Hello World!';
-     *     html: '<p>Hello World!</p>';
+     *     plain: 'Hello World!',
+     *     html: '<p>Hello World!</p>'
      * });
+     * ```
+     *
+     * ```text
+     * DESCRIPTION:Hello World!
+     * X-ALT-DESC;FMTTYPE=text/html:<p>Hello World!</p>
      * ```
      *
      * @since 0.2.0
@@ -854,17 +1046,38 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalAttendee`]] and returns it. Use options to prefill
+     * Creates a new {@link ICalAttendee} and returns it. Use options to prefill
      * the attendee's attributes. Calling this method without options will create
      * an empty attendee.
      *
      * ```javascript
+     * import ical from 'ical-generator';
+     *
      * const cal = ical();
-     * const event = cal.createEvent();
-     * const attendee = event.createAttendee({email: 'hui@example.com', name: 'Hui'});
+     * const event = cal.createEvent({
+     *   start: new Date()
+     * });
+     *
+     * event.createAttendee({email: 'hui@example.com', name: 'Hui'});
      *
      * // add another attendee
      * event.createAttendee('Buh <buh@example.net>');
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:b4944f07-98e4-4581-ac80-2589bb20273d
+     * SEQUENCE:0
+     * DTSTAMP:20240212T194232Z
+     * DTSTART:20240212T194232Z
+     * SUMMARY:
+     * ATTENDEE;ROLE=REQ-PARTICIPANT;CN="Hui":MAILTO:hui@example.com
+     * ATTENDEE;ROLE=REQ-PARTICIPANT;CN="Buh":MAILTO:buh@example.net
+     * END:VEVENT
+     * END:VCALENDAR
      * ```
      *
      * As with the organizer, you can also add an explicit `mailto` address.
@@ -927,7 +1140,7 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalAlarm`]] and returns it. Use options to prefill
+     * Creates a new {@link ICalAlarm} and returns it. Use options to prefill
      * the alarm's attributes. Calling this method without options will create
      * an empty alarm.
      *
@@ -986,7 +1199,7 @@ export default class ICalEvent {
 
 
     /**
-     * Creates a new [[`ICalCategory`]] and returns it. Use options to prefill the category's attributes.
+     * Creates a new {@link ICalCategory} and returns it. Use options to prefill the category's attributes.
      * Calling this method without options will create an empty category.
      *
      * ```javascript
@@ -1407,7 +1620,7 @@ export default class ICalEvent {
      * @since 0.2.4
      */
     toJSON(): ICalEventJSONData {
-        let repeating: ICalEventInternalRepeatingData | string | null = null;
+        let repeating: ICalEventJSONRepeatingData | string | null = null;
         if(isRRule(this.data.repeating) || typeof this.data.repeating === 'string') {
             repeating = this.data.repeating.toString();
         }
@@ -1418,6 +1631,7 @@ export default class ICalEvent {
             });
         }
 
+        this.swapStartAndEndIfRequired();
         return Object.assign({}, this.data, {
             start: toJSON(this.data.start) || null,
             end: toJSON(this.data.end) || null,
@@ -1449,6 +1663,7 @@ export default class ICalEvent {
         // SEQUENCE
         g += 'SEQUENCE:' + this.data.sequence + '\r\n';
 
+        this.swapStartAndEndIfRequired();
         g += 'DTSTAMP:' + formatDate(this.calendar.timezone(), this.data.stamp) + '\r\n';
         if (this.data.allDay) {
             g += 'DTSTART;VALUE=DATE:' + formatDate(this.calendar.timezone(), this.data.start, true) + '\r\n';
@@ -1557,7 +1772,7 @@ export default class ICalEvent {
         }
 
         // LOCATION
-        if (this.data.location?.title) {
+        if (this.data.location && 'title' in this.data.location && this.data.location.title) {
             g += 'LOCATION:' + escape(
                 this.data.location.title +
                 (this.data.location.address ? '\n' + this.data.location.address : ''),
@@ -1572,13 +1787,14 @@ export default class ICalEvent {
                     ':geo:' + escape(this.data.location.geo?.lat, false) + ',' +
                     escape(this.data.location.geo?.lon, false) + '\r\n';
             }
-
-            if (this.data.location.geo) {
-                g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
-                    escape(this.data.location.geo?.lon, false) + '\r\n';
-            }
         }
 
+        // GEO
+        if (this.data.location && 'geo' in this.data.location && this.data.location.geo) {
+            g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
+                escape(this.data.location.geo?.lon, false) + '\r\n';
+        }
+        
         // DESCRIPTION
         if (this.data.description) {
             g += 'DESCRIPTION:' + escape(this.data.description.plain, false) + '\r\n';
