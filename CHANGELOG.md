@@ -1,3 +1,23 @@
+# [7.0.0](https://github.com/sebbo2002/ical-generator/compare/v6.0.1...v7.0.0) (2024-03-17)
+
+
+### Bug Fixes
+
+* **Event:** Run start/end validation only when getting data ([9174a32](https://github.com/sebbo2002/ical-generator/commit/9174a32bfe209f17f8c8460bc38187bb84dfecb0)), closes [#581](https://github.com/sebbo2002/ical-generator/issues/581)
+* fixed GEO missing when supplied (closes [#569](https://github.com/sebbo2002/ical-generator/issues/569)) ([2eeceb8](https://github.com/sebbo2002/ical-generator/commit/2eeceb84feb0cb5b9cc07a93e2b8b47fc3d313a7))
+* fixed typo `&&&` to `&&` ([7707b59](https://github.com/sebbo2002/ical-generator/commit/7707b595de0791c0d93f414a3340696d9e52d2ec))
+
+
+### Features
+
+* **Alarm:** Add support for `email` alarm type ([5398f09](https://github.com/sebbo2002/ical-generator/commit/5398f09809544c7529e8cabec2ee997b2a4781ae)), closes [#576](https://github.com/sebbo2002/ical-generator/issues/576)
+* **Event:** Made `ICalEvent.location.title` optional to allow setting `GEO` without title ([42be230](https://github.com/sebbo2002/ical-generator/commit/42be23018544dbf75ad9ce6cfe25231d1d434cc0)), closes [#578](https://github.com/sebbo2002/ical-generator/issues/578)
+
+
+### BREAKING CHANGES
+
+* **Event:** [ICalEvent.location()](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalEvent.html#location)'s `title` field can now be undefined
+
 ## [6.0.1](https://github.com/sebbo2002/ical-generator/compare/v6.0.0...v6.0.1) (2024-01-07)
 
 
