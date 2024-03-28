@@ -7,7 +7,7 @@
     "url": "https://github.com/sebbo2002/js-template/issues"
   },
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.19.2"
   },
   "description": "A template that I use to start new projects and services.",
   "devDependencies": {
