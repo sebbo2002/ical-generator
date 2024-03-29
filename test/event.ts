@@ -16,6 +16,7 @@ import ICalAlarm, { ICalAlarmType } from '../src/alarm.js';
 import ICalCategory from '../src/category.js';
 import { isRRule } from '../src/tools.js';
 import rrule from 'rrule';
+import {DateTime} from 'luxon';
 
 describe('ical-generator Event', function () {
     describe('constructor()', function () {
@@ -2051,6 +2052,23 @@ describe('ical-generator Event', function () {
                 }
             }, cal);
             assert.ok(event.toString().includes('WKST'), 'with WKST');
+        });
+
+        it('should render allday events for luxon dates with timezone correct', function () {
+            const cal = new ICalCalendar();
+            const luxonStartDate = DateTime.fromISO('2024-03-17T00:00:00.000+01:00');
+            const luxonEndDate = DateTime.fromISO('2024-03-18T00:00:00.000+01:00');
+            const event = new ICalEvent({
+                allDay: true,
+                start: luxonStartDate,
+                end: luxonEndDate,
+            }, cal);
+
+            const actual = event.toString();
+            assert.match(actual, new RegExp('X-MICROSOFT-CDO-ALLDAYEVENT:TRUE\r\n'), 'with Microsoft CDO alldayevent set');
+            assert.match(actual, new RegExp('X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE\r\n'), 'with Microsoft MSNCalendar alldayevent flag set');
+            assert.match(actual, new RegExp(`DTSTART;VALUE=DATE:${luxonStartDate.toFormat('yyyyLLdd')}\r\n`), 'for DTSTART');
+            assert.match(actual, new RegExp(`DTEND;VALUE=DATE:${luxonEndDate.toFormat('yyyyLLdd')}\r\n`), 'for DTEND');
         });
     });
 });
