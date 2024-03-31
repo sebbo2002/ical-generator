@@ -54,13 +54,19 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
     }
     else if(isMoment(d)) {
         // @see https://momentjs.com/timezone/docs/#/using-timezones/parsing-in-zone/
-        const m = timezone ? (isMomentTZ(d) && !d.tz() ? d.clone().tz(timezone) : d) : (floating ? d : d.utc());
+        const m = timezone
+            ? (isMomentTZ(d) && !d.tz() ? d.clone().tz(timezone) : d)
+            : (floating || (dateonly && isMomentTZ(d) && d.tz()) ? d : d.utc());
+
         return m.format('YYYYMMDD') + (!dateonly ? (
             'T' + m.format('HHmmss') + (floating || timezone ? '' : 'Z')
         ) : '');
     }
     else if(isLuxonDate(d)) {
-        const m = timezone ? d.setZone(timezone) : (floating ? d : d.setZone('utc'));
+        const m = timezone
+            ? d.setZone(timezone)
+            : (floating || (dateonly && d.zone.type !== 'system') ? d : d.setZone('utc'));
+
         return m.toFormat('yyyyLLdd') + (!dateonly ? (
             'T' + m.toFormat('HHmmss') + (floating || timezone ? '' : 'Z')
         ) : '');

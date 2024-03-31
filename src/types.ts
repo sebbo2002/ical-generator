@@ -76,6 +76,7 @@ export interface ICalMomentDurationStub {
 
 export interface ICalLuxonDateTimeStub {
     setZone(zone?: string): ICalLuxonDateTimeStub;
+    zone: { type: string; };
     toFormat(fmt: string): string;
     toJSDate(): Date;
     get isValid(): boolean;
