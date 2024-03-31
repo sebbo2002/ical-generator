@@ -145,7 +145,7 @@ describe('ICalTools', function () {
             });
             it('should work with dateonly flag, non floating, and date with timezone', function () {
                 assert.strictEqual(
-                    formatDate(null, DateTime.fromISO('2024-03-17T00:00:00.000+01:00'), true),
+                    formatDate(null, DateTime.fromISO('2024-03-17T00:00:00.000+01:00', {setZone: true}), true),
                     '20240317'
                 );
             });

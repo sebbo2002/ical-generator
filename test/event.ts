@@ -2056,8 +2056,8 @@ describe('ical-generator Event', function () {
 
         it('should render allday events for luxon dates with timezone correct', function () {
             const cal = new ICalCalendar();
-            const luxonStartDate = DateTime.fromISO('2024-03-17T00:00:00.000+01:00');
-            const luxonEndDate = DateTime.fromISO('2024-03-18T00:00:00.000+01:00');
+            const luxonStartDate = DateTime.fromISO('2024-03-17T00:00:00.000+01:00', {setZone: true});
+            const luxonEndDate = DateTime.fromISO('2024-03-18T00:00:00.000+01:00', {setZone: true});
             const event = new ICalEvent({
                 allDay: true,
                 start: luxonStartDate,
