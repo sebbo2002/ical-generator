@@ -1666,9 +1666,9 @@ export default class ICalEvent {
         this.swapStartAndEndIfRequired();
         g += 'DTSTAMP:' + formatDate(this.calendar.timezone(), this.data.stamp) + '\r\n';
         if (this.data.allDay) {
-            g += 'DTSTART;VALUE=DATE:' + formatDate(this.calendar.timezone(), this.data.start, true) + '\r\n';
+            g += 'DTSTART;VALUE=DATE:' + formatDate(this.timezone(), this.data.start, true) + '\r\n';
             if (this.data.end) {
-                g += 'DTEND;VALUE=DATE:' + formatDate(this.calendar.timezone(), this.data.end, true) + '\r\n';
+                g += 'DTEND;VALUE=DATE:' + formatDate(this.timezone(), this.data.end, true) + '\r\n';
             }
 
             g += 'X-MICROSOFT-CDO-ALLDAYEVENT:TRUE\r\n';

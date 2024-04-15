@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import dayJsUTCPlugin from 'dayjs/plugin/utc.js';
 import dayJsTimezonePlugin from 'dayjs/plugin/timezone.js';
 import {
-    checkDate, 
+    checkDate,
     escape,
     foldLines,
     formatDate,
@@ -141,6 +141,12 @@ describe('ICalTools', function () {
                 assert.strictEqual(
                     formatDate(null, DateTime.fromISO('2018-07-05T18:24:00.052'), true, false),
                     '20180705'
+                );
+            });
+            it('should work with dateonly flag, non floating, and date with timezone', function () {
+                assert.strictEqual(
+                    formatDate(null, DateTime.fromISO('2024-03-17T00:00:00.000+01:00', {setZone: true}), true),
+                    '20240317'
                 );
             });
         });
