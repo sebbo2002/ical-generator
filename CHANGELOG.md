@@ -1,3 +1,15 @@
+# [7.1.0](https://github.com/sebbo2002/ical-generator/compare/v7.0.0...v7.1.0) (2024-04-15)
+
+
+### Bug Fixes
+
+* Use event timezone for allDay events ([1bfeaf6](https://github.com/sebbo2002/ical-generator/commit/1bfeaf64284694e4510f3e1588c683c19da03ed0))
+
+
+### Features
+
+* Apply timezone for supported allday-events ([176352c](https://github.com/sebbo2002/ical-generator/commit/176352c9dfd3d4ac0fa21c458c174ef3c4f74535)), closes [#592](https://github.com/sebbo2002/ical-generator/issues/592)
+
 # [7.0.0](https://github.com/sebbo2002/ical-generator/compare/v6.0.1...v7.0.0) (2024-03-17)
 
 
