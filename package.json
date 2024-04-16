@@ -9,7 +9,7 @@
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "devDependencies": {
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.12",
-    "@sebbo2002/semantic-release-jsr": "^1.0.0-develop.5",
+    "@sebbo2002/semantic-release-jsr": "^1.0.0-develop.6",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
