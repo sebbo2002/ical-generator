@@ -13,11 +13,11 @@ import {
     isRRule,
     toDate,
     toJSON
-} from './tools.js';
-import ICalAttendee, {ICalAttendeeData} from './attendee.js';
-import ICalAlarm, {ICalAlarmData} from './alarm.js';
-import ICalCategory, {ICalCategoryData} from './category.js';
-import ICalCalendar from './calendar.js';
+} from './tools.ts';
+import ICalAttendee, {ICalAttendeeData} from './attendee.ts';
+import ICalAlarm, {ICalAlarmData} from './alarm.ts';
+import ICalCategory, {ICalCategoryData} from './category.ts';
+import ICalCalendar from './calendar.ts';
 import {
     ICalDateTimeValue,
     ICalDescription,
@@ -27,7 +27,7 @@ import {
     ICalRepeatingOptions,
     ICalRRuleStub,
     ICalWeekday
-} from './types.js';
+} from './types.ts';
 
 
 export enum ICalEventStatus {

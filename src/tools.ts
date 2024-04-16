@@ -8,7 +8,7 @@ import {
     ICalMomentStub,
     ICalMomentTimezoneStub,
     ICalOrganizer, ICalRRuleStub
-} from './types.js';
+} from './types.ts';
 
 /**
  * Converts a valid date/time object supported by this library to a string.
