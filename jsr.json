@@ -5,7 +5,8 @@
     "include": [
       "LICENSE",
       "README.md",
-      "src/*.ts"
+      "src/*.ts",
+      "jsr.json"
     ]
   },
   "version": "7.1.0"
