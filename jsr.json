@@ -2,11 +2,10 @@
   "exports": "./src/index.ts",
   "name": "@sebbo2002/ical-generator",
   "publish": {
-    "exclude": [
-      "examples/**",
-      "release.config.cjs",
-      "test/**",
-      "tsup.config.ts"
+    "include": [
+      "LICENSE",
+      "README.md",
+      "src/*.ts"
     ]
   },
   "version": "7.1.0"
