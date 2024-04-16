@@ -35,6 +35,8 @@ configuration.plugins.push('semantic-release-license');
 
 configuration.plugins.push('@semantic-release/npm');
 
+configuration.plugins.push('@sebb2002/semantic-release-jsr');
+
 configuration.plugins.push(['@semantic-release/exec', {
     'prepareCmd': './.github/workflows/build.sh'
 }]);
