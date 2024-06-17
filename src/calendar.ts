@@ -7,9 +7,9 @@ import {
     generateCustomAttributes,
     isMomentDuration,
     toDurationString
-} from './tools.js';
-import ICalEvent, {ICalEventData, ICalEventJSONData} from './event.js';
-import { ICalMomentDurationStub, ICalTimezone } from './types.js';
+} from './tools.ts';
+import ICalEvent, {ICalEventData, ICalEventJSONData} from './event.ts';
+import { ICalMomentDurationStub, ICalTimezone } from './types.ts';
 
 
 export interface ICalCalendarData {
