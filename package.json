@@ -34,7 +34,7 @@
     "tsx": "^4.16.2",
     "typedoc": "^0.26.3",
     "typescript": "^5.5.3",
-    "typescript-eslint": "^8.0.0-alpha.39"
+    "typescript-eslint": "^8.0.0-alpha.41"
   },
   "engines": {
     "node": ">=18.0.0"
