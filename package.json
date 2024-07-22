@@ -30,8 +30,8 @@
     "mochawesome": "^7.1.3",
     "semantic-release-license": "^1.0.3",
     "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
-    "tsx": "^4.16.2",
     "typedoc": "^0.26.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.0-alpha.41"
@@ -59,7 +59,7 @@
     "build": "tsup && cp ./dist/lib/index.d.ts ./dist/lib/index.d.cts",
     "build-all": "./.github/workflows/build.sh",
     "coverage": "c8 mocha",
-    "develop": "tsx src/bin/start.ts",
+    "develop": "TS_NODE_TRANSPILE_ONLY=true node --no-warnings --enable-source-maps --loader ts-node/esm src/bin/start.ts",
     "license-check": "license-checker --production --summary",
     "lint": "eslint .",
     "start": "node ./dist/bin/start.js",
