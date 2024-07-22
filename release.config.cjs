@@ -35,6 +35,12 @@ configuration.plugins.push('semantic-release-license');
 
 configuration.plugins.push('@semantic-release/npm');
 
+configuration.plugins.push('@sebbo2002/semantic-release-jsr');
+
+configuration.plugins.push(['@semantic-release/exec', {
+    'prepareCmd': './.github/workflows/build.sh'
+}]);
+
 configuration.plugins.push(['@semantic-release/exec', {
     'prepareCmd': './.github/workflows/build.sh'
 }]);
@@ -45,7 +51,7 @@ configuration.plugins.push(['@semantic-release/github', {
 }]);
 
 configuration.plugins.push(['@semantic-release/git', {
-    'assets': ['CHANGELOG.md', 'LICENSE'],
+    'assets': ['CHANGELOG.md', 'LICENSE', 'package-lock.json', 'package.json'],
     'message': 'chore(release): :bookmark: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}'
 }]);
 

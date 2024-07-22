@@ -1,47 +1,132 @@
-# template
+<br />
+<br />
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
+<p align="center">
+  <a href="https://github.com/sebbo2002/ical-generator#gh-light-mode-only">
+    <img src="https://static.sebbo.net/ical-generator/logo-light.svg" width="318px" alt="ical-generator logo" />
+  </a>
+  <a href="https://github.com/sebbo2002/ical-generator#gh-dark-mode-only">
+    <img src="https://static.sebbo.net/ical-generator/logo-dark.svg" width="318px" alt="ical-generator logo" />
+  </a>
+</p>
+<p align="center">
+    <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" /></a>
+    <a href="https://bundlephobia.com/package/ical-generator"><img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" /></a>
+    <img src="https://img.shields.io/depfu/dependencies/github/sebbo2002%2Fical-generator?style=flat-square" alt="Dependency Status" />
+    <a href="https://github.com/sebbo2002/ical-generator/actions/workflows/test-release.yml?query=branch%3Adevelop"><img src="https://img.shields.io/github/actions/workflow/status/sebbo2002/ical-generator/test-release.yml?style=flat-square" alt="CI Status" /></a>
+    <a href="https://sebbo2002.github.io/ical-generator/develop/coverage/"><img alt="Code Coverage Badge" src="https://img.shields.io/nycrc/sebbo2002/ical-generator?style=flat-square"></a>
+</p>
 
-Here would be a very short description of the project. So in this example it would be a short information that this is
-a template that I use to start new projects and services.
+<br />
 
 
-## 🚨 Template Usage Checklist
-- [ ] Update project name in `package.json`
-- [ ] Create `main` and `develop` branches
-- [ ] Set `develop` as default branch
-- [ ] Create Docker Repository
-    - [ ] Add Repository Description
-    - [ ] Add secret: `DOCKERHUB_TOKEN`
-- [ ] Create npm Repository with `npm publish --access public`
-    - [ ] Add secret: `NPM_TOKEN`
-- [ ] Go through repo settings
+`ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
+to generate subscriptionable calendar feeds.
+
 
 
 ## 📦 Installation
 
-	git clone https://github.com/sebbo2002/template.git
-    cd ./template
-
-    npm install
+	npm install ical-generator
 
 
 ## ⚡️ Quick Start
 
-This is where it would normally say how to use the project.
-This could be a code example for a library or instructions on how to use a CLI tool.
+```javascript
+import ical, {ICalCalendarMethod} from 'ical-generator';
+import http from 'node:http';
 
+const calendar = ical({name: 'my first iCal'});
+
+// A method is required for outlook to display event as an invitation
+calendar.method(ICalCalendarMethod.REQUEST);
+
+const startTime = new Date();
+const endTime = new Date();
+endTime.setHours(startTime.getHours()+1);
+calendar.createEvent({
+    start: startTime,
+    end: endTime,
+    summary: 'Example Event',
+    description: 'It works ;)',
+    location: 'my room',
+    url: 'http://sebbo.net/'
+});
+
+http.createServer((req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/calendar; charset=utf-8',
+        'Content-Disposition': 'attachment; filename="calendar.ics"'
+    });
+
+    res.end(calendar.toString());
+}).listen(3000, '127.0.0.1', () => {
+    console.log('Server running at http://127.0.0.1:3000/');
+});
+```
+See the [examples](./examples) folder for more examples.
 
 ## 📑 API-Reference
 
-Is there an API that needs to be documented? Then here would be a nice place for it. If there is external documentation,
-you can link it here ([example](https://github.com/sebbo2002/ical-generator/#-api-reference)).
+- [Index](https://sebbo2002.github.io/ical-generator/develop/reference/)
+    - [ICalCalendar](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalCalendar.html)
+    - [ICalEvent](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalEvent.html)
+        - [ICalAlarm](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalAlarm.html)
+        - [ICalAttendee](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalAttendee.html)
+        - [ICalCategory](https://sebbo2002.github.io/ical-generator/develop/reference/classes/ICalCategory.html)
+
+## 🕒 Date, Time & Timezones
+
+ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
+[Day.js](https://day.js.org/en/), [Luxon's](https://moment.github.io/luxon/) [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
+and the older [moment.js](https://momentjs.com/) and [moment-timezone](https://momentjs.com/timezone/)
+objects. You can also pass a string which is then passed to javascript's `Date` internally.
+
+It is recommended to use UTC time as far as possible. `ical-generator` will output all time information as UTC time as
+long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
+set, `ical-generator` assumes that the given time matches the time zone. If a time zone is used, it is also recommended
+to use a VTimezone generator. Such a function generates a VTimezone entry and returns it. For example, ical-timezones can
+be used for this:
+
+```typescript
+import {ICalCalendar} from 'ical-generator';
+import {getVtimezoneComponent} from '@touch4it/ical-timezones';
+
+const cal = new ICalCalendar();
+cal.timezone({
+    name: 'FOO',
+    generator: getVtimezoneComponent
+});
+cal.createEvent({
+    start: new Date(),
+    timezone: 'Europe/London'
+});
+```
+
+If a `moment-timezone` object or Luxon's `setZone` method works, `ical-generator` sets it according to the time zone set
+in the calendar/event.
+
+
+
+
+## 🚦 Tests
+
+```
+npm test
+npm run coverage
+```
 
 
 ## 🙋 FAQ
 
-### What's `1` + `2`
-It's `3` 🎉
+### Where's the changelog?
+It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md). If you need the changelog for
+`ical-generator` 1.x.x and older, you'll find it [here](https://github.com/sebbo2002/ical-generator/blob/25338b8bf98f9afd3c88849e735fa33fa45fb766/CHANGELOG.md).
+
+### I get a `ReferenceError: TextEncoder is not defined` error (in some browsers)
+This library uses [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder), which
+is available in node.js ≥ 11.0.0 and [all modern browsers](https://caniuse.com/?search=textencoder).
+Outdated browsers may not have the necessary API and generate this error when generating the calendar.
 
 
 ## 🙆🏼‍♂️ Copyright and license
