@@ -2065,8 +2065,12 @@ describe('ical-generator Event', function () {
             }, cal);
 
             const actual = event.toString();
+            // eslint-disable-next-line no-control-regex
             assert.match(actual, new RegExp('X-MICROSOFT-CDO-ALLDAYEVENT:TRUE\r\n'), 'with Microsoft CDO alldayevent set');
+
+            // eslint-disable-next-line no-control-regex
             assert.match(actual, new RegExp('X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE\r\n'), 'with Microsoft MSNCalendar alldayevent flag set');
+
             assert.match(actual, new RegExp(`DTSTART;VALUE=DATE:${luxonStartDate.toFormat('yyyyLLdd')}\r\n`), 'for DTSTART');
             assert.match(actual, new RegExp(`DTEND;VALUE=DATE:${luxonEndDate.toFormat('yyyyLLdd')}\r\n`), 'for DTEND');
         });

@@ -26,3 +26,5 @@ jobs:
           days-before-close: 14
           stale-issue-label: stale
           stale-pr-label: stale
+          exempt-issue-labels: do-not-close
+          exempt-pr-labels: do-not-close

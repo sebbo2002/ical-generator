@@ -135,16 +135,16 @@ export default class ICalAlarm {
             throw new Error('`event` option required!');
         }
 
-        data.type !== undefined && this.type(data.type);
-        'trigger' in data && data.trigger !== undefined && this.trigger(data.trigger);
-        'triggerBefore' in data && data.triggerBefore !== undefined && this.triggerBefore(data.triggerBefore);
-        'triggerAfter' in data && data.triggerAfter !== undefined && this.triggerAfter(data.triggerAfter);
-        data.repeat && this.repeat(data.repeat);
-        data.attach !== undefined && this.attach(data.attach);
-        data.description !== undefined && this.description(data.description);
-        data.summary !== undefined && this.summary(data.summary);
-        data.attendees !== undefined && this.attendees(data.attendees);
-        data.x !== undefined && this.x(data.x);
+        if (data.type !== undefined) this.type(data.type);
+        if ('trigger' in data && data.trigger !== undefined) this.trigger(data.trigger);
+        if ('triggerBefore' in data && data.triggerBefore !== undefined) this.triggerBefore(data.triggerBefore);
+        if ('triggerAfter' in data && data.triggerAfter !== undefined) this.triggerAfter(data.triggerAfter);
+        if (data.repeat) this.repeat(data.repeat);
+        if (data.attach !== undefined) this.attach(data.attach);
+        if (data.description !== undefined) this.description(data.description);
+        if (data.summary !== undefined) this.summary(data.summary);
+        if (data.attendees !== undefined) this.attendees(data.attendees);
+        if (data.x !== undefined) this.x(data.x);
     }
 
 

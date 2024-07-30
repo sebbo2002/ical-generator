@@ -212,33 +212,33 @@ export default class ICalEvent {
             throw new Error('`calendar` option required!');
         }
 
-        data.id && this.id(data.id);
-        data.sequence !== undefined && this.sequence(data.sequence);
-        data.start && this.start(data.start);
-        data.end !== undefined && this.end(data.end);
-        data.recurrenceId !== undefined && this.recurrenceId(data.recurrenceId);
-        data.timezone !== undefined && this.timezone(data.timezone);
-        data.stamp !== undefined && this.stamp(data.stamp);
-        data.allDay !== undefined && this.allDay(data.allDay);
-        data.floating !== undefined && this.floating(data.floating);
-        data.repeating !== undefined && this.repeating(data.repeating);
-        data.summary !== undefined && this.summary(data.summary);
-        data.location !== undefined && this.location(data.location);
-        data.description !== undefined && this.description(data.description);
-        data.organizer !== undefined && this.organizer(data.organizer);
-        data.attendees !== undefined && this.attendees(data.attendees);
-        data.alarms !== undefined && this.alarms(data.alarms);
-        data.categories !== undefined && this.categories(data.categories);
-        data.status !== undefined && this.status(data.status);
-        data.busystatus !== undefined && this.busystatus(data.busystatus);
-        data.priority !== undefined && this.priority(data.priority);
-        data.url !== undefined && this.url(data.url);
-        data.attachments !== undefined && this.attachments(data.attachments);
-        data.transparency !== undefined && this.transparency(data.transparency);
-        data.created !== undefined && this.created(data.created);
-        data.lastModified !== undefined && this.lastModified(data.lastModified);
-        data.class !== undefined && this.class(data.class);
-        data.x !== undefined && this.x(data.x);
+        if (data.id) this.id(data.id);
+        if (data.sequence !== undefined) this.sequence(data.sequence);
+        if (data.start) this.start(data.start);
+        if (data.end !== undefined) this.end(data.end);
+        if (data.recurrenceId !== undefined) this.recurrenceId(data.recurrenceId);
+        if (data.timezone !== undefined) this.timezone(data.timezone);
+        if (data.stamp !== undefined) this.stamp(data.stamp);
+        if (data.allDay !== undefined) this.allDay(data.allDay);
+        if (data.floating !== undefined) this.floating(data.floating);
+        if (data.repeating !== undefined) this.repeating(data.repeating);
+        if (data.summary !== undefined) this.summary(data.summary);
+        if (data.location !== undefined) this.location(data.location);
+        if (data.description !== undefined) this.description(data.description);
+        if (data.organizer !== undefined) this.organizer(data.organizer);
+        if (data.attendees !== undefined) this.attendees(data.attendees);
+        if (data.alarms !== undefined) this.alarms(data.alarms);
+        if (data.categories !== undefined) this.categories(data.categories);
+        if (data.status !== undefined) this.status(data.status);
+        if (data.busystatus !== undefined) this.busystatus(data.busystatus);
+        if (data.priority !== undefined) this.priority(data.priority);
+        if (data.url !== undefined) this.url(data.url);
+        if (data.attachments !== undefined) this.attachments(data.attachments);
+        if (data.transparency !== undefined) this.transparency(data.transparency);
+        if (data.created !== undefined) this.created(data.created);
+        if (data.lastModified !== undefined) this.lastModified(data.lastModified);
+        if (data.class !== undefined) this.class(data.class);
+        if (data.x !== undefined) this.x(data.x);
     }
 
     /**
