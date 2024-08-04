@@ -1,3 +1,15 @@
+# [7.2.0](https://github.com/sebbo2002/ical-generator/compare/v7.1.0...v7.2.0) (2024-08-04)
+
+
+### Features
+
+* Release `ical-generator` on jsr.io ([776a307](https://github.com/sebbo2002/ical-generator/commit/776a307164938af3896f776c39000f2526973867))
+
+
+### Reverts
+
+* Revert "chore: Replace ts-node with tsx" ([1630d2a](https://github.com/sebbo2002/ical-generator/commit/1630d2adbcaff4121e0a4531f065be5b773e292b))
+
 # [7.1.0](https://github.com/sebbo2002/ical-generator/compare/v7.0.0...v7.1.0) (2024-04-15)
 
 
