@@ -1,9 +1,9 @@
 'use strict';
 
 
-import {addOrGetCustomAttributes, checkEnum, checkNameAndMail, escape} from './tools.js';
-import ICalEvent from './event.js';
-import ICalAlarm from './alarm.js';
+import {addOrGetCustomAttributes, checkEnum, checkNameAndMail, escape} from './tools.ts';
+import ICalEvent from './event.ts';
+import ICalAlarm from './alarm.ts';
 
 
 interface ICalInternalAttendeeData {
@@ -126,19 +126,19 @@ export default class ICalAttendee {
             throw new Error('No value for `email` in ICalAttendee given!');
         }
 
-        data.name !== undefined && this.name(data.name);
-        data.email !== undefined && this.email(data.email);
-        data.mailto !== undefined && this.mailto(data.mailto);
-        data.sentBy !== undefined && this.sentBy(data.sentBy);
-        data.status !== undefined && this.status(data.status);
-        data.role !== undefined && this.role(data.role);
-        data.rsvp !== undefined && this.rsvp(data.rsvp);
-        data.type !== undefined && this.type(data.type);
-        data.delegatedTo !== undefined && this.delegatedTo(data.delegatedTo);
-        data.delegatedFrom !== undefined && this.delegatedFrom(data.delegatedFrom);
-        data.delegatesTo && this.delegatesTo(data.delegatesTo);
-        data.delegatesFrom && this.delegatesFrom(data.delegatesFrom);
-        data.x !== undefined && this.x(data.x);
+        if (data.name !== undefined) this.name(data.name);
+        if (data.email !== undefined) this.email(data.email);
+        if (data.mailto !== undefined) this.mailto(data.mailto);
+        if (data.sentBy !== undefined) this.sentBy(data.sentBy);
+        if (data.status !== undefined) this.status(data.status);
+        if (data.role !== undefined) this.role(data.role);
+        if (data.rsvp !== undefined) this.rsvp(data.rsvp);
+        if (data.type !== undefined) this.type(data.type);
+        if (data.delegatedTo !== undefined) this.delegatedTo(data.delegatedTo);
+        if (data.delegatedFrom !== undefined) this.delegatedFrom(data.delegatedFrom);
+        if (data.delegatesTo) this.delegatesTo(data.delegatesTo);
+        if (data.delegatesFrom) this.delegatesFrom(data.delegatesFrom);
+        if (data.x !== undefined) this.x(data.x);
     }
 
 

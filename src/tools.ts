@@ -8,7 +8,7 @@ import {
     ICalMomentStub,
     ICalMomentTimezoneStub,
     ICalOrganizer, ICalRRuleStub
-} from './types.js';
+} from './types.ts';
 
 /**
  * Converts a valid date/time object supported by this library to a string.
@@ -76,17 +76,13 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
 
         let m = d;
         if(timezone) {
-            // @see https://day.js.org/docs/en/plugin/timezone
-            // @ts-ignore
             m = typeof d.tz === 'function' ? d.tz(timezone) : d;
         }
         else if(floating) {
             // m = d;
         }
 
-        // @ts-ignore
         else if (typeof d.utc === 'function') {
-            // @ts-ignore
             m = d.utc();
         }
         else {
@@ -314,7 +310,6 @@ export function toDate(value: ICalDateTimeValue): Date {
         return new Date(value);
     }
 
-    // @ts-ignore
     if(isLuxonDate(value)) {
         return value.toJSDate();
     }
@@ -324,7 +319,7 @@ export function toDate(value: ICalDateTimeValue): Date {
 
 export function isMoment(value: ICalDateTimeValue): value is ICalMomentStub {
 
-    // @ts-ignore
+    // @ts-expect-error _isAMomentObject is a private property
     return value != null && value._isAMomentObject != null;
 }
 export function isMomentTZ(value: ICalDateTimeValue): value is ICalMomentTimezoneStub {
@@ -342,15 +337,11 @@ export function isLuxonDate(value: ICalDateTimeValue): value is ICalLuxonDateTim
 }
 
 export function isMomentDuration(value: unknown): value is ICalMomentDurationStub {
-
-    // @ts-ignore
-    return value !== null && typeof value === 'object' && typeof value.asSeconds === 'function';
+    return value !== null && typeof value === 'object' && 'asSeconds' in value && typeof value.asSeconds === 'function';
 }
 
 export function isRRule(value: unknown): value is ICalRRuleStub {
-
-    // @ts-ignore
-    return value !== null && typeof value === 'object' && typeof value.between === 'function' && typeof value.toString === 'function';
+    return value !== null && typeof value === 'object' && 'between' in value && typeof value.between === 'function' && typeof value.toString === 'function';
 }
 
 export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {
