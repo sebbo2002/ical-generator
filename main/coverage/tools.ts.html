@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.78% </span>
+                <span class="strong">98.75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>405/410</span>
+                <span class='fraction'>396/401</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.71% </span>
+                <span class="strong">97.68% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>171/175</span>
+                <span class='fraction'>169/173</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">98.78% </span>
+                <span class="strong">98.75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>405/410</span>
+                <span class='fraction'>396/401</span>
             </div>
         
             
@@ -464,16 +464,7 @@
 <a name='L399'></a><a href='#L399'>399</a>
 <a name='L400'></a><a href='#L400'>400</a>
 <a name='L401'></a><a href='#L401'>401</a>
-<a name='L402'></a><a href='#L402'>402</a>
-<a name='L403'></a><a href='#L403'>403</a>
-<a name='L404'></a><a href='#L404'>404</a>
-<a name='L405'></a><a href='#L405'>405</a>
-<a name='L406'></a><a href='#L406'>406</a>
-<a name='L407'></a><a href='#L407'>407</a>
-<a name='L408'></a><a href='#L408'>408</a>
-<a name='L409'></a><a href='#L409'>409</a>
-<a name='L410'></a><a href='#L410'>410</a>
-<a name='L411'></a><a href='#L411'>411</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L402'></a><a href='#L402'>402</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -553,13 +544,9 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -789,7 +776,6 @@
 <span class="cline-any cline-yes">94x</span>
 <span class="cline-any cline-yes">94x</span>
 <span class="cline-any cline-yes">30x</span>
-<span class="cline-any cline-yes">30x</span>
 <span class="cline-any cline-yes">124x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -819,12 +805,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
-<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">162x</span>
-<span class="cline-any cline-yes">162x</span>
 <span class="cline-any cline-yes">162x</span>
 <span class="cline-any cline-yes">162x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -893,7 +875,7 @@ import {
     ICalMomentStub,
     ICalMomentTimezoneStub,
     ICalOrganizer, ICalRRuleStub
-} from './types.js';
+} from './types.ts';
 &nbsp;
 /**
  * Converts a valid date/time object supported by this library to a string.
@@ -961,17 +943,13 @@ export function formatDate (timezone: string | null, d: ICalDateTimeValue, dateo
 &nbsp;
         let m = d;
         if(timezone) {
-            // @see https://day.js.org/docs/en/plugin/timezone
-            // @ts-ignore
             m = typeof d.tz === 'function' ? d.tz(timezone) <span class="branch-0 cbranch-no" title="branch not covered" >: d;</span>
         }
         else if(floating) {
             // m = d;
         }
 &nbsp;
-        // @ts-ignore
         else if (typeof d.utc === 'function') {
-            // @ts-ignore
             m = d.utc();
         }
 <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >        else {</span></span>
@@ -1199,7 +1177,6 @@ export function toDate(value: ICalDateTimeValue): Date {
         return new Date(value);
     }
 &nbsp;
-    // @ts-ignore
     if(isLuxonDate(value)) {
         return value.toJSDate();
     }
@@ -1209,7 +1186,7 @@ export function toDate(value: ICalDateTimeValue): Date {
 &nbsp;
 export function isMoment(value: ICalDateTimeValue): value is ICalMomentStub {
 &nbsp;
-    // @ts-ignore
+    // @ts-expect-error _isAMomentObject is a private property
     return value != null &amp;&amp; value._isAMomentObject != null;
 }
 export function isMomentTZ(value: ICalDateTimeValue): value is ICalMomentTimezoneStub {
@@ -1227,15 +1204,11 @@ export function isLuxonDate(value: ICalDateTimeValue): value is ICalLuxonDateTim
 }
 &nbsp;
 export function isMomentDuration(value: unknown): value is ICalMomentDurationStub {
-&nbsp;
-    // @ts-ignore
-    return value !== null &amp;&amp; typeof value === 'object' &amp;&amp; typeof value.asSeconds === 'function';
+    return value !== null &amp;&amp; typeof value === 'object' &amp;&amp; 'asSeconds' in value &amp;&amp; typeof value.asSeconds === 'function';
 }
 &nbsp;
 export function isRRule(value: unknown): value is ICalRRuleStub {
-&nbsp;
-    // @ts-ignore
-    return value !== null &amp;&amp; typeof value === 'object' &amp;&amp; typeof value.between === 'function' &amp;&amp; typeof value.toString === 'function';
+    return value !== null &amp;&amp; typeof value === 'object' &amp;&amp; 'between' in value &amp;&amp; typeof value.between === 'function' &amp;&amp; typeof value.toString === 'function';
 }
 &nbsp;
 export function toJSON(value: ICalDateTimeValue | null | undefined): string | null | undefined {
@@ -1300,7 +1273,7 @@ export function toDurationString(seconds: number): string {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-04-15T20:18:51.119Z
+                at 2024-08-04T09:31:08.923Z
             </div>
         <script src="prettify.js"></script>
         <script>
