@@ -1,6 +1,6 @@
-loader:
-  - ts-node/esm
-full-trace: true
-recursive: true
 extension:
   - ts
+full-trace: true
+node-option:
+  - import=tsx
+recursive: true

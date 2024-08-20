@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-import express, {Express} from 'express';
+import express, {type Express} from 'express';
 import {Server} from 'http';
 
 
