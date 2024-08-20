@@ -3,7 +3,7 @@
         display: block;
     }
     a[href$="#gh-dark-mode-only"] {
-        display: block;
+        display: none;
     }
 }
 
