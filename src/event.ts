@@ -266,7 +266,7 @@ export default class ICalEvent {
     /**
      * Get the event's ID
      * @since 0.2.0
-     * @alias id
+     * @see {@link id}
      */
     uid(): string;
 
@@ -275,7 +275,6 @@ export default class ICalEvent {
      * If not set, a UUID will be generated randomly.
      *
      * @param id Event ID you want to set
-     * @alias id
      */
     uid(id: string | number): this;
     uid(id?: string | number): this | string {
@@ -487,6 +486,7 @@ export default class ICalEvent {
     /**
      * Get the event's timestamp
      * @since 0.2.0
+     * @see {@link timestamp}
      */
     stamp(): ICalDateTimeValue;
 
@@ -496,6 +496,7 @@ export default class ICalEvent {
      * for details about supported values and timezone handling.
      *
      * @since 0.2.0
+     * @see {@link timestamp}
      */
     stamp(stamp: ICalDateTimeValue): this;
     stamp(stamp?: ICalDateTimeValue): this | ICalDateTimeValue {
@@ -510,7 +511,7 @@ export default class ICalEvent {
     /**
      * Get the event's timestamp
      * @since 0.2.0
-     * @alias stamp
+     * @see {@link stamp}
      */
     timestamp(): ICalDateTimeValue;
 
@@ -520,7 +521,7 @@ export default class ICalEvent {
      * for details about supported values and timezone handling.
      *
      * @since 0.2.0
-     * @alias stamp
+     * @see {@link stamp}
      */
     timestamp(stamp: ICalDateTimeValue): this;
     timestamp(stamp?: ICalDateTimeValue): this | ICalDateTimeValue {

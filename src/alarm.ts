@@ -324,7 +324,8 @@ export default class ICalAlarm {
      * alarm is triggered after the event started.
      *
      * @since 0.2.1
-     * @alias trigger
+     * @see {@link trigger}
+     * @see {@link triggerAfter}
      */
     triggerBefore (trigger: number | ICalDateTimeValue): this;
 
@@ -345,7 +346,8 @@ export default class ICalAlarm {
      * for details about supported values and timezone handling.
      *
      * @since 0.2.1
-     * @alias trigger
+     * @see {@link trigger}
+     * @see {@link triggerAfter}
      */
     triggerBefore (): number | ICalDateTimeValue;
     triggerBefore (trigger?: number | ICalDateTimeValue): this | number | ICalDateTimeValue {
