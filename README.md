@@ -64,7 +64,7 @@ http.createServer((req, res) => {
     console.log('Server running at http://127.0.0.1:3000/');
 });
 ```
-See the [examples](./examples) folder for more examples.
+See the [examples](https://github.com/sebbo2002/ical-generator/tree/develop/examples) folder for more examples.
 
 ## 📑 API-Reference
 
