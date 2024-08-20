@@ -15,7 +15,7 @@ jobs:
     if: github.repository != 'sebbo2002/js-template' && (contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main')
     strategy:
       matrix:
-        node: [18.x, 20.x, current]
+        node: [18.x, 20.x, 22.x, current]
     steps:
       - name: ☁️ Checkout Project
         uses: actions/checkout@v4
