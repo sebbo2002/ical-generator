@@ -9,6 +9,7 @@
   "description": "ical-generator is a small piece of code which generates ical calendar files",
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.12",
     "@sebbo2002/semantic-release-jsr": "^1.1.0",
     "@semantic-release/changelog": "^6.0.3",
@@ -36,8 +37,8 @@
     "semantic-release": "^24.0.0",
     "semantic-release-license": "^1.0.2",
     "source-map-support": "^0.5.21",
-    "ts-node": "^10.9.2",
     "tsup": "^8.2.4",
+    "tsx": "^4.16.2",
     "typedoc": "^0.26.3",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.0-alpha.62"
@@ -120,7 +121,7 @@
     "build": "tsup && cp ./dist/index.d.ts ./dist/index.d.cts",
     "build-all": "./.github/workflows/build.sh",
     "coverage": "c8 mocha",
-    "develop": "TS_NODE_TRANSPILE_ONLY=true node --no-warnings --enable-source-maps --loader ts-node/esm src/bin/start.ts",
+    "develop": "tsx src/bin/start.ts",
     "example": "node ./dist/examples/push.js",
     "license-check": "license-checker --production --summary",
     "lint": "eslint .",

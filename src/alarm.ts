@@ -1,6 +1,6 @@
 'use strict';
 
-import ICalEvent from './event.ts';
+import type ICalEvent from './event.ts';
 import {
     addOrGetCustomAttributes,
     formatDate,
@@ -11,8 +11,8 @@ import {
     toJSON,
     checkNameAndMail
 } from './tools.ts';
-import {ICalDateTimeValue} from './types.ts';
-import ICalAttendee, { ICalAttendeeData } from './attendee.ts';
+import { type ICalDateTimeValue } from './types.ts';
+import ICalAttendee, { type ICalAttendeeData } from './attendee.ts';
 
 
 export enum ICalAlarmType {

@@ -4,7 +4,7 @@
 
 'use strict';
 
-import ICalCalendar, {ICalCalendarData} from './calendar.ts';
+import ICalCalendar, { type ICalCalendarData } from './calendar.ts';
 
 
 /**
@@ -47,77 +47,77 @@ function ical(data?: ICalCalendarData): ICalCalendar {
 export default ical;
 
 export {
-    default as ICalAlarm,
-    ICalAlarmData,
-    ICalAlarmBaseData,
-    ICalAlarmJSONData,
     ICalAlarmRelatesTo,
-    ICalAlarmRepeatData,
-    ICalAlarmTriggerData,
-    ICalAlarmTriggerAfterData,
-    ICalAlarmTriggerBeforeData,
     ICalAlarmType,
-    ICalAlarmTypeValue,
-    ICalAttachment,
+    default as ICalAlarm,
+    type ICalAlarmBaseData,
+    type ICalAlarmData,
+    type ICalAlarmJSONData,
+    type ICalAlarmRepeatData,
+    type ICalAlarmTriggerAfterData,
+    type ICalAlarmTriggerBeforeData,
+    type ICalAlarmTriggerData,
+    type ICalAlarmTypeValue,
+    type ICalAttachment
 } from './alarm.ts';
 
 export {
-    default as ICalAttendee,
-    ICalAttendeeData,
-    ICalAttendeeType,
     ICalAttendeeRole,
     ICalAttendeeStatus,
-    ICalAttendeeJSONData
+    ICalAttendeeType,
+    default as ICalAttendee,
+    type ICalAttendeeData,
+    type ICalAttendeeJSONData
 } from './attendee.ts';
 
 export {
-    default as ICalCalendar,
-    ICalCalendarData,
-    ICalCalendarProdIdData,
     ICalCalendarMethod,
-    ICalCalendarJSONData
+    default as ICalCalendar,
+    type ICalCalendarData,
+    type ICalCalendarJSONData,
+    type ICalCalendarProdIdData
 } from './calendar.ts';
 
 export {
     default as ICalCategory,
-    ICalCategoryData,
-    ICalCategoryJSONData
+    type ICalCategoryData,
+    type ICalCategoryJSONData
 } from './category.ts';
 
 export {
-    default as ICalEvent,
-    ICalEventStatus,
     ICalEventBusyStatus,
-    ICalEventTransparency,
-    ICalEventData,
-    ICalEventJSONData,
-    ICalEventJSONRepeatingData,
     ICalEventClass,
+    ICalEventStatus,
+    ICalEventTransparency,
+    default as ICalEvent,
+    type ICalEventData,
+    type ICalEventJSONData,
+    type ICalEventJSONRepeatingData
 } from './event.ts';
 
 export {
-    ICalDateTimeValue,
-    ICalRepeatingOptions,
-    ICalLocation,
-    ICalLocationWithTitle,
-    ICalLocationWithoutTitle,
-    ICalGeo,
-    ICalOrganizer,
-    ICalDescription,
     ICalEventRepeatingFreq,
     ICalWeekday,
-    ICalTimezone,
-    ICalMomentStub,
-    ICalMomentTimezoneStub,
-    ICalMomentDurationStub,
-    ICalLuxonDateTimeStub,
-    ICalDayJsStub,
-    ICalRRuleStub
+    type ICalDateTimeValue,
+    type ICalDayJsStub,
+    type ICalDescription,
+    type ICalGeo,
+    type ICalLocation,
+    type ICalLocationWithTitle,
+    type ICalLocationWithoutTitle,
+    type ICalLuxonDateTimeStub,
+    type ICalMomentDurationStub,
+    type ICalMomentStub,
+    type ICalMomentTimezoneStub,
+    type ICalOrganizer,
+    type ICalRRuleStub,
+    type ICalRepeatingOptions,
+    type ICalTimezone,
 } from './types.ts';
 
 export {
-    formatDate,
-    formatDateTZ,
     escape,
-    foldLines
+    foldLines,
+    formatDate,
+    formatDateTZ
 } from './tools.ts';

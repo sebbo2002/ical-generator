@@ -1,13 +1,14 @@
 'use strict';
 
 import {
-    ICalDateTimeValue,
-    ICalDayJsStub,
-    ICalLuxonDateTimeStub,
-    ICalMomentDurationStub,
-    ICalMomentStub,
-    ICalMomentTimezoneStub,
-    ICalOrganizer, ICalRRuleStub
+    type ICalDateTimeValue,
+    type ICalDayJsStub,
+    type ICalLuxonDateTimeStub,
+    type ICalMomentDurationStub,
+    type ICalMomentStub,
+    type ICalMomentTimezoneStub,
+    type ICalOrganizer,
+    type ICalRRuleStub
 } from './types.ts';
 
 /**

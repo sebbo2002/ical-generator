@@ -3,24 +3,24 @@
 import assert from 'assert';
 import ical, {
     ICalAlarm,
-    ICalAlarmType,
     ICalAttendee,
-    ICalAttendeeType,
     ICalAttendeeRole,
     ICalAttendeeStatus,
-    ICalCategory,
+    ICalAttendeeType,
     ICalCalendar,
     ICalCalendarMethod,
+    ICalCategory,
     ICalEvent,
-    ICalEventStatus,
     ICalEventBusyStatus,
+    ICalEventStatus,
     ICalEventTransparency,
-    ICalEventRepeatingFreq,
-    ICalWeekday,
+    escape,
+    foldLines,
     formatDate,
     formatDateTZ,
-    escape,
-    foldLines
+    ICalAlarmType,
+    ICalEventRepeatingFreq,
+    ICalWeekday
 } from '../src/index.js';
 
 describe('ical-generator Index', function() {

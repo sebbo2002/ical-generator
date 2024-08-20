@@ -8,8 +8,8 @@ import {
     isMomentDuration,
     toDurationString
 } from './tools.ts';
-import ICalEvent, {ICalEventData, ICalEventJSONData} from './event.ts';
-import { ICalMomentDurationStub, ICalTimezone } from './types.ts';
+import ICalEvent, { type ICalEventData, type ICalEventJSONData } from './event.ts';
+import { type ICalMomentDurationStub, type ICalTimezone } from './types.ts';
 
 
 export interface ICalCalendarData {

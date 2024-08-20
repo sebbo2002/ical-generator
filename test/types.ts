@@ -10,18 +10,18 @@ import momentTz from 'moment-timezone';
 import rrule from 'rrule';
 
 import {
-    ICalAttendeeData,
-    ICalAttendeeJSONData,
-    ICalCalendarData,
-    ICalCalendarJSONData,
-    ICalCategoryData,
-    ICalCategoryJSONData,
-    ICalDayJsStub,
-    ICalEventJSONData,
-    ICalLuxonDateTimeStub,
-    ICalMomentStub,
-    ICalMomentTimezoneStub,
-    ICalRRuleStub
+    type ICalAttendeeData,
+    type ICalAttendeeJSONData,
+    type ICalCalendarData,
+    type ICalCalendarJSONData,
+    type ICalCategoryData,
+    type ICalCategoryJSONData,
+    type ICalDayJsStub,
+    type ICalEventJSONData,
+    type ICalLuxonDateTimeStub,
+    type ICalMomentStub,
+    type ICalMomentTimezoneStub,
+    type ICalRRuleStub
 } from '../src/index.js';
 
 const dayJsTest = dayjs() satisfies ICalDayJsStub;

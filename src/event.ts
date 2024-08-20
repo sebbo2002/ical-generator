@@ -14,19 +14,19 @@ import {
     toDate,
     toJSON
 } from './tools.ts';
-import ICalAttendee, {ICalAttendeeData} from './attendee.ts';
-import ICalAlarm, {ICalAlarmData} from './alarm.ts';
-import ICalCategory, {ICalCategoryData} from './category.ts';
+import ICalAttendee, { type ICalAttendeeData } from './attendee.ts';
+import ICalAlarm, { type ICalAlarmData } from './alarm.ts';
+import ICalCategory, { type ICalCategoryData } from './category.ts';
 import ICalCalendar from './calendar.ts';
 import {
-    ICalDateTimeValue,
-    ICalDescription,
     ICalEventRepeatingFreq,
-    ICalLocation,
-    ICalOrganizer,
-    ICalRepeatingOptions,
-    ICalRRuleStub,
-    ICalWeekday
+    ICalWeekday,
+    type ICalDateTimeValue,
+    type ICalDescription,
+    type ICalLocation,
+    type ICalOrganizer,
+    type ICalRRuleStub,
+    type ICalRepeatingOptions
 } from './types.ts';
 
 
