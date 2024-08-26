@@ -1,3 +1,17 @@
+# [8.0.0](https://github.com/sebbo2002/ical-generator/compare/v7.2.0...v8.0.0) (2024-08-26)
+
+
+### chore
+
+* Drop support for node.js v19 and v21 ([2fff079](https://github.com/sebbo2002/ical-generator/commit/2fff079040a377fbe9ecc340388f6a29b863cf80))
+
+
+### BREAKING CHANGES
+
+* Drop node.js v21 Support
+
+These node.js versions are no longer supported. For more information see https://nodejs.dev/en/about/releases/
+
 # [7.2.0](https://github.com/sebbo2002/ical-generator/compare/v7.1.0...v7.2.0) (2024-08-04)
 
 
