@@ -4,10 +4,10 @@ import assert from 'assert';
 import ICalCalendar from '../src/calendar.js';
 import ICalEvent from '../src/event.js';
 import ICalAttendee, {
-    ICalAttendeeData,
     ICalAttendeeRole,
     ICalAttendeeStatus,
-    ICalAttendeeType
+    ICalAttendeeType,
+    type ICalAttendeeData
 } from '../src/attendee.js';
 
 describe('ical-generator Attendee', function () {

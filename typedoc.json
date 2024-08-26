@@ -1,4 +1,5 @@
 {
+    "customCss": "typedoc.css",
     "entryPoints": ["./src/index.ts"],
     "exclude": [],
     "excludeInternal": true,

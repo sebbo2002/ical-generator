@@ -2,7 +2,7 @@
 
 import assert from 'assert';
 import moment from 'moment';
-import ICalCalendar, {ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar.js';
+import ICalCalendar, {type ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar.js';
 import ICalEvent from '../src/event.js';
 import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 

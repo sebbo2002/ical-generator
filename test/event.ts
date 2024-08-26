@@ -6,9 +6,9 @@ import ICalCalendar from '../src/calendar.js';
 import ICalEvent, {
     ICalEventBusyStatus,
     ICalEventClass,
-    ICalEventData,
     ICalEventStatus,
-    ICalEventTransparency
+    ICalEventTransparency,
+    type ICalEventData
 } from '../src/event.js';
 import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types.js';
 import ICalAttendee from '../src/attendee.js';

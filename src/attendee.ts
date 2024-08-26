@@ -2,8 +2,8 @@
 
 
 import {addOrGetCustomAttributes, checkEnum, checkNameAndMail, escape} from './tools.ts';
-import ICalEvent from './event.ts';
-import ICalAlarm from './alarm.ts';
+import type ICalEvent from './event.ts';
+import type ICalAlarm from './alarm.ts';
 
 
 interface ICalInternalAttendeeData {
