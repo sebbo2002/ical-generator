@@ -1432,6 +1432,16 @@ describe('ical-generator Event', function () {
                 sentBy: undefined
             });
         });
+
+        it('should include a : (PR #610)', function () {
+            const event = new ICalEvent({
+                start: moment(),
+                summary: 'Example Event',
+                organizer: { name: 'Some Guy' }
+            }, new ICalCalendar());
+
+            assert.ok(event.toString().includes('ORGANIZER;CN="Some Guy":'));
+        });
     });
 
     describe('createAttendee()', function () {

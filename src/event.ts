@@ -1816,9 +1816,12 @@ export default class ICalEvent {
             if (this.data.organizer.email && this.data.organizer.mailto) {
                 g += ';EMAIL=' + escape(this.data.organizer.email, false);
             }
+
+            g += ':';
             if(this.data.organizer.email) {
-                g += ':mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email, false);
+                g += 'mailto:' + escape(this.data.organizer.mailto || this.data.organizer.email, false);
             }
+
             g += '\r\n';
         }
 
