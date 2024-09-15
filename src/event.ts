@@ -1808,7 +1808,7 @@ export default class ICalEvent {
 
         // ORGANIZER
         if (this.data.organizer) {
-            g += 'ORGANIZER;CN="' + escape(this.data.organizer.name, true) + '":';
+            g += 'ORGANIZER;CN="' + escape(this.data.organizer.name, true) + '"';
 
             if (this.data.organizer.sentBy) {
                 g += ';SENT-BY="mailto:' + escape(this.data.organizer.sentBy, true) + '"';
