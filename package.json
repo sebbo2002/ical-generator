@@ -20,7 +20,7 @@
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.0",
     "@types/luxon": "^3.4.2",
-    "@types/mocha": "^10.0.8",
+    "@types/mocha": "^10.0.9",
     "c8": "^10.1.2",
     "dayjs": "^1.11.13",
     "eslint": "^9.11.1",
@@ -31,17 +31,17 @@
     "mocha": "^10.7.3",
     "mochawesome": "^7.1.3",
     "moment": "^2.30.1",
-    "moment-timezone": "^0.5.45",
+    "moment-timezone": "^0.5.46",
     "nyc": "^17.1.0",
     "rrule": "^2.8.1",
-    "semantic-release": "^24.1.1",
+    "semantic-release": "^24.1.2",
     "semantic-release-license": "^1.0.2",
     "source-map-support": "^0.5.21",
     "tsup": "^8.3.0",
     "tsx": "^4.19.1",
-    "typedoc": "^0.26.7",
+    "typedoc": "^0.26.8",
     "typescript": "^5.6.2",
-    "typescript-eslint": "^8.5.0"
+    "typescript-eslint": "^8.8.1"
   },
   "engines": {
     "node": "18 || 20 || >=22.0.0"
