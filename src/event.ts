@@ -938,7 +938,7 @@ export default class ICalEvent {
         }
         if (location && (
             ('title' in location && !location.title) ||
-            (location?.geo && (!isFinite(location.geo.lat) || !isFinite(location.geo.lon))) ||
+            (location?.geo && (typeof location.geo.lat !== 'number' || !isFinite(location.geo.lat) || typeof location.geo.lon !== 'number' || !isFinite(location.geo.lon))) ||
             (!('title' in location) && !location?.geo)
         )) {
             throw new Error(
@@ -1791,11 +1791,11 @@ export default class ICalEvent {
         }
 
         // GEO
-        if (this.data.location && 'geo' in this.data.location && this.data.location.geo) {
-            g += 'GEO:' + escape(this.data.location.geo?.lat, false) + ';' +
-                escape(this.data.location.geo?.lon, false) + '\r\n';
+        if (this.data.location?.geo?.lat && this.data.location.geo.lon) {
+            g += 'GEO:' + escape(this.data.location.geo.lat, false) + ';' +
+                escape(this.data.location.geo.lon, false) + '\r\n';
         }
-        
+
         // DESCRIPTION
         if (this.data.description) {
             g += 'DESCRIPTION:' + escape(this.data.description.plain, false) + '\r\n';
