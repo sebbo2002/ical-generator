@@ -324,4 +324,29 @@ describe('Issues', function () {
             assert.strictEqual(end, '2024-02-29T19:20:00.000Z');
         });
     });
+
+    describe('Issue #618', function () {
+        it('should also produce an error', function () {
+            assert.throws(() => {
+                const calendar = ical();
+                calendar.createEvent({
+                    summary: 'Test Event',
+                    start: new Date(),
+                    location: {
+                        title: 'Empty Venue',
+
+                        // @ts-ignore
+                        address: null,
+                        geo: {
+                            // @ts-ignore
+                            lat: null,
+
+                            // @ts-ignore
+                            lon: null
+                        }
+                    }
+                });
+            }, /`location` isn't formatted correctly/);
+        });
+    });
 });
