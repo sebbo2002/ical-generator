@@ -1,3 +1,11 @@
+## [8.0.1](https://github.com/sebbo2002/ical-generator/compare/v8.0.0...v8.0.1) (2024-10-16)
+
+
+### Bug Fixes
+
+* **Event:** Add missing : for ORGANIZERs ([dca6352](https://github.com/sebbo2002/ical-generator/commit/dca6352e30b042584cee7941966531400fa6f9d4)), closes [#610](https://github.com/sebbo2002/ical-generator/issues/610)
+* **Event:** Handle location.geo.lat|lon = null ([7e68f00](https://github.com/sebbo2002/ical-generator/commit/7e68f0046ac927806325d68dcf31dc815efeeb8e)), closes [#618](https://github.com/sebbo2002/ical-generator/issues/618)
+
 # [8.0.0](https://github.com/sebbo2002/ical-generator/compare/v7.2.0...v8.0.0) (2024-08-26)
 
 
