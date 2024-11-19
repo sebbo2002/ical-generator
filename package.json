@@ -24,7 +24,7 @@
     "c8": "^10.1.2",
     "dayjs": "^1.11.13",
     "eslint": "^9.13.0",
-    "eslint-plugin-jsonc": "^2.16.0",
+    "eslint-plugin-jsonc": "^2.18.1",
     "esm": "^3.2.25",
     "license-checker": "^25.0.1",
     "luxon": "^3.5.0",
@@ -41,7 +41,7 @@
     "tsx": "^4.19.2",
     "typedoc": "^0.26.11",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.8.1"
+    "typescript-eslint": "^8.14.0"
   },
   "engines": {
     "node": "18 || 20 || >=22.0.0"
