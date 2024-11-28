@@ -23,7 +23,7 @@
     "@types/mocha": "^10.0.9",
     "c8": "^10.1.2",
     "dayjs": "^1.11.13",
-    "eslint": "^9.15.0",
+    "eslint": "^9.13.0",
     "eslint-plugin-jsonc": "^2.18.1",
     "esm": "^3.2.25",
     "license-checker": "^25.0.1",
