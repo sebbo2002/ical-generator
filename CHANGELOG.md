@@ -1,3 +1,15 @@
+# [8.1.0](https://github.com/sebbo2002/ical-generator/compare/v8.0.1...v8.1.0) (2025-01-09)
+
+
+### Bug Fixes
+
+* **deps:** downgrade eslint to v9.13.0 to resolve typescript-eslint issue ([b716d34](https://github.com/sebbo2002/ical-generator/commit/b716d340379690e2cf784d1d60735b77fdf3083b)), closes [#10353](https://github.com/sebbo2002/ical-generator/issues/10353) [typescript-eslint/typescript-eslint#10353](https://github.com/typescript-eslint/typescript-eslint/issues/10353)
+
+
+### Features
+
+* replace uuid dependency with native crypto method ([6628515](https://github.com/sebbo2002/ical-generator/commit/66285152c18396709196354b3128191d2154bda4))
+
 ## [8.0.1](https://github.com/sebbo2002/ical-generator/compare/v8.0.0...v8.0.1) (2024-10-16)
 
 
