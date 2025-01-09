@@ -126,5 +126,5 @@
     "test": "mocha"
   },
   "type": "module",
-  "version": "8.1.0-develop.2"
+  "version": "8.1.0"
 }
