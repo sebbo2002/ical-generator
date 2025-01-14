@@ -1,6 +1,6 @@
 'use strict';
 
-import { randomUUID } from 'crypto';
+import uuid from 'uuid-random';
 import {
     addOrGetCustomAttributes,
     checkDate,
@@ -178,7 +178,7 @@ export default class ICalEvent {
      */
     constructor(data: ICalEventData, calendar: ICalCalendar) {
         this.data = {
-            id: randomUUID(),
+            id: uuid(),
             sequence: 0,
             start: new Date(),
             end: null,
