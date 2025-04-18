@@ -1,7 +1,8 @@
 'use strict';
 
-import Magic from '../../src/lib/index.js';
 import assert from 'assert';
+
+import Magic from '../../src/lib/index.js';
 
 describe('Example', function () {
     it('should work with integers', function () {

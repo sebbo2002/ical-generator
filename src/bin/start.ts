@@ -1,15 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
-import express, {type Express} from 'express';
-import {Server} from 'http';
-
+import express, { type Express } from 'express';
+import { Server } from 'http';
 
 class AppServer {
-    static run() {
-        new AppServer();
-    }
-
     private app: Express;
     private server: Server;
 
@@ -23,6 +18,10 @@ class AppServer {
         process.on('SIGTERM', () => this.stop());
     }
 
+    static run() {
+        new AppServer();
+    }
+
     setupRoutes() {
         this.app.get('/ping', (req, res) => {
             res.send('pong');
@@ -32,7 +31,7 @@ class AppServer {
     }
 
     async stop() {
-        await new Promise(cb => this.server.close(cb));
+        await new Promise((cb) => this.server.close(cb));
 
         // await db.close() if we have a db connection in this app
         // await other things we should cleanup nicely

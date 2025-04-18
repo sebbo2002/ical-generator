@@ -1,20 +1,20 @@
-update_strategy: "individual"
+update_strategy: 'individual'
 
-dev_update_strategy: "grouped"
-grouped_dev_update_schedule: "weekly"
-grouped_dev_update_start_date: "2023-11-21"
-grouped_dev_update_time: "08:00"
+dev_update_strategy: 'grouped'
+grouped_dev_update_schedule: 'weekly'
+grouped_dev_update_start_date: '2023-11-21'
+grouped_dev_update_time: '08:00'
 
 reasonably_up_to_date: true
 update_out_of_spec: true
 
-automerge_strategy: "minor"
-automerge_dev_strategy: "major"
-automerge_method: "rebase"
+automerge_strategy: 'minor'
+automerge_dev_strategy: 'major'
+automerge_method: 'rebase'
 
-engine_update_strategy: "major"
+engine_update_strategy: 'major'
 
-commit_message: "chore(deps): update {{dependency}} to version {{version}}"
-commit_message_grouped: "chore(deps): Update {{update_type}} {{project_type}} dependencies ({{date}})"
-labels: "dependencies"
-auto_assign: "sebbo2002"
+commit_message: 'chore(deps): update {{dependency}} to version {{version}}'
+commit_message_grouped: 'chore(deps): Update {{update_type}} {{project_type}} dependencies ({{date}})'
+labels: 'dependencies'
+auto_assign: 'sebbo2002'
