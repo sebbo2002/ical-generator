@@ -31,3 +31,6 @@ mv -f ./mochawesome-report ./docs/tests
 
 # Coverage Report in ./doc/coverage
 npm run coverage
+
+# Run eslint and prettier
+npm run lint
