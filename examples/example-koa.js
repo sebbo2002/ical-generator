@@ -1,25 +1,25 @@
 'use strict';
 
 import ical from 'ical-generator';
-import moment from 'moment';
 import Koa from 'koa';
+import moment from 'moment';
 
 const cal = ical({
-    prodId: '//superman-industries.com//ical-generator//EN',
     events: [
         {
-            start: moment(),
-            end: moment().add(1, 'hour'),
-            summary: 'Example Event',
             description: 'It works ;)',
-            url: 'https://example.com'
-        }
-    ]
+            end: moment().add(1, 'hour'),
+            start: moment(),
+            summary: 'Example Event',
+            url: 'https://example.com',
+        },
+    ],
+    prodId: '//superman-industries.com//ical-generator//EN',
 });
 
 const app = new Koa();
 
-app.use(ctx => {
+app.use((ctx) => {
     ctx.status = 200;
     ctx.respond = false;
 

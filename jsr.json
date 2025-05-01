@@ -1,13 +1,8 @@
 {
-  "exports": "./src/index.ts",
-  "name": "@sebbo2002/ical-generator",
-  "publish": {
-    "include": [
-      "LICENSE",
-      "README.md",
-      "src/*.ts",
-      "jsr.json"
-    ]
-  },
-  "version": "7.1.0"
+    "exports": "./src/index.ts",
+    "name": "@sebbo2002/ical-generator",
+    "publish": {
+        "include": ["LICENSE", "README.md", "src/*.ts", "jsr.json"]
+    },
+    "version": "7.1.0"
 }

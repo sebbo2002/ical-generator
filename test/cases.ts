@@ -1,292 +1,347 @@
 'use strict';
 
+import { getVtimezoneComponent } from '@touch4it/ical-timezones';
 import assert from 'assert';
-import { join, dirname } from 'node:path';
 import { promises as fs } from 'node:fs';
+import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import ical, { ICalEventTransparency } from '../src/index.js';
+
+import { ICalAlarmType } from '../src/alarm.js';
+import {
+    ICalAttendeeRole,
+    ICalAttendeeStatus,
+    ICalAttendeeType,
+} from '../src/attendee.js';
 import { ICalCalendarMethod } from '../src/calendar.js';
 import { ICalEventStatus } from '../src/event.js';
+import ical, { ICalEventTransparency } from '../src/index.js';
 import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types.js';
-import { ICalAttendeeRole, ICalAttendeeStatus, ICalAttendeeType } from '../src/attendee.js';
-import { ICalAlarmType } from '../src/alarm.js';
-import { getVtimezoneComponent } from '@touch4it/ical-timezones';
 
 describe('ical-generator Cases', function () {
     const resultDir = join(dirname(fileURLToPath(import.meta.url)), 'results');
     it('case #1', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({ prodId: '//sebbo.net//ical-generator.tests//EN' });
         cal.createEvent({
-            id: '123',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
-            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
             created: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
+            id: '123',
             lastModified: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-            summary: 'Simple Event'
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            summary: 'Simple Event',
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_01.ics', 'utf8'));
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_01.ics', 'utf8'),
+        );
 
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
     it('case #2', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({ prodId: '//sebbo.net//ical-generator.tests//EN' });
         cal.createEvent({
-            id: '123',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
-            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-            summary: 'Sample Event',
-            location: 'localhost',
-            transparency: ICalEventTransparency.OPAQUE,
             description: {
+                html: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop</p>',
                 plain: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop',
-                html: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\nbeep boop</p>'
-            }
+            },
+            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
+            id: '123',
+            location: 'localhost',
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            summary: 'Sample Event',
+            transparency: ICalEventTransparency.OPAQUE,
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_02.ics', 'utf8'));
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_02.ics', 'utf8'),
+        );
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
     it('case #3', async function () {
         const cal = ical({
             method: ICalCalendarMethod.ADD,
-            prodId: '//sebbo.net//ical-generator.tests//EN'
+            prodId: '//sebbo.net//ical-generator.tests//EN',
         });
         cal.createEvent({
-            id: '123',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-            end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
             allDay: true,
-            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-            summary: 'Sample Event',
+            attachments: ['https://files.sebbo.net/calendar/attachments/foo'],
+            categories: [{ name: 'WORK' }],
+            end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+            id: '123',
             location: {
-                title: 'Apple Store Kurfürstendamm',
                 address: 'Kurfürstendamm 26, 10719 Berlin, Deutschland',
+                geo: { lat: 52.50363, lon: 13.32865 },
                 radius: 141.1751386318387,
-                geo: {lat: 52.503630, lon: 13.328650}
+                title: 'Apple Store Kurfürstendamm',
             },
             organizer: 'Sebastian Pekarek <mail@sebbo.net>',
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             status: ICalEventStatus.CONFIRMED,
-            categories: [{name: 'WORK'}],
+            summary: 'Sample Event',
             url: 'http://sebbo.net/',
-            attachments: [
-                'https://files.sebbo.net/calendar/attachments/foo'
-            ]
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_03.ics', 'utf8'), 'toString');
-        assert.strictEqual(ical(cal.toJSON()).toString(), string, 'toJSON / toString()');
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_03.ics', 'utf8'),
+            'toString',
+        );
+        assert.strictEqual(
+            ical(cal.toJSON()).toString(),
+            string,
+            'toJSON / toString()',
+        );
     });
 
     it('case #4 (repeating)', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
-        cal.timezone({name: null, generator: getVtimezoneComponent});
+        const cal = ical({ prodId: '//sebbo.net//ical-generator.tests//EN' });
+        cal.timezone({ generator: getVtimezoneComponent, name: null });
         cal.events([
             {
+                end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
                 id: '1',
-                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-                end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-                summary: 'repeating by month',
                 repeating: {
+                    exclude: new Date('Fr Oct 06 2013 23:15:00 UTC'),
                     freq: ICalEventRepeatingFreq.MONTHLY,
-                    exclude: new Date('Fr Oct 06 2013 23:15:00 UTC')
-                }
-            },
-            {
-                id: '2',
-                start: new Date('Fr Oct 04 2013 22:39:30'),
-                end: new Date('Fr Oct 06 2013 23:15:00'),
+                },
                 stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-                timezone: 'Europe/Berlin',
-                summary: 'repeating by day, twice',
-                repeating: {
-                    freq: ICalEventRepeatingFreq.DAILY,
-                    count: 2
-                }
-            },
-            {
-                id: '3',
                 start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-                end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+                summary: 'repeating by month',
+            },
+            {
+                end: new Date('Fr Oct 06 2013 23:15:00'),
+                id: '2',
+                repeating: {
+                    count: 2,
+                    freq: ICalEventRepeatingFreq.DAILY,
+                },
                 stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-                summary: 'repeating by 3 weeks, until 2014',
+                start: new Date('Fr Oct 04 2013 22:39:30'),
+                summary: 'repeating by day, twice',
+                timezone: 'Europe/Berlin',
+            },
+            {
+                end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+                id: '3',
                 repeating: {
                     freq: ICalEventRepeatingFreq.WEEKLY,
                     interval: 3,
-                    until: new Date('We Jan 01 2014 00:00:00 UTC')
-                }
-            }
+                    until: new Date('We Jan 01 2014 00:00:00 UTC'),
+                },
+                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+                summary: 'repeating by 3 weeks, until 2014',
+            },
         ]);
 
-        assert.strictEqual(cal.toString(), await fs.readFile(resultDir + '/generate_04.ics', 'utf8'), 'first check');
+        assert.strictEqual(
+            cal.toString(),
+            await fs.readFile(resultDir + '/generate_04.ics', 'utf8'),
+            'first check',
+        );
 
         // Wount be same, as reference to VTimezone generator is not exported
         // assert.strictEqual(ical(cal.toJSON()).toString(), string);
 
         cal.timezone(null);
-        assert.strictEqual(ical(cal.toJSON()).toString(), cal.toString(), 'second check');
+        assert.strictEqual(
+            ical(cal.toJSON()).toString(),
+            cal.toString(),
+            'second check',
+        );
     });
 
     it('case #5 (floating)', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({ prodId: '//sebbo.net//ical-generator.tests//EN' });
         cal.createEvent({
-            id: '1',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
+            floating: true,
+            id: '1',
             stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             summary: 'floating',
-            floating: true
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_05.ics', 'utf8'));
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_05.ics', 'utf8'),
+        );
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
     it('case #6 (attendee with simple delegation and alarm)', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN', method: ICalCalendarMethod.PUBLISH});
+        const cal = ical({
+            method: ICalCalendarMethod.PUBLISH,
+            prodId: '//sebbo.net//ical-generator.tests//EN',
+        });
         cal.createEvent({
-            id: '123',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-            allDay: true,
-            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-            summary: 'Sample Event',
-            organizer: 'Sebastian Pekarek <mail@sebbo.net>',
-            attendees: [
-                {
-                    name: 'Smith, Matt; ("Sales")',
-                    email: 'matt@example.com',
-                    delegatesTo: {
-                        name: 'John',
-                        email: 'john@example.com',
-                        status: ICalAttendeeStatus.ACCEPTED
-                    }
-                }
-            ],
             alarms: [
                 {
-                    type: ICalAlarmType.display,
-                    trigger: 60 * 10,
                     repeat: {
+                        interval: 60,
                         times: 2,
-                        interval: 60
-                    }
+                    },
+                    trigger: 60 * 10,
+                    type: ICalAlarmType.display,
                 },
                 {
-                    type: ICalAlarmType.display,
+                    description: "I'm a reminder :)",
                     trigger: 60 * 60,
-                    description: 'I\'m a reminder :)'
-                }
+                    type: ICalAlarmType.display,
+                },
             ],
+            allDay: true,
+            attendees: [
+                {
+                    delegatesTo: {
+                        email: 'john@example.com',
+                        name: 'John',
+                        status: ICalAttendeeStatus.ACCEPTED,
+                    },
+                    email: 'matt@example.com',
+                    name: 'Smith, Matt; ("Sales")',
+                },
+            ],
+            id: '123',
+            organizer: 'Sebastian Pekarek <mail@sebbo.net>',
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             status: ICalEventStatus.CONFIRMED,
-            url: 'http://sebbo.net/'
+            summary: 'Sample Event',
+            url: 'http://sebbo.net/',
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_06.ics', 'utf8'));
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_06.ics', 'utf8'),
+        );
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
     it('case #7 (repeating: byDay, byMonth, byMonthDay)', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({ prodId: '//sebbo.net//ical-generator.tests//EN' });
         cal.events([
             {
-                id: '1',
-                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
                 end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-                summary: 'repeating by month',
+                id: '1',
                 repeating: {
+                    byMonth: [1, 4, 7, 10],
                     freq: ICalEventRepeatingFreq.MONTHLY,
-                    byMonth: [1, 4, 7, 10]
-                }
+                },
+                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+                summary: 'repeating by month',
             },
             {
                 id: '2',
-                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-                summary: 'repeating on Mo/We/Fr, twice',
                 repeating: {
-                    freq: ICalEventRepeatingFreq.DAILY,
+                    byDay: [ICalWeekday.MO, ICalWeekday.WE, ICalWeekday.FR],
                     count: 2,
-                    byDay: [ICalWeekday.MO, ICalWeekday.WE, ICalWeekday.FR]
-                }
+                    freq: ICalEventRepeatingFreq.DAILY,
+                },
+                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+                summary: 'repeating on Mo/We/Fr, twice',
             },
             {
-                id: '3',
-                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
                 end: new Date('Fr Oct 06 2013 23:15:00 UTC'),
-                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-                summary: 'repeating on 1st and 15th',
+                id: '3',
                 repeating: {
+                    byMonthDay: [1, 15],
                     freq: ICalEventRepeatingFreq.DAILY,
                     interval: 1,
-                    byMonthDay: [1, 15]
-                }
-            }
+                },
+                stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+                start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+                summary: 'repeating on 1st and 15th',
+            },
         ]);
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_07.ics', 'utf8'));
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_07.ics', 'utf8'),
+        );
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
     it('case #8', async function () {
-        const cal = ical({prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({ prodId: '//sebbo.net//ical-generator.tests//EN' });
         cal.createEvent({
-            id: '123',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
-            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
-            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            attendees: [
+                {
+                    email: 'mail@example.com',
+                    role: ICalAttendeeRole.REQ,
+                    rsvp: true,
+                    status: ICalAttendeeStatus.NEEDSACTION,
+                    type: ICalAttendeeType.INDIVIDUAL,
+                },
+            ],
             created: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
+            id: '123',
             lastModified: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             summary: 'Simple Event',
-            attendees: [{
-                type: ICalAttendeeType.INDIVIDUAL,
-                role: ICalAttendeeRole.REQ,
-                status: ICalAttendeeStatus.NEEDSACTION,
-                email: 'mail@example.com',
-                rsvp: true
-            }]
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_08.ics', 'utf8'));
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_08.ics', 'utf8'),
+        );
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 
     it('case #9 (organizer with mailto)', async function () {
-        const cal = ical({method: ICalCalendarMethod.REQUEST, prodId: '//sebbo.net//ical-generator.tests//EN'});
+        const cal = ical({
+            method: ICalCalendarMethod.REQUEST,
+            prodId: '//sebbo.net//ical-generator.tests//EN',
+        });
         cal.createEvent({
-            id: '123',
-            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            attendees: [
+                {
+                    email: 'mail@example.com',
+                    role: ICalAttendeeRole.REQ,
+                    rsvp: true,
+                    status: ICalAttendeeStatus.NEEDSACTION,
+                    type: ICalAttendeeType.INDIVIDUAL,
+                },
+            ],
             end: new Date('Fr Oct 04 2013 23:15:00 UTC'),
-            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
-            summary: 'Sample Event',
+            id: '123',
             organizer: {
-                name: 'Sebastian Pekarek',
                 email: 'mail@sebbo.net',
-                mailto: 'mail2@example2.com'
+                mailto: 'mail2@example2.com',
+                name: 'Sebastian Pekarek',
             },
-            attendees: [{
-                type: ICalAttendeeType.INDIVIDUAL,
-                role: ICalAttendeeRole.REQ,
-                status: ICalAttendeeStatus.NEEDSACTION,
-                email: 'mail@example.com',
-                rsvp: true
-            }]
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            summary: 'Sample Event',
         });
 
         const string = cal.toString();
-        assert.strictEqual(string, await fs.readFile(resultDir + '/generate_09.ics', 'utf8'), 'toString');
-        assert.strictEqual(ical(cal.toJSON()).toString(), string, 'toJSON / toString()');
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_09.ics', 'utf8'),
+            'toString',
+        );
+        assert.strictEqual(
+            ical(cal.toJSON()).toString(),
+            string,
+            'toJSON / toString()',
+        );
     });
 });

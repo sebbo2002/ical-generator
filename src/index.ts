@@ -6,7 +6,6 @@
 
 import ICalCalendar, { type ICalCalendarData } from './calendar.ts';
 
-
 /**
  * Create a new, empty calendar and returns it.
  *
@@ -47,77 +46,72 @@ function ical(data?: ICalCalendarData): ICalCalendar {
 export default ical;
 
 export {
-    ICalAlarmRelatesTo,
-    ICalAlarmType,
     default as ICalAlarm,
     type ICalAlarmBaseData,
     type ICalAlarmData,
     type ICalAlarmJSONData,
+    ICalAlarmRelatesTo,
     type ICalAlarmRepeatData,
     type ICalAlarmTriggerAfterData,
     type ICalAlarmTriggerBeforeData,
     type ICalAlarmTriggerData,
+    ICalAlarmType,
     type ICalAlarmTypeValue,
-    type ICalAttachment
+    type ICalAttachment,
 } from './alarm.ts';
 
 export {
+    default as ICalAttendee,
+    type ICalAttendeeData,
+    type ICalAttendeeJSONData,
     ICalAttendeeRole,
     ICalAttendeeStatus,
     ICalAttendeeType,
-    default as ICalAttendee,
-    type ICalAttendeeData,
-    type ICalAttendeeJSONData
 } from './attendee.ts';
 
 export {
-    ICalCalendarMethod,
     default as ICalCalendar,
     type ICalCalendarData,
     type ICalCalendarJSONData,
-    type ICalCalendarProdIdData
+    ICalCalendarMethod,
+    type ICalCalendarProdIdData,
 } from './calendar.ts';
 
 export {
     default as ICalCategory,
     type ICalCategoryData,
-    type ICalCategoryJSONData
+    type ICalCategoryJSONData,
 } from './category.ts';
 
 export {
+    default as ICalEvent,
     ICalEventBusyStatus,
     ICalEventClass,
-    ICalEventStatus,
-    ICalEventTransparency,
-    default as ICalEvent,
     type ICalEventData,
     type ICalEventJSONData,
-    type ICalEventJSONRepeatingData
+    type ICalEventJSONRepeatingData,
+    ICalEventStatus,
+    ICalEventTransparency,
 } from './event.ts';
 
+export { escape, foldLines, formatDate, formatDateTZ } from './tools.ts';
+
 export {
-    ICalEventRepeatingFreq,
-    ICalWeekday,
     type ICalDateTimeValue,
     type ICalDayJsStub,
     type ICalDescription,
+    ICalEventRepeatingFreq,
     type ICalGeo,
     type ICalLocation,
-    type ICalLocationWithTitle,
     type ICalLocationWithoutTitle,
+    type ICalLocationWithTitle,
     type ICalLuxonDateTimeStub,
     type ICalMomentDurationStub,
     type ICalMomentStub,
     type ICalMomentTimezoneStub,
     type ICalOrganizer,
-    type ICalRRuleStub,
     type ICalRepeatingOptions,
+    type ICalRRuleStub,
     type ICalTimezone,
+    ICalWeekday,
 } from './types.ts';
-
-export {
-    escape,
-    foldLines,
-    formatDate,
-    formatDateTZ
-} from './tools.ts';

@@ -1,15 +1,16 @@
 'use strict';
 
 import assert from 'assert';
+
 import ICalCategory from '../src/category.js';
 
 describe('ical-generator Category', function () {
     describe('constructor()', function () {
         it('should ignore unknown data attributes', function () {
             const a = new ICalCategory({
+                name: 'FOO',
                 // @ts-ignore
                 unknown: true,
-                name: 'FOO'
             });
 
             assert.strictEqual(a.name(), 'FOO');
@@ -38,15 +39,15 @@ describe('ical-generator Category', function () {
         });
 
         it('should change something', function () {
-            const c = new ICalCategory({name: 'BANANA'});
+            const c = new ICalCategory({ name: 'BANANA' });
             assert.ok(c.toString().includes('BANANA'));
         });
     });
 
     describe('toJSON()', function () {
         it('should contain valued previously set', function () {
-            const c = new ICalCategory({name: 'FOOBAR'});
-            assert.deepStrictEqual(c.toJSON(), {name: 'FOOBAR'});
+            const c = new ICalCategory({ name: 'FOOBAR' });
+            assert.deepStrictEqual(c.toJSON(), { name: 'FOOBAR' });
         });
     });
 });

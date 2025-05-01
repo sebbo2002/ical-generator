@@ -14,13 +14,8 @@
         "target": "es2022",
         "verbatimModuleSyntax": true
     },
-    "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
-    ],
-    "include": [
-        "src/**/*"
-    ],
+    "exclude": ["node_modules", "**/*.spec.ts"],
+    "include": ["src/**/*"],
     "ts-node": {
         "esm": true,
         "experimentalResolver": true,

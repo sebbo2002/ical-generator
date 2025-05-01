@@ -1,22 +1,12 @@
 {
     "check-coverage": true,
     "extends": "@istanbuljs/nyc-config-typescript",
-    "include": [
-        "src/**/*.ts"
-    ],
-    "exclude": [
-        "coverage/**",
-        "node_modules/**"
-    ],
+    "include": ["src/**/*.ts"],
+    "exclude": ["coverage/**", "node_modules/**"],
     "report-dir": "./docs/coverage/",
     "temp-directory": "./.nyc_output",
     "sourceMap": true,
-    "reporter": [
-        "text",
-        "text-summary",
-        "cobertura",
-        "html"
-    ],
+    "reporter": ["text", "text-summary", "cobertura", "html"],
     "all": true,
     "branches": 95,
     "lines": 95,

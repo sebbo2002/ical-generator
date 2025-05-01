@@ -1,35 +1,35 @@
 @media (prefers-color-scheme: light) {
-    a[href$="#gh-light-mode-only"] {
+    a[href$='#gh-light-mode-only'] {
         display: block;
     }
-    a[href$="#gh-dark-mode-only"] {
+    a[href$='#gh-dark-mode-only'] {
         display: none;
     }
 }
 
 @media (prefers-color-scheme: dark) {
-    a[href$="#gh-light-mode-only"] {
+    a[href$='#gh-light-mode-only'] {
         display: none;
     }
-    a[href$="#gh-dark-mode-only"] {
+    a[href$='#gh-dark-mode-only'] {
         display: block;
     }
 }
 
 html[data-theme='light'] {
-    a[href$="#gh-light-mode-only"] {
+    a[href$='#gh-light-mode-only'] {
         display: block;
     }
-    a[href$="#gh-dark-mode-only"] {
+    a[href$='#gh-dark-mode-only'] {
         display: none;
     }
 }
 
 html[data-theme='dark'] {
-    a[href$="#gh-light-mode-only"] {
+    a[href$='#gh-light-mode-only'] {
         display: none;
     }
-    a[href$="#gh-dark-mode-only"] {
+    a[href$='#gh-dark-mode-only'] {
         display: block;
     }
 }

@@ -21,7 +21,7 @@ import {
     type ICalLuxonDateTimeStub,
     type ICalMomentStub,
     type ICalMomentTimezoneStub,
-    type ICalRRuleStub
+    type ICalRRuleStub,
 } from '../src/index.js';
 
 const dayJsTest = dayjs() satisfies ICalDayJsStub;
@@ -30,7 +30,10 @@ const momentTest = moment() satisfies ICalMomentStub;
 const momentTimezoneTest = momentTz() satisfies ICalMomentTimezoneStub;
 
 const RRule = rrule.RRule;
-const rruleTest = new RRule({ freq: RRule.WEEKLY, dtstart: new Date() }) satisfies ICalRRuleStub;
+const rruleTest = new RRule({
+    dtstart: new Date(),
+    freq: RRule.WEEKLY,
+}) satisfies ICalRRuleStub;
 
 const attendeeJson = {} as ICalAttendeeJSONData satisfies ICalAttendeeData;
 const calendarJson = {} as ICalCalendarJSONData satisfies ICalCalendarData;
@@ -42,7 +45,10 @@ describe('ical-generator Types', function () {
         assert.ok(dayJsTest, 'day.js stub should be compatible');
         assert.ok(luxonTest, 'luxon stub should be compatible');
         assert.ok(momentTest, 'moment stub should be compatible');
-        assert.ok(momentTimezoneTest, 'moment-timezone stub should be compatible');
+        assert.ok(
+            momentTimezoneTest,
+            'moment-timezone stub should be compatible',
+        );
         assert.ok(rruleTest, 'rrule stub should be compatible');
     });
     it('calendar data should be compatible with calendar json data', function () {
