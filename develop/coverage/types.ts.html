@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>118/118</span>
+                <span class='fraction'>129/129</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>118/118</span>
+                <span class='fraction'>129/129</span>
             </div>
         
             
@@ -181,7 +181,18 @@
 <a name='L116'></a><a href='#L116'>116</a>
 <a name='L117'></a><a href='#L117'>117</a>
 <a name='L118'></a><a href='#L118'>118</a>
-<a name='L119'></a><a href='#L119'>119</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a>
+<a name='L123'></a><a href='#L123'>123</a>
+<a name='L124'></a><a href='#L124'>124</a>
+<a name='L125'></a><a href='#L125'>125</a>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -299,38 +310,63 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export enum ICalEventRepeatingFreq {
+    DAILY = 'DAILY',
+    HOURLY = 'HOURLY',
+    MINUTELY = 'MINUTELY',
+    MONTHLY = 'MONTHLY',
+    SECONDLY = 'SECONDLY',
+    WEEKLY = 'WEEKLY',
+    YEARLY = 'YEARLY',
+}
+&nbsp;
+export enum ICalWeekday {
+    FR = 'FR',
+    MO = 'MO',
+    SA = 'SA',
+    SU = 'SU',
+    TH = 'TH',
+    TU = 'TU',
+    WE = 'WE',
+}
+&nbsp;
+/**
  * ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
  * [moment.js](https://momentjs.com/) (and [moment-timezone](https://momentjs.com/timezone/), [Day.js](https://day.js.org/en/) and
  * [Luxon](https://moment.github.io/luxon/)'s [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
  * objects. You can also pass a string which is then passed to javascript's Date internally.
  */
-export type ICalDateTimeValue = Date | ICalMomentStub | ICalMomentTimezoneStub | ICalLuxonDateTimeStub | ICalDayJsStub | string;
+export type ICalDateTimeValue =
+    | Date
+    | ICalDayJsStub
+    | ICalLuxonDateTimeStub
+    | ICalMomentStub
+    | ICalMomentTimezoneStub
+    | string;
 &nbsp;
-export interface ICalRepeatingOptions {
-    freq: ICalEventRepeatingFreq;
-    count?: number;
-    interval?: number;
-    until?: ICalDateTimeValue;
-    byDay?: ICalWeekday[] | ICalWeekday;
-    byMonth?: number[] | number;
-    byMonthDay?: number[] | number;
-    bySetPos?: number[] | number;
-    exclude?: ICalDateTimeValue[] | ICalDateTimeValue;
-    startOfWeek?: ICalWeekday;
+export interface ICalDayJsStub {
+    format(format?: string): string;
+    isValid(): boolean;
+    toDate(): Date;
+    toJSON(): string;
+    tz(zone?: string): ICalDayJsStub;
+    utc(): ICalDayJsStub;
 }
 &nbsp;
-export type ICalLocation = ICalLocationWithTitle | ICalLocationWithoutTitle;
-&nbsp;
-export interface ICalLocationWithTitle {
-    title: string;
-    address?: string;
-    radius?: number;
-    geo?: ICalGeo;
-}
-&nbsp;
-export interface ICalLocationWithoutTitle {
-    geo: ICalGeo;
+export interface ICalDescription {
+    html?: string;
+    plain: string;
 }
 &nbsp;
 export interface ICalGeo {
@@ -338,84 +374,81 @@ export interface ICalGeo {
     lon: number;
 }
 &nbsp;
-export interface ICalOrganizer {
-    name: string;
-    email?: string;
-    mailto?: string;
-    sentBy?: string;
+export type ICalLocation = ICalLocationWithoutTitle | ICalLocationWithTitle;
+&nbsp;
+export interface ICalLocationWithoutTitle {
+    geo: ICalGeo;
 }
 &nbsp;
-export interface ICalDescription {
-    plain: string;
-    html?: string;
+export interface ICalLocationWithTitle {
+    address?: string;
+    geo?: ICalGeo;
+    radius?: number;
+    title: string;
 }
 &nbsp;
-export interface ICalTimezone {
-    name: string | null;
-    generator?: (timezone: string) =&gt; string|null;
-}
-&nbsp;
-export interface ICalMomentStub {
-    format(format?: string): string;
-    clone(): ICalMomentStub;
-    utc(): ICalMomentStub;
-    toDate(): Date;
-    isValid(): boolean;
-    toJSON(): string;
-}
-&nbsp;
-export interface ICalMomentTimezoneStub extends ICalMomentStub {
-    clone(): ICalMomentTimezoneStub;
-    utc(): ICalMomentTimezoneStub;
-    tz(): string | undefined;
-    tz(timezone: string): ICalMomentTimezoneStub;
+export interface ICalLuxonDateTimeStub {
+    get isValid(): boolean;
+    setZone(zone?: string): ICalLuxonDateTimeStub;
+    toFormat(fmt: string): string;
+    toJSDate(): Date;
+    toJSON(): null | string;
+    zone: { type: string };
 }
 &nbsp;
 export interface ICalMomentDurationStub {
     asSeconds(): number;
 }
 &nbsp;
-export interface ICalLuxonDateTimeStub {
-    setZone(zone?: string): ICalLuxonDateTimeStub;
-    zone: { type: string; };
-    toFormat(fmt: string): string;
-    toJSDate(): Date;
-    get isValid(): boolean;
-    toJSON(): string | null;
+export interface ICalMomentStub {
+    clone(): ICalMomentStub;
+    format(format?: string): string;
+    isValid(): boolean;
+    toDate(): Date;
+    toJSON(): string;
+    utc(): ICalMomentStub;
 }
 &nbsp;
-export interface ICalDayJsStub {
-    tz(zone?: string): ICalDayJsStub;
-    utc(): ICalDayJsStub;
-    format(format?: string): string;
-    toDate(): Date;
-    isValid(): boolean;
-    toJSON(): string;
+export interface ICalMomentTimezoneStub extends ICalMomentStub {
+    clone(): ICalMomentTimezoneStub;
+    tz(): string | undefined;
+    tz(timezone: string): ICalMomentTimezoneStub;
+    utc(): ICalMomentTimezoneStub;
+}
+&nbsp;
+export interface ICalOrganizer {
+    email?: string;
+    mailto?: string;
+    name: string;
+    sentBy?: string;
+}
+&nbsp;
+export interface ICalRepeatingOptions {
+    byDay?: ICalWeekday | ICalWeekday[];
+    byMonth?: number | number[];
+    byMonthDay?: number | number[];
+    bySetPos?: number | number[];
+    count?: number;
+    exclude?: ICalDateTimeValue | ICalDateTimeValue[];
+    freq: ICalEventRepeatingFreq;
+    interval?: number;
+    startOfWeek?: ICalWeekday;
+    until?: ICalDateTimeValue;
 }
 &nbsp;
 export interface ICalRRuleStub {
-    between(after: Date, before: Date, inc?: boolean, iterator?: (d: Date, len: number) =&gt; boolean): Date[];
+    between(
+        after: Date,
+        before: Date,
+        inc?: boolean,
+        iterator?: (d: Date, len: number) =&gt; boolean,
+    ): Date[];
     toString(): string;
 }
 &nbsp;
-export enum ICalEventRepeatingFreq {
-    SECONDLY = 'SECONDLY',
-    MINUTELY = 'MINUTELY',
-    HOURLY = 'HOURLY',
-    DAILY = 'DAILY',
-    WEEKLY = 'WEEKLY',
-    MONTHLY = 'MONTHLY',
-    YEARLY = 'YEARLY'
-}
-&nbsp;
-export enum ICalWeekday {
-    SU = 'SU',
-    MO = 'MO',
-    TU = 'TU',
-    WE = 'WE',
-    TH = 'TH',
-    FR = 'FR',
-    SA = 'SA'
+export interface ICalTimezone {
+    generator?: (timezone: string) =&gt; null | string;
+    name: null | string;
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -424,7 +457,7 @@ export enum ICalWeekday {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-04-29T15:17:44.831Z
+                at 2025-05-01T21:40:57.499Z
             </div>
         <script src="prettify.js"></script>
         <script>
