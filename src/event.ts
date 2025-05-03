@@ -1,7 +1,5 @@
 'use strict';
 
-import uuid from 'uuid-random';
-
 import ICalAlarm, { type ICalAlarmData } from './alarm.ts';
 import ICalAttendee, { type ICalAttendeeData } from './attendee.ts';
 import ICalCalendar from './calendar.ts';
@@ -191,7 +189,7 @@ export default class ICalEvent {
             description: null,
             end: null,
             floating: false,
-            id: uuid(),
+            id: crypto.randomUUID(),
             lastModified: null,
             location: null,
             organizer: null,
