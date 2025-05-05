@@ -17,6 +17,13 @@ export enum ICalAttendeeRole {
     REQ = 'REQ-PARTICIPANT',
 }
 
+// ref: https://datatracker.ietf.org/doc/html/rfc6638#section-7.1
+export enum ICalAttendeeScheduleAgent {
+    CLIENT = 'CLIENT',
+    NONE = 'NONE',
+    SERVER = 'SERVER',
+}
+
 export enum ICalAttendeeStatus {
     ACCEPTED = 'ACCEPTED',
     DECLINED = 'DECLINED',
@@ -33,7 +40,6 @@ export enum ICalAttendeeType {
     ROOM = 'ROOM',
     UNKNOWN = 'UNKNOWN',
 }
-
 export interface ICalAttendeeData {
     delegatedFrom?: ICalAttendee | ICalAttendeeData | null | string;
     delegatedTo?: ICalAttendee | ICalAttendeeData | null | string;
@@ -44,6 +50,7 @@ export interface ICalAttendeeData {
     name?: null | string;
     role?: ICalAttendeeRole;
     rsvp?: boolean | null;
+    scheduleAgent?: ICalAttendeeScheduleAgent | ICalXName | null;
     sentBy?: null | string;
     status?: ICalAttendeeStatus | null;
     type?: ICalAttendeeType | null;
@@ -67,6 +74,8 @@ export interface ICalAttendeeJSONData {
     x: { key: string; value: string }[];
 }
 
+export type ICalXName = `X-${string}`;
+
 interface ICalInternalAttendeeData {
     delegatedFrom: ICalAttendee | null;
     delegatedTo: ICalAttendee | null;
@@ -75,6 +84,7 @@ interface ICalInternalAttendeeData {
     name: null | string;
     role: ICalAttendeeRole;
     rsvp: boolean | null;
+    scheduleAgent: ICalAttendeeScheduleAgent | ICalXName | null;
     sentBy: null | string;
     status: ICalAttendeeStatus | null;
     type: ICalAttendeeType | null;
@@ -119,6 +129,7 @@ export default class ICalAttendee {
             name: null,
             role: ICalAttendeeRole.REQ,
             rsvp: null,
+            scheduleAgent: null,
             sentBy: null,
             status: null,
             type: null,
@@ -145,6 +156,8 @@ export default class ICalAttendee {
             this.delegatedFrom(data.delegatedFrom);
         if (data.delegatesTo) this.delegatesTo(data.delegatesTo);
         if (data.delegatesFrom) this.delegatesFrom(data.delegatesFrom);
+        if (data.scheduleAgent !== undefined)
+            this.scheduleAgent(data.scheduleAgent);
         if (data.x !== undefined) this.x(data.x);
     }
 
@@ -403,6 +416,46 @@ export default class ICalAttendee {
         return this;
     }
     /**
+     * Get attendee's schedule agent
+     * @since 9.0.0
+     */
+    scheduleAgent(): ICalAttendeeScheduleAgent | ICalXName;
+    /**
+     * Set attendee's schedule agent
+     * See {@link ICalAttendeeScheduleAgent} for available values.
+     * You can also use custom X-* values.
+     *
+     * @since 9.0.0
+     */
+    scheduleAgent(
+        scheduleAgent: ICalAttendeeScheduleAgent | ICalXName | null,
+    ): this;
+    scheduleAgent(
+        scheduleAgent?: ICalAttendeeScheduleAgent | ICalXName | null,
+    ): ICalAttendeeScheduleAgent | ICalXName | null | this {
+        if (scheduleAgent === undefined) {
+            return this.data.scheduleAgent;
+        }
+        if (!scheduleAgent) {
+            this.data.scheduleAgent = null;
+            return this;
+        }
+
+        if (
+            typeof scheduleAgent == 'string' &&
+            scheduleAgent.toUpperCase().startsWith('X-')
+        ) {
+            this.data.scheduleAgent = scheduleAgent as string as ICalXName;
+            return this;
+        }
+
+        this.data.scheduleAgent = checkEnum(
+            ICalAttendeeScheduleAgent,
+            scheduleAgent,
+        ) as ICalAttendeeScheduleAgent;
+        return this;
+    }
+    /**
      * Get the acting user's email adress
      * @since 3.3.0
      */
@@ -462,7 +515,6 @@ export default class ICalAttendee {
             x: this.x(),
         });
     }
-
     /**
      * Return generated attendee as a string.
      *
@@ -520,6 +572,11 @@ export default class ICalAttendee {
             g += ';EMAIL=' + escape(this.data.email, false);
         }
 
+        // SCHEDULE-AGENT
+        if (this.data.scheduleAgent) {
+            g += ';SCHEDULE-AGENT=' + this.data.scheduleAgent;
+        }
+
         // CUSTOM X ATTRIBUTES
         if (this.data.x.length) {
             g +=
@@ -564,7 +621,6 @@ export default class ICalAttendee {
         this.data.type = checkEnum(ICalAttendeeType, type) as ICalAttendeeType;
         return this;
     }
-
     /**
      * Set X-* attributes. Woun't filter double attributes,
      * which are also added by another method (e.g. status),

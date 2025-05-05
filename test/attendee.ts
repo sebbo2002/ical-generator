@@ -5,6 +5,7 @@ import assert from 'assert';
 import ICalAttendee, {
     type ICalAttendeeData,
     ICalAttendeeRole,
+    ICalAttendeeScheduleAgent,
     ICalAttendeeStatus,
     ICalAttendeeType,
 } from '../src/attendee.js';
@@ -22,6 +23,7 @@ describe('ical-generator Attendee', function () {
                 name: 'John Doe',
                 role: ICalAttendeeRole.REQ,
                 rsvp: false,
+                scheduleAgent: ICalAttendeeScheduleAgent.CLIENT,
                 sentBy: null,
                 status: ICalAttendeeStatus.ACCEPTED,
                 type: ICalAttendeeType.INDIVIDUAL,
@@ -551,6 +553,67 @@ describe('ical-generator Attendee', function () {
         });
     });
 
+    describe('scheduleAgent()', function () {
+        it('setter should return this', function () {
+            const a = new ICalAttendee(
+                { email: 'foo@example.com' },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.deepStrictEqual(a.scheduleAgent(null), a);
+            assert.deepStrictEqual(
+                a.scheduleAgent(ICalAttendeeScheduleAgent.CLIENT),
+                a,
+            );
+        });
+
+        it('getter should return value', function () {
+            const a = new ICalAttendee(
+                { email: 'foo@example.com' },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.strictEqual(a.scheduleAgent(), null);
+            a.scheduleAgent(ICalAttendeeScheduleAgent.CLIENT);
+            assert.strictEqual(a.scheduleAgent(), 'CLIENT');
+            a.scheduleAgent(null);
+            assert.strictEqual(a.scheduleAgent(), null);
+        });
+
+        it('should show in the toString() output', function () {
+            const a = new ICalAttendee(
+                {
+                    email: 'mailing-list@example.com',
+                    scheduleAgent: ICalAttendeeScheduleAgent.CLIENT,
+                },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.ok(a.toString().indexOf('SCHEDULE-AGENT=CLIENT') > -1);
+        });
+
+        it('should accept X- prefixed custom values', function () {
+            const a = new ICalAttendee(
+                {
+                    email: 'mailing-list@example.com',
+                    scheduleAgent: 'X-CUSTOM-VALUE',
+                },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.equal(a.scheduleAgent(), 'X-CUSTOM-VALUE');
+            a.scheduleAgent('X-CUSTOM-VALUE-2');
+            assert.equal(a.scheduleAgent(), 'X-CUSTOM-VALUE-2');
+        });
+
+        it('should throw error when using non-X- prefixed custom values', function () {
+            const a = new ICalAttendee(
+                { email: 'foo@example.com' },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.throws(function () {
+                // @ts-ignore
+                a.scheduleAgent('NON-X-CUSTOM-VALUE');
+            }, /must be one of the following/);
+        });
+    });
+
     describe('x()', function () {
         it('works as expected', function () {
             const a = new ICalAttendee(
@@ -584,6 +647,7 @@ describe('ical-generator Attendee', function () {
                 name: 'Max Mustermann',
                 role: 'REQ-PARTICIPANT',
                 rsvp: null,
+                scheduleAgent: null,
                 sentBy: null,
                 status: 'DELEGATED',
                 type: null,

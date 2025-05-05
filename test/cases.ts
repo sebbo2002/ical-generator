@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { ICalAlarmType } from '../src/alarm.js';
 import {
     ICalAttendeeRole,
+    ICalAttendeeScheduleAgent,
     ICalAttendeeStatus,
     ICalAttendeeType,
 } from '../src/attendee.js';
@@ -343,5 +344,40 @@ describe('ical-generator Cases', function () {
             string,
             'toJSON / toString()',
         );
+    });
+
+    it('case #10 (SCHEDULE-AGENT=CLIENT for custom invitation emails)', async function () {
+        const cal = ical({
+            method: ICalCalendarMethod.PUBLISH,
+            prodId: '//sebbo.net//ical-generator.tests//EN',
+        });
+        cal.createEvent({
+            allDay: true,
+            attendees: [
+                {
+                    delegatesTo: {
+                        email: 'john@example.com',
+                        name: 'John',
+                        status: ICalAttendeeStatus.ACCEPTED,
+                    },
+                    email: 'matt@example.com',
+                    name: 'Smith, Matt; ("Sales")',
+                    scheduleAgent: ICalAttendeeScheduleAgent.CLIENT,
+                },
+            ],
+            id: '123',
+            organizer: 'Sebastian Pekarek <mail@sebbo.net>',
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            status: ICalEventStatus.CONFIRMED,
+            summary: 'Sample Event',
+            url: 'http://sebbo.net/',
+        });
+        const string = cal.toString();
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_10.ics', 'utf8'),
+        );
+        assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
 });
