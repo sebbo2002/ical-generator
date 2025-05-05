@@ -65,6 +65,7 @@ export {
     type ICalAttendeeData,
     type ICalAttendeeJSONData,
     ICalAttendeeRole,
+    type ICalAttendeeScheduleAgent,
     ICalAttendeeStatus,
     ICalAttendeeType,
 } from './attendee.ts';
