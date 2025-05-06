@@ -9,7 +9,7 @@
     "reporter": ["text", "text-summary", "cobertura", "html"],
     "all": true,
     "branches": 95,
-    "lines": 95,
+    "lines": 98,
     "functions": 100,
     "statements": 98,
     "per-file": true
