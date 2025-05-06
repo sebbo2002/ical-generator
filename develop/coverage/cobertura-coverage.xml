@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="5182" lines-covered="5127" line-rate="0.9893000000000001" branches-valid="921" branches-covered="899" branch-rate="0.9761" timestamp="1746545724857" complexity="0" version="0.1">
+<coverage lines-valid="5182" lines-covered="5127" line-rate="0.9893000000000001" branches-valid="921" branches-covered="899" branch-rate="0.9761" timestamp="1746547802501" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
