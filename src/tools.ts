@@ -9,6 +9,7 @@ import {
     type ICalMomentTimezoneStub,
     type ICalOrganizer,
     type ICalRRuleStub,
+    type ICalTZDateStub,
 } from './types.ts';
 
 export function addOrGetCustomAttributes(
@@ -244,7 +245,9 @@ export function formatDate(
     }
 
     if (typeof d === 'string' || d instanceof Date) {
-        const m = new Date(d);
+        // TZDate is an extension of the native Date object.
+        // @see https://github.com/date-fns/tz for more information.
+        const m = isTZDate(d) ? d.withTimeZone(timezone) : new Date(d);
 
         // (!dateonly && !floating) || !timezone => utc
         let s =
@@ -419,6 +422,18 @@ export function isRRule(value: unknown): value is ICalRRuleStub {
         'between' in value &&
         typeof value.between === 'function' &&
         typeof value.toString === 'function'
+    );
+}
+
+export function isTZDate(value: ICalDateTimeValue): value is ICalTZDateStub {
+    return (
+        value instanceof Date &&
+        'internal' in value &&
+        value.internal instanceof Date &&
+        'withTimeZone' in value &&
+        typeof value.withTimeZone === 'function' &&
+        'tzComponents' in value &&
+        typeof value.tzComponents === 'function'
     );
 }
 

@@ -127,3 +127,9 @@ export interface ICalTimezone {
     generator?: (timezone: string) => null | string;
     name: null | string;
 }
+
+export interface ICalTZDateStub extends Date {
+    timeZone?: string;
+    tzComponents(): string[];
+    withTimeZone(timezone?: null | string): ICalTZDateStub;
+}
