@@ -2,6 +2,7 @@
  * Check if stubs are working
  */
 
+import { TZDate } from '@date-fns/tz';
 import assert from 'assert';
 import dayjs from 'dayjs';
 import { DateTime } from 'luxon';
@@ -22,12 +23,14 @@ import {
     type ICalMomentStub,
     type ICalMomentTimezoneStub,
     type ICalRRuleStub,
+    type ICalTZDateStub,
 } from '../src/index.js';
 
 const dayJsTest = dayjs() satisfies ICalDayJsStub;
 const luxonTest = DateTime.now() satisfies ICalLuxonDateTimeStub;
 const momentTest = moment() satisfies ICalMomentStub;
 const momentTimezoneTest = momentTz() satisfies ICalMomentTimezoneStub;
+const dateFnsTzTest = new TZDate() satisfies ICalTZDateStub;
 
 const RRule = rrule.RRule;
 const rruleTest = new RRule({
@@ -50,6 +53,7 @@ describe('ical-generator Types', function () {
             'moment-timezone stub should be compatible',
         );
         assert.ok(rruleTest, 'rrule stub should be compatible');
+        assert.ok(dateFnsTzTest, 'date-fns/tz stub should be compatible');
     });
     it('calendar data should be compatible with calendar json data', function () {
         assert.ok(attendeeJson, 'attendee json data should be compatible');
