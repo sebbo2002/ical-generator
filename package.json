@@ -5,6 +5,7 @@
     },
     "description": "ical-generator is a small piece of code which generates ical calendar files",
     "devDependencies": {
+        "@date-fns/tz": "^1.2.0",
         "@eslint/js": "^9.25.0",
         "@istanbuljs/nyc-config-typescript": "^1.0.2",
         "@qiwi/semantic-release-gh-pages-plugin": "^5.4.3",
@@ -118,6 +119,7 @@
     },
     "runkitExampleFilename": "examples/example-runkit.js",
     "scripts": {
+        "prepare": "npm run build",
         "build": "tsup && cp ./dist/index.d.ts ./dist/index.d.cts",
         "build-all": "./.github/workflows/build.sh",
         "coverage": "c8 mocha",

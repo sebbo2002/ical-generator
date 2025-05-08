@@ -1,5 +1,6 @@
 'use strict';
 
+import { TZDate } from '@date-fns/tz';
 import assert from 'assert';
 import dayjs from 'dayjs';
 import dayJsTimezonePlugin from 'dayjs/plugin/timezone.js';
@@ -97,6 +98,135 @@ describe('ICalTools', function () {
                     formatDate(
                         '/Europe/Berlin',
                         '2018-07-05T18:24:00.052',
+                        false,
+                        false,
+                    ),
+                    '20180705T182400',
+                );
+            });
+        });
+        describe('TZDate', function () {
+            it('timezone=0 dateonly=0 floating=0', function () {
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        false,
+                        false,
+                    ),
+                    '20180705T182400Z',
+                );
+            });
+            it('timezone=0 dateonly=0 floating=1', function () {
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        false,
+                        true,
+                    ),
+                    '20180705T182400',
+                );
+            });
+            it('timezone=0 dateonly=1 floating=0', function () {
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        true,
+                        false,
+                    ),
+                    '20180705',
+                );
+            });
+            it('timezone=0 dateonly=1 floating=1', function () {
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        true,
+                        true,
+                    ),
+                    '20180705',
+                );
+            });
+            it('timezone=1 dateonly=0 floating=0', function () {
+                assert.strictEqual(
+                    formatDate(
+                        'Europe/Berlin',
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        false,
+                        false,
+                    ),
+                    '20180705T202400',
+                );
+            });
+            it('timezone=1 dateonly=0 floating=1', function () {
+                assert.strictEqual(
+                    formatDate(
+                        'Europe/Berlin',
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        false,
+                        true,
+                    ),
+                    '20180705T202400',
+                );
+            });
+            it('timezone=1 dateonly=1 floating=0', function () {
+                assert.strictEqual(
+                    formatDate(
+                        'Europe/Berlin',
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        true,
+                        false,
+                    ),
+                    '20180705',
+                );
+            });
+            it('timezone=1 dateonly=1 floating=1', function () {
+                assert.strictEqual(
+                    formatDate(
+                        'Europe/Berlin',
+                        new TZDate('2018-07-05T18:24:00.052'),
+                        true,
+                        true,
+                    ),
+                    '20180705',
+                );
+            });
+            it('should work with / prefixed global timezones', function () {
+                assert.strictEqual(
+                    formatDate(
+                        '/Europe/Berlin',
+                        new TZDate('2018-07-05T18:24:00.052Z'),
+                        false,
+                        false,
+                    ),
+                    '20180705T202400',
+                );
+            });
+            it('should ignore TZDate timezone', function () {
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate(
+                            '2018-07-05T18:24:00.052+02:00',
+                            'Europe/Berlin',
+                        ),
+                        false,
+                        false,
+                    ),
+                    '20180705T162400Z',
+                );
+            });
+            it('should work prefer timezone argument over TZDate timezone', function () {
+                assert.strictEqual(
+                    formatDate(
+                        'Europe/Berlin',
+                        new TZDate(
+                            '2018-07-05T18:24:00.052+02:00',
+                            'Asia/Tokyo',
+                        ),
                         false,
                         false,
                     ),
