@@ -114,5 +114,6 @@ export {
     type ICalRepeatingOptions,
     type ICalRRuleStub,
     type ICalTimezone,
+    type ICalTZDateStub,
     ICalWeekday,
 } from './types.ts';
