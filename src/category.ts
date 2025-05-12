@@ -1,20 +1,16 @@
 'use strict';
 
-
-import {escape} from './tools.ts';
-
+import { escape } from './tools.ts';
 
 export interface ICalCategoryData {
     name: string;
 }
 
+export type ICalCategoryInternalData = ICalCategoryJSONData;
 
 export interface ICalCategoryJSONData {
     name: string;
 }
-
-export type ICalCategoryInternalData = ICalCategoryJSONData;
-
 
 /**
  * Usually you get an {@link ICalCategory} object like this:
@@ -43,29 +39,27 @@ export default class ICalCategory {
      */
     constructor(data: ICalCategoryData) {
         this.data = {
-            name: ''
+            name: '',
         };
 
-        if(!data.name) {
+        if (!data.name) {
             throw new Error('No value for `name` in ICalCategory given!');
         }
 
         this.name(data.name);
     }
 
-
     /**
      * Get the category name
      * @since 0.3.0
      */
     name(): string;
-
     /**
      * Set the category name
      * @since 0.3.0
      */
     name(name: string): this;
-    name(name?: string): this | string {
+    name(name?: string): string | this {
         if (name === undefined) {
             return this.data.name;
         }
@@ -73,7 +67,6 @@ export default class ICalCategory {
         this.data.name = name;
         return this;
     }
-
 
     /**
      * Return a shallow copy of the category's options for JSON stringification.
@@ -85,7 +78,6 @@ export default class ICalCategory {
         return Object.assign({}, this.data);
     }
 
-
     /**
      * Return generated category name as a string.
      *
@@ -94,7 +86,6 @@ export default class ICalCategory {
      * ```
      */
     toString(): string {
-
         // CN / Name
         return escape(this.data.name, false);
     }

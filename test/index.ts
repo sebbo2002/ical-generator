@@ -1,8 +1,14 @@
 'use strict';
 
 import assert from 'assert';
+
 import ical, {
+    escape,
+    foldLines,
+    formatDate,
+    formatDateTZ,
     ICalAlarm,
+    ICalAlarmType,
     ICalAttendee,
     ICalAttendeeRole,
     ICalAttendeeStatus,
@@ -12,23 +18,18 @@ import ical, {
     ICalCategory,
     ICalEvent,
     ICalEventBusyStatus,
+    ICalEventRepeatingFreq,
     ICalEventStatus,
     ICalEventTransparency,
-    escape,
-    foldLines,
-    formatDate,
-    formatDateTZ,
-    ICalAlarmType,
-    ICalEventRepeatingFreq,
-    ICalWeekday
+    ICalWeekday,
 } from '../src/index.js';
 
-describe('ical-generator Index', function() {
+describe('ical-generator Index', function () {
     describe('default', function () {
-        it('should be a function', function() {
+        it('should be a function', function () {
             assert.strictEqual(typeof ical, 'function');
         });
-        it('should return a ICalCalendar', function() {
+        it('should return a ICalCalendar', function () {
             assert.ok(ical() instanceof ICalCalendar);
         });
     });
@@ -58,11 +59,11 @@ describe('ical-generator Index', function() {
     });
 
     describe('Calendar', function () {
-        it('should export ICalCalendar', function() {
+        it('should export ICalCalendar', function () {
             assert.ok(ICalCalendar);
         });
 
-        it('should export ICalCalendarMethod', function() {
+        it('should export ICalCalendarMethod', function () {
             assert.ok(ICalCalendarMethod);
         });
     });
@@ -74,16 +75,16 @@ describe('ical-generator Index', function() {
     });
 
     describe('Event', function () {
-        it('should export ICalEvent', function() {
+        it('should export ICalEvent', function () {
             assert.ok(ICalEvent);
         });
-        it('should export ICalEventStatus', function() {
+        it('should export ICalEventStatus', function () {
             assert.ok(ICalEventStatus);
         });
-        it('should export ICalEventBusyStatus', function() {
+        it('should export ICalEventBusyStatus', function () {
             assert.ok(ICalEventBusyStatus);
         });
-        it('should export ICalEventTransparency', function() {
+        it('should export ICalEventTransparency', function () {
             assert.ok(ICalEventTransparency);
         });
     });

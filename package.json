@@ -1,133 +1,135 @@
 {
-  "author": "Sebastian Pekarek <mail@sebbo.net>",
-  "bugs": {
-    "url": "http://github.com/sebbo2002/ical-generator/issues"
-  },
-  "dependencies": {
-    "uuid-random": "^1.3.2"
-  },
-  "description": "ical-generator is a small piece of code which generates ical calendar files",
-  "devDependencies": {
-    "@eslint/js": "^9.17.0",
-    "@istanbuljs/nyc-config-typescript": "^1.0.2",
-    "@qiwi/semantic-release-gh-pages-plugin": "^5.4.2",
-    "@sebbo2002/semantic-release-jsr": "^2.0.1-develop.2",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/exec": "^6.0.3",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/npm": "^12.0.1",
-    "@touch4it/ical-timezones": "^1.9.0",
-    "@types/eslint__js": "^8.42.3",
-    "@types/express": "^5.0.0",
-    "@types/luxon": "^3.4.2",
-    "@types/mocha": "^10.0.10",
-    "c8": "^10.1.3",
-    "dayjs": "^1.11.13",
-    "eslint": "^9.17.0",
-    "eslint-plugin-jsonc": "^2.18.2",
-    "esm": "^3.2.25",
-    "license-checker": "^25.0.1",
-    "luxon": "^3.5.0",
-    "mocha": "^11.0.1",
-    "mochawesome": "^7.1.3",
-    "moment": "^2.30.1",
-    "moment-timezone": "^0.5.46",
-    "nyc": "^17.1.0",
-    "rrule": "^2.8.1",
-    "semantic-release": "^24.2.1",
-    "semantic-release-license": "^1.0.2",
-    "source-map-support": "^0.5.21",
-    "tsup": "^8.3.5",
-    "tsx": "^4.19.2",
-    "typedoc": "^0.27.6",
-    "typescript": "^5.7.3",
-    "typescript-eslint": "^8.19.1"
-  },
-  "engines": {
-    "node": "18 || 20 || >=22.0.0"
-  },
-  "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
-  },
-  "files": [
-    "/src",
-    "/dist"
-  ],
-  "homepage": "https://github.com/sebbo2002/ical-generator",
-  "keywords": [
-    "ical",
-    "ics",
-    "icalendar",
-    "generator",
-    "calendar",
-    "subscription",
-    "outlook",
-    "rfc",
-    "rfc5545",
-    "events",
-    "alarms"
-  ],
-  "license": "MIT",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "name": "ical-generator",
-  "peerDependencies": {
-    "@touch4it/ical-timezones": ">=1.6.0",
-    "@types/luxon": ">= 1.26.0",
-    "@types/mocha": ">= 8.2.1",
-    "dayjs": ">= 1.10.0",
-    "luxon": ">= 1.26.0",
-    "moment": ">= 2.29.0",
-    "moment-timezone": ">= 0.5.33",
-    "rrule": ">= 2.6.8"
-  },
-  "peerDependenciesMeta": {
-    "@touch4it/ical-timezones": {
-      "optional": true
+    "author": "Sebastian Pekarek <mail@sebbo.net>",
+    "bugs": {
+        "url": "http://github.com/sebbo2002/ical-generator/issues"
     },
-    "@types/luxon": {
-      "optional": true
+    "description": "ical-generator is a small piece of code which generates ical calendar files",
+    "devDependencies": {
+        "@date-fns/tz": "^1.2.0",
+        "@eslint/js": "^9.25.0",
+        "@istanbuljs/nyc-config-typescript": "^1.0.2",
+        "@qiwi/semantic-release-gh-pages-plugin": "^5.4.3",
+        "@sebbo2002/semantic-release-jsr": "^2.0.1-develop.2",
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/exec": "^7.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/npm": "^12.0.1",
+        "@touch4it/ical-timezones": "^1.9.0",
+        "@types/express": "^5.0.1",
+        "@types/luxon": "^3.6.2",
+        "@types/mocha": "^10.0.10",
+        "c8": "^10.1.3",
+        "dayjs": "^1.11.13",
+        "eslint": "^9.25.1",
+        "eslint-config-prettier": "^10.1.2",
+        "eslint-plugin-jsonc": "^2.20.0",
+        "eslint-plugin-perfectionist": "^4.12.3",
+        "esm": "^3.2.25",
+        "husky": "^9.1.7",
+        "license-checker": "^25.0.1",
+        "luxon": "^3.6.1",
+        "mocha": "^11.1.0",
+        "mochawesome": "^7.1.3",
+        "moment": "^2.30.1",
+        "moment-timezone": "^0.5.48",
+        "nyc": "^17.1.0",
+        "prettier": "^3.5.3",
+        "rrule": "^2.8.1",
+        "semantic-release": "^24.2.3",
+        "semantic-release-license": "^1.0.2",
+        "source-map-support": "^0.5.21",
+        "tsup": "^8.4.0",
+        "tsx": "^4.19.3",
+        "typedoc": "^0.28.2",
+        "typescript": "^5.8.3",
+        "typescript-eslint": "^8.31.1"
     },
-    "@types/mocha": {
-      "optional": true
+    "engines": {
+        "node": "20 || >=22.0.0"
     },
-    "@types/node": {
-      "optional": true
+    "exports": {
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
     },
-    "dayjs": {
-      "optional": true
+    "files": [
+        "/src",
+        "/dist"
+    ],
+    "homepage": "https://github.com/sebbo2002/ical-generator",
+    "keywords": [
+        "ical",
+        "ics",
+        "icalendar",
+        "generator",
+        "calendar",
+        "subscription",
+        "outlook",
+        "rfc",
+        "rfc5545",
+        "events",
+        "alarms"
+    ],
+    "license": "MIT",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "name": "ical-generator",
+    "peerDependencies": {
+        "@touch4it/ical-timezones": ">=1.6.0",
+        "@types/luxon": ">= 1.26.0",
+        "@types/mocha": ">= 8.2.1",
+        "dayjs": ">= 1.10.0",
+        "luxon": ">= 1.26.0",
+        "moment": ">= 2.29.0",
+        "moment-timezone": ">= 0.5.33",
+        "rrule": ">= 2.6.8"
     },
-    "luxon": {
-      "optional": true
+    "peerDependenciesMeta": {
+        "@touch4it/ical-timezones": {
+            "optional": true
+        },
+        "@types/luxon": {
+            "optional": true
+        },
+        "@types/mocha": {
+            "optional": true
+        },
+        "@types/node": {
+            "optional": true
+        },
+        "dayjs": {
+            "optional": true
+        },
+        "luxon": {
+            "optional": true
+        },
+        "moment": {
+            "optional": true
+        },
+        "moment-timezone": {
+            "optional": true
+        },
+        "rrule": {
+            "optional": true
+        }
     },
-    "moment": {
-      "optional": true
+    "preferGlobal": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sebbo2002/ical-generator.git"
     },
-    "moment-timezone": {
-      "optional": true
+    "runkitExampleFilename": "examples/example-runkit.js",
+    "scripts": {
+        "prepare": "npm run build",
+        "build": "tsup && cp ./dist/index.d.ts ./dist/index.d.cts",
+        "build-all": "./.github/workflows/build.sh",
+        "coverage": "c8 mocha",
+        "develop": "tsx src/bin/start.ts",
+        "example": "node ./dist/examples/push.js",
+        "license-check": "license-checker --production --summary",
+        "lint": "npx eslint . --fix && npx prettier . --write",
+        "start": "node ./dist/bin/start.js",
+        "test": "mocha"
     },
-    "rrule": {
-      "optional": true
-    }
-  },
-  "preferGlobal": false,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sebbo2002/ical-generator.git"
-  },
-  "runkitExampleFilename": "examples/example-runkit.js",
-  "scripts": {
-    "build": "tsup && cp ./dist/index.d.ts ./dist/index.d.cts",
-    "build-all": "./.github/workflows/build.sh",
-    "coverage": "c8 mocha",
-    "develop": "tsx src/bin/start.ts",
-    "example": "node ./dist/examples/push.js",
-    "license-check": "license-checker --production --summary",
-    "lint": "eslint .",
-    "start": "node ./dist/bin/start.js",
-    "test": "mocha"
-  },
-  "type": "module",
-  "version": "8.1.1"
+    "type": "module",
+    "version": "9.0.0-develop.6"
 }

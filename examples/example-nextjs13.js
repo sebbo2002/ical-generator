@@ -15,22 +15,22 @@ export async function GET(req) {
 
     try {
         const calendar = icalendar({
-            prodId: '//superman-industries.com//ical-generator//EN',
             events: [
                 {
-                    start: moment(),
-                    end: moment().add(1, 'hour'),
-                    summary: 'Example Event',
                     description: 'It works ;)',
-                    url: 'https://example.com'
-                }
-            ]
+                    end: moment().add(1, 'hour'),
+                    start: moment(),
+                    summary: 'Example Event',
+                    url: 'https://example.com',
+                },
+            ],
+            prodId: '//superman-industries.com//ical-generator//EN',
         });
 
         return new Response(calendar.toString(), {
             headers: {
-                'Content-Type': 'text/calendar; charset=utf-8',
                 'Content-Disposition': `attachment; filename='${filename}'`,
+                'Content-Type': 'text/calendar; charset=utf-8',
             },
             status: 200,
         });

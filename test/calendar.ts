@@ -1,26 +1,30 @@
 'use strict';
 
+import { getVtimezoneComponent } from '@touch4it/ical-timezones';
 import assert from 'assert';
 import moment from 'moment';
-import ICalCalendar, {type ICalCalendarJSONData, ICalCalendarMethod} from '../src/calendar.js';
+
+import ICalCalendar, {
+    type ICalCalendarJSONData,
+    ICalCalendarMethod,
+} from '../src/calendar.js';
 import ICalEvent from '../src/event.js';
-import {getVtimezoneComponent} from '@touch4it/ical-timezones';
 
 describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
         it('shoud load json export', function () {
             const data: ICalCalendarJSONData = {
-                prodId: '//sebbo.net//ical-generator//EN',
+                description: 'Hi, I am the description.',
+                events: [],
                 method: ICalCalendarMethod.PUBLISH,
                 name: 'Test Calendar',
-                description: 'Hi, I am the description.',
-                timezone: null,
-                url: 'https://github.com/sebbo2002/ical-generator',
-                source: 'http://example.com/my/original_source.ical',
+                prodId: '//sebbo.net//ical-generator//EN',
                 scale: null,
+                source: 'http://example.com/my/original_source.ical',
+                timezone: null,
                 ttl: null,
-                events: [],
-                x: []
+                url: 'https://github.com/sebbo2002/ical-generator',
+                x: [],
             };
             const cal = new ICalCalendar(data);
             assert.deepStrictEqual(cal.toJSON(), data);
@@ -36,7 +40,10 @@ describe('ical-generator Calendar', function () {
 
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepStrictEqual(cal, cal.prodId('//loremipsum.de//ical-tests//EN'));
+            assert.deepStrictEqual(
+                cal,
+                cal.prodId('//loremipsum.de//ical-tests//EN'),
+            );
         });
 
         it('should throw error when not string/object', function () {
@@ -52,7 +59,7 @@ describe('ical-generator Calendar', function () {
             assert.throws(function () {
                 // @ts-ignore
                 cal.prodId({
-                    product: 'ical-tests'
+                    product: 'ical-tests',
                 });
             }, /`prodid\.company`/);
         });
@@ -62,7 +69,7 @@ describe('ical-generator Calendar', function () {
             assert.throws(function () {
                 // @ts-ignore
                 cal.prodId({
-                    company: 'sebbo.net'
+                    company: 'sebbo.net',
                 });
             }, /`prodid\.product`/);
         });
@@ -70,20 +77,26 @@ describe('ical-generator Calendar', function () {
         it('should change something #1', function () {
             const cal = new ICalCalendar().prodId({
                 company: 'loremipsum.com',
-                product: 'awesome-unit-tests'
+                product: 'awesome-unit-tests',
             });
 
-            assert.strictEqual(cal.prodId(), '//loremipsum.com//awesome-unit-tests//EN');
+            assert.strictEqual(
+                cal.prodId(),
+                '//loremipsum.com//awesome-unit-tests//EN',
+            );
         });
 
         it('should change something #2', function () {
             const cal = new ICalCalendar().prodId({
                 company: 'loremipsum.com',
+                language: 'DE',
                 product: 'awesome-unit-tests',
-                language: 'DE'
             });
 
-            assert.strictEqual(cal.prodId(), '//loremipsum.com//awesome-unit-tests//DE');
+            assert.strictEqual(
+                cal.prodId(),
+                '//loremipsum.com//awesome-unit-tests//DE',
+            );
         });
     });
 
@@ -91,7 +104,11 @@ describe('ical-generator Calendar', function () {
         it('setter should return this', function () {
             const c = new ICalCalendar();
             assert.deepStrictEqual(c, c.method(null), 'method(null)');
-            assert.deepStrictEqual(c, c.method(ICalCalendarMethod.PUBLISH), 'method(enum)');
+            assert.deepStrictEqual(
+                c,
+                c.method(ICalCalendarMethod.PUBLISH),
+                'method(enum)',
+            );
         });
 
         it('getter should return value', function () {
@@ -110,11 +127,11 @@ describe('ical-generator Calendar', function () {
             assert.throws(function () {
                 // @ts-ignore
                 c.method('KICK ASS');
-            }, /Input must be one of the following: PUBLISH, REQUEST, REPLY, ADD, CANCEL, REFRESH, COUNTER, DECLINECOUNTER/);
+            }, /Input must be one of the following: ADD, CANCEL, COUNTER, DECLINECOUNTER, PUBLISH, REFRESH, REPLY, REQUEST/);
         });
 
         it('should change something', function () {
-            const c = new ICalCalendar({method: ICalCalendarMethod.PUBLISH});
+            const c = new ICalCalendar({ method: ICalCalendarMethod.PUBLISH });
             assert.strictEqual(c.method(), 'PUBLISH');
 
             c.method(ICalCalendarMethod.ADD);
@@ -142,7 +159,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar().name('Testevents');
             cal.createEvent({
                 start: new Date(),
-                summary: 'Example Event'
+                summary: 'Example Event',
             });
             assert.strictEqual(cal.name(), 'Testevents');
         });
@@ -168,7 +185,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar().description('Testbeschreibung');
             cal.createEvent({
                 start: new Date(),
-                summary: 'Example Event'
+                summary: 'Example Event',
             });
 
             assert.ok(cal.description(), 'Testbeschreibung');
@@ -180,10 +197,13 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.deepStrictEqual(cal, cal.timezone('Europe/Berlin'));
             assert.deepStrictEqual(cal, cal.timezone(null));
-            assert.deepStrictEqual(cal, cal.timezone({
-                name: 'Europe/Berlin',
-                generator: getVtimezoneComponent
-            }));
+            assert.deepStrictEqual(
+                cal,
+                cal.timezone({
+                    generator: getVtimezoneComponent,
+                    name: 'Europe/Berlin',
+                }),
+            );
         });
 
         it('getter should return value', function () {
@@ -193,7 +213,7 @@ describe('ical-generator Calendar', function () {
             cal.timezone(null);
             assert.strictEqual(cal.timezone(), null);
 
-            cal.timezone({name: 'Europe/Berlin'});
+            cal.timezone({ name: 'Europe/Berlin' });
             assert.strictEqual(cal.timezone(), 'Europe/Berlin');
         });
 
@@ -230,7 +250,10 @@ describe('ical-generator Calendar', function () {
     describe('source()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepStrictEqual(cal, cal.source('http://example.com/my/original_source.ical'));
+            assert.deepStrictEqual(
+                cal,
+                cal.source('http://example.com/my/original_source.ical'),
+            );
         });
 
         it('getter should return value', function () {
@@ -238,7 +261,10 @@ describe('ical-generator Calendar', function () {
             assert.strictEqual(cal.source(), null);
 
             cal.source('http://example.com/my/original_source.ical');
-            assert.strictEqual(cal.source(), 'http://example.com/my/original_source.ical');
+            assert.strictEqual(
+                cal.source(),
+                'http://example.com/my/original_source.ical',
+            );
 
             cal.url(null);
             assert.strictEqual(cal.url(), null);
@@ -248,7 +274,10 @@ describe('ical-generator Calendar', function () {
     describe('url()', function () {
         it('setter should return this', function () {
             const cal = new ICalCalendar();
-            assert.deepStrictEqual(cal, cal.url('https://example.com/calendar.ical'));
+            assert.deepStrictEqual(
+                cal,
+                cal.url('https://example.com/calendar.ical'),
+            );
         });
 
         it('getter should return value', function () {
@@ -261,11 +290,13 @@ describe('ical-generator Calendar', function () {
         });
 
         it('should change something', function () {
-            const cal = new ICalCalendar().url('https://example.com/calendar.ical');
+            const cal = new ICalCalendar().url(
+                'https://example.com/calendar.ical',
+            );
             cal.createEvent({
-                start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
+                start: new Date(),
+                summary: 'Example Event',
             });
             assert.ok(cal.url(), 'https://example.com/calendar.ical');
         });
@@ -289,9 +320,9 @@ describe('ical-generator Calendar', function () {
         it('should change something', function () {
             const cal = new ICalCalendar().scale('gregorian');
             cal.createEvent({
-                start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
+                start: new Date(),
+                summary: 'Example Event',
             });
             assert.ok(cal.scale(), 'GREGORIAN');
         });
@@ -300,14 +331,16 @@ describe('ical-generator Calendar', function () {
     describe('createEvent()', function () {
         it('should return a ICalEvent instance', function () {
             const cal = new ICalCalendar();
-            assert.ok(cal.createEvent({ start: new Date() }) instanceof ICalEvent);
+            assert.ok(
+                cal.createEvent({ start: new Date() }) instanceof ICalEvent,
+            );
         });
 
         it('should pass data to instance', function () {
             const cal = new ICalCalendar();
             const event = cal.createEvent({
                 start: new Date(),
-                summary: 'Patch-Day'
+                summary: 'Patch-Day',
             });
 
             assert.strictEqual(event.summary(), 'Patch-Day');
@@ -317,7 +350,7 @@ describe('ical-generator Calendar', function () {
             assert.doesNotThrow(function () {
                 new ICalCalendar().createEvent({
                     start: new Date(),
-                    summary: 'Patch-Day'
+                    summary: 'Patch-Day',
                 });
             }, Error);
         });
@@ -338,8 +371,8 @@ describe('ical-generator Calendar', function () {
             assert.strictEqual(cal.length(), 0);
 
             const cal2 = cal.events([
-                { start: new Date(), summary: 'Event A'},
-                { start: new Date(), summary: 'Event B'}
+                { start: new Date(), summary: 'Event A' },
+                { start: new Date(), summary: 'Event B' },
             ]);
 
             assert.strictEqual(cal.length(), 2);
@@ -366,15 +399,17 @@ describe('ical-generator Calendar', function () {
         it('setter should work with key and value strings', function () {
             const cal = new ICalCalendar();
             assert.deepStrictEqual(cal, cal.x('X-FOO', 'bar'));
-            assert.deepEqual(cal.x(), [{
-                key: 'X-FOO',
-                value: 'bar'
-            }]);
+            assert.deepEqual(cal.x(), [
+                {
+                    key: 'X-FOO',
+                    value: 'bar',
+                },
+            ]);
 
             assert.deepStrictEqual(cal, cal.x('X-LOREM', 'ipsum'));
             assert.deepEqual(cal.x(), [
-                {key: 'X-FOO', value: 'bar'},
-                {key: 'X-LOREM', value: 'ipsum'}
+                { key: 'X-FOO', value: 'bar' },
+                { key: 'X-LOREM', value: 'ipsum' },
             ]);
 
             assert.throws(() => {
@@ -394,46 +429,52 @@ describe('ical-generator Calendar', function () {
 
         it('setter should work with key and value array', function () {
             const cal = new ICalCalendar();
-            assert.deepStrictEqual(cal, cal.x([{key: 'X-FOO', value: 'bar'}]));
-            assert.deepEqual(cal.x(), [{key: 'X-FOO', value: 'bar'}]);
+            assert.deepStrictEqual(
+                cal,
+                cal.x([{ key: 'X-FOO', value: 'bar' }]),
+            );
+            assert.deepEqual(cal.x(), [{ key: 'X-FOO', value: 'bar' }]);
 
-            assert.deepStrictEqual(cal, cal.x([{key: 'X-LOREM', value: 'ipsum'}]));
-            assert.deepEqual(cal.x(), [{key: 'X-LOREM', value: 'ipsum'}]);
+            assert.deepStrictEqual(
+                cal,
+                cal.x([{ key: 'X-LOREM', value: 'ipsum' }]),
+            );
+            assert.deepEqual(cal.x(), [{ key: 'X-LOREM', value: 'ipsum' }]);
 
             assert.throws(() => {
-                cal.x([{key: 'LOREM', value: 'ipsum'}]);
+                cal.x([{ key: 'LOREM', value: 'ipsum' }]);
             });
 
             assert.throws(() => {
                 // @ts-ignore
-                cal.x([{key: 'X-LOREM', value: 1337}]);
+                cal.x([{ key: 'X-LOREM', value: 1337 }]);
             });
 
             assert.throws(() => {
                 // @ts-ignore
-                cal.x([{key: 5, value: 'ipsum'}]);
+                cal.x([{ key: 5, value: 'ipsum' }]);
             });
         });
 
         it('setter should work with key and value object', function () {
             const cal = new ICalCalendar();
-            assert.deepStrictEqual(cal, cal.x({'X-FOO': 'bar'}));
-            assert.deepEqual(cal.x(), [{key: 'X-FOO', value: 'bar'}]);
+            assert.deepStrictEqual(cal, cal.x({ 'X-FOO': 'bar' }));
+            assert.deepEqual(cal.x(), [{ key: 'X-FOO', value: 'bar' }]);
 
-            assert.deepStrictEqual(cal, cal.x({'X-LOREM': 'ipsum'}));
-            assert.deepEqual(cal.x(), [{key: 'X-LOREM', value: 'ipsum'}]);
+            assert.deepStrictEqual(cal, cal.x({ 'X-LOREM': 'ipsum' }));
+            assert.deepEqual(cal.x(), [{ key: 'X-LOREM', value: 'ipsum' }]);
 
             assert.throws(() => {
-                cal.x({'LOREM': 'ipsum'});
+                cal.x({ LOREM: 'ipsum' });
             });
 
             assert.throws(() => {
                 // @ts-ignore
-                cal.x({'X-LOREM': 1337});
+                cal.x({ 'X-LOREM': 1337 });
             });
 
             assert.throws(() => {
-                cal.x({5: 'ipsum'});
+                cal.x({ 5: 'ipsum' });
             });
         });
 
@@ -441,7 +482,7 @@ describe('ical-generator Calendar', function () {
             const cal = new ICalCalendar();
             assert.deepEqual(cal.x(), []);
             cal.x('X-FOO', 'BAR');
-            assert.deepEqual(cal.x(), [{key: 'X-FOO', value: 'BAR'}]);
+            assert.deepEqual(cal.x(), [{ key: 'X-FOO', value: 'BAR' }]);
             cal.x({});
             assert.deepEqual(cal.x().length, 0);
         });
@@ -449,9 +490,9 @@ describe('ical-generator Calendar', function () {
         it('should change something', function () {
             const cal = new ICalCalendar().x('X-FOO', 'BAR');
             cal.createEvent({
-                start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
+                start: new Date(),
+                summary: 'Example Event',
             });
             assert.ok(cal.toString().includes('X-FOO'));
         });
@@ -470,13 +511,13 @@ describe('ical-generator Calendar', function () {
         it('should work with params', function () {
             const cal = new ICalCalendar();
             cal.createEvent({
+                end: new Date(new Date().getTime() + 1000 * 60 * 60),
                 start: new Date(),
-                end: new Date(new Date().getTime() + (1000 * 60 * 60)),
                 summary: 'HTTP Calendar Event',
                 x: [
-                    {key: 'X-FOO', value: 'bar'},
-                    {key: 'X-LOREM', value: 'ipsum'}
-                ]
+                    { key: 'X-FOO', value: 'bar' },
+                    { key: 'X-LOREM', value: 'ipsum' },
+                ],
             });
 
             const prodId = cal.toJSON().prodId;
@@ -486,8 +527,8 @@ describe('ical-generator Calendar', function () {
             const events = cal.toJSON().events;
             assert.strictEqual(events?.length, 1);
             assert.deepEqual(events[0].x, [
-                {'key': 'X-FOO', 'value': 'bar'},
-                {'key': 'X-LOREM', 'value': 'ipsum'}
+                { key: 'X-FOO', value: 'bar' },
+                { key: 'X-LOREM', value: 'ipsum' },
             ]);
         });
 
@@ -503,9 +544,9 @@ describe('ical-generator Calendar', function () {
             assert.strictEqual(cal.length(), 0);
 
             cal.createEvent({
-                start: new Date(),
                 end: new Date(new Date().getTime() + 3600000),
-                summary: 'Example Event'
+                start: new Date(),
+                summary: 'Example Event',
             });
             assert.strictEqual(cal.length(), 1);
         });
@@ -547,36 +588,56 @@ describe('ical-generator Calendar', function () {
         it('should include the source', function () {
             const cal = new ICalCalendar();
             cal.source('http://foo.bar.example.com/ical.cal');
-            assert.ok(cal.toString().includes('http://foo.bar.example.com/ical.cal'));
+            assert.ok(
+                cal.toString().includes('http://foo.bar.example.com/ical.cal'),
+            );
         });
 
         it('should include VTimezone objects if generator was supplied', function () {
             const cal = new ICalCalendar();
-            cal.timezone({name: 'Europe/Berlin', generator: getVtimezoneComponent});
+            cal.timezone({
+                generator: getVtimezoneComponent,
+                name: 'Europe/Berlin',
+            });
             cal.createEvent({
                 start: new Date(),
-                timezone: 'Europe/London'
+                timezone: 'Europe/London',
             });
 
-            assert.ok(cal.toString().includes('BEGIN:VTIMEZONE\r\n'), 'BEGIN:VTIMEZONE');
-            assert.ok(cal.toString().includes('TZID:Europe/Berlin\r\n'), 'TZID:Europe/Berlin');
-            assert.ok(cal.toString().includes('TZID:Europe/London\r\n'), 'TZID:Europe/London');
+            assert.ok(
+                cal.toString().includes('BEGIN:VTIMEZONE\r\n'),
+                'BEGIN:VTIMEZONE',
+            );
+            assert.ok(
+                cal.toString().includes('TZID:Europe/Berlin\r\n'),
+                'TZID:Europe/Berlin',
+            );
+            assert.ok(
+                cal.toString().includes('TZID:Europe/London\r\n'),
+                'TZID:Europe/London',
+            );
         });
         it('should also work if VTimezone was not found', function () {
             const cal = new ICalCalendar();
-            cal.timezone({name: 'FOO', generator: getVtimezoneComponent});
+            cal.timezone({ generator: getVtimezoneComponent, name: 'FOO' });
             assert.ok(!cal.toString().includes('TZID:Foo\r\n'));
         });
         it('should ignore global timezone ids', function () {
             const cal = new ICalCalendar();
-            cal.timezone({name: '/Europe/Berlin', generator: getVtimezoneComponent});
+            cal.timezone({
+                generator: getVtimezoneComponent,
+                name: '/Europe/Berlin',
+            });
             assert.ok(!cal.toString().includes('TZID:/Europe/Berlin\r\n'));
         });
 
         it('should include the ttl', function () {
             const cal = new ICalCalendar();
             cal.ttl(moment.duration(3, 'days'));
-            assert.ok(cal.toString().indexOf('REFRESH-INTERVAL;VALUE=DURATION:P3D') > -1);
+            assert.ok(
+                cal.toString().indexOf('REFRESH-INTERVAL;VALUE=DURATION:P3D') >
+                    -1,
+            );
             assert.ok(cal.toString().indexOf('X-PUBLISHED-TTL:P3D') > -1);
         });
     });

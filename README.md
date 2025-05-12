@@ -12,51 +12,46 @@
 <p align="center">
     <a href="https://github.com/sebbo2002/ical-generator/blob/develop/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License" /></a>
     <a href="https://bundlephobia.com/package/ical-generator"><img src="https://img.shields.io/bundlephobia/min/ical-generator?style=flat-square" alt="Module Size" /></a>
-    <img src="https://img.shields.io/depfu/dependencies/github/sebbo2002%2Fical-generator?style=flat-square" alt="Dependency Status" />
     <a href="https://github.com/sebbo2002/ical-generator/actions/workflows/test-release.yml?query=branch%3Adevelop"><img src="https://img.shields.io/github/actions/workflow/status/sebbo2002/ical-generator/test-release.yml?style=flat-square" alt="CI Status" /></a>
     <a href="https://sebbo2002.github.io/ical-generator/develop/coverage/"><img alt="Code Coverage Badge" src="https://img.shields.io/nycrc/sebbo2002/ical-generator?style=flat-square"></a>
 </p>
 
 <br />
 
-
 `ical-generator` is a small but fine library with which you can very easily create a valid iCal calendars, for example
 to generate subscriptionable calendar feeds.
 
-
-
 ## 📦 Installation
 
-	npm install ical-generator
-
+    npm install ical-generator
 
 ## ⚡️ Quick Start
 
 ```javascript
-import ical, {ICalCalendarMethod} from 'ical-generator';
+import ical, { ICalCalendarMethod } from 'ical-generator';
 import http from 'node:http';
 
-const calendar = ical({name: 'my first iCal'});
+const calendar = ical({ name: 'my first iCal' });
 
 // A method is required for outlook to display event as an invitation
 calendar.method(ICalCalendarMethod.REQUEST);
 
 const startTime = new Date();
 const endTime = new Date();
-endTime.setHours(startTime.getHours()+1);
+endTime.setHours(startTime.getHours() + 1);
 calendar.createEvent({
     start: startTime,
     end: endTime,
     summary: 'Example Event',
     description: 'It works ;)',
     location: 'my room',
-    url: 'http://sebbo.net/'
+    url: 'http://sebbo.net/',
 });
 
 http.createServer((req, res) => {
     res.writeHead(200, {
         'Content-Type': 'text/calendar; charset=utf-8',
-        'Content-Disposition': 'attachment; filename="calendar.ics"'
+        'Content-Disposition': 'attachment; filename="calendar.ics"',
     });
 
     res.end(calendar.toString());
@@ -64,6 +59,7 @@ http.createServer((req, res) => {
     console.log('Server running at http://127.0.0.1:3000/');
 });
 ```
+
 See the [examples](https://github.com/sebbo2002/ical-generator/tree/develop/examples) folder for more examples.
 
 ## 📑 API-Reference
@@ -79,8 +75,8 @@ See the [examples](https://github.com/sebbo2002/ical-generator/tree/develop/exam
 
 ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
 [Day.js](https://day.js.org/en/), [Luxon's](https://moment.github.io/luxon/) [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
-and the older [moment.js](https://momentjs.com/) and [moment-timezone](https://momentjs.com/timezone/)
-objects. You can also pass a string which is then passed to javascript's `Date` internally.
+and the older [moment.js](https://momentjs.com/), [moment-timezone](https://momentjs.com/timezone/)
+objects and [TZDate](https://github.com/date-fns/tz). You can also pass a string which is then passed to javascript's `Date` internally.
 
 It is recommended to use UTC time as far as possible. `ical-generator` will output all time information as UTC time as
 long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
@@ -89,25 +85,22 @@ to use a VTimezone generator. Such a function generates a VTimezone entry and re
 be used for this:
 
 ```typescript
-import {ICalCalendar} from 'ical-generator';
-import {getVtimezoneComponent} from '@touch4it/ical-timezones';
+import { ICalCalendar } from 'ical-generator';
+import { getVtimezoneComponent } from '@touch4it/ical-timezones';
 
 const cal = new ICalCalendar();
 cal.timezone({
     name: 'FOO',
-    generator: getVtimezoneComponent
+    generator: getVtimezoneComponent,
 });
 cal.createEvent({
     start: new Date(),
-    timezone: 'Europe/London'
+    timezone: 'Europe/London',
 });
 ```
 
 If a `moment-timezone` object or Luxon's `setZone` method works, `ical-generator` sets it according to the time zone set
 in the calendar/event.
-
-
-
 
 ## 🚦 Tests
 
@@ -116,18 +109,18 @@ npm test
 npm run coverage
 ```
 
-
 ## 🙋 FAQ
 
 ### Where's the changelog?
+
 It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md). If you need the changelog for
 `ical-generator` 1.x.x and older, you'll find it [here](https://github.com/sebbo2002/ical-generator/blob/25338b8bf98f9afd3c88849e735fa33fa45fb766/CHANGELOG.md).
 
 ### I get a `ReferenceError: TextEncoder is not defined` error (in some browsers)
+
 This library uses [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder), which
 is available in node.js ≥ 11.0.0 and [all modern browsers](https://caniuse.com/?search=textencoder).
 Outdated browsers may not have the necessary API and generate this error when generating the calendar.
-
 
 ## 🙆🏼‍♂️ Copyright and license
 
