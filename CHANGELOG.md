@@ -1,3 +1,29 @@
+# [9.0.0](https://github.com/sebbo2002/ical-generator/compare/v8.1.1...v9.0.0) (2025-05-12)
+
+- Merge remote-tracking branch 'template/typescript' into develop ([12911af](https://github.com/sebbo2002/ical-generator/commit/12911aff492741e4c6d72b4ab1082b5324d17ccf))
+
+### chore
+
+- Drop node v18 support ([3e18405](https://github.com/sebbo2002/ical-generator/commit/3e18405ac1e1be738a414623f97169c802567f99))
+- Drop node v18 support ([fcf1711](https://github.com/sebbo2002/ical-generator/commit/fcf171117bc444a91b0b336f617ddbf2a7c61a68))
+
+### Features
+
+- Add support to @date-fnz/tz ([522ef9d](https://github.com/sebbo2002/ical-generator/commit/522ef9da4018650efc1ff51f1560d0f77802e675)), closes [#657](https://github.com/sebbo2002/ical-generator/issues/657)
+- **attendee:** support SCHEDULE-AGENT ([7756486](https://github.com/sebbo2002/ical-generator/commit/7756486cf33400a2f82ee98d9cd8a7147fe84c11))
+
+### BREAKING CHANGES
+
+- Drop node.js v18 Support
+
+This node.js version is no longer supported. For more information see https://nodejs.dev/en/about/releases/
+
+- Drop node.js v18 Support
+
+This node.js version is no longer supported. For more information see https://nodejs.dev/en/about/releases/
+
+- As some ENUMs are now sorted alphabetically, the error messages have changed if no valid ENUM value was passed but one is expected. As long as you do not check the text of errors, this will not affect you.
+
 ## [8.1.1](https://github.com/sebbo2002/ical-generator/compare/v8.1.0...v8.1.1) (2025-01-14)
 
 ### Reverts
