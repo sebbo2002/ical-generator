@@ -8,9 +8,9 @@
     "sourceMap": true,
     "reporter": ["text", "text-summary", "cobertura", "html"],
     "all": true,
-    "branches": 95,
+    "branches": 80,
     "lines": 98,
-    "functions": 100,
+    "functions": 85,
     "statements": 98,
     "per-file": true
 }

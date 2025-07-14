@@ -3,7 +3,7 @@
 import assert from 'assert';
 import { DateTime } from 'luxon';
 import moment from 'moment-timezone';
-import rrule from 'rrule';
+import { RRule } from 'rrule';
 
 import ICalAlarm, { ICalAlarmType } from '../src/alarm.js';
 import ICalAttendee from '../src/attendee.js';
@@ -1464,10 +1464,10 @@ describe('ical-generator Event', function () {
         it('should support RRules', function () {
             const start = new Date(Date.UTC(2012, 1, 1, 10, 30));
             const e = new ICalEvent({ start }, new ICalCalendar());
-            const rule = new rrule.RRule({
-                byweekday: [rrule.RRule.MO, rrule.RRule.FR],
+            const rule = new RRule({
+                byweekday: [RRule.MO, RRule.FR],
                 dtstart: start,
-                freq: rrule.RRule.WEEKLY,
+                freq: RRule.WEEKLY,
                 interval: 5,
                 until: new Date(Date.UTC(2012, 12, 31)),
             });
@@ -2472,10 +2472,10 @@ describe('ical-generator Event', function () {
 
         it('should stringify RRule objects', function () {
             const date = new Date();
-            const rule = new rrule.RRule({
-                byweekday: [rrule.RRule.MO, rrule.RRule.FR],
+            const rule = new RRule({
+                byweekday: [RRule.MO, RRule.FR],
                 dtstart: date,
-                freq: rrule.RRule.WEEKLY,
+                freq: RRule.WEEKLY,
                 interval: 5,
                 until: new Date(Date.UTC(2012, 12, 31)),
             });
