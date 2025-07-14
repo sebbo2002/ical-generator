@@ -1,17 +1,57 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="5203" lines-covered="5148" line-rate="0.9894" branches-valid="926" branches-covered="904" branch-rate="0.9762000000000001" timestamp="1751665035557" complexity="0" version="0.1">
+<coverage lines-valid="5203" lines-covered="5148" line-rate="0.9894" branches-valid="1051" branches-covered="1006" branch-rate="0.9571" timestamp="1752517174430" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
   <packages>
-    <package name="main" line-rate="0.9894" branch-rate="0.9762000000000001">
+    <package name="main" line-rate="0.9894" branch-rate="0.9571">
       <classes>
-        <class name="alarm.ts" filename="src/alarm.ts" line-rate="0.9873000000000001" branch-rate="0.9718000000000001">
+        <class name="alarm.ts" filename="src/alarm.ts" line-rate="0.9873000000000001" branch-rate="0.9487000000000001">
           <methods>
             <method name="__name" hits="1" signature="()V">
               <lines>
-                <line number="5" hits="1"/>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="2" signature="()V">
+              <lines>
+                <line number="1" hits="2"/>
+              </lines>
+            </method>
+            <method name="get" hits="127" signature="()V">
+              <lines>
+                <line number="1" hits="127"/>
+              </lines>
+            </method>
+            <method name="__toESM" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAlarmRelatesTo" hits="5" signature="()V">
+              <lines>
+                <line number="1" hits="5"/>
+              </lines>
+            </method>
+            <method name="ICalAlarmType" hits="23" signature="()V">
+              <lines>
+                <line number="1" hits="23"/>
+              </lines>
+            </method>
+            <method name="default" hits="85" signature="()V">
+              <lines>
+                <line number="1" hits="85"/>
               </lines>
             </method>
             <method name="&lt;instance_members_initializer&gt;" hits="67" signature="()V">
@@ -101,11 +141,11 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="85" branch="true" condition-coverage="78.57142857142857% (11/14)"/>
             <line number="2" hits="1" branch="false"/>
             <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
-            <line number="5" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="5" hits="1" branch="false"/>
             <line number="6" hits="1" branch="false"/>
             <line number="7" hits="1" branch="false"/>
             <line number="8" hits="1" branch="false"/>
@@ -893,14 +933,59 @@
             <line number="790" hits="4" branch="false"/>
             <line number="791" hits="4" branch="true" condition-coverage="100% (1/1)"/>
             <line number="792" hits="4" branch="false"/>
-            <line number="793" hits="1" branch="false"/>
+            <line number="793" hits="1" branch="true" condition-coverage="0% (0/1)"/>
           </lines>
         </class>
-        <class name="attendee.ts" filename="src/attendee.ts" line-rate="0.9913" branch-rate="0.9682">
+        <class name="attendee.ts" filename="src/attendee.ts" line-rate="0.9913" branch-rate="0.9568000000000001">
           <methods>
             <method name="__name" hits="1" signature="()V">
               <lines>
-                <line number="6" hits="1"/>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="get" hits="151" signature="()V">
+              <lines>
+                <line number="1" hits="151"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeRole" hits="7" signature="()V">
+              <lines>
+                <line number="1" hits="7"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeScheduleAgent" hits="5" signature="()V">
+              <lines>
+                <line number="1" hits="5"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeStatus" hits="10" signature="()V">
+              <lines>
+                <line number="1" hits="10"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeType" hits="7" signature="()V">
+              <lines>
+                <line number="1" hits="7"/>
+              </lines>
+            </method>
+            <method name="default" hits="122" signature="()V">
+              <lines>
+                <line number="1" hits="122"/>
               </lines>
             </method>
             <method name="&lt;instance_members_initializer&gt;" hits="90" signature="()V">
@@ -1000,12 +1085,12 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="122" branch="true" condition-coverage="92.3076923076923% (12/13)"/>
             <line number="2" hits="1" branch="false"/>
             <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="1" branch="false"/>
-            <line number="6" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="6" hits="1" branch="false"/>
             <line number="7" hits="1" branch="false"/>
             <line number="8" hits="1" branch="false"/>
             <line number="9" hits="1" branch="false"/>
@@ -1692,14 +1777,49 @@
             <line number="690" hits="6" branch="false"/>
             <line number="691" hits="6" branch="true" condition-coverage="100% (1/1)"/>
             <line number="692" hits="6" branch="false"/>
-            <line number="693" hits="1" branch="false"/>
+            <line number="693" hits="1" branch="true" condition-coverage="0% (0/1)"/>
           </lines>
         </class>
-        <class name="calendar.ts" filename="src/calendar.ts" line-rate="0.995" branch-rate="0.9743">
+        <class name="calendar.ts" filename="src/calendar.ts" line-rate="0.995" branch-rate="0.9460999999999999">
           <methods>
             <method name="__name" hits="1" signature="()V">
               <lines>
-                <line number="3" hits="1"/>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="2" signature="()V">
+              <lines>
+                <line number="1" hits="2"/>
+              </lines>
+            </method>
+            <method name="get" hits="524" signature="()V">
+              <lines>
+                <line number="1" hits="524"/>
+              </lines>
+            </method>
+            <method name="__toESM" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalCalendarMethod" hits="11" signature="()V">
+              <lines>
+                <line number="1" hits="11"/>
+              </lines>
+            </method>
+            <method name="default" hits="395" signature="()V">
+              <lines>
+                <line number="1" hits="395"/>
               </lines>
             </method>
             <method name="&lt;instance_members_initializer&gt;" hits="393" signature="()V">
@@ -1799,9 +1919,9 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="395" branch="true" condition-coverage="76.92307692307693% (10/13)"/>
             <line number="2" hits="1" branch="false"/>
-            <line number="3" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="1" branch="false"/>
             <line number="6" hits="1" branch="false"/>
@@ -2598,14 +2718,39 @@
             <line number="797" hits="56" branch="false"/>
             <line number="798" hits="56" branch="true" condition-coverage="100% (1/1)"/>
             <line number="799" hits="56" branch="false"/>
-            <line number="800" hits="1" branch="false"/>
+            <line number="800" hits="1" branch="true" condition-coverage="0% (0/1)"/>
           </lines>
         </class>
-        <class name="category.ts" filename="src/category.ts" line-rate="1" branch-rate="1">
+        <class name="category.ts" filename="src/category.ts" line-rate="1" branch-rate="0.9411">
           <methods>
             <method name="__name" hits="1" signature="()V">
               <lines>
-                <line number="3" hits="1"/>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="get" hits="21" signature="()V">
+              <lines>
+                <line number="1" hits="21"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="default" hits="21" signature="()V">
+              <lines>
+                <line number="1" hits="21"/>
               </lines>
             </method>
             <method name="&lt;instance_members_initializer&gt;" hits="12" signature="()V">
@@ -2640,9 +2785,9 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="21" branch="true" condition-coverage="85.71428571428571% (6/7)"/>
             <line number="2" hits="1" branch="false"/>
-            <line number="3" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="1" branch="false"/>
             <line number="6" hits="1" branch="false"/>
@@ -2734,11 +2879,61 @@
             <line number="92" hits="1" branch="false"/>
           </lines>
         </class>
-        <class name="event.ts" filename="src/event.ts" line-rate="0.9864" branch-rate="0.9802">
+        <class name="event.ts" filename="src/event.ts" line-rate="0.9864" branch-rate="0.9702">
           <methods>
             <method name="__name" hits="1" signature="()V">
               <lines>
-                <line number="3" hits="1"/>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="5" signature="()V">
+              <lines>
+                <line number="1" hits="5"/>
+              </lines>
+            </method>
+            <method name="get" hits="533" signature="()V">
+              <lines>
+                <line number="1" hits="533"/>
+              </lines>
+            </method>
+            <method name="__toESM" hits="4" signature="()V">
+              <lines>
+                <line number="1" hits="4"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEventBusyStatus" hits="6" signature="()V">
+              <lines>
+                <line number="1" hits="6"/>
+              </lines>
+            </method>
+            <method name="ICalEventClass" hits="5" signature="()V">
+              <lines>
+                <line number="1" hits="5"/>
+              </lines>
+            </method>
+            <method name="ICalEventStatus" hits="9" signature="()V">
+              <lines>
+                <line number="1" hits="9"/>
+              </lines>
+            </method>
+            <method name="ICalEventTransparency" hits="7" signature="()V">
+              <lines>
+                <line number="1" hits="7"/>
+              </lines>
+            </method>
+            <method name="default" hits="419" signature="()V">
+              <lines>
+                <line number="1" hits="419"/>
               </lines>
             </method>
             <method name="&lt;instance_members_initializer&gt;" hits="358" signature="()V">
@@ -2938,9 +3133,9 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="419" branch="true" condition-coverage="81.25% (13/16)"/>
             <line number="2" hits="1" branch="false"/>
-            <line number="3" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="1" branch="false"/>
             <line number="6" hits="1" branch="false"/>
@@ -5002,14 +5197,149 @@
             <line number="2062" hits="2" branch="false"/>
             <line number="2063" hits="2" branch="false"/>
             <line number="2064" hits="98" branch="false"/>
-            <line number="2065" hits="1" branch="false"/>
+            <line number="2065" hits="1" branch="true" condition-coverage="0% (0/1)"/>
           </lines>
         </class>
-        <class name="index.ts" filename="src/index.ts" line-rate="1" branch-rate="1">
+        <class name="index.ts" filename="src/index.ts" line-rate="1" branch-rate="0.8787">
           <methods>
             <method name="__name" hits="1" signature="()V">
               <lines>
-                <line number="7" hits="1"/>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="7" signature="()V">
+              <lines>
+                <line number="1" hits="7"/>
+              </lines>
+            </method>
+            <method name="get" hits="111" signature="()V">
+              <lines>
+                <line number="1" hits="111"/>
+              </lines>
+            </method>
+            <method name="__toESM" hits="6" signature="()V">
+              <lines>
+                <line number="1" hits="6"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAlarm" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAlarmRelatesTo" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="ICalAlarmType" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAttendee" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeRole" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeStatus" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalAttendeeType" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalCalendar" hits="2" signature="()V">
+              <lines>
+                <line number="1" hits="2"/>
+              </lines>
+            </method>
+            <method name="ICalCalendarMethod" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalCategory" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEvent" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEventBusyStatus" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEventClass" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="ICalEventRepeatingFreq" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEventStatus" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEventTransparency" hits="2" signature="()V">
+              <lines>
+                <line number="1" hits="2"/>
+              </lines>
+            </method>
+            <method name="ICalWeekday" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="default" hits="38" signature="()V">
+              <lines>
+                <line number="1" hits="38"/>
+              </lines>
+            </method>
+            <method name="escape" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="foldLines" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="formatDate" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="formatDateTZ" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
               </lines>
             </method>
             <method name="ical" hits="37" signature="()V">
@@ -5019,13 +5349,13 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="1" branch="true" condition-coverage="90.32258064516128% (28/31)"/>
             <line number="2" hits="1" branch="false"/>
             <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="1" branch="false"/>
             <line number="6" hits="1" branch="false"/>
-            <line number="7" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="7" hits="1" branch="false"/>
             <line number="8" hits="1" branch="false"/>
             <line number="9" hits="1" branch="false"/>
             <line number="10" hits="1" branch="false"/>
@@ -5064,7 +5394,7 @@
             <line number="43" hits="37" branch="false"/>
             <line number="44" hits="37" branch="false"/>
             <line number="45" hits="1" branch="false"/>
-            <line number="46" hits="1" branch="false"/>
+            <line number="46" hits="1" branch="true" condition-coverage="0% (0/1)"/>
             <line number="47" hits="1" branch="false"/>
             <line number="48" hits="1" branch="false"/>
             <line number="49" hits="1" branch="false"/>
@@ -5140,11 +5470,126 @@
             <line number="119" hits="1" branch="false"/>
           </lines>
         </class>
-        <class name="tools.ts" filename="src/tools.ts" line-rate="0.9861" branch-rate="0.9767">
+        <class name="tools.ts" filename="src/tools.ts" line-rate="0.9861" branch-rate="0.9690000000000001">
           <methods>
             <method name="__name" hits="19" signature="()V">
               <lines>
-                <line number="3" hits="19"/>
+                <line number="1" hits="19"/>
+              </lines>
+            </method>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="get" hits="1996" signature="()V">
+              <lines>
+                <line number="1" hits="1996"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="addOrGetCustomAttributes" hits="106" signature="()V">
+              <lines>
+                <line number="1" hits="106"/>
+              </lines>
+            </method>
+            <method name="checkDate" hits="570" signature="()V">
+              <lines>
+                <line number="1" hits="570"/>
+              </lines>
+            </method>
+            <method name="checkEnum" hits="177" signature="()V">
+              <lines>
+                <line number="1" hits="177"/>
+              </lines>
+            </method>
+            <method name="checkNameAndMail" hits="32" signature="()V">
+              <lines>
+                <line number="1" hits="32"/>
+              </lines>
+            </method>
+            <method name="escape" hits="204" signature="()V">
+              <lines>
+                <line number="1" hits="204"/>
+              </lines>
+            </method>
+            <method name="foldLines" hits="53" signature="()V">
+              <lines>
+                <line number="1" hits="53"/>
+              </lines>
+            </method>
+            <method name="formatDate" hits="134" signature="()V">
+              <lines>
+                <line number="1" hits="134"/>
+              </lines>
+            </method>
+            <method name="formatDateTZ" hits="90" signature="()V">
+              <lines>
+                <line number="1" hits="90"/>
+              </lines>
+            </method>
+            <method name="generateCustomAttributes" hits="139" signature="()V">
+              <lines>
+                <line number="1" hits="139"/>
+              </lines>
+            </method>
+            <method name="isDayjs" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="isLuxonDate" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="isMoment" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="isMomentDuration" hits="18" signature="()V">
+              <lines>
+                <line number="1" hits="18"/>
+              </lines>
+            </method>
+            <method name="isMomentTZ" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="isRRule" hits="167" signature="()V">
+              <lines>
+                <line number="1" hits="167"/>
+              </lines>
+            </method>
+            <method name="isTZDate" hits="0" signature="()V">
+              <lines>
+                <line number="1" hits="0"/>
+              </lines>
+            </method>
+            <method name="toDate" hits="124" signature="()V">
+              <lines>
+                <line number="1" hits="124"/>
+              </lines>
+            </method>
+            <method name="toDurationString" hits="37" signature="()V">
+              <lines>
+                <line number="1" hits="37"/>
+              </lines>
+            </method>
+            <method name="toJSON" hits="145" signature="()V">
+              <lines>
+                <line number="1" hits="145"/>
               </lines>
             </method>
             <method name="addOrGetCustomAttributes" hits="106" signature="()V">
@@ -5244,9 +5689,9 @@
             </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="false"/>
+            <line number="1" hits="145" branch="true" condition-coverage="95.45454545454545% (21/22)"/>
             <line number="2" hits="1" branch="false"/>
-            <line number="3" hits="19" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
             <line number="5" hits="1" branch="false"/>
             <line number="6" hits="1" branch="false"/>
@@ -5739,7 +6184,7 @@
             <line number="493" hits="37" branch="true" condition-coverage="100% (1/1)"/>
             <line number="494" hits="37" branch="false"/>
             <line number="495" hits="1" branch="false"/>
-            <line number="496" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="496" hits="1" branch="true" condition-coverage="50% (1/2)"/>
             <line number="497" hits="145" branch="false"/>
             <line number="498" hits="145" branch="false"/>
             <line number="499" hits="145" branch="true" condition-coverage="100% (1/1)"/>
@@ -5753,11 +6198,41 @@
             <line number="507" hits="145" branch="false"/>
           </lines>
         </class>
-        <class name="types.ts" filename="src/types.ts" line-rate="1" branch-rate="1">
+        <class name="types.ts" filename="src/types.ts" line-rate="1" branch-rate="0.8332999999999999">
           <methods>
+            <method name="__export" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="__copyProps" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="get" hits="163" signature="()V">
+              <lines>
+                <line number="1" hits="163"/>
+              </lines>
+            </method>
+            <method name="__toCommonJS" hits="1" signature="()V">
+              <lines>
+                <line number="1" hits="1"/>
+              </lines>
+            </method>
+            <method name="ICalEventRepeatingFreq" hits="115" signature="()V">
+              <lines>
+                <line number="1" hits="115"/>
+              </lines>
+            </method>
+            <method name="ICalWeekday" hits="48" signature="()V">
+              <lines>
+                <line number="1" hits="48"/>
+              </lines>
+            </method>
           </methods>
           <lines>
-            <line number="1" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="1" hits="1" branch="true" condition-coverage="90% (9/10)"/>
             <line number="2" hits="1" branch="false"/>
             <line number="3" hits="1" branch="false"/>
             <line number="4" hits="1" branch="false"/>
@@ -5767,7 +6242,7 @@
             <line number="8" hits="1" branch="false"/>
             <line number="9" hits="1" branch="false"/>
             <line number="10" hits="1" branch="false"/>
-            <line number="11" hits="1" branch="true" condition-coverage="100% (1/1)"/>
+            <line number="11" hits="1" branch="true" condition-coverage="50% (1/2)"/>
             <line number="12" hits="1" branch="false"/>
             <line number="13" hits="1" branch="false"/>
             <line number="14" hits="1" branch="false"/>
