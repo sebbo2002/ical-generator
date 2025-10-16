@@ -987,9 +987,9 @@ describe('ical-generator Event', function () {
             );
             assert.throws(
                 function () {
-                    // @ts-ignore
                     event.repeating({
                         freq: ICalEventRepeatingFreq.MONTHLY,
+                        // @ts-ignore
                         until: 3,
                     });
                 },
@@ -998,9 +998,9 @@ describe('ical-generator Event', function () {
             );
             assert.throws(
                 function () {
-                    // @ts-ignore
                     event.repeating({
                         freq: ICalEventRepeatingFreq.MONTHLY,
+                        // @ts-ignore
                         until: null,
                     });
                 },
@@ -1009,9 +1009,9 @@ describe('ical-generator Event', function () {
             );
             assert.throws(
                 function () {
-                    // @ts-ignore
                     event.repeating({
                         freq: ICalEventRepeatingFreq.MONTHLY,
+                        // @ts-ignore
                         until: NaN,
                     });
                 },
@@ -1615,14 +1615,17 @@ describe('ical-generator Event', function () {
                 new ICalCalendar(),
             );
 
-            // @ts-ignore
             assert.throws(
-                () => event.location({ geo: 3 }),
+                () =>
+                    event.location({
+                        // @ts-ignore
+                        geo: 3,
+                    }),
                 /`location` isn't formatted correctly/i,
             );
 
-            // @ts-ignore
             assert.throws(
+                // @ts-ignore
                 () => event.location({}),
                 /`location` isn't formatted correctly/i,
             );
@@ -1713,9 +1716,12 @@ describe('ical-generator Event', function () {
                 mailto: 'mail2@example2.com',
                 name: 'Sebastian Pekarek',
             });
-            assert.strictEqual('Sebastian Pekarek', e.organizer()?.name);
-            assert.strictEqual('mail@example.com', e.organizer()?.email);
-            assert.strictEqual('mail2@example2.com', e.organizer()?.mailto);
+
+            const result = e.organizer();
+            assert.ok(result && 'mailto' in result);
+            assert.strictEqual('Sebastian Pekarek', result?.name);
+            assert.strictEqual('mail@example.com', result?.email);
+            assert.strictEqual('mail2@example2.com', result?.mailto);
         });
 
         it('setter should return this', function () {
@@ -1825,7 +1831,7 @@ describe('ical-generator Event', function () {
             }, /`organizer`/);
         });
 
-        it('should work without an email', function () {
+        it('should not work without an email', function () {
             const event = new ICalEvent(
                 {
                     start: moment(),
@@ -1834,26 +1840,10 @@ describe('ical-generator Event', function () {
                 new ICalCalendar(),
             );
 
-            event.organizer({ name: 'Sebastian Pekarek' });
-            assert.deepStrictEqual(event.organizer(), {
-                email: undefined,
-                mailto: undefined,
-                name: 'Sebastian Pekarek',
-                sentBy: undefined,
-            });
-        });
-
-        it('should include a : (PR #610)', function () {
-            const event = new ICalEvent(
-                {
-                    organizer: { name: 'Some Guy' },
-                    start: moment(),
-                    summary: 'Example Event',
-                },
-                new ICalCalendar(),
-            );
-
-            assert.ok(event.toString().includes('ORGANIZER;CN="Some Guy":'));
+            assert.throws(() => {
+                // @ts-ignore
+                event.organizer({ name: 'Sebastian Pekarek' });
+            }, /`organizer.email` is empty!/);
         });
     });
 
