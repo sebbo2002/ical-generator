@@ -19,7 +19,7 @@ jobs:
           repository: sebbo2002/release-bot
           path: ./.actions/release-bot
       - name: 🔧 Setup node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
