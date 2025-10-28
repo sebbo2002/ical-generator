@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.13% </span>
+                <span class="strong">99.12% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>687/693</span>
+                <span class='fraction'>681/687</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.82% </span>
+                <span class="strong">95.68% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>122/126</span>
+                <span class='fraction'>133/139</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>20/20</span>
+                <span class='fraction'>29/29</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">99.13% </span>
+                <span class="strong">99.12% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>687/693</span>
+                <span class='fraction'>681/687</span>
             </div>
         
             
@@ -750,13 +750,7 @@
 <a name='L685'></a><a href='#L685'>685</a>
 <a name='L686'></a><a href='#L686'>686</a>
 <a name='L687'></a><a href='#L687'>687</a>
-<a name='L688'></a><a href='#L688'>688</a>
-<a name='L689'></a><a href='#L689'>689</a>
-<a name='L690'></a><a href='#L690'>690</a>
-<a name='L691'></a><a href='#L691'>691</a>
-<a name='L692'></a><a href='#L692'>692</a>
-<a name='L693'></a><a href='#L693'>693</a>
-<a name='L694'></a><a href='#L694'>694</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L688'></a><a href='#L688'>688</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">122x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -946,9 +940,6 @@
 <span class="cline-any cline-yes">22x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">22x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -1007,9 +998,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">20x</span>
 <span class="cline-any cline-yes">20x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -1449,7 +1437,7 @@
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="branch-0 cbranch-no" title="branch not covered" >'use strict';</span>
 &nbsp;
 import type ICalAlarm from './alarm.ts';
 import type ICalEvent from './event.ts';
@@ -1640,10 +1628,7 @@ export default class ICalAttendee {
             this.data.delegatedFrom = null;
         } else if (typeof delegatedFrom === 'string') {
             this.data.delegatedFrom = new ICalAttendee(
-                {
-                    email: delegatedFrom,
-                    ...checkNameAndMail('delegatedFrom', delegatedFrom),
-                },
+                checkNameAndMail('delegatedFrom', delegatedFrom),
                 this.parent,
             );
         } else if (delegatedFrom instanceof ICalAttendee) {
@@ -1701,10 +1686,7 @@ export default class ICalAttendee {
 &nbsp;
         if (typeof delegatedTo === 'string') {
             this.data.delegatedTo = new ICalAttendee(
-                {
-                    email: delegatedTo,
-                    ...checkNameAndMail('delegatedTo', delegatedTo),
-                },
+                checkNameAndMail('delegatedTo', delegatedTo),
                 this.parent,
             );
         } else if (delegatedTo instanceof ICalAttendee) {
@@ -2141,7 +2123,7 @@ export default class ICalAttendee {
 &nbsp;
         return this;
     }
-}
+<span class="branch-0 cbranch-no" title="branch not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -2149,7 +2131,7 @@ export default class ICalAttendee {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-12T16:35:44.229Z
+                at 2025-10-28T18:14:08.607Z
             </div>
         <script src="prettify.js"></script>
         <script>
