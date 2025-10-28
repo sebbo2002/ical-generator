@@ -1,3 +1,18 @@
+# [10.0.0](https://github.com/sebbo2002/ical-generator/compare/v9.0.0...v10.0.0) (2025-10-28)
+
+### Bug Fixes
+
+- Make organizer and attendee's email mandatory ([4409cd6](https://github.com/sebbo2002/ical-generator/commit/4409cd6ff835c2283f7bac2f3ba54ceb6aeda756)), closes [#685](https://github.com/sebbo2002/ical-generator/issues/685)
+
+### chore
+
+- Remove support for node.js v23 ([6c8ca82](https://github.com/sebbo2002/ical-generator/commit/6c8ca827a154f74d87d3ab9fe6e07a7bc997032b))
+
+### BREAKING CHANGES
+
+- node.js v23 is now deprecated, please use a [supported version](https://github.com/nodejs/release#release-schedule).
+- `email` is now a required field for all attendees and organizers.
+
 # [9.0.0](https://github.com/sebbo2002/ical-generator/compare/v8.1.1...v9.0.0) (2025-05-12)
 
 - Merge remote-tracking branch 'template/typescript' into develop ([12911af](https://github.com/sebbo2002/ical-generator/commit/12911aff492741e4c6d72b4ab1082b5324d17ccf))
