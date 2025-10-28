@@ -94,7 +94,7 @@ export interface ICalMomentTimezoneStub extends ICalMomentStub {
 }
 
 export interface ICalOrganizer {
-    email?: string;
+    email: string;
     mailto?: string;
     name: string;
     sentBy?: string;

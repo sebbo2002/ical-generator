@@ -189,10 +189,7 @@ export default class ICalAttendee {
             this.data.delegatedFrom = null;
         } else if (typeof delegatedFrom === 'string') {
             this.data.delegatedFrom = new ICalAttendee(
-                {
-                    email: delegatedFrom,
-                    ...checkNameAndMail('delegatedFrom', delegatedFrom),
-                },
+                checkNameAndMail('delegatedFrom', delegatedFrom),
                 this.parent,
             );
         } else if (delegatedFrom instanceof ICalAttendee) {
@@ -250,10 +247,7 @@ export default class ICalAttendee {
 
         if (typeof delegatedTo === 'string') {
             this.data.delegatedTo = new ICalAttendee(
-                {
-                    email: delegatedTo,
-                    ...checkNameAndMail('delegatedTo', delegatedTo),
-                },
+                checkNameAndMail('delegatedTo', delegatedTo),
                 this.parent,
             );
         } else if (delegatedTo instanceof ICalAttendee) {

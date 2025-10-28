@@ -593,7 +593,7 @@ export default class ICalEvent {
             return data;
         }
         if (typeof data === 'string') {
-            data = { email: data, ...checkNameAndMail('data', data) };
+            data = checkNameAndMail('data', data);
         }
 
         const attendee = new ICalAttendee(data, this);

@@ -185,6 +185,9 @@ export function checkNameAndMail(
     if (!result.name) {
         throw new Error('`' + attribute + '.name` is empty!');
     }
+    if (!result.email) {
+        throw new Error('`' + attribute + '.email` is empty!');
+    }
 
     return result;
 }
