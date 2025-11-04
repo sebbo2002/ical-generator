@@ -15,7 +15,7 @@
         "@semantic-release/git": "^10.0.1",
         "@semantic-release/npm": "^13.1.1",
         "@touch4it/ical-timezones": "^1.9.0",
-        "@types/express": "^5.0.3",
+        "@types/express": "^5.0.5",
         "@types/luxon": "^3.7.1",
         "@types/mocha": "^10.0.10",
         "c8": "^10.1.3",
