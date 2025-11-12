@@ -20,7 +20,6 @@ fi;
 mkdir -p ./docs/
 rm -rf ./docs/coverage/ ./docs/reference/ ./docs/tests/
 
-
 # TypeDoc in ./docs/referece
 npx typedoc
 
