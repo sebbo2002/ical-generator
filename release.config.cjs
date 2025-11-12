@@ -73,14 +73,4 @@ configuration.plugins.push([
     },
 ]);
 
-configuration.plugins.push([
-    '@qiwi/semantic-release-gh-pages-plugin',
-    {
-        dst: `./${process.env.BRANCH}`,
-        msg: 'docs: Updated for <%= nextRelease.gitTag %>',
-        pullTagsBranch: 'main',
-        src: './docs',
-    },
-]);
-
 module.exports = configuration;

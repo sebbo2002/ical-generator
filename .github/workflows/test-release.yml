@@ -70,9 +70,11 @@ jobs:
     concurrency: release
     permissions:
       contents: write
-      issues: write
-      pull-requests: write
       id-token: write
+      issues: write
+      packages: write
+      pages: write
+      pull-requests: write
     needs:
       - coverage
       - tests
@@ -86,6 +88,19 @@ jobs:
         with:
           node-version: 22.x
           cache: 'npm'
+      - name: 📦 Ensure npm ≥ 11.5.1
+        run: |
+          REQUIRED_VERSION="11.5.1"
+          CURRENT_VERSION=$(npm -v)
+          echo "Current npm version: $CURRENT_VERSION"
+
+          SMALLEST=$(printf '%s\n' "$CURRENT_VERSION" "$REQUIRED_VERSION" | sort -V | head -n1)
+          if [ "$CURRENT_VERSION" = "$REQUIRED_VERSION" ] || [ "$SMALLEST" = "$REQUIRED_VERSION" ]; then
+            echo "npm version ($CURRENT_VERSION) meets the requirement ($REQUIRED_VERSION)."
+          else
+            echo "Updating npm to latest version..."
+            npm install -g npm@latest
+          fi
       - name: 📦 Install dependencies
         run: npm ci
       - name: 📂 Create docs folder
@@ -94,10 +109,17 @@ jobs:
         run: BRANCH=${GITHUB_REF#refs/heads/} npx semantic-release
         env:
           GH_REPO: ${{ github.repository }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_OWNER: ${{ github.repository_owner }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+          npm_config_access: public
+      - name: 🌎 Deploy GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          destination_dir: ./${GITHUB_REF#refs/heads/}
       - name: 🔃 Merge main back into develop
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: everlytic/branch-merge@1.1.5
