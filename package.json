@@ -42,7 +42,7 @@
         "tsx": "^4.20.6",
         "typedoc": "^0.28.14",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.46.2"
+        "typescript-eslint": "^8.48.0"
     },
     "engines": {
         "node": "20 || 22 || >=24"
