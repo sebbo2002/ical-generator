@@ -15,7 +15,7 @@ jobs:
       - name: 🤖 template-updater
         uses: sebbo2002/action-template-updater@develop
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TEMPLATE_UPDATER_TOKEN }}
           bot-token: ${{ secrets.GITHUB_TOKEN }}
           template: sebbo2002/js-template/typescript
           assignees: sebbo2002
