@@ -203,7 +203,7 @@ export default class ICalAlarm {
             return this;
         }
 
-        let _attach = null;
+        let _attach: ICalAttachment | undefined;
         if (typeof attachment === 'string') {
             _attach = {
                 mime: null,

@@ -85,6 +85,7 @@ to use a VTimezone generator. Such a function generates a VTimezone entry and re
 `timezones-ical-library` or `@touch4it/ical-timezones` can be used for this:
 
 #### Example with `@touch4it/ical-timezones`
+
 ```typescript
 import { ICalCalendar } from 'ical-generator';
 import { getVtimezoneComponent } from '@touch4it/ical-timezones';
@@ -101,6 +102,7 @@ cal.createEvent({
 ```
 
 #### Example with `timezones-ical-library`
+
 ```typescript
 import { ICalCalendar } from 'ical-generator';
 import { tzlib_get_ical_block } from 'timezones-ical-library';
@@ -108,7 +110,7 @@ import { tzlib_get_ical_block } from 'timezones-ical-library';
 const cal = new ICalCalendar();
 cal.timezone({
     name: 'Europe/Berlin',
-    generator: tz => tzlib_get_ical_block(tz)[0],
+    generator: (tz) => tzlib_get_ical_block(tz)[0],
 });
 cal.createEvent({
     start: new Date(),
