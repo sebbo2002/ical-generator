@@ -25,6 +25,7 @@
         "eslint-plugin-jsonc": "^2.21.1",
         "eslint-plugin-perfectionist": "^5.5.0",
         "esm": "^3.2.25",
+        "globals": "^17.3.0",
         "husky": "^9.1.7",
         "license-checker": "^25.0.1",
         "luxon": "^3.7.2",

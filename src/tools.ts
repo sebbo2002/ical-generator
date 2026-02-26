@@ -19,17 +19,14 @@ export function addOrGetCustomAttributes(
         | Record<string, string>
         | { key: string; value: string }[],
 ): void;
-
 export function addOrGetCustomAttributes(
     data: { x: [string, string][] },
     keyOrArray: string,
     value: string,
 ): void;
-
 export function addOrGetCustomAttributes(data: {
     x: [string, string][];
 }): { key: string; value: string }[];
-
 export function addOrGetCustomAttributes(
     data: { x: [string, string][] },
     keyOrArray?:
