@@ -10,12 +10,40 @@ import moment from 'moment';
 import momentTz from 'moment-timezone';
 import { Temporal } from 'temporal-polyfill';
 
+import type {
+    ICalDayJsStub,
+    ICalLuxonDateTimeStub,
+    ICalMomentStub,
+    ICalMomentTimezoneStub,
+    ICalTemporalInstantStub,
+    ICalTemporalPlainDateStub,
+    ICalTemporalPlainDateTimeStub,
+    ICalTemporalZonedDateTimeStub,
+    ICalTZDateStub,
+} from '../src/types.js';
+
 import {
+    addOrGetCustomAttributes,
     checkDate,
+    checkEnum,
+    checkNameAndMail,
     escape,
     foldLines,
     formatDate,
     formatDateTZ,
+    generateCustomAttributes,
+    isDayjs,
+    isLuxonDate,
+    isMoment,
+    isMomentDuration,
+    isMomentTZ,
+    isRRule,
+    isTemporal,
+    isTemporalInstant,
+    isTemporalPlainDate,
+    isTemporalPlainDateTime,
+    isTemporalZonedDateTime,
+    isTZDate,
     toDate,
     toDurationString,
     toJSON,
@@ -593,6 +621,83 @@ describe('ICalTools', function () {
         });
     });
 
+    describe('custom attributes', function () {
+        it('should add/get custom attributes from array', function () {
+            const data: { x: [string, string][] } = { x: [] };
+            addOrGetCustomAttributes(data, [['X-FOO', 'bar']]);
+            assert.deepStrictEqual(data.x, [['X-FOO', 'bar']]);
+            const arr = addOrGetCustomAttributes(data) as {
+                key: string;
+                value: string;
+            }[];
+            assert.deepStrictEqual(arr, [{ key: 'X-FOO', value: 'bar' }]);
+        });
+        it('should add custom attribute via key/value', function () {
+            const data: { x: [string, string][] } = { x: [] };
+            addOrGetCustomAttributes(data, 'X-TEST', 'value');
+            assert.deepStrictEqual(data.x, [['X-TEST', 'value']]);
+        });
+        it('should throw when key does not start with X-', function () {
+            const data: { x: [string, string][] } = { x: [] };
+            assert.throws(
+                () => addOrGetCustomAttributes(data, 'FOO', 'bar'),
+                /Key has to start with `X-`!/,
+            );
+        });
+    });
+
+    describe('generateCustomAttributes()', function () {
+        it('should generate string with uppercase keys and escaped values', function () {
+            const data: { x: [string, string][] } = {
+                x: [['X-foo', 'a;b\\c']],
+            };
+            const str = generateCustomAttributes(data);
+            assert.strictEqual(str, 'X-FOO:a\\;b\\\\c\r\n');
+        });
+        it('should return empty string when no entries', function () {
+            const data: { x: [string, string][] } = { x: [] };
+            assert.strictEqual(generateCustomAttributes(data), '');
+        });
+    });
+
+    describe('checkNameAndMail()', function () {
+        it('should parse name and email from string', function () {
+            const res = checkNameAndMail(
+                'organizer',
+                'John Doe <john@example.com>',
+            );
+            assert.deepStrictEqual(res, {
+                email: 'john@example.com',
+                name: 'John Doe',
+            });
+        });
+        it('should trim and handle just email', function () {
+            const res = checkNameAndMail('organizer', '   jane@example.com   ');
+            assert.deepStrictEqual(res, {
+                email: 'jane@example.com',
+                name: 'jane@example.com',
+            });
+        });
+        it('should throw on bad string', function () {
+            assert.throws(
+                () => checkNameAndMail('organizer', 'notvalid'),
+                /isn't formated correctly/,
+            );
+        });
+        it('should accept object input', function () {
+            const obj = { email: 'a@b.com', name: 'A' } as Parameters<
+                typeof checkNameAndMail
+            >[1];
+            const res = checkNameAndMail('organizer', obj);
+            assert.deepStrictEqual(res, {
+                email: 'a@b.com',
+                mailto: undefined,
+                name: 'A',
+                sentBy: undefined,
+            });
+        });
+    });
+
     describe('formatDateTZ()', function () {
         it('should work with timezone', function () {
             const ed = { timezone: 'Europe/Berlin' };
@@ -1119,6 +1224,18 @@ describe('ICalTools', function () {
                     '20180705',
                 );
             });
+            it('formatDate should throw when dayjs UTC plugin is not available', function () {
+                const fakeDayjsLike: ICalDayJsStub = {
+                    format: () => '20180705T182400Z',
+                    isValid: () => true,
+                    toDate: () => new Date(),
+                    toJSON: () => new Date().toJSON(),
+                };
+                assert.throws(
+                    () => formatDate(null, fakeDayjsLike, false, false),
+                    /UTC plugin is not available/,
+                );
+            });
         });
         describe('Temporal.ZonedDateTime', function () {
             it('should work without setting a timezone', function () {
@@ -1354,6 +1471,17 @@ describe('ICalTools', function () {
         });
     });
 
+    describe('checkEnum()', function () {
+        it('should accept valid values and reject invalid ones', function () {
+            const Type = { BAR: 'BAR', FOO: 'FOO' } as Record<string, string>;
+            assert.strictEqual(checkEnum(Type, 'foo'), 'FOO');
+            assert.throws(
+                () => checkEnum(Type, 'baz'),
+                /Input must be one of the following/,
+            );
+        });
+    });
+
     describe('toDate()', function () {
         it('should work with strings', function () {
             const date = new Date();
@@ -1481,6 +1609,298 @@ describe('ICalTools', function () {
             assert.ok(typeof json === 'string');
             checkDate(json, 'test');
             toDate(json);
+        });
+    });
+
+    describe('ICalTools - is* functions', function () {
+        it('isMomentDuration should detect moment.duration-like objects', function () {
+            const fake = { asSeconds: () => 123 };
+            assert.strictEqual(isMomentDuration(fake), true);
+            assert.strictEqual(isMomentDuration(null), false);
+            assert.strictEqual(isMomentDuration({}), false);
+        });
+
+        it('isRRule should detect rrule-like objects', function () {
+            const fake = {
+                between: () => [],
+                toString: () => 'RRULE:FREQ=DAILY',
+            };
+            assert.strictEqual(isRRule(fake), true);
+            assert.strictEqual(isRRule({}), false);
+        });
+
+        it('isDayjs should identify plain objects as Dayjs-like when others are not matched', function () {
+            const plainDayjsLike: ICalDayJsStub = {
+                format() {
+                    return '';
+                },
+                isValid() {
+                    return true;
+                },
+                toDate() {
+                    return new Date();
+                },
+                toJSON() {
+                    return new Date().toJSON();
+                },
+            };
+            assert.strictEqual(isDayjs(plainDayjsLike), true);
+            // luxon-like object should not be dayjs
+            const luxonLikeShort: ICalLuxonDateTimeStub = {
+                get isValid() {
+                    return true;
+                },
+                setZone() {
+                    return this;
+                },
+                toFormat() {
+                    return '';
+                },
+                toJSDate() {
+                    return new Date();
+                },
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                zone: { type: 'system' },
+            };
+            assert.strictEqual(isDayjs(luxonLikeShort), false);
+        });
+
+        it('isLuxonDate should detect objects with toJSDate', function () {
+            const luxonLike: ICalLuxonDateTimeStub = {
+                get isValid() {
+                    return true;
+                },
+                setZone() {
+                    return this;
+                },
+                toFormat() {
+                    return '';
+                },
+                toJSDate() {
+                    return new Date();
+                },
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                zone: { type: 'system' },
+            };
+            assert.strictEqual(isLuxonDate(luxonLike), true);
+            assert.strictEqual(isLuxonDate({}), false);
+        });
+
+        it('isMoment and isMomentTZ should detect moment-like objects', function () {
+            const momentLike: ICalMomentStub = {
+                clone() {
+                    return this;
+                },
+                format() {
+                    return '';
+                },
+                isValid() {
+                    return true;
+                },
+                toDate() {
+                    return new Date();
+                },
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                utc() {
+                    return this;
+                },
+            };
+            // Set the private property via index signature to avoid casting to any
+            (
+                momentLike as unknown as { _isAMomentObject?: boolean }
+            )._isAMomentObject = true;
+            assert.strictEqual(isMoment(momentLike), true);
+
+            const momentTzLike: ICalMomentTimezoneStub = {
+                clone() {
+                    return this;
+                },
+                format() {
+                    return '';
+                },
+                isValid() {
+                    return true;
+                },
+                toDate() {
+                    return new Date();
+                },
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                tz(arg?: string) {
+                    if (typeof arg === 'string') return this;
+                    return 'UTC' as unknown as ICalMomentTimezoneStub | string;
+                },
+                utc() {
+                    return this;
+                },
+            };
+            (
+                momentTzLike as unknown as { _isAMomentObject?: boolean }
+            )._isAMomentObject = true;
+            assert.strictEqual(isMomentTZ(momentTzLike), true);
+            assert.strictEqual(isMomentTZ(momentLike), false);
+        });
+
+        it('isTemporal* should detect temporal-like objects', function () {
+            const zdt: ICalTemporalZonedDateTimeStub = {
+                day: 1,
+                hour: 0,
+                minute: 0,
+                month: 1,
+                second: 0,
+                timeZoneId: 'UTC',
+                toInstant() {
+                    return {
+                        epochMilliseconds: 123,
+                        toJSON() {
+                            return new Date().toJSON();
+                        },
+                        toString() {
+                            return '';
+                        },
+                        toZonedDateTimeISO() {
+                            return zdt;
+                        },
+                    } as ICalTemporalInstantStub;
+                },
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                toPlainDateTime() {
+                    return {
+                        day: 1,
+                        hour: 0,
+                        minute: 0,
+                        month: 1,
+                        second: 0,
+                        toJSON() {
+                            return new Date().toJSON();
+                        },
+                        toPlainDate() {
+                            return {
+                                day: 1,
+                                month: 1,
+                                toJSON() {
+                                    return new Date().toJSON();
+                                },
+                                toPlainDateTime() {
+                                    return {} as ICalTemporalPlainDateTimeStub;
+                                },
+                                toString() {
+                                    return '';
+                                },
+                                year: 2020,
+                            } as ICalTemporalPlainDateStub;
+                        },
+                        toString() {
+                            return '';
+                        },
+                        toZonedDateTime() {
+                            return zdt;
+                        },
+                        year: 2020,
+                    } as ICalTemporalPlainDateTimeStub;
+                },
+                toString() {
+                    return '';
+                },
+                withTimeZone() {
+                    return this;
+                },
+                year: 2020,
+            };
+            assert.strictEqual(isTemporalZonedDateTime(zdt), true);
+
+            const pdt: ICalTemporalPlainDateTimeStub = {
+                day: 1,
+                hour: 0,
+                minute: 0,
+                month: 1,
+                second: 0,
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                toPlainDate() {
+                    return {
+                        day: 1,
+                        month: 1,
+                        toJSON() {
+                            return new Date().toJSON();
+                        },
+                        toString() {
+                            return '';
+                        },
+                        year: 2020,
+                    } as ICalTemporalPlainDateStub;
+                },
+                toString() {
+                    return '';
+                },
+                toZonedDateTime() {
+                    return zdt;
+                },
+                year: 2020,
+            };
+            assert.strictEqual(isTemporalPlainDateTime(pdt), true);
+
+            const pd: ICalTemporalPlainDateStub = {
+                day: 1,
+                month: 1,
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                toPlainDateTime() {
+                    return {} as ICalTemporalPlainDateTimeStub;
+                },
+                toString() {
+                    return '';
+                },
+                year: 2020,
+            };
+            assert.strictEqual(isTemporalPlainDate(pd), true);
+
+            const instant: ICalTemporalInstantStub = {
+                epochMilliseconds: 123,
+                toJSON() {
+                    return new Date().toJSON();
+                },
+                toString() {
+                    return '';
+                },
+                toZonedDateTimeISO() {
+                    return zdt;
+                },
+            };
+            assert.strictEqual(isTemporalInstant(instant), true);
+
+            // isTemporal should be true for any of the above
+            assert.strictEqual(isTemporal(zdt), true);
+            assert.strictEqual(isTemporal(pdt), true);
+            assert.strictEqual(isTemporal(pd), true);
+            assert.strictEqual(isTemporal(instant), true);
+        });
+
+        it('isTZDate should detect TZDate-like Date instances', function () {
+            const d: ICalTZDateStub = Object.assign(new Date(), {
+                internal: new Date(),
+                tzComponents() {
+                    return {};
+                },
+                withTimeZone() {
+                    return this;
+                },
+            });
+            assert.strictEqual(isTZDate(d), true);
+
+            const plain = new Date();
+            assert.strictEqual(isTZDate(plain), false);
         });
     });
 });
