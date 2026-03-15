@@ -9,7 +9,7 @@
         "@eslint/js": "^10.0.1",
         "@istanbuljs/nyc-config-typescript": "^1.0.2",
         "@qiwi/semantic-release-gh-pages-plugin": "^5.4.3",
-        "@sebbo2002/semantic-release-jsr": "^3.2.0",
+        "@sebbo2002/semantic-release-jsr": "^3.2.1",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/exec": "^7.1.0",
         "@semantic-release/git": "^10.0.1",
@@ -19,10 +19,10 @@
         "@types/luxon": "^3.7.1",
         "@types/mocha": "^10.0.10",
         "c8": "^11.0.0",
-        "dayjs": "^1.11.19",
-        "eslint": "^10.0.2",
+        "dayjs": "^1.11.20",
+        "eslint": "^10.0.3",
         "eslint-config-prettier": "^10.1.8",
-        "eslint-plugin-jsonc": "^3.1.1",
+        "eslint-plugin-jsonc": "^3.1.2",
         "eslint-plugin-perfectionist": "^5.6.0",
         "esm": "^3.2.25",
         "globals": "^17.4.0",
@@ -44,7 +44,7 @@
         "tsx": "^4.21.0",
         "typedoc": "^0.28.17",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.56.0"
+        "typescript-eslint": "^8.57.0"
     },
     "engines": {
         "node": "20 || 22 || >=24"
