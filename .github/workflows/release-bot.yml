@@ -10,11 +10,14 @@ jobs:
   release-bot:
     runs-on: ubuntu-latest
     if: ${{ github.repository != 'sebbo2002/js-template' }}
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: ☁️ Checkout Project
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: ☁️ Checkout ReleaseBot
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: sebbo2002/release-bot
           path: ./.actions/release-bot
@@ -29,4 +32,4 @@ jobs:
       - name: 🤖 Run ReleaseBot
         uses: ./.actions/release-bot
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}

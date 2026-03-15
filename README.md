@@ -74,9 +74,10 @@ See the [examples](https://github.com/sebbo2002/ical-generator/tree/develop/exam
 ## 🕒 Date, Time & Timezones
 
 ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
-[Day.js](https://day.js.org/en/), [Luxon's](https://moment.github.io/luxon/) [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
-and the older [moment.js](https://momentjs.com/), [moment-timezone](https://momentjs.com/timezone/)
-objects and [TZDate](https://github.com/date-fns/tz). You can also pass a string which is then passed to javascript's `Date` internally.
+[Day.js](https://day.js.org/en/), [Luxon's](https://moment.github.io/luxon/) [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html),
+the older [moment.js](https://momentjs.com/), [moment-timezone](https://momentjs.com/timezone/),
+[TZDate](https://github.com/date-fns/tz) and [Temporal](https://tc39.es/proposal-temporal/docs/) objects.
+You can also pass a string which is then passed to javascript's `Date` internally.
 
 It is recommended to use UTC time as far as possible. `ical-generator` will output all time information as UTC time as
 long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
@@ -85,6 +86,7 @@ to use a VTimezone generator. Such a function generates a VTimezone entry and re
 `timezones-ical-library` or `@touch4it/ical-timezones` can be used for this:
 
 #### Example with `@touch4it/ical-timezones`
+
 ```typescript
 import { ICalCalendar } from 'ical-generator';
 import { getVtimezoneComponent } from '@touch4it/ical-timezones';
@@ -101,6 +103,7 @@ cal.createEvent({
 ```
 
 #### Example with `timezones-ical-library`
+
 ```typescript
 import { ICalCalendar } from 'ical-generator';
 import { tzlib_get_ical_block } from 'timezones-ical-library';
@@ -108,7 +111,7 @@ import { tzlib_get_ical_block } from 'timezones-ical-library';
 const cal = new ICalCalendar();
 cal.timezone({
     name: 'Europe/Berlin',
-    generator: tz => tzlib_get_ical_block(tz)[0],
+    generator: (tz) => tzlib_get_ical_block(tz)[0],
 });
 cal.createEvent({
     start: new Date(),
