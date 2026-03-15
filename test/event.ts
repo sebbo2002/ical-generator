@@ -1477,7 +1477,6 @@ describe('ical-generator Event', function () {
             const result = e.repeating();
             assert.ok(isRRule(result));
             assert.deepStrictEqual(result, rule);
-            console.log(e.toString());
             assert.ok(
                 e
                     .toString()

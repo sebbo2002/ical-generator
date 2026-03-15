@@ -20,9 +20,9 @@ export enum ICalWeekday {
 
 /**
  * ical-generator supports [native Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date),
- * [moment.js](https://momentjs.com/) (and [moment-timezone](https://momentjs.com/timezone/), [Day.js](https://day.js.org/en/) and
+ * [moment.js](https://momentjs.com/) (and [moment-timezone](https://momentjs.com/timezone/), [Day.js](https://day.js.org/en/),
  * [Luxon](https://moment.github.io/luxon/)'s [DateTime](https://moment.github.io/luxon/docs/class/src/datetime.js~DateTime.html)
- * objects. You can also pass a string which is then passed to javascript's Date internally.
+ * and [Temporal](https://tc39.es/proposal-temporal/docs/) objects. You can also pass a string which is then passed to javascript's Date internally.
  */
 export type ICalDateTimeValue =
     | Date
@@ -30,6 +30,10 @@ export type ICalDateTimeValue =
     | ICalLuxonDateTimeStub
     | ICalMomentStub
     | ICalMomentTimezoneStub
+    | ICalTemporalInstantStub
+    | ICalTemporalPlainDateStub
+    | ICalTemporalPlainDateTimeStub
+    | ICalTemporalZonedDateTimeStub
     | string;
 
 export interface ICalDayJsStub {
@@ -37,8 +41,8 @@ export interface ICalDayJsStub {
     isValid(): boolean;
     toDate(): Date;
     toJSON(): string;
-    tz(zone?: string): ICalDayJsStub;
-    utc(): ICalDayJsStub;
+    tz?(zone?: string): ICalDayJsStub;
+    utc?(): ICalDayJsStub;
 }
 
 export interface ICalDescription {
@@ -121,6 +125,50 @@ export interface ICalRRuleStub {
         iterator?: (d: Date, len: number) => boolean,
     ): Date[];
     toString(): string;
+}
+
+export interface ICalTemporalInstantStub {
+    epochMilliseconds: number;
+    epochSeconds?: number;
+    toJSON(): string;
+    toString(): string;
+    toZonedDateTimeISO(timeZone: string): ICalTemporalZonedDateTimeStub;
+}
+
+export interface ICalTemporalPlainDateStub {
+    day: number;
+    month: number;
+    toJSON(): string;
+    toString(): string;
+    year: number;
+}
+
+export interface ICalTemporalPlainDateTimeStub {
+    day: number;
+    hour: number;
+    minute: number;
+    month: number;
+    second: number;
+    toJSON(): string;
+    toPlainDate(): ICalTemporalPlainDateStub;
+    toString(): string;
+    toZonedDateTime(timeZone: string): ICalTemporalZonedDateTimeStub;
+    year: number;
+}
+
+export interface ICalTemporalZonedDateTimeStub {
+    day: number;
+    hour: number;
+    minute: number;
+    month: number;
+    second: number;
+    timeZoneId: string;
+    toInstant(): ICalTemporalInstantStub;
+    toJSON(): string;
+    toPlainDateTime(): ICalTemporalPlainDateTimeStub;
+    toString(): string;
+    withTimeZone(timeZone: string): ICalTemporalZonedDateTimeStub;
+    year: number;
 }
 
 export interface ICalTimezone {

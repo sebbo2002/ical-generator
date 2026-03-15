@@ -9,6 +9,10 @@ import {
     type ICalMomentTimezoneStub,
     type ICalOrganizer,
     type ICalRRuleStub,
+    type ICalTemporalInstantStub,
+    type ICalTemporalPlainDateStub,
+    type ICalTemporalPlainDateTimeStub,
+    type ICalTemporalZonedDateTimeStub,
     type ICalTZDateStub,
 } from './types.ts';
 
@@ -94,6 +98,19 @@ export function checkDate(
         throw new Error(`\`${attribute}\` has to be a valid date!`);
     }
     if (value instanceof Date || typeof value === 'string') {
+        return value;
+    }
+
+    // Temporal types - these are always valid if they exist
+    // Check this first to avoid false positives with other date libraries
+    if (
+        typeof value === 'object' &&
+        value !== null &&
+        (isTemporalZonedDateTime(value) ||
+            isTemporalPlainDateTime(value) ||
+            isTemporalPlainDate(value) ||
+            isTemporalInstant(value))
+    ) {
         return value;
     }
 
@@ -314,6 +331,66 @@ export function formatDate(
                 ? 'T' + m.toFormat('HHmmss') + (floating || timezone ? '' : 'Z')
                 : '')
         );
+    } else if (isTemporalZonedDateTime(d)) {
+        let t = d;
+
+        // try to convert to the specified timezone
+        if (timezone) {
+            t = d.withTimeZone(d.timeZoneId);
+        }
+        if (!timezone && d.timeZoneId !== 'UTC') {
+            t = d.withTimeZone('UTC');
+        }
+
+        return formatDate(
+            null,
+            t.toPlainDateTime(),
+            dateonly,
+
+            // keep floating if specified or if a timezone is set
+            // to remove the 'Z' UTC specifier from the output
+            floating || !!timezone,
+        );
+    } else if (isTemporalPlainDateTime(d)) {
+        // Temporal.PlainDateTime - floating time or convert to timezone
+        if (dateonly) {
+            return (
+                d.year +
+                d.month.toString().padStart(2, '0') +
+                d.day.toString().padStart(2, '0')
+            );
+        }
+
+        if (timezone) {
+            // Convert to ZonedDateTime in the specified timezone
+            const zoned = d.toZonedDateTime(timezone);
+            return formatDate(timezone, zoned, dateonly, floating);
+        }
+
+        // Floating time - no timezone, no Z
+        return (
+            d.year +
+            d.month.toString().padStart(2, '0') +
+            d.day.toString().padStart(2, '0') +
+            'T' +
+            d.hour.toString().padStart(2, '0') +
+            d.minute.toString().padStart(2, '0') +
+            d.second.toString().padStart(2, '0') +
+            (floating || timezone ? '' : 'Z')
+        );
+    } else if (isTemporalPlainDate(d)) {
+        // Temporal.PlainDate - date only
+        return (
+            d.year +
+            d.month.toString().padStart(2, '0') +
+            d.day.toString().padStart(2, '0') +
+            (!dateonly ? 'T000000' + (floating || timezone ? '' : 'Z') : '')
+        );
+    } else if (isTemporalInstant(d)) {
+        // Temporal.Instant - convert to ZonedDateTime first
+        const targetTz = timezone || 'UTC';
+        const zoned = d.toZonedDateTimeISO(targetTz);
+        return formatDate(timezone, zoned, dateonly, floating);
     } else {
         // @see https://day.js.org/docs/en/plugin/utc
 
@@ -381,7 +458,8 @@ export function isDayjs(value: ICalDateTimeValue): value is ICalDayJsStub {
         value !== null &&
         !(value instanceof Date) &&
         !isMoment(value) &&
-        !isLuxonDate(value)
+        !isLuxonDate(value) &&
+        !isTemporal(value)
     );
 }
 
@@ -392,12 +470,17 @@ export function isLuxonDate(
         typeof value === 'object' &&
         value !== null &&
         'toJSDate' in value &&
-        typeof value.toJSDate === 'function'
+        typeof value.toJSDate === 'function' &&
+        !isTemporal(value)
     );
 }
 export function isMoment(value: ICalDateTimeValue): value is ICalMomentStub {
-    // @ts-expect-error _isAMomentObject is a private property
-    return value != null && value._isAMomentObject != null;
+    return (
+        value != null &&
+        // @ts-expect-error _isAMomentObject is a private property
+        value._isAMomentObject != null &&
+        !isTemporal(value)
+    );
 }
 export function isMomentDuration(
     value: unknown,
@@ -425,6 +508,111 @@ export function isRRule(value: unknown): value is ICalRRuleStub {
     );
 }
 
+export function isTemporal(
+    value: ICalDateTimeValue,
+): value is
+    | ICalTemporalInstantStub
+    | ICalTemporalPlainDateStub
+    | ICalTemporalPlainDateTimeStub
+    | ICalTemporalZonedDateTimeStub {
+    return (
+        isTemporalZonedDateTime(value) ||
+        isTemporalPlainDateTime(value) ||
+        isTemporalPlainDate(value) ||
+        isTemporalInstant(value)
+    );
+}
+
+export function isTemporalInstant(
+    value: ICalDateTimeValue,
+): value is ICalTemporalInstantStub {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        !isTemporalZonedDateTime(value) &&
+        !isTemporalPlainDateTime(value) &&
+        !isTemporalPlainDate(value) &&
+        'toZonedDateTimeISO' in value &&
+        typeof value.toZonedDateTimeISO === 'function' &&
+        !('year' in value) &&
+        !('timeZoneId' in value)
+    );
+}
+
+export function isTemporalPlainDate(
+    value: ICalDateTimeValue,
+): value is ICalTemporalPlainDateStub {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        !isTemporalZonedDateTime(value) &&
+        !isTemporalPlainDateTime(value) &&
+        'toPlainDateTime' in value &&
+        typeof value.toPlainDateTime === 'function' &&
+        'year' in value &&
+        typeof value.year === 'number' &&
+        'month' in value &&
+        typeof value.month === 'number' &&
+        'day' in value &&
+        typeof value.day === 'number' &&
+        !('hour' in value) &&
+        !('timeZoneId' in value) &&
+        !('epochSeconds' in value)
+    );
+}
+
+export function isTemporalPlainDateTime(
+    value: ICalDateTimeValue,
+): value is ICalTemporalPlainDateTimeStub {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        !isTemporalZonedDateTime(value) &&
+        'toZonedDateTime' in value &&
+        typeof value.toZonedDateTime === 'function' &&
+        'toPlainDate' in value &&
+        typeof value.toPlainDate === 'function' &&
+        'year' in value &&
+        typeof value.year === 'number' &&
+        'month' in value &&
+        typeof value.month === 'number' &&
+        'day' in value &&
+        typeof value.day === 'number' &&
+        'hour' in value &&
+        typeof value.hour === 'number' &&
+        'minute' in value &&
+        typeof value.minute === 'number' &&
+        'second' in value &&
+        typeof value.second === 'number' &&
+        !('timeZone' in value)
+    );
+}
+
+export function isTemporalZonedDateTime(
+    value: ICalDateTimeValue,
+): value is ICalTemporalZonedDateTimeStub {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        'timeZoneId' in value &&
+        typeof value.timeZoneId === 'string' &&
+        'toPlainDateTime' in value &&
+        typeof value.toPlainDateTime === 'function' &&
+        'year' in value &&
+        typeof value.year === 'number' &&
+        'month' in value &&
+        typeof value.month === 'number' &&
+        'day' in value &&
+        typeof value.day === 'number' &&
+        'hour' in value &&
+        typeof value.hour === 'number' &&
+        'minute' in value &&
+        typeof value.minute === 'number' &&
+        'second' in value &&
+        typeof value.second === 'number'
+    );
+}
+
 export function isTZDate(value: ICalDateTimeValue): value is ICalTZDateStub {
     return (
         value instanceof Date &&
@@ -440,6 +628,36 @@ export function isTZDate(value: ICalDateTimeValue): value is ICalTZDateStub {
 export function toDate(value: ICalDateTimeValue): Date {
     if (typeof value === 'string' || value instanceof Date) {
         return new Date(value);
+    }
+
+    if (isTemporalZonedDateTime(value)) {
+        // Convert ZonedDateTime to Instant, then to Date
+        const instant = value.toInstant();
+        return new Date(instant.epochMilliseconds);
+    }
+
+    if (isTemporalPlainDateTime(value)) {
+        // PlainDateTime has no timezone, treat as UTC
+        return new Date(
+            Date.UTC(
+                value.year,
+                value.month - 1,
+                value.day,
+                value.hour,
+                value.minute,
+                value.second,
+            ),
+        );
+    }
+
+    if (isTemporalPlainDate(value)) {
+        // PlainDate has no time, treat as midnight UTC
+        return new Date(Date.UTC(value.year, value.month - 1, value.day));
+    }
+
+    if (isTemporalInstant(value)) {
+        // Instant has epochMilliseconds
+        return new Date(value.epochMilliseconds);
     }
 
     if (isLuxonDate(value)) {
@@ -501,6 +719,17 @@ export function toJSON(
     }
     if (typeof value === 'string') {
         return value;
+    }
+
+    // Temporal.ZonedDateTime needs special handling to convert to UTC first
+    // as [Timezone] info is not supported as a string input format
+    if (isTemporalZonedDateTime(value)) {
+        return toJSON(value.withTimeZone('UTC').toPlainDateTime());
+    }
+
+    // Temporal types have toJSON() method that returns ISO strings
+    if (isTemporal(value)) {
+        return value.toJSON();
     }
 
     return value.toJSON();

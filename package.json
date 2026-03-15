@@ -39,6 +39,7 @@
         "semantic-release": "^25.0.3",
         "semantic-release-license": "^1.0.2",
         "source-map-support": "^0.5.21",
+        "temporal-polyfill": "^0.3.0",
         "tsup": "^8.5.1",
         "tsx": "^4.21.0",
         "typedoc": "^0.28.17",

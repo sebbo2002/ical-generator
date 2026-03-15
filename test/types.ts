@@ -9,6 +9,7 @@ import { DateTime } from 'luxon';
 import moment from 'moment';
 import momentTz from 'moment-timezone';
 import rrule from 'rrule';
+import { Temporal } from 'temporal-polyfill';
 
 import {
     type ICalAttendeeData,
@@ -23,6 +24,8 @@ import {
     type ICalMomentStub,
     type ICalMomentTimezoneStub,
     type ICalRRuleStub,
+    type ICalTemporalInstantStub,
+    type ICalTemporalPlainDateStub,
     type ICalTZDateStub,
 } from '../src/index.js';
 
@@ -31,6 +34,18 @@ const luxonTest = DateTime.now() satisfies ICalLuxonDateTimeStub;
 const momentTest = moment() satisfies ICalMomentStub;
 const momentTimezoneTest = momentTz() satisfies ICalMomentTimezoneStub;
 const dateFnsTzTest = new TZDate() satisfies ICalTZDateStub;
+const temporalInstantTest = Temporal.Instant.from(
+    '2024-01-01T00:00:00Z',
+) satisfies ICalTemporalInstantStub;
+const temporalPlainDateTest = Temporal.PlainDate.from(
+    '2024-01-01',
+) satisfies ICalTemporalPlainDateStub;
+const temporalPlainDateTimeTest = Temporal.PlainDateTime.from(
+    '2024-01-01T00:00:00',
+) satisfies ICalTemporalPlainDateStub;
+const temporalZonedDateTimeTest = Temporal.ZonedDateTime.from(
+    '2024-01-01T00:00:00+00:00[UTC]',
+) satisfies ICalTemporalPlainDateStub;
 
 const RRule = rrule.RRule;
 const rruleTest = new RRule({
@@ -54,6 +69,22 @@ describe('ical-generator Types', function () {
         );
         assert.ok(rruleTest, 'rrule stub should be compatible');
         assert.ok(dateFnsTzTest, 'date-fns/tz stub should be compatible');
+        assert.ok(
+            temporalInstantTest,
+            'Temporal.Instant stub should be compatible',
+        );
+        assert.ok(
+            temporalPlainDateTest,
+            'Temporal.PlainDate stub should be compatible',
+        );
+        assert.ok(
+            temporalPlainDateTimeTest,
+            'Temporal.PlainDateTime stub should be compatible',
+        );
+        assert.ok(
+            temporalZonedDateTimeTest,
+            'Temporal.ZonedDateTime stub should be compatible',
+        );
     });
     it('calendar data should be compatible with calendar json data', function () {
         assert.ok(attendeeJson, 'attendee json data should be compatible');
