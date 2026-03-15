@@ -1,3 +1,9 @@
+# [10.1.0](https://github.com/sebbo2002/ical-generator/compare/v10.0.0...v10.1.0) (2026-03-15)
+
+### Features
+
+- Temporal Support ([c16cc30](https://github.com/sebbo2002/ical-generator/commit/c16cc303d238ec2a7cc1293dd32506b4ee5ee58b)), closes [#583](https://github.com/sebbo2002/ical-generator/issues/583)
+
 # [10.0.0](https://github.com/sebbo2002/ical-generator/compare/v9.0.0...v10.0.0) (2025-10-28)
 
 ### Bug Fixes
