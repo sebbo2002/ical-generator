@@ -268,14 +268,14 @@ export function formatDate(
 
         // (!dateonly && !floating) || !timezone => utc
         let s =
-            m.getUTCFullYear() +
+            m.getUTCFullYear().toString().padStart(4, '0') +
             String(m.getUTCMonth() + 1).padStart(2, '0') +
             m.getUTCDate().toString().padStart(2, '0');
 
         // (dateonly || floating) && timezone => tz
         if (timezone) {
             s =
-                m.getFullYear() +
+                m.getFullYear().toString().padStart(2, '0') +
                 String(m.getMonth() + 1).padStart(2, '0') +
                 m.getDate().toString().padStart(2, '0');
         }
@@ -355,7 +355,7 @@ export function formatDate(
         // Temporal.PlainDateTime - floating time or convert to timezone
         if (dateonly) {
             return (
-                d.year +
+                d.year.toString().padStart(4, '0') +
                 d.month.toString().padStart(2, '0') +
                 d.day.toString().padStart(2, '0')
             );
@@ -369,7 +369,7 @@ export function formatDate(
 
         // Floating time - no timezone, no Z
         return (
-            d.year +
+            d.year.toString().padStart(4, '0') +
             d.month.toString().padStart(2, '0') +
             d.day.toString().padStart(2, '0') +
             'T' +
@@ -381,7 +381,7 @@ export function formatDate(
     } else if (isTemporalPlainDate(d)) {
         // Temporal.PlainDate - date only
         return (
-            d.year +
+            d.year.toString().padStart(4, '0') +
             d.month.toString().padStart(2, '0') +
             d.day.toString().padStart(2, '0') +
             (!dateonly ? 'T000000' + (floating || timezone ? '' : 'Z') : '')

@@ -1,9 +1,17 @@
 'use strict';
 
 import assert from 'assert';
+import dayjs from 'dayjs';
+import dayJsTimezonePlugin from 'dayjs/plugin/timezone.js';
+import dayJsUTCPlugin from 'dayjs/plugin/utc.js';
+import { DateTime } from 'luxon';
 import moment from 'moment-timezone';
+import { Temporal } from 'temporal-polyfill';
 
-import ical from '../src/index.js';
+dayjs.extend(dayJsUTCPlugin);
+dayjs.extend(dayJsTimezonePlugin);
+
+import ical, { ICalEvent } from '../src/index.js';
 import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types.js';
 
 describe('Issues', function () {
@@ -402,6 +410,105 @@ describe('Issues', function () {
                     summary: 'Test Event',
                 });
             }, /`location` isn't formatted correctly/);
+        });
+    });
+
+    describe('Issue #732', function () {
+        it('provided example should produce valid output', function () {
+            const cal = ical();
+            const event = new ICalEvent(
+                {
+                    description: 'description',
+                    id: 'id',
+                    start: new Date('0025-05-12T08:35:00.000+00:00'),
+                    summary: 'summary',
+                },
+                cal,
+            );
+
+            cal.createEvent(event);
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with String', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: '0025-05-12T08:35:00.000+00:00',
+            });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Date', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: new Date('0025-05-12T08:35:00.000+00:00'),
+            });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Moment', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: moment('0025-05-12T08:35:00.000+00:00'),
+            });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Moment TZ', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: moment.tz('0025-05-12T08:35:00.000+00:00', 'UTC'),
+            });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Luxon', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: DateTime.fromISO('0025-05-12T08:35:00.000+00:00'),
+            });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Day.js', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: dayjs('0025-05-12T08:35:00.000+00:00'),
+            });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Temporal::ZonedDateTime', function () {
+            const cal = ical();
+            const zdt = Temporal.ZonedDateTime.from({
+                day: 12,
+                hour: 8,
+                minute: 35,
+                month: 5,
+                second: 0,
+                timeZone: 'UTC',
+                year: 25,
+            });
+            cal.createEvent({ start: zdt });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Temporal::PlainDateTime', function () {
+            const cal = ical();
+            const pdt = Temporal.PlainDateTime.from({
+                day: 12,
+                hour: 8,
+                minute: 35,
+                month: 5,
+                second: 0,
+                year: 25,
+            });
+            cal.createEvent({ start: pdt });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
+        });
+        it('should work with Temporal::PlainDate', function () {
+            const cal = ical();
+            const pd = Temporal.PlainDate.from({ day: 12, month: 5, year: 25 });
+            cal.createEvent({ start: pd });
+            assert.ok(cal.toString().includes('DTSTART:00250512T000000'));
+        });
+        it('should work with Temporal::Instant', function () {
+            const cal = ical();
+            const instant = Temporal.Instant.from('0025-05-12T08:35:00Z');
+            cal.createEvent({ start: instant });
+            assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
         });
     });
 });
