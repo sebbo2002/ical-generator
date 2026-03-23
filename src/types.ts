@@ -8,6 +8,19 @@ export enum ICalEventRepeatingFreq {
     YEARLY = 'YEARLY',
 }
 
+export enum ICalEventTravelTimeSuggestion {
+    AUTOMATIC = 'AUTOMATIC',
+    DISABLED = 'DISABLED',
+    ENABLED = 'ENABLED',
+}
+
+export enum ICalEventTravelTimeTransportation {
+    BICYCLE = 'BICYCLE',
+    CAR = 'CAR',
+    TRANSIT = 'TRANSIT',
+    WALKING = 'WALKING',
+}
+
 export enum ICalWeekday {
     FR = 'FR',
     MO = 'MO',
@@ -48,6 +61,15 @@ export interface ICalDayJsStub {
 export interface ICalDescription {
     html?: string;
     plain: string;
+}
+
+export interface ICalEventTravelTime {
+    seconds: number;
+    startFrom?: {
+        location: ICalLocation;
+        transportation: ICalEventTravelTimeTransportation;
+    };
+    suggestionBehavior?: ICalEventTravelTimeSuggestion;
 }
 
 export interface ICalGeo {

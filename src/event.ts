@@ -15,12 +15,14 @@ import {
     generateCustomAttributes,
     isRRule,
     toDate,
+    toDurationString,
     toJSON,
 } from './tools.ts';
 import {
     type ICalDateTimeValue,
     type ICalDescription,
     ICalEventRepeatingFreq,
+    type ICalEventTravelTime,
     type ICalLocation,
     type ICalOrganizer,
     type ICalRepeatingOptions,
@@ -78,6 +80,7 @@ export interface ICalEventData {
     summary?: string;
     timezone?: null | string;
     transparency?: ICalEventTransparency | null;
+    travelTime?: ICalEventTravelTime | null;
     url?: null | string;
     x?:
         | [string, string][]
@@ -110,6 +113,7 @@ export interface ICalEventJSONData {
     summary: string;
     timezone: null | string;
     transparency: ICalEventTransparency | null;
+    travelTime: ICalEventTravelTime | null;
     url: null | string;
     x: { key: string; value: string }[];
 }
@@ -153,6 +157,7 @@ interface ICalEventInternalData {
     summary: string;
     timezone: null | string;
     transparency: ICalEventTransparency | null;
+    travelTime: ICalEventTravelTime | null;
     url: null | string;
     x: [string, string][];
 }
@@ -203,6 +208,7 @@ export default class ICalEvent {
             summary: '',
             timezone: null,
             transparency: null,
+            travelTime: null,
             url: null,
             x: [],
         };
@@ -237,6 +243,7 @@ export default class ICalEvent {
         if (data.attachments !== undefined) this.attachments(data.attachments);
         if (data.transparency !== undefined)
             this.transparency(data.transparency);
+        if (data.travelTime !== undefined) this.travelTime(data.travelTime);
         if (data.created !== undefined) this.created(data.created);
         if (data.lastModified !== undefined)
             this.lastModified(data.lastModified);
@@ -1781,6 +1788,99 @@ export default class ICalEvent {
                 '\r\n';
         }
 
+        // Travel time
+        if (this.data.travelTime) {
+            g +=
+                'X-APPLE-TRAVEL-DURATION;VALUE=DURATION:' +
+                toDurationString(this.data.travelTime.seconds) +
+                '\r\n';
+
+            if (this.data.location) {
+                if (this.data.travelTime.suggestionBehavior) {
+                    g +=
+                        'X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:' +
+                        this.data.travelTime.suggestionBehavior +
+                        '\r\n';
+                }
+                if (this.data.travelTime.startFrom) {
+                    g += 'X-APPLE-TRAVEL-START;';
+
+                    const travelStartParameters: string[] = [];
+
+                    travelStartParameters.push(
+                        'ROUTING=' +
+                            this.data.travelTime.startFrom.transportation,
+                    );
+                    travelStartParameters.push('VALUE=URI');
+
+                    if (
+                        'address' in this.data.travelTime.startFrom.location &&
+                        this.data.travelTime.startFrom.location.address
+                    ) {
+                        travelStartParameters.push(
+                            'X-ADDRESS=' +
+                                escape(
+                                    this.data.travelTime.startFrom.location
+                                        .address,
+                                    false,
+                                ),
+                        );
+                    }
+
+                    if (
+                        'radius' in this.data.travelTime.startFrom.location &&
+                        this.data.travelTime.startFrom.location.radius
+                    ) {
+                        travelStartParameters.push(
+                            'X-APPLE-RADIUS=' +
+                                escape(
+                                    this.data.travelTime.startFrom.location
+                                        .radius,
+                                    false,
+                                ),
+                        );
+                    }
+
+                    if (
+                        'title' in this.data.travelTime.startFrom.location &&
+                        this.data.travelTime.startFrom.location.title
+                    ) {
+                        travelStartParameters.push(
+                            'X-TITLE=' +
+                                escape(
+                                    this.data.travelTime.startFrom.location
+                                        .title,
+                                    false,
+                                ),
+                        );
+                    }
+
+                    g += travelStartParameters.join(';');
+
+                    if (
+                        'geo' in this.data.travelTime.startFrom.location &&
+                        this.data.travelTime.startFrom.location.geo
+                    ) {
+                        g +=
+                            ':geo:' +
+                            escape(
+                                this.data.travelTime.startFrom.location.geo
+                                    ?.lat,
+                                false,
+                            ) +
+                            ',' +
+                            escape(
+                                this.data.travelTime.startFrom.location.geo
+                                    ?.lon,
+                                false,
+                            );
+                    }
+
+                    g += '\r\n';
+                }
+            }
+        }
+
         // DESCRIPTION
         if (this.data.description) {
             g +=
@@ -1939,6 +2039,58 @@ export default class ICalEvent {
             ICalEventTransparency,
             transparency,
         ) as ICalEventTransparency;
+        return this;
+    }
+
+    /**
+     * Get the event's travel time
+     * @returns {null|ICalEventTravelTime}
+     */
+    travelTime(): ICalEventTravelTime | null;
+    /**
+     * Use this method to set the event's travel time. \
+     * (Only supported on Apple calendar clients)
+     *
+     * @param {null|number} travelTime Travel time in seconds
+     */
+    travelTime(travelTime: null | number): this;
+    /**
+     * Use this method to set the event's travel time. \
+     * (Only supported on Apple calendar clients)
+     *
+     * NOTE: suggestionBehavior and travelStart will only be set if the event has a location
+     *
+     * @param {null|ICalEventTravelTime} travelTime Travel time object
+     */
+    travelTime(travelTime: ICalEventTravelTime | null): this;
+    travelTime(
+        travelTime?: ICalEventTravelTime | null | number,
+    ): ICalEventTravelTime | null | number | this {
+        if (travelTime === undefined) {
+            return this.data.travelTime;
+        }
+
+        if (typeof travelTime === 'number' && travelTime <= 0) {
+            throw new Error('`travelTime` has to be more than 0!');
+        }
+
+        if (
+            travelTime &&
+            typeof travelTime === 'object' &&
+            'seconds' in travelTime &&
+            travelTime.seconds <= 0
+        ) {
+            throw new Error('`travelTime.seconds` has to be more than 0!');
+        }
+
+        if (typeof travelTime === 'number') {
+            this.data.travelTime = {
+                seconds: travelTime,
+            };
+            return this;
+        }
+
+        this.data.travelTime = travelTime;
         return this;
     }
 
