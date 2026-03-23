@@ -14,6 +14,7 @@ describe('ical-generator Calendar', function () {
     describe('constructor()', function () {
         it('shoud load json export', function () {
             const data: ICalCalendarJSONData = {
+                color: null,
                 description: 'Hi, I am the description.',
                 events: [],
                 method: ICalCalendarMethod.PUBLISH,
@@ -325,6 +326,30 @@ describe('ical-generator Calendar', function () {
                 summary: 'Example Event',
             });
             assert.ok(cal.scale(), 'GREGORIAN');
+        });
+    });
+
+    describe('color()', function () {
+        it('setter should return this', function () {
+            const cal = new ICalCalendar();
+            assert.deepStrictEqual(cal, cal.color('#237fcb'));
+        });
+
+        it('getter should return value', function () {
+            const cal = new ICalCalendar();
+            assert.strictEqual(cal.color(), null);
+            cal.color('#237fcb');
+            assert.strictEqual(cal.color(), '#237FCB');
+            cal.color(null);
+            assert.strictEqual(cal.color(), null);
+        });
+
+        it('should throw error when the color is formatted incorrectly', function () {
+            const cal = new ICalCalendar();
+            assert.throws(() => {
+                // @ts-ignore
+                cal.color('#fff');
+            });
         });
     });
 
