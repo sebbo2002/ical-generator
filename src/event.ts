@@ -2051,6 +2051,11 @@ export default class ICalEvent {
      * Use this method to set the event's travel time. \
      * (Only supported on Apple calendar clients)
      *
+     * ```typescript
+     * // Set fixed travel time in seconds, doesn't recalculate if traffic conditions change
+     * event.travelTime(60 * 30) // 30 minutes travel time
+     * ```
+     *
      * @param {null|number} travelTime Travel time in seconds
      */
     travelTime(travelTime: null | number): this;
@@ -2059,6 +2064,24 @@ export default class ICalEvent {
      * (Only supported on Apple calendar clients)
      *
      * NOTE: suggestionBehavior and travelStart will only be set if the event has a location
+     *
+     * ```typescript
+     * // Set travel time in seconds, if startFrom is present it adapts if traffic conditions change
+     * event.travelTime({
+     *   seconds: 60 * 30, // 30 minutes travel time
+     *   suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC, // Let Apple Calendar client decide how to handle suggestions
+     *   startFrom: {
+     *     location: {
+     *       geo: {
+     *         lat: 50.000000,
+     *         lon: 10.000000
+     *       },
+     *       title: "Private address"
+     *     },
+     *     transportation: ICalEventTravelTimeTransportation.BICYCLE // Use bicycle routes for travel time recalculation
+     *   }
+     * })
+     * ```
      *
      * @param {null|ICalEventTravelTime} travelTime Travel time object
      */
