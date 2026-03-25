@@ -16,7 +16,12 @@ import {
 import { ICalCalendarMethod } from '../src/calendar.js';
 import { ICalEventStatus } from '../src/event.js';
 import ical, { ICalEventTransparency } from '../src/index.js';
-import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types.js';
+import {
+    ICalEventRepeatingFreq,
+    ICalEventTravelTimeSuggestion,
+    ICalEventTravelTimeTransportation,
+    ICalWeekday,
+} from '../src/types.js';
 
 describe('ical-generator Cases', function () {
     const resultDir = join(dirname(fileURLToPath(import.meta.url)), 'results');
@@ -87,8 +92,25 @@ describe('ical-generator Cases', function () {
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             status: ICalEventStatus.CONFIRMED,
             summary: 'Sample Event',
+            travelTime: {
+                seconds: 60 * 30,
+                startFrom: {
+                    location: {
+                        address: 'Turmstr. 39, 10551 Berlin, Deutschland',
+                        geo: {
+                            lat: 52.52683,
+                            lon: 13.336345,
+                        },
+                        title: 'Private address',
+                    },
+                    transportation: ICalEventTravelTimeTransportation.BICYCLE,
+                },
+                suggestionBehavior: ICalEventTravelTimeSuggestion.ENABLED,
+            },
             url: 'http://sebbo.net/',
         });
+
+        console.log(cal.events()[0].toString());
 
         const string = cal.toString();
         assert.strictEqual(
