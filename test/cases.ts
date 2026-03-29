@@ -92,21 +92,6 @@ describe('ical-generator Cases', function () {
             start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
             status: ICalEventStatus.CONFIRMED,
             summary: 'Sample Event',
-            travelTime: {
-                seconds: 60 * 30,
-                startFrom: {
-                    location: {
-                        address: 'Turmstr. 39, 10551 Berlin, Deutschland',
-                        geo: {
-                            lat: 52.52683,
-                            lon: 13.336345,
-                        },
-                        title: 'Private address',
-                    },
-                    transportation: ICalEventTravelTimeTransportation.BICYCLE,
-                },
-                suggestionBehavior: ICalEventTravelTimeSuggestion.ENABLED,
-            },
             url: 'http://sebbo.net/',
         });
 
@@ -399,6 +384,48 @@ describe('ical-generator Cases', function () {
         assert.strictEqual(
             string,
             await fs.readFile(resultDir + '/generate_10.ics', 'utf8'),
+        );
+        assert.strictEqual(ical(cal.toJSON()).toString(), string);
+    });
+    
+    it('case #11 (Apple travel time)', async function () {
+        const cal = ical({
+            method: ICalCalendarMethod.PUBLISH,
+            prodId: '//sebbo.net//ical-generator.tests//EN',
+        });
+        cal.createEvent({
+            end: new Date('Fr Oct 04 2013 23:39:30 UTC'),
+            id: '123',
+            location: {
+                address: 'Kurfürstendamm 26, 10719 Berlin, Deutschland',
+                geo: { lat: 52.50363, lon: 13.32865 },
+                radius: 141.1751386318387,
+                title: 'Apple Store Kurfürstendamm',
+            },
+            stamp: new Date('Fr Oct 04 2013 23:34:53 UTC'),
+            start: new Date('Fr Oct 04 2013 22:39:30 UTC'),
+            summary: 'Sample Event',
+            travelTime: {
+                seconds: 60 * 30,
+                startFrom: {
+                    location: {
+                        address: 'Turmstr. 39, 10551 Berlin, Deutschland',
+                        geo: {
+                            lat: 52.52683,
+                            lon: 13.336345,
+                        },
+                        title: 'Private address',
+                    },
+                    transportation: ICalEventTravelTimeTransportation.BICYCLE,
+                },
+                suggestionBehavior: ICalEventTravelTimeSuggestion.ENABLED,
+            },
+            url: 'http://sebbo.net/',
+        });
+        const string = cal.toString();
+        assert.strictEqual(
+            string,
+            await fs.readFile(resultDir + '/generate_11.ics', 'utf8'),
         );
         assert.strictEqual(ical(cal.toJSON()).toString(), string);
     });
