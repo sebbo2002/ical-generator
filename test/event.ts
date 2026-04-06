@@ -17,7 +17,12 @@ import ICalEvent, {
     ICalEventTransparency,
 } from '../src/event.js';
 import { isRRule } from '../src/tools.js';
-import { ICalEventRepeatingFreq, ICalWeekday } from '../src/types.js';
+import {
+    ICalEventRepeatingFreq,
+    ICalEventTravelTimeSuggestion,
+    ICalEventTravelTimeTransportation,
+    ICalWeekday,
+} from '../src/types.js';
 
 describe('ical-generator Event', function () {
     describe('constructor()', function () {
@@ -50,6 +55,7 @@ describe('ical-generator Event', function () {
                 summary: 'Hello.',
                 timezone: 'Europe/Berlin',
                 transparency: ICalEventTransparency.TRANSPARENT,
+                travelTime: null,
                 url: 'https://github.com/sebbo2002/ical-generator',
                 x: [],
             };
@@ -2543,6 +2549,257 @@ describe('ical-generator Event', function () {
                 // @ts-ignore
                 e.transparency(-1);
             }, /Input must be one of the following: OPAQUE, TRANSPARENT/);
+        });
+    });
+
+    describe('travelTime()', function () {
+        it('getter should return value', function () {
+            const e = new ICalEvent({ start: new Date() }, new ICalCalendar());
+            assert.strictEqual(e.travelTime(), null);
+
+            // 30 minutes travel time
+            e.travelTime(60 * 30);
+            assert.deepStrictEqual(e.travelTime(), { seconds: 1800 });
+
+            e.travelTime(null);
+            assert.strictEqual(e.travelTime(), null);
+
+            e.travelTime({ seconds: 60 * 30 });
+            assert.deepStrictEqual(e.travelTime(), { seconds: 1800 });
+
+            e.travelTime({
+                seconds: 60 * 30,
+                suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC,
+            });
+            assert.deepStrictEqual(e.travelTime(), {
+                seconds: 1800,
+                suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC,
+            });
+
+            e.travelTime({
+                seconds: 60 * 30,
+                startFrom: {
+                    location: {
+                        geo: {
+                            lat: 50.0,
+                            lon: 10.0,
+                        },
+                    },
+                    transportation: ICalEventTravelTimeTransportation.CAR,
+                },
+                suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC,
+            });
+            assert.deepStrictEqual(e.travelTime(), {
+                seconds: 1800,
+                startFrom: {
+                    location: {
+                        geo: {
+                            lat: 50.0,
+                            lon: 10.0,
+                        },
+                    },
+                    transportation: ICalEventTravelTimeTransportation.CAR,
+                },
+                suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC,
+            });
+        });
+
+        it('setter should return this', function () {
+            const e = new ICalEvent({ start: new Date() }, new ICalCalendar());
+            assert.deepStrictEqual(e, e.travelTime(null));
+            assert.deepStrictEqual(e, e.travelTime(60 * 30));
+            assert.deepStrictEqual(e, e.travelTime({ seconds: 60 * 30 }));
+            assert.deepStrictEqual(
+                e,
+                e.travelTime({
+                    seconds: 60 * 30,
+                    suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC,
+                }),
+            );
+            assert.deepStrictEqual(
+                e,
+                e.travelTime({
+                    seconds: 60 * 30,
+                    startFrom: {
+                        location: {
+                            geo: {
+                                lat: 50.0,
+                                lon: 10.0,
+                            },
+                        },
+                        transportation: ICalEventTravelTimeTransportation.CAR,
+                    },
+                    suggestionBehavior: ICalEventTravelTimeSuggestion.AUTOMATIC,
+                }),
+            );
+        });
+
+        it('setter should allow setting null', function () {
+            const e = new ICalEvent({ start: new Date() }, new ICalCalendar());
+            e.travelTime(60 * 30);
+            e.travelTime(null);
+            assert.strictEqual(e.travelTime(), null);
+            assert.ok(!e.toString().includes('X-APPLE-TRAVEL-DURATION'));
+        });
+
+        it('setter should allow setting valid value', function () {
+            const e = new ICalEvent({ start: new Date() }, new ICalCalendar());
+
+            e.travelTime(60 * 30);
+            assert.deepStrictEqual(e.travelTime(), { seconds: 1800 });
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-DURATION;VALUE=DURATION:PT30M'),
+            );
+
+            e.travelTime({ seconds: 60 * 90 });
+            assert.deepStrictEqual(e.travelTime(), { seconds: 5400 });
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-DURATION;VALUE=DURATION:PT1H30M'),
+            );
+
+            e.travelTime({
+                seconds: 60 * 60,
+                suggestionBehavior: ICalEventTravelTimeSuggestion.DISABLED,
+            });
+            assert.deepStrictEqual(e.travelTime(), {
+                seconds: 3600,
+                suggestionBehavior: 'DISABLED',
+            });
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-DURATION;VALUE=DURATION:PT1H'),
+            );
+            // Shouldn't write X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:DISABLED with no location present
+            assert.ok(
+                !e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:DISABLED'),
+            );
+
+            e.location({ geo: { lat: 40.0, lon: 5.0 } });
+            e.travelTime({
+                seconds: 60 * 120,
+                suggestionBehavior: ICalEventTravelTimeSuggestion.DISABLED,
+            });
+            assert.deepStrictEqual(e.travelTime(), {
+                seconds: 7200,
+                suggestionBehavior: ICalEventTravelTimeSuggestion.DISABLED,
+            });
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-DURATION;VALUE=DURATION:PT2H'),
+            );
+            // Shouldn't write X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:DISABLED with no location present
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:DISABLED'),
+            );
+
+            e.travelTime({
+                seconds: 60 * 300,
+                startFrom: {
+                    location: { geo: { lat: 45.0, lon: 20.0 } },
+                    transportation: ICalEventTravelTimeTransportation.CAR,
+                },
+            });
+            assert.deepStrictEqual(e.travelTime(), {
+                seconds: 18000,
+                startFrom: {
+                    location: { geo: { lat: 45.0, lon: 20.0 } },
+                    transportation: ICalEventTravelTimeTransportation.CAR,
+                },
+            });
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-DURATION;VALUE=DURATION:PT5H'),
+            );
+            // Shouldn't write X-APPLE-TRAVEL-START with no location present
+            assert.ok(
+                !e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-START;VALUE=URI;ROUTING=CAR'),
+            );
+
+            e.location({ geo: { lat: 40.0, lon: 5.0 } });
+            e.travelTime({
+                seconds: 60 * 240,
+                startFrom: {
+                    location: { geo: { lat: 45.0, lon: 20.0 } },
+                    transportation: ICalEventTravelTimeTransportation.CAR,
+                },
+            });
+            assert.deepStrictEqual(e.travelTime(), {
+                seconds: 14400,
+                startFrom: {
+                    location: { geo: { lat: 45.0, lon: 20.0 } },
+                    transportation: ICalEventTravelTimeTransportation.CAR,
+                },
+            });
+            assert.ok(
+                e
+                    .toString()
+                    .includes('X-APPLE-TRAVEL-DURATION;VALUE=DURATION:PT4H'),
+            );
+            // Shouldn't write X-APPLE-TRAVEL-ADVISORY-BEHAVIOR:DISABLED with no location present
+            assert.ok(
+                !e
+                    .toString()
+                    .includes(
+                        'X-APPLE-TRAVEL-START;VALUE=URI;ROUTING=CAR:geo:45.000000,20.000000',
+                    ),
+            );
+        });
+
+        it('should throw if zero or negative', function () {
+            const e = new ICalEvent(
+                {
+                    start: moment(),
+                    summary: 'Example Event',
+                },
+                new ICalCalendar(),
+            );
+
+            assert.throws(function () {
+                e.travelTime(0);
+            });
+
+            assert.throws(function () {
+                e.travelTime(-100);
+            });
+
+            assert.throws(function () {
+                e.travelTime({ seconds: 0 });
+            });
+
+            assert.throws(function () {
+                e.travelTime({ seconds: -100 });
+            });
+        });
+
+        it('should not throw if positive', function () {
+            const e = new ICalEvent(
+                {
+                    start: moment(),
+                    summary: 'Example Event',
+                },
+                new ICalCalendar(),
+            );
+
+            assert.doesNotThrow(function () {
+                e.travelTime(60 * 30);
+            });
+
+            assert.doesNotThrow(function () {
+                e.travelTime({ seconds: 60 * 30 });
+            });
         });
     });
 
