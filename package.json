@@ -34,7 +34,7 @@
         "prettier": "3.5.3",
         "semantic-release-license": "^1.0.3",
         "source-map-support": "^0.5.21",
-        "tsup": "^8.4.0",
+        "tsdown": "^0.21.8",
         "tsx": "^4.19.3",
         "typedoc": "^0.28.3",
         "typescript": "^5.8.3",
@@ -60,7 +60,7 @@
         "url": "git+https://github.com/sebbo2002/js-template.git"
     },
     "scripts": {
-        "build": "tsup && cp ./dist/lib/index.d.ts ./dist/lib/index.d.cts",
+        "build": "tsdown",
         "build-all": "./.github/workflows/build.sh",
         "coverage": "c8 mocha",
         "develop": "tsx src/bin/start.ts",
