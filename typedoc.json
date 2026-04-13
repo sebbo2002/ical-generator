@@ -1,5 +1,8 @@
 {
     "customCss": "typedoc.css",
+    "compilerOptions": {
+        "types": ["node"]
+    },
     "entryPoints": ["./src/index.ts"],
     "exclude": [],
     "excludeInternal": true,
