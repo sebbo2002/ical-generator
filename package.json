@@ -44,7 +44,7 @@
         "node": "20 || >=22.0.0"
     },
     "exports": {
-        "import": "./dist/lib/index.js",
+        "import": "./dist/lib/index.mjs",
         "require": "./dist/lib/index.cjs"
     },
     "files": [
