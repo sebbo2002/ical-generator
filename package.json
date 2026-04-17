@@ -35,7 +35,7 @@
         "moment": "^2.30.1",
         "moment-timezone": "^0.6.1",
         "nyc": "^18.0.0",
-        "prettier": "^3.8.2",
+        "prettier": "^3.8.3",
         "rrule": "^2.8.1",
         "semantic-release": "^25.0.3",
         "semantic-release-license": "^1.0.2",
