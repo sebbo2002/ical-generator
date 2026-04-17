@@ -8,6 +8,29 @@ export enum ICalEventRepeatingFreq {
     YEARLY = 'YEARLY',
 }
 
+/**
+ * Used in ICalEvent.travelTime()
+ *
+ * Controls whether Apple clients give suggestions like "Time to leave" notifications, route prompts in Apple Maps, etc.
+ */
+export enum ICalEventTravelTimeSuggestion {
+    AUTOMATIC = 'AUTOMATIC',
+    DISABLED = 'DISABLED',
+    ENABLED = 'ENABLED',
+}
+
+/**
+ * Used in ICalEvent.travelTime()
+ *
+ * Controls which mode of transportation is used by Apple Calendar clients for calculating travel time and suggesting routes
+ */
+export enum ICalEventTravelTimeTransportation {
+    BICYCLE = 'BICYCLE',
+    CAR = 'CAR',
+    TRANSIT = 'TRANSIT',
+    WALKING = 'WALKING',
+}
+
 export enum ICalWeekday {
     FR = 'FR',
     MO = 'MO',
@@ -48,6 +71,15 @@ export interface ICalDayJsStub {
 export interface ICalDescription {
     html?: string;
     plain: string;
+}
+
+export interface ICalEventTravelTime {
+    seconds: number;
+    startFrom?: {
+        location: ICalLocation;
+        transportation: ICalEventTravelTimeTransportation;
+    };
+    suggestionBehavior?: ICalEventTravelTimeSuggestion;
 }
 
 export interface ICalGeo {

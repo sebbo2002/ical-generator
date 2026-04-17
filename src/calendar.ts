@@ -26,6 +26,7 @@ export enum ICalCalendarMethod {
 }
 
 export interface ICalCalendarData {
+    color?: null | string;
     description?: null | string;
     events?: (ICalEvent | ICalEventData)[];
     method?: ICalCalendarMethod | null;
@@ -43,6 +44,7 @@ export interface ICalCalendarData {
 }
 
 export interface ICalCalendarJSONData {
+    color: null | string;
     description: null | string;
     events: ICalEventJSONData[];
     method: ICalCalendarMethod | null;
@@ -63,6 +65,7 @@ export interface ICalCalendarProdIdData {
 }
 
 interface ICalCalendarInternalData {
+    color: null | string;
     description: null | string;
     events: ICalEvent[];
     method: ICalCalendarMethod | null;
@@ -128,6 +131,7 @@ export default class ICalCalendar {
      */
     constructor(data: ICalCalendarData = {}) {
         this.data = {
+            color: null,
             description: null,
             events: [],
             method: null,
@@ -150,6 +154,7 @@ export default class ICalCalendar {
         if (data.url !== undefined) this.url(data.url);
         if (data.scale !== undefined) this.scale(data.scale);
         if (data.ttl !== undefined) this.ttl(data.ttl);
+        if (data.color !== undefined) this.color(data.color);
         if (data.events !== undefined) this.events(data.events);
         if (data.x !== undefined) this.x(data.x);
     }
@@ -165,6 +170,30 @@ export default class ICalCalendar {
         return this;
     }
 
+    /**
+     * Get your feed's color
+     * @returns {null|string}
+     */
+    color(): null | string;
+    /**
+     * Set your feed's color
+     * (Only supported on Apple calendar clients)
+     * @param {null|string} color \# followed by six character hex color code
+     */
+    color(color: null | string): this;
+    color(color?: null | string): null | string | this {
+        if (color === undefined) {
+            return this.data.color;
+        }
+
+        // Only six character hex color codes seem to be supported
+        if (typeof color === 'string' && !/^#[A-F0-9]{6}$/gi.test(color)) {
+            throw new Error('`color` is malformed!');
+        }
+
+        this.data.color = color ? String(color).toUpperCase() : null;
+        return this;
+    }
     /**
      * Creates a new {@link ICalEvent} and returns it. Use options to prefill the event's attributes.
      * Calling this method without options will create an empty event.
@@ -640,6 +669,11 @@ export default class ICalCalendar {
                 toDurationString(this.data.ttl) +
                 '\r\n';
             g += 'X-PUBLISHED-TTL:' + toDurationString(this.data.ttl) + '\r\n';
+        }
+
+        // Apple calendar color
+        if (this.data.color) {
+            g += 'X-APPLE-CALENDAR-COLOR:' + this.data.color + '\r\n';
         }
 
         // Events
