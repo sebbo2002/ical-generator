@@ -1,3 +1,14 @@
+# [10.2.0](https://github.com/sebbo2002/ical-generator/compare/v10.1.0...v10.2.0) (2026-04-17)
+
+### Bug Fixes
+
+- Fix generated ical for years < 1000 ([5d9ff4a](https://github.com/sebbo2002/ical-generator/commit/5d9ff4aa1140dc2a871de67df62a6064596b524f)), closes [#732](https://github.com/sebbo2002/ical-generator/issues/732)
+
+### Features
+
+- Add support for Apple Calendar's travel time ([b5521b1](https://github.com/sebbo2002/ical-generator/commit/b5521b15aac39380964bf42960a17ea8e0fdc8bd))
+- Add support for X-APPLE-CALENDAR-COLOR ([26c7b92](https://github.com/sebbo2002/ical-generator/commit/26c7b929b8a887ca4200133049884ba973125af0))
+
 # [10.1.0](https://github.com/sebbo2002/ical-generator/compare/v10.0.0...v10.1.0) (2026-03-15)
 
 ### Features

@@ -134,5 +134,5 @@
         "test": "mocha"
     },
     "type": "module",
-    "version": "10.2.0-develop.4"
+    "version": "10.2.0"
 }
