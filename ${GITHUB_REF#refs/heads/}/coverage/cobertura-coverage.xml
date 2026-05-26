@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="5722" lines-covered="5655" line-rate="0.9882" branches-valid="1165" branches-covered="1119" branch-rate="0.9605" timestamp="1779812686662" complexity="0" version="0.1">
+<coverage lines-valid="5722" lines-covered="5655" line-rate="0.9882" branches-valid="1165" branches-covered="1119" branch-rate="0.9605" timestamp="1779814144308" complexity="0" version="0.1">
   <sources>
     <source>/home/runner/work/ical-generator/ical-generator</source>
   </sources>
@@ -5405,10 +5405,10 @@
             <line number="2232" hits="122" branch="true" condition-coverage="100% (1/1)"/>
             <line number="2233" hits="63" branch="false"/>
             <line number="2234" hits="122" branch="true" condition-coverage="100% (1/1)"/>
-            <line number="2235" hits="2" branch="false"/>
-            <line number="2236" hits="2" branch="false"/>
-            <line number="2237" hits="2" branch="false"/>
-            <line number="2238" hits="2" branch="false"/>
+            <line number="2235" hits="3" branch="false"/>
+            <line number="2236" hits="3" branch="false"/>
+            <line number="2237" hits="3" branch="false"/>
+            <line number="2238" hits="3" branch="false"/>
             <line number="2239" hits="122" branch="false"/>
             <line number="2240" hits="0" branch="true" condition-coverage="0% (0/1)"/>
           </lines>
