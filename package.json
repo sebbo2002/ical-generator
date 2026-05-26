@@ -18,7 +18,7 @@
         "@types/express": "^5.0.6",
         "@types/luxon": "^3.7.1",
         "@types/mocha": "^10.0.10",
-        "@types/node": "^25.6.0",
+        "@types/node": "^25.9.1",
         "c8": "^11.0.0",
         "dayjs": "^1.11.20",
         "eslint": "^10.3.0",
@@ -42,7 +42,7 @@
         "source-map-support": "^0.5.21",
         "temporal-polyfill": "^0.3.0",
         "tsdown": "^0.22.0",
-        "tsx": "^4.21.0",
+        "tsx": "^4.22.3",
         "typedoc": "^0.28.19",
         "typescript": "^6.0.3",
         "typescript-eslint": "^8.59.1"
