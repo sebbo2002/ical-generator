@@ -1,3 +1,21 @@
+# [11.0.0](https://github.com/sebbo2002/ical-generator/compare/v10.2.0...v11.0.0) (2026-06-02)
+
+### Bug Fixes
+
+- nest types per-condition in exports map ([2063944](https://github.com/sebbo2002/ical-generator/commit/20639448dad17cc2cbe72ef2d1b278524d3f991b)), closes [#746](https://github.com/sebbo2002/ical-generator/issues/746)
+- Strip quotes in string if already in quotes ([4d715ab](https://github.com/sebbo2002/ical-generator/commit/4d715ab0771eb91103e5c495b8bf3be918ee10a4)), closes [#753](https://github.com/sebbo2002/ical-generator/issues/753)
+- **types:** declare types entry for ESM consumers ([78be10d](https://github.com/sebbo2002/ical-generator/commit/78be10d379dcc2657433305e5da8a2f6f73eca79))
+
+### Features
+
+- Drop support for node.js v20 and v23 ([d949a08](https://github.com/sebbo2002/ical-generator/commit/d949a088c82ede8768c62556cfc0da9ce2255b1b))
+
+### BREAKING CHANGES
+
+- Drop node.js v20 / v23 Support
+
+This node.js version is no longer supported. For more information see https://nodejs.dev/en/about/releases/
+
 # [10.2.0](https://github.com/sebbo2002/ical-generator/compare/v10.1.0...v10.2.0) (2026-04-17)
 
 ### Bug Fixes
