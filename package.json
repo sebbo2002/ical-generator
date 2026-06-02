@@ -45,10 +45,10 @@
         "tsx": "^4.22.3",
         "typedoc": "^0.28.19",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.60.0"
+        "typescript-eslint": "^8.60.1"
     },
     "engines": {
-        "node": "20 || 22 || >=24"
+        "node": "22 || >=24.0.0"
     },
     "types": "./dist/index.d.mts",
     "exports": {
