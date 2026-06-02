@@ -631,6 +631,17 @@ describe('ical-generator Attendee', function () {
         });
     });
 
+    describe('toString()', function () {
+        it('should strip quotes from attendee name (#753)', function () {
+            const a = new ICalAttendee(
+                { email: 'john@example.com', name: 'John "Quotes" Doe' },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.ok(a.toString().includes('CN="John Quotes Doe"'));
+            assert.ok(!a.toString().includes('\\"'));
+        });
+    });
+
     describe('toJSON()', function () {
         it('should work', function () {
             const a = new ICalAttendee(

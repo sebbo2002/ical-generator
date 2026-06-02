@@ -756,8 +756,14 @@ describe('ICalTools', function () {
                 'Lorem \\nipsum',
             );
         });
-        it('should escape " in text when inQuotes = true', function () {
-            assert.strictEqual(escape('Lorem "ipsum', true), 'Lorem \\"ipsum');
+        it('should strip " in text when inQuotes = true (#753)', function () {
+            assert.strictEqual(escape('Lorem "ipsum', true), 'Lorem ipsum');
+        });
+        it('should strip all " in text when inQuotes = true (#753)', function () {
+            assert.strictEqual(
+                escape('John "Quotes" Doe', true),
+                'John Quotes Doe',
+            );
         });
         it('should not escape " in text when inQuotes = false', function () {
             assert.strictEqual(escape('Lorem "ipsum', false), 'Lorem "ipsum');

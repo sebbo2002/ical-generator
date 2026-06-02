@@ -210,8 +210,8 @@ export function checkNameAndMail(
  */
 export function escape(str: string | unknown, inQuotes: boolean): string {
     return String(str)
-        .replace(inQuotes ? /[\\"]/g : /[\\;,]/g, function (match) {
-            return '\\' + match;
+        .replace(inQuotes ? /"/g : /[\\;,]/g, function (match) {
+            return inQuotes ? '' : '\\' + match;
         })
         .replace(/(?:\r\n|\r|\n)/g, '\\n');
 }
