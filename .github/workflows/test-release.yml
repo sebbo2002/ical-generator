@@ -18,7 +18,7 @@ jobs:
         node: [22.x, 24.x, 25.x, current]
     steps:
       - name: ☁️ Checkout Project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: 🔧 Setup node.js
         uses: actions/setup-node@v6
         with:
@@ -35,7 +35,7 @@ jobs:
     if: github.repository != 'sebbo2002/js-template' && (contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main')
     steps:
       - name: ☁️ Checkout Project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: 🔧 Setup node.js
         uses: actions/setup-node@v6
         with:
@@ -54,7 +54,7 @@ jobs:
     if: contains(toJson(github.event.commits.*.message), '[skip ci]') == false || github.ref == 'refs/heads/main'
     steps:
       - name: ☁️ Checkout Project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: 🔧 Setup node.js
         uses: actions/setup-node@v6
         with:
@@ -83,7 +83,7 @@ jobs:
     if: ${{ github.repository != 'sebbo2002/js-template' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop') }}
     steps:
       - name: ☁️ Checkout Project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: 🔧 Setup node.js
         uses: actions/setup-node@v6
         with:
