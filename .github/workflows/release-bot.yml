@@ -15,9 +15,9 @@ jobs:
       pull-requests: write
     steps:
       - name: ☁️ Checkout Project
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: ☁️ Checkout ReleaseBot
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           repository: sebbo2002/release-bot
           path: ./.actions/release-bot
