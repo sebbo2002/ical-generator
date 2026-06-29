@@ -173,6 +173,23 @@ describe('ical-generator Attendee', function () {
             );
             assert.ok(a.toString().includes('bar@example.com'));
         });
+
+        it('should escape the double quote in the quoted parameter value', function () {
+            const a = new ICalAttendee(
+                {
+                    email: 'foo@example.com',
+                    sentBy: 'bar@example.com" X-EVIL:injected',
+                },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.ok(
+                a
+                    .toString()
+                    .includes(
+                        ';SENT-BY="mailto:bar@example.com X-EVIL:injected"',
+                    ),
+            );
+        });
     });
 
     describe('role()', function () {
