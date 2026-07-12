@@ -136,12 +136,6 @@ npm run coverage
 It's [here](https://github.com/sebbo2002/ical-generator/blob/develop/CHANGELOG.md). If you need the changelog for
 `ical-generator` 1.x.x and older, you'll find it [here](https://github.com/sebbo2002/ical-generator/blob/25338b8bf98f9afd3c88849e735fa33fa45fb766/CHANGELOG.md).
 
-### I get a `ReferenceError: TextEncoder is not defined` error (in some browsers)
-
-This library uses [`TextEncoder`](https://developer.mozilla.org/en-US/docs/Web/API/TextEncoder), which
-is available in node.js ≥ 11.0.0 and [all modern browsers](https://caniuse.com/?search=textencoder).
-Outdated browsers may not have the necessary API and generate this error when generating the calendar.
-
 ## 🙆🏼‍♂️ Copyright and license
 
 Copyright (c) Sebastian Pekarek under the [MIT license](LICENSE).
