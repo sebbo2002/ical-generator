@@ -9,7 +9,7 @@
         "@eslint/js": "^10.0.1",
         "@istanbuljs/nyc-config-typescript": "^1.0.2",
         "@qiwi/semantic-release-gh-pages-plugin": "^5.4.3",
-        "@sebbo2002/semantic-release-jsr": "^4.0.0",
+        "@sebbo2002/semantic-release-jsr": "^4.0.2",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/exec": "^7.1.0",
         "@semantic-release/git": "^10.0.1",
@@ -141,5 +141,5 @@
         "test": "mocha"
     },
     "type": "module",
-    "version": "11.0.1-develop.1"
+    "version": "11.1.0-develop.2"
 }

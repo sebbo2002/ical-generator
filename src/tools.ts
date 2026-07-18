@@ -219,28 +219,41 @@ export function escape(str: string | unknown, inQuotes: boolean): string {
 /**
  * Trim line length of given string
  */
+const MAX_OCTETS = 74;
+
 export function foldLines(input: string): string {
     return input
         .split('\r\n')
         .map(function (line) {
+            // Fast path: a short, pure-ASCII line can never need folding.
+            if (line.length <= MAX_OCTETS && isAscii(line)) {
+                return line;
+            }
+
             let result = '';
-            let c = 0;
+            let octets = 0;
             for (let i = 0; i < line.length; i++) {
                 let ch = line.charAt(i);
+                const charCode = line.charCodeAt(i);
 
-                // surrogate pair, see https://mathiasbynens.be/notes/javascript-encoding#surrogate-pairs
-                if (ch >= '\ud800' && ch <= '\udbff') {
+                let charsize: number;
+                if (charCode < 0x80) {
+                    charsize = 1;
+                } else if (charCode < 0x800) {
+                    charsize = 2;
+                } else if (charCode >= 0xd800 && charCode <= 0xdbff) {
+                    // surrogate pair, see https://mathiasbynens.be/notes/javascript-encoding#surrogate-pairs
                     ch += line.charAt(++i);
+                    charsize = 4;
+                } else {
+                    charsize = 3;
                 }
 
-                // TextEncoder is available in browsers and node.js >= 11.0.0
-                const charsize = new TextEncoder().encode(ch).length;
-                c += charsize;
-                if (c > 74) {
+                octets += charsize;
+                if (octets > MAX_OCTETS) {
                     result += '\r\n ';
-                    c = charsize;
+                    octets = charsize;
                 }
-
                 result += ch;
             }
             return result;
@@ -474,6 +487,7 @@ export function isLuxonDate(
         !isTemporal(value)
     );
 }
+
 export function isMoment(value: ICalDateTimeValue): value is ICalMomentStub {
     return (
         value != null &&
@@ -497,7 +511,6 @@ export function isMomentTZ(
 ): value is ICalMomentTimezoneStub {
     return isMoment(value) && 'tz' in value && typeof value.tz === 'function';
 }
-
 export function isRRule(value: unknown): value is ICalRRuleStub {
     return (
         value !== null &&
@@ -733,4 +746,11 @@ export function toJSON(
     }
 
     return value.toJSON();
+}
+
+function isAscii(line: string): boolean {
+    for (let i = 0; i < line.length; i++) {
+        if (line.charCodeAt(i) > 0x7f) return false;
+    }
+    return true;
 }

@@ -787,6 +787,26 @@ describe('ICalTools', function () {
                 '👋🏼12345678ikjhgztrde546rf7g8hjiomkjnhgqfcdxerdftgzuinjhgcfvtzvzvuwcb\r\n iweciujvguhbghbbqwxowidoi21e8981',
             );
         });
+        it('folds before a 4-octet character on the boundary without splitting the surrogate pair', function () {
+            assert.strictEqual(
+                foldLines(
+                    'SUMMARY:0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF:\u{1F4DE}',
+                ),
+                'SUMMARY:0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF:\r\n \u{1F4DE}',
+            );
+        });
+        it('folds before a 2-octet character on the boundary', function () {
+            assert.strictEqual(
+                foldLines('SUMMARY:' + 'x'.repeat(65) + 'é'),
+                'SUMMARY:' + 'x'.repeat(65) + '\r\n é',
+            );
+        });
+        it('folds before a 3-octet character on the boundary', function () {
+            assert.strictEqual(
+                foldLines('SUMMARY:' + 'x'.repeat(64) + '本'),
+                'SUMMARY:' + 'x'.repeat(64) + '\r\n 本',
+            );
+        });
     });
 
     describe('checkDate()', function () {
