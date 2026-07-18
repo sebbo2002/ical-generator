@@ -543,7 +543,7 @@ export default class ICalAttendee {
 
         // SENT-BY
         if (this.data.sentBy !== null) {
-            g += ';SENT-BY="mailto:' + this.data.sentBy + '"';
+            g += ';SENT-BY="mailto:' + escape(this.data.sentBy, true) + '"';
         }
 
         // DELEGATED-TO
