@@ -27,6 +27,7 @@ import {
 describe('ical-generator Event', function () {
     describe('constructor()', function () {
         it('shoud set data from constructor', function () {
+            const now = new Date().toJSON();
             const data: ICalEventData = {
                 alarms: [],
                 allDay: true,
@@ -37,20 +38,20 @@ describe('ical-generator Event', function () {
                 busystatus: ICalEventBusyStatus.BUSY,
                 categories: [],
                 class: null,
-                created: new Date().toJSON(),
+                created: now,
                 description: null,
-                end: new Date().toJSON(),
+                end: now,
                 floating: false,
                 id: 'FOO',
-                lastModified: new Date().toJSON(),
+                lastModified: now,
                 location: null,
                 organizer: null,
                 priority: 5,
-                recurrenceId: new Date().toJSON(),
+                recurrenceId: now,
                 repeating: null,
                 sequence: 1,
-                stamp: new Date().toJSON(),
-                start: new Date().toJSON(),
+                stamp: now,
+                start: now,
                 status: null,
                 summary: 'Hello.',
                 timezone: 'Europe/Berlin',
