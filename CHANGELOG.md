@@ -1,3 +1,15 @@
+# [11.1.0](https://github.com/sebbo2002/ical-generator/compare/v11.0.0...v11.1.0) (2026-07-24)
+
+### Bug Fixes
+
+- **attendee:** escape double quote in attendee SENT-BY parameter value ([1332482](https://github.com/sebbo2002/ical-generator/commit/1332482ce3bdbbdefd976149318014a500045fd5))
+- downgrade temporal-polyfill to 0.3.2 for compatibility ([0e4d029](https://github.com/sebbo2002/ical-generator/commit/0e4d0290934607eef2df2d5d9486739c2e255c3e))
+- revert to global crypto.randomUUID, restore cross-platform compatibility ([3a4b94c](https://github.com/sebbo2002/ical-generator/commit/3a4b94c6c55e377fee671e7fbf898114514661dc)), closes [#633](https://github.com/sebbo2002/ical-generator/issues/633) [#631](https://github.com/sebbo2002/ical-generator/issues/631) [#632](https://github.com/sebbo2002/ical-generator/issues/632) [#633](https://github.com/sebbo2002/ical-generator/issues/633) [#635](https://github.com/sebbo2002/ical-generator/issues/635)
+
+### Features
+
+- Performance improvements for iCal generation ([9e0053d](https://github.com/sebbo2002/ical-generator/commit/9e0053de99460d63dbe3a49f5e097efb239cf339)), closes [#765](https://github.com/sebbo2002/ical-generator/issues/765)
+
 # [11.0.0](https://github.com/sebbo2002/ical-generator/compare/v10.2.0...v11.0.0) (2026-06-02)
 
 ### Bug Fixes
