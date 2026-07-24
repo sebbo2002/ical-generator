@@ -12,6 +12,7 @@
         "sourceMap": true,
         "strict": true,
         "target": "es2023",
+        "types": ["node"],
         "verbatimModuleSyntax": true
     },
     "exclude": ["node_modules", "**/*.spec.ts"],
