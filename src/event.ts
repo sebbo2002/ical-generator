@@ -10,10 +10,12 @@ import {
     checkEnum,
     checkNameAndMail,
     escape,
+    escapeParameterValue,
     formatDate,
     formatDateTZ,
     generateCustomAttributes,
     isRRule,
+    quoteParameterValue,
     toDate,
     toDurationString,
     toJSON,
@@ -1762,14 +1764,14 @@ export default class ICalEvent {
                     'X-APPLE-STRUCTURED-LOCATION;VALUE=URI;' +
                     (this.data.location.address
                         ? 'X-ADDRESS=' +
-                          escape(this.data.location.address, false) +
+                          quoteParameterValue(this.data.location.address) +
                           ';'
                         : '') +
                     'X-APPLE-RADIUS=' +
-                    escape(this.data.location.radius, false) +
+                    quoteParameterValue(this.data.location.radius) +
                     ';' +
                     'X-TITLE=' +
-                    escape(this.data.location.title, false) +
+                    quoteParameterValue(this.data.location.title) +
                     ':geo:' +
                     escape(this.data.location.geo?.lat, false) +
                     ',' +
@@ -1819,10 +1821,9 @@ export default class ICalEvent {
                     ) {
                         travelStartParameters.push(
                             'X-ADDRESS=' +
-                                escape(
+                                quoteParameterValue(
                                     this.data.travelTime.startFrom.location
                                         .address,
-                                    false,
                                 ),
                         );
                     }
@@ -1833,10 +1834,9 @@ export default class ICalEvent {
                     ) {
                         travelStartParameters.push(
                             'X-APPLE-RADIUS=' +
-                                escape(
+                                quoteParameterValue(
                                     this.data.travelTime.startFrom.location
                                         .radius,
-                                    false,
                                 ),
                         );
                     }
@@ -1847,10 +1847,9 @@ export default class ICalEvent {
                     ) {
                         travelStartParameters.push(
                             'X-TITLE=' +
-                                escape(
+                                quoteParameterValue(
                                     this.data.travelTime.startFrom.location
                                         .title,
-                                    false,
                                 ),
                         );
                     }
@@ -1900,16 +1899,18 @@ export default class ICalEvent {
         // ORGANIZER
         if (this.data.organizer) {
             g +=
-                'ORGANIZER;CN="' + escape(this.data.organizer.name, true) + '"';
+                'ORGANIZER;CN="' +
+                escapeParameterValue(this.data.organizer.name) +
+                '"';
 
             if (this.data.organizer.sentBy) {
                 g +=
                     ';SENT-BY="mailto:' +
-                    escape(this.data.organizer.sentBy, true) +
+                    escapeParameterValue(this.data.organizer.sentBy) +
                     '"';
             }
             if (this.data.organizer.email && this.data.organizer.mailto) {
-                g += ';EMAIL=' + escape(this.data.organizer.email, false);
+                g += ';EMAIL=' + quoteParameterValue(this.data.organizer.email);
             }
 
             g += ':';

@@ -609,6 +609,26 @@ describe('ical-generator Alarm', function () {
             }, /`attach.uri`/);
         });
 
+        it('should quote the FMTTYPE parameter when required', function () {
+            const a = new ICalAlarm(
+                {
+                    attach: {
+                        mime: 'audio/basic;charset=utf-8',
+                        uri: 'https://example.com/alarm.aud',
+                    },
+                    trigger: 600,
+                    type: ICalAlarmType.audio,
+                },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+
+            assert.ok(
+                a
+                    .toString()
+                    .includes('ATTACH;FMTTYPE="audio/basic;charset=utf-8":'),
+            );
+        });
+
         it('should throw error when unknown format', function () {
             const a = new ICalAlarm(
                 {},

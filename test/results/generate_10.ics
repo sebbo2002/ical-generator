@@ -14,8 +14,8 @@ ORGANIZER;CN="Sebastian Pekarek":mailto:mail@sebbo.net
 ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;DELEGATED-FROM="matt@examp
  le.com";CN="John":MAILTO:john@example.com
 ATTENDEE;ROLE=REQ-PARTICIPANT;PARTSTAT=DELEGATED;DELEGATED-TO="john@exampl
- e.com";CN="Smith, Matt; (Sales)";SCHEDULE-AGENT=CLIENT:MAILTO:matt@example
- .com
+ e.com";CN="Smith, Matt; (^'Sales^')";SCHEDULE-AGENT=CLIENT:MAILTO:matt@exa
+ mple.com
 URL;VALUE=URI:http://sebbo.net/
 STATUS:CONFIRMED
 END:VEVENT
