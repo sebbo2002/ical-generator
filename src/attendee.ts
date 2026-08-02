@@ -8,6 +8,8 @@ import {
     checkEnum,
     checkNameAndMail,
     escape,
+    escapeParameterValue,
+    quoteParameterValue,
 } from './tools.ts';
 
 export enum ICalAttendeeRole {
@@ -543,27 +545,36 @@ export default class ICalAttendee {
 
         // SENT-BY
         if (this.data.sentBy !== null) {
-            g += ';SENT-BY="mailto:' + escape(this.data.sentBy, true) + '"';
+            g +=
+                ';SENT-BY="mailto:' +
+                escapeParameterValue(this.data.sentBy) +
+                '"';
         }
 
         // DELEGATED-TO
         if (this.data.delegatedTo) {
-            g += ';DELEGATED-TO="' + this.data.delegatedTo.email() + '"';
+            g +=
+                ';DELEGATED-TO="' +
+                escapeParameterValue(this.data.delegatedTo.email()) +
+                '"';
         }
 
         // DELEGATED-FROM
         if (this.data.delegatedFrom) {
-            g += ';DELEGATED-FROM="' + this.data.delegatedFrom.email() + '"';
+            g +=
+                ';DELEGATED-FROM="' +
+                escapeParameterValue(this.data.delegatedFrom.email()) +
+                '"';
         }
 
         // CN / Name
         if (this.data.name) {
-            g += ';CN="' + escape(this.data.name, true) + '"';
+            g += ';CN="' + escapeParameterValue(this.data.name) + '"';
         }
 
         // EMAIL
         if (this.data.email && this.data.mailto) {
-            g += ';EMAIL=' + escape(this.data.email, false);
+            g += ';EMAIL=' + quoteParameterValue(this.data.email);
         }
 
         // SCHEDULE-AGENT
@@ -578,7 +589,9 @@ export default class ICalAttendee {
                 this.data.x
                     .map(
                         ([key, value]) =>
-                            key.toUpperCase() + '=' + escape(value, false),
+                            key.toUpperCase() +
+                            '=' +
+                            quoteParameterValue(value),
                     )
                     .join(';');
         }

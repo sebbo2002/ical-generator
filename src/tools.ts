@@ -206,14 +206,33 @@ export function checkNameAndMail(
     return result;
 }
 /**
- * Escapes special characters in the given string
+ * Escapes special characters in the given string. `inQuotes` selects the
+ * parameter value encoding (RFC 6868), otherwise the TEXT escaping of
+ * RFC 5545 section 3.3.11 is applied.
  */
 export function escape(str: string | unknown, inQuotes: boolean): string {
+    if (inQuotes) {
+        return escapeParameterValue(str);
+    }
+
     return String(str)
-        .replace(inQuotes ? /"/g : /[\\;,]/g, function (match) {
-            return inQuotes ? '' : '\\' + match;
-        })
+        .replace(/[\\;,]/g, (match) => '\\' + match)
         .replace(/(?:\r\n|\r|\n)/g, '\\n');
+}
+
+/**
+ * Encodes a property parameter value as defined by RFC 6868. The backslash
+ * escaping used for TEXT values is not defined for parameter values, so the
+ * caret encoding is the only way to keep a `"`, a `^` or a line break.
+ */
+export function escapeParameterValue(str: string | unknown): string {
+    return (
+        String(str)
+            // must run first, otherwise the carets introduced below are encoded again
+            .replace(/\^/g, '^^')
+            .replace(/"/g, "^'")
+            .replace(/(?:\r\n|\r|\n)/g, '^n')
+    );
 }
 
 /**
@@ -636,6 +655,16 @@ export function isTZDate(value: ICalDateTimeValue): value is ICalTZDateStub {
         'tzComponents' in value &&
         typeof value.tzComponents === 'function'
     );
+}
+
+/**
+ * Encodes a property parameter value (RFC 6868) and wraps it in double quotes
+ * if RFC 5545 section 3.2 requires it: `;`, `:` and `,` are not allowed in an
+ * unquoted parameter value and would otherwise end the parameter.
+ */
+export function quoteParameterValue(str: string | unknown): string {
+    const value = escapeParameterValue(str);
+    return /[,:;]/.test(value) ? '"' + value + '"' : value;
 }
 
 export function toDate(value: ICalDateTimeValue): Date {

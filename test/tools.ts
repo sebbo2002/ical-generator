@@ -28,6 +28,7 @@ import {
     checkEnum,
     checkNameAndMail,
     escape,
+    escapeParameterValue,
     foldLines,
     formatDate,
     formatDateTZ,
@@ -44,6 +45,7 @@ import {
     isTemporalPlainDateTime,
     isTemporalZonedDateTime,
     isTZDate,
+    quoteParameterValue,
     toDate,
     toDurationString,
     toJSON,
@@ -756,17 +758,69 @@ describe('ICalTools', function () {
                 'Lorem \\nipsum',
             );
         });
-        it('should strip " in text when inQuotes = true (#753)', function () {
-            assert.strictEqual(escape('Lorem "ipsum', true), 'Lorem ipsum');
+        it('should encode " in text when inQuotes = true (#753)', function () {
+            assert.strictEqual(escape('Lorem "ipsum', true), "Lorem ^'ipsum");
         });
-        it('should strip all " in text when inQuotes = true (#753)', function () {
+        it('should encode all " in text when inQuotes = true (#753)', function () {
             assert.strictEqual(
                 escape('John "Quotes" Doe', true),
-                'John Quotes Doe',
+                "John ^'Quotes^' Doe",
             );
         });
         it('should not escape " in text when inQuotes = false', function () {
             assert.strictEqual(escape('Lorem "ipsum', false), 'Lorem "ipsum');
+        });
+    });
+
+    describe('escapeParameterValue()', function () {
+        it('should encode " as ^\' (RFC 6868)', function () {
+            assert.strictEqual(
+                escapeParameterValue('John "Quotes" Doe'),
+                "John ^'Quotes^' Doe",
+            );
+        });
+        it('should encode ^ as ^^ (RFC 6868)', function () {
+            assert.strictEqual(escapeParameterValue('a^b'), 'a^^b');
+        });
+        it('should encode a line break as ^n (RFC 6868)', function () {
+            assert.strictEqual(escapeParameterValue('l1\nl2'), 'l1^nl2');
+            assert.strictEqual(escapeParameterValue('l1\rl2'), 'l1^nl2');
+            assert.strictEqual(escapeParameterValue('l1\r\nl2'), 'l1^nl2');
+        });
+        it('should encode ^ before introducing new carets', function () {
+            // a literal ^n must not come back out as a line break
+            assert.strictEqual(escapeParameterValue('a^nb'), 'a^^nb');
+            assert.strictEqual(escapeParameterValue("a^'b"), "a^^'b");
+        });
+        it('should not apply the TEXT escaping of RFC 5545', function () {
+            assert.strictEqual(escapeParameterValue('a\\;,b'), 'a\\;,b');
+        });
+        it('should leave a plain value untouched', function () {
+            assert.strictEqual(
+                escapeParameterValue('Lorem ipsum'),
+                'Lorem ipsum',
+            );
+        });
+    });
+
+    describe('quoteParameterValue()', function () {
+        it('should not quote a value that does not need it', function () {
+            assert.strictEqual(
+                quoteParameterValue('Lorem ipsum'),
+                'Lorem ipsum',
+            );
+        });
+        it('should quote a value containing ; : or ,', function () {
+            assert.strictEqual(quoteParameterValue('a;b'), '"a;b"');
+            assert.strictEqual(quoteParameterValue('a:b'), '"a:b"');
+            assert.strictEqual(quoteParameterValue('a,b'), '"a,b"');
+        });
+        it('should encode and quote at the same time', function () {
+            assert.strictEqual(quoteParameterValue('a";b'), '"a^\';b"');
+        });
+        it('should not quote a value that only contains a "', function () {
+            // the " is gone after encoding, so no quoting is required
+            assert.strictEqual(quoteParameterValue('a"b'), "a^'b");
         });
     });
 
