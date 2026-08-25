@@ -141,5 +141,5 @@
         "test": "mocha"
     },
     "type": "module",
-    "version": "11.1.1-develop.1"
+    "version": "11.1.1-develop.2"
 }
