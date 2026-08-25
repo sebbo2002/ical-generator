@@ -1,3 +1,9 @@
+## [11.1.1](https://github.com/sebbo2002/ical-generator/compare/v11.1.0...v11.1.1) (2026-08-25)
+
+### Bug Fixes
+
+- encode property parameter values as defined by RFC 6868 ([2ef3274](https://github.com/sebbo2002/ical-generator/commit/2ef327412068f4225ad9703ca42dfcf835da10c4))
+
 # [11.1.0](https://github.com/sebbo2002/ical-generator/compare/v11.0.0...v11.1.0) (2026-07-24)
 
 ### Bug Fixes
