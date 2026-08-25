@@ -10,6 +10,7 @@ import {
     escape,
     formatDate,
     generateCustomAttributes,
+    quoteParameterValue,
     toDurationString,
     toJSON,
 } from './tools.ts';
@@ -518,7 +519,7 @@ export default class ICalAlarm {
         ) {
             g +=
                 'ATTACH;FMTTYPE=' +
-                escape(this.data.attach.mime, false) +
+                quoteParameterValue(this.data.attach.mime) +
                 ':' +
                 escape(this.data.attach.uri, false) +
                 '\r\n';

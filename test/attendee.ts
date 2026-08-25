@@ -186,7 +186,7 @@ describe('ical-generator Attendee', function () {
                 a
                     .toString()
                     .includes(
-                        ';SENT-BY="mailto:bar@example.com X-EVIL:injected"',
+                        ';SENT-BY="mailto:bar@example.com^\' X-EVIL:injected"',
                     ),
             );
         });
@@ -649,13 +649,67 @@ describe('ical-generator Attendee', function () {
     });
 
     describe('toString()', function () {
-        it('should strip quotes from attendee name (#753)', function () {
+        it('should encode quotes in the attendee name (#753)', function () {
             const a = new ICalAttendee(
                 { email: 'john@example.com', name: 'John "Quotes" Doe' },
                 new ICalEvent({ start: new Date() }, new ICalCalendar()),
             );
-            assert.ok(a.toString().includes('CN="John Quotes Doe"'));
+            assert.ok(a.toString().includes('CN="John ^\'Quotes^\' Doe"'));
             assert.ok(!a.toString().includes('\\"'));
+        });
+        it('should encode ^ in the attendee name (RFC 6868)', function () {
+            const a = new ICalAttendee(
+                { email: 'john@example.com', name: 'a^nb' },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.ok(a.toString().includes('CN="a^^nb"'));
+        });
+        it('should encode a line break in the attendee name (RFC 6868)', function () {
+            const a = new ICalAttendee(
+                { email: 'john@example.com', name: 'John\nDoe' },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.ok(a.toString().includes('CN="John^nDoe"'));
+        });
+        it('should encode quotes in the delegation parameters', function () {
+            const event = new ICalEvent(
+                { start: new Date() },
+                new ICalCalendar(),
+            );
+            assert.ok(
+                new ICalAttendee(
+                    {
+                        delegatedTo: { email: 'to"@example.com' },
+                        email: 'john@example.com',
+                    },
+                    event,
+                )
+                    .toString()
+                    .includes(';DELEGATED-TO="to^\'@example.com"'),
+            );
+            assert.ok(
+                new ICalAttendee(
+                    {
+                        delegatedFrom: { email: 'from"@example.com' },
+                        email: 'john@example.com',
+                    },
+                    event,
+                )
+                    .toString()
+                    .includes(';DELEGATED-FROM="from^\'@example.com"'),
+            );
+        });
+        it('should quote parameter values containing ; : or ,', function () {
+            const a = new ICalAttendee(
+                {
+                    email: 'a:b@example.com',
+                    mailto: 'john@example.com',
+                    x: { 'X-NUM': 'one,two' },
+                },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+            assert.ok(a.toString().includes(';EMAIL="a:b@example.com"'));
+            assert.ok(a.toString().includes(';X-NUM="one,two"'));
         });
     });
 

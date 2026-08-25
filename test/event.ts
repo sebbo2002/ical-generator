@@ -1636,6 +1636,23 @@ describe('ical-generator Event', function () {
                 /`location` isn't formatted correctly/i,
             );
         });
+
+        it('should quote the structured location parameters', function () {
+            const event = new ICalEvent(
+                { start: new Date() },
+                new ICalCalendar(),
+            );
+            event.location({
+                address: 'Hauptstr. 5, Berlin',
+                geo: { lat: 52.5, lon: 13.4 },
+                radius: 50,
+                title: 'Standup: Room 3',
+            });
+
+            const string = event.toString().replace(/\r\n /g, '');
+            assert.ok(string.includes(';X-ADDRESS="Hauptstr. 5, Berlin"'));
+            assert.ok(string.includes(';X-TITLE="Standup: Room 3"'));
+        });
     });
 
     describe('description()', function () {
@@ -1850,6 +1867,28 @@ describe('ical-generator Event', function () {
                 // @ts-ignore
                 event.organizer({ name: 'Sebastian Pekarek' });
             }, /`organizer.email` is empty!/);
+        });
+
+        it('should encode the organizer parameters (RFC 6868)', function () {
+            const event = new ICalEvent(
+                { start: new Date() },
+                new ICalCalendar(),
+            );
+            event.organizer({
+                email: 'a:b@example.com',
+                mailto: 'mail@example.com',
+                name: 'John "Quotes" ^ Doe',
+                sentBy: 'sent"by@example.com',
+            });
+
+            const string = event.toString();
+            assert.ok(
+                string.includes('ORGANIZER;CN="John ^\'Quotes^\' ^^ Doe"'),
+            );
+            assert.ok(
+                string.includes(';SENT-BY="mailto:sent^\'by@example.com"'),
+            );
+            assert.ok(string.includes(';EMAIL="a:b@example.com"'));
         });
     });
 
