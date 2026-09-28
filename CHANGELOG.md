@@ -1,3 +1,9 @@
+## [11.1.2](https://github.com/sebbo2002/ical-generator/compare/v11.1.1...v11.1.2) (2026-09-28)
+
+### Bug Fixes
+
+- convert Temporal dates to the requested timezone ([4f1a561](https://github.com/sebbo2002/ical-generator/commit/4f1a561a4f6496f3125afbe2de2b6a46804d753e))
+
 ## [11.1.1](https://github.com/sebbo2002/ical-generator/compare/v11.1.0...v11.1.1) (2026-08-25)
 
 ### Bug Fixes
