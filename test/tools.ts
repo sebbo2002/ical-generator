@@ -1345,7 +1345,16 @@ describe('ICalTools', function () {
                 });
                 assert.strictEqual(
                     formatDate('UTC', zdt, false, false),
-                    '20180705T182400',
+                    '20180705T162400',
+                );
+            });
+            it('should convert ZonedDateTime before selecting the date', function () {
+                const zdt = Temporal.ZonedDateTime.from(
+                    '2026-07-05T00:30:00+09:00[Asia/Tokyo]',
+                );
+                assert.strictEqual(
+                    formatDate('America/Los_Angeles', zdt, true, false),
+                    '20260704',
                 );
             });
             it('should format ZonedDateTime as date-only', function () {
