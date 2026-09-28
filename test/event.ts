@@ -4,6 +4,7 @@ import assert from 'assert';
 import { DateTime } from 'luxon';
 import moment from 'moment-timezone';
 import { RRule } from 'rrule';
+import { Temporal } from 'temporal-polyfill';
 
 import ICalAlarm, { ICalAlarmType } from '../src/alarm.js';
 import ICalAttendee from '../src/attendee.js';
@@ -2844,6 +2845,80 @@ describe('ical-generator Event', function () {
     });
 
     describe('toString()', function () {
+        for (const testCase of [
+            {
+                calendarTimezone: 'America/New_York',
+                end: '20260115T132400',
+                eventTimezone: undefined,
+                name: 'the calendar timezone',
+                source: '2026-01-15T18:24:00+01:00[Europe/Berlin]',
+                start: '20260115T122400',
+            },
+            {
+                calendarTimezone: 'Europe/Berlin',
+                end: '20260308T033000',
+                eventTimezone: 'America/New_York',
+                name: 'an event timezone across daylight saving',
+                source: '2026-03-08T06:30:00+00:00[UTC]',
+                start: '20260308T013000',
+            },
+            {
+                calendarTimezone: 'Europe/Berlin',
+                end: '20260704T093000',
+                eventTimezone: 'America/Los_Angeles',
+                name: 'an event timezone on the previous day',
+                source: '2026-07-05T00:30:00+09:00[Asia/Tokyo]',
+                start: '20260704T083000',
+            },
+        ]) {
+            it(
+                'should convert Temporal dates to ' + testCase.name,
+                function () {
+                    const start = Temporal.ZonedDateTime.from(testCase.source);
+                    const calendar = new ICalCalendar({
+                        timezone: testCase.calendarTimezone,
+                    });
+                    calendar.createEvent({
+                        end: start.add({ hours: 1 }),
+                        recurrenceId: start,
+                        repeating: {
+                            exclude: [start],
+                            freq: ICalEventRepeatingFreq.DAILY,
+                        },
+                        start,
+                        timezone: testCase.eventTimezone,
+                    });
+                    const lines = calendar.toString().split('\r\n');
+                    const parameter = testCase.eventTimezone
+                        ? ';TZID=' + testCase.eventTimezone
+                        : '';
+                    const timezone =
+                        testCase.eventTimezone || testCase.calendarTimezone;
+
+                    assert.ok(
+                        lines.includes(
+                            'DTSTART' + parameter + ':' + testCase.start,
+                        ),
+                    );
+                    assert.ok(
+                        lines.includes(
+                            'DTEND' + parameter + ':' + testCase.end,
+                        ),
+                    );
+                    assert.ok(
+                        lines.includes(
+                            'RECURRENCE-ID' + parameter + ':' + testCase.start,
+                        ),
+                    );
+                    assert.ok(
+                        lines.includes(
+                            'EXDATE;TZID=' + timezone + ':' + testCase.start,
+                        ),
+                    );
+                },
+            );
+        }
+
         it('should make use of escaping', function () {
             const e = new ICalEvent(
                 {

@@ -368,7 +368,7 @@ export function formatDate(
 
         // try to convert to the specified timezone
         if (timezone) {
-            t = d.withTimeZone(d.timeZoneId);
+            t = d.withTimeZone(timezone);
         }
         if (!timezone && d.timeZoneId !== 'UTC') {
             t = d.withTimeZone('UTC');
