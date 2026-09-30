@@ -29,7 +29,7 @@
         "husky": "^9.1.7",
         "license-checker": "^25.0.1",
         "mocha": "^11.1.0",
-        "mochawesome": "^7.1.3",
+        "mochawesome": "^8.1.1",
         "nyc": "^17.1.0",
         "prettier": "3.5.3",
         "semantic-release-license": "^1.0.3",
