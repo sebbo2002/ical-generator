@@ -26,14 +26,14 @@
         "eslint-plugin-jsonc": "^3.3.0",
         "eslint-plugin-perfectionist": "^5.11.0",
         "esm": "^3.2.25",
-        "globals": "^17.12.0",
+        "globals": "^17.13.0",
         "husky": "^9.1.7",
         "license-checker": "^25.0.1",
         "luxon": "^3.7.2",
         "mocha": "^12.0.0",
         "mochawesome": "^8.1.1",
         "moment": "^2.31.0",
-        "moment-timezone": "^0.6.4",
+        "moment-timezone": "^0.6.5",
         "nyc": "^18.0.0",
         "prettier": "^3.9.9",
         "rrule": "^2.8.1",
@@ -45,7 +45,7 @@
         "tsx": "^4.23.13",
         "typedoc": "^0.28.20",
         "typescript": "^6.0.3",
-        "typescript-eslint": "^8.69.0"
+        "typescript-eslint": "^8.71.1"
     },
     "engines": {
         "node": "22 || >=24.0.0"
