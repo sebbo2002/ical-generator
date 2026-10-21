@@ -81,15 +81,24 @@ You can also pass a string which is then passed to javascript's `Date` internall
 
 It is recommended to use UTC time as far as possible. `ical-generator` will output all time information as UTC time as
 long as no time zone is defined. For day.js, a plugin is necessary for this, which is a prerequisite. If a time zone is
-set, `ical-generator` assumes that the given time matches the time zone. If a time zone is used, it is also recommended
-to use a VTimezone generator. Such a function generates a VTimezone entry and returns it. For example,
-`timezones-ical-library` or `@touch4it/ical-timezones` can be used for this:
+set, `ical-generator` assumes that the given time matches the time zone.
+
+Please note that a native `Date` (or a string) has no time zone of its own. If a time zone is set, `ical-generator`
+uses the local time of the machine it runs on (`getHours()` etc.) and labels it with the given time zone. The result
+therefore depends on the server's time zone: `new Date('2026-07-01T09:30:00Z')` with `timezone: 'Europe/Prague'` becomes
+`DTSTART;TZID=Europe/Prague:20260701T093000` on a server running in UTC, although 09:30 UTC is 11:30 in Prague. To get
+the same output everywhere, pass a `TZDate`, a Luxon `DateTime`, a `moment-timezone` or a Temporal object, or do not
+set a time zone so that the time is written as UTC.
+
+If a time zone is used, it is also recommended to use a VTimezone generator. Such a function generates a VTimezone entry
+and returns it. For example, `timezones-ical-library` or `@touch4it/ical-timezones` can be used for this:
 
 #### Example with `@touch4it/ical-timezones`
 
 ```typescript
 import { ICalCalendar } from 'ical-generator';
 import { getVtimezoneComponent } from '@touch4it/ical-timezones';
+import { TZDate } from '@date-fns/tz';
 
 const cal = new ICalCalendar();
 cal.timezone({
@@ -97,7 +106,7 @@ cal.timezone({
     generator: getVtimezoneComponent,
 });
 cal.createEvent({
-    start: new Date(),
+    start: new TZDate(2026, 0, 15, 9, 30, 'Europe/London'), // 09:30 London time
     timezone: 'Europe/London',
 });
 ```
@@ -107,14 +116,15 @@ cal.createEvent({
 ```typescript
 import { ICalCalendar } from 'ical-generator';
 import { tzlib_get_ical_block } from 'timezones-ical-library';
+import { TZDate } from '@date-fns/tz';
 
 const cal = new ICalCalendar();
 cal.timezone({
-    name: 'Europe/Berlin',
+    name: 'Europe/London',
     generator: (tz) => tzlib_get_ical_block(tz)[0],
 });
 cal.createEvent({
-    start: new Date(),
+    start: new TZDate(2026, 0, 15, 9, 30, 'Europe/London'), // 09:30 London time
     timezone: 'Europe/London',
 });
 ```

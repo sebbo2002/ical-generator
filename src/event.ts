@@ -1472,7 +1472,9 @@ export default class ICalEvent {
      * is used.
      *
      * Please note that if the time zone is set, ical-generator assumes
-     * that all times are already in the correct time zone. Alternatively,
+     * that all times are already in the correct time zone. For a native
+     * `Date`, this means the local time of the machine running the code is
+     * used, so the output depends on the server's time zone. Alternatively,
      * a `moment-timezone` or a Luxon object can be passed with `setZone`,
      * ical-generator will then set the time zone itself.
      *
