@@ -510,5 +510,25 @@ describe('Issues', function () {
             cal.createEvent({ start: instant });
             assert.ok(cal.toString().includes('DTSTART:00250512T083500Z'));
         });
+        it('should work with String and timezone', function () {
+            const cal = ical();
+            cal.createEvent({
+                start: '0025-05-12T08:35:00',
+                timezone: 'Europe/Berlin',
+            });
+            assert.ok(
+                cal
+                    .toString()
+                    .includes('DTSTART;TZID=Europe/Berlin:00250512T083500'),
+            );
+        });
+        it('should work with all-day events and timezone', function () {
+            const cal = ical({ timezone: 'Europe/Berlin' });
+            cal.createEvent({
+                allDay: true,
+                start: '0025-05-12T00:00:00',
+            });
+            assert.ok(cal.toString().includes('DTSTART;VALUE=DATE:00250512'));
+        });
     });
 });

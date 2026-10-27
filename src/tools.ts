@@ -307,7 +307,7 @@ export function formatDate(
         // (dateonly || floating) && timezone => tz
         if (timezone) {
             s =
-                m.getFullYear().toString().padStart(2, '0') +
+                m.getFullYear().toString().padStart(4, '0') +
                 String(m.getMonth() + 1).padStart(2, '0') +
                 m.getDate().toString().padStart(2, '0');
         }
