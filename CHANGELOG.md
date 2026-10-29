@@ -1,3 +1,10 @@
+## [11.1.3](https://github.com/sebbo2002/ical-generator/compare/v11.1.2...v11.1.3) (2026-10-29)
+
+### Bug Fixes
+
+- pad years < 1000 when a timezone is set ([f26300c](https://github.com/sebbo2002/ical-generator/commit/f26300cab5e36262689d521b45a1a7a4dd7f7f2f)), closes [#732](https://github.com/sebbo2002/ical-generator/issues/732)
+- regenerate package-lock after develop merge ([85c6444](https://github.com/sebbo2002/ical-generator/commit/85c6444db76c1308b895d0638d8678807b5e2c26))
+
 ## [11.1.2](https://github.com/sebbo2002/ical-generator/compare/v11.1.1...v11.1.2) (2026-09-28)
 
 ### Bug Fixes
