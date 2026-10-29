@@ -17,7 +17,38 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: 🔃 Enable auto-merge for Dependabot PRs
         if: steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
-        run: gh pr merge --auto --merge "$PR_URL"
+        run: |
+          if gh pr merge --auto --merge "$PR_URL"; then
+            echo "Auto-merge enabled, GitHub will merge the PR once all requirements are met."
+            exit 0
+          fi
+
+          echo "::warning::Could not enable auto-merge (probably no branch protection rules configured). Waiting for all checks to finish instead…"
+
+          deadline=$(( $(date +%s) + 30 * 60 ))
+          while :; do
+            buckets="$(gh pr checks "$PR_URL" --json workflow,bucket \
+              --jq '[ .[] | select(.workflow != "Dependabot auto-merge") | .bucket ] | join(",")' || true)"
+
+            if [[ "$buckets" != *pending* ]]; then
+              break
+            fi
+            if (( $(date +%s) >= deadline )); then
+              echo "::warning::Timed out after 30m while waiting for checks, trying to merge anyway…"
+              break
+            fi
+            echo "Checks still pending ($buckets), waiting…"
+            sleep 30
+          done
+
+          if [[ "$buckets" == *fail* || "$buckets" == *cancel* ]]; then
+            echo "::warning::Checks failed ($buckets), skipping merge."
+            exit 0
+          fi
+
+          if ! gh pr merge --merge "$PR_URL"; then
+            echo "::warning::Direct merge failed as well, PR has to be merged manually."
+          fi
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
