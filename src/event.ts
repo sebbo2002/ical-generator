@@ -1007,6 +1007,11 @@ export default class ICalEvent {
      * [readme](https://github.com/sebbo2002/ical-generator#-date-time--timezones)
      * for details about supported values and timezone handling.
      *
+     * For all-day events, the recurrence id is emitted as an RFC 5545 DATE
+     * value (`RECURRENCE-ID;VALUE=DATE:YYYYMMDD`), matching the event's
+     * `DTSTART;VALUE=DATE` format. For timed events, the usual date-time
+     * format is used.
+     *
      * @since 0.2.0
      */
     recurrenceId(recurrenceId: ICalDateTimeValue | null): this;
@@ -1078,6 +1083,45 @@ export default class ICalEvent {
      * DTSTART:20200101T200000Z
      * RRULE:FREQ=WEEKLY;COUNT=4
      * SUMMARY:Repeating Event
+     * END:VEVENT
+     * END:VCALENDAR
+     * ```
+     *
+     * For all-day events, the `until` date is emitted as an RFC 5545 DATE value
+     * (`UNTIL=YYYYMMDD` without time), matching the event's `DTSTART;VALUE=DATE`
+     * format:
+     *
+     * ```typescript
+     * import ical, { ICalEventRepeatingFreq } from 'ical-generator';
+     *
+     * const cal = ical();
+     *
+     * const event = cal.createEvent({
+     *   allDay: true,
+     *   start: new Date('2025-03-10'),
+     *   summary: 'Repeating All-Day Event'
+     * });
+     * event.repeating({
+     *   freq: ICalEventRepeatingFreq.WEEKLY,
+     *   until: new Date('2025-03-24')
+     * });
+     *
+     * cal.toString();
+     * ```
+     *
+     * ```text
+     * BEGIN:VCALENDAR
+     * VERSION:2.0
+     * PRODID:-//sebbo.net//ical-generator//EN
+     * BEGIN:VEVENT
+     * UID:d21d3ff4-73c2-4e12-ae45-fb1baf488292
+     * SEQUENCE:0
+     * DTSTAMP:20261116T171008Z
+     * DTSTART;VALUE=DATE:20250310
+     * X-MICROSOFT-CDO-ALLDAYEVENT:TRUE
+     * X-MICROSOFT-MSNCALENDAR-ALLDAYEVENT:TRUE
+     * RRULE:FREQ=WEEKLY;UNTIL=20250324
+     * SUMMARY:Repeating All-Day Event
      * END:VEVENT
      * END:VCALENDAR
      * ```
