@@ -1639,14 +1639,24 @@ export default class ICalEvent {
             }
 
             if (this.data.repeating.until) {
-                g +=
-                    ';UNTIL=' +
-                    formatDate(
-                        this.calendar.timezone(),
-                        this.data.repeating.until,
-                        false,
-                        this.floating(),
-                    );
+                if (this.data.allDay) {
+                    g +=
+                        ';UNTIL=' +
+                        formatDate(
+                            this.timezone(),
+                            this.data.repeating.until,
+                            true,
+                        );
+                } else {
+                    g +=
+                        ';UNTIL=' +
+                        formatDate(
+                            this.calendar.timezone(),
+                            this.data.repeating.until,
+                            false,
+                            this.floating(),
+                        );
+                }
             }
 
             if (this.data.repeating.byDay) {
@@ -1727,13 +1737,20 @@ export default class ICalEvent {
 
         // RECURRENCE
         if (this.data.recurrenceId) {
-            g +=
-                formatDateTZ(
-                    this.timezone(),
-                    'RECURRENCE-ID',
-                    this.data.recurrenceId,
-                    this.data,
-                ) + '\r\n';
+            if (this.data.allDay) {
+                g +=
+                    'RECURRENCE-ID;VALUE=DATE:' +
+                    formatDate(this.timezone(), this.data.recurrenceId, true) +
+                    '\r\n';
+            } else {
+                g +=
+                    formatDateTZ(
+                        this.timezone(),
+                        'RECURRENCE-ID',
+                        this.data.recurrenceId,
+                        this.data,
+                    ) + '\r\n';
+            }
         }
 
         // SUMMARY
