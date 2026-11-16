@@ -1525,6 +1525,140 @@ describe('ical-generator Event', function () {
                     ),
             );
         });
+
+        it('should render UNTIL as DATE for all-day events', function () {
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.WEEKLY,
+                        until: new Date(Date.UTC(2025, 2, 24)),
+                    },
+                    start: new Date(Date.UTC(2025, 2, 10)),
+                },
+                new ICalCalendar(),
+            );
+
+            const actual = e.toString();
+            const until = actual.match(/UNTIL=([^;\r\n]+)/);
+
+            assert.ok(until, 'UNTIL is rendered');
+            assert.strictEqual(until[1], '20250324');
+            assert.ok(
+                !actual.includes('UNTIL=20250324T'),
+                'UNTIL must not be a DATE-TIME',
+            );
+            assert.ok(
+                actual.includes('DTSTART;VALUE=DATE:20250310'),
+                'DTSTART is a DATE',
+            );
+        });
+
+        it('should render UNTIL as DATE for all-day events with string until', function () {
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.WEEKLY,
+                        until: '2025-03-24T00:00:00Z',
+                    },
+                    start: new Date(Date.UTC(2025, 2, 10)),
+                },
+                new ICalCalendar(),
+            );
+
+            const until = e.toString().match(/UNTIL=([^;\r\n]+)/);
+
+            assert.ok(until, 'UNTIL is rendered');
+            assert.strictEqual(until[1], '20250324');
+            assert.ok(!until[1].includes('T'), 'UNTIL must be a DATE');
+        });
+
+        it('should render UNTIL as DATE for all-day events with Temporal.PlainDate until', function () {
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.WEEKLY,
+                        until: Temporal.PlainDate.from('2025-03-24'),
+                    },
+                    start: new Date(Date.UTC(2025, 2, 10)),
+                },
+                new ICalCalendar(),
+            );
+
+            const actual = e.toString();
+            const until = actual.match(/UNTIL=([^;\r\n]+)/);
+
+            assert.ok(until, 'UNTIL is rendered');
+            assert.strictEqual(until[1], '20250324');
+            assert.ok(
+                !/^(UNTIL|DTSTART);[^\r\n]*TZID=/.test(actual),
+                'DATE values must not carry a TZID',
+            );
+        });
+
+        it('should render UNTIL in the same DATE frame as DTSTART for all-day events with calendar timezone', function () {
+            const cal = new ICalCalendar({ timezone: 'America/New_York' });
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.WEEKLY,
+                        until: new Date(2025, 2, 24),
+                    },
+                    start: new Date(2025, 2, 10),
+                },
+                cal,
+            );
+
+            const actual = e.toString();
+            const dtstart = actual.match(/DTSTART;VALUE=DATE:(\d{8})/);
+            const until = actual.match(/UNTIL=([^;\r\n]+)/);
+
+            assert.ok(dtstart, 'DTSTART is rendered as DATE');
+            assert.ok(until, 'UNTIL is rendered');
+            assert.strictEqual(
+                until[1],
+                new Date(
+                    Date.UTC(
+                        Number(dtstart[1].substring(0, 4)),
+                        Number(dtstart[1].substring(4, 6)) - 1,
+                        Number(dtstart[1].substring(6, 8)) + 14,
+                    ),
+                )
+                    .toISOString()
+                    .substring(0, 10)
+                    .replace(/-/g, ''),
+            );
+            assert.ok(!until[1].includes('T'), 'UNTIL must be a DATE');
+            assert.ok(
+                !/\r\nUNTIL;TZID=|UNTIL=[^;\r\n]*Z/.test(actual),
+                'UNTIL must not carry a TZID or Z suffix',
+            );
+            assert.ok(
+                actual.includes('RRULE:FREQ=WEEKLY;UNTIL=' + until[1] + '\r\n'),
+                'UNTIL is part of the RRULE',
+            );
+        });
+
+        it('should keep UNTIL as DATE-TIME for timed events', function () {
+            const e = new ICalEvent(
+                {
+                    repeating: {
+                        freq: ICalEventRepeatingFreq.WEEKLY,
+                        until: new Date(Date.UTC(2025, 2, 24)),
+                    },
+                    start: new Date(Date.UTC(2025, 2, 10, 10)),
+                },
+                new ICalCalendar(),
+            );
+
+            const until = e.toString().match(/UNTIL=([^;\r\n]+)/);
+
+            assert.ok(until, 'UNTIL is rendered');
+            assert.strictEqual(until[1], '20250324T000000Z');
+        });
     });
 
     describe('summary()', function () {
@@ -2918,6 +3052,56 @@ describe('ical-generator Event', function () {
                 },
             );
         }
+
+        it('should render RECURRENCE-ID as DATE for all-day events', function () {
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    recurrenceId: new Date(Date.UTC(2025, 2, 17)),
+                    start: new Date(Date.UTC(2025, 2, 10)),
+                },
+                new ICalCalendar(),
+            );
+
+            const lines = e.toString().split('\r\n');
+            const recurrenceLine = lines.find((line) =>
+                line.startsWith('RECURRENCE-ID'),
+            );
+
+            assert.strictEqual(
+                recurrenceLine,
+                'RECURRENCE-ID;VALUE=DATE:20250317',
+            );
+            assert.ok(!recurrenceLine?.includes('TZID'), 'without TZID');
+            assert.ok(
+                lines.includes('DTSTART;VALUE=DATE:20250310'),
+                'DTSTART is a DATE',
+            );
+        });
+
+        it('should render RECURRENCE-ID as DATE for all-day events with event timezone', function () {
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    recurrenceId: new Date(2025, 2, 17),
+                    start: new Date(2025, 2, 10),
+                    timezone: 'America/New_York',
+                },
+                new ICalCalendar(),
+            );
+
+            const lines = e.toString().split('\r\n');
+            const recurrenceLine = lines.find((line) =>
+                line.startsWith('RECURRENCE-ID'),
+            );
+
+            assert.strictEqual(
+                recurrenceLine,
+                'RECURRENCE-ID;VALUE=DATE:20250317',
+            );
+            assert.ok(!recurrenceLine?.includes('TZID'), 'without TZID');
+            assert.ok(!/:\d{8}T/.test(recurrenceLine || ''), 'without time');
+        });
 
         it('should make use of escaping', function () {
             const e = new ICalEvent(
