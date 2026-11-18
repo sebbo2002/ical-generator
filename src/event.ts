@@ -1660,7 +1660,9 @@ export default class ICalEvent {
                 .toString()
                 .replace(/\r\n/g, '\n')
                 .split('\n')
-                .filter((l) => l && !l.startsWith('DTSTART:'))
+                // the event writes its own DTSTART, so drop the rule's one,
+                // also with parameters like `DTSTART;TZID=…` (RRule `tzid`)
+                .filter((l) => l && !/^DTSTART[;:]/i.test(l))
                 .join('\r\n');
 
             if (

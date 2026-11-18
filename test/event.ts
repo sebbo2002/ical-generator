@@ -1509,6 +1509,54 @@ describe('ical-generator Event', function () {
                     ),
             );
         });
+        it('should not render a second DTSTART for RRule objects with tzid', function () {
+            const e = new ICalEvent(
+                {
+                    start: new Date('2026-01-10T08:00:00Z'),
+                    timezone: 'Europe/Berlin',
+                },
+                new ICalCalendar(),
+            );
+            e.repeating(
+                new RRule({
+                    count: 3,
+                    dtstart: new Date(Date.UTC(2026, 0, 10, 9, 0, 0)),
+                    freq: RRule.DAILY,
+                    tzid: 'Europe/Berlin',
+                }),
+            );
+
+            const lines = e.toString().split('\r\n');
+            assert.strictEqual(
+                lines.filter((l) => l.startsWith('DTSTART')).length,
+                1,
+            );
+            assert.ok(lines.includes('RRULE:COUNT=3;FREQ=DAILY'));
+        });
+        it('should not render a second DTSTART for strings with DTSTART parameters', function () {
+            const e = new ICalEvent(
+                {
+                    start: new Date('2026-01-10T08:00:00Z'),
+                    timezone: 'Europe/Berlin',
+                },
+                new ICalCalendar(),
+            );
+            e.repeating(
+                'DTSTART;TZID=Europe/Berlin:20260110T090000\n' +
+                    'RRULE:FREQ=WEEKLY;COUNT=2\n' +
+                    'EXDATE;TZID=Europe/Berlin:20260117T090000',
+            );
+
+            const lines = e.toString().split('\r\n');
+            assert.strictEqual(
+                lines.filter((l) => l.startsWith('DTSTART')).length,
+                1,
+            );
+            assert.ok(lines.includes('RRULE:FREQ=WEEKLY;COUNT=2'));
+            assert.ok(
+                lines.includes('EXDATE;TZID=Europe/Berlin:20260117T090000'),
+            );
+        });
         it('should add RRULE: prefix for single line string if not already there', function () {
             const e = new ICalEvent({ start: new Date() }, new ICalCalendar());
             const rule =
