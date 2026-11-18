@@ -1,3 +1,12 @@
+## [11.1.4](https://github.com/sebbo2002/ical-generator/compare/v11.1.3...v11.1.4) (2026-11-18)
+
+### Bug Fixes
+
+- **event:** drop a repeating rule's DTSTART also when it has parameters ([16f857f](https://github.com/sebbo2002/ical-generator/commit/16f857f9b880374471aee277bd52c8452998d3f9))
+- **event:** use DATE value for RRULE UNTIL and RECURRENCE-ID on all-day events, closes [#814](https://github.com/sebbo2002/ical-generator/issues/814) ([214db60](https://github.com/sebbo2002/ical-generator/commit/214db60bd1158b999f1efd05d79b220ebc908666))
+- **tools:** keep the TZDate / ZonedDateTime time zone for all-day dates ([50d1069](https://github.com/sebbo2002/ical-generator/commit/50d1069f03c0586eca2648b349953450adb02c19))
+- **tools:** write durations with whole seconds only ([355f4aa](https://github.com/sebbo2002/ical-generator/commit/355f4aa39468398a0da8c499e163ab0564ba3ac4))
+
 ## [11.1.3](https://github.com/sebbo2002/ical-generator/compare/v11.1.2...v11.1.3) (2026-10-29)
 
 ### Bug Fixes
