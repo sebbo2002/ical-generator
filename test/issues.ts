@@ -531,4 +531,39 @@ describe('Issues', function () {
             assert.ok(cal.toString().includes('DTSTART;VALUE=DATE:00250512'));
         });
     });
+
+    describe('Issue #814', function () {
+        it('should generate a DATE value for repeating until on all-day events', function () {
+            const cal = ical();
+            cal.createEvent({
+                allDay: true,
+                end: new Date('2025-03-11T00:00:00Z'),
+                repeating: {
+                    freq: 'WEEKLY',
+                    until: new Date('2025-03-24T00:00:00Z'),
+                },
+                start: new Date('2025-03-10T00:00:00Z'),
+            });
+
+            const str = cal.toString();
+            assert.ok(str.includes('DTSTART;VALUE=DATE:20250310'), str);
+            assert.ok(str.includes('RRULE:FREQ=WEEKLY;UNTIL=20250324'), str);
+            assert.ok(!str.includes('UNTIL=20250324T'), str);
+        });
+
+        it('should generate a DATE value for recurrence id on all-day events', function () {
+            const cal = ical();
+            cal.createEvent({
+                allDay: true,
+                end: new Date('2025-03-11T00:00:00Z'),
+                recurrenceId: new Date('2025-03-17T00:00:00Z'),
+                start: new Date('2025-03-10T00:00:00Z'),
+            });
+
+            const str = cal.toString();
+            assert.ok(str.includes('RECURRENCE-ID;VALUE=DATE:20250317'), str);
+            assert.ok(!str.includes('RECURRENCE-ID:20250317T'), str);
+            assert.ok(!/RECURRENCE-ID[^\r\n]*TZID/.test(str), str);
+        });
+    });
 });

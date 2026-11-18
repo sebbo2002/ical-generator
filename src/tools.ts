@@ -296,7 +296,14 @@ export function formatDate(
     if (typeof d === 'string' || d instanceof Date) {
         // TZDate is an extension of the native Date object.
         // @see https://github.com/date-fns/tz for more information.
-        const m = isTZDate(d) ? d.withTimeZone(timezone) : new Date(d);
+        // All-day dates of a TZDate with its own time zone use that zone,
+        // same as for moment-timezone and Luxon objects (see #592)
+        const ownZone = dateonly && !timezone && isTZDate(d) && !!d.timeZone;
+        const m = ownZone
+            ? d
+            : isTZDate(d)
+              ? d.withTimeZone(timezone)
+              : new Date(d);
 
         // (!dateonly && !floating) || !timezone => utc
         let s =
@@ -305,7 +312,7 @@ export function formatDate(
             m.getUTCDate().toString().padStart(2, '0');
 
         // (dateonly || floating) && timezone => tz
-        if (timezone) {
+        if (timezone || ownZone) {
             s =
                 m.getFullYear().toString().padStart(4, '0') +
                 String(m.getMonth() + 1).padStart(2, '0') +
@@ -370,7 +377,8 @@ export function formatDate(
         if (timezone) {
             t = d.withTimeZone(timezone);
         }
-        if (!timezone && d.timeZoneId !== 'UTC') {
+        // all-day dates keep the object's own time zone (see #592)
+        if (!timezone && !dateonly && d.timeZoneId !== 'UTC') {
             t = d.withTimeZone('UTC');
         }
 
@@ -712,10 +720,14 @@ export function toDate(value: ICalDateTimeValue): Date {
 export function toDurationString(seconds: number): string {
     let string = '';
 
+    // RFC 5545 only allows whole seconds, so round the absolute value
+    // (keeps rounding symmetric for negative durations)
+    const negative = seconds < 0;
+    seconds = Math.round(Math.abs(seconds));
+
     // < 0
-    if (seconds < 0) {
+    if (negative && seconds > 0) {
         string = '-';
-        seconds *= -1;
     }
 
     string += 'P';

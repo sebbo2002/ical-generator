@@ -90,6 +90,10 @@ therefore depends on the server's time zone: `new Date('2026-07-01T09:30:00Z')` 
 the same output everywhere, pass a `TZDate`, a Luxon `DateTime`, a `moment-timezone` or a Temporal object, or do not
 set a time zone so that the time is written as UTC.
 
+For all-day events (`allDay: true`), RFC 5545 DATE values are used everywhere: `DTSTART;VALUE=DATE`,
+`DTEND;VALUE=DATE`, `EXDATE;VALUE=DATE`, and—for recurring events—`RRULE:...;UNTIL=YYYYMMDD` and
+`RECURRENCE-ID;VALUE=DATE` are emitted without time information, in the same format as the event's start date.
+
 If a time zone is used, it is also recommended to use a VTimezone generator. Such a function generates a VTimezone entry
 and returns it. For example, `timezones-ical-library` or `@touch4it/ical-timezones` can be used for this:
 

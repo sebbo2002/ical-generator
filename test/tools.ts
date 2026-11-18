@@ -265,6 +265,28 @@ describe('ICalTools', function () {
                     '20180705T182400',
                 );
             });
+            it('should use the TZDate timezone with dateonly flag', function () {
+                // 06:00 in Tokyo is still the 4th in UTC
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate(2018, 6, 5, 6, 0, 0, 'Asia/Tokyo'),
+                        true,
+                        false,
+                    ),
+                    '20180705',
+                );
+                // 20:00 in Los Angeles is already the 6th in UTC
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        new TZDate(2018, 6, 5, 20, 0, 0, 'America/Los_Angeles'),
+                        true,
+                        false,
+                    ),
+                    '20180705',
+                );
+            });
         });
         describe('moment.js', function () {
             it('should work without setting a timezone', function () {
@@ -585,6 +607,32 @@ describe('ICalTools', function () {
                 });
                 assert.strictEqual(
                     formatDate(null, zdt, true, false),
+                    '20180705',
+                );
+            });
+            it('should use the ZonedDateTime timezone with dateonly flag', function () {
+                // 06:00 in Tokyo is still the 4th in UTC
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        Temporal.ZonedDateTime.from(
+                            '2018-07-05T06:00:00[Asia/Tokyo]',
+                        ),
+                        true,
+                        false,
+                    ),
+                    '20180705',
+                );
+                // 20:00 in Los Angeles is already the 6th in UTC
+                assert.strictEqual(
+                    formatDate(
+                        null,
+                        Temporal.ZonedDateTime.from(
+                            '2018-07-05T20:00:00[America/Los_Angeles]',
+                        ),
+                        true,
+                        false,
+                    ),
                     '20180705',
                 );
             });
@@ -1005,6 +1053,18 @@ describe('ICalTools', function () {
             assert.strictEqual(toDurationString(86400), 'P1D');
 
             assert.strictEqual(toDurationString(-3600), '-PT1H');
+        });
+
+        it('should round to whole seconds', async function () {
+            // RFC 5545 durations only allow integer seconds
+            assert.strictEqual(toDurationString(1.5), 'PT2S');
+            assert.strictEqual(toDurationString(600.75), 'PT10M1S');
+            assert.strictEqual(toDurationString(3600.25), 'PT1H');
+            assert.strictEqual(toDurationString(86399.6), 'P1D');
+            assert.strictEqual(toDurationString(0.4), 'PT0S');
+            assert.strictEqual(toDurationString(599.9999999), 'PT10M');
+            assert.strictEqual(toDurationString(-1.5), '-PT2S');
+            assert.strictEqual(toDurationString(-0.4), 'PT0S');
         });
     });
 
