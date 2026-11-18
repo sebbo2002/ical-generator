@@ -720,10 +720,14 @@ export function toDate(value: ICalDateTimeValue): Date {
 export function toDurationString(seconds: number): string {
     let string = '';
 
+    // RFC 5545 only allows whole seconds, so round the absolute value
+    // (keeps rounding symmetric for negative durations)
+    const negative = seconds < 0;
+    seconds = Math.round(Math.abs(seconds));
+
     // < 0
-    if (seconds < 0) {
+    if (negative && seconds > 0) {
         string = '-';
-        seconds *= -1;
     }
 
     string += 'P';

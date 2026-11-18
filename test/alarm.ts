@@ -173,6 +173,17 @@ describe('ical-generator Alarm', function () {
             assert.strictEqual(a.trigger(), 120);
         });
 
+        it('should write fractional seconds as whole seconds', function () {
+            const a = new ICalAlarm(
+                { repeat: { interval: 90.25, times: 2 }, trigger: 600.75 },
+                new ICalEvent({ start: new Date() }, new ICalCalendar()),
+            );
+
+            const str = a.toString();
+            assert.ok(str.includes('TRIGGER:-PT10M1S'), str);
+            assert.ok(str.includes('DURATION:PT1M30S'), str);
+        });
+
         it('should change something', function () {
             const trigger = moment('2015-02-01T13:38:45.000Z');
             const a = new ICalAlarm(

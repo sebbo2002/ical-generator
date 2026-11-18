@@ -1054,6 +1054,18 @@ describe('ICalTools', function () {
 
             assert.strictEqual(toDurationString(-3600), '-PT1H');
         });
+
+        it('should round to whole seconds', async function () {
+            // RFC 5545 durations only allow integer seconds
+            assert.strictEqual(toDurationString(1.5), 'PT2S');
+            assert.strictEqual(toDurationString(600.75), 'PT10M1S');
+            assert.strictEqual(toDurationString(3600.25), 'PT1H');
+            assert.strictEqual(toDurationString(86399.6), 'P1D');
+            assert.strictEqual(toDurationString(0.4), 'PT0S');
+            assert.strictEqual(toDurationString(599.9999999), 'PT10M');
+            assert.strictEqual(toDurationString(-1.5), '-PT2S');
+            assert.strictEqual(toDurationString(-0.4), 'PT0S');
+        });
     });
 
     describe('formatDate()', function () {
