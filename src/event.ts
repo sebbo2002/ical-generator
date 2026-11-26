@@ -1735,7 +1735,7 @@ export default class ICalEvent {
                         this.data.repeating.exclude
                             .map((excludedDate) => {
                                 return formatDate(
-                                    this.calendar.timezone(),
+                                    this.timezone(),
                                     excludedDate,
                                     true,
                                 );

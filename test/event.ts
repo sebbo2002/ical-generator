@@ -1707,6 +1707,31 @@ describe('ical-generator Event', function () {
             assert.ok(until, 'UNTIL is rendered');
             assert.strictEqual(until[1], '20250324T000000Z');
         });
+
+        it('should render EXDATE in the same DATE frame as DTSTART for all-day events with event timezone', function () {
+            // 2026-12-01 00:00 in Tokyo
+            const date = moment.utc('2026-11-30T15:00:00Z');
+            const e = new ICalEvent(
+                {
+                    allDay: true,
+                    repeating: {
+                        count: 3,
+                        exclude: [date],
+                        freq: ICalEventRepeatingFreq.DAILY,
+                    },
+                    start: date,
+                    timezone: 'Asia/Tokyo',
+                },
+                new ICalCalendar(),
+            );
+
+            const lines = e.toString().split('\r\n');
+            assert.ok(lines.includes('DTSTART;VALUE=DATE:20261201'));
+            assert.ok(
+                lines.includes('EXDATE;VALUE=DATE:20261201'),
+                lines.join('\n'),
+            );
+        });
     });
 
     describe('summary()', function () {
