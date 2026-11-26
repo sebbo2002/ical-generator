@@ -1,11 +1,15 @@
 {
-    "entryPoints": ["./src/lib/index.ts"],
+    "customCss": "typedoc.css",
+    "compilerOptions": {
+        "types": ["node"]
+    },
+    "entryPoints": ["./src/index.ts"],
     "exclude": [],
     "excludeInternal": true,
     "excludePrivate": true,
     "excludeProtected": true,
     "includeVersion": true,
-    "name": "",
+    "name": "ical-generator",
     "out": "./docs/reference",
     "plugin": [],
     "readme": "README.md",

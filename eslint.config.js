@@ -16,6 +16,7 @@ export default [
         rules: {
             '@typescript-eslint/ban-ts-comment': 'off',
             '@typescript-eslint/ban-ts-ignore': 'off',
+            'no-control-regex': 'off',
         },
     },
     {
@@ -36,6 +37,7 @@ export default [
             'docs/**',
             'package-lock.json',
             '.nyc_output/**',
+            'mochawesome-report/**',
         ],
     },
 ];
